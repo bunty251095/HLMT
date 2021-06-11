@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.caressa.records_tracker.viewmodel.HealthRecordsViewModel"/>
+    </data>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="60"
+        android:fillViewport="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@color/white">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_selected_records"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:recordToUploadList="@{viewmodel.recordsInSessionList}"
+                    tools:listitem="@layout/item_selected_record"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_no_documents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    style="@style/VivantTitle"
+                    android:gravity="center"
+                    android:text="@string/SELECT_RECORDS_TO_PROCEED"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_more"
+                style="@style/CustomButtonLeft"
+                android:layout_width="match_parent"
+                android:text="@string/ADD_MORE"
+                android:textColor="@color/textViewColor"
+                android:layout_marginStart="@dimen/_17sdp"
+                android:layout_marginEnd="@dimen/_17sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textRelationShipFDSHP"
+                style="@style/VivantTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_17sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/DOCUMENT_BELONGS_TO"
+                android:textColor="@color/textViewColor"
+                android:textSize="@dimen/_13sdp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_relatives_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:relativesList="@{viewmodel.userRelativesList}"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textDocumentNotesFDSHP"
+                style="@style/VivantTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_17sdp"
+                android:text="@string/HAVE_NOTES_TO_MENTION"
+                android:textColor="@color/textViewColor"
+                android:textSize="@dimen/_13sdp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_edt_login_email_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_17sdp"
+                android:layout_marginEnd="@dimen/_17sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layout_login_or"
+                app:layout_constraintStart_toStartOf="@+id/layout_login_or"
+                app:layout_constraintEnd_toEndOf="@+id/layout_login_or">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_notes"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    app:srcCompat="@drawable/ic_upload_file"
+                    app:tint="@color/security_grey_light"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/til_edt_notes" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_edt_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="false"
+                    app:hintEnabled="false"
+                    style="@style/VivantTextInputLayoutStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/VivantEditTextStyle"
+                        android:hint="@string/TYPE_YOUR_NOTES"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLength="50"
+                        android:paddingStart="@dimen/_30sdp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_15sdp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <com.caressa.common.view.ArcButton
+            android:id="@+id/btn_back_select_relation"
+            style="@style/CustomButtonLeft"
+            app:isLeftButton="true"
+            app:isTemplate="true"
+            android:text="@string/BACK" />
+
+        <com.caressa.common.view.ArcButton
+            android:id="@+id/btn_save_select_relation"
+            style="@style/CustomButtonRight"
+            app:isTemplate="true"
+            android:text="@string/SAVE" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</layout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/vivant_toolbar_green_blue</color>
+    <color name="ColorPrimaryDark">@color/vivant_toolbar_green_blue</color>
+    <color name="colorAccent">@color/vivant_toolbar_green_blue</color>
+
+    <!-- Vivant Revamp New Colors-->
+    <color name="vivant_toolbar_green_blue">#00c8a0</color>
+    <color name="vivant_title_charcoal_grey">#3f4846</color>
+    <color name="vivant_charcoal_grey">#e13f4846</color>
+    <color name="vivant_marigold">#ffc800</color>
+    <color name="vivant_desc_charcoal_grey_70">#b33f4846</color>
+    <color name="vivant_gunmetal">#616866</color>
+    <color name="vivant_nasty_green">#84c449</color>
+    <color name="vivant_watermelon">#ff485d</color>
+    <color name="vivant_red">#ff181d</color>
+    <color name="vivant_dusty_orange">#e7962b</color>
+    <color name="vivant_green_blue_two">#00c8a1</color>
+    <color name="vivant_pale_grey">#f2f4f7</color>
+    <color name="vivant_bright_sky_blue">#00cfff</color>
+    <color name="vivant_questionsteel_grey">#7b807f</color>
+    <color name="vivant_charcoal_grey_55">#8c3f4846</color>
+    <color name="vivant_orange_yellow">#ffa000</color>
+    <color name="vivant_greyish">#b4b4b4</color>
+    <color name="vivant_pumpkin_orange">#f68b1f</color>
+    <color name="vivant_dark_sky_blue">#31b6ed</color>
+    <color name="vivant_dusky_blue">#466689</color>
+    <color name="vivant_bright_blue">#0273ff</color>
+    <color name="vivant_heather">#9a8cba</color>
+    <color name="vivant_soft_pink">#fcb4c1</color>
+    <color name="vivant_track_param_textcolor">#9a9a9a</color>
+    <color name="vivant_edit_textcolor">#c0c0c0</color>
+    <color name="vivant_icon_warm_grey">#9a9a9a</color>
+    <color name="vivant_teal_blue">#00a49e</color>
+    <color name="vivant_purple">#7a6ba0</color>
+    <color name="vivant_disabled">#E6E6E6</color>
+    <color name="vivant_light_grey">#efefef</color>
+    <!-- Vivant Revamp New Colors-->
+
+<!--     Vivant Original Colours-->
+    <color name="vivantGreen">#00d2a0</color>
+    <color name="vivantCyan">#00cfff</color>
+    <color name="vivantPurple">#341976</color>
+    <color name="vivantOrange">#ffa000</color>
+    <color name="vivantOrangeDark">#ffa000</color>
+    <color name="vivantBlue">#006eff</color>
+    <color name="vivantYellow">#FED640</color>
+    <color name="vivantTeal">#00a096</color>
+    <color name="vivantPink">#ffafbe</color>
+    <color name="vivantNavy">#326478</color>
+    <color name="vivantDenim">#3A5C81</color>
+    <color name="vivantRed">#ff485d</color>
+    <color name="vivantWhite">#ffffff</color>
+    <color name="vivantLight">#E7E7E7</color>
+    <color name="vivantDarkGrey">#646464</color>
+    <color name="vivantActive">#01a39e</color>
+    <color name="vivantInactive">#c8c8c8</color>
+    <color name="vivantInactiveLight">#44c8c8c8</color>
+    <!--     Vivant Original Colours-->
+
+    <!--     Vivant New Branding Guideline Colours-->
+    <color name="blue">#0273FF</color>
+    <color name="pink">#FCB9C0</color>
+    <color name="red">#FA6F7D</color>
+    <color name="yellow">#FFD600</color>
+    <color name="purple">#A78DE9</color>
+    <color name="green">#62E1B0</color>
+    <color name="navy">#608CBB </color>
+    <!--     Vivant New Branding Guideline Colours-->
+
+    <!--     HRA Observation Colours-->
+<!--    <color name="high_risk">#ff485d</color>
+    <color name="moderate_risk">#ffa000</color>
+    <color name="low_risk">#40ddb8</color>
+    <color name="optimum_risk">#00d2a0</color>-->
+
+    <color name="high_risk">@color/vivant_watermelon</color>
+    <color name="moderate_risk">@color/vivant_orange_yellow</color>
+    <color name="healthy_risk">@color/vivant_nasty_green</color>
+    <color name="optimum_risk">#4fa142</color>
+
+    <!--     HRA Observation Colours-->
+
+    <color name="shimmerColor">#c8c8c8</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <!--<color name="textViewColor">@color/vivantDenim</color>-->
+    <color name="textViewColor">@color/vivant_title_charcoal_grey</color>
+    <color name="textViewColorSecondary">#646464</color>
+    <color name="textViewColorBlack">#000</color>
+    <color name="colorBorderUploadAreaURSHP">#d4d3d3</color>
+    <color name="colorBackgroundButtonCrossURSHR">#6b6b6b</color>
+    <color name="colorBorderButtonURSHP">#c9c8c8</color>
+    <color name="colorBorderEditTextFDSHP">#d4d4d4</color>
+    <color name="colorSelectionVRSHR">#ecebeb</color>
+    <color name="greyAlpha">#66afafaf</color>
+    <color name="transparent">#00000000</color>
+    <color name="toolbar_bg_color">#FFFFFF</color>
+    <color name="colorCellBackground">#e5e5e5</color>
+    <color name="security_grey_light">#b4b4b4</color>
+
+    <color name="medButtonColor">#00cfff</color>
+    <color name="temp">#006EFF</color>
+
+</resources>

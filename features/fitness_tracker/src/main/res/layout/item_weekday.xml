@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="weekDay"
+            type="com.caressa.fitness_tracker.util.WeekDay"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.caressa.common.view.ArcTextView
+            android:id="@+id/txtWeekDay"
+            app:isTemplate="true"
+            app:isPrimary="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{weekDay.dayOfWeek}"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_12sdp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtWeekDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="center"
+            android:text="@{weekDay.dayOfMonth}"
+            android:textColor="@color/textViewColor"
+            android:textSize="@dimen/_14sdp"/>
+
+        <com.caressa.common.view.ArcView
+            android:id="@+id/view"
+            app:isTemplate="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_3sdp"/>
+
+    </LinearLayout>
+
+</layout>

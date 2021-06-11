@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="record"
+            type="com.caressa.model.entity.HealthDocument"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/layout_record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/_4sdp"
+            app:cardCornerRadius="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="@dimen/view_width"
+                    android:layout_height="@dimen/_75sdp"
+                    android:background="@color/vivant_nasty_green"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    app:layout_constraintTop_toTopOf="@+id/view"
+                    app:layout_constraintBottom_toBottomOf="@+id/view"
+                    app:layout_constraintStart_toStartOf="@+id/view">
+
+                    <com.caressa.common.view.ArcImageView
+                        android:id="@+id/img_category"
+                        android:layout_width="@dimen/_28sdp"
+                        android:layout_height="@dimen/_28sdp"
+                        app:isTemplate="true"
+                        app:srcCompat="@drawable/img_other"
+                        android:tint="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_doc_category"
+                        style="@style/VivantDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Other\nDocument"
+                        android:textSize="@dimen/_10sdp"
+                        android:ellipsize="end"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/img_category"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <com.caressa.common.view.ArcView
+                        android:id="@+id/view1"
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="match_parent"
+                        app:isTemplate="true"
+                        android:visibility="invisible"
+                        android:background="@color/vivant_green_blue_two"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        app:layout_constraintStart_toEndOf="@+id/img_category"
+                        app:layout_constraintTop_toTopOf="@+id/img_category"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_doc_category"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.caressa.common.view.ArcView
+                    android:id="@+id/view4"
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="0dp"
+                    app:isTemplate="true"
+                    android:background="@color/vivant_green_blue_two"
+                    app:layout_constraintStart_toEndOf="@+id/layout_category"
+                    app:layout_constraintTop_toTopOf="@+id/layout_category"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_category"/>
+
+                <com.caressa.common.view.ArcTextView
+                    android:id="@+id/txt_digitize"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:isTemplate="true"
+                    app:isPrimary="true"
+                    style="@style/VivantTitle"
+                    android:text="@string/DIGITIZE"
+                    android:visibility="visible"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/selector_primary_color"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_doc_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/VivantTitle"
+                    android:text="Record Name"
+                    android:textSize="@dimen/_11sdp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    app:layout_constraintEnd_toStartOf="@+id/txt_digitize"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_doc_relation"
+                    app:layout_constraintStart_toEndOf="@+id/layout_category"
+                    app:layout_constraintTop_toTopOf="@+id/layout_category"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_doc_relation"
+                    style="@style/VivantDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Relation"
+                    android:textSize="@dimen/_11sdp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toEndOf="@+id/txt_doc_name"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_doc_date"
+                    app:layout_constraintStart_toStartOf="@+id/txt_doc_name"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_doc_name"/>
+
+                <com.caressa.common.view.ArcTextView
+                    android:id="@+id/txt_doc_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:isTemplate="true"
+                    app:isPrimary="true"
+                    style="@style/VivantDescription"
+                    android:text="23 Apr 2020"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_11sdp"
+                    android:ellipsize="end"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_category"
+                    app:layout_constraintStart_toStartOf="@+id/txt_doc_relation"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_doc_relation"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_options"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_download"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:alpha="0.6"
+                        app:srcCompat="@drawable/img_download"
+                        android:tint="@color/white"
+                        android:background="@drawable/circle_shape"
+                        android:backgroundTint="@color/vivant_orange_yellow"
+                        android:padding="@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/img_share"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_share"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:alpha="0.6"
+                        app:srcCompat="@drawable/img_share"
+                        android:background="@drawable/circle_shape"
+                        android:backgroundTint="@color/vivantGreen"
+                        android:padding="@dimen/_6sdp"
+                        android:layout_marginStart="@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/img_delete"
+                        app:layout_constraintStart_toEndOf="@+id/img_download"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_delete"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        app:srcCompat="@drawable/img_delete"
+                        android:tint="@color/vivant_title_charcoal_grey"
+                        android:background="@drawable/circle_shape"
+                        android:backgroundTint="@color/vivant_pale_grey"
+                        android:padding="@dimen/_6sdp"
+                        android:layout_marginStart="@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_share"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

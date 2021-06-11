@@ -1,0 +1,1 @@
+include ':app', ':common', ':data:remote', ':data:model', ':data:local', ':data:repository',  ':features:home', ':features:detail', ':common_test', ':navigation', ':features:security', ':features:hra', ':features:medication_tracker', ':features:fitness_tracker', ':features:records_tracker', ':features:track_parameter', ':features:blogs' , ':features:tools_calculators'

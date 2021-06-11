@@ -1,0 +1,151 @@
+<resources>
+
+    <string name="QUIZ_CODE_HEART_AGE">HRTAGECAL</string>
+    <string name="QUIZ_CODE_DIABETES">DIAB_RISK_ASMT</string>
+    <string name="QUIZ_CODE_HYPERTENSION">HYPERTENSIONCAL</string>
+    <string name="QUIZ_CODE_STRESS_ANXIETY">DASS-21</string>
+    <string name="QUIZ_CODE_SMART_PHONE">SMARTPH</string>
+
+    <string name="CALCULATE">Calculate</string>
+    <string name="RECALCULATE">Recalculate</string>
+    <string name="VIEW_DETAILED_REPORT">View Detailed Report</string>
+    <string name="RESTART_ASSESSMENT">Restart Assessment</string>
+
+    <string name="BMI">BMI</string>
+    <string name="LIPID">LIPID</string>
+
+    <string name="INCH">Inch</string>
+    <string name="CM">Cm</string>
+
+    <string name="range_low_risk">0–5</string>
+    <string name="range_mild_risk">6–11</string>
+    <string name="range_moderate_risk">12–19</string>
+    <string name="range_high_risk">20–47</string>
+
+    <string name="DEPRESSION">Depression</string>
+    <string name="ANXIETY">Anxiety</string>
+    <string name="STRESS">Stress</string>
+
+    <string name="NEVER">Never</string>
+    <string name="SOMETIMES">Sometimes</string>
+    <string name="OFTEN">Often</string>
+    <string name="ALWAYS">Always</string>
+    <string name="ALMOST_ALWAYS">Almost Always</string>
+
+    <string name="NORMAL">Normal</string>
+    <string name="MILD">Mild</string>
+    <string name="MODERATE">Moderate</string>
+    <string name="SEVERE">Severe</string>
+    <string name="EXTREMELY_SEVERE">Extremely\nSevere</string>
+
+    <string name="LOW_RISK">Low\nRisk</string>
+    <string name="MILD_RISK">Mild\nRisk</string>
+    <string name="MODERATE_RISK">Moderate\nRisk</string>
+    <string name="SEVER_RISK">Severe\nRisk</string>
+    <string name="HIGH_RISK">High\nRisk</string>
+    <string name="NORMAL_RISK">Normal\nRisk</string>
+    <string name="EXTREMELY_SEVER_RISK">Extremely\nSevere Risk</string>
+
+    <string name="LOW_RISK_1">Low Risk</string>
+    <string name="HIGH_RISK_1">High Risk</string>
+
+    <string name="TITLE_TOOLS_CALCULATORS">Tools and Calculators</string>
+    <string name="HEART_AGE_CALCULATOR">Heart Age Calculator</string>
+    <string name="DIABETES_CALCULATOR">Diabetes Calculator</string>
+    <string name="HYPERTENSION_CALCULATOR">Hypertension Calculator</string>
+    <string name="STRESS_ANXIETY_CALCULATOR">Stress And Anxiety Calculator</string>
+    <string name="SMART_PHONE_CALCULATOR">Smart Phone Addiction</string>
+    <string name="DUE_DATE_CALCULATOR">Due Date Calculator</string>
+
+    <string name="TRACKER_DUE_DATE">Due Date\nCalculator</string>
+    <string name="TRACKER_DIABETES">Diabetes\nCalculator</string>
+    <string name="TRACKER_STRESS_ANXIETY">Stress &amp; Anxiety Calculator</string>
+    <string name="TRACKER_SMART_PHONE">Smart Phone\nAddiction</string>
+    <string name="TRACKER_HYPERTENSION">Hypertension\nCalculator</string>
+    <string name="TRACKER_HEART_AGE">Heart Age\nCalculator</string>
+    <string name="TRACKER_VACCINATION">Vaccination\nCalculator</string>
+
+    <string name="TRACKER_DESC_DUE_DATE">Know your due date\n</string>
+    <string name="TRACKER_DESC_DIABETES">Know your diabetes risk\n</string>
+    <string name="TRACKER_DESC_STRESS_ANXIETY">Are you feeling  stressed?\n</string>
+    <string name="TRACKER_DESC_SMART_PHONE">Addicted to smartphone?\n</string>
+    <string name="TRACKER_DESC_HYPERTENSION">Know your blood pressure\n</string>
+    <string name="TRACKER_DESC__HEART_AGE">Is your Heart is as young as you are?</string>
+    <string name="TRACKER_DESC__VACCINATION">Track your vaccination\n</string>
+
+    <string name="SYSTOLIC_DIALOG_TITLE"><![CDATA[Systolic & Diastolic BP]]></string>
+    <string name="SYSTOLIC_DIALOG_MESSAGE">Enter your blood pressure details</string>
+    <string name="SYSTOLIC_BP">Systolic BP</string>
+    <string name="DIASTOLIC_BP">Diastolic BP</string>
+
+    <string name="DUE_DATE_OBSERVATION">* This is an estimated date of when your baby is due. Babies rarely keep to an exact timetable, so your full-term pregnancy can be anywhere between <h2><b>37 and 42 weeks.</b></h2> </string>
+    <string name="LABLE_MENSTRUAL_PERIOD_LMP">Enter the date of the first day of your last menstrual period (LMP) :</string>
+    <string name="THE_DEPRESSION_SCALE_ASSESSES">The Depression scale assesses</string>
+    <string name="THE_ANXIETY_SCALE_ASSESSES">The Anxiety scale assesses</string>
+    <string name="THE_STRESS_SCALE_ASSESSES">The Stress scale assesses</string>
+    <string name="YOU_HAVE_FOLLOWING_NON_MODERATE_RISK">You have following Non Moderate Risk</string>
+    <string name="TO_MANAGE_YOUR_EMOTIONAL_HEALTH">To manage your emotional health</string>
+    <string name="health_condition_content">if you have any of these risk factors ,your risk may be higher than what is shown in the tool.</string>
+    <string name="health_condition_question">Do you have any of these health conditions ?</string>
+    <string name="STRESS_SUMMERY_OBSERVATION1">The DASS-21 should not be used to replace a face to face clinical interview. If you are experiencing significant emotional difficulties you should contact your doctor.</string>
+    <string name="STRESS_SUMMERY_OBSERVATION">The Depression, Anxiety and Stress Scale - 21 Items (DASS-21) is a set of three self-report scales designed to measure the emotional states of depression, anxiety and stress. Each of the three DASS-21 scales contains 7 items, divided into subscales with similar content.</string>
+    <string name="hypertension_summary_text">The Hypertension calculator gives you an overall idea of the health and a general indication of how lifestyle-related factors may affect your Blood Pressure. The risk has been calculated based on the parameters for your age group, gender.</string>
+    <string name="HEART_AGE_SUMMARY_TEXT">The Heart Age and Risk gives you a overall idea of the health of your heart and general indication of how lifestyle related factors may affect your heart health.</string>
+
+    <string name="you_are_doing_good_in">You are doing good in</string>
+    <string name="you_need_to_improve_on">You need to improve on</string>
+    <string name="you_have_following_on_modifiable_risk">You have following Non Modifiable Risk</string>
+
+    <string name="NO_NOMOPHOBIC">No\nNomophobic</string>
+    <string name="MILD_NOMOPHOBIC">Mild\nNomophobic</string>
+    <string name="MODERATE_NOMOPHOBIC">Moderate\nNomophobic</string>
+    <string name="SEVERE_NOMOPHOBIC">Severe\nNomophobic</string>
+
+    <string name="NOT_AT_ALL_NOMOPHOBIC">Not at all\nNomophobic</string>
+    <string name="MILD_NOMOPHOBIA">Mild\nNomophobic</string>
+    <string name="MODERATE_NOMOPHOBIA">Moderate\nNomophobic</string>
+    <string name="SEVERE_NOMOPHOBIA">Severe\nNomophobic</string>
+
+    <string name="HAVE_NO_NOMOPHOBIA">You have No Nomophobia</string>
+    <string name="HAVE_MILD_NOMOPHOBIA">You have Mild Nomophobia</string>
+    <string name="HAVE_MODERATE_NOMOPHOBIA">You have Moderate Nomophobia</string>
+    <string name="HAVE_SEVERE_NOMOPHOBIA">You have Severe Nomophobia</string>
+
+    <string name="DESC_MILD_NOMOPHOBIC">You have mild nomophobia. You get a little antsy when you forget your phone at home for a day or get stuck somewhere without WiFi, but the anxiety isn\'t too overwhelming.</string>
+    <string name="DESC_MODERATE_NOMOPHOBIC">You have moderate nomophobia. You\'re pretty attached to your device. You often check for updates while you\'re walking down the street or talking to a friend, and you often feel anxious when you\'re disconnected. You are just on the edge of becoming addicted. However, it is good that you do not let your Smartphone come in the way. Sometimes, you avoid your phone and feel bad for it, but the rest part of being with family, children, etc, makes you happy. So, you just need to beware!.</string>
+    <string name="DESC_SEVERE_NOMOPHOBIC">You have severe nomophobia. You can barely go for 60 seconds without checking your phone. It\'s the first thing you check in the morning and the last at night, and dominates most of your activities in-between. You are definitely suffering from Nomophobia, and God help others if you forget your phone at home or lose it! You are so addicted to your phone that you sometimes wonder what if you could stick your phone to the hand!.</string>
+
+    <!--Diabetes Questions-->
+    <string name="QUES_DIABETES_1">Are you of Asian Origin?</string>
+    <string name="QUES_DIABETES_2">Have either of your parents or any of your siblings been diagnosed with Diabetes?</string>
+    <string name="QUES_DIABETES_3">Have you ever been found to have High Blood Sugar(during health checkup/an illness/pregnency)?</string>
+    <string name="QUES_DIABETES_4">Are you currently taking medication for high Blood Pressure?</string>
+    <string name="QUES_DIABETES_5">Do you currently smoke cigarettes or any other tobacco products on a daily basis?</string>
+    <string name="QUES_DIABETES_6">Do you eat fruits and vegetables 2 to 3 times a day?</string>
+    <string name="QUES_DIABETES_7">On an average,do you exercise for more than 3 hours a week?</string>
+    <!--Diabetes Questions-->
+
+    <string-array name="model_arrays">
+        <item>BMI</item>
+        <item>LIPID</item>
+    </string-array>
+
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="age_group_array">
+        <item>Under 35 Years</item>
+        <item>35 – 44</item>
+        <item>45 – 54</item>
+        <item>55 – 64</item>
+        <item>65 yrs or Over</item>
+    </string-array>
+
+    <string-array name="gender_disease">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+</resources>

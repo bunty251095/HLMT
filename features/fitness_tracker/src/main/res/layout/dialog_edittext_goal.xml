@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/default_16dp"
+    android:layout_marginRight="@dimen/default_16dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <com.caressa.common.view.ArcTextView
+        style="@style/VivantTitle"
+        app:isTemplate="true"
+        app:isPrimary="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/_10sdp"
+        android:gravity="center"
+        android:text="@string/UPDATE_GOAL"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_16sdp" />
+
+<!--    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/dialog_et"
+        style="@style/CustomEdittext"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/background_edittext_fdshp"
+        android:hint="Enter your steps goal..."
+        android:inputType="number"
+        android:maxLength="5"
+        android:textColor="@color/textViewColor" />-->
+
+<!--    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inpLayout_goal"
+        style="@style/CustomEditTextInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:hint="@string/hint_steps_goal">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialog_et"
+            style="@style/CustomEdittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="5"/>
+    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inpLayout_goal"
+        style="@style/VivantTextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintEnabled="false"
+        app:passwordToggleEnabled="false"
+        android:layout_margin="@dimen/_10sdp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialog_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/VivantEditTextStyle"
+            android:text=""
+            android:hint="30 - 10000"
+            android:textSize="@dimen/_14sdp"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLines="1"
+            android:maxLength="5"
+            android:paddingTop="@dimen/_10sdp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_btn_medications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/_10sdp">
+
+        <com.caressa.common.view.ArcButton
+            android:id="@+id/dialog_btncancel"
+            style="@style/CustomButtonLeft"
+            app:isLeftButton="true"
+            app:isTemplate="true"
+            android:text="@string/CANCEL"/>
+
+        <com.caressa.common.view.ArcButton
+            android:id="@+id/dialog_btnok"
+            style="@style/CustomButtonRight"
+            app:isTemplate="true"
+            android:text="@string/OK"/>
+
+    </LinearLayout>
+
+</LinearLayout>

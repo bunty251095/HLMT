@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorBorderEditTextFDSHP">#d4d4d4</color>
+    <!-- prference Screen  -->
+    <array name="seekbar_colors">
+        <item>#4FC1C1</item>
+        <item>#B4D852</item>
+        <item>#FFD401</item>
+        <item>#FD836E</item>
+    </array>
+</resources>

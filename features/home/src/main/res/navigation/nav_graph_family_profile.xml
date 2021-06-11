@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph_family_profile"
+        app:startDestination="@id/familyMembersListFragment2">
+
+    <fragment
+        android:id="@+id/familyMembersListFragment2"
+        tools:layout="@layout/fragment_family_members_list"
+        android:name="com.caressa.home.ui.ProfileAndFamilyMember.FamilyMembersListFragment">
+
+        <argument android:name="from" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_familyMembersListFragment2_to_selectRelationshipFragment2"
+            app:destination="@id/selectRelationshipFragment2"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_familyMembersListFragment2_to_editFamilyMemberDetailsFragment2"
+            app:destination="@id/editFamilyMemberDetailsFragment2"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/editFamilyMemberDetailsFragment2"
+            tools:layout="@layout/fragment_edit_family_member_details"
+            android:name="com.caressa.home.ui.ProfileAndFamilyMember.EditFamilyMemberDetailsFragment">
+
+        <action
+            android:id="@+id/action_editFamilyMemberDetailsFragment_to_familyMembersListFragment"
+            app:popUpTo="@id/familyMembersListFragment2"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/selectRelationshipFragment2"
+        tools:layout="@layout/fragment_select_relationship"
+        android:name="com.caressa.home.ui.ProfileAndFamilyMember.SelectRelationshipFragment">
+
+        <action
+            android:id="@+id/action_selectRelationshipFragment2_to_addFamilyMemberFragment2"
+            app:destination="@id/addFamilyMemberFragment2"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_selectRelationshipFragment2_to_familyMembersListFragment2"
+            app:popUpTo="@id/familyMembersListFragment2"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/addFamilyMemberFragment2"
+        tools:layout="@layout/fragment_add_family_member"
+        android:name="com.caressa.home.ui.ProfileAndFamilyMember.AddFamilyMemberFragment">
+
+        <action
+            android:id="@+id/action_addFamilyMemberFragment_to_selectRelationshipFragment"
+            app:popUpTo="@id/selectRelationshipFragment2"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_addFamilyMemberFragment_to_familyMembersListFragment"
+        app:popUpTo="@id/familyMembersListFragment2"/>
+
+</navigation>

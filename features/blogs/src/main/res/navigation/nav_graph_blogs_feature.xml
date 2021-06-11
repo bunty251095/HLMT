@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph_blogs_feature"
+        app:startDestination="@id/blogsDashboardFragment">
+
+    <fragment
+            android:id="@+id/blogsDashboardFragment"
+            tools:layout="@layout/fragment_blogs_dashboard"
+            android:name="com.caressa.blogs.ui.BlogDashboardFragment">
+        <action
+                android:id="@+id/action_blogsDashboardFragment_to_blogDetailFragment"
+                app:destination="@id/blogDetailFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/blogDetailFragment"
+            tools:layout="@layout/fragment_blog_detail"
+            android:name="com.caressa.blogs.ui.BlogDetailFragment">
+        <argument
+                android:name="title"
+                app:argType="string" />
+    </fragment>
+
+    <activity
+        android:id="@+id/home_activity"
+        android:name="com.caressa.home.ui.HomeMainActivity" />
+</navigation>

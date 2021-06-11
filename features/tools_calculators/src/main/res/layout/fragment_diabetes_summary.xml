@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:SeekArc="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="viewModel"
+            type="com.caressa.tools_calculators.viewmodel.ToolsCalculatorsViewModel"/>
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_heart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_heart_risk_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.caressa.common.view.SeekArc
+                android:id="@+id/indicator_diabetes_risk"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_200sdp"
+                android:layout_gravity="center"
+                app:arcWidth="@dimen/_3sdp"
+                app:progressWidth="@dimen/_5sdp"
+                app:arcColor="@color/vivant_pale_grey"
+                app:progressColor="@color/colorPrimary"
+                app:max="47"
+                SeekArc:progress="0"
+                SeekArc:rotation="180"
+                SeekArc:startAngle="30"
+                SeekArc:sweepAngle="300"
+                app:touchInside="false"
+                android:padding="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <com.caressa.common.view.ArcConstraintLayout
+                android:id="@+id/layout_heart_risk"
+                app:isTemplate="true"
+                android:layout_width="@dimen/_155sdp"
+                android:layout_height="@dimen/_155sdp"
+                android:background="@drawable/circle_bg"
+                android:backgroundTint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/indicator_diabetes_risk"
+                app:layout_constraintEnd_toEndOf="@+id/indicator_diabetes_risk"
+                app:layout_constraintStart_toStartOf="@+id/indicator_diabetes_risk"
+                app:layout_constraintTop_toTopOf="@+id/indicator_diabetes_risk">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_heart_risk"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_gravity="center_vertical"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_score"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:srcCompat="@drawable/img_diabetes"
+                    tools:ignore="VectorDrawableCompat"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/VivantTitle"
+                    android:gravity="center"
+                    android:text=" -- "
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_22sdp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_observation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_heart_risk" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_observation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/VivantDescription"
+                    android:text=" -- "
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_score"/>
+
+            </com.caressa.common.view.ArcConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_risk_boundry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layout_heart_risk"
+                app:layout_constraintEnd_toEndOf="@+id/layout_heart_risk"
+                app:layout_constraintStart_toStartOf="@+id/layout_heart_risk">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/VivantDescription"
+                    android:text="Low Risk"
+                    android:textColor="@color/textViewColor"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintEnd_toStartOf="@+id/textView2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/VivantDescription"
+                    android:text="High Risk"
+                    android:textColor="@color/textViewColor"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_risk_ranges"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_32sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        app:layout_constraintTop_toBottomOf="@+id/layout_heart"
+        app:layout_constraintEnd_toEndOf="@+id/layout_heart"
+        app:layout_constraintStart_toStartOf="@+id/layout_heart">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_low_risk"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="0.25"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/layout_mild_risk"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_3sdp"
+                android:background="@color/vivant_nasty_green"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_low_risk"
+                style="@style/VivantDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/LOW_RISK"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_6sdp"
+                app:layout_constraintTop_toBottomOf="@+id/view1"
+                app:layout_constraintEnd_toEndOf="@+id/view1"
+                app:layout_constraintStart_toStartOf="@+id/view1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_range_low_risk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/range_low_risk"
+                style="@style/VivantTitle"
+                android:textSize="@dimen/_11sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_low_risk"
+                app:layout_constraintEnd_toEndOf="@+id/lbl_low_risk"
+                app:layout_constraintStart_toStartOf="@+id/lbl_low_risk"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_mild_risk"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="0.25"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/layout_moderate_risk"
+            app:layout_constraintStart_toEndOf="@+id/layout_low_risk">
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_3sdp"
+                android:background="@color/vivant_marigold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_mild_risk"
+                style="@style/VivantDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/MILD_RISK"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_6sdp"
+                app:layout_constraintTop_toBottomOf="@+id/view2"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="@+id/view2"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_range_mild_risk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/range_mild_risk"
+                style="@style/VivantTitle"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_mild_risk"
+                app:layout_constraintEnd_toEndOf="@+id/lbl_mild_risk"
+                app:layout_constraintStart_toStartOf="@+id/lbl_mild_risk"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_moderate_risk"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="0.25"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/layout_high_risk"
+            app:layout_constraintStart_toEndOf="@+id/layout_mild_risk">
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_3sdp"
+                android:background="@color/vivant_orange_yellow"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_moderate_risk"
+                style="@style/VivantDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/MODERATE_RISK"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_6sdp"
+                app:layout_constraintTop_toBottomOf="@+id/view3"
+                app:layout_constraintEnd_toEndOf="@+id/view3"
+                app:layout_constraintStart_toStartOf="@+id/view3"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_range_moderate_risk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/range_moderate_risk"
+                style="@style/VivantTitle"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_moderate_risk"
+                app:layout_constraintEnd_toEndOf="@+id/lbl_moderate_risk"
+                app:layout_constraintStart_toStartOf="@+id/lbl_moderate_risk"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_high_risk"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="0.25"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/layout_moderate_risk">
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_3sdp"
+                android:background="@color/vivant_watermelon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_high_risk"
+                style="@style/VivantDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/HIGH_RISK"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_6sdp"
+                app:layout_constraintTop_toBottomOf="@+id/view4"
+                app:layout_constraintEnd_toEndOf="@+id/view4"
+                app:layout_constraintStart_toStartOf="@+id/view4"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_range_high_risk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/range_high_risk"
+                style="@style/VivantTitle"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_high_risk"
+                app:layout_constraintEnd_toEndOf="@+id/lbl_high_risk"
+                app:layout_constraintStart_toStartOf="@+id/lbl_high_risk"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_dib_probability"
+        style="@style/CustomTextview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:gravity="center"
+        android:text=" "
+        android:textColor="@color/textViewColor"
+        app:layout_constraintBottom_toTopOf="@+id/btn_view_report_diabetes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_risk_ranges"/>
+
+    <com.caressa.common.view.ArcButton
+        android:id="@+id/btn_view_report_diabetes"
+        app:isTemplate="true"
+        android:text="@string/VIEW_DETAILED_REPORT"
+        style="@style/CustomButton"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_restart_diabetes"
+        app:layout_constraintEnd_toEndOf="@+id/btn_restart_diabetes"
+        app:layout_constraintStart_toStartOf="@+id/btn_restart_diabetes"/>
+
+    <com.caressa.common.view.ArcButton
+        android:id="@+id/btn_restart_diabetes"
+        app:isTemplate="true"
+        android:text="@string/RESTART_ASSESSMENT"
+        style="@style/CustomButton"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

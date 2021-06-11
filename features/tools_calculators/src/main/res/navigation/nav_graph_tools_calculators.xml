@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_tools_calculators"
+    app:startDestination="@id/toolsCalculatorsDashboardFragment">
+
+    <fragment
+        android:id="@+id/toolsCalculatorsDashboardFragment"
+        tools:layout="@layout/fragment_tools_calculators_dashboard"
+        android:name="com.caressa.tools_calculators.ui.ToolsCalculatorsDashboardFragment">
+
+        <action
+            android:id="@+id/action_toolsCalculatorsDashboardFragment_to_heartAgeFragment"
+            app:destination="@id/heartAgeFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_toolsCalculatorsDashboardFragment_to_diabetesCalculatorFragment"
+            app:destination="@id/diabetesCalculatorFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_toolsCalculatorsDashboardFragment_to_hypertensionInputFragment"
+            app:destination="@id/hypertensionInputFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_toolsCalculatorsDashboardFragment_to_stressAndAnxietyInputFragment"
+            app:destination="@id/stressAndAnxietyInputFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_toolsCalculatorsDashboardFragment_to_smartPhoneInputFragment"
+            app:destination="@id/smartPhoneInputFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_toolsCalculatorsDashboardFragment_to_dueDateInputFragment"
+            app:destination="@id/dueDateInputFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/heartAgeFragment"
+        tools:layout="@layout/fragment_heart_age"
+        android:name="com.caressa.tools_calculators.ui.HeartAgeCalculator.HeartAgeFragment">
+
+        <action
+            android:id="@+id/action_heartAgeFragment_to_heartSummaryFragment"
+            app:destination="@id/heartSummaryFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_heartAgeFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/heartSummaryFragment"
+        tools:layout="@layout/fragment_heart_summary"
+        android:name="com.caressa.tools_calculators.ui.HeartAgeCalculator.HeartSummaryFragment">
+
+        <action
+            android:id="@+id/action_heartSummaryFragment_to_heartReportFragment"
+            app:destination="@id/heartReportFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_heartSummaryFragment_to_heartAgeRecalculateFragment"
+            app:destination="@id/heartAgeRecalculateFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/heartReportFragment"
+        tools:layout="@layout/fragment_heart_report"
+        android:name="com.caressa.tools_calculators.ui.HeartAgeCalculator.HeartReportFragment">
+
+        <action
+            android:id="@+id/action_heartReportFragment_to_heartAgeFragment"
+            app:popUpTo="@id/heartAgeFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+        <action
+            android:id="@+id/action_heartReportFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/heartAgeRecalculateFragment"
+        tools:layout="@layout/fragment_heart_age_recalculate"
+        android:name="com.caressa.tools_calculators.ui.HeartAgeCalculator.HeartAgeRecalculateFragment">
+
+        <action
+            android:id="@+id/action_heartAgeRecalculateFragment_to_heartSummaryFragment"
+            app:destination="@id/heartSummaryFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/diabetesCalculatorFragment"
+        tools:layout="@layout/fragment_diabetes_calculator_input"
+        android:name="com.caressa.tools_calculators.ui.DiabetesCalculator.DiabetesCalculatorInputFragment">
+
+        <action
+            android:id="@+id/action_diabetesCalculatorFragment_to_diabetesSummaryFragment"
+            app:destination="@id/diabetesSummaryFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_diabetesCalculatorFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/diabetesSummaryFragment"
+        tools:layout="@layout/fragment_diabetes_summary"
+        android:name="com.caressa.tools_calculators.ui.DiabetesCalculator.DiabetesSummaryFragment">
+
+        <action
+            android:id="@+id/action_diabetesSummaryFragment_to_diabetesReportFragment"
+            app:destination="@id/diabetesReportFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_diabetesSummaryFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/diabetesReportFragment"
+        tools:layout="@layout/fragment_diabetes_report"
+        android:name="com.caressa.tools_calculators.ui.DiabetesCalculator.DiabetesReportFragment">
+
+        <action
+            android:id="@+id/action_diabetesReportFragment_to_diabetesCalculatorFragment"
+            app:destination="@id/diabetesCalculatorFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_diabetesReportFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/hypertensionInputFragment"
+        tools:layout="@layout/fragment_hypertension_input"
+        android:name="com.caressa.tools_calculators.ui.HypertensionCalculator.HypertensionInputFragment">
+
+        <action
+            android:id="@+id/action_hypertensionInputFragment_to_hypertensionSummeryFragment"
+            app:destination="@id/hypertensionSummeryFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_hypertensionInputFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/hypertensionSummeryFragment"
+        tools:layout="@layout/fragment_hypertension_summery"
+        android:name="com.caressa.tools_calculators.ui.HypertensionCalculator.HypertensionSummeryFragment">
+
+        <action
+            android:id="@+id/action_hypertensionSummeryFragment_to_hypertensionReportFragment"
+            app:destination="@id/hypertensionReportFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_hypertensionSummeryFragment_to_hypertensionRecalculateFragment"
+            app:destination="@id/hypertensionRecalculateFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_hypertensionSummeryFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/hypertensionReportFragment"
+        tools:layout="@layout/fragment_hypertension_report"
+        android:name="com.caressa.tools_calculators.ui.HypertensionCalculator.HypertensionReportFragment">
+
+        <action
+            android:id="@+id/action_hypertensionReportFragment_to_hypertensionInputFragment"
+            app:destination="@id/hypertensionInputFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_hypertensionReportFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/hypertensionRecalculateFragment"
+        tools:layout="@layout/fragment_hypertension_recalculate"
+        android:name="com.caressa.tools_calculators.ui.HypertensionCalculator.HypertensionRecalculateFragment">
+
+        <action
+            android:id="@+id/action_hypertensionRecalculateFragment_to_hypertensionSummeryFragment"
+            app:destination="@id/hypertensionSummeryFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/stressAndAnxietyInputFragment"
+        tools:layout="@layout/fragment_stress_and_anxiety_input"
+        android:name="com.caressa.tools_calculators.ui.StressAndAnxietyCalculator.StressAndAnxietyInputFragment">
+
+        <action
+            android:id="@+id/action_stressAndAnxietyInputFragment_to_stressAndAnxietySummeryFragment"
+            app:destination="@id/stressAndAnxietySummeryFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_stressAndAnxietyInputFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/stressAndAnxietySummeryFragment"
+        tools:layout="@layout/fragment_stress_and_anxiety_summery"
+        android:name="com.caressa.tools_calculators.ui.StressAndAnxietyCalculator.StressAndAnxietySummeryFragment">
+
+        <action
+            android:id="@+id/action_stressAndAnxietySummeryFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/smartPhoneInputFragment"
+        tools:layout="@layout/fragment_smart_phone_input"
+        android:name="com.caressa.tools_calculators.ui.SmartPhoneAddiction.SmartPhoneInputFragment">
+
+        <action
+            android:id="@+id/action_smartPhoneInputFragment_to_smartPhoneAddictionSummaryFragment"
+            app:destination="@id/smartPhoneAddictionSummaryFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_smartPhoneInputFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/smartPhoneAddictionSummaryFragment"
+        tools:layout="@layout/fragment_smart_phone_addiction_summary"
+        android:name="com.caressa.tools_calculators.ui.SmartPhoneAddiction.SmartPhoneAddictionSummaryFragment">
+
+        <argument
+            android:name="Score"
+            app:argType="string"
+            android:defaultValue=" "/>
+
+        <action
+            android:id="@+id/action_smartPhoneAddictionSummaryFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/dueDateInputFragment"
+        tools:layout="@layout/fragment_due_date_input"
+        android:name="com.caressa.tools_calculators.ui.DueDateCalculator.DueDateInputFragment">
+
+        <action
+            android:id="@+id/action_dueDateInputFragment_to_dueDateCalculatorReportFragment"
+            app:destination="@id/dueDateCalculatorReportFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_dueDateInputFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/dueDateCalculatorReportFragment"
+        tools:layout="@layout/fragment_due_date_calculator_report"
+        android:name="com.caressa.tools_calculators.ui.DueDateCalculator.DueDateCalculatorReportFragment">
+
+        <action
+            android:id="@+id/action_dueDateCalculatorReportFragment_to_dueDateInputFragment"
+            app:popUpTo="@id/dueDateInputFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+        <action
+            android:id="@+id/action_dueDateCalculatorReportFragment_to_toolsCalculatorsDashboardFragment"
+            app:popUpTo="@id/toolsCalculatorsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+</navigation>

@@ -1,0 +1,541 @@
+<resources>
+    <string name="app_name">hra</string>
+
+    <string name="TITLE_HRA">Health Risk Assesment</string>
+    <string name="TITLE_HRA_SUMMARY">HRA Summary</string>
+    <string name="I_DONT_REM">I don\'t know/remember</string>
+    <string name="START">Start</string>
+    <string name="RESTART_HRA">Restart HRA</string>
+    <string name="BOOK_HEALTH_PACKAGES">Book Package</string>
+    <string name="DOWNLOAD_REPORT">Download Report</string>
+
+    <string name="WELLNESS_SCORE">Wellness Score</string>
+    <string name="RISK_SUMMARY">Risk Summary</string>
+    <string name="RECOMMENDED_LAB_TESTS">Recommended Lab Tests</string>
+
+    <string name="range_high_risk">0 - 15</string>
+    <string name="range_moderate_risk">16 - 45</string>
+    <string name="range_healthy">46 - 85</string>
+    <string name="range_optimum">86 - 100</string>
+
+    <string name="HEIGHT">Height</string>
+    <string name="WEIGHT">Weight</string>
+    <string name="SYSTOLIC">Systolic</string>
+    <string name="DIASTOLIC">Diastolic</string>
+
+    <string name="RANDOM_SUGAR">Random Blood Sugar</string>
+    <string name="FASTING_SUGAR">Fasting Blood Sugar</string>
+    <string name="POST_MEAL_SUGAR">Post Meal Blood Sugar</string>
+
+    <string name="RANDOM_BS">Random Blood \nSugar</string>
+    <string name="FASTING_BS">Fasting Blood \nSugar</string>
+    <string name="POST_MEAL_BS">Post Meal Blood \nSugar</string>
+    <string name="HBA1C">HbA1c</string>
+
+    <string name="TOTAL_CHOL">Total \nCholesterol</string>
+    <string name="TOTAL_CHOLESTEROL">Total Cholesterol</string>
+    <string name="HDL">HDL</string>
+    <string name="LDL">LDL</string>
+    <string name="TRIGLYCERIDES">Triglycerides</string>
+    <string name="VLDL">VLDL</string>
+
+    <string name="SWITCH_PROFILE">Switch Profile</string>
+    <string name="SWITCH_PROFILE_DESC">To give HRA for a Family Member , your Profile will be Switched to that Respective Family Member</string>
+
+    <string name="START_HRA">Start Health Risk Assessment</string>
+    <string name="ADD_FAMILY_MEMBER">Add Family Member</string>
+    <string name="THATS_ALL">Thats All</string>
+    <string name="VIEW_REPORT">View Report</string>
+    <string name="PLEASE_SELECT_ALL_THAT_APPLY">Please select all that apply &amp; click next</string>
+    <string name="TEXT_START_ASSESSMENT"><![CDATA[Hi <b>%s.</b> in the next 10 minutes, you will need to answer some questions and gain insights to your holistic health. \nDuring this <b> Health risk assessment </b>, we will understand 3 key pillars of your well being - Vitals, Lifestyle & Occupational health.\n
+    As a bonus, we will furnish you with a health score & complete summary & recommendations to reduce your health risks (if any).]]></string>
+    <string name="QUES_FAMILY_PROFILE"><![CDATA[Before we begin, please tell me <b>who</b> is taking this assessment?]]></string>
+
+    <string name="LESSTHAN_6Hours">Less than 6 hrs</string>
+    <string name="SIXTO_EIGHT_HOURS">6 to 8 hrs</string>
+    <string name="MORE_THAN_8HOURS">More than 8 hrs</string>
+
+    <string name="RB_DONT_SMOKE">No, I don’t Smoke</string>
+    <string name="RB_12CIGAR">1 - 2 Cigarettes</string>
+    <string name="RB_34CIGAR">3 - 4 Cigarettes</string>
+    <string name="RB_MORETHAN_4CIGAR">More than 4 Cigarettes</string>
+
+    <string name="DEATH_OF_RELATIVE">Death of relative/ Close one</string>
+    <string name="END_OF_RELATIONSHIP">End of relationship i.e. Divorce/ Breakup</string>
+    <string name="FEEL_DEMOTIVATED">Feel demotivated at work</string>
+    <string name="PHYSICAL_PROBLEM">Physical, Sexual or Emotional abuse</string>
+    <string name="ONGOING_MEDICATION">Ongoing Medication</string>
+    <string name="FINANCIAL_MATTER">Financial Issues/Lost Job</string>
+    <string name="HEALTH_CONCERN">Health Concerns</string>
+
+    <string name="GESTATION_DIAB">Gestational diabetes</string>
+    <string name="WOMEN_UTI">Urinary Tract Infection</string>
+    <string name="WOMEN_BRESTPAIN">Breast Tenderness</string>
+    <string name="WOMEN_PERIOD">Menstrual Irregularity</string>
+    <string name="WOMEN_DISCHARGE">Vaginal Discharge</string>
+    <string name="WOMEN_CONCEIVE">Complication in conceiving</string>
+    <string name="WOMEN_PID">Pelvic Inflammatory Disease</string>
+    <string name="WOMEN_FIB">Fibroid</string>
+    <string name="WOMEN_PCOS">Polycystic Ovarian Syndrome (PCOS)</string>
+
+    <string name="CHOL_TEST">Cholesterol Test</string>
+    <string name="PAP_SEAMER_TEST">Pap Test</string>
+    <string name="TSH_TEST">Thyroid Profile</string>
+    <string name="BASIC_HEALTH_TEST">Basic Health Check</string>
+    <string name="SUGAR_TEST">Sugar Profile</string>
+    <string name="MAMMOGRAM_TEST">Mammogram</string>
+    <string name="NONE_OF_ABOVE">None of the above</string>
+    <string name="NONE_OF_BELOW">None of the below</string>
+
+    <string name="CAVITIES">Cavities</string>
+    <string name="BAD_BREATH">Bad Breath</string>
+    <string name="STAINING">Staining</string>
+    <string name="BLEEDING_GUM">Bleeding Gums</string>
+    <string name="BLURRED_VISION">Blurred Vision</string>
+    <string name="DRY_EYE">Dry Eyes</string>
+    <string name="WEARING_LENSES">Near / Far Sightedness</string>
+    <string name="DANDRUFF">Dandruff</string>
+    <string name="ACNE">Acne</string>
+    <string name="DRYNESS">Skin Dryness</string>
+
+    <string name="BRIGHT_LIGHT">Bright Light</string>
+    <string name="LOUD_NOISE">Loud Noise</string>
+    <string name="POISONOUS_GASES">Hazardous Gas</string>
+    <string name="TALKING_LONG">Talking For Long Hours</string>
+
+    <string name="QUESTION_WHR">Enter your Waist &amp; Hip measurement</string>
+    <string name="QUESTION_BMI"><![CDATA[Let\'s calculate your Body mass index (BMI); a simple way to gauge your weight: height ratio.
+    Please enter your vital <b>health parameters.</b>]]></string>
+    <string name="QUESTION_BP"><![CDATA[What is your <b>blood pressure</b> value? \nKindly mention input in mmHg]]></string>
+    <string name="QUESTION_BS">Have you checked your Blood Sugar recently?</string>
+    <string name="QUESTION_BS2">Please enter Blood Sugar reading</string>
+    <string name="QUESTION_HEALTH_CONDITION"><![CDATA[Do you have any of these <b> Health Conditions?</b>]]></string>
+    <string name="QUESTION_PHY"><![CDATA[Which of the following <b> apply to you?</b>]]></string>
+    <string name="QUESTION_WOMEN"><![CDATA[Do you have history of any of these <b>Medical Illnesses?</b>]]></string>
+    <string name="QUESTION_CHOLESTEROL">Have you checked your Blood Cholesterol recently?</string>
+    <string name="QUESTION_CHOLESTEROL2">Please Enter Blood Cholesterol Reading</string>
+    <string name="QUESTION_FAMILY_HISTORY"><![CDATA[Does anyone in your <b> blood relation </b> have any of these <b> health conditions? </b>]]></string>
+    <string name="QUESTION_SNACKS"><![CDATA[Do you <b>eat fruits & vegetables</b> 2 to 3 times a day?]]></string>
+    <string name="QUESTION_FAT"><![CDATA[Do you <b>eat fast food like red meat, cheese, fried foods</b> more than 3 times a week?]]></string>
+    <string name="QUESTION_EXERCISE"><![CDATA[Do you <b>exercise</b> more than 3 hours a week?]]></string>
+    <string name="QUESTION_SLEEP"><![CDATA[How many <b>hours do you sleep in a day?</b>]]></string>
+    <string name="QUESTION_SMOKE">Do you Smoke?</string>
+    <string name="QUESTION_SMOKE2"><![CDATA[How many <b>cigarettes do you smoke</b> in a day?]]></string>
+    <string name="QUESTION_DRINK"><![CDATA[How much <b>alcohol do you consume</b> per week ?]]></string>
+    <string name="QUESTION_FAMILY_LIFE"><![CDATA[Do you feel that you have a good balance between your <b>work & family life?</b>]]></string>
+    <string name="QUESTION_SOCIAL"><![CDATA[How strong are your <b>social ties</b> with your <b>family & friends?</b>]]></string>
+    <string name="QUESTION_SATISFIED_LIFE"><![CDATA[How <b>satisfied</b> are you with <b>your life?</b>]]></string>
+    <string name="QUESTION_JOB_PAY"><![CDATA[Is your job offering <b>adequate amount of paid time off?</b>]]></string>
+    <string name="QUESTION_SHIFT"><![CDATA[Do you work <b>in shifts?</b>]]></string>
+    <string name="QUESTION_EXTENDED_TIME"><![CDATA[Do you spend <b>more than 8 hours</b> in front of <b>PC/Laptop?</b>]]></string>
+    <string name="QUESTION_STREES"><![CDATA[Do you often <b>feel stressed?</b>]]></string>
+    <string name="QUESTION_HEALTH_CHECKUP">Have you had any of these tests done within the past one year?</string>
+    <string name="QUESTION_BLOOD_SUGAR_INPUT"><![CDATA[Please update your last <b>Blood Sugar</b> level readings]]></string>
+    <string name="QUESTION_BLOOD_SUGAR"><![CDATA[Which of the following <b>Sugar report</b> you have recently done? ]]></string>
+    <string name="QUESTION_CHOLESTEROL_NEW"><![CDATA[Which of the following <b>Cholesterol report</b> have you recently done? ]]></string>
+    <string name="QUESTION_CHOLESTEROL_INPUT"><![CDATA[Please update your last <b>Blood Cholesterol</b> level readings.]]></string>
+    <!--    <string name="QUES_FAMILY_PROFILE"><![CDATA[Okay, %s. <b> Whom </b> is the assessment for?]]></string>-->
+    <string name="QUESTION_FAMILY_PROFILE"><![CDATA[Before we begin, please tell me <b>who</b> is taking this assessment?]]></string>
+    <string name="QUESTION_LAST"><![CDATA[Thanks for sharing the details with us. Your <b>health risk assessment results</b> are on the way.]]></string>
+    <string name="QUESTION_CHECKUP"><![CDATA[Which of the following <b> health check-ups </b> have you undergone with the past year? ]]></string>
+    <string name="QUESTION_EDS"><![CDATA[Which of the following <b> Skin/Dental/Eye disorder </b>are you suffering from?]]></string>
+    <string name="QUESTION_EXPOSE"><![CDATA[Are you <b> exposed to</b>  any of the following <b>at your workplace</b>?]]></string>
+    <string name="QUESTION_BRIGHT_LIGHT"><![CDATA[Are you <b>exposed to</b> any of the following <b>at your workplace?</b>]]></string>
+
+    <!--HRA Questions-->
+    <string name="QUES_WHR">Enter your Waist &amp; Hip measurement</string>
+    <string name="QUES_BMI">Help us know you better</string>
+    <string name="QUES_BP">Have you checked your blood pressure recently?</string>
+    <string name="QUES_BS">Have you checked your Blood Sugar recently?</string>
+    <string name="QUES_BS2">Please enter Blood Sugar reading</string>
+    <string name="QUES_HEALTH_CONDITION">Have you ever been diagnosed with these Health Conditions?</string>
+    <string name="QUES_CHOLESTEROL">Have you checked your Blood Cholesterol recently?</string>
+    <string name="QUES_CHOLESTEROL2">Please Enter Blood Cholesterol Reading</string>
+    <string name="QUES_FAMILY_HISTORY">Do you have a family history of these Health Conditions?</string>
+    <string name="QUES_SNACKS">Do you snack on fruits and vegetables everyday?</string>
+    <string name="QUES_FAT">Do you snack on fried and junk foods every week?</string>
+    <string name="QUES_EXERCISE">Do you exercise ?</string>
+    <string name="QUES_SLEEP">Do you sleep more than 6 hours through the night?</string>
+    <string name="QUES_SMOKE">Do you Smoke?</string>
+    <string name="QUES_SMOKE2">How many cigarettes do you smoke a day?</string>
+    <string name="QUES_DRINK">How many pegs do you drink every week?</string>
+    <string name="QUES_FAMILY_LIFE">Do you enjoy your work and personal life equally?</string>
+    <string name="QUES_SOCIAL">How likely are your family and friends ready to help and support you if needed?</string>
+    <string name="QUES_SATISFIED_LIFE">Do you feel happy about whatever you do?</string>
+    <string name="QUES_JOB_PAY">Does your job offer paid leaves as per norm?</string>
+    <string name="QUES_SHIFT">Do you work in shifts?</string>
+    <string name="QUES_EXTENDED_TIME">Do you spend extended period of time sitting at work?</string>
+    <string name="QUES_STREES">Are you experiencing stress at this time?</string>
+    <string name="QUES_HEALTH_CHECKUP">Have you had any of these tests done within the past one year?</string>
+
+    <string name="YOUR_BMI_IS">Your BMI</string>
+    <string name="YOUR_BP_IS">Your Blood Pressure value is</string>
+    <string name="YOUR_BS_IS">Your Blood sugar Level is</string>
+    <string name="YOUR_CL_IS">Your Cholesterol level is</string>
+    <string name="enter_disease">Enter disease</string>
+    <string name="SYSTOLIC_BP">Systolic (mm Hg)</string>
+    <string name="DIASYSTOLIC_BP">Diastolic (mm Hg)</string>
+    <string name="STARTING_HRA">Starting HRA</string>
+    <!--HRA Questions-->
+
+    <!--HRA Summary-->
+    <string name="CATEGORY">Category</string>
+    <string name="YOUR_WELLNESS_SCORE_PLACES">Your wellness score\nplaces you in</string>
+    <string name="WELLNESS_DESC_CURRENT_HRA_HISTORY_ID">We were unable to compute your Health Score since you have not taken the complete HRA.
+        Please Take the HRA to be able to see your Health Score.
+    </string>
+    <string name="WELLNESS_DESC_HRA_CUTOFF">We were not able to compute your Health Score since you have not answered some of the
+        mandatory questions required to compute the Health Score. Please Complete the HRA to be able to seeyour Health Score.
+    </string>
+    <string name="WELLNESS_DESC_SCORE_ZERO_NEGATIVE">Your wellness score is 0 (out of 100), which places you in High Risk category</string>
+    <string name="CONGRATULATION_NO_RISK">Congratulations!! As per the information you have provided, it seems, atpresent,
+        you have no risks.\n\nKeep up the good work, maintain a healthy lifestyle.
+    </string>
+    <string name="WELLNESS_SCORE_SUBTITLE_TEXT">Your Wellness score represents your holistic health status basis of your responses to the questionnaire.</string>
+    <string name="SUMMERY_SUBTITLE_TEXT">Your Risk Summary provides you with potential areas of “At Risk” aspects, which require your attention, basis your submission.</string>
+    <string name="LAB_TESTS_SUBTITLE_TEXT">Test Recommendations provide you a schedule and frequency of vital tests to identify your health regularly, based on your wellness score &amp; Risk summary</string>
+    <string name="RECOMMENDED_LAB_TESTS_CHECK_UPS">Recommended Lab Tests/\nCheck-Ups</string>
+    <string name="LAB_TEST_CHECK_UPS">LAB TEST/CHECK-UPS</string>
+    <string name="FREQUENCY">FREQUENCY</string>
+    <!--HRA Summary-->
+
+    <!--HRA Score Observations-->
+    <string name="OBS_HIGH_RISK">High Risk</string>
+    <string name="OBS_MODERATE_RISK">Moderate Risk</string>
+    <string name="OBS_HEALTHY">Healthy</string>
+    <string name="OBS_OPTIMUM">Optimum</string>
+    <string name="HIGH">High</string>
+    <string name="MODERATE">Moderate</string>
+    <string name="AT_RISK">At Risk</string>
+
+    <string name="HIGH_RISK">High Risk</string>
+    <string name="MODERATE_RISK">Moderate Risk</string>
+    <string name="MODERATE_RISK2">Moderate\nRisk</string>
+    <string name="LOW_RISK">At Risk</string>
+    <!--HRA Score Observations-->
+
+    <!--BMI Observations-->
+    <string name="UNDER_WEIGHT">Underweight</string>
+    <string name="NORMAL">Normal</string>
+    <string name="OVER_WEIGHT">Overweight</string>
+    <string name="PRE_OBESE">Pre-Obese</string>
+    <string name="OBESS_LEVEL_1">Obese Level 1</string>
+    <string name="OBESS_LEVEL_2">Obese Level 2</string>
+    <string name="OBESS_LEVEL_3">Obese Level 3</string>
+    <!--BMI Observations-->
+
+    <!--BloodPressure Observations-->
+    <string name="PRE_HYPERTENSION">PreHypertension</string>
+    <string name="HYP_TENSION_STAGE1">Hypertension- Stage 1</string>
+    <string name="HYP_TENSION_STAGE2">Hypertension- Stage 2</string>
+    <string name="HYP_TENSION_CRITICAL">Hypertension- Critical</string>
+    <!--BloodPressure Observations-->
+
+    <!--BloodSugar Observations-->
+    <string name="LOW">Low</string>
+    <string name="EARLY_DIABETIC">Early Diabetic</string>
+    <string name="DIABETIC">Diabetic</string>
+    <!--BloodSugar Observations-->
+
+    <!--Cholestrol Observations-->
+    <string name="DESIRABLE">Desirable</string>
+    <string name="MILDLY_HIGH">Mildly High</string>
+    <!--Cholestrol Observations-->
+
+    <string name="OTHERS">Others</string>
+    <string name="NONE">None</string>
+    <string name="DIABETES">Diabetes</string>
+    <string name="HIGH_BP">High BP</string>
+    <string name="OBESITY">Obesity</string>
+    <string name="ASTHMA">Asthma</string>
+    <string name="ARTHRITIS">Arthritis</string>
+    <string name="HIGH_CHOLESTEROL">High Cholesterol</string>
+    <string name="HEART_PROBLEMS">Heart Problems</string>
+    <string name="BREAST_CANCER">Breast Cancer</string>
+    <string name="COLORECTAL_CANCER">Colorectal Cancer</string>
+    <string name="CERVICAL_CANCER">Cervical Cancer</string>
+
+    <string name="THYROID_IMBALANCE">Thyroid Imbalance</string>
+    <string name="MENTAL_ILLNESS">Mental Illness</string>
+    <string name="STROKE">Stroke</string>
+    <string name="HEART_DISEASE">Heart Diseases</string>
+
+    <string name="COMPLETELY">Completely</string>
+    <string name="MOSTLY">Mostly</string>
+    <string name="PARTLY">Partly</string>
+    <string name="NOT_SATISFIED">Not Satisfied</string>
+
+    <string name="RB_1_2_CIGARETTES">1–2 Cigarettes</string>
+    <string name="RB_3_4_CIGARETTES">3–4 Cigarettes</string>
+    <string name="RB_4_OR_MORE">4 or more</string>
+
+    <string name="PEGnone">None</string>
+    <!--    <string name="RB_1_2_PEGS">1–2 Pegs</string>
+        <string name="RB_3_4_PEGS">3-4 Pegs</string>
+        <string name="RB_4_PEGS">4 Pegs</string>-->
+
+    <string name="I_DONT_DRINK">No, I don\'t drink</string>
+    <string name="RB_1_2_PEGS">Upto 60 ml</string>
+    <string name="RB_3_4_PEGS">60 - 120 ml</string>
+    <string name="RB_4_PEGS">More than 120 ml</string>
+
+    <!--social options-->
+    <string name="RB_VERY_STRONG">Very strong</string>
+    <string name="RB_ABOVE_AVERAGE">Above average</string>
+    <string name="RB_BELOW_AVERAGE">Below average</string>
+    <string name="RB_NOT_SURE">Not sure</string>
+
+    <!--jobpay options-->
+    <string name="RB_ALWAYS">Always</string>
+    <string name="RB_SOMETIMES">Sometimes</string>
+    <string name="RB_RARELY">Rarely</string>
+    <string name="RB_NEVER">Never</string>
+    <string name="RB_USUALLY">Usually</string>
+
+    <string name="BASIC_HEALTH_CHECKUP">Basic Health Check</string>
+    <string name="CHOLESTEROL_TEST">Cholesterol Test</string>
+    <string name="SUGAR_PROFILE_TEST">Sugar Profile Test</string>
+    <string name="PAP_SMEAR_TEST">Pap Smear Test</string>
+    <string name="MAMMOGRAM">Mammogram</string>
+    <!--HRA Questions-->
+
+    <!--HRA Yes-No Buttons-->
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <!--HRA Yes-No Buttons-->
+
+    <!--bloodsugar Tag-->
+    <string name="tag_bs_yes">85_YES</string>
+    <string name="tag_bs_no">85_NO</string>
+    <!--bloodsugar Tag-->
+
+    <!--BloodPressure Tag-->
+    <string name="tag_bp_yes">86_YES</string>
+    <string name="tag_bp_no">86_NO</string>
+
+
+    <string name="exe_tag_always">6_PHYEXEALW</string>
+    <string name="exe_tag_usually">6_PHYEXEMSTWEEK</string>
+    <string name="exe_tag_rarely">6_PHYEXERARE</string>
+    <string name="exe_tag_never">6_PHYEXENEVER</string>
+    <!--exercise Tag-->
+
+    <!--jobpay-->
+    <string name="rb_alwaystag">67_JPTALWAYS</string>
+    <string name="rb_sometimestag">67_JPTSOMETIME</string>
+    <string name="rb_rarelytag">67_JPTRAR</string>
+    <string name="rb_nevertag">67_JPTNEVER</string>
+    <!--jobpay-->
+
+    <!--family life-->
+    <string name="rb_familyliferarelytag">68_BALWFRAR</string>
+    <string name="rb_familylifealwaystag">68_BALWFALWAYS</string>
+    <string name="rb_familylifesometimestag">68_BALWFSOMETIME</string>
+    <string name="rb_familylifenevertag">68_BALWFNEVER</string>
+    <!--family life-->
+
+    <!--Health Conditions options-->
+    <string-array name="arr_diseases">
+        <item>None</item>
+        <item>High BP</item>
+        <item>Thyroid Imbalance</item>
+        <item>High Cholesterol</item>
+        <item>Diabetes</item>
+        <item>Asthma</item>
+        <item>Arthritis</item>
+        <item>Mental Illness</item>
+        <item>Heart Diseases</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="arr_diseasestag">
+        <item>15_NONE</item>
+        <item>15_HBP</item>
+        <item>15_THYRIOD</item>
+        <item>15_INC_CHOL</item>
+        <item>15_DIAB</item>
+        <item>15_ASTAMA</item>
+        <item>15_ARTH</item>
+        <item>15_MENTLCOND</item>
+        <item>15_HRTPROB</item>
+        <item>15_OTHERS</item>
+    </string-array>
+    <!--Health Conditions options-->
+
+    <!--familydiseases options-->
+    <string-array name="arr_familydiseases">
+        <item>None</item>
+        <item>Diabetes</item>
+        <item>High BP</item>
+        <item>Obesity</item>
+        <item>Asthma</item>
+        <item>Arthritis</item>
+        <item>High Cholesterol</item>
+        <item>Heart Problems</item>
+        <item>Mental Illness</item>
+        <item>Stroke</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="arr_familydiseasestag">
+        <item>1_NONE</item>
+        <item>1_DIABETIC</item>
+        <item>1_HIGHBP</item>
+        <item>1_OBESE</item>
+        <item>1_ASTAMA</item>
+        <item>1_ARTHRITIS</item>
+        <item>1_ELECHOLESTEROL</item>
+        <item>1_HRTOPR</item>
+        <item>1_MENTALILLNESS</item>
+        <item>1_STROKE</item>
+        <item>1_FAMOTHER</item>
+    </string-array>
+    <!--familydiseases options-->
+
+    <!--smoke options-->
+    <string-array name="arr_smoketag">
+        <item>2_NO</item>
+        <item>2_YES</item>
+    </string-array>
+
+    <string name="tag_smoke_yes">2_YES</string>
+    <string name="tag_smoke_no">2_NO</string>
+
+    <string-array name="arr_cigartag">
+        <item>SMKCNT12</item>
+        <item>SMKCNT34</item>
+        <item>SMKCNTGT4</item>
+    </string-array>
+    <string-array name="arr_cigarvalue">
+        <item>1–2 Cigarettes</item>
+        <item>3–4 Cigarettes</item>
+        <item>4 or more</item>
+    </string-array>
+
+    <string name="rb_1or3cigarstag">SMKCNT12</string>
+    <string name="rb_3or5cigarstag">SMKCNT34</string>
+    <string name="rb_5ormoretag">SMKCNTGT4</string>
+    <!--smoke options-->
+
+    <string name="rb_verystrongtag">7_SOCSYSLOTFRD</string>
+    <string name="rb_aboveaveragetag">7_SOCSYSTLKFRD</string>
+    <string name="rb_belowaveragetag">7_SOCSYSRARFRD</string>
+    <string name="rb_notsuretag">7_SOCSYSDONTFRD</string>
+    <!--social options-->
+
+    <!--Cholestrol Tag-->
+
+    <string name="tag_chol_yes">13_YES</string>
+    <string name="tag_chol_no">13_NO</string>
+    <!--Cholestrol Tag-->
+
+    <!--Eat Fruits Tag Yes/No-->
+    <string-array name="arr_eatfruitstag">
+        <item>12_ALW</item>
+        <item>12_NEV</item>
+    </string-array>
+    <!--Eat Fruits Tag-->
+
+    <!--Eat High Fats Tag Yes/No-->
+    <string-array name="arr_eathighfatstag">
+        <item>13_EV</item>
+        <item>13_NEV</item>
+    </string-array>
+    <!--Eat High Fats Tag-->
+
+    <!--Sleep Tag Yes/No-->
+    <string-array name="arr_sleeptag">
+        <item>6_PHYSLPALL</item>
+        <item>6_PHYSLPMSTNGT</item>
+    </string-array>
+    <!--Sleep Tag-->
+
+    <!--HRA drinkquestion-->
+    <string name="DNKnone">1_GENDRINKNO</string>
+    <string name="DNK12">DNKCNT12</string>
+    <string name="DNK34">DNKCNT34</string>
+    <string name="DNKGT4">DNKCNTGT4</string>
+    <!--HRA drinkquestion-->
+
+    <!--Shifts Tag Yes/No-->
+    <string-array name="arr_shiftstag">
+        <item>OCCSHIFTYES</item>
+        <item>OCCSHIFTNO</item>
+    </string-array>
+    <!--Shifts Tag-->
+
+    <!--PCHrs Tag Yes/No-->
+    <string-array name="arr_pchrstag">
+        <item>OCCPCTIMYES</item>
+        <item>OCCPCTIMNO</item>
+    </string-array>
+    <!--PCHrs Tag-->
+
+    <!--Stressed Tag Yes/No-->
+    <string-array name="arr_stressedtag">
+        <item>6_PHYSTRYES</item>
+        <item>6_PHYSTRNO</item>
+    </string-array>
+    <!--Stressed Tag-->
+
+    <!--Health Checkup Options-->
+    <string-array name="arr_healthcheckup_female">
+        <item>None</item>
+        <item>Basic Health Check</item>
+        <item>Cholesterol Test</item>
+        <item>Sugar Profile Test</item>
+        <item>Pap Smear Test</item>
+        <item>Mammogram</item>
+    </string-array>
+
+    <string-array name="arr_healthcheckup_male">
+        <item>None</item>
+        <item>Basic Health Check</item>
+        <item>Cholesterol Test</item>
+        <item>Sugar Profile Test</item>
+    </string-array>
+
+    <string-array name="arr_healthcheckuptag_female">
+        <item>None</item>
+        <item>13_GENLT1YR</item>
+        <item>13_LIPLT1YR</item>
+        <item>13_DIBLT1YR</item>
+        <item>11_WMNPAPLSTYR</item>
+        <item>11_WMNMAMLSTYR</item>
+    </string-array>
+    <string-array name="arr_healthcheckuptag_male">
+        <item>None</item>
+        <item>13_GENLT1YR</item>
+        <item>13_LIPLT1YR</item>
+        <item>13_DIBLT1YR</item>
+    </string-array>
+    <!--Health Checkup Options-->
+
+    <!--satisfiedlife options-->
+    <string-array name="arr_satisfiedlifelable">
+        <item>Completely</item>
+        <item>Mostly</item>
+        <item>Partly</item>
+        <item>Not Satisfied</item>
+    </string-array>
+    <string-array name="arr_satisfiedlifetag">
+        <item>1_GENOVRALW</item>
+        <item>1_GENOVRSMT</item>
+        <item>1_GENOVRNVR</item>
+        <item>1_GENOVRSTR</item>
+    </string-array>
+    <!--satisfiedlife options-->
+
+    <!--Loading msg-->
+    <string name="fetching_bmi_details">Fetching BMI  Details</string>
+    <string name="fetching_bp_details">Fetching Blood Pressure  Details</string>
+    <string name="fetching_lab_details">Fetching Lab Details</string>
+    <string name="submitting_hra_details">Submitting HRA Details</string>
+    <string name="no_application_available">No Application Available to View PDF</string>
+    <string name="unable_to_open_file">Unable to open file.</string>
+    <string name="downloading_hra">Downloading HRA Report</string>
+    <string name="loading_hra_summary">Loading HRA Summary</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Loading msg-->
+
+</resources>

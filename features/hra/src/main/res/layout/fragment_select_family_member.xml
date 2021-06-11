@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.hra.viewmodel.HraViewModel"/>
+    </data>
+
+    <ScrollView
+        android:id="@+id/mainScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_hi"
+            style="@style/HRAImageView"
+            android:src="@drawable/img_family_member_select"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/lbl_intro_msg"/>
+
+        <com.caressa.hra.views.HTMLTextView
+            android:id="@+id/lbl_intro_msg"
+            style="@style/HRAQuestion"
+            android:layout_width="match_parent"
+            android:text="@string/QUES_FAMILY_PROFILE"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/rg_selection"/>
+
+        <RadioGroup
+            android:id="@+id/rg_selection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            app:hraRelativesList="@{viewModel.userRelativesList}"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_9sdp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_add_family_member"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.caressa.common.view.ArcButton
+            android:id="@+id/btn_add_family_member"
+            app:isTemplate="true"
+            style="@style/HRACustomButton"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/ADD_FAMILY_MEMBER"
+            android:background="@drawable/btn_round_fill_hra"
+            android:textColor="@color/white"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>
+

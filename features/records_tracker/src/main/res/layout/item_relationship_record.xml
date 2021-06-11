@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="relative"
+            type="com.caressa.model.entity.UserRelatives"/>
+        <variable
+            name="utilities"
+            type="com.caressa.common.utils.Utilities"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/layout_relative"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            app:cardElevation="@dimen/_4sdp"
+            app:cardCornerRadius="@dimen/_3sdp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_relative_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_relative"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:loadImage="@{utilities.getRelationImgIdWithGender(relative.relationshipCode,relative.gender)}"
+                    app:srcCompat="@drawable/icon_father"
+                    app:tint="@color/vivant_icon_warm_grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_relation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/VivantDescription"
+                    android:gravity="center"
+                    android:text='@{"(" + relative.relationship + ")"}'
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/textViewColor"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/img_relative"
+                    app:layout_constraintStart_toStartOf="@+id/img_relative"
+                    app:layout_constraintTop_toBottomOf="@+id/img_relative"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomTextview"
+                    android:text="@{relative.firstName}"
+                    android:textColor="@color/textViewColor"
+                    android:textSize="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/txt_relation"
+                    app:layout_constraintEnd_toEndOf="@+id/txt_relation"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_relation" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

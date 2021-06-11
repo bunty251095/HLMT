@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.home.viewmodel.ProfileFamilyMemberViewModel"/>
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_banner_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_banner_profile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lbl_profile"
+                    style="@style/VivantTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/TITLE_YOUR_PROFILE"
+                    android:textColor="@color/vivantWhite"
+                    android:textSize="@dimen/_20sdp"
+                    android:tag="bold"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgBackMyProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    app:srcCompat="@drawable/back_arrow_white"
+                    android:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_user_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_marginTop="@dimen/_45sdp"
+                android:padding="@dimen/_8sdp"
+                android:layout_gravity="center_horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/layout_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_banner_pic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_6sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/layout_img_shimmer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:shimmer_duration="500"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <include layout="@layout/layout_profile_img_shimmer"/>
+
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_img_details"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/img_user_pic"
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="@dimen/_100sdp"
+                                android:src="@drawable/img_my_profile"
+                                app:civ_border_width="@dimen/_4sdp"
+                                app:civ_border_color="#4fa7a7a7"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_marginStart="@dimen/_35sdp"
+                                android:layout_marginEnd="@dimen/_35sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/img_edit_pic"
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:visibility="visible"
+                                android:src="@drawable/ic_edit"
+                                android:tint="@color/white"
+                                android:background="@drawable/circle_bg"
+                                android:backgroundTint="#249efe"
+                                android:padding="@dimen/_6sdp"
+                                android:layout_margin="@dimen/_4sdp"
+                                app:layout_constraintBottom_toBottomOf="@+id/img_user_pic"
+                                app:layout_constraintEnd_toEndOf="@+id/img_user_pic" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/txt_username"
+                                style="@style/VivantTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text=""
+                                android:textSize="@dimen/_14sdp"
+                                android:ellipsize="end"
+                                android:layout_marginTop="@dimen/_6sdp"
+                                app:layout_constraintTop_toBottomOf="@+id/img_user_pic"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/txt_age_gender"
+                                style="@style/VivantDescription"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text=""
+                                android:textSize="@dimen/_12sdp"
+                                android:ellipsize="end"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginBottom="@dimen/_8sdp"
+                                app:layout_constraintTop_toBottomOf="@+id/txt_username"
+                                app:layout_constraintStart_toStartOf="@+id/txt_username"
+                                app:layout_constraintEnd_toEndOf="@+id/txt_username"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/layout_details_shimmer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:shimmer_duration="500"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:layout_marginEnd="@dimen/_18sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_user_img">
+
+                <include layout="@layout/layout_profile_detail_shimmer"/>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_show_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:clipToPadding="false"
+                android:layout_marginBottom="@dimen/_70sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layout_details_shimmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_username"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_6sdp"
+                        app:srcCompat="@drawable/img_name"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_name"
+                        style="@style/VivantDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:text=""
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_13sdp"
+                        android:gravity="center_vertical"
+                        android:ellipsize="end"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_username"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_username"
+                        app:layout_constraintTop_toTopOf="@+id/img_username"/>
+
+                    <View
+                        android:id="@+id/view_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/vivant_pale_grey"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/img_username"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_username"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_email"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_7sdp"
+                        app:srcCompat="@drawable/img_email"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_email"
+                        style="@style/VivantDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:text=""
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_13sdp"
+                        android:ellipsize="end"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_email"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_email"
+                        app:layout_constraintTop_toTopOf="@+id/img_email" />
+
+                    <View
+                        android:id="@+id/view_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/vivant_pale_grey"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/img_email"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_alternate_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_email"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_alternate_email"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_7sdp"
+                        app:srcCompat="@drawable/img_email"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_alternate_email"
+                        style="@style/VivantDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:text=""
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_13sdp"
+                        android:gravity="center_vertical"
+                        android:ellipsize="end"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_alternate_email"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_alternate_email"
+                        app:layout_constraintTop_toTopOf="@+id/img_alternate_email"/>
+
+                    <View
+                        android:id="@+id/view_alternate_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/vivant_pale_grey"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/img_alternate_email"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_alternate_email"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_number"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_7sdp"
+                        app:srcCompat="@drawable/img_phone"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_number"
+                        style="@style/VivantDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:text=""
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_13sdp"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_number"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_number"
+                        app:layout_constraintTop_toTopOf="@+id/img_number"/>
+
+                    <View
+                        android:id="@+id/view_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/vivant_pale_grey"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/img_number"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_alternate_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_alternate_number"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_7sdp"
+                        app:srcCompat="@drawable/img_phone"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_alternate_number"
+                        style="@style/VivantDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:text=""
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_13sdp"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_alternate_number"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_alternate_number"
+                        app:layout_constraintTop_toTopOf="@+id/img_alternate_number"/>
+
+                    <View
+                        android:id="@+id/view_alternate_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/vivant_pale_grey"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/img_alternate_number"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_alternate_number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_address"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_7sdp"
+                        app:srcCompat="@drawable/img_address"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_address"
+                        style="@style/VivantDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text=""
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_13sdp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_address"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_address"
+                        app:layout_constraintTop_toTopOf="@+id/img_address" />
+
+                    <View
+                        android:id="@+id/view_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/vivant_pale_grey"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/img_address"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_address"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_dob"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_7sdp"
+                        app:srcCompat="@drawable/img_dob"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_dob"
+                        style="@style/VivantDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:text=""
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_13sdp"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_dob"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_dob"
+                        app:layout_constraintTop_toTopOf="@+id/img_dob"/>
+
+                    <View
+                        android:id="@+id/view_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/vivant_pale_grey"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/img_dob"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_edit_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:layout_marginEnd="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:clipToPadding="false"
+                android:layout_marginBottom="@dimen/_50sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layout_user_img"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_username_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_username_edit"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_6sdp"
+                        app:srcCompat="@drawable/img_name"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_edt_username"
+                        style="@style/VivantTextInputLayoutStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="false"
+                        android:layout_marginStart="@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_username_edit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_username_edit"
+                        app:layout_constraintTop_toTopOf="@+id/img_username_edit">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantEditTextStyle"
+                            android:hint="Username"
+                            android:text=""
+                            android:textSize="@dimen/_13sdp"
+                            android:ellipsize="end"
+                            android:imeOptions="actionNext"
+                            android:inputType="textPersonName|textNoSuggestions"
+                            android:maxLines="1"
+                            android:maxLength="50"
+                            android:paddingTop="@dimen/_10sdp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_email_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_username_edit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_email_edit"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_7sdp"
+                        app:srcCompat="@drawable/img_email"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_edt_email"
+                        style="@style/VivantTextInputLayoutStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="false"
+                        android:layout_marginStart="@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_email_edit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_email_edit"
+                        app:layout_constraintTop_toTopOf="@+id/img_email_edit">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantEditTextStyle"
+                            android:hint="@string/EMAIL_ADDRESS"
+                            android:text=""
+                            android:textSize="@dimen/_13sdp"
+                            android:ellipsize="end"
+                            android:imeOptions="actionNext"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:maxLength="50"
+                            android:paddingTop="@dimen/_10sdp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_alternate_email_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_email_edit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_alternate_email_edit"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_7sdp"
+                        app:srcCompat="@drawable/img_email"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_edt_alternate_email"
+                        style="@style/VivantTextInputLayoutStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="false"
+                        android:layout_marginStart="@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_alternate_email_edit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_alternate_email_edit"
+                        app:layout_constraintTop_toTopOf="@+id/img_alternate_email_edit">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_alternate_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantEditTextStyle"
+                            android:hint="@string/ALTERNATE_EMAIL_ADDRESS"
+                            android:text=""
+                            android:textSize="@dimen/_13sdp"
+                            android:ellipsize="end"
+                            android:imeOptions="actionNext"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:maxLength="50"
+                            android:paddingTop="@dimen/_10sdp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_number_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_alternate_email_edit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_number_edit"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_7sdp"
+                        app:srcCompat="@drawable/img_phone"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_edt_number"
+                        style="@style/VivantTextInputLayoutStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="false"
+                        android:layout_marginStart= "@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_number_edit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_number_edit"
+                        app:layout_constraintTop_toTopOf="@+id/img_number_edit">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantEditTextStyle"
+                            android:hint="@string/NUMBER"
+                            android:text=""
+                            android:textSize="@dimen/_13sdp"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:paddingTop="@dimen/_10sdp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_alternate_number_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_number_edit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_alternate_number_edit"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_7sdp"
+                        app:srcCompat="@drawable/img_phone"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_edt_alternate_number"
+                        style="@style/VivantTextInputLayoutStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="false"
+                        android:layout_marginStart= "@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_alternate_number_edit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_alternate_number_edit"
+                        app:layout_constraintTop_toTopOf="@+id/img_alternate_number_edit">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_alternate_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantEditTextStyle"
+                            android:hint="@string/ALTERNATE_NUMBER"
+                            android:text=""
+                            android:textSize="@dimen/_13sdp"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:paddingTop="@dimen/_10sdp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_address_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_alternate_number_edit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_address__edit"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_7sdp"
+                        app:srcCompat="@drawable/img_address"
+                        android:tint="@color/vivantInactive"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_edt_address"
+                        style="@style/VivantTextInputLayoutStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="false"
+                        android:layout_marginStart="@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_address__edit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_address__edit"
+                        app:layout_constraintTop_toTopOf="@+id/img_address__edit">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantEditTextStyle"
+                            android:hint="@string/ADDRESS"
+                            android:text=""
+                            android:textSize="@dimen/_13sdp"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:minLines="2"
+                            android:maxLines="2"
+                            android:paddingTop="@dimen/_10sdp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_edit_profile"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:visibility="visible"
+        android:src="@drawable/img_edit"
+        android:tint="@color/white"
+        android:background="@drawable/circle_bg"
+        android:backgroundTint="#249efe"
+        android:padding="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="Edit Button" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layout_btn_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.caressa.common.view.ArcButton
+            android:id="@+id/btn_cancel_profile"
+            style="@style/CustomButtonLeft"
+            app:isLeftButton="true"
+            app:isTemplate="true"
+            android:text="@string/CANCEL"/>
+
+        <com.caressa.common.view.ArcButton
+            android:id="@+id/btn_update_profile"
+            style="@style/CustomButtonRight"
+            app:isTemplate="true"
+            android:text="@string/UPDATE"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

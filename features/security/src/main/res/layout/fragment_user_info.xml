@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.security.viewmodel.SignUpViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+        <ScrollView
+            android:id="@+id/layout_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/layout_btns"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/default_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_scroll_view">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomTextview"
+                    android:text="25"
+                    android:textColor="@color/textViewColor"
+                    android:textSize="@dimen/_15sdp"
+                    android:gravity="end"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomTextview"
+                    android:text="Oct"
+                    android:textColor="@color/textViewColor"
+                    android:textSize="@dimen/_15sdp"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    app:layout_constraintTop_toTopOf="@+id/txt_date"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_date"
+                    app:layout_constraintStart_toEndOf="@+id/txt_date"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomTextview"
+                    android:text="1995"
+                    android:textColor="@color/textViewColor"
+                    android:textSize="@dimen/_15sdp"
+                    android:gravity="start"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    app:layout_constraintTop_toTopOf="@+id/txt_date"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_date"
+                    app:layout_constraintStart_toEndOf="@+id/txt_month"/>
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorCellBackground"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    app:layout_constraintStart_toStartOf="@id/txt_date"
+                    app:layout_constraintEnd_toEndOf="@id/txt_year"
+                    app:layout_constraintTop_toBottomOf="@id/txt_month" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lbl_dob"
+                    style="@style/CustomTextview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DATE_OF_BIRTH"
+                    android:textColor="@color/textViewColor"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_dob_details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/lbl_dob"
+                    app:layout_constraintStart_toStartOf="@+id/lbl_dob"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_dob"
+                    app:layout_constraintBottom_toTopOf="@+id/lbl_gender"
+                    android:background="@drawable/background_edittext_fdshp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_month"
+                        style="@style/CustomTextview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:gravity="center"
+                        android:text="@string/MONTH"
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_15sdp"
+                        android:padding="@dimen/_8sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/txt_select_month" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_select_month"
+                        style="@style/CustomTextview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="center"
+                        android:drawableEnd="@drawable/arrow_down_small"
+                        android:text=""
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_15sdp"
+                        android:padding="@dimen/_8sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/lbl_month" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorCellBackground"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_month" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_day"
+                        style="@style/CustomTextview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:gravity="center"
+                        android:text="@string/DAY"
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_15sdp"
+                        android:padding="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_month"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/txt_select_date" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_select_date"
+                        style="@style/CustomTextview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="center"
+                        android:drawableEnd="@drawable/arrow_down_small"
+                        android:text=""
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_15sdp"
+                        android:padding="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_select_month"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/lbl_day" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorCellBackground"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_day" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_year"
+                        style="@style/CustomTextview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:gravity="center"
+                        android:text="@string/YEAR"
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_15sdp"
+                        android:padding="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_day"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/txt_select_year" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_select_year"
+                        style="@style/CustomTextview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:drawableEnd="@drawable/arrow_down_small"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_15sdp"
+                        android:padding="@dimen/_8sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/lbl_year"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_select_date" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lbl_gender"
+                    style="@style/CustomTextview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/GENDER"
+                    android:textColor="@color/textViewColor"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_dob_details"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_dob_details"
+                    app:layout_constraintStart_toStartOf="@+id/layout_dob_details" />
+
+                <RadioGroup
+                    android:id="@+id/rg_gender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_gender"
+                    app:layout_constraintStart_toStartOf="@+id/lbl_gender"
+                    app:layout_constraintEnd_toEndOf="@+id/lbl_gender">
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/rb_Male"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:checked="true"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:drawableTop="@drawable/icon_father"
+                        android:drawableTint="@color/selector_radio_color"
+                        android:gravity="center"
+                        android:text="Male"
+                        android:textSize="@dimen/_25sdp"
+                        android:textColor="@color/selector_radio_color"/>
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/rb_female"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:checked="false"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:drawableTop="@drawable/icon_mother"
+                        android:drawableTint="@color/selector_radio_color"
+                        android:gravity="center"
+                        android:text="Female"
+                        android:textSize="@dimen/_25sdp"
+                        android:textColor="@color/selector_radio_color"/>
+
+                </RadioGroup>
+
+<!--                <RadioGroup
+                    android:id="@+id/rg_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:padding="@dimen/_18sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_gender"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/rb_Male"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:drawableStart="@drawable/selector_radiobarbutton"
+                        android:layout_marginEnd="5dp"
+                        android:text="@string/MALE"
+                        android:textSize="@dimen/_18sdp"
+                        android:textColor="@color/selector_radio_color" />
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/rb_female"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:checked="false"
+                        android:gravity="center"
+                        android:drawableStart="@drawable/selector_radiobarbutton"
+                        android:text="@string/FEMALE"
+                        android:textSize="@dimen/_18sdp"
+                        android:textColor="@color/selector_radio_color" />
+                </RadioGroup>-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/layout_btns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_back"
+                style="@style/CustomButtonLeft"
+                android:text="@string/BACK"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_done"
+                style="@style/CustomButtonRight"
+                android:text="@string/I_AM_DONE"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

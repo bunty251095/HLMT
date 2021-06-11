@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "694765538505",
+    "firebase_url": "https://vivant-1535544517097.firebaseio.com",
+    "project_id": "vivant-1535544517097",
+    "storage_bucket": "vivant-1535544517097.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694765538505:android:a66aa42f8bc4d0c7",
+        "android_client_info": {
+          "package_name": "com.caressa.allizhealth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "694765538505-nsf6dt798s9lppgomhnb9vl6kotbl5ov.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.caressa.allizhealth",
+            "certificate_hash": "71890f4aeb7d0d4cded4a92563ef1d8d5265bc56"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqJXMCc2WbbT3YTinodCGoD7GbiytXoBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "694765538505-ob9fe4q5g9q3s3qft3ush60ekdgg433c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "694765538505-i549m9qiga2je6dppqt86fblkhtjb6gb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vivant.me.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694765538505:android:d5c37a68dac26cb7",
+        "android_client_info": {
+          "package_name": "vivant.me.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "694765538505-tg34ue2keb3ghfbkurjp2op8tehflek8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vivant.me.app",
+            "certificate_hash": "2ed46bab90ec46b69a77b4c9f43319b80a67d897"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqJXMCc2WbbT3YTinodCGoD7GbiytXoBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "694765538505-ob9fe4q5g9q3s3qft3ush60ekdgg433c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "694765538505-i549m9qiga2je6dppqt86fblkhtjb6gb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vivant.me.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

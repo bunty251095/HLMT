@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="appVersion"
+            type="com.caressa.model.entity.AppVersion"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:background="@drawable/btn_border_disabled"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_app_logo"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                app:loadAppImgUrl="@{appVersion.imagePath}"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_title"
+                style="@style/VivantTitle"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="@string/DEAR_USER"
+                android:textSize="@dimen/_15sdp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_app_logo"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_update_description"
+                style="@style/VivantDescription"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@{appVersion.description}"
+                android:textSize="@dimen/_13sdp"
+                android:gravity="center"
+                android:textColor="@color/vivant_charcoal_grey"
+                android:alpha="0.88"
+                app:layout_constraintEnd_toEndOf="@+id/txt_title"
+                app:layout_constraintStart_toStartOf="@+id/txt_title"
+                app:layout_constraintTop_toBottomOf="@id/txt_title"/>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@color/vivant_light_grey"
+                app:layout_constraintTop_toBottomOf="@+id/txt_update_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                android:weightSum="2">
+
+                <com.caressa.common.view.ArcTextView
+                    android:id="@+id/btn_left_update"
+                    app:isTemplate="true"
+                    app:isPrimary="true"
+                    style="@style/CustomButtonLeft"
+                    android:background="@color/transparent"
+                    android:layout_width="match_parent"
+                    app:isLeftButton="true"
+                    app:setTextVisible="@{appVersion.forceUpdate}"
+                    android:text="@string/NO_THANKS"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold"/>
+
+                <com.caressa.common.view.ArcButton
+                    android:id="@+id/btn_right_update"
+                    style="@style/CustomButtonRight"
+                    android:layout_width="match_parent"
+                    app:isTemplate="true"
+                    android:text="@string/UPDATE"
+                    android:textSize="@dimen/_14sdp"/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

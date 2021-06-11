@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="history"
+            type="com.caressa.model.entity.TrackParameterMaster.History"/>
+        <variable
+            name="color"
+            type="Integer"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:focusable="true"
+        android:clickable="true">
+
+        <View
+            android:id="@+id/view_last"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#d4d3d3"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_param_title_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toStartOf="@+id/layout_value"
+            app:layout_constraintHorizontal_weight="0.6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.caressa.common.view.ArcTextView
+                android:id="@+id/txt_param_title"
+                app:isTemplate="true"
+                style="@style/VivantTitle"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingEnd="@dimen/_8sdp"
+                android:text="@{history.description}"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintBottom_toTopOf="@+id/txt_param_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.caressa.common.view.ArcTextView
+                android:id="@+id/txt_param_date"
+                style="@style/VivantDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:NotNullEmptyText="@{history.recordDate.toString()}"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/txt_param_title"
+                app:layout_constraintStart_toStartOf="@+id/txt_param_title"
+                app:layout_constraintTop_toBottomOf="@+id/txt_param_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/layout_param_title_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="0.4"
+            app:layout_constraintStart_toEndOf="@+id/layout_param_title_date"
+            app:layout_constraintTop_toTopOf="@+id/layout_param_title_date">
+
+            <com.caressa.common.view.ArcTextView
+                android:id="@+id/txt_param_value"
+                style="@style/VivantTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:gravity="end"
+                android:NotNullEmptyText="@{history.value.toString()}"
+                android:textColor="@{color}"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintEnd_toStartOf="@+id/txt_param_unit"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.caressa.common.view.ArcTextView
+                android:id="@+id/txt_param_unit"
+                style="@style/VivantDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:NotNullEmptyText="@{history.unit.toString()}"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_param_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txt_param_value" />
+
+            <com.caressa.common.view.ArcTextView
+                android:id="@+id/txt_param_obs"
+                style="@style/VivantDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="end"
+                android:NotNullEmptyText="@{history.observation.toString()}"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@{color}"
+                app:layout_constraintEnd_toEndOf="@+id/txt_param_unit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_param_value" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/view_expand"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="#efefef"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_value" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

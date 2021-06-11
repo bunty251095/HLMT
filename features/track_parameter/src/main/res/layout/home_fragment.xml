@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.track_parameter.viewmodel.ParameterHomeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_height="0dp"
+            android:layout_weight="35"
+            android:layout_width="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/track_parameters_banner"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBack"
+                app:srcCompat="@drawable/back_arrow_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/white"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingStart="@dimen/_8sdp"
+                android:paddingEnd="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/VivantTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgBack"
+                android:layout_alignStart="@+id/imgBack"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:text="Track health\nparameter"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20sdp" />
+
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="65"
+            android:fillViewport="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_select_param"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_select_param"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="true"
+                        android:clickable="true">
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="@dimen/view_width"
+                            android:layout_height="@dimen/_60sdp"
+                            android:background="@color/vivant_bright_blue"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_upload"
+                            android:layout_width="@dimen/_36sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:tint="@color/vivant_icon_warm_grey"
+                            app:srcCompat="@drawable/img_select_param" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_upload_record"
+                            style="@style/VivantTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:text="Select Parameters"
+                            android:textSize="@dimen/_13sdp"
+                            android:tag="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/desc_upload_record"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_upload"
+                            app:layout_constraintTop_toTopOf="@+id/img_upload" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/desc_upload_record"
+                            style="@style/VivantDescription"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:text="Select key health parameters to track"
+                            android:textSize="@dimen/_11sdp"
+                            android:gravity="center_vertical"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_upload"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/lbl_upload_record"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_upload_record" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_update_param"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_update_param"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="true"
+                        android:clickable="true">
+
+                        <View
+                            android:id="@+id/view1"
+                            android:layout_width="@dimen/view_width"
+                            android:layout_height="@dimen/_60sdp"
+                            android:background="@color/vivant_marigold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_view"
+                            android:layout_width="@dimen/_36sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:tint="@color/vivant_icon_warm_grey"
+                            app:srcCompat="@drawable/img_update" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_view_record"
+                            style="@style/VivantTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:text="Update Parameter"
+                            android:textSize="@dimen/_13sdp"
+                            android:tag="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/desc_view_record"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_view"
+                            app:layout_constraintTop_toTopOf="@+id/img_view" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/desc_view_record"
+                            style="@style/VivantDescription"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="Update parameters to see the trend"
+                            android:textSize="@dimen/_11sdp"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_view"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/lbl_view_record"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_view_record" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_dashboard_param"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_dashboard_param"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="true"
+                        android:clickable="true">
+
+                        <View
+                            android:id="@+id/view2"
+                            android:layout_width="@dimen/view_width"
+                            android:layout_height="@dimen/_60sdp"
+                            android:background="@color/vivant_dusky_blue"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_share"
+                            android:layout_width="@dimen/_36sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:padding="@dimen/_3sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:tint="@color/vivant_icon_warm_grey"
+                            app:srcCompat="@drawable/img_dashboard" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_share_record"
+                            style="@style/VivantTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:text="Dashboard"
+                            android:textSize="@dimen/_13sdp"
+                            android:tag="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/desc_share_record"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_share"
+                            app:layout_constraintTop_toTopOf="@+id/img_share" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/desc_share_record"
+                            style="@style/VivantDescription"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:text="Quick View of Your Health Data"
+                            android:textSize="@dimen/_11sdp"
+                            android:gravity="center_vertical"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_share"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/lbl_share_record"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_share_record" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_history_param"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_history_param"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="true"
+                        android:clickable="true">
+
+                        <View
+                            android:id="@+id/view4"
+                            android:layout_width="@dimen/view_width"
+                            android:layout_height="@dimen/_60sdp"
+                            android:background="@color/vivant_green_blue_two"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_digitize"
+                            android:layout_width="@dimen/_36sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:padding="@dimen/_3sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:tint="@color/vivant_icon_warm_grey"
+                            app:srcCompat="@drawable/img_history" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_digitize_record"
+                            style="@style/VivantTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:text="History"
+                            android:textSize="@dimen/_13sdp"
+                            android:tag="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/desc_digitize_record"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_digitize"
+                            app:layout_constraintTop_toTopOf="@+id/img_digitize" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/desc_digitize_record"
+                            style="@style/VivantDescription"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:text="Check your existing data"
+                            android:textSize="@dimen/_11sdp"
+                            android:gravity="center_vertical"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_digitize"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/lbl_digitize_record"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_digitize_record" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <View
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightButtonSP"
+            android:layout_margin="@dimen/default_5dp" />
+    </LinearLayout>
+</layout>

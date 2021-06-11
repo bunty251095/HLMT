@@ -1,0 +1,25 @@
+apply from: '../../android_feature_dependencies.gradle'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    implementation project(Modules.common)
+    api Libraries.facebook
+    api Libraries.firebaseAuth
+    api Libraries.firebaseCore
+    api Libraries.gsmAuth
+    api Libraries.otpView
+    implementation 'com.chaos.view:pinview:1.4.3'
+    implementation 'org.conscrypt:conscrypt-android:2.5.1'
+}

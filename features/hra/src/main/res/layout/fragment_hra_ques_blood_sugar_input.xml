@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.hra.viewmodel.HraViewModel"/>
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/mainScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <RadioGroup
+            android:id="@+id/rgPrevious"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rgPreviousList="@{viewModel.prevAnsList}"
+            android:gravity="end"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            app:layout_constraintBottom_toTopOf="@+id/img_ques"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_ques"
+            style="@style/HRAImageView"
+            android:loadImage="@{viewModel.quesData.bgImage}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/txt_ques"/>
+
+        <com.caressa.hra.views.HTMLTextView
+            android:id="@+id/txt_ques"
+            style="@style/HRAQuestion"
+            android:layout_width="match_parent"
+            android:htmlTextFromId="@{viewModel.quesData.question}"
+            android:layout_marginBottom="@dimen/_25sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/layout_input_fields"/>
+
+        <LinearLayout
+            android:id="@+id/layout_input_fields"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="28dp"
+            android:gravity="end"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/btn_next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/random_bs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lbl_ques_random_bs"
+                    style="@style/VivantDescription"
+                    android:layout_width="0dp"
+                    android:text="@string/RANDOM_BS"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/textViewColor"
+                    app:layout_constraintBottom_toBottomOf="@+id/lay_random_bs"
+                    app:layout_constraintEnd_toStartOf="@+id/lay_random_bs"
+                    app:layout_constraintHorizontal_weight="0.4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/lay_random_bs" />
+
+                <com.caressa.hra.views.CustomEditTextHra
+                    android:id="@+id/lay_random_bs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="0.6"
+                    app:layout_constraintStart_toEndOf="@+id/lbl_ques_random_bs"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fasting_bs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_15sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lbl_ques_fasting_bs"
+                    style="@style/VivantDescription"
+                    android:layout_width="0dp"
+                    android:text="@string/FASTING_BS"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/textViewColor"
+                    app:layout_constraintBottom_toBottomOf="@+id/lay_fasting_bs"
+                    app:layout_constraintEnd_toStartOf="@+id/lay_fasting_bs"
+                    app:layout_constraintHorizontal_weight="0.4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/lay_fasting_bs" />
+
+                <com.caressa.hra.views.CustomEditTextHra
+                    android:id="@+id/lay_fasting_bs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="0.6"
+                    app:layout_constraintStart_toEndOf="@+id/lbl_ques_fasting_bs"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/post_meal_bs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_15sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lbl_ques_post_meal_bs"
+                    style="@style/VivantDescription"
+                    android:layout_width="0dp"
+                    android:text="@string/POST_MEAL_BS"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/textViewColor"
+                    app:layout_constraintBottom_toBottomOf="@+id/lay_post_meal_bs"
+                    app:layout_constraintEnd_toStartOf="@+id/lay_post_meal_bs"
+                    app:layout_constraintHorizontal_weight="0.4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/lay_post_meal_bs" />
+
+                <com.caressa.hra.views.CustomEditTextHra
+                    android:id="@+id/lay_post_meal_bs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="0.6"
+                    app:layout_constraintStart_toEndOf="@+id/lbl_ques_post_meal_bs"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/hab1c_bs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_15sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lbl_ques_HbA1c_bs"
+                    style="@style/VivantDescription"
+                    android:layout_width="0dp"
+                    android:text="@string/HBA1C"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/textViewColor"
+                    app:layout_constraintBottom_toBottomOf="@+id/lay_HbA1c_bs"
+                    app:layout_constraintEnd_toStartOf="@+id/lay_HbA1c_bs"
+                    app:layout_constraintHorizontal_weight="0.4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/lay_HbA1c_bs" />
+
+                <com.caressa.hra.views.CustomEditTextHra
+                    android:id="@+id/lay_HbA1c_bs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="0.6"
+                    app:layout_constraintStart_toEndOf="@+id/lbl_ques_HbA1c_bs"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            style="@style/HRACustomButton"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/_20sdp"
+            android:text="@string/NEXT"
+            android:background="@drawable/btn_round_disabled_hra"
+            android:textColor="@color/vivant_charcoal_grey_55"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
+

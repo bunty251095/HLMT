@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="instruction"
+            type="com.caressa.medication_tracker.model.InstructionModel"/>
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/layout_meal"
+    android:layout_width="@dimen/_80sdp"
+    android:layout_height="@dimen/_80sdp"
+    android:layout_marginEnd="@dimen/_8sdp"
+    android:background="@drawable/border_normal">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_meal"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/img_before_meal"
+        android:tint="@color/colorPrimary"
+        android:loadImage="@{instruction.imageId}"
+        android:padding="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_meal"
+        style="@style/VivantTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{instruction.title}"
+        android:textSize="@dimen/_11sdp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_4sdp"
+        app:layout_constraintTop_toBottomOf="@+id/img_meal"
+        app:layout_constraintStart_toStartOf="@+id/img_meal"
+        app:layout_constraintEnd_toEndOf="@+id/img_meal"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.medication_tracker.viewmodel.MedicineTrackerViewModel"/>
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_medicine_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/_4sdp"
+                app:cardCornerRadius="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.caressa.common.view.ArcConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isTemplate="true"
+                    android:background="@color/colorPrimary">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_category"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        app:layout_constraintHorizontal_weight="0.2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/txt_med_name"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_medicine_type"
+                            android:layout_width="@dimen/_23sdp"
+                            android:layout_height="@dimen/_23sdp"
+                            app:srcCompat="@drawable/img_syrup"
+                            android:tint="@color/white"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:id="@+id/view3"
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="0dp"
+                        android:background="@color/white"
+                        app:layout_constraintStart_toEndOf="@+id/layout_category"
+                        app:layout_constraintTop_toTopOf="@+id/layout_category"
+                        app:layout_constraintBottom_toBottomOf="@+id/layout_category"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_med_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintHorizontal_weight="0.8"
+                        style="@style/VivantTitle"
+                        android:tag="bold"
+                        android:text="Medicine Name  (Type)"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:layout_constraintTop_toTopOf="@+id/layout_category"
+                        app:layout_constraintBottom_toBottomOf="@+id/layout_category"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/layout_category"/>
+
+                </com.caressa.common.view.ArcConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_days"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/_4sdp"
+                app:cardCornerRadius="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@+id/card_medicine_details"
+                app:layout_constraintStart_toStartOf="@+id/card_medicine_details"
+                app:layout_constraintEnd_toEndOf="@+id/card_medicine_details">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_how_often"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/VivantTitle"
+                        android:tag="bold"
+                        android:text="@string/HOW_OFTEN_WILL_YOU_TAKE"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_med_frequency"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_42sdp"
+                        tools:listitem="@layout/item_med_frequency"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_how_often"
+                        app:layout_constraintBottom_toTopOf="@+id/layout_x_days"
+                        app:layout_constraintStart_toStartOf="@+id/lbl_how_often"
+                        app:layout_constraintEnd_toEndOf="@+id/lbl_how_often"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_x_days"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginBottom="@dimen/_12sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/rv_med_frequency"
+                        app:layout_constraintStart_toStartOf="@+id/rv_med_frequency"
+                        app:layout_constraintTop_toBottomOf="@+id/rv_med_frequency">
+
+                        <View
+                            android:id="@+id/view1"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
+                            android:background="#efefef"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_enter_days"
+                            style="@style/VivantDescription"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:tag="bold"
+                            android:text="@string/NUMBER_OF_DAYS"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginStart="@dimen/_6sdp"
+                            android:layout_marginEnd="@dimen/_6sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            app:layout_constraintEnd_toStartOf="@+id/edt_duration"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_calender"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:visibility="visible"
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:padding="@dimen/_5sdp"
+                            android:src="@drawable/img_calender2"
+                            android:tint="@color/vivant_edit_textcolor"
+                            app:layout_constraintBottom_toBottomOf="@+id/edt_duration"
+                            app:layout_constraintStart_toStartOf="@+id/edt_duration"
+                            app:layout_constraintTop_toTopOf="@+id/edt_duration" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_duration"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/vivant_edit_textcolor"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:paddingStart="@dimen/_30sdp"
+                            android:text=""
+                            android:textColor="@color/textViewColor"
+                            android:textSize="@dimen/_14sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            app:layout_constraintBottom_toBottomOf="@+id/lbl_enter_days"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/lbl_enter_days"
+                            app:layout_constraintTop_toTopOf="@+id/lbl_enter_days" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_days"
+                            style="@style/VivantDescription"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:tag="bold"
+                            android:text="@string/DAYS"
+                            android:textSize="@dimen/_12sdp"
+                            app:layout_constraintBottom_toBottomOf="@+id/edt_duration"
+                            app:layout_constraintEnd_toEndOf="@+id/edt_duration"
+                            app:layout_constraintTop_toTopOf="@+id/edt_duration" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_start_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/_4sdp"
+                app:cardCornerRadius="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                app:layout_constraintEnd_toStartOf="@+id/card_end_date"
+                app:layout_constraintStart_toStartOf="@+id/card_days"
+                app:layout_constraintTop_toBottomOf="@+id/card_days">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_start_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/VivantTitle"
+                        android:tag="bold"
+                        android:text="@string/START_DATE"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <com.caressa.common.view.ArcImageView
+                        android:id="@+id/img_calender2"
+                        app:isTemplate="true"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:src="@drawable/img_calender2"
+                        android:tint="@color/colorPrimary"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        app:layout_constraintEnd_toEndOf="@+id/edt_start_date"
+                        app:layout_constraintTop_toTopOf="@+id/edt_start_date"
+                        app:layout_constraintBottom_toBottomOf="@+id/edt_start_date"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_start_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/vivant_edit_textcolor"
+                        android:hint="dd mmm yyyy"
+                        android:lines="1"
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_13sdp"
+                        android:inputType="none"
+                        android:editable="false"
+                        android:imeOptions="actionDone"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_start_date"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/lbl_start_date"
+                        app:layout_constraintEnd_toEndOf="@+id/lbl_start_date"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_end_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/_4sdp"
+                app:cardCornerRadius="@dimen/_3sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="@+id/card_days"
+                app:layout_constraintStart_toEndOf="@+id/card_start_date"
+                app:layout_constraintTop_toTopOf="@+id/card_start_date">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_end_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/VivantTitle"
+                        android:tag="bold"
+                        android:text="@string/END_DATE"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <com.caressa.common.view.ArcImageView
+                        android:id="@+id/img_calender3"
+                        app:isTemplate="true"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:src="@drawable/img_calender2"
+                        android:tint="@color/colorPrimary"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        app:layout_constraintEnd_toEndOf="@+id/edt_end_date"
+                        app:layout_constraintTop_toTopOf="@+id/edt_end_date"
+                        app:layout_constraintBottom_toBottomOf="@+id/edt_end_date"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_end_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/vivant_edit_textcolor"
+                        android:hint="dd mmm yyyy"
+                        android:lines="1"
+                        android:textColor="@color/textViewColor"
+                        android:textSize="@dimen/_13sdp"
+                        android:inputType="none"
+                        android:editable="false"
+                        android:imeOptions="actionDone"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_end_date"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/lbl_end_date"
+                        app:layout_constraintEnd_toEndOf="@+id/lbl_end_date"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_dosage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/_4sdp"
+                app:cardCornerRadius="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@+id/card_start_date"
+                app:layout_constraintStart_toStartOf="@+id/card_start_date"
+                app:layout_constraintEnd_toEndOf="@+id/card_end_date">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_dosage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/VivantTitle"
+                        android:tag="bold"
+                        android:text="@string/DOSAGE"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_dose_count"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/VivantDescription"
+                        android:tag="bold"
+                        android:text="@string/HOW_MANY_YOU_NEED_TO_TAKE_AT_ONE_TIME"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_dosage"
+                        app:layout_constraintStart_toStartOf="@+id/lbl_dosage"
+                        app:layout_constraintEnd_toEndOf="@+id/lbl_dosage"/>
+
+                    <com.caressa.medication_tracker.view.CounterView
+                        android:id="@+id/counter_med_dose"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_dose_count"
+                        app:layout_constraintStart_toStartOf="@+id/lbl_dose_count"
+                        app:layout_constraintEnd_toEndOf="@+id/lbl_dose_count"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_med_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/VivantDescription"
+                        android:tag="bold"
+                        android:text="@string/HOW_MANY_TIME_DAILY"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/counter_med_dose"
+                        app:layout_constraintStart_toStartOf="@+id/counter_med_dose"
+                        app:layout_constraintEnd_toEndOf="@+id/counter_med_dose"/>
+
+                    <com.caressa.medication_tracker.view.CounterView
+                        android:id="@+id/counter_med_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_med_time"
+                        app:layout_constraintStart_toStartOf="@+id/lbl_med_time"
+                        app:layout_constraintEnd_toEndOf="@+id/lbl_med_time"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_med_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/item_med_time"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/counter_med_time"
+                        app:layout_constraintStart_toStartOf="@+id/counter_med_time"
+                        app:layout_constraintEnd_toEndOf="@+id/counter_med_time"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_meal_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/_4sdp"
+                app:cardCornerRadius="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@+id/card_dosage"
+                app:layout_constraintEnd_toEndOf="@+id/card_dosage"
+                app:layout_constraintStart_toStartOf="@+id/card_dosage">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_intake_instruction"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/VivantTitle"
+                        android:tag="bold"
+                        android:text="@string/INTAKE_INSTRUCTIONS"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_meal_time"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_80sdp"
+                        tools:listitem="@layout/item_meal_time"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_16sdp"
+                        android:clipToPadding="false"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_4sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_intake_instruction"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/lbl_intake_instruction"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_notes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/_4sdp"
+                app:cardCornerRadius="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@+id/card_meal_time"
+                app:layout_constraintEnd_toEndOf="@+id/card_meal_time"
+                app:layout_constraintStart_toStartOf="@+id/card_meal_time">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_notes"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/VivantTitle"
+                        android:tag="bold"
+                        android:text="@string/NOTES"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        app:srcCompat="@drawable/ic_upload_file"
+                        android:tint="@color/vivant_icon_warm_grey"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintStart_toStartOf="@+id/til_edt_notes"
+                        app:layout_constraintTop_toTopOf="@+id/til_edt_notes" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_edt_notes"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:passwordToggleEnabled="false"
+                        app:hintEnabled="false"
+                        style="@style/VivantTextInputLayoutStyle"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_notes"
+                        app:layout_constraintEnd_toEndOf="@+id/lbl_notes"
+                        app:layout_constraintStart_toStartOf="@+id/lbl_notes">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_notes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantEditTextStyle"
+                            android:hint="@string/TYPE_YOUR_NOTES"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:maxLength="50"
+                            android:paddingStart="@dimen/_30sdp"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_15sdp"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_max_50_char"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/VivantDescription"
+                        android:tag="bold"
+                        android:text="@string/Max_50_Characters"
+                        android:textSize="@dimen/_11sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/til_edt_notes"
+                        app:layout_constraintEnd_toEndOf="@+id/til_edt_notes"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_alert"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/_4sdp"
+                app:cardCornerRadius="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@+id/card_notes"
+                app:layout_constraintEnd_toEndOf="@+id/card_notes"
+                app:layout_constraintStart_toStartOf="@+id/card_notes">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_alert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/VivantTitle"
+                        android:tag="bold"
+                        android:text="@string/ENABLE_NOTIFICATION_ALERT"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_marginTop="@dimen/_14sdp"
+                        android:layout_marginBottom="@dimen/_14sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/sw_alert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:thumb="@drawable/thumb_selector"
+                        app:track="@drawable/track_selector"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:layout_constraintTop_toTopOf="@+id/lbl_alert"
+                        app:layout_constraintBottom_toBottomOf="@+id/lbl_alert"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <com.caressa.common.view.ArcButton
+                android:id="@+id/btn_schedule"
+                android:layout_width="match_parent"
+                app:isTemplate="true"
+                style="@style/CustomButton"
+                android:text="@string/SUBMIT"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:layout_constraintTop_toBottomOf="@+id/card_alert"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/card_alert"
+                app:layout_constraintStart_toStartOf="@+id/card_alert"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.caressa.common.view.ArcConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_header"
+    app:isTemplate="true">
+
+    <com.caressa.common.view.ArcTextView
+        android:id="@+id/lbl_date"
+        style="@style/VivantTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:text="Date"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/lbl_value"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.caressa.common.view.ArcTextView
+        android:id="@+id/lbl_value"
+        style="@style/VivantTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:gravity="center"
+        android:text="Value"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/lbl_date"
+        app:layout_constraintEnd_toStartOf="@+id/lbl_obs"
+        app:layout_constraintHorizontal_weight="0.35"
+        app:layout_constraintStart_toEndOf="@+id/lbl_date"
+        app:layout_constraintTop_toTopOf="@+id/lbl_date" />
+
+    <com.caressa.common.view.ArcTextView
+        android:id="@+id/lbl_obs"
+        style="@style/VivantTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:text="Observation"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/lbl_value"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="0.35"
+        app:layout_constraintStart_toEndOf="@+id/lbl_value"
+        app:layout_constraintTop_toTopOf="@+id/lbl_value" />
+
+</com.caressa.common.view.ArcConstraintLayout>

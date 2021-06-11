@@ -1,0 +1,71 @@
+{
+  "project_info": {
+    "project_number": "131375685253",
+    "firebase_url": "https://allizhealth-device-synch.firebaseio.com",
+    "project_id": "allizhealth-device-synch",
+    "storage_bucket": "allizhealth-device-synch.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131375685253:android:a66aa42f8bc4d0c7",
+        "android_client_info": {
+          "package_name": "com.caressa.allizhealth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "131375685253-fe6vc5vi1n5pl2iumivus365etdslklc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.caressa.allizhealth",
+            "certificate_hash": "3115c703f5562a43dc5578d820a3f70e97c13827"
+          }
+        },
+        {
+          "client_id": "131375685253-sbkqtllm8ncvhs3c6ahlpjkukl6p2i0n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.caressa.allizhealth",
+            "certificate_hash": "2ed46bab90ec46b69a77b4c9f43319b80a67d897"
+          }
+        },
+        {
+          "client_id": "131375685253-1oa5felnr1vdbnuc8i3s2sseivut870s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.caressa.allizhealth",
+            "certificate_hash": "919be4177e39b879ec3e5e8e5df2dc166d1bc7e5"
+          }
+        },
+        {
+          "client_id": "131375685253-kgb90ksquontqa1gion390lql0fpanku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPVkuWYciS5pftTb3qY8bhh7QBkShU0bA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "131375685253-gkoo4ihllm60dt1unb7c19agvgglfga8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "131375685253-pae4h8f7on0i7lrr8ssdl7f2t13qljjm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.allizhealth.apps"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

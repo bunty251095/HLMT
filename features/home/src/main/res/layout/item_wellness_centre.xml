@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/item_wellness"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/vivant_nasty_green"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/_10sdp"
+    android:paddingEnd="@dimen/_10sdp"
+    android:paddingTop="@dimen/_10sdp"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:layout_marginEnd="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_10sdp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_welness_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Medicines and Healthcare"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        style="@style/VivantTitle"
+        android:tag="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_welness_desc"
+        style="@style/VivantDescription"
+        android:alpha="0.9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get assured discount on prescribed medicines and other healthcare products with delvery at your doorsteps across 100 cities."
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_welness_title" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_view_more"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_34sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:text="   View More   "
+        style="@style/CustomButtonLeft"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/vivant_pale_grey"
+        android:layout_marginStart="@dimen/_3sdp"
+        android:paddingStart="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="@+id/txt_welness_desc"
+        app:layout_constraintTop_toBottomOf="@+id/txt_welness_desc" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_wellness_centre"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_80sdp"
+        app:srcCompat="@drawable/img_health_package"
+        android:alpha="0.25"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_welness_desc" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

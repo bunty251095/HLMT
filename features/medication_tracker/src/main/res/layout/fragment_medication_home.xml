@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.medication_tracker.viewmodel.MedicineTrackerViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_210sdp"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/bg_manage_medication"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    app:srcCompat="@drawable/back_arrow_white"
+                    android:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textView"
+                    style="@style/VivantTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Track your\nmedicine with us"
+                    android:textColor="@color/white"
+                    android:tag="bold"
+                    android:textSize="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_dashboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_14sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imgBanner">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_dashboard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:clickable="true">
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="@dimen/_4sdp"
+                            android:layout_height="@dimen/_60sdp"
+                            android:background="@color/vivant_bright_blue"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_dashboard"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/img_dashboard" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_dashboard"
+                            android:layout_width="@dimen/_32sdp"
+                            android:layout_height="@dimen/_32sdp"
+                            app:srcCompat="@drawable/img_dashboard"
+                            android:tint="@color/vivant_icon_warm_grey"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:layout_marginBottom="@dimen/_12sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/view"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_dashboard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantTitle"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:text="@string/DASHBOARD"
+                            android:textSize="@dimen/_13sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_dashboard"
+                            app:layout_constraintTop_toTopOf="@+id/img_dashboard" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txt_dashboard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantDescription"
+                            android:ellipsize="end"
+                            android:text="@string/QUICK_VIEW_TO_YOUR_MEDICINES"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_dashboard"
+                            app:layout_constraintEnd_toEndOf="@+id/lbl_dashboard"
+                            app:layout_constraintStart_toStartOf="@+id/lbl_dashboard"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_dashboard"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_add_medicine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_14sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card_dashboard">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_add_medicine"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:clickable="true">
+
+                        <View
+                            android:id="@+id/view1"
+                            android:layout_width="@dimen/_4sdp"
+                            android:layout_height="@dimen/_60sdp"
+                            android:background="@color/vivant_marigold"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_add_medicine"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/img_add_medicine" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_add_medicine"
+                            android:layout_width="@dimen/_32sdp"
+                            android:layout_height="@dimen/_32sdp"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:layout_marginBottom="@dimen/_12sdp"
+                            android:tint="@color/vivant_icon_warm_grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/view1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/img_calender" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_add_medicine"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantTitle"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:text="@string/ADD_MEDICATION"
+                            android:textSize="@dimen/_13sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_add_medicine"
+                            app:layout_constraintTop_toTopOf="@+id/img_add_medicine" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txt_add_medicine"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantDescription"
+                            android:ellipsize="end"
+                            android:text="@string/ADD_YOUR_MEDICINE"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_add_medicine"
+                            app:layout_constraintEnd_toEndOf="@+id/lbl_add_medicine"
+                            app:layout_constraintStart_toStartOf="@+id/lbl_add_medicine"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_add_medicine" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_my_medications"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_14sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card_add_medicine">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_my_medications"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:clickable="true">
+
+                        <View
+                            android:id="@+id/view2"
+                            android:layout_width="@dimen/_4sdp"
+                            android:layout_height="@dimen/_60sdp"
+                            android:background="@color/vivant_soft_pink"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_due_medicine"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/img_due_medicine" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_due_medicine"
+                            android:layout_width="@dimen/_32sdp"
+                            android:layout_height="@dimen/_32sdp"
+                            app:srcCompat="@drawable/img_my_medication"
+                            android:tint="@color/vivant_icon_warm_grey"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:layout_marginBottom="@dimen/_12sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/view2"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_due_medicine"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantTitle"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:text="@string/MY_MEDICATIONS"
+                            android:textSize="@dimen/_13sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_due_medicine"
+                            app:layout_constraintTop_toTopOf="@+id/img_due_medicine"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txt_due_medicine"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantDescription"
+                            android:text="@string/Check_your_medication_history"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_due_medicine"
+                            app:layout_constraintEnd_toEndOf="@+id/lbl_due_medicine"
+                            app:layout_constraintStart_toStartOf="@+id/lbl_due_medicine"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_due_medicine" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card_my_medications" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

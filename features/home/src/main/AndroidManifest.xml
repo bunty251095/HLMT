@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.caressa.home">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+        android:largeHeap="true"
+        android:screenOrientation="portrait">
+        <activity android:name=".ui.PasswordChangeActivity"/>
+        <activity android:name=".ui.ProfileAndFamilyMember.MyProfileNewActivity"/>
+        <activity android:name=".ui.FeedbackActivity"/>
+        <activity android:name=".ui.SettingsActivity"/>
+        <activity android:name=".ui.FamilyDoctor.FamilyDoctorAddOrUpdateActivity"/>
+        <activity android:name=".ui.FamilyDoctor.FamilyDoctorListActivity"/>
+        <activity
+            android:name=".ui.ContactUsActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity
+            android:name=".ui.WebViews.OrderMedicineActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity
+            android:name=".ui.WebViews.CommonWebViewActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity
+            android:name=".ui.WebViews.WellnessCentreActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity
+            android:name=".ui.ProfileAndFamilyMember.FamilyProfileActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity
+            android:name=".ui.HomeMainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:finishOnTaskLaunch="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+    </application>
+
+</manifest>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+                name="hraLabtest"
+                type="com.caressa.model.hra.HraLabTest"/>
+        <variable
+                name="viewModel"
+                type="com.caressa.hra.viewmodel.HraSummaryViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_labtest"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_lab_test"
+            style="@style/VivantTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="0.6"
+            android:text="Lab Test Name"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/vivant_gunmetal"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_frequency"
+            app:layout_constraintEnd_toStartOf="@+id/txt_frequency"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txt_frequency"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_frequency"
+            style="@style/VivantTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="0.4"
+            android:text="Frequency"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/vivant_gunmetal"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txt_lab_test"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:alpha="0.3"
+            android:background="@color/vivant_charcoal_grey_55"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_lab_test"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

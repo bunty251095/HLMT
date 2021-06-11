@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fitness_navigation"
+    app:startDestination="@id/fitnessDashboardFragment">
+
+    <fragment
+        android:id="@+id/fitnessDashboardFragment"
+        android:name="com.caressa.fitness_tracker.ui.FitnessDashboardFragment"
+        tools:layout="@layout/fitness_dashboard_fragment" >
+
+        <argument android:name="from" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_fitnessDashboardFragment_to_fragmentStepsDetail"
+            app:destination="@id/fragmentStepsDetail"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentStepsDetail"
+        android:name="com.caressa.fitness_tracker.ui.StepsDetailFragment"
+        tools:layout="@layout/fragment_steps_detail">
+
+        <argument android:name="from" app:argType="string"/>
+
+        <action
+            android:id="@+id/fragmentStepsDetail_to_fitnessDashboardFragment"
+            app:popUpTo="@id/fitnessDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <activity
+        android:id="@+id/home_activity"
+        android:name="com.caressa.home.ui.HomeMainActivity" />
+
+</navigation>

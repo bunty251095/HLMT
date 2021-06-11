@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="familyMember"
+            type="com.caressa.model.entity.UserRelatives"/>
+        <variable
+            name="viewModel"
+            type="com.caressa.home.viewmodel.ProfileFamilyMemberViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/layout_family_member"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/_3sdp"
+            app:cardCornerRadius="@dimen/_3sdp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rlAddFamilyMemberStripLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="@dimen/_4sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:background="@color/vivant_nasty_green"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageUsersFamilyMembersAdapter"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    app:srcCompat="@drawable/icon_mother"
+                    android:tint="@color/vivant_track_param_textcolor"
+                    android:loadImage="@{viewModel.getRelationImgId(familyMember.relationshipCode)}"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    app:layout_constraintTop_toTopOf="@+id/view5"
+                    app:layout_constraintBottom_toBottomOf="@+id/view5"
+                    app:layout_constraintStart_toStartOf="@+id/view5" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textNameFamilyMemberAdapter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{familyMember.firstName}"
+                    style="@style/VivantTitle"
+                    android:textSize="@dimen/_13sdp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_1sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageUsersFamilyMembersAdapter"
+                    app:layout_constraintTop_toTopOf="@+id/imageUsersFamilyMembersAdapter" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textRelationFamilyMember"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:text="@{familyMember.relationship}"
+                    style="@style/VivantDescription"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageUsersFamilyMembersAdapter"
+                    app:layout_constraintStart_toStartOf="@+id/textNameFamilyMemberAdapter"
+                    app:layout_constraintTop_toBottomOf="@+id/textNameFamilyMemberAdapter" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textFamilyMemberAge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    style="@style/VivantDescription"
+                    app:layout_constraintBottom_toBottomOf="@+id/textRelationFamilyMember"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textRelationFamilyMember"
+                    app:layout_constraintTop_toTopOf="@+id/textRelationFamilyMember" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageViewAdapterEditMember"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    app:layout_constraintRight_toRightOf="@id/textFamilyMemberAge"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginRight="@dimen/default_10dp"
+                    android:src="@drawable/img_edit"
+                    android:tint="@color/vivant_track_param_textcolor" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</layout>

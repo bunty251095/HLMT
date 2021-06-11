@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="time"
+            type="com.caressa.medication_tracker.model.TimeModel"/>
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_med_time"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_26sdp"
+            android:layout_marginTop="@dimen/_9sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/btn_oval_disabled">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_clock"
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_14sdp"
+                android:src="@drawable/img_time"
+                android:tint="@color/vivant_heather"
+                android:layout_marginStart="@dimen/_6sdp"
+                app:layout_constraintTop_toTopOf="@+id/txt_med_schedule_time"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_med_schedule_time"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_med_schedule_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/VivantTitle"
+                android:gravity="center"
+                android:text="09:00 AM"
+                android:textColor="@color/vivant_heather"
+                android:textSize="@dimen/_11sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_clock"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_remove"
+        android:visibility="visible"
+        android:layout_width="@dimen/_16sdp"
+        android:layout_height="@dimen/_16sdp"
+        android:background="@drawable/circular_border"
+        android:elevation="@dimen/_3sdp"
+        android:padding="@dimen/_3sdp"
+        app:srcCompat="@drawable/ic_close"
+        android:tint="@color/vivant_charcoal_grey_55"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

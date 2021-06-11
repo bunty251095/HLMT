@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="userRelative"
+            type="com.caressa.model.entity.UserRelatives"/>
+        <variable
+            name="viewModel"
+            type="com.caressa.home.viewmodel.DashboardViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_relative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="yes"
+            android:layout_margin="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.caressa.common.view.ArcImageView
+                android:id="@+id/img_relative"
+                android:layout_width="@dimen/_36sdp"
+                android:layout_height="@dimen/_36sdp"
+                app:isTemplate="true"
+                android:padding="@dimen/_3sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icon_brother"/>
+
+            <com.caressa.common.view.ArcTextView
+                android:id="@+id/txt_relative_name"
+                style="@style/CustomTextview"
+                app:isTemplate="true"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:text=""
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                app:layout_constraintBottom_toTopOf="@+id/txt_relation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_relative"
+                app:layout_constraintTop_toTopOf="@+id/img_relative"/>
+
+            <com.caressa.common.view.ArcTextView
+                android:id="@+id/txt_relation"
+                style="@style/CustomTextview"
+                app:isTemplate="true"
+                android:layout_width="0dp"
+                android:text=""
+                android:textSize="@dimen/_11sdp"
+                android:maxLines="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/img_relative"
+                app:layout_constraintStart_toStartOf="@+id/txt_relative_name"
+                app:layout_constraintTop_toBottomOf="@+id/txt_relative_name" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

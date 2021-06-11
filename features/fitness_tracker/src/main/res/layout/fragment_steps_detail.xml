@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.fitness_tracker.viewmodel.FitnessViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_graph_monthly"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_weight="0.6"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/layout_data">
+
+            <com.caressa.common.view.ArcTextView
+                android:id="@+id/viewLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/VivantTitle"
+                app:isTemplate="true"
+                app:isPrimary="true"
+                android:text="@string/VIEW_SCROLL"
+                android:textSize="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.caressa.common.view.ArcTextView
+                android:id="@+id/viewRight"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/VivantTitle"
+                app:isTemplate="true"
+                app:isPrimary="true"
+                android:text="@string/VIEW_RIGHT"
+                android:textSize="@dimen/_18sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="@+id/viewLeft"
+                app:layout_constraintBottom_toBottomOf="@+id/viewLeft"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/graph_monthly"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                app:layout_constraintVertical_weight="0.85"
+                app:layout_constraintTop_toBottomOf="@+id/viewLeft"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/layout_graph_details"/>
+
+            <LinearLayout
+                android:id="@+id/layout_graph_details"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintVertical_weight="0.15"
+                android:layout_marginStart="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@+id/graph_monthly"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <com.caressa.common.view.ArcView
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_2sdp"
+                    app:isTemplate="true"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimary"
+                    android:text="-"
+                    android:layout_marginTop="@dimen/_2sdp"/>
+
+                <com.caressa.common.view.ArcTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:isTemplate="true"
+                    app:isPrimary="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/GOALS"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="-----"
+                    android:textStyle="bold"
+                    android:textColor="@color/vivantOrange"
+                    android:textSize="@dimen/_16sdp"
+                    android:layout_marginStart="@dimen/_15sdp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/STEPS"
+                    android:textColor="@color/vivantOrange"
+                    android:textSize="@dimen/_13sdp" />
+
+            </LinearLayout>
+
+            <!--            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_graph_details"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintVertical_weight="0.2"
+                app:layout_constraintTop_toBottomOf="@+id/graph_monthly"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_data"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_weight="0.4"
+            app:layout_constraintTop_toBottomOf="@+id/layout_graph_monthly"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_gravity="center"
+                android:background="@color/vivant_greyish"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.caressa.common.view.ArcTextView
+                android:id="@+id/txt_date"
+                android:layout_width="match_parent"
+                app:isTemplate="true"
+                style="@style/VivantTitle"
+                android:text="01 May 2021"
+                android:textSize="@dimen/_18sdp"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_22sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <LinearLayout
+                android:id="@+id/layout_Fitness_data"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.caressa.fitness_tracker.view.CustomStepsDetailView
+                        android:id="@+id/layout_steps_goals"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="50" />
+
+                    <com.caressa.common.view.ArcView
+                        app:isTemplate="true"
+                        android:layout_width="@dimen/separatorWidth"
+                        android:layout_height="match_parent"
+                        android:background="@color/vivant_greyish"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <com.caressa.fitness_tracker.view.CustomStepsDetailView
+                        android:id="@+id/layout_calories"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="50" />
+
+                </LinearLayout>
+
+                <com.caressa.common.view.ArcView
+                    app:isTemplate="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/separatorWidth"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@color/vivant_greyish"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.caressa.fitness_tracker.view.CustomStepsDetailView
+                        android:id="@+id/layout_distance"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="50" />
+
+                    <com.caressa.common.view.ArcView
+                        app:isTemplate="true"
+                        android:layout_width="@dimen/separatorWidth"
+                        android:layout_height="match_parent"
+                        android:background="@color/vivant_greyish"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <com.caressa.fitness_tracker.view.CustomStepsDetailView
+                        android:id="@+id/layout_active_time"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="50" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.caressa.common.view.ArcTextView
+                android:id="@+id/lbl_no_data"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                app:isTemplate="true"
+                app:isPrimary="true"
+                style="@style/VivantTitle"
+                android:text="@string/NO_FITNESS_DATA"
+                android:textSize="@dimen/_18sdp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/txt_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

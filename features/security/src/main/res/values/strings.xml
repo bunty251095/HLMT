@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">Vivant</string>
+
+    <string name="facebook_app_id">397824020674947</string>
+    <string name="fb_login_protocol_scheme">fb397824020674947</string>
+    <string name="google_web_client_id">131375685253-kgb90ksquontqa1gion390lql0fpanku.apps.googleusercontent.com</string>
+    <!--    <string name="google_web_client_id">694765538505-tg34ue2keb3ghfbkurjp2op8tehflek8.apps.googleusercontent.com</string>-->
+
+    <string name="LOGIN_WITH_OTP">Login With OTP</string>
+    <string name="DONT_HAVE_ACCOUNT">Don\'t have an account?</string>
+    <string name="TERMS_OF_SERVICE_LOGIN">By clicking on Log in you agree to</string>
+    <string name="TERMS_OF_SERVICE_SIGNUP">By clicking on Sign Up you agree to</string>
+    <string name="YOU_HAVE_READ_THEM">and that you have read them</string>
+    <string name="YOUR_DOB">Your Date Of Birth</string>
+    <string name="TERMS_CONDITIONS">Terms and Conditions</string>
+    <string name="ADDITIONAL_DETAILS">Additional Details</string>
+    <string name="VIVANT_TERMS_CONDITIONS">Vivant Terms and Conditions</string>
+    <string name="LOGIN_USING_FB">Log in using Facebook</string>
+    <string name="LOGIN_USING_GOOGLE">Log in using Google</string>
+    <string name="OR_LOGIN_WITH">OR Login with</string>
+    <string name="SIGN_UP_USING_FB">Sign up using Facebook</string>
+    <string name="SIGNUP_USING_GOOGLE">Sign up using Google</string>
+    <string name="OR_SIGN_UP_USING_EMAIL">OR Signup Using Email</string>
+    <string name="MSG_USER_LESS_THAN_18_TO_ACCESS_HRA">Do we have your correct date of birth? if not, please update.Please note that to access Health Risk Assessment, you must be at least 18 years old.
+    </string>
+    <string name="EMAIL_OR_PHONE">Email Or Phone</string>
+    <string name="PASSWORD">Password</string>
+    <string name="CONFIRM_PASSWORD">Confirm Password</string>
+    <string name="OTP">OTP</string>
+    <string name="EMAIL_PHONE">Email Address / Phone number</string>
+    <string name="LOG_IN">Log In</string>
+    <string name="SIGN_IN">Sign In</string>
+    <string name="SIGN_UP">Sign Up</string>
+    <string name="FORGOT_PASSWORD">Forgot Password?</string>
+    <string name="I_AM_DONE">I am done</string>
+    <string name="FACEBOOK">Facebook</string>
+    <string name="GOOGLE">Google</string>
+
+    <string name="NAME_COMPULSARY">Name*</string>
+    <string name="EMAIL_COMPULSARY">Email*</string>
+    <string name="PASSWORD_COMPULSARY">Password*</string>
+    <string name="PHONE_OPTIONAL">Phone Number(Optional)</string>
+
+    <string name="VERIFY">Verify</string>
+    <string name="RESEND_MAIL">Resend Mail</string>
+    <string name="RESEND_CODE">Resend Code</string>
+    <string name="NEW_PASSWORD">New Password</string>
+    <string name="CHANGE_PASSWORD">Change Your Password</string>
+    <string name="ENTER_NEW_PASSWORD">Enter your New Password</string>
+    <string name="RE_ENTER_NEW_PASSWORD">Re-enter New Password</string>
+    <string name="RESET_PASSWORD">Reset Password</string>
+    <string name="FORGOT_YOUR_PASSWORD">Forgot Your Password?</string>
+    <string name="FORGOT_PASSWORD_DESC">Enter your email address &amp; we will send\nyou instructions to rest your password</string>
+    <string name="VERIFICATION_CODE">Verification Code</string>
+
+    <string name="PASSWORD_CRITERIA">Your Password Criteria</string>
+    <string name="PASSWORD_CRITERIA_DESC">Your Password length Should be minimum 6 characters</string>
+    <string name="OTP_SENT_DESC">OTP code has been sent to your \nemail address, please verify</string>
+
+    <!--    <string name="error_invalid_otp">Please enter a valid OTP</string>-->
+    <string name="GOOGLE_SIGN_IN_FAILED">Google sign in failed</string>
+    <string name="FB_SIGN_IN_FAILED">Facebook sign in failed</string>
+    <string name="ERROR_INVALID_EMAIL_PHONE">Please enter valid email address or phone</string>
+    <string name="ERROR_AGE_GREATER_THEN_18_YEARS">Age should be greater than 18 years</string>
+    <string name="ERROR_EMAIL_REGISTERED">This email is already Registered with us</string>
+    <string name="ERROR_PHONE_REGISTERED">This Phone Number is Already Registered with us</string>
+    <string name="ERROR_PHONE_NOT_REGISTERED">This Phone number is not Registered with us</string>
+    <string name="ERROR_EMAIL_PHONE_NOT_REGISTERED">This Email or Phone number is not registered with us</string>
+    <string name="ERROR_INVALID_NAME">Please Enter Your Name</string>
+    <string name="ERROR_INVALID_PHONE">Please Enter Valid Phone Number</string>
+    <string name="ERROR_INVALID_EMAIL">Please Enter Valid Email</string>
+    <string name="ERROR_INVALID_PASSWORD">Please Enter valid Password</string>
+    <string name="ERROR_EMAIL_MUST_INCLUDE">Email address must include @</string>
+    <!--    <string name="ERROR_INVALID_PASSWORD">Password must contains at least one capital letter one small letter one special symbol and at least 8 characters long.</string>-->
+    <string name="ERROR_INCORRECT_PASSWORD">This Password is incorrect</string>
+    <string name="ERROR_PASSWORD_DOESNOT_MATCH">Passwords do not match</string>
+    <string name="ERROR_PASSWORD_DOESNOT_MATCH_REQUIREMENTS">Password does not match the Requirements</string>
+    <string name="ERROR_PASSWORD_CONFIRM_DOESNOT_MATCH">Password and confirm password does not match.</string>
+    <string name="ERROR_FIELD_REQUIRED">This field is required</string>
+    <string name="ERROR_STORAGE_PERMISSION_REQUIRED">Storage Permission is required</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

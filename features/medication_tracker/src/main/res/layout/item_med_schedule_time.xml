@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_recent_med"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_4sdp"
+    android:layout_marginEnd="@dimen/_4sdp"
+    android:background="@drawable/btn_oval_disabled">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_status"
+        android:layout_width="@dimen/_11sdp"
+        android:layout_height="@dimen/_11sdp"
+        android:src="@drawable/img_skipped"
+        android:tint="@color/colorPrimary"
+        android:layout_marginStart="@dimen/_2sdp"
+        app:layout_constraintTop_toTopOf="@+id/txt_med_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txt_med_time"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_med_time"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_med_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/VivantDescription"
+        android:gravity="center_vertical"
+        android:text="00:00 am"
+        android:textSize="@dimen/_9sdp"
+        android:layout_marginStart="@dimen/_3sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/img_status"
+        app:layout_constraintStart_toEndOf="@+id/img_status"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="parameter"
+            type="com.caressa.common.utils.ParameterDataModel"/>
+    </data>
+
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:srcCompat="@drawable/img_height"
+        android:tint="@color/white"
+        android:background="@drawable/circle_bg"
+        android:padding="@dimen/_5sdp"
+        android:layout_gravity="center_vertical"
+        tools:ignore="VectorDrawableCompat"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/vivant_pale_grey"
+        android:paddingStart="@dimen/_8sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_3sdp"
+        android:layout_marginEnd="@dimen/_5sdp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTitle"
+            style="@style/ToolsSubTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Height"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/vivant_green_blue_two"
+            android:textStyle="bold"
+            android:text="5'5''"
+            style="@style/ToolsText"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Today via mobile entry"
+            android:textSize="@dimen/_10sdp"
+            style="@style/ToolsText"
+            android:textColor="@color/vivant_charcoal_grey"
+            android:alpha="0.88"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/txtValue"
+            app:layout_constraintTop_toBottomOf="@+id/txtValue"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtUnit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=" Feet/Inches"
+            android:layout_marginStart="@dimen/_1sdp"
+            android:textSize="@dimen/_10sdp"
+            android:alpha="88"
+            app:layout_constraintBottom_toBottomOf="@+id/txtValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtValue"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:tint="@color/vivant_charcoal_grey"
+            android:src="@drawable/img_edit"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

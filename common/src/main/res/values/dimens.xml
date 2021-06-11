@@ -1,0 +1,56 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="view_width">@dimen/_3sdp</dimen>
+
+    <dimen name="text_large">22.0sp</dimen>
+    <dimen name="text_medium">18.0sp</dimen>
+    <dimen name="text_medium_to_large">20.0sp</dimen>
+    <dimen name="text_micro">12.0sp</dimen>
+    <dimen name="text_nano">10.0sp</dimen>
+    <dimen name="text_small">14.0sp</dimen>
+    <dimen name="text_small_to_medium">16.0sp</dimen>
+    <dimen name="text_xlarge">24.0sp</dimen>
+
+    <dimen name="img_legend">16dp</dimen>
+    <dimen name="img_day_icon">20dp</dimen>
+    <dimen name="img_meter">26dp</dimen>
+    <dimen name="img_bg">50dp</dimen>
+    <dimen name="circle_bg">120dp</dimen>
+    <dimen name="circle_bg_small">100dp</dimen>
+    <dimen name="img_bg_small">40dp</dimen>
+    <dimen name="padding_large">10dp</dimen>
+    <dimen name="padding_small">5dp</dimen>
+    <dimen name="dialuage_otp_circle">35dp</dimen>
+
+    <!-- Default Sizes -->
+    <dimen name="default_5dp">5dp</dimen>
+    <dimen name="default_10dp">10dp</dimen>
+    <dimen name="default_16dp">16dp</dimen>
+
+    <!-- Font Sizes -->
+    <dimen name="size_12sp">12sp</dimen>
+    <dimen name="size_14sp">14sp</dimen>
+    <dimen name="size_15sp">15sp</dimen>
+    <dimen name="size_16sp">16sp</dimen>
+    <dimen name="size_17sp">17sp</dimen>
+    <dimen name="size_18sp">18sp</dimen>
+    <dimen name="size_20sp">20sp</dimen>
+    <dimen name="size_21sp">21sp</dimen>
+    <dimen name="size_22sp">22sp</dimen>
+    <dimen name="size_25sp">25sp</dimen>
+    <dimen name="size_30sp">30sp</dimen>
+    <dimen name="size_40sp">40sp</dimen>
+
+    <dimen name="dashboardTextSize">@dimen/_12sdp</dimen>
+    <dimen name="heightButtonSP">35dp</dimen>
+    <dimen name="widthButtonSP">165dp</dimen>
+    <dimen name="widthButtonInnerSP">160dp</dimen>
+    <dimen name="imageSize">50dp</dimen>
+    <dimen name="controlview_height">40dp</dimen>
+
+    <dimen name="separatorWidth">0.6dp</dimen>
+
+</resources>

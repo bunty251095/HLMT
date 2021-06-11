@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">records_tracker</string>
+
+    <string name="TITLE_STORE_HEALTH_RECORDS">Store Health Records</string>
+    <string name="TITLE_DIGITIZED_RECORD">Digitized Record</string>
+    <string name="TITLE_DIGITIZED_RECORDS">Digitized Records</string>
+    <string name="TITLE_UPLOADED_RECORDS">Uploaded Records</string>
+    <string name="TITLE_UPLOAD_RECORDS">Upload Records</string>
+
+    <string name="pathology_lab_report">Pathology Lab Report</string>
+<!--    <string name="prescription">Prescription</string>-->
+    <string name="DIGITIZE">Digitize</string>
+
+    <string name="type_diet_plan">Diet\nPlan</string>
+    <string name="type_fitness_plan">Fitness\nPlan</string>
+    <string name="type_prescription">Doctor\nPrescription</string>
+    <string name="type_pathology_lab_report">Pathology\nReport</string>
+    <string name="type_hospital_report">Hospital\nReport</string>
+    <string name="type_other_document">Other\nDocument</string>
+    <string name="type_hra_report">HRA\nReport</string>
+
+    <string name="all">All</string>
+    <string name="diet_plan">Diet Plan</string>
+    <string name="fitness_plan">Fitness Plan</string>
+    <string name="prescription">Doctor Prescription</string>
+    <string name="pathology_report">Pathology Report</string>
+    <string name="hospital_report">Hospital Report</string>
+    <string name="other_document">Other Document</string>
+    <string name="hra_report">HRA Report</string>
+
+    <string name="RECORD">Record</string>
+    <string name="RECORDS">Records</string>
+    <string name="ALL_RECORDS">All Records</string>
+    <string name="NO_RECORD_AVAILABLE">No Records available</string>
+    <string name="SELECT_RECORDS">Select records</string>
+    <string name="DELETE_RECORD">Delete Record</string>
+    <string name="UPLOAD_NEW_RECORDS">Upload New Record</string>
+    <string name="SELECT_RECORD_TO_UPLOAD">Select a Record to Upload</string>
+    <string name="DATE_OF_CHECKUP">Date of Checkup</string>
+    <string name="CHECKUP_DATE">Checkup Date   :</string>
+    <string name="TYPE_OF_DOCUMENT">Type of Document</string>
+    <string name="MEDIA_TYPE">Media Type</string>
+    <string name="PHOTO">Photo</string>
+    <string name="FILE">File</string>
+    <string name="GALLERY">Gallery</string>
+    <string name="ADD_MORE">Add More</string>
+    <string name="TYPE_YOUR_NOTES">Type your notes</string>
+    <string name="THIS_DOCUMENT_BELONGS_TO">This document belongs to</string>
+    <string name="VALUE_MUST_BE_BETWEEN">Value must be in between </string>
+    <string name="SELECT_RECORDS_TO_PROCEED">Please Select Records to Proceed</string>
+    <string name="DOCUMENT_BELONGS_TO">To whom these document belongs to</string>
+    <string name="HAVE_NOTES_TO_MENTION">Do you have some notes to mention?</string>
+    <string name="DO_YOU_WANT_TO_TAKE_A_NOTE">Do you want to take a note?</string>
+    <string name="MSG_DELETE_CONFIRMATION">Are you sure that you want to delete the Selected Record from list?</string>
+
+    <string name="MSG_RECORD_SAVED">Record(s) Saved Successfully.</string>
+    <string name="MSG_RECORD_DELETED">Record(s) deleted Successfully.</string>
+    <string name="MSG_REOCRD_DOWNLOADED">Record Downloaded Successfully.</string>
+    <string name="MSG_DATA_UPLOADED">Data uploded Successfully.</string>
+
+    <string name="NO_RECORDS_FOUND">No Records Found</string>
+    <string name="NO_RECORDS_CLICK_FOR_UPLOADING">No reports uploaded \n Click on an option below \n to start uploading</string>
+
+    <string name="ERROR_SELECT_RECORD_TO_PROCEED">Please Select Record to Proceed</string>
+    <string name="ERROR_FILES_NOT_ACCEPTED">files are not accepted</string>
+    <string name="ERROR_UNABLE_TO_OPEN_FILE">Unable to open file.</string>
+    <string name="ERROR_NOT_ABLE_TO_READ_FILE">Unable to Read file.</string>
+    <string name="ERROR_DOC_CANNOT_DIGITIZE">Document can\'t be digitized</string>
+    <string name="ERROR_CANNOT_DIGITIZE">Document type can not be digitized</string>
+    <string name="ERROR_FILE_NOT_EXIST">File does not exist in the system</string>
+    <string name="ERROR_NO_APPLICATION_TO_VIEW_PDF">No Application Available to View PDF</string>
+    <string name="ERROR_FILE_SIZE_LESS_THEN_5MB">File size must be less than 5MB</string>
+    <string name="ERROR_UNABLE_TO_READ_FILE">Unable to read file, please try again</string>
+    <string name="ERROR_SELECT_RECORDS_TO_DELETE">Please select record(s) to delete</string>
+    <string name="ERROR_SELECT_RECORDS_TO_SHARE">Please select record(s) to share</string>
+    <string name="ERROR_DOWNLOAD_RECORDS_TO_SHARE">Please download the document to share</string>
+    <string name="ERROR_UNIT_NOT_SUPPORTED">Unit is not Supported</string>
+    <string name="ERROR_VALUE_NOT_CORRECT">Value is not Correct</string>
+    <string name="ERROR_UNIT_NOT_CORRECT">Unit is not Correct</string>
+    <string name="ERROR_ENTER_VALID_INPUT">Please Enter Valid Input.</string>
+    <string name="ERROR_DOES_NOT_MATCHING_REQUIREMENTS"> does not match the requirements, kindly remove it to proceed</string>
+
+</resources>

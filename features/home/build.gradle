@@ -1,0 +1,26 @@
+apply from: '../../android_feature_dependencies.gradle'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "com.caressa.common_test.FakeRunner"
+    }
+    buildFeatures {
+        dataBinding true
+    }
+/*    testOptions {
+        animationsDisabled = true
+    }*/
+}
+
+dependencies {
+    implementation project(Modules.common)
+
+    api Libraries.otpView
+    api Libraries.circleImageview
+    api Libraries.ucrop
+    implementation Libraries.firebaseMessaging
+}

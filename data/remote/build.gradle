@@ -1,0 +1,28 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply from: '../../android_commons.gradle'
+
+dependencies {
+    // KOTLIN
+    api KotlinLibraries.kotlin
+    // NETWORK
+    api Libraries.retrofitCoroutineAdapter
+    api Libraries.retrofit
+    api Libraries.retrofitGsonConverter
+    api Libraries.httpLoggingInterceptor
+    api Libraries.scalarsConverter
+
+    // DATA MODULE
+    implementation project(Modules.model)
+    implementation project(Modules.common)
+
+
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+    // TEST
+    testImplementation TestLibraries.junit
+    testImplementation TestLibraries.koin
+    testImplementation TestLibraries.mockWebServer
+}

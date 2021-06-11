@@ -1,0 +1,33 @@
+<resources>
+
+    <string name="TITLE_ACTIVITY_TRACKER">Activity Tracker</string>
+    <string name="SET_GOAL">SET GOAL</string>
+    <string name="WEEKLY_STATISTICS">Weekly Statistics</string>
+    <string name="MONTHLY_STATISTICS">Monthly Statistics</string>
+    <string name="UPDATE_GOAL">Update Goal</string>
+    <string name="FORCE_SYNC">Force Sync</string>
+    <string name="TODAY">Today</string>
+    <string name="GOALS">Goals</string>
+    <string name="STEPS">Steps</string>
+    <string name="STEP_GOAL">Steps/Goal</string>
+    <string name="STEPS_TO_GO">Steps To Go</string>
+    <string name="MY_GOAL">My Goal</string>
+    <string name="CALORIES_BURNED">CALORIES\nBURNED</string>
+    <string name="CALORIES">Calories</string>
+    <string name="DISTANCE">Distance</string>
+    <string name="ACTIVE_TIME">Active Time</string>
+    <string name="hint_steps_goal">Steps goal</string>
+
+    <string name="VIEW_SCROLL">&lt;-------------&gt;</string>
+    <string name="VIEW_LEFT">&lt;------</string>
+    <string name="VIEW_RIGHT">------&gt;</string>
+
+    <string name="MSG_GOALS_UPDATED">Goal Updated Successfully</string>
+    <string name="FORCE_SYNC_CONFORMATION">Are you sure you want to force sync your entire Google Fit steps data for past one year?
+Please be noted that your entire history of fitness data will be overwritten.</string>
+
+    <string name="err_enter_value_in_30_10000">Please enter value between 30 to 10000</string>
+    <string name="err_enter_steps">Please enter the steps</string>
+    <string name="NO_FITNESS_DATA">Fitness Data Not Available</string>
+
+</resources>

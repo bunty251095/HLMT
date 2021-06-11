@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="healthDataParameter"
+            type="com.caressa.model.shr.HealthDataParameter"/>
+        <variable
+            name="viewmodel"
+            type="com.caressa.records_tracker.viewmodel.HealthRecordsViewModel"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_remove_parameter"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:background="@drawable/circle_drawable"
+            android:backgroundTint="@color/white"
+            android:elevation="@dimen/_3sdp"
+            android:padding="@dimen/_3sdp"
+            app:srcCompat="@drawable/ic_close"
+            android:tint="@color/vivant_charcoal_grey_55"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_digitized_parameter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/_3sdp"
+                app:cardCornerRadius="@dimen/_3sdp"
+                app:cardUseCompatPadding="true"
+                app:cardPreventCornerOverlap="false"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_6sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_parameter_name"
+                        style="@style/VivantTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintHorizontal_weight="0.4"
+                        android:text=""
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="normal"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/til_edt_param_value"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_edt_param_value"
+                        android:layout_width="0dp"
+                        app:layout_constraintHorizontal_weight="0.3"
+                        android:layout_height="wrap_content"
+                        app:passwordToggleEnabled="false"
+                        app:hintEnabled="false"
+                        style="@style/VivantTextInputLayoutStyle"
+                        app:layout_constraintTop_toTopOf="@+id/txt_parameter_name"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_parameter_name"
+                        app:layout_constraintStart_toEndOf="@+id/txt_parameter_name"
+                        app:layout_constraintEnd_toStartOf="@+id/til_edt_param_unit">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_param_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantEditTextStyle"
+                            android:text=""
+                            android:textColor="@color/vivant_nasty_green"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_13sdp"
+                            android:lines="1"
+                            android:maxLength="25"
+                            android:inputType="numberDecimal"
+                            android:imeOptions="actionDone"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_edt_param_unit"
+                        android:layout_width="0dp"
+                        app:layout_constraintHorizontal_weight="0.3"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        app:passwordToggleEnabled="false"
+                        app:hintEnabled="false"
+                        style="@style/VivantTextInputLayoutStyle"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        app:layout_constraintTop_toTopOf="@+id/til_edt_param_value"
+                        app:layout_constraintBottom_toBottomOf="@+id/til_edt_param_value"
+                        app:layout_constraintStart_toEndOf="@+id/til_edt_param_value"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_param_unit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantEditTextStyle"
+                            android:gravity="end"
+                            android:text=""
+                            android:textSize="@dimen/_11sdp"
+                            android:textColor="@color/vivant_charcoal_grey_55"
+                            android:inputType="text"
+                            android:lines="1"
+                            android:maxLength="25"
+                            android:imeOptions="actionDone"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

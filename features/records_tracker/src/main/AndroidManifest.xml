@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.caressa.records_tracker">
+
+    <application>
+        <activity android:name="com.caressa.records_tracker.HealthRecordsActivity"
+                android:screenOrientation="sensorPortrait"
+                android:windowSoftInputMode="adjustPan">
+        </activity>
+    </application>
+
+</manifest>

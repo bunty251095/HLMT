@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+                name="familyMember"
+                type="com.caressa.model.entity.UserRelatives"/>
+        <variable
+                name="viewModel"
+                type="com.caressa.home.viewmodel.ProfileFamilyMemberViewModel"/>
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <RelativeLayout
+                android:id="@+id/rlAddFamilyMemberStripLayout"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageUsersFamilyMembersAdapter"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/background_edittext_fdshp"
+                    android:padding="@dimen/default_10dp"
+                    android:loadImage="@{viewModel.getRelationImgId(familyMember.relationshipCode)}"
+                    android:tint="@color/textViewColor" />
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@+id/imageUsersFamilyMembersAdapter"
+                    android:gravity="center|start">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textNameFamilyMemberAdapter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{familyMember.firstName}"
+                        android:textColor="@color/textViewColor"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textRelationFamilyMember"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textNameFamilyMemberAdapter"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="false"
+                        android:text="@{familyMember.relationship}"
+                        android:textColor="@color/textViewColor"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textFamilyMemberAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textRelationFamilyMember"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="false"
+                        android:showAge="@{familyMember}"
+                        android:textColor="@color/textViewColor"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+            </RelativeLayout>
+zzz
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageViewAdapterEditMember"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/default_10dp"
+                    android:src="@drawable/ic_edit"
+                    android:tint="@color/textViewColor" />
+
+        </RelativeLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/vivantInactive" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

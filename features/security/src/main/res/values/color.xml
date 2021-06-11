@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="security_dusky_blue">#465892</color>
+    <color name="security_pale_red">#d64c3f</color>
+    <color name="security_grey_light">#b4b4b4</color>
+    <color name="security_steel_grey">#797e7d</color>
+</resources>

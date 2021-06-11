@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fitsSystemWindows="true"
+        android:gravity="center"
+        app:title=""
+        app:titleTextColor="@color/colorPrimary">
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.caressa.common.view.ArcTextView
+        android:id="@+id/toolbar_title"
+        style="@style/CustomTextview"
+        app:isTemplate="true"
+        app:isPrimary="true"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_gravity="center"
+        android:gravity="center|center_horizontal"
+        android:text=""
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_16sdp" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/vivantInactive"
+        android:layout_gravity="bottom"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_vivant_logo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:visibility="gone"
+        android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:adjustViewBounds="true"
+        android:padding="5dp"
+        android:src="@drawable/vivant_v_green" />
+
+</FrameLayout>
+<!--
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="4dp"
+        android:fitsSystemWindows="true"
+        android:gravity="center"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_gravity="center"
+        android:background="@color/vivantGreen"
+        android:gravity="center"
+        android:visibility="visible">
+
+&lt;!&ndash;        <androidx.appcompat.widget.AppCompatImageView
+               android:id="@+id/imgLogo"
+               android:layout_width="wrap_content"
+               android:layout_height="?actionBarSize"
+               android:layout_alignParentStart="true"
+               android:layout_alignParentTop="true"
+                android:scaleType="centerInside"
+                android:background="@color/vivantGreen"
+                android:src="@drawable/vivant_logo_white" />&ndash;&gt;
+
+    </RelativeLayout>
+
+</FrameLayout>-->

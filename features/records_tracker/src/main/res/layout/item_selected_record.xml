@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="recordInSession"
+            type="com.caressa.model.entity.RecordInSession"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.caressa.common.view.CustomImageView
+            android:id="@+id/img_selected_doc"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_100sdp"
+            app:recordInSessionImg="@{recordInSession}"
+            android:src="@drawable/img_pdf"
+            android:layout_centerInParent="true"
+            android:background="@drawable/image_border"
+            android:scaleType="centerCrop"
+            android:elevation="@dimen/_3sdp"
+            android:layout_margin="@dimen/_7sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_cancel_doc"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:background="@drawable/circle_drawable"
+            android:backgroundTint="@color/white"
+            android:elevation="@dimen/_3sdp"
+            android:padding="@dimen/_4sdp"
+            app:srcCompat="@drawable/ic_close"
+            android:tint="@color/vivant_charcoal_grey_55"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

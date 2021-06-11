@@ -1,0 +1,22 @@
+/**
+ * Shared dependencies between modules
+ */
+dependencies {
+    // KOTLIN
+    api KotlinLibraries.kotlin
+    api KotlinLibraries.kotlinCoroutineCore
+    api AndroidLibraries.kotlinCoroutineAndroid
+    // ANDROID
+    api AndroidLibraries.appCompat
+    api AndroidLibraries.coreKtx
+    api AndroidLibraries.constraintLayout
+    api AndroidLibraries.lifecycleViewModel
+    api AndroidLibraries.lifecycleExtensions
+    api AndroidLibraries.recyclerView
+    api AndroidLibraries.navigation
+    api AndroidLibraries.navigationFrag
+    api AndroidLibraries.androidxLegacySupport
+    api AndroidLibraries.appDesign
+    api Libraries.dexter
+
+}

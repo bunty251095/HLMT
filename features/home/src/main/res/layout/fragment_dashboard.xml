@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.caressa.home.viewmodel.DashboardViewModel"/>
+
+        <variable
+            name="backViewModel"
+            type="com.caressa.home.viewmodel.BackgroundCallViewModel"/>
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llHealthLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintVertical_weight="0.30"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/llHealthModules">
+
+                <LinearLayout
+                    android:id="@+id/layout_hra"
+                    android:layout_width="@dimen/_125sdp"
+                    android:layout_height="@dimen/_125sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="4dp"
+                    android:hraObsColor="@{viewModel.hraDetails}"
+                    android:background="@drawable/circle_drawable"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/layout_take_health_checkup"
+                    app:layout_constraintHorizontal_weight="0.4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_health_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="--"
+                        app:showHraScore="@{viewModel.hraDetails}"
+                        android:textColor="@color/vivantWhite"
+                        android:textSize="@dimen/_35sdp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_hra_observation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="---"
+                        app:showHraObservation="@{viewModel.hraDetails}"
+                        android:gravity="center"
+                        android:textSize="@dimen/dashboardTextSize"
+                        android:textColor="@color/vivantWhite"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_4sdp"/>
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/layout_take_health_checkup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_42sdp"
+                    app:layout_constraintHorizontal_weight="0.6"
+                    android:background="@drawable/rounded_corner_border"
+                    android:backgroundTint="@color/vivantBlue"
+                    android:gravity="center"
+                    android:text="@string/DASH_TAKE_HEALTH_CHECKUP"
+                    android:textColor="@color/vivantWhite"
+                    android:textSize="@dimen/dashboardTextSize"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/layout_hra"
+                    app:layout_constraintBottom_toTopOf="@+id/layout_chat_with_doctor" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/layout_chat_with_doctor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_42sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_border"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:text="@string/DASH_CHAT_WITH_DOCTOR"
+                    android:textColor="@color/vivantWhite"
+                    android:textSize="@dimen/dashboardTextSize"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_take_health_checkup"
+                    app:layout_constraintBottom_toTopOf="@+id/layout_order_medicines"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_take_health_checkup"
+                    app:layout_constraintStart_toStartOf="@+id/layout_take_health_checkup" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/layout_order_medicines"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_42sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_border"
+                    android:backgroundTint="@color/vivantCyan"
+                    android:gravity="center"
+                    android:text="@string/DASH_ORDER_YOUR_MEDICINES"
+                    android:textColor="@color/vivantWhite"
+                    android:textSize="@dimen/dashboardTextSize"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_chat_with_doctor"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_chat_with_doctor"
+                    app:layout_constraintStart_toStartOf="@+id/layout_chat_with_doctor"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llHealthModules"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintVertical_weight="0.70"
+                app:layout_constraintTop_toBottomOf="@+id/llHealthLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/_8sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_track_parameter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_border"
+                    android:backgroundTint="@color/vivantTeal"
+                    android:gravity="center"
+                    android:minHeight="@dimen/_125sdp"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_6sdp"
+                    app:layout_constraintEnd_toStartOf="@+id/layout_store_health_records"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_dash_track"
+                        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="@string/DASH_TRACK_PARAMETER"
+                        android:textColor="@color/vivantWhite"
+                        android:textSize="@dimen/dashboardTextSize"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatImageView"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_store_health_records"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_125sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_border"
+                    android:backgroundTint="@color/vivantOrangeDark"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    app:layout_constraintTop_toTopOf="@+id/layout_track_parameter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/layout_track_parameter"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_track_parameter">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView2"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_dash_store"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView5" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="@string/DASH_STORE_HEALTH_RECORD"
+                        android:textColor="@color/vivantWhite"
+                        android:textSize="@dimen/dashboardTextSize"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatImageView2"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView2" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_medicine_tracker"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_65sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_border"
+                    android:backgroundTint="@color/vivantCyan"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_track_parameter"
+                    app:layout_constraintEnd_toStartOf="@+id/layout_activity_tracker">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView5"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_marginStart="8dp"
+                        android:padding="@dimen/_8sdp"
+                        android:src="@drawable/ic_dash_medication"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/DASH_MEDICINE_TRACKER"
+                        android:textColor="@color/vivantWhite"
+                        android:textSize="@dimen/dashboardTextSize"
+                        app:layout_constraintStart_toEndOf="@+id/appCompatImageView5"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatImageView5"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView5"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_activity_tracker"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_65sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_border"
+                    android:backgroundTint="@color/vivantPink"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    app:layout_constraintTop_toTopOf="@+id/layout_medicine_tracker"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/layout_medicine_tracker"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_medicine_tracker">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView6"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:padding="@dimen/_8sdp"
+                        android:src="@drawable/ic_dash_fitness"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView3"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/DASH_ACTIVITY_TRACKER"
+                        android:textColor="@color/vivantWhite"
+                        android:textSize="@dimen/dashboardTextSize"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatImageView6"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView6"
+                        app:layout_constraintStart_toEndOf="@+id/appCompatImageView6"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_wellness_centre"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_90sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_border"
+                    android:backgroundTint="@color/vivantRed"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_medicine_tracker"
+                    app:layout_constraintEnd_toStartOf="@+id/layout_hospital_near_me">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView7"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:src="@drawable/ic_dash_wellness_center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView6"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView6"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:text="@string/DASH_WELLNESS_CENTRE"
+                        android:textColor="@color/vivantWhite"
+                        android:textSize="@dimen/dashboardTextSize"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView7"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatImageView7"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView7"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_hospital_near_me"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_90sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_border"
+                    android:backgroundTint="@color/vivantNavy"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    app:layout_constraintTop_toTopOf="@+id/layout_wellness_centre"
+                    app:layout_constraintStart_toEndOf="@+id/layout_wellness_centre"
+                    app:layout_constraintEnd_toStartOf="@+id/layout_health_library"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_wellness_centre">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView8"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:src="@drawable/ic_dash_hospital_near_me"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView7"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:text="@string/DASH_HOSPITAL_NEAR_ME"
+                        android:textColor="@color/vivantWhite"
+                        android:textSize="@dimen/dashboardTextSize"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView8"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatImageView8"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView8"
+                        app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/appCompatTextView7"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_health_library"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_90sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_border"
+                    android:backgroundTint="@color/vivantPurple"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/layout_hospital_near_me"
+                    app:layout_constraintStart_toEndOf="@+id/layout_hospital_near_me"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_hospital_near_me">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView9"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:src="@drawable/ic_dash_blogs"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView8"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView8"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:text="@string/DASH_HEALTH_LIBRARY"
+                        android:textColor="@color/vivantWhite"
+                        android:textSize="@dimen/dashboardTextSize"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView9"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatImageView9"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView9"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_chat_with_dietitian"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/rounded_corner_border"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_wellness_centre"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/appCompatImageView10"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:padding="@dimen/_9sdp"
+                            android:src="@drawable/ic_dash_dietitian"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/appCompatTextView9"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/appCompatTextView9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/DASH_CHAT_DIETITIAN"
+                            android:textColor="@color/vivantWhite"
+                            android:textSize="@dimen/dashboardTextSize"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/appCompatImageView10" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

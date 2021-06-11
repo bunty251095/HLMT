@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">track_parameter</string>
+
+    <string-array name="arr_units">
+        <item>Metric</item>
+        <item>Imperial</item>
+    </string-array>
+    <string name="sp_prompt_unit">Choose Default Unit</string>
+    <string name="history">History</string>
+
+    <!--Track Health Parameters-->
+    <string name="title_select_parameters">Select Parameters</string>
+    <string name="msg_select_param_to_track">Please Select at least one Parameter to Track</string>
+
+    <string name="blood_presure">Blood\nPresure</string>
+    <string name="blood_sugar">Blood\nSugar</string>
+    <string name="hemogram_profile">Hemogram\nProfile</string>
+    <string name="kidney_profile">Kidney\nProfile</string>
+    <string name="lipid_profile">Lipid\nProfile</string>
+    <string name="liver_profile">Liver\nProfile</string>
+    <string name="thyroid_profile">Thyroid\nProfile</string>
+    <string name="urine_profile">Urine\nProfile</string>
+
+    <string name="weight">Weight</string>
+    <string name="waist">Waist</string>
+    <string name="bmi">BMI</string>
+    <string name="whr">WHR</string>
+    <string name="bp">BP</string>
+    <string name="bs">Blood Sugar</string>
+    <string name="cholesterol">Cholesterol</string>
+    <string name="hemoglobin">Hemoglobin</string>
+    <string name="hemogram">Hemogram</string>
+    <string name="kidney">Kidney</string>
+    <string name="lipid">Lipid</string>
+    <string name="liver">Liver</string>
+    <string name="thyroid">Thyroid</string>
+    <string name="urine">Urine</string>
+    <string name="pulse">Pulse</string>
+    <string name="steps">Steps</string>
+    <string name="calories">Calories</string>
+    <string name="add_more">Add More</string>
+
+    <string name="save">Save</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Track Health Parameters-->
+</resources>

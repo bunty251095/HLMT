@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel"
+            type="com.caressa.medication_tracker.viewmodel.MedicineTrackerViewModel"/>
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_med_calender"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_95sdp"
+        tools:listitem="@layout/item_medicine_calender"
+        android:paddingStart="@dimen/_6sdp"
+        android:paddingEnd="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_add_medication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_med_calender">
+
+        <com.caressa.common.view.ArcImageView
+            android:id="@+id/img_add_edit"
+            app:isTemplate="true"
+            app:isBackground="true"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            app:srcCompat="@drawable/add"
+            android:tint="@color/white"
+            android:background="@drawable/circle_bg"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginEnd="@dimen/_4sdp"
+            app:layout_constraintEnd_toStartOf="@+id/lbl_add_edit"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.caressa.common.view.ArcTextView
+            android:id="@+id/lbl_add_edit"
+            app:isTemplate="true"
+            app:isPrimary="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/VivantTitle"
+            android:text="@string/ADD_MEDICATION"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="@+id/img_add_edit"
+            app:layout_constraintBottom_toBottomOf="@+id/img_add_edit"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/layout_medicine_details_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:shimmer_duration="500"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_med_calender">
+
+        <include layout="@layout/layout_med_dashboard_shimmer"/>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_medicine_details"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        tools:listitem="@layout/item_med_dashboard"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_60sdp"
+        app:layout_constraintTop_toBottomOf="@+id/layout_add_medication"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_no_medicines"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_80sdp"
+        app:layout_constraintTop_toBottomOf="@+id/layout_add_medication"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_no_data"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:src="@drawable/img_no_record"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/VivantTitle"
+            android:text="@string/NO_MEDICINES"
+            android:textSize="@dimen/_15sdp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/img_no_data"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_btn_medications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.caressa.common.view.ArcButton
+            android:id="@+id/btn_dash_upload_pre"
+            style="@style/CustomButtonLeft"
+            app:isLeftButton="true"
+            app:isTemplate="true"
+            android:text="@string/UPLOAD_PRESCRIPTION"/>
+
+        <com.caressa.common.view.ArcButton
+            android:id="@+id/btn_dash_my_medications"
+            style="@style/CustomButtonRight"
+            app:isTemplate="true"
+            android:text="@string/TITLE_MY_MEDICATIONS"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

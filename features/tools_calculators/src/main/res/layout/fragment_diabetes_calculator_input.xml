@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel"
+            type="com.caressa.tools_calculators.viewmodel.ToolsCalculatorsViewModel"/>
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="@dimen/_10sdp"
+        android:scrollbars="none"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".other.HeartAgeInputActivity">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Profile Parameters"
+                style="@style/VivantTitle"
+                android:textSize="@dimen/_12sdp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/vivantDarkGrey"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/layoutStyle"
+                android:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/ToolsQuestion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="Select Your Age Group"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtAgeGroup"
+                        style="@style/VivantTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down"
+                        android:drawableTint="@color/black"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:text="Under 35 Years"
+                        android:textSize="@dimen/_11sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/sp_age_group"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_1sdp"
+                        android:dropDownSelector="@color/textViewColor"
+                        android:entries="@array/age_group_array"
+                        android:spinnerMode="dropdown"
+                        style="@style/spinnerStyle"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/vivantInactive"
+                        android:layout_marginEnd="@dimen/_4sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/sp_age_group"
+                        app:layout_constraintEnd_toEndOf="@+id/sp_age_group"
+                        app:layout_constraintStart_toStartOf="@+id/sp_age_group"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/greyAlpha" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/layoutStyle"
+                android:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/ToolsQuestion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/GENDER"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtGender"
+                        style="@style/VivantTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down"
+                        android:drawableTint="@color/black"
+                        android:drawablePadding="@dimen/_8sdp"
+                        android:paddingTop="@dimen/_3sdp"
+                        android:text="Male"
+                        android:textSize="@dimen/_11sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/vivantInactive"
+                        android:layout_marginEnd="@dimen/_4sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/txtGender"
+                        app:layout_constraintEnd_toEndOf="@+id/txtGender"
+                        app:layout_constraintStart_toStartOf="@+id/txtGender"/>
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerGender"
+                        android:layout_width="@dimen/_130sdp"
+                        android:layout_height="@dimen/_1sdp"
+                        android:dropDownSelector="@color/vivant_pale_grey"
+                        android:ellipsize="none"
+                        android:entries="@array/gender_array"
+                        android:spinnerMode="dropdown"
+                        android:layout_marginStart="@dimen/_35sdp"
+                        android:tag="GENDER"
+                        style="@style/spinnerStyle"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="@+id/txtGender"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtGender" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/greyAlpha" />
+
+            <LinearLayout
+                style="@style/layoutStyle"
+                android:weightSum="10"
+                android:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/ToolsQuestion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="7"
+                    android:text="@string/QUES_DIABETES_1" />
+
+                <RadioGroup
+                    android:id="@+id/rgOrigin"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:layout_weight="3"
+                    android:background="@drawable/border_normal_outline"
+                    android:checkedButton="@+id/off1"
+                    android:orientation="horizontal">
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/off1"
+                        app:isTemplate="true"
+                        android:background="@drawable/sw_on"
+                        style="@style/ToolsToggleLeft" />
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/on1"
+                        app:isTemplate="true"
+                        android:background="@drawable/sw_on"
+                        style="@style/ToolsToggleRight" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/greyAlpha" />
+
+            <LinearLayout
+                style="@style/layoutStyle"
+                android:weightSum="10"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="7"
+                    style="@style/ToolsQuestion"
+                    android:text="@string/QUES_DIABETES_2" />
+
+                <RadioGroup
+                    android:id="@+id/rgDiabetes"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:layout_weight="3"
+                    android:background="@drawable/border_normal_outline"
+                    android:checkedButton="@+id/off2"
+                    android:orientation="horizontal">
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/off2"
+                        app:isTemplate="true"
+                        android:background="@drawable/sw_on"
+                        style="@style/ToolsToggleLeft" />
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/on2"
+                        app:isTemplate="true"
+                        android:background="@drawable/sw_on"
+                        style="@style/ToolsToggleRight" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/greyAlpha" />
+
+            <LinearLayout
+                style="@style/layoutStyle"
+                android:weightSum="10">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="7"
+                    style="@style/ToolsQuestion"
+                    android:text="@string/QUES_DIABETES_3" />
+
+                <RadioGroup
+                    android:id="@+id/rgBloodSugar"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:layout_weight="3"
+                    android:background="@drawable/border_normal_outline"
+                    android:checkedButton="@+id/off3"
+                    android:orientation="horizontal">
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/off3"
+                        app:isTemplate="true"
+                        android:background="@drawable/sw_on"
+                        style="@style/ToolsToggleLeft" />
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/on3"
+                        app:isTemplate="true"
+                        android:background="@drawable/sw_on"
+                        style="@style/ToolsToggleRight" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/greyAlpha" />
+
+            <LinearLayout
+                style="@style/layoutStyle"
+                android:weightSum="10">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="7"
+                    style="@style/ToolsQuestion"
+                    android:text="@string/QUES_DIABETES_4" />
+
+                <RadioGroup
+                    android:id="@+id/rg_bp_medication"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:layout_weight="3"
+                    android:background="@drawable/border_normal_outline"
+                    android:checkedButton="@+id/off3"
+                    android:orientation="horizontal">
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/off4"
+                        app:isTemplate="true"
+                        android:background="@drawable/sw_on"
+                        style="@style/ToolsToggleLeft" />
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/on4"
+                        app:isTemplate="true"
+                        android:background="@drawable/sw_on"
+                        style="@style/ToolsToggleRight" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/greyAlpha" />
+
+            <LinearLayout
+                style="@style/layoutStyle"
+                android:weightSum="10">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/ToolsQuestion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="7"
+                    android:text="@string/QUES_DIABETES_5" />
+
+                <RadioGroup
+                    android:id="@+id/rg_smoke"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:layout_weight="3"
+                    android:background="@drawable/border_normal_outline"
+                    android:checkedButton="@+id/off3"
+                    android:orientation="horizontal">
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/off5"
+                        app:isTemplate="true"
+                        style="@style/ToolsToggleLeft"
+                        android:background="@drawable/sw_on"/>
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/on5"
+                        app:isTemplate="true"
+                        style="@style/ToolsToggleRight"
+                        android:background="@drawable/sw_on"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/greyAlpha" />
+
+            <LinearLayout
+                style="@style/layoutStyle"
+                android:weightSum="10">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="7"
+                    style="@style/ToolsQuestion"
+                    android:text="@string/QUES_DIABETES_6" />
+
+                <RadioGroup
+                    android:id="@+id/rg_fruits"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:layout_weight="3"
+                    android:background="@drawable/border_normal_outline"
+                    android:checkedButton="@+id/off3"
+                    android:orientation="horizontal">
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/off6"
+                        app:isTemplate="true"
+                        android:background="@drawable/sw_on"
+                        style="@style/ToolsToggleLeft" />
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/on6"
+                        app:isTemplate="true"
+                        android:background="@drawable/sw_on"
+                        style="@style/ToolsToggleRight" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/greyAlpha" />
+
+            <LinearLayout
+                style="@style/layoutStyle"
+                android:weightSum="10">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="7"
+                    style="@style/ToolsQuestion"
+                    android:text="@string/QUES_DIABETES_7" />
+
+                <RadioGroup
+                    android:id="@+id/rg_exercise"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:layout_weight="3"
+                    android:background="@drawable/border_normal_outline"
+                    android:checkedButton="@+id/off3"
+                    android:orientation="horizontal">
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/off7"
+                        app:isTemplate="true"
+                        android:background="@drawable/sw_on"
+                        style="@style/ToolsToggleLeft" />
+
+                    <com.caressa.common.view.ArcRadioButton
+                        android:id="@+id/on7"
+                        app:isTemplate="true"
+                        android:background="@drawable/sw_on"
+                        style="@style/ToolsToggleRight" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/greyAlpha" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Measurement Parameter"
+                android:textStyle="bold"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/textViewColor"
+                android:layout_marginTop="@dimen/_10sdp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/vivantDarkGrey"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/param_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_mesurement_parameter"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_100sdp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.caressa.common.view.ArcButton
+        android:id="@+id/btn_calculate_diabetes"
+        app:isTemplate="true"
+        android:text="@string/CALCULATE"
+        style="@style/CustomButton"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

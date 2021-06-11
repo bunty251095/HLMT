@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">-->
+
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/VivantTitle"
+            android:text="Physical Effects of Addiction"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/vivant_charcoal_grey"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Over use of your cell phone or smartphone can result in a number of different physical problems that may cause permanent damage or be difficult to treat, including:"
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:lineSpacingExtra="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_8sdp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_14sdp"
+        android:padding="@dimen/_3sdp"
+        android:background="@color/vivant_nasty_green">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_33sdp"
+            android:layout_height="@dimen/_33sdp"
+            app:srcCompat="@drawable/img_digital_eye_strain"
+            android:padding="@dimen/_4sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Digital eye strain"
+            android:textColor="@color/white"
+            style="@style/VivantTitle"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/_8sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp"
+        android:visibility="visible">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eyes begin to burn and itch."
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:lineSpacingExtra="@dimen/_2sdp"
+            android:drawableStart="@drawable/squre_bg"
+            android:drawableTint="@color/vivant_nasty_green"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blurred vision."
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:lineSpacingExtra="@dimen/_2sdp"
+            android:drawableStart="@drawable/squre_bg"
+            android:drawableTint="@color/vivant_nasty_green"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eye fatigue."
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:lineSpacingExtra="@dimen/_2sdp"
+            android:drawableStart="@drawable/squre_bg"
+            android:drawableTint="@color/vivant_nasty_green"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Digital Eye Strain can cause headaches."
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:lineSpacingExtra="@dimen/_2sdp"
+            android:drawableStart="@drawable/squre_bg"
+            android:drawableTint="@color/vivant_nasty_green"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp" >
+
+            <View
+                android:id="@+id/img_suggestion"
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:background="@color/vivant_nasty_green"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_suggestion"
+                style="@style/ToolsQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:text="The pain and discomfort associated with viewing a digital screen for over 2 hours." />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:padding="@dimen/_3sdp"
+        android:background="@color/vivant_orange_yellow">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_33sdp"
+            android:layout_height="@dimen/_33sdp"
+            app:srcCompat="@drawable/img_neck_problem"
+            android:padding="@dimen/_4sdp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Neck problems"
+            style="@style/VivantTitle"
+            android:textColor="@color/white"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/_8sdp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:padding="@dimen/_10sdp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Also known as &quot;text neck,&quot; which refers to neck pain resulting from looking down at cell phone or tablet for too long."
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:lineSpacingExtra="@dimen/_2sdp"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:padding="@dimen/_3sdp"
+        android:background="@color/vivant_watermelon">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_33sdp"
+            android:layout_height="@dimen/_33sdp"
+            app:srcCompat="@drawable/img_illness"
+            android:padding="@dimen/_4sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Increased illnesses due to germs"
+            android:textColor="@color/white"
+            style="@style/VivantTitle"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/_8sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:padding="@dimen/_10sdp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 in 6 cell phones has fecal matter on it."
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:drawableStart="@drawable/squre_bg"
+            android:drawableTint="@color/vivant_watermelon"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp" >
+
+            <View
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:background="@color/vivant_watermelon"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/ToolsQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:text="E. coli bacteria, which can cause fever, vomiting, and diarrhea, is found on many phones." />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp" >
+
+            <View
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:background="@color/vivant_watermelon"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/ToolsQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:text="Phones have been found to be contaminated with MRSA." />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Causes painful abscesses."
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:drawableStart="@drawable/squre_bg"
+            android:drawableTint="@color/vivant_greyish"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_20sdp">
+
+            <View
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:background="@color/vivant_greyish"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/ToolsQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:text="Life-threatening infections in bones, joints, surgical wounds, bloodstream, heart valves, and lungs." />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Car accidents."
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:drawableStart="@drawable/squre_bg"
+            android:drawableTint="@color/vivant_watermelon"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_20sdp">
+
+            <View
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:background="@color/vivant_greyish"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/ToolsQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:text="Many people believe that they can multitask and use their phones while driving, but this causes significant impairment and puts the driver and others on the road in danger." />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_20sdp">
+
+            <View
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:background="@color/vivant_greyish"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/ToolsQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:text="Research has revealed that texting and driving can be just as dangerous as drinking and driving." />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male infertility."
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:drawableStart="@drawable/squre_bg"
+            android:drawableTint="@color/vivant_watermelon"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_20sdp">
+
+            <View
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:background="@color/vivant_greyish"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/ToolsQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:text="Preliminary studies have revealed that cell phone radiation may decrease sperm count, sperm motility and viability." />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/VivantTitle"
+            android:text="Psychological Effects of Cell Phone Addiction"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/vivant_charcoal_grey"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:padding="@dimen/_3sdp"
+        android:background="@color/vivant_nasty_green">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_33sdp"
+            android:layout_height="@dimen/_33sdp"
+            app:srcCompat="@drawable/img_sleep_disturbances"
+            android:padding="@dimen/_4sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sleep disturbances"
+            style="@style/VivantTitle"
+            android:textColor="@color/white"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/_8sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:padding="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp">
+
+            <View
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:background="@color/vivant_nasty_green"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/ToolsQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:text="Cell phone addiction has been linked to an increase in sleep disorders and fatigue in users." />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp">
+
+            <View
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:background="@color/vivant_nasty_green"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/ToolsQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:text="Using your cell phone before bed increases the likelihood of insomnia." />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bright light may decrease sleep quality."
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:drawableStart="@drawable/squre_bg"
+            android:drawableTint="@color/vivant_greyish"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_20sdp">
+
+            <View
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:background="@color/vivant_greyish"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/ToolsQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:text="Smartphone use could increase amount of time it takes to fall asleep." />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_20sdp">
+
+            <View
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:background="@color/vivant_greyish"
+                android:layout_marginTop="@dimen/_4sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/ToolsQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:text="Light emitted from the cell phone may activate the brain." />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:padding="@dimen/_3sdp"
+        android:background="@color/vivant_orange_yellow">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_33sdp"
+            android:layout_height="@dimen/_33sdp"
+            app:srcCompat="@drawable/img_depression"
+            android:padding="@dimen/_4sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Depression"
+            style="@style/VivantTitle"
+            android:textColor="@color/white"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/_8sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:padding="@dimen/_3sdp"
+        android:background="@color/vivant_watermelon">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_33sdp"
+            android:layout_height="@dimen/_33sdp"
+            app:srcCompat="@drawable/img_obsession"
+            android:padding="@dimen/_4sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Obsessive Compulsive Disorder"
+            android:textColor="@color/white"
+            style="@style/VivantTitle"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/_8sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:padding="@dimen/_3sdp"
+        android:background="@color/vivant_nasty_green">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_33sdp"
+            android:layout_height="@dimen/_33sdp"
+            app:srcCompat="@drawable/img_relationship_problem"
+            android:padding="@dimen/_4sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Relationship problems"
+            android:textColor="@color/white"
+            style="@style/VivantTitle"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/_8sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offline relationships may suffer as a result of neglect in favor of excessive cell phone and social media use."
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:lineSpacingExtra="@dimen/_2sdp"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:padding="@dimen/_3sdp"
+        android:background="@color/vivant_orange_yellow">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_33sdp"
+            android:layout_height="@dimen/_33sdp"
+            app:srcCompat="@drawable/img_anxiety"
+            android:padding="@dimen/_4sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anxiety"
+            style="@style/VivantTitle"
+            android:textColor="@color/white"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/_8sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Research has found that college students who use their cell phones the most are more likely to feel anxious during downtime."
+            android:gravity="start|center_vertical"
+            style="@style/ToolsQuestion"
+            android:lineSpacingExtra="@dimen/_2sdp"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp" />
+
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+<!--    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>-->

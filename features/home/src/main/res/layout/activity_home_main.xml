@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.home.viewmodel.DashboardViewModel"/>
+        <variable
+            name="backViewModel"
+            type="com.caressa.home.viewmodel.BackgroundCallViewModel"/>
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
+
+        <include
+            android:id="@+id/toolBarView"
+            layout="@layout/app_bar_home_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:choiceMode="singleChoice"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="false">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="@{backViewModel.getStepsGoal.toString()}"
+                android:orientation="vertical">
+
+<!--                <include
+                        android:id="@+id/header_layout"
+                        layout="@layout/nav_header_home_main"/>-->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/nav_drawer_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_drawer_list"
+                    app:drawerItems="@{viewModel.navDrawerOptionList}"/>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/layout_logout"
+                    android:layout_width="match_parent"
+                    android:visibility="visible"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_gravity="bottom"
+                    android:gravity="start|center">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_version_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/VivantDescription"
+                        android:text=""
+                        android:textColor="@color/vivant_greyish"
+                        android:textSize="@dimen/_11sdp"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</layout>

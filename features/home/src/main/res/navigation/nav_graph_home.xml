@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_home"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.caressa.home.ui.DashboardFragment"
+        tools:layout="@layout/fragment_dashboard">
+
+        <action android:id="@+id/action_dashboardFragment_to_homeFragment"
+            app:destination="@id/homeFragment"/>
+
+        <action android:id="@+id/action_dashboardFragment_to_securityActivity"
+            app:destination="@id/securityActivity" />
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_hra_activity"
+            app:destination="@id/hraActivity"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_fitnessActivity"
+            app:destination="@id/fitnessActivity"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_trackParamActivity"
+            app:destination="@id/trackParamActivity"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_medicationActivity"
+            app:destination="@id/medicationActivity"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_hraSummaryActivity2"
+            app:destination="@id/hraSummaryActivity"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_shrActivity"
+            app:destination="@id/shrActivity"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_blogsActivity"
+            app:destination="@id/blogsActivity"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_commonWebViewActivity"
+            app:destination="@id/commonWebViewActivity"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_commonWebViewFragment"
+            app:destination="@id/commonWebViewFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_wellnessCentreActivity"
+            app:destination="@id/wellnessCentreActivity"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_orderMedicinesActivity"
+            app:destination="@id/orderMedicinesActivity"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action android:id="@+id/action_dashboardFragment_to_toolsTrackerActivity"
+            app:destination="@id/toolsTracker"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.caressa.home.HomeFragment"
+        tools:layout="@layout/fragment_home"/>
+
+    <fragment
+            android:id="@+id/commonWebViewFragment"
+            android:name="com.caressa.home.ui.WebViews.CommonWebViewFragment"
+            tools:layout="@layout/fragment_common_web_view"/>
+
+    <activity
+            android:id="@+id/commonWebViewActivity"
+            android:name="com.caressa.home.ui.WebViews.CommonWebViewActivity"
+            tools:layout="@layout/activity_common_web_view"/>
+
+    <activity
+            android:id="@+id/wellnessCentreActivity"
+            tools:layout="@layout/activity_wellness_centre"
+            android:name="com.caressa.home.ui.WebViews.WellnessCentreActivity"/>
+
+    <activity
+            android:id="@+id/orderMedicinesActivity"
+            tools:layout="@layout/activity_order_medicine"
+            android:name="com.caressa.home.ui.WebViews.OrderMedicineActivity"/>
+
+    <activity
+            android:id="@+id/hraActivity"
+            android:name="com.caressa.hra.HraHomeActivity"/>
+
+    <activity
+        android:id="@+id/hraSummaryActivity"
+        android:name="com.caressa.hra.ui.HraSummaryActivity"/>
+
+    <activity
+            android:id="@+id/shrActivity"
+            android:name="com.caressa.records_tracker.HealthRecordsActivity"/>
+
+    <activity android:id="@+id/medicationActivity"
+              android:name="com.caressa.medication_tracker.MedicationHomeActivity"/>
+
+    <activity android:id="@+id/fitnessActivity"
+              android:name="com.caressa.fitness_tracker.FitnessHomeActivity"/>
+
+    <activity android:id="@+id/securityActivity"
+            android:name="com.caressa.security.ui.SecurityActivity"/>
+
+    <activity android:id="@+id/trackParamActivity"
+        android:name="com.caressa.track_parameter.ParameterHomeActivity"/>
+
+    <activity android:id="@+id/blogsActivity"
+            android:name="com.caressa.blogs.BlogsActivity"/>
+
+    <activity android:id="@+id/toolsTracker"
+        android:name="com.caressa.tools_calculators.ToolsCalculatorsHomeActivity"/>
+
+</navigation>

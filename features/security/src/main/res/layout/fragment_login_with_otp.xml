@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.caressa.security.viewmodel.LoginWithOtpViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logo_vivant"
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/vivant_logo_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lbl_login_otp"
+            style="@style/CustomTextview"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="@string/LOGIN_WITH_OTP"
+            android:textColor="@color/vivantWhite"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo_vivant" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/hint_phone"
+            style="@style/CustomTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/hint_email_or_phone"
+            android:textColor="@color/vivantWhite"
+            android:textSize="@dimen/_11sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_login_otp" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_number_otp"
+            style="@style/CustomEdittext"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/selector_border_edit_text"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLength="50"
+            app:layout_constraintEnd_toEndOf="@+id/hint_phone"
+            app:layout_constraintStart_toStartOf="@+id/hint_phone"
+            app:layout_constraintTop_toBottomOf="@+id/hint_phone" />-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inpLayout_number_otp"
+            style="@style/CustomEditTextInput"
+            android:background="@drawable/selector_border_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/EMAIL_OR_PHONE"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_login_otp" >
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/edt_number_otp"
+                style="@style/CustomEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:maxLength="50" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next_otp"
+            style="@style/CustomButton"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/btn_fill_white"
+            android:gravity="center"
+            android:text="@string/NEXT"
+            android:textColor="@color/vivantGreen"
+            app:layout_constraintEnd_toEndOf="@+id/inpLayout_number_otp"
+            app:layout_constraintStart_toStartOf="@+id/inpLayout_number_otp"
+            app:layout_constraintTop_toBottomOf="@+id/inpLayout_number_otp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtName"
+            android:visibility="gone"
+            android:hint="@{viewmodel.otpLoginData.isExist}"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_next_otp"
+            app:layout_constraintStart_toStartOf="@+id/btn_next_otp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_next_otp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:text="@{viewmodel.otpGenerateData.status}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtName2"
+            android:visibility="gone"
+            android:hint="@{viewmodel.user.emailAddress}"
+            app:layout_constraintTop_toBottomOf="@+id/txtName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

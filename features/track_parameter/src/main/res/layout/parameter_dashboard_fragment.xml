@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+            <variable
+                    name="viewModel"
+                    type="com.caressa.track_parameter.viewmodel.DashboardViewModel" />
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
+        <!-- <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/swipe_container"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" >-->
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/trackHealthParameterDashbaordRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        <!--
+        </android.support.v4.widget.SwipeRefreshLayout>
+        -->
+
+
+        <Button
+                android:id="@+id/btn_home"
+                style="@style/CustomButton"
+                android:text="Home" />
+
+    </LinearLayout>
+</layout>

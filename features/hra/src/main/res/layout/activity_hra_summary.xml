@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:SeekArc="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.hra.viewmodel.HraSummaryViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <include
+            android:id="@+id/toolBarView"
+            layout="@layout/toolbar_hra_summary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolBarView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_7sdp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_wellness_score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_6sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:paddingBottom="@dimen/_6sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_score_summary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.caressa.common.view.SeekArc
+                                android:id="@+id/indicator_score"
+                                android:layout_width="@dimen/_175sdp"
+                                android:layout_height="@dimen/_175sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/_6sdp"
+                                android:padding="@dimen/_15sdp"
+                                app:max="100"
+                                SeekArc:progress="0"
+                                SeekArc:rotation="180"
+                                SeekArc:startAngle="30"
+                                SeekArc:sweepAngle="300"
+                                app:arcColor="@color/vivantInactiveLight"
+                                app:arcWidth="@dimen/_4sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:progressColor="@color/colorPrimary"
+                                app:progressWidth="@dimen/_5sdp"
+                                app:touchInside="false" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_score_details"
+                                android:layout_width="@dimen/_135sdp"
+                                android:layout_height="@dimen/_135sdp"
+                                android:background="@drawable/circle_shape"
+                                android:backgroundTint="@color/colorPrimary"
+                                app:layout_constraintBottom_toBottomOf="@+id/indicator_score"
+                                app:layout_constraintEnd_toEndOf="@+id/indicator_score"
+                                app:layout_constraintStart_toStartOf="@+id/indicator_score"
+                                app:layout_constraintTop_toTopOf="@+id/indicator_score"
+                                tools:targetApi="lollipop">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/img_report"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="@dimen/_18sdp"
+                                    android:padding="@dimen/_5sdp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/img_heart_risk"
+                                    app:tint="@color/white" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/txt_observation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text=""
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_13sdp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/img_report" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/txt_score"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_6sdp"
+                                    android:gravity="center"
+                                    android:text=""
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_24sdp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="@+id/txt_observation"
+                                    app:layout_constraintStart_toStartOf="@+id/txt_observation"
+                                    app:layout_constraintTop_toBottomOf="@+id/txt_observation" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/lbl_wellness_score"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/WELLNESS_SCORE"
+                                android:textColor="@color/textViewColor"
+                                android:textSize="@dimen/_14sdp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="@+id/indicator_score"
+                                app:layout_constraintStart_toStartOf="@+id/indicator_score"
+                                app:layout_constraintTop_toBottomOf="@+id/indicator_score" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/desc_wellness_score"
+                                style="@style/VivantDescription"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_7sdp"
+                                android:gravity="center"
+                                android:text="@string/WELLNESS_SCORE_SUBTITLE_TEXT"
+                                android:textSize="@dimen/_11sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/lbl_wellness_score" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_risk_ranges"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:orientation="horizontal"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="@+id/desc_wellness_score"
+                                app:layout_constraintStart_toStartOf="@+id/desc_wellness_score"
+                                app:layout_constraintTop_toBottomOf="@+id/desc_wellness_score">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/high"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toStartOf="@+id/moderate"
+                                    app:layout_constraintHorizontal_weight="0.25"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <View
+                                        android:id="@+id/view1"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_4sdp"
+                                        android:layout_marginStart="@dimen/_8sdp"
+                                        android:layout_marginEnd="@dimen/_8sdp"
+                                        android:background="@color/high_risk"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"/>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/lbl_low_risk"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_6sdp"
+                                        android:gravity="center"
+                                        android:text="@string/HIGH_RISK"
+                                        android:textSize="@dimen/_10sdp"
+                                        app:layout_constraintEnd_toEndOf="@+id/view1"
+                                        app:layout_constraintStart_toStartOf="@+id/view1"
+                                        app:layout_constraintTop_toBottomOf="@+id/view1"/>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/lbl_range_low_risk"
+                                        style="@style/VivantTitle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_4sdp"
+                                        android:text="@string/range_high_risk"
+                                        android:textSize="@dimen/_11sdp"
+                                        app:layout_constraintEnd_toEndOf="@+id/lbl_low_risk"
+                                        app:layout_constraintStart_toStartOf="@+id/lbl_low_risk"
+                                        app:layout_constraintTop_toBottomOf="@+id/lbl_low_risk" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/moderate"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toStartOf="@+id/healthy"
+                                    app:layout_constraintHorizontal_weight="0.25"
+                                    app:layout_constraintStart_toEndOf="@+id/high"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <View
+                                        android:id="@+id/view2"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_4sdp"
+                                        android:background="@color/moderate_risk"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/lbl_mild_risk"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_6sdp"
+                                        android:gravity="center"
+                                        android:text="@string/MODERATE_RISK"
+                                        android:textSize="@dimen/_10sdp"
+                                        app:layout_constraintEnd_toEndOf="@+id/view2"
+                                        app:layout_constraintStart_toStartOf="@+id/view2"
+                                        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/lbl_range_mild_risk"
+                                        style="@style/VivantTitle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_4sdp"
+                                        android:text="@string/range_moderate_risk"
+                                        android:textSize="@dimen/_11sdp"
+                                        app:layout_constraintEnd_toEndOf="@+id/lbl_mild_risk"
+                                        app:layout_constraintStart_toStartOf="@+id/lbl_mild_risk"
+                                        app:layout_constraintTop_toBottomOf="@+id/lbl_mild_risk" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/healthy"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toStartOf="@+id/optimum"
+                                    app:layout_constraintHorizontal_weight="0.25"
+                                    app:layout_constraintStart_toEndOf="@+id/moderate"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <View
+                                        android:id="@+id/view3"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_4sdp"
+                                        android:background="@color/healthy_risk"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/lbl_moderate_risk"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_6sdp"
+                                        android:gravity="center"
+                                        android:text="@string/HEALTHY"
+                                        android:textSize="@dimen/_10sdp"
+                                        app:layout_constraintEnd_toEndOf="@+id/view3"
+                                        app:layout_constraintStart_toStartOf="@+id/view3"
+                                        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/lbl_range_moderate_risk"
+                                        style="@style/VivantTitle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_4sdp"
+                                        android:text="@string/range_healthy"
+                                        android:textSize="@dimen/_11sdp"
+                                        app:layout_constraintEnd_toEndOf="@+id/lbl_moderate_risk"
+                                        app:layout_constraintStart_toStartOf="@+id/lbl_moderate_risk"
+                                        app:layout_constraintTop_toBottomOf="@+id/lbl_moderate_risk" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/optimum"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_weight="0.25"
+                                    app:layout_constraintStart_toEndOf="@+id/healthy"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <View
+                                        android:id="@+id/view4"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_4sdp"
+                                        android:background="@color/optimum_risk"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/lbl_high_risk"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_6sdp"
+                                        android:gravity="center"
+                                        android:text="@string/OPTIMUM"
+                                        android:textSize="@dimen/_10sdp"
+                                        app:layout_constraintEnd_toEndOf="@+id/view4"
+                                        app:layout_constraintStart_toStartOf="@+id/view4"
+                                        app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/lbl_range_high_risk"
+                                        style="@style/VivantTitle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp"
+                                        android:text="@string/range_optimum"
+                                        android:textSize="@dimen/_11sdp"
+                                        app:layout_constraintEnd_toEndOf="@+id/lbl_high_risk"
+                                        app:layout_constraintHorizontal_bias="0.0"
+                                        app:layout_constraintStart_toStartOf="@+id/lbl_high_risk"
+                                        app:layout_constraintTop_toBottomOf="@+id/lbl_high_risk" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txt_unable_to_calculate_score"
+                            style="@style/VivantTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginBottom="@dimen/_15sdp"
+                            android:gravity="center"
+                            android:text="@string/WELLNESS_DESC_CURRENT_HRA_HISTORY_ID"
+                            android:textSize="@dimen/_12sdp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/layout_score_summary"
+                            app:layout_constraintStart_toStartOf="@+id/layout_score_summary"
+                            app:layout_constraintTop_toBottomOf="@+id/layout_score_summary" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_risk_summary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="@+id/card_wellness_score"
+                    app:layout_constraintStart_toStartOf="@+id/card_wellness_score"
+                    app:layout_constraintTop_toBottomOf="@+id/card_wellness_score">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_risk_summery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:padding="@dimen/_7sdp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_risk_summary"
+                            style="@style/VivantTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:text="@string/RISK_SUMMARY"
+                            android:textSize="@dimen/_13sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_risksummary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:layout_marginBottom="@dimen/_7sdp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/lbl_risk_summary"
+                            app:layout_constraintStart_toEndOf="@+id/lbl_risk_summary"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_risk_summary">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/summery_details"
+                                style="@style/VivantDescription"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_3sdp"
+                                android:text="@string/SUMMERY_SUBTITLE_TEXT"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_high_risk"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                app:cardCornerRadius="@dimen/_3sdp"
+                                app:cardElevation="@dimen/_2sdp"
+                                app:cardUseCompatPadding="true"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/summery_details">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layout_high_risk"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <View
+                                        android:id="@+id/view7"
+                                        android:layout_width="@dimen/_2sdp"
+                                        android:layout_height="0dp"
+                                        android:background="@color/vivant_watermelon"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/lbl_high"
+                                        style="@style/VivantTitle"
+                                        android:layout_width="0dp"
+                                        android:layout_height="0dp"
+                                        android:gravity="center"
+                                        android:text="@string/HIGH_RISK"
+                                        android:textSize="@dimen/_11sdp"
+                                        app:layout_constraintBottom_toBottomOf="@+id/view8"
+                                        app:layout_constraintEnd_toStartOf="@+id/txt_high_desc"
+                                        app:layout_constraintHorizontal_weight="0.3"
+                                        app:layout_constraintStart_toEndOf="@+id/view7"
+                                        app:layout_constraintTop_toTopOf="@+id/view8" />
+
+                                    <View
+                                        android:id="@+id/view8"
+                                        android:layout_width="@dimen/_1sdp"
+                                        android:layout_height="0dp"
+                                        android:background="@color/vivant_greyish"
+                                        app:layout_constraintBottom_toBottomOf="@+id/txt_high_desc"
+                                        app:layout_constraintStart_toEndOf="@+id/lbl_high"
+                                        app:layout_constraintTop_toTopOf="@+id/txt_high_desc" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/txt_high_desc"
+                                        style="@style/VivantDescription"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:layout_marginBottom="@dimen/_8sdp"
+                                        android:gravity="center_vertical"
+                                        android:minLines="2"
+                                        android:text=""
+                                        android:textSize="@dimen/_11sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_weight="0.7"
+                                        app:layout_constraintStart_toEndOf="@+id/lbl_high"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_moderate_risk"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:cardCornerRadius="@dimen/_3sdp"
+                                app:cardElevation="@dimen/_2sdp"
+                                app:cardUseCompatPadding="true"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/card_high_risk">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layout_moderate_risk"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <View
+                                        android:id="@+id/view9"
+                                        android:layout_width="@dimen/_2sdp"
+                                        android:layout_height="0dp"
+                                        android:background="@color/vivant_orange_yellow"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/lbl_moderate"
+                                        style="@style/VivantTitle"
+                                        android:layout_width="0dp"
+                                        android:layout_height="0dp"
+                                        android:gravity="center"
+                                        android:text="@string/MODERATE_RISK2"
+                                        android:textSize="@dimen/_11sdp"
+                                        app:layout_constraintBottom_toBottomOf="@+id/view10"
+                                        app:layout_constraintEnd_toStartOf="@+id/txt_moderate_desc"
+                                        app:layout_constraintHorizontal_weight="0.3"
+                                        app:layout_constraintStart_toEndOf="@+id/view9"
+                                        app:layout_constraintTop_toTopOf="@+id/view10" />
+
+                                    <View
+                                        android:id="@+id/view10"
+                                        android:layout_width="@dimen/_1sdp"
+                                        android:layout_height="0dp"
+                                        android:background="@color/vivant_greyish"
+                                        app:layout_constraintBottom_toBottomOf="@+id/txt_moderate_desc"
+                                        app:layout_constraintStart_toEndOf="@+id/lbl_moderate"
+                                        app:layout_constraintTop_toTopOf="@+id/txt_moderate_desc" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/txt_moderate_desc"
+                                        style="@style/VivantDescription"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:layout_marginBottom="@dimen/_8sdp"
+                                        android:gravity="center_vertical"
+                                        android:minLines="2"
+                                        android:text=""
+                                        android:textSize="@dimen/_11sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_weight="0.7"
+                                        app:layout_constraintStart_toEndOf="@+id/lbl_moderate"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_at_risk"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:cardCornerRadius="@dimen/_3sdp"
+                                app:cardElevation="@dimen/_2sdp"
+                                app:cardUseCompatPadding="true"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/card_moderate_risk">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layout_at_risk"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <View
+                                        android:id="@+id/view11"
+                                        android:layout_width="@dimen/_2sdp"
+                                        android:layout_height="0dp"
+                                        android:background="@color/vivant_nasty_green"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/lbl_at_risk"
+                                        style="@style/VivantTitle"
+                                        android:layout_width="0dp"
+                                        android:layout_height="0dp"
+                                        android:gravity="center"
+                                        android:text="@string/AT_RISK"
+                                        android:textSize="@dimen/_11sdp"
+                                        app:layout_constraintBottom_toBottomOf="@+id/view12"
+                                        app:layout_constraintEnd_toStartOf="@+id/txt_at_risk"
+                                        app:layout_constraintHorizontal_weight="0.3"
+                                        app:layout_constraintStart_toEndOf="@+id/view11"
+                                        app:layout_constraintTop_toTopOf="@+id/view12" />
+
+                                    <View
+                                        android:id="@+id/view12"
+                                        android:layout_width="@dimen/_1sdp"
+                                        android:layout_height="0dp"
+                                        android:background="@color/vivant_greyish"
+                                        app:layout_constraintBottom_toBottomOf="@+id/txt_at_risk"
+                                        app:layout_constraintStart_toEndOf="@+id/lbl_at_risk"
+                                        app:layout_constraintTop_toTopOf="@+id/txt_at_risk" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/txt_at_risk"
+                                        style="@style/VivantDescription"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:layout_marginBottom="@dimen/_8sdp"
+                                        android:gravity="center_vertical"
+                                        android:minLines="2"
+                                        android:text=""
+                                        android:textSize="@dimen/_11sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_weight="0.7"
+                                        app:layout_constraintStart_toEndOf="@+id/lbl_at_risk"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txt_congrats_msg"
+                            style="@style/VivantDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:text="@string/CONGRATULATION_NO_RISK"
+                            android:textSize="@dimen/_11sdp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/lbl_risk_summary"
+                            app:layout_constraintStart_toEndOf="@+id/lbl_risk_summary"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_risk_summary" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_lab_tests"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="@+id/card_wellness_score"
+                    app:layout_constraintStart_toStartOf="@+id/card_wellness_score"
+                    app:layout_constraintTop_toBottomOf="@+id/card_risk_summary">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_lab_tests"
+                        style="@style/VivantTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:text="@string/RECOMMENDED_LAB_TESTS"
+                        android:textSize="@dimen/_13sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/view5"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@color/textViewColor"
+                        app:layout_constraintEnd_toEndOf="@+id/lbl_lab_tests"
+                        app:layout_constraintStart_toStartOf="@+id/lbl_lab_tests"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_lab_tests" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/desc_lab_tests"
+                        style="@style/VivantDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:text="@string/LAB_TESTS_SUBTITLE_TEXT"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_common_labtests"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:cardCornerRadius="@dimen/_3sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:cardUseCompatPadding="true"
+                        app:layout_constraintEnd_toEndOf="@+id/view5"
+                        app:layout_constraintStart_toStartOf="@+id/view5"
+                        app:layout_constraintTop_toBottomOf="@+id/desc_lab_tests">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_relative_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <include
+                                android:id="@+id/header_labtests"
+                                layout="@layout/item_labtest_header"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:visibility="visible"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.caressa.common.view.ExpandedHeightListView
+                                android:id="@+id/rv_lab_tests"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:listitem="@layout/item_labtest"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                app:layout_constraintEnd_toEndOf="@+id/header_labtests"
+                                app:layout_constraintStart_toStartOf="@+id/header_labtests"
+                                app:layout_constraintTop_toBottomOf="@+id/header_labtests" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_doctor_suggested_labtests"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="@dimen/_3sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:cardUseCompatPadding="true"
+                        app:layout_constraintEnd_toEndOf="@+id/view5"
+                        app:layout_constraintStart_toStartOf="@+id/view5"
+                        app:layout_constraintTop_toBottomOf="@+id/card_common_labtests">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <include
+                                android:id="@+id/header_suggested_labtests"
+                                layout="@layout/header_suggested_by_doctor"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:visibility="visible"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.caressa.common.view.ExpandedHeightListView
+                                android:id="@+id/rv_lab_test_doctor_suggested"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:listitem="@layout/item_labtest"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                app:layout_constraintEnd_toEndOf="@+id/header_suggested_labtests"
+                                app:layout_constraintStart_toStartOf="@+id/header_suggested_labtests"
+                                app:layout_constraintTop_toBottomOf="@+id/header_suggested_labtests" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_btn_summary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    app:layout_constraintEnd_toEndOf="@+id/card_wellness_score"
+                    app:layout_constraintStart_toStartOf="@+id/card_wellness_score"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_lab_tests">
+
+                    <com.caressa.common.view.ArcButton
+                        android:id="@+id/btn_book_package"
+                        style="@style/CustomButtonRight"
+                        android:layout_marginStart="0dp"
+                        android:text="@string/BOOK_HEALTH_PACKAGES"
+                        app:isTemplate="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_download_report"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <com.caressa.common.view.ArcButton
+                        android:id="@+id/btn_download_report"
+                        style="@style/CustomButtonRight"
+                        android:layout_marginEnd="0dp"
+                        android:text="@string/DOWNLOAD_REPORT"
+                        app:isTemplate="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/btn_book_package" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_restart_hra"
+                    style="@style/HRACustomButton"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_38sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:background="@drawable/btn_fill_normal"
+                    android:backgroundTint="@color/vivant_marigold"
+                    android:text="@string/RESTART_HRA"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_btn_summary"
+                    app:layout_constraintStart_toStartOf="@+id/layout_btn_summary"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_btn_summary"
+                    tools:targetApi="lollipop" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

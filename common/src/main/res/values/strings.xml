@@ -1,0 +1,172 @@
+<resources>
+    <string name="app_name">Vivant</string>
+
+    <!--Button Strings-->
+    <string name="SAVE">Save</string>
+    <string name="SUBMIT">Submit</string>
+    <string name="RESTART">Restart</string>
+    <string name="SEND">Send</string>
+    <string name="FINISH">Finish</string>
+    <string name="DONE">Done</string>
+    <string name="NEXT">Next</string>
+    <string name="PREVIOUS">Previous</string>
+    <string name="OK">OK</string>
+    <string name="OR">OR</string>
+    <string name="CONFIRM">Confirm</string>
+    <string name="PROCEED">Proceed</string>
+    <string name="SELECT">Select</string>
+    <string name="CLOSE">Close</string>
+    <string name="CANCEL">Cancel</string>
+    <string name="BACK">Back</string>
+    <string name="CONTINUE">Continue</string>
+    <string name="DELETE">Delete</string>
+    <string name="UPDATE">Update</string>
+    <string name="DEAR_USER">Dear User</string>
+    <string name="DOWNLOAD">Download</string>
+    <string name="SHARE">Share</string>
+    <string name="VIEW">View</string>
+    <string name="ADD">Add</string>
+    <string name="LOGOUT">Logout</string>
+    <string name="ALERT">Alert</string>
+    <string name="VIEW_MORE">View More</string>
+    <string name="TAKEN">Taken</string>
+    <string name="SKIP">Skip</string>
+    <string name="REFRESH">Refresh</string>
+    <string name="RESEND_OTP">Resend OTP</string>
+    <string name="NO_THANKS">No thanks</string>
+    <string name="UPLOAD_REPORT">Upload Report</string>
+    <string name="UPLOAD_PRESCRIPTION">Upload Prescription</string>
+    <string name="ORDER_MEDICINE">Order Medicine</string>
+    <string name="ADD_MEDICATION">Add Medication</string>
+    <!--Button Strings-->
+
+    <string name="YES">Yes</string>
+    <string name="NO">No</string>
+    <string name="MALE">Male</string>
+    <string name="FEMALE">Female</string>
+    <string name="NAME">Name</string>
+    <string name="GENDER">Gender</string>
+    <string name="PHONE">Phone</string>
+    <string name="PHONE_NUMBER">Phone Number</string>
+    <string name="NUMBER">Number</string>
+    <string name="ALTERNATE_NUMBER">Altrernate Number</string>
+    <string name="EMAIL">Email</string>
+    <string name="EMAIL_ADDRESS">Email Address</string>
+    <string name="ALTERNATE_EMAIL_ADDRESS">Altrernate Email Address</string>
+    <string name="ADDRESS">Address</string>
+    <string name="AGE">Age</string>
+    <string name="DATE_OF_BIRTH">Date Of Birth</string>
+    <string name="MOBILE_NUMBER">Mobile Number</string>
+    <string name="AND">and</string>
+    <string name="DATE">Date</string>
+    <string name="DAY">Day</string>
+    <string name="MONTH">Month</string>
+    <string name="YEAR">Year</string>
+    <string name="YEARS">Years</string>
+    <string name="SEC">Sec</string>
+    <string name="TODAY">Today</string>
+    <string name="SESSION">Session</string>
+    <string name="MYSELF">Myself</string>
+    <string name="MEMBER">Member</string>
+    <string name="MEMBERS">Members</string>
+
+    <string name="FATHER">Father</string>
+    <string name="MOTHER">Mother</string>
+    <string name="SON">Son</string>
+    <string name="DAUGHTER">Daughter</string>
+    <string name="BROTHER">Brother</string>
+    <string name="SISTER">Sister</string>
+    <string name="WIFE">Wife</string>
+    <string name="HUSBAND">Husband</string>
+    <string name="SPOUSE">Spouse</string>
+    <string name="GRAND_FATHER">Grand Father</string>
+    <string name="GRAND_MOTHER">Grand Mother</string>
+
+    <!--HRA-->
+    <string name="TAKE_YOUR_HRA">Take your HRA</string>
+    <string name="COMPLETE_YOUR_HRA">Complete your HRA</string>
+    <string name="HIGH_RISK">High Risk</string>
+    <string name="NEEDS_IMPROVEMENT">Needs Improvement</string>
+    <string name="HEALTHY">Healthy</string>
+    <string name="OPTIMUM">Optimum</string>
+    <!--HRA-->
+
+    <string name="PERMISSION_REQUIRED">Permission Required</string>
+    <string name="NEED_STORAGE_PERMISSION">For storing and reading files, we need storage permission.</string>
+    <string name="NEED_CAMERA_PERMISSION">For clicking snap to upload we need camera permission.</string>
+    <string name="ERROR_STORAGE_PERMISSION">Storage Permission is Required to Proceed further</string>
+    <string name="ERROR_CAMERA_PERMISSION">camera Permission is Required to Proceed further</string>
+
+    <string name="AN_ERROR_HAPPENED">An error happened, please retry !</string>
+    <string name="UNEXPECTED_ERROR">Unexpected error occurred, please try again.</string>
+    <string name="SESSION_EXPIRED">Your Session Expired, please try again.</string>
+
+    <!--App Message-->
+    <string name="API_RETRY_ERROR">Please retry!</string>
+    <string name="MSG_API_DEFAULT_ERROR">Something wrong happened!</string>
+    <string name="SOME_ERROR">Some Error Occurred!</string>
+    <string name="MSG_NO_INTERNET_CONNECTION">No Internet Connection</string>
+
+    <string name="SYNCHRONIZING">Synchronizing…</string>
+    <string name="PASSWORD_CHANGED">Password Changed</string>
+    <string name="PASSWORD_CHANGED_SUCCESS">Your Password has been changed \nSuccessfuly</string>
+    <string name="GO_TO_APP">Go Back To My App</string>
+    <string name="PLEASE_WAIT">Please wait…</string>
+    <string name="LOADING">Loading…</string>
+    <string name="ERROR_GENERAL">Unable to connect, please try again</string>
+    <string name="AWW_SNAP">Aww! Snap!</string>
+    <string name="PRESS_AGAIN_TO_EXIT">Press again to exit</string>
+    <string name="NO_INTERNET_AVAILABLE">No Internet Available</string>
+    <string name="MSG_SESSION_EXPIRED">Seems your session is expired, please login again.</string>
+    <string name="ERROR_INTERNET_UNAVAILABLE">Seems like you are offline. Please check your internet connection and try again.</string>
+    <string name="MSG_OTP">OTP has been sent to your registered mobile number, please wait while we are retrieving</string>
+
+    <!--Error Msg-->
+    <string name="VALIDATE_OTP">Please Enter a Valid OTP</string>
+    <string name="VALIDATE_EMAIL">Please Enter Valid Email</string>
+    <string name="VALIDATE_EMAIL_MUST_INCLUDE">Email must include @</string>
+    <string name="VALIDATE_PHONE">Please Enter Valid Phone Number</string>
+    <string name="VALIDATE_MESSAGE">Please Write Something in Message</string>
+    <string name="VALIDATE_EMAIL_PHONE">Please Enter valid Email/pHONE</string>
+    <string name="VALIDATE_SAME_PHONE">Please Enter a New Number</string>
+    <string name="ERROR_MOBILE_ALREADY_REGISTERED">This Numbert is already Registered with us</string>
+    <string name="VALIDATE_NAME">Please Enter valid Name</string>
+    <string name="VALIDATE_DATE_OF_BIRTH">Please Enter valid Date of Birth</string>
+    <string name="ERROR_UNABLE_VERIFY_OTP">Unable to verify OTP provided, please try again</string>
+    <string name="ERROR_CONTACT_US_QUERY">Query Should be between 5–1000 letter\'s</string>
+    <!--Error Msg-->
+
+    <string name="digits_alpha">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="digits_alpha_numeric">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890</string>
+    <string name="numeric">1234567890</string>
+    <string name="numeric_fraction">1234567890.</string>
+
+    <string name="title">Title</string>
+    <string name="DASHBOARD">Dashboard</string>
+    <string name="enter_bmi_details">Enter your vital health parameters</string>
+    <string name="pick_your_height">Pick Your Height</string>
+    <string name="current_weight">Current Weight</string>
+    <string name="YOUR_BMI_IS">Your BMI is : </string>
+    <string name="height">Height  : </string>
+    <string name="weight">Weight  : </string>
+    <string name="select_height">Select Height</string>
+    <string name="select_weight">Select Weight</string>
+    <string name="ft_in">ft,in</string>
+    <string name="ft">ft</string>
+    <string name="inch">in</string>
+    <string name="cm">cm</string>
+    <string name="lbs">lbs</string>
+    <string name="kg">kg</string>
+    <string name="mm_hg">mm Hg</string>
+    <string name="MG_DL">mg/dL</string>
+    <string name="KCAL">Kcal</string>
+    <string name="MIN">min</string>
+    <string name="KM">km</string>
+    <string name="MTR">mtr</string>
+
+    <string name="PICK_YOUR_HEIGHT">Pick Your Height</string>
+    <string name="CURRENT_WEIGHT">Pick Your Weight</string>
+    <string name="ENTER_WEIGHT">Enter your weight</string>
+    <string name="ENTER_HEIGHT">Enter your height</string>
+
+</resources>

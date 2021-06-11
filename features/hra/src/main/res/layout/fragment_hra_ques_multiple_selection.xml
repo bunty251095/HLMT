@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.hra.viewmodel.HraViewModel"/>
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/mainScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <RadioGroup
+            android:id="@+id/rgPrevious"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rgPreviousList="@{viewModel.prevAnsList}"
+            android:gravity="end"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            app:layout_constraintBottom_toTopOf="@+id/img_ques"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_ques"
+            style="@style/HRAImageView"
+            android:loadImage="@{viewModel.quesData.bgImage}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/txt_ques"/>
+
+        <com.caressa.hra.views.HTMLTextView
+            android:id="@+id/txt_ques"
+            style="@style/HRAQuestion"
+            android:layout_width="match_parent"
+            android:htmlTextFromId="@{viewModel.quesData.question}"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/lbl_sub_text"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lbl_sub_text"
+            style="@style/VivantDescription"
+            android:layout_width="match_parent"
+            android:text="@string/PLEASE_SELECT_ALL_THAT_APPLY"
+            android:textColor="@color/vivant_marigold"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/option_container"/>
+
+        <com.caressa.common.view.FlowLayout
+            android:id="@+id/option_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:flChecked="@{viewModel.selectedOptionList}"
+            android:gravity="end"
+            android:orientation="vertical"
+            app:flRowSpacing="@dimen/_3sdp"
+            app:flChildSpacing="@dimen/_2sdp"
+            android:layout_marginStart="@dimen/_18sdp"
+            android:layout_marginEnd="@dimen/_18sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_next"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            style="@style/HRACustomButton"
+            android:backgroundTint="@color/vivant_marigold"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/_20sdp"
+            android:text="@string/NEXT"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:background="@drawable/btn_round_fill_hra"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
+

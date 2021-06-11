@@ -1,0 +1,90 @@
+<resources>
+
+    <string name="TITLE_MEDICINE_TRACKER">Medicine Tracker</string>
+    <string name="TITLE_MY_MEDICATIONS">My Medications</string>
+    <string name="TITLE_ADD_MEDICATION">Add Medicine</string>
+    <string name="TITLE_SCHEDULE_MEDICATION">Schedule Medicine</string>
+
+    <string name="DASHBOARD">Dashboard</string>
+    <string name="QUICK_VIEW_TO_YOUR_MEDICINES">Quick view to your medicines</string>
+    <string name="ADD_MEDICATION">Add Medication</string>
+    <string name="ADD_YOUR_MEDICINE">Add your medicine</string>
+    <string name="MY_MEDICATIONS">My Medications</string>
+    <string name="Check_your_medication_history">Check your medication history</string>
+
+    <string name="ADD_MEDICINE">Add Medicine</string>
+    <string name="UPDATE_STATUS">Update Status</string>
+    <string name="UPDATE_YOUR_MEDICINE_STATUS">Update your Medicine Status</string>
+    <string name="MEDICINE_NAME">Medicine Name</string>
+    <string name="ENABLE">Enable</string>
+    <string name="DISABLE">Disable</string>
+    <string name="FOR">for</string>
+    <string name="TIME">Time</string>
+    <string name="START_DATE">Start date</string>
+    <string name="END_DATE">End date</string>
+    <string name="STATUS">Status</string>
+    <string name="DOSAGE">Dosage</string>
+    <string name="SCHEDULE">Schedule</string>
+
+    <string name="TAKEN">Taken</string>
+    <string name="SKIPPED">Skipped</string>
+    <string name="MISSED">Missed</string>
+
+    <string name="BEFORE_MEAL">Before Meal</string>
+    <string name="WITH_MEAL">With Meal</string>
+    <string name="AFTER_MEAL">After Meal</string>
+    <string name="ANYTIME">Anytime</string>
+
+    <string name="ONGOING">Ongoing</string>
+    <string name="COMPLETED">Completed</string>
+    <string name="ALL">All</string>
+
+    <string name="TABLET">Tablet</string>
+    <string name="CAPSULE">Capsule</string>
+    <string name="SYRUP">Syrup</string>
+    <string name="DROPS">Drops</string>
+    <string name="INJECTION">Injection</string>
+    <string name="GEL">Gel</string>
+    <string name="TUBE">Tube</string>
+    <string name="SPRAY">Spray</string>
+    <string name="MOUTHWASH">Mouthwash</string>
+    <string name="SOLUTION">Solution</string>
+    <string name="OINTMENT">Ointment</string>
+    <string name="OTHER">Other</string>
+
+    <string-array name="arr_med_frequency">
+        <item>Every Day</item>
+        <item>For X Days</item>
+        <!--        <item>Specific Days</item>-->
+    </string-array>
+
+    <string name="NUMBER_OF_DAYS">Number of Days</string>
+    <string name="DAYS">Days</string>
+    <string name="HOW_OFTEN_WILL_YOU_TAKE">How often will you take it?</string>
+    <string name="HOW_MANY_YOU_NEED_TO_TAKE_AT_ONE_TIME">How many you need to take at one time?</string>
+    <string name="HOW_MANY_TIME_DAILY">How many time daily?</string>
+    <string name="INTAKE_INSTRUCTIONS">Intake Instructions</string>
+    <string name="NOTES">Notes</string>
+    <string name="ENABLE_NOTIFICATION_ALERT">Enable Notification Alert</string>
+    <string name="TYPE_YOUR_NOTES">Type your notes</string>
+    <string name="Max_50_Characters">Max 50 Characters</string>
+
+    <string name="DO_YOU_WANT_TO">Do you want to</string>
+    <string name="NOTIFICATION_ALERT">Notification Alert</string>
+    <string name="DELETE_MEDICINE">Delete Medicine</string>
+    <string name="RESCHEDULE_MEDICINE">Reschedule Medicine</string>
+    <string name="UPDATE_MEDICINE_SCHEDULES">Update Medicine Schedules</string>
+    <string name="PAST_MEDICINES">Past Medicines</string>
+    <string name="NO_MEDICINES">No Medicines Available</string>
+    <string name="MEDICINE_DELETED">Medicine Deleted Successfully</string>
+    <string name="MEDICINE_ADDED">Medicine Added Successfully</string>
+    <string name="MEDICINE_UPDATED">Medicine Updated Successfully</string>
+    <string name="ALERT_ENABLED">Notification Enabled Successfully</string>
+    <string name="ALERT_DISABLED">Notification Disabled Successfully</string>
+    <string name="ERROE_SELECT_SCHEDULE_TIME">Please Select Schedule Time</string>
+    <string name="ERROR_ENTER_MEDICINE_NAME">Please Enter Medication Name first</string>
+    <string name="MSG_SCHEDULE_TIME_FOUND">We don\'t have Schedule Time for this Medicine.Do you want add Schedule Time?</string>
+    <string name="MSG_CONFIRMATION_DELETE_MEDICINE">Do you want to</string>
+    <string name="MSG_CONFIRMATION_RESCHEDULE_MEDICINE">Do you want to Reschedule</string>
+
+</resources>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.home.viewmodel.DashboardViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.caressa.common.view.ArcConstraintLayout
+                android:id="@+id/layout_banner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_170sdp"
+                app:isTemplate="true"
+                android:background="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.caressa.common.view.ArcImageView
+                    android:id="@+id/img_app_logo"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    app:isTemplate="true"
+                    android:padding="@dimen/_15sdp"
+                    android:src="@drawable/vivant_v_green"
+                    android:background="@drawable/circle_bg"
+                    android:backgroundTint="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/VivantTitle"
+                    android:text="Help us to make us better..."
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sdp"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_app_logo"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgBackFeedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    app:srcCompat="@drawable/back_arrow_white"
+                    android:tint="@color/white"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            </com.caressa.common.view.ArcConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_suggestion_feedback"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                style="@style/VivantDescription"
+                android:text="Do you have any suggestion or feedback to make our app better?"
+                android:textColor="@color/textViewColor"
+                android:textSize="@dimen/_13sdp"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/_20sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_banner"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_app_feedback"
+                style="@style/CustomEdittext"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_120sdp"
+                android:gravity="top"
+                android:hint="Write something to us..."
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:maxLength="1000"
+                android:padding="@dimen/_8sdp"
+                android:background="@drawable/btn_border_disabled"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@+id/lbl_suggestion_feedback"
+                app:layout_constraintStart_toStartOf="@+id/lbl_suggestion_feedback"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_suggestion_feedback"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.caressa.common.view.ArcButton
+        android:id="@+id/btn_submit_feedback"
+        app:isTemplate="true"
+        android:layout_width="0dp"
+        style="@style/CustomButton"
+        android:text="@string/SUBMIT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

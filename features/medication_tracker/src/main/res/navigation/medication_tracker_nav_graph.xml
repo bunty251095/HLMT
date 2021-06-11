@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_medication_feature"
+    app:startDestination="@id/medicineHome">
+
+    <fragment
+        android:id="@+id/medicineHome"
+        android:name="com.caressa.medication_tracker.ui.MedicineHomeFragment"
+        tools:layout="@layout/fragment_medication_home"
+        android:label="Medication Tracker">
+
+        <argument android:name="from" app:argType="string"/>
+        <argument android:name="date" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_medicineHome_to_medicineDashboardFragment"
+            app:destination="@id/medicineDashboardFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_medicineHome_to_addMedicineFragment"
+            app:destination="@id/addMedicineFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_medicineHome_to_myMedicationsFragment"
+            app:destination="@id/myMedicationsFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/medicineDashboardFragment"
+        android:name="com.caressa.medication_tracker.ui.MedicineDashboardFragment"
+        tools:layout="@layout/fragment_medicine_dashboard">
+
+        <argument android:name="from" app:argType="string"/>
+        <argument android:name="date" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_medicineDashboardFragment_to_addMedicineFragment"
+            app:destination="@id/addMedicineFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_medicineDashboardFragment_to_myMedicationsFragment"
+            app:destination="@id/myMedicationsFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_medicineDashboardFragment_to_scheduleMedicineFragment"
+            app:destination="@id/scheduleMedicineFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_medicineDashboardFragment_to_medicineHome"
+            app:popUpTo="@id/medicineHome"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/myMedicationsFragment"
+        android:name="com.caressa.medication_tracker.ui.MyMedicationsFragment"
+        tools:layout="@layout/fragment_my_medications">
+
+        <argument android:name="from" app:argType="string"/>
+        <argument android:name="date" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_myMedicationsFragment_to_scheduleMedicineFragment"
+            app:destination="@id/scheduleMedicineFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_myMedicationsFragment_to_medicineDashboardFragment"
+            app:destination="@id/medicineDashboardFragment"
+            app:popUpTo="@+id/medicineDashboardFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+        <action
+            android:id="@+id/action_myMedicationsFragment_to_medicineHome"
+            app:popUpTo="@id/medicineHome"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/addMedicineFragment"
+        android:name="com.caressa.medication_tracker.ui.AddMedicineFragment"
+        tools:layout="@layout/fragment_add_medicine">
+
+        <argument android:name="MedicationID" app:argType="integer"/>
+        <argument android:name="DrugID" app:argType="integer" />
+        <argument android:name="MedicineName" app:argType="string"/>
+        <argument android:name="DrugTypeCode" app:argType="string"/>
+        <argument android:name="from" app:argType="string"/>
+        <argument android:name="date" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_addMedicineFragment_to_scheduleMedicineFragment"
+            app:destination="@id/scheduleMedicineFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_addMedicineFragment_to_medicineDashboardFragment"
+            app:destination="@id/medicineDashboardFragment"
+            app:popUpTo="@+id/medicineDashboardFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+        <action
+            android:id="@+id/action_addMedicineFragment_to_medicineHome"
+            app:popUpTo="@id/medicineHome"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/scheduleMedicineFragment"
+        android:name="com.caressa.medication_tracker.ui.ScheduleDetailsFragment"
+        tools:layout="@layout/fragment_schedule_details">
+
+        <argument android:name="from" app:argType="string"/>
+        <argument android:name="MedicationID" app:argType="integer" />
+        <argument android:name="DrugID" app:argType="integer" />
+        <argument android:name="MedicineName" app:argType="string"/>
+        <argument android:name="DrugTypeCode" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_scheduleMedicineFragment_to_addMedicineFragment"
+            app:destination="@id/addMedicineFragment"
+            app:popUpTo="@+id/addMedicineFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+        <action
+            android:id="@+id/action_scheduleMedicineFragment_to_myMedicationsFragment"
+            app:destination="@id/myMedicationsFragment"
+            app:popUpTo="@+id/myMedicationsFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+        <action
+            android:id="@+id/action_scheduleMedicineFragment_to_medicineDashboardFragment"
+            app:destination="@id/medicineDashboardFragment"
+            app:popUpTo="@+id/medicineDashboardFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+        <action
+            android:id="@+id/action_scheduleMedicineFragment_to_medicineHome"
+            app:destination="@id/medicineHome"
+            app:popUpTo="@+id/medicineHome"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+    </fragment>
+
+</navigation>

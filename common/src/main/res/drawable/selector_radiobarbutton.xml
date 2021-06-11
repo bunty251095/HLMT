@@ -1,0 +1,14 @@
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_radio_button_unchecked" android:state_checked="false" />
+    <item android:drawable="@drawable/ic_radio_button_checked" android:state_checked="true" />
+    <item android:drawable="@drawable/ic_radio_button_checked" android:state_pressed="true" />
+    <item android:drawable="@drawable/ic_radio_button_unchecked" /> <!-- default -->
+</selector>
+
+<!--
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_radiobarunselected" android:state_checked="false" />
+    <item android:drawable="@drawable/ic_radiobarselected" android:state_checked="true" />
+    <item android:drawable="@drawable/ic_radiobarunselected" /> &lt;!&ndash; default &ndash;&gt;
+</selector>-->

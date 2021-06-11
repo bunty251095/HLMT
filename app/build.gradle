@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+apply from: '../android_commons.gradle'
+apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'io.fabric'
+
+android {
+
+    buildToolsVersion '30.0.3'
+    defaultConfig {
+        applicationId "com.caressa.allizhealth"
+//        applicationId "vivant.me.app"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+
+}
+
+dependencies {
+    // Multidex
+    implementation Libraries.multidex
+    // COMMON
+    implementation project(Modules.common)
+    // DATA modules
+    implementation project(Modules.local)
+    implementation project(Modules.remote)
+    implementation project(Modules.repository)
+    // FEATURES modules
+    implementation project(Modules.featureHome)
+    implementation project(Modules.featureSecurity)
+    implementation project(Modules.featureHra)
+    implementation project(Modules.featureMedicationTracker)
+    implementation project(Modules.featureFitnessTracker)
+    implementation project(Modules.featureRecordsTracker)
+    implementation project(Modules.featureTrackParameter)
+    implementation project(Modules.featureBlogs)
+    implementation project(Modules.featureToolsCalculators)
+    // NAVIGATION
+    implementation project(Modules.navigation)
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+    // ANDROID
+    api AndroidLibraries.constraintLayout
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.appDesign
+    implementation AndroidLibraries.navigation
+    implementation AndroidLibraries.navigationFrag
+    implementation Libraries.firebaseCore
+    implementation Libraries.firebaseMessaging
+    implementation Libraries.firebaseAnalytics
+    // Firebase Crashlytics dependency.
+    //implementation Libraries.firebaseCrashlytics
+}

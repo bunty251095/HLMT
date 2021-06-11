@@ -1,0 +1,31 @@
+
+apply plugin: 'com.android.library'
+apply from: '../android_commons.gradle'
+
+dependencies {
+    implementation project(Modules.navigation)
+
+    api AndroidLibraries.googleMaterialDesign
+    api AndroidLibraries.constraintLayout
+    api AndroidLibraries.appCompat
+    api AndroidLibraries.appDesign
+    api AndroidLibraries.navigation
+    api AndroidLibraries.navigationFrag
+    api AndroidLibraries.recyclerView
+    api Libraries.datetimepicker
+    api Libraries.shimmer
+    api Libraries.glide
+    api Libraries.picasso
+    api Libraries.dexter
+
+    api Libraries.gsmFitness
+    api Libraries.gsmAuth
+
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+    implementation AndroidLibraries.androidxLegacySupport
+
+    //api Libraries.firebaseCrashlytics
+
+//    implementation "org.jetbrains.anko:anko-commons:0.10.8"
+}

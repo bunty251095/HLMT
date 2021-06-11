@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph_shr_feature"
+        app:startDestination="@id/healthRecordsDashboardFragment">
+
+    <fragment
+            android:id="@+id/healthRecordsDashboardFragment"
+            tools:layout="@layout/fragment_health_records_dashboard"
+            android:name="com.caressa.records_tracker.ui.HealthRecordsDashboardFragment">
+
+        <argument android:name="from" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_healthRecordsDashboardFragment_to_viewRecordsFragment"
+            app:destination="@id/viewRecordsFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_healthRecordsDashboardFragment_to_digitizedRecordsListFragment"
+            app:destination="@id/digitizedRecordsListFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_healthRecordsDashboardFragment_to_documentTypeFragment"
+            app:destination="@id/documentTypeFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/viewRecordsFragment"
+        tools:layout="@layout/fragment_view_records"
+        android:name="com.caressa.records_tracker.ui.ViewRecordsFragment">
+
+        <argument android:name="from" app:argType="string"/>
+        <argument android:name="code" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_viewRecordsFragment_to_documentTypeFragment"
+            app:destination="@id/documentTypeFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_viewRecordsFragment_to_fragmentDigitize"
+            app:destination="@id/fragmentDigitize"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/digitizedRecordsListFragment"
+        tools:layout="@layout/fragment_digitize_record_list"
+        android:name="com.caressa.records_tracker.ui.DigitizeRecordListFragment">
+
+        <argument android:name="code" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_digitizedRecordsListFragment_to_fragmentDigitize"
+            app:destination="@id/fragmentDigitize"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/documentTypeFragment"
+        tools:layout="@layout/fragment_document_type"
+        android:name="com.caressa.records_tracker.ui.DocumentTypeFragment">
+
+        <argument android:name="from" app:argType="string"/>
+        <argument android:name="code" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_documentTypeFragment_to_uploadRecordFragment"
+            app:destination="@id/uploadRecordFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_documentTypeFragment_to_healthRecordsDashboardFragment"
+            app:popUpTo="@id/healthRecordsDashboardFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+        <action
+            android:id="@+id/action_documentTypeFragment_to_viewRecordsFragment"
+            app:popUpTo="@id/viewRecordsFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/uploadRecordFragment"
+        tools:layout="@layout/fragment_upload_record"
+        android:name="com.caressa.records_tracker.ui.UploadRecordFragment">
+
+        <argument android:name="code" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_uploadRecordFragment_to_selectRelationFragment"
+            app:destination="@id/selectRelationFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_uploadRecordFragment_to_documentTypeFragment"
+            app:popUpTo="@id/documentTypeFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/selectRelationFragment"
+        tools:layout="@layout/fragment_select_relation"
+        android:name="com.caressa.records_tracker.ui.SelectRelationFragment">
+
+        <argument android:name="code" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_selectRelationFragment_to_uploadRecordFragment"
+            app:popUpTo="@id/uploadRecordFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+        <action
+            android:id="@+id/action_selectRelationFragment_to_viewRecordsFragment"
+            app:destination="@+id/viewRecordsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph_shr_feature"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+<!--        <action
+            android:id="@+id/action_selectRelationFragment_to_viewRecordsFragment"
+            app:destination="@+id/viewRecordsFragment"
+            app:popUpTo="@+id/healthRecordsDashboardFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentDigitize"
+        tools:layout="@layout/fragment_digitize_record"
+        android:name="com.caressa.records_tracker.ui.DigitizeRecordFragment">
+
+        <argument android:name="from" app:argType="string"/>
+        <argument android:name="code" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_fragmentDigitize_to_viewRecordsFragment"
+            app:destination="@id/viewRecordsFragment"
+            app:popUpTo="@+id/viewRecordsFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+        <action
+            android:id="@+id/action_fragmentDigitize_to_digitizedRecordsListFragment"
+            app:destination="@id/digitizedRecordsListFragment"
+            app:popUpTo="@id/digitizedRecordsListFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+    </fragment>
+
+</navigation>

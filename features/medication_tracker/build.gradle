@@ -1,0 +1,28 @@
+apply from: '../../android_feature_dependencies.gradle'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "com.caressa.common_test.FakeRunner"
+    }
+    buildFeatures {
+        dataBinding true
+    }
+/*    testOptions {
+        animationsDisabled = true
+    }*/
+}
+
+dependencies {
+    implementation project(Modules.common)
+
+    // NETWORK
+    implementation AndroidLibraries.kotlinCoroutineAndroid
+    implementation Libraries.httpLoggingInterceptor
+    implementation Libraries.retrofitGsonConverter
+    implementation Libraries.scalarsConverter
+    implementation Libraries.retrofitCoroutineAdapter
+}

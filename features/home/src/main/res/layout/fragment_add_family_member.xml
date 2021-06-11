@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.home.viewmodel.ProfileFamilyMemberViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_60sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_img_relation">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_img_relation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_36sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <com.caressa.common.view.ArcImageView
+                        android:id="@+id/img_family_member"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        app:isTemplate="true"
+                        android:scaleType="centerInside"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_relationship"
+                        style="@style/CustomTextview"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/vivant_track_param_textcolor"
+                        android:textSize="@dimen/_13sdp"
+                        android:textStyle="normal"
+                        app:layout_constraintTop_toBottomOf="@+id/img_family_member"
+                        app:layout_constraintEnd_toEndOf="@+id/img_family_member"
+                        app:layout_constraintStart_toStartOf="@+id/img_family_member"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/layout_member_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardUseCompatPadding="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_img_relation">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:id="@+id/view1"
+                            android:layout_width="@dimen/_4sdp"
+                            android:layout_height="0dp"
+                            android:background="@color/blue"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_username"
+                            android:layout_width="@dimen/_28sdp"
+                            android:layout_height="@dimen/_28sdp"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:layout_marginBottom="@dimen/_12sdp"
+                            android:tint="@color/vivant_track_param_textcolor"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/img_name"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_username"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:text="@string/NAME"
+                            android:textColor="@color/vivant_greyish"
+                            android:textSize="@dimen/_11sdp"
+                            android:paddingStart="@dimen/_3sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_username"
+                            app:layout_constraintTop_toTopOf="@+id/img_username"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_edt_member_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:passwordToggleEnabled="false"
+                            app:hintEnabled="false"
+                            style="@style/VivantTextInputLayoutStyle"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_username"
+                            app:layout_constraintEnd_toEndOf="@+id/lbl_username"
+                            app:layout_constraintStart_toStartOf="@+id/lbl_username"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_username">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_member_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                style="@style/VivantEditTextStyle"
+                                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                android:inputType="textPersonName|textNoSuggestions"
+                                android:lines="1"
+                                android:maxLength="25"
+                                android:textSize="@dimen/_13sdp"
+                                android:imeOptions="actionNext"
+                                android:ellipsize="end"
+                                android:paddingTop="@dimen/_10sdp"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/layout_member_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardUseCompatPadding="true"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_member_name">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:id="@+id/view2"
+                            android:layout_width="@dimen/_4sdp"
+                            android:layout_height="0dp"
+                            android:background="@color/vivantYellow"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_dob"
+                            android:layout_width="@dimen/_28sdp"
+                            android:layout_height="@dimen/_28sdp"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:layout_marginBottom="@dimen/_12sdp"
+                            android:tint="@color/vivant_track_param_textcolor"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/img_dob"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_dob"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:text="@string/DATE_OF_BIRTH"
+                            android:textColor="@color/vivant_greyish"
+                            android:textSize="@dimen/_11sdp"
+                            android:paddingStart="@dimen/_3sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_dob"
+                            app:layout_constraintTop_toTopOf="@+id/img_dob"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_edt_member_dob"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:passwordToggleEnabled="false"
+                            app:hintEnabled="false"
+                            style="@style/VivantTextInputLayoutStyle"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_dob"
+                            app:layout_constraintEnd_toEndOf="@+id/lbl_dob"
+                            app:layout_constraintStart_toStartOf="@+id/lbl_dob"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_dob">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_member_dob"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/VivantEditTextStyle"
+                                android:text=""
+                                android:editable="false"
+                                android:focusableInTouchMode="false"
+                                android:textSize="@dimen/_13sdp"
+                                android:paddingTop="@dimen/_10sdp"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/layout_member_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardUseCompatPadding="true"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_member_dob">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:id="@+id/view5"
+                            android:layout_width="@dimen/_4sdp"
+                            android:layout_height="0dp"
+                            android:background="@color/vivant_nasty_green"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_mobile"
+                            android:layout_width="@dimen/_28sdp"
+                            android:layout_height="@dimen/_28sdp"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:layout_marginBottom="@dimen/_12sdp"
+                            android:tint="@color/vivant_track_param_textcolor"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/img_phone"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_mobile"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:text="@string/NUMBER"
+                            android:textColor="@color/vivant_greyish"
+                            android:textSize="@dimen/_11sdp"
+                            android:paddingStart="@dimen/_3sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_mobile"
+                            app:layout_constraintTop_toTopOf="@+id/img_mobile"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_edt_member_mobile"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:passwordToggleEnabled="false"
+                            app:hintEnabled="false"
+                            style="@style/VivantTextInputLayoutStyle"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_mobile"
+                            app:layout_constraintEnd_toEndOf="@+id/lbl_mobile"
+                            app:layout_constraintStart_toStartOf="@+id/lbl_mobile"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_mobile">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_member_mobile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/VivantEditTextStyle"
+                                android:inputType="number"
+                                android:lines="1"
+                                android:imeOptions="actionNext"
+                                android:text=""
+                                android:textSize="@dimen/_13sdp"
+                                android:paddingTop="@dimen/_10sdp"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/layout_member_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardUseCompatPadding="true"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_member_mobile">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:id="@+id/view6"
+                            android:layout_width="@dimen/_4sdp"
+                            android:layout_height="0dp"
+                            android:background="@color/vivant_orange_yellow"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_email"
+                            android:layout_width="@dimen/_28sdp"
+                            android:layout_height="@dimen/_28sdp"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:layout_marginBottom="@dimen/_12sdp"
+                            android:tint="@color/vivant_track_param_textcolor"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/img_email"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/lbl_email"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:text="@string/EMAIL_ADDRESS"
+                            android:textColor="@color/vivant_greyish"
+                            android:textSize="@dimen/_11sdp"
+                            android:paddingStart="@dimen/_3sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_email"
+                            app:layout_constraintTop_toTopOf="@+id/img_email"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_edt_member_email"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:passwordToggleEnabled="false"
+                            app:hintEnabled="false"
+                            style="@style/VivantTextInputLayoutStyle"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_email"
+                            app:layout_constraintEnd_toEndOf="@+id/lbl_email"
+                            app:layout_constraintStart_toStartOf="@+id/lbl_email"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_email">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_member_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/VivantEditTextStyle"
+                                android:inputType="textEmailAddress"
+                                android:lines="1"
+                                android:imeOptions="actionDone"
+                                android:text=""
+                                android:ellipsize="end"
+                                android:textSize="@dimen/_13sdp"
+                                android:paddingTop="@dimen/_10sdp"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/layout_btn_add_relation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.caressa.common.view.ArcButton
+                android:id="@+id/btn_back_add_member"
+                style="@style/CustomButtonLeft"
+                app:isLeftButton="true"
+                app:isTemplate="true"
+                android:text="@string/BACK"/>
+
+            <com.caressa.common.view.ArcButton
+                android:id="@+id/btn_add_member"
+                style="@style/CustomButtonRight"
+                app:isTemplate="true"
+                android:text="@string/SAVE"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

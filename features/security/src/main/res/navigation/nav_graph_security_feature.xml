@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_security_feature"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.caressa.security.ui.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_main_activity"
+            app:destination="@id/splash_activity"/>
+
+        <action
+            android:id="@+id/next_sign_up"
+            app:destination="@+id/signUpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_login_fragment_to_forgotPasswordFragment"
+            app:destination="@+id/forgotPasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_login_terms"
+            app:destination="@id/termsAndConditionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/next_otp"
+            app:destination="@+id/loginViaOTPFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.caressa.security.ui.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up">
+
+        <action
+            android:id="@+id/action_signup_terms"
+            app:destination="@id/termsAndConditionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_next_userInfo"
+            app:destination="@id/userInfoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+
+            <argument
+                    android:name="name"
+                    app:argType="string"
+                    android:defaultValue=" "/>
+            <argument
+                    android:name="mobileNo"
+                    app:argType="string"
+                    android:defaultValue=" "/>
+            <argument
+                    android:name="passCode"
+                    app:argType="string"
+                    android:defaultValue=" "/>
+            <argument
+                    android:name="email"
+                    app:argType="string"
+                    android:defaultValue=" "/>
+
+        </action>
+
+        <action
+            android:id="@+id/action_next_userConfirmation"
+            app:destination="@id/userConfirmationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_signUpFragment_to_main_activity"
+            app:destination="@id/splash_activity" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/termsAndConditionFragment"
+        android:name="com.caressa.security.ui.TermsAndConditionFragment"
+        android:label="TermsAndConditionFragment"
+        tools:layout="@layout/fragment_terms_and_condition">
+    </fragment>
+
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.caressa.security.ui.ForgetPasswordFragment"
+        tools:layout="@layout/fragment_forget_password">
+
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
+            app:popUpTo="@+id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_verifyCodeFragment"
+            app:destination="@+id/verifyCodeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/verifyCodeFragment"
+        android:name="com.caressa.security.ui.VerifyCodeFragment"
+        tools:layout="@layout/fragment_verify_code">
+
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue=" " />
+
+        <action
+            android:id="@+id/action_verifyCodeFragment_to_changePasswordFragment"
+            app:destination="@+id/changePasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.caressa.security.ui.ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password">
+
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue=" "/>
+
+        <action
+            android:id="@+id/action_changePasswordFragment_to_loginFragment"
+            app:popUpTo="@+id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.caressa.security.ui.UserInfoFragment"
+        android:label="UserInfoFragment"
+        tools:layout="@layout/fragment_user_info">
+
+        <argument android:name="name" app:argType="string"/>
+        <argument android:name="mobileNo" app:argType="string"/>
+        <argument android:name="passCode" app:argType="string"/>
+        <argument android:name="email" app:argType="string"/>
+
+        <action
+            android:id="@+id/back_signup"
+            app:popUpTo="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_userInfoFragment_to_main_activity"
+            app:destination="@id/splash_activity" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/userConfirmationFragment"
+        android:name="com.caressa.security.ui.UserConfirmationFragment"
+        android:label="UserConfirmationFragment"
+        tools:layout="@layout/fragment_user_confirmation">
+
+        <action
+            android:id="@+id/action_userConfirmationFragment_to_main_activity"
+            app:destination="@id/splash_activity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginViaOTPFragment"
+        android:name="com.caressa.security.ui.LoginWithOtpFragment"
+        android:label="LoginViaOTPFragment"
+        tools:layout="@layout/fragment_login_with_otp">
+
+        <action
+            android:id="@+id/action_loginViaOTPFragment_to_main_activity"
+            app:destination="@id/splash_activity"/>
+        <action
+            android:id="@+id/action_loginViaOTPFragment_to_main_activity2"
+            app:destination="@id/splash_activity" />
+
+    </fragment>
+
+    <activity
+        android:id="@+id/splash_activity"
+        tools:layout="@layout/activity_splash_screen"
+        android:name="com.caressa.security.ui.SplashScreenActivity" />
+
+</navigation>

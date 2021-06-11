@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph_hra_feature"
+        app:startDestination="@id/introductionFragment">
+
+    <fragment
+        android:id="@+id/introductionFragment"
+        android:name="com.caressa.hra.ui.IntroductionFragment"
+        tools:layout="@layout/fragment_introduction">
+
+        <action
+            android:id="@+id/action_introductionFragment_to_selectFamilyMemberFragment"
+            app:destination="@id/selectFamilyMemberFragment"
+            app:enterAnim="@anim/hra_enter_anim" app:exitAnim="@anim/hra_exit_anim"
+            app:popEnterAnim="@anim/hra_enter_to_exit" app:popExitAnim="@anim/hra_exit_to_exit"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/selectFamilyMemberFragment"
+        android:name="com.caressa.hra.ui.SelectFamilyMemberFragment"
+        tools:layout="@layout/fragment_select_family_member">
+
+        <action
+            android:id="@+id/action_selectFamilyMemberFragment_to_introductionFragment"
+            app:popUpTo="@id/introductionFragment"
+            app:enterAnim="@anim/hra_enter_anim" app:exitAnim="@anim/hra_exit_anim"
+            app:popEnterAnim="@anim/hra_enter_to_exit" app:popExitAnim="@anim/hra_exit_to_exit"/>
+
+        <action
+            android:id="@+id/action_selectFamilyMemberFragment_to_hraQuestionsActivity"
+            app:destination="@id/hraQuestionsActivity"/>
+
+    </fragment>
+
+    <activity
+        android:id="@+id/hraQuestionsActivity"
+        android:name="com.caressa.hra.ui.HraQuestionsActivity"
+        tools:layout="@layout/activity_hra_questions">
+
+    </activity>
+
+    <activity
+        android:id="@+id/hraSummaryActivity"
+        android:name="com.caressa.hra.ui.HraSummaryActivity"
+        tools:layout="@layout/activity_hra_summary">
+
+    </activity>
+
+<!--    <activity
+        android:id="@+id/home_activity"
+        android:name="com.caressa.home.ui.HomeMainActivity" />-->
+
+</navigation>

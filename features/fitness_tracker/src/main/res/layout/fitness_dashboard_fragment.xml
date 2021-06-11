@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.caressa.fitness_tracker.viewmodel.FitnessViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.caressa.common.view.ArcTextView
+            android:id="@+id/lbl_today"
+            android:layout_width="0dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:isTemplate="true"
+            style="@style/VivantTitle"
+            android:text="@string/TODAY"
+            android:textColor="@color/textViewColorBlack"
+            android:textSize="@dimen/_15sdp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/layout_distance"
+            app:layout_constraintEnd_toStartOf="@+id/layout_calories"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTodaysDate"
+            android:visibility="gone"
+            style="@style/CustomTextview"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:text="---- , --- --"
+            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/textViewColorBlack"
+            app:layout_constraintEnd_toEndOf="@+id/lbl_today"
+            app:layout_constraintStart_toStartOf="@+id/lbl_today"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_today"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_distance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="1"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toStartOf="@+id/lbl_today"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lbl_today">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_today_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/vivant_green_blue_two"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_today_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CustomTextview"
+                android:text="@string/DISTANCE"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                app:layout_constraintEnd_toEndOf="@+id/txt_today_distance"
+                app:layout_constraintTop_toBottomOf="@+id/txt_today_distance"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/txt_today_distance"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_calories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="1"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/lbl_today"
+            app:layout_constraintTop_toTopOf="@+id/lbl_today">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_today_calories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="@dimen/_14sdp"
+                android:textColor="@color/vivant_pumpkin_orange"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_Calories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CustomTextview"
+                android:text="@string/CALORIES"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_today_calories"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/txt_today_calories"
+                app:layout_constraintStart_toStartOf="@+id/txt_today_calories" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTodaysDate"
+            tools:visibility="visible">
+
+            <at.grabner.circleprogress.CircleProgressView
+                android:id="@+id/progress_bar"
+                android:layout_width="@dimen/_135sdp"
+                android:layout_height="@dimen/_135sdp"
+                app:animateProgress="true"
+                app:cpv_autoTextSize="true"
+                app:cpv_barColor="@color/colorPrimary"
+                app:cpv_barStrokeCap="Round"
+                app:cpv_barWidth="@dimen/_12sdp"
+                app:cpv_fillColor="@color/colorPrimary"
+                app:cpv_innerContourColor="@color/white"
+                app:cpv_innerContourSize="@dimen/_2sdp"
+                app:cpv_maxValue="100"
+                app:cpv_outerContourSize="0dp"
+                app:cpv_rimColor="@color/vivantInactiveLight"
+                app:cpv_rimWidth="@dimen/_10sdp"
+                app:cpv_seekMode="true"
+                app:cpv_spinColor="@color/vivantRed"
+                app:cpv_textMode="Text"
+                app:cpv_textScale="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:visibility="visible"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_step_count"
+                style="@style/CustomTextview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingStart="@dimen/_4sdp"
+                android:paddingEnd="@dimen/_4sdp"
+                android:text="0"
+                android:textColor="@color/vivantWhite"
+                android:textSize="@dimen/_19sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                app:layout_constraintTop_toTopOf="@+id/progress_bar"
+                app:layout_constraintEnd_toEndOf="@+id/progress_bar"
+                app:layout_constraintStart_toStartOf="@+id/progress_bar"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                app:layout_constraintEnd_toEndOf="@+id/progress_bar"
+                app:layout_constraintStart_toStartOf="@+id/progress_bar"
+                app:layout_constraintTop_toBottomOf="@+id/txt_step_count"
+                app:srcCompat="@drawable/img_step"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textView5"
+                style="@style/CustomTextview"
+                android:text="@string/STEPS"
+                android:textColor="@color/vivantWhite"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtGoal"
+            style="@style/CustomTextview"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/vivant_light_grey"
+            android:minWidth="80dp"
+            android:padding="@dimen/_3sdp"
+            android:text="3000"
+            android:textColor="@color/vivant_dark_sky_blue"
+            android:textSize="@dimen/_15sdp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@+id/viewContainer"
+            app:layout_constraintStart_toStartOf="@+id/viewContainer"
+            app:layout_constraintTop_toBottomOf="@+id/viewContainer"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtStepsToGo"
+            style="@style/CustomTextview"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:text="0"
+            android:textColor="@color/vivantPurple"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtGoal"
+            app:layout_constraintEnd_toStartOf="@+id/txtGoal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtGoal"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTodayActTime"
+            style="@style/CustomTextview"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:text="0"
+            android:textSize="@dimen/_15sdp"
+            android:textColor="@color/vivant_nasty_green"
+            app:layout_constraintBottom_toBottomOf="@+id/txtGoal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtGoal"
+            app:layout_constraintTop_toTopOf="@+id/txtGoal"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="1"
+            style="@style/CustomTextview"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@string/STEPS_TO_GO"
+            android:textSize="@dimen/_13sdp"
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@+id/textView9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtGoal"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="1"
+            style="@style/CustomTextview"
+            android:text="@string/MY_GOAL"
+            android:textSize="@dimen/_13sdp"
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@+id/textView10"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="@+id/textView8"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/CustomTextview"
+            app:layout_constraintHorizontal_weight="1"
+            android:text="@string/ACTIVE_TIME"
+            android:textSize="@dimen/_13sdp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView9"
+            app:layout_constraintTop_toTopOf="@+id/textView9"/>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/vivant_edit_textcolor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9"/>
+
+        <com.caressa.common.view.ArcTextView
+            android:id="@+id/lbl_weekly_stat"
+            android:layout_width="wrap_content"
+            app:isTemplate="true"
+            style="@style/VivantTitle"
+            android:text="@string/WEEKLY_STATISTICS"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/textViewColorBlack"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"/>
+
+        <com.caressa.common.view.ArcButton
+            android:id="@+id/btn_monthly_stat"
+            app:isTemplate="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MONTHLY_STATISTICS"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold"
+            android:background="@drawable/selector_fill_button"
+            android:padding="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lbl_weekly_stat"
+            app:layout_constraintBottom_toBottomOf="@+id/lbl_weekly_stat"/>
+
+<!--        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_monthly_stat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/VivantTitle"
+            android:text="@string/MONTHLY_STATISTICS"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            android:background="@drawable/selector_fill_button"
+            android:padding="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lbl_weekly_stat"
+            app:layout_constraintBottom_toBottomOf="@+id/lbl_weekly_stat"/>-->
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/steps_chart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_monthly_stat"
+            app:layout_constraintBottom_toTopOf="@+id/rv_weekday"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_weekday"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_43sdp"
+            tools:listitem="@layout/item_weekday"
+            android:paddingStart="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_3sdp"
+            app:layout_constraintBottom_toTopOf="@+id/layout_week_data"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.caressa.common.view.ArcConstraintLayout
+            android:id="@+id/layout_week_data"
+            app:isTemplate="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_8sdp"
+            android:paddingStart="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_Steps"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="1"
+                style="@style/VivantDescription"
+                android:text="@string/STEPS"
+                android:textColor="@color/vivantWhite"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                app:layout_constraintEnd_toStartOf="@+id/lbl_calories"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_calories"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="1"
+                style="@style/VivantDescription"
+                android:text="@string/CALORIES"
+                android:textColor="@color/vivantWhite"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center"
+                app:layout_constraintEnd_toStartOf="@+id/lbl_distance"
+                app:layout_constraintStart_toEndOf="@+id/lbl_Steps"
+                app:layout_constraintTop_toTopOf="@+id/lbl_Steps"
+                app:layout_constraintBottom_toBottomOf="@+id/lbl_Steps"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_distance"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="1"
+                style="@style/VivantDescription"
+                android:text="@string/DISTANCE"
+                android:textColor="@color/vivantWhite"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center"
+                app:layout_constraintEnd_toStartOf="@+id/lbl_active_time"
+                app:layout_constraintStart_toEndOf="@+id/lbl_calories"
+                app:layout_constraintTop_toTopOf="@+id/lbl_Steps"
+                app:layout_constraintBottom_toBottomOf="@+id/lbl_Steps"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_active_time"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="1"
+                style="@style/VivantDescription"
+                android:text="@string/ACTIVE_TIME"
+                android:textColor="@color/vivantWhite"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/lbl_distance"
+                app:layout_constraintTop_toTopOf="@+id/lbl_Steps"
+                app:layout_constraintBottom_toBottomOf="@+id/lbl_Steps"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtSteps"
+                style="@style/VivantDescription"
+                android:text="- -"
+                android:textColor="@color/vivantWhite"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="@+id/lbl_Steps"
+                app:layout_constraintEnd_toEndOf="@+id/lbl_Steps"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_Steps"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtCalories"
+                style="@style/VivantDescription"
+                android:text="- -"
+                android:textColor="@color/vivantWhite"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@+id/lbl_calories"
+                app:layout_constraintEnd_toEndOf="@+id/lbl_calories"
+                app:layout_constraintTop_toTopOf="@+id/txtSteps"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtDistance"
+                style="@style/VivantDescription"
+                android:text="- -"
+                android:textColor="@color/vivantWhite"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@+id/lbl_distance"
+                app:layout_constraintEnd_toEndOf="@+id/lbl_distance"
+                app:layout_constraintTop_toTopOf="@+id/txtSteps"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtActTime"
+                style="@style/VivantDescription"
+                android:text="- -"
+                android:textColor="@color/vivantWhite"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@+id/lbl_active_time"
+                app:layout_constraintEnd_toEndOf="@+id/lbl_active_time"
+                app:layout_constraintTop_toTopOf="@+id/txtSteps"/>
+
+        </com.caressa.common.view.ArcConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
