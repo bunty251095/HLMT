@@ -7,8 +7,8 @@ android {
 
     buildToolsVersion '30.0.3'
     defaultConfig {
-        applicationId "com.caressa.allizhealth"
-//        applicationId "com.vivant.hlmt.app.uat"
+//        applicationId "com.caressa.allizhealth"
+        applicationId "com.vivant.hlmt.app.uat"
 //        applicationId "vivant.me.app"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
