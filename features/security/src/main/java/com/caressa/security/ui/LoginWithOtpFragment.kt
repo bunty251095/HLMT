@@ -39,7 +39,7 @@ class LoginWithOtpFragment : BaseFragment() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_otp)
 
-        viewModel.otpScreenData.observe(this , Observer {
+        viewModel.otpScreenData.observe(viewLifecycleOwner , Observer {
                     val email = it.get("email").toString()
                     val phone = it.get("phone").toString()
                     showOTPScreen( email , phone )
@@ -95,7 +95,7 @@ class LoginWithOtpFragment : BaseFragment() {
             if ( !strOTP.isNullOrEmpty()  && strOTP?.length == 6 ) {
 
                 viewModel.callValidateOTPforUserAPI( strOTP!! , emailStr , phoneNumber )
-                viewModel.isLoading.observe(this, Observer {
+                viewModel.isLoading.observe(viewLifecycleOwner, Observer {
                     if( it == Resource.Status.SUCCESS) {
                         if (dialog.isShowing) {
                             dialog.dismiss()
