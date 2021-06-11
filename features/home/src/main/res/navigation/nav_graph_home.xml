@@ -72,6 +72,12 @@
             app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
 
         <action
+            android:id="@+id/action_dashboardFragment_to_toolsCalculatorsHomeActivity"
+            app:destination="@id/toolsCalculatorsHomeActivity"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
             android:id="@+id/action_dashboardFragment_to_wellnessCentreActivity"
             app:destination="@id/wellnessCentreActivity"
             app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
@@ -109,6 +115,10 @@
             android:id="@+id/wellnessCentreActivity"
             tools:layout="@layout/activity_wellness_centre"
             android:name="com.caressa.home.ui.WebViews.WellnessCentreActivity"/>
+
+    <activity
+        android:id="@+id/toolsCalculatorsHomeActivity"
+        android:name="com.caressa.tools_calculators.ToolsCalculatorsHomeActivity"/>
 
     <activity
             android:id="@+id/orderMedicinesActivity"

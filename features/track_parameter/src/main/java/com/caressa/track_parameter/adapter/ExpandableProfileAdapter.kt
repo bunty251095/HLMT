@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.view.ExpandedHeightListView
-import com.caressa.model.parameter.DashboardParamGridModel
 import com.caressa.model.parameter.ParentProfileModel
 import com.caressa.track_parameter.databinding.ItemExpandableProfileBinding
 import com.caressa.track_parameter.ui.RevDetailHistoryFragment
@@ -60,7 +59,7 @@ class ExpandableProfileAdapter(private val mContext: Context,private val fragmen
                 holder.childView.visibility = View.GONE
                 holder.imgExpand.setImageResource(R.drawable.ic_add)
                 holder.layoutParent.setBackgroundColor(ContextCompat.getColor(mContext,R.color.white))
-                ImageViewCompat.setImageTintList(holder.imgExpandableProfile, ColorStateList.valueOf(ContextCompat.getColor(mContext,R.color.vivant_icon_warm_grey)))
+                ImageViewCompat.setImageTintList(holder.imgExpandableProfile, ColorStateList.valueOf(ContextCompat.getColor(mContext,R.color.hlmt_warm_grey)))
                 ImageViewCompat.setImageTintList(holder.imgExpand, ColorStateList.valueOf(appColorHelper.primaryColor()))
                 holder.txtExpandableProfile.setTextColor(ContextCompat.getColor(mContext,R.color.textViewColor))
             }

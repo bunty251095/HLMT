@@ -66,7 +66,7 @@
                     android:layout_weight="3"
                     android:hint="18 to 74"
                     android:paddingStart="@dimen/_5sdp"
-                    android:fontFamily="@font/lato_font"
+                    android:fontFamily="@font/dax_font"
                     android:background="@drawable/selector_line_edittext"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:inputType="number"

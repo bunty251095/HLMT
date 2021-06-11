@@ -88,7 +88,7 @@ open class MedicineHomeFragment : BaseFragment() {
             }
             if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
                 v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
-                ImageViewCompat.setImageTintList(binding.imgDashboard, ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.vivant_icon_warm_grey)))
+                ImageViewCompat.setImageTintList(binding.imgDashboard, ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.hlmt_warm_grey)))
                 binding.lblDashboard.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_title_charcoal_grey))
                 binding.txtDashboard.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_charcoal_grey_55))
             }
@@ -105,7 +105,7 @@ open class MedicineHomeFragment : BaseFragment() {
             }
             if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
                 v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
-                ImageViewCompat.setImageTintList(binding.imgAddMedicine, ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.vivant_icon_warm_grey)))
+                ImageViewCompat.setImageTintList(binding.imgAddMedicine, ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.hlmt_warm_grey)))
                 binding.lblAddMedicine.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_title_charcoal_grey))
                 binding.txtAddMedicine.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_charcoal_grey_55))
             }
@@ -122,7 +122,7 @@ open class MedicineHomeFragment : BaseFragment() {
             }
             if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
                 v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
-                ImageViewCompat.setImageTintList(binding.imgDueMedicine, ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.vivant_icon_warm_grey)))
+                ImageViewCompat.setImageTintList(binding.imgDueMedicine, ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.hlmt_warm_grey)))
                 binding.lblDueMedicine.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_title_charcoal_grey))
                 binding.txtDueMedicine.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_charcoal_grey_55))
             }

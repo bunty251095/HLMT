@@ -28,22 +28,18 @@
             <com.caressa.common.view.ArcConstraintLayout
                 android:id="@+id/layout_banner"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_170sdp"
+                android:layout_height="@dimen/_180sdp"
                 app:isTemplate="true"
                 android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.caressa.common.view.ArcImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img_app_logo"
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="@dimen/_90sdp"
-                    app:isTemplate="true"
-                    android:padding="@dimen/_15sdp"
-                    android:src="@drawable/vivant_v_green"
-                    android:background="@drawable/circle_bg"
-                    android:backgroundTint="@color/white"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:src="@drawable/hlmt_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

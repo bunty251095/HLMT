@@ -22,7 +22,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:tint="@color/vivant_icon_warm_grey"
+            android:tint="@color/hlmt_warm_grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

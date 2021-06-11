@@ -109,7 +109,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginStart="@dimen/_20sdp"
-                            android:tint="@color/vivant_icon_warm_grey"
+                            android:tint="@color/hlmt_warm_grey"
                             app:srcCompat="@drawable/img_select_param" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -182,7 +182,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginStart="@dimen/_20sdp"
-                            android:tint="@color/vivant_icon_warm_grey"
+                            android:tint="@color/hlmt_warm_grey"
                             app:srcCompat="@drawable/img_update" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -255,7 +255,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginStart="@dimen/_20sdp"
-                            android:tint="@color/vivant_icon_warm_grey"
+                            android:tint="@color/hlmt_warm_grey"
                             app:srcCompat="@drawable/img_dashboard" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -329,7 +329,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginStart="@dimen/_20sdp"
-                            android:tint="@color/vivant_icon_warm_grey"
+                            android:tint="@color/hlmt_warm_grey"
                             app:srcCompat="@drawable/img_history" />
 
                         <androidx.appcompat.widget.AppCompatTextView

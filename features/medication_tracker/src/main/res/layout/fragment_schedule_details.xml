@@ -549,7 +549,7 @@
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         app:srcCompat="@drawable/ic_upload_file"
-                        android:tint="@color/vivant_icon_warm_grey"
+                        android:tint="@color/hlmt_warm_grey"
                         android:layout_marginTop="@dimen/_8sdp"
                         app:layout_constraintStart_toStartOf="@+id/til_edt_notes"
                         app:layout_constraintTop_toTopOf="@+id/til_edt_notes" />

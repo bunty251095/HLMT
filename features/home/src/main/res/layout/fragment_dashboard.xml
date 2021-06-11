@@ -38,6 +38,7 @@
                 android:id="@+id/llHealthLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintVertical_weight="0.30"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -89,6 +90,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/layout_take_health_checkup"
                     android:layout_width="0dp"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/_42sdp"
                     app:layout_constraintHorizontal_weight="0.6"
@@ -106,6 +108,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/layout_chat_with_doctor"
+                    android:visibility="gone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/_42sdp"
@@ -127,6 +130,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/layout_order_medicines"
+                    android:visibility="gone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/_42sdp"
@@ -148,11 +152,11 @@
                 android:id="@+id/llHealthModules"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_20sdp"
                 app:layout_constraintVertical_weight="0.70"
                 app:layout_constraintTop_toBottomOf="@+id/llHealthLayout"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="@dimen/_8sdp">
+                app:layout_constraintStart_toStartOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_track_parameter"
@@ -369,7 +373,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:gravity="center"
-                        android:text="@string/DASH_WELLNESS_CENTRE"
+                        android:text="@string/DASH_TOOLS_TRACKER"
                         android:textColor="@color/vivantWhite"
                         android:textSize="@dimen/dashboardTextSize"
                         android:layout_marginTop="@dimen/_4sdp"
@@ -382,6 +386,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_hospital_near_me"
+                    android:visibility="gone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/_90sdp"
@@ -471,6 +476,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_chat_with_dietitian"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
