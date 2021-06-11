@@ -8,6 +8,8 @@
 
     <string name="LOGIN_WITH_OTP">Login With OTP</string>
     <string name="DONT_HAVE_ACCOUNT">Don\'t have an account?</string>
+    <string name="I_AGREE_CONSENT">I provide my Consent and I agree to the</string>
+    <string name="TERMS_AND_CONDITIONS">Terms &amp; Conditions</string>
     <string name="TERMS_OF_SERVICE_LOGIN">By clicking on Log in you agree to</string>
     <string name="TERMS_OF_SERVICE_SIGNUP">By clicking on Sign Up you agree to</string>
     <string name="YOU_HAVE_READ_THEM">and that you have read them</string>
@@ -29,6 +31,7 @@
     <string name="OTP">OTP</string>
     <string name="EMAIL_PHONE">Email Address / Phone number</string>
     <string name="LOG_IN">Log In</string>
+    <string name="LOGIN">Login</string>
     <string name="SIGN_IN">Sign In</string>
     <string name="SIGN_UP">Sign Up</string>
     <string name="FORGOT_PASSWORD">Forgot Password?</string>
@@ -52,6 +55,12 @@
     <string name="FORGOT_YOUR_PASSWORD">Forgot Your Password?</string>
     <string name="FORGOT_PASSWORD_DESC">Enter your email address &amp; we will send\nyou instructions to rest your password</string>
     <string name="VERIFICATION_CODE">Verification Code</string>
+    <string name="ENTER_NUMBER_TO_GET_OTP">Enter your mobile number to get OTP</string>
+
+    <string name="DO_YOU_HAVE_HLM_360_ACCOUNT">Do you have HLM Takaful 360 account?</string>
+    <string name="NO_DONT">No,don\'t</string>
+    <string name="YES_I_HAVE">Yes,I have</string>
+    <string name="I_AM_NEW">I\'m New</string>
 
     <string name="PASSWORD_CRITERIA">Your Password Criteria</string>
     <string name="PASSWORD_CRITERIA_DESC">Your Password length Should be minimum 6 characters</string>
