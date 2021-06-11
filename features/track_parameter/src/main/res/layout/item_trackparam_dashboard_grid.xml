@@ -38,7 +38,7 @@
                     android:layout_height="@dimen/_35sdp"
                     android:layout_margin="@dimen/_8sdp"
                     android:loadImage="@{parameter.imgId}"
-                    android:tint="@color/vivant_icon_warm_grey"
+                    android:tint="@color/hlmt_warm_grey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

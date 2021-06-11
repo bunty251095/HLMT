@@ -71,7 +71,7 @@ class RevSelectedParamAdapter(private val showUrineProfile: Boolean) : RecyclerV
                     ImageViewCompat.setImageTintList(
                         binding.imgSelectedProfile,
                         ColorStateList.valueOf(
-                            binding.imgSelectedProfile.getResources().getColor(R.color.vivant_icon_warm_grey)
+                            binding.imgSelectedProfile.getResources().getColor(R.color.hlmt_warm_grey)
                         )
                     )
                     binding.txtSelectedProfile.setTextColor(

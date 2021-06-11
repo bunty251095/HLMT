@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -75,8 +74,8 @@ class NavigationDrawerListAdapter(val viewModel:DashboardViewModel,val activity:
                 if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
                     v.setBackgroundColor(ContextCompat.getColor(context,R.color.white))
                     ImageViewCompat.setImageTintList(holder.navIcon,
-                        ColorStateList.valueOf(ContextCompat.getColor(context,R.color.vivant_icon_warm_grey)))
-                    holder.navTitle.setTextColor(ContextCompat.getColor(context,R.color.vivant_charcoal_grey))
+                        ColorStateList.valueOf(ContextCompat.getColor(context,R.color.hlmt_warm_grey)))
+                    holder.navTitle.setTextColor(ContextCompat.getColor(context,R.color.textViewColor))
                 }
                 false
             }

@@ -37,8 +37,8 @@ class SplashScreenActivity : AppCompatActivity(),DefaultNotificationDialog.OnDia
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        val animation = AnimationUtils.loadAnimation(this, R.anim.anim_pulse)
-        logo_vivant.startAnimation(animation)
+/*        val animation = AnimationUtils.loadAnimation(this, R.anim.anim_pulse)
+        logo_vivant.startAnimation(animation)*/
 
         FirebaseApp.initializeApp(applicationContext)
         registerObserver()

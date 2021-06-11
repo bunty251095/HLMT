@@ -56,7 +56,7 @@ class HealthRecordsAdapter(val context : Context, val viewModel : HealthRecordsV
                 ext = RealPathUtil.getFileExt(filename)
             }
 
-            if (!Utilities.isNullOrEmpty(code) && code.equals("LAB", ignoreCase = true)) {
+/*            if (!Utilities.isNullOrEmpty(code) && code.equals("LAB", ignoreCase = true)) {
                 if (ext.equals("JPEG", ignoreCase = true) || ext.equals("jpg",
                         ignoreCase = true) || ext.equals("png", ignoreCase = true) || ext.equals("pdf",
                         ignoreCase = true)) {
@@ -66,7 +66,7 @@ class HealthRecordsAdapter(val context : Context, val viewModel : HealthRecordsV
                 }
             } else {
                 holder.txtDigitize.visibility = View.GONE
-            }
+            }*/
 
             holder.txtDocName.text = record.Title
             holder.txtDocRelation.text = record.PersonName
@@ -88,37 +88,37 @@ class HealthRecordsAdapter(val context : Context, val viewModel : HealthRecordsV
             if (!Utilities.isNullOrEmpty(code)) {
                 when {
                     code.equals("LAB", ignoreCase = true) -> {
-                        holder.view.setBackgroundColor(ContextCompat.getColor(context,color[0]))
+                        //holder.view.setBackgroundColor(ContextCompat.getColor(context,color[0]))
                         holder.imgCategory.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.img_pathology))
                         holder.txtDocCategory.text = context.resources.getString(R.string.pathology_report)
                     }
                     code.equals("HOS", ignoreCase = true) -> {
-                        holder.view.setBackgroundColor(ContextCompat.getColor(context,color[1]))
+                        //holder.view.setBackgroundColor(ContextCompat.getColor(context,color[1]))
                         holder.imgCategory.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.img_hospital_report))
                         holder.txtDocCategory.text = context.resources.getString(R.string.hospital_report)
                     }
                     code.equals("PRE", ignoreCase = true) -> {
-                        holder.view.setBackgroundColor(ContextCompat.getColor(context,color[2]))
+                        //holder.view.setBackgroundColor(ContextCompat.getColor(context,color[2]))
                         holder.imgCategory.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.img_prescription))
                         holder.txtDocCategory.text = context.resources.getString(R.string.prescription)
                     }
                     code.equals("DIET_PLAN", ignoreCase = true) -> {
-                        holder.view.setBackgroundColor(ContextCompat.getColor(context,color[3]))
+                        //holder.view.setBackgroundColor(ContextCompat.getColor(context,color[3]))
                         holder.imgCategory.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.img_diet_plan))
                         holder.txtDocCategory.text = context.resources.getString(R.string.diet_plan)
                     }
                     code.equals("FIT_PLAN", ignoreCase = true) -> {
-                        holder.view.setBackgroundColor(ContextCompat.getColor(context,color[4]))
+                        //holder.view.setBackgroundColor(ContextCompat.getColor(context,color[4]))
                         holder.imgCategory.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.img_fitness_plan))
                         holder.txtDocCategory.text = context.resources.getString(R.string.fitness_plan)
                     }
                     code.equals("OTR", ignoreCase = true) -> {
-                        holder.view.setBackgroundColor(ContextCompat.getColor(context,color[5]))
+                        //holder.view.setBackgroundColor(ContextCompat.getColor(context,color[5]))
                         holder.imgCategory.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.img_other))
                         holder.txtDocCategory.text = context.resources.getString(R.string.other_document)
                     }
                     code.equals("HRAREPORT", ignoreCase = true) -> {
-                        holder.view.setBackgroundColor(ContextCompat.getColor(context,color[6]))
+                        //holder.view.setBackgroundColor(ContextCompat.getColor(context,color[6]))
                         holder.imgCategory.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.img_hra_report))
                         holder.txtDocCategory.text = context.resources.getString(R.string.hra_report)
                     }

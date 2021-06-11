@@ -13,7 +13,7 @@
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_13sdp"
         android:layout_marginBottom="@dimen/_13sdp"
-        android:tint="@color/vivant_icon_warm_grey"
+        android:tint="@color/hlmt_warm_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/txt_param_title"
         app:layout_constraintStart_toStartOf="parent"

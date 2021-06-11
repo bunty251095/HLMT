@@ -40,7 +40,7 @@
                     android:layout_margin="@dimen/_10sdp"
                     android:loadImage="@{utilities.getRelationImgIdWithGender(relative.relationshipCode,relative.gender)}"
                     app:srcCompat="@drawable/icon_father"
-                    app:tint="@color/vivant_icon_warm_grey"
+                    app:tint="@color/hlmt_warm_grey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>

@@ -88,7 +88,8 @@ class DashboardFragment : BaseFragment() , ScoreListener {
         }
 
         binding.layoutWellnessCentre.setOnClickListener {
-            it.findNavController().navigate(R.id.action_dashboardFragment_to_wellnessCentreActivity)
+            it.findNavController().navigate(R.id.action_dashboardFragment_to_toolsCalculatorsHomeActivity)
+            //it.findNavController().navigate(R.id.action_dashboardFragment_to_wellnessCentreActivity)
         }
 
         binding.layoutHospitalNearMe.setOnClickListener {

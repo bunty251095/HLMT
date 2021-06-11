@@ -284,13 +284,13 @@ object HomeBinding {
             if ( !Utilities.isNullOrEmpty(imgUrl) ) {
                 Picasso.get()
                     .load(imgUrl)
-                    .placeholder(R.drawable.vivant_logo)
+                    .placeholder(R.drawable.hlmt_logo)
                     //.resize(6000,3000)
                     //.onlyScaleDown()
-                    .error(R.drawable.vivant_logo)
+                    .error(R.drawable.hlmt_logo)
                     .into(this)
             } else {
-                setImageResource(R.drawable.vivant_logo)
+                setImageResource(R.drawable.hlmt_logo)
             }
         } catch (e:Exception) {
             e.printStackTrace()

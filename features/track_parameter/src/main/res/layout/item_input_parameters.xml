@@ -72,7 +72,7 @@
                         android:layout_height="@dimen/_27sdp"
                         android:paddingBottom="@dimen/_4sdp"
                         android:src="@drawable/img_bp"
-                        android:tint="@color/vivant_icon_warm_grey"
+                        android:tint="@color/hlmt_warm_grey"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/til_input_value"
                         app:layout_constraintStart_toStartOf="@+id/til_input_value"

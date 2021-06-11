@@ -48,7 +48,7 @@
                         android:layout_height="@dimen/_30sdp"
                         android:src="@drawable/img_profile_kidney"
                         android:loadImage="@{helper.getProfileImageByProfileCode(profile.profileCode)}"
-                        android:tint="@color/vivant_icon_warm_grey"
+                        android:tint="@color/hlmt_warm_grey"
                         android:layout_marginStart="@dimen/_6sdp"
                         android:padding="@dimen/_1sdp"
                         app:layout_constraintStart_toStartOf="parent"

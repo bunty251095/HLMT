@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/vivant_toolbar_green_blue</color>
-    <color name="ColorPrimaryDark">@color/vivant_toolbar_green_blue</color>
-    <color name="colorAccent">@color/vivant_toolbar_green_blue</color>
+    <color name="colorPrimary">@color/hlmt_european_blue</color>
+    <color name="ColorPrimaryDark">@color/hlmt_european_blue</color>
+    <color name="colorAccent">@color/hlmt_european_blue</color>
+
+    <!-- HLMT Colors -->
+    <color name="hlmt_european_blue">#002D62</color>
+    <color name="hlmt_poppy_red">#FF0000</color>
+    <color name="hlmt_dark_grey">#747678</color>
+    <color name="hlmt_cool_grey">#9A9B9C</color>
+    <color name="hlmt_warm_grey">#C7C2BA</color>
+    <color name="textViewColor">#000000</color>
+    <!-- HLMT Colors -->
 
     <!-- Vivant Revamp New Colors-->
     <color name="vivant_toolbar_green_blue">#00c8a0</color>
@@ -30,7 +39,6 @@
     <color name="vivant_soft_pink">#fcb4c1</color>
     <color name="vivant_track_param_textcolor">#9a9a9a</color>
     <color name="vivant_edit_textcolor">#c0c0c0</color>
-    <color name="vivant_icon_warm_grey">#9a9a9a</color>
     <color name="vivant_teal_blue">#00a49e</color>
     <color name="vivant_purple">#7a6ba0</color>
     <color name="vivant_disabled">#E6E6E6</color>
@@ -68,12 +76,6 @@
     <color name="navy">#608CBB </color>
     <!--     Vivant New Branding Guideline Colours-->
 
-    <!--     HRA Observation Colours-->
-<!--    <color name="high_risk">#ff485d</color>
-    <color name="moderate_risk">#ffa000</color>
-    <color name="low_risk">#40ddb8</color>
-    <color name="optimum_risk">#00d2a0</color>-->
-
     <color name="high_risk">@color/vivant_watermelon</color>
     <color name="moderate_risk">@color/vivant_orange_yellow</color>
     <color name="healthy_risk">@color/vivant_nasty_green</color>
@@ -84,8 +86,6 @@
     <color name="shimmerColor">#c8c8c8</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <!--<color name="textViewColor">@color/vivantDenim</color>-->
-    <color name="textViewColor">@color/vivant_title_charcoal_grey</color>
     <color name="textViewColorSecondary">#646464</color>
     <color name="textViewColorBlack">#000</color>
     <color name="colorBorderUploadAreaURSHP">#d4d3d3</color>
