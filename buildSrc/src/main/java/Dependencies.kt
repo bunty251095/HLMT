@@ -1,5 +1,5 @@
 object ApplicationId {
-    val id = "com.caressa.allizhealth"
+    val id = "com.vivant.hlmt.app.uat"
 }
 
 object Modules {

@@ -9,7 +9,6 @@ android {
     defaultConfig {
 //        applicationId "com.caressa.allizhealth"
         applicationId "com.vivant.hlmt.app.uat"
-//        applicationId "vivant.me.app"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
