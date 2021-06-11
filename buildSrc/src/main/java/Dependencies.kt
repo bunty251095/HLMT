@@ -1,5 +1,4 @@
 object ApplicationId {
-//    val id = "com.caressa.archapp"
     val id = "com.caressa.allizhealth"
 }
 

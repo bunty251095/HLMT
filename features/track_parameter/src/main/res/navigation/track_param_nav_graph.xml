@@ -81,6 +81,12 @@
             <argument android:name="showAllProfile" app:argType="string" android:defaultValue="true"/>
         </action>
 
+        <action
+            android:id="@+id/action_dashboardFragment_to_selectParameterFragment"
+            app:destination="@id/selectParameterFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+
     </fragment>
 
     <fragment
@@ -115,6 +121,7 @@
             <argument android:name="profileName" app:argType="string" android:defaultValue="NA" />
             <argument android:name="profileCode" app:argType="string" android:defaultValue="NA"/>
         </action>
+
 
     </fragment>
 
