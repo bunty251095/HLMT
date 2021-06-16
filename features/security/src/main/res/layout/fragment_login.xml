@@ -33,13 +33,11 @@
 
                 <com.caressa.common.view.ArcImageView
                     android:id="@+id/img_signup_heart"
-                    app:isTemplate="true"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_80sdp"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:src="@drawable/img_heart"
-                    android:tint="@color/colorPrimary"
+                    android:src="@drawable/hlmt_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -57,110 +55,16 @@
                     app:layout_constraintEnd_toEndOf="@+id/img_signup_heart"
                     app:layout_constraintStart_toStartOf="@+id/img_signup_heart" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/layout_btn_social_signup"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_edt_login_email_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/lbl_signup">
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/btn_login_facebook"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:gravity="center"
-                        android:background="@drawable/btn_fill_normal"
-                        android:backgroundTint="@color/security_dusky_blue">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:padding="@dimen/_3sdp"
-                            android:src="@drawable/img_fb" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/FACEBOOK"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:textSize="@dimen/_13sdp"
-                            android:textColor="@color/vivantWhite" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/btn_login_googleplus"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/btn_fill_normal"
-                        android:backgroundTint="@color/security_pale_red"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:src="@drawable/img_gplus"/>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:gravity="center"
-                            android:text="@string/GOOGLE"
-                            android:textColor="@color/vivantWhite"
-                            android:textSize="@dimen/_13sdp"/>
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <RelativeLayout
-                    android:id="@+id/layout_login_or"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_28sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_btn_social_signup">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_centerInParent="true"
-                        android:background="@color/vivantInactive"/>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/CustomTextview"
-                        android:layout_centerInParent="true"
-                        android:background="@color/vivantWhite"
-                        android:textColor="@color/security_steel_grey"
-                        android:textSize="@dimen/_14sdp"
-                        android:text=" Or "/>
-
-                </RelativeLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_edt_login_email_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_28sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_login_or"
-                    app:layout_constraintStart_toStartOf="@+id/layout_login_or"
-                    app:layout_constraintEnd_toEndOf="@+id/layout_login_or">
+                    app:layout_constraintTop_toBottomOf="@id/lbl_signup"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imageView"

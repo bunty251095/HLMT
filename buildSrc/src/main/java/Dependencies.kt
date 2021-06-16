@@ -1,3 +1,4 @@
+
 object ApplicationId {
     val id = "com.vivant.hlmt.app.uat"
 }
@@ -27,8 +28,8 @@ object Modules {
 }
 
 object Releases {
-    const val versionCode = 102
-    const val versionName = "3.1.1"
+    const val versionCode = 1
+    const val versionName = "1.0.0"
 }
 
 object Versions {
@@ -95,6 +96,7 @@ object Versions {
     val circleImageview = "2.2.0"
     val ucrop = "2.2.6"
     val indicatorseekbar = "2.1.2"
+    val gms = "4.3.8"
 }
 
 object Libraries {
@@ -125,7 +127,7 @@ object Libraries {
     val firebaseAuth = "com.google.firebase:firebase-auth:${Versions.firebaseAuth}"
     val firebaseCore = "com.google.firebase:firebase-core:${Versions.firebase}"
     val firebaseMessaging = "com.google.firebase:firebase-messaging:${Versions.firebaseMessaging}"
-    //val fabricsCathartics = "com.crashlytics.sdk.android:crashlytics:${Versions.fabricCrashlytics}"
+    val fabricsCathartics = "com.crashlytics.sdk.android:crashlytics:${Versions.fabricCrashlytics}"
     val firebaseAnalytics = "com.google.firebase:firebase-analytics:${Versions.firebaseAnalytics}"
     val firebaseCrashlytics = "com.crashlytics.sdk.android:crashlytics:${Versions.firebaseCrashlytics}"
 
@@ -153,6 +155,9 @@ object Libraries {
     val pdfViewer = "com.github.barteksc:android-pdf-viewer:${Versions.pdfViewer}"
     val indicatorseekbar = "com.github.warkiz.widget:indicatorseekbar:${Versions.indicatorseekbar}"
     val scalableSdp = "com.intuit.sdp:sdp-android:${Versions.sdp}"
+
+    // gms google service
+    val gmsService = "com.google.gms:google-services:{${Versions.gms}}}"
 
 }
 

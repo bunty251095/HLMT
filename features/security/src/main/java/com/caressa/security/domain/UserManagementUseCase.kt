@@ -65,5 +65,25 @@ class UserManagementUseCase(private val repository: UserRepository){
         }
     }
 
+    // New Api Integration
+
+    suspend fun invokeLoginNameExist(isForceRefresh : Boolean, data: LoginNameExistsModel): LiveData<Resource<LoginNameExistsModel.IsExistResponse>> {
+        return Transformations.map(
+            repository.isLoginNameExist(isForceRefresh,data)) {
+            it // Place here your specific logic actions
+        }
+    }
+
+    suspend fun invokeLoginResponse(isForceRefresh : Boolean, data: LoginModel): LiveData<Resource<LoginModel.Response>> {
+        return Transformations.map(
+            repository.hlmtLoginResponse(isForceRefresh,data)) {
+            it // Place here your specific logic actions
+        }
+    }
+
+    suspend fun invokeAddUserInfo(data: Users) {
+            repository.saveUserInfo(data)
+
+    }
 
 }

@@ -382,7 +382,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                     Html.fromHtml("<br><br>" + "Application Link : " +
                             "<a href=\"https://wk2w7.app.goo.gl/reffral\">https://wk2w7.app.goo.gl/reffral</a> " + "</br></br>")
                     + Html.fromHtml("<br><br>" + "Team Vivant</br><br>" +
-                    "<a href=\"https://vivant.me\">www.vivant.me</a></br></br>");*/
+                    "<a href=\"https://vivant.me\">www.vivant.vivant.me</a></br></br>");*/
             val text = "Hello," + "\n\n" +  title + "\n\n" + "Join" + himOrHer + "on Vivant, the Health & Wellness App that helps you to Store, Track and Manage your Health Data." +
                     "\n\n" + "Track your steps, get your wellness score, receive personalised recommendations and health goal, chat with a Doctor, all for free !!" +
                     "\n\n" + "What`s more! Earn and redeem rewards while managing your health from our wellness partners." +
@@ -390,7 +390,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                             "<a href=\"https://bit.ly/33d2un5\">https://bit.ly/33d2un5</a> " + "</br></br>") +
                     Html.fromHtml("<br><br>" + " App Store : " +
                             "<a href=\"https://apple.co/3jZI72s\">https://apple.co/3jZI72s</a> " + "</br></br>")+
-                    Html.fromHtml("<br><br>" + "Team Vivant</br><br>" + "<a href=\"https://vivant.me\">www.vivant.me</a></br></br>")
+                    Html.fromHtml("<br><br>" + "Team Vivant</br><br>" + "<a href=\"https://vivant.me\">www.vivant.vivant.me</a></br></br>")
 
             val sendIntent = Intent()
             sendIntent.action = Intent.ACTION_SEND

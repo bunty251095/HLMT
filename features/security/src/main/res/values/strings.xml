@@ -29,7 +29,7 @@
     <string name="PASSWORD">Password</string>
     <string name="CONFIRM_PASSWORD">Confirm Password</string>
     <string name="OTP">OTP</string>
-    <string name="EMAIL_PHONE">Email Address / Phone number</string>
+    <string name="EMAIL_PHONE">Registered Mobile Number</string>
     <string name="LOG_IN">Log In</string>
     <string name="LOGIN">Login</string>
     <string name="SIGN_IN">Sign In</string>
@@ -58,8 +58,8 @@
     <string name="ENTER_NUMBER_TO_GET_OTP">Enter your mobile number to get OTP</string>
 
     <string name="DO_YOU_HAVE_HLM_360_ACCOUNT">Do you have HLM Takaful 360 account?</string>
-    <string name="NO_DONT">No,don\'t</string>
-    <string name="YES_I_HAVE">Yes,I have</string>
+    <string name="NO_DONT">No, I don\'t</string>
+    <string name="YES_I_HAVE">Yes, I have</string>
     <string name="I_AM_NEW">I\'m New</string>
 
     <string name="PASSWORD_CRITERIA">Your Password Criteria</string>

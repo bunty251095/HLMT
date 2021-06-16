@@ -1,17 +1,20 @@
 apply plugin: 'com.android.application'
 apply from: '../android_commons.gradle'
 apply plugin: 'com.google.gms.google-services'
-//apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
 
     buildToolsVersion '30.0.3'
     defaultConfig {
-//        applicationId "com.caressa.allizhealth"
-        applicationId "com.vivant.hlmt.app.uat"
+        applicationId "com.vivant.hlmt.app"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    buildTypes {
+        debug {
+            applicationIdSuffix ".uat"
+        }
+    }
 
 }
 
@@ -45,9 +48,17 @@ dependencies {
     implementation AndroidLibraries.appDesign
     implementation AndroidLibraries.navigation
     implementation AndroidLibraries.navigationFrag
-    implementation Libraries.firebaseCore
-    implementation Libraries.firebaseMessaging
-    implementation Libraries.firebaseAnalytics
-    // Firebase Crashlytics dependency.
-    //implementation Libraries.firebaseCrashlytics
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+
+//    implementation Libraries.firebaseCore
+//    implementation Libraries.firebaseMessaging
+//    implementation Libraries.firebaseAnalytics
 }

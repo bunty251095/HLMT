@@ -122,7 +122,7 @@
         <item name="boxStrokeColor">@color/selector_edit_text_color</item>
         <item name="backgroundTint">@color/selector_edit_text_color</item>
 <!--        <item name="colorControlHighlight">@color/vivant_green_blue_two</item>-->
-        <item name="colorControlActivated">@color/vivant_green_blue_two</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
         <item name="colorControlNormal">@color/vivant_pale_grey</item>
         <item name="errorTextAppearance">@style/errorTextAppearance</item>
     </style>

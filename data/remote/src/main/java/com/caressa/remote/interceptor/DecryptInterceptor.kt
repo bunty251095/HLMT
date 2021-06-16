@@ -69,6 +69,7 @@ class DecryptInterceptor : Interceptor {
         return decryptedResponse*/
         val decryptedResponse: String = decrypted!!
             .replace("\\r\\n", "")
+            .replace("\\\\r\\\\n", "")
             .replace("\\\"", "\"")
             .replace("\\\\\"", "\"")
             .replace("\"{", "{")

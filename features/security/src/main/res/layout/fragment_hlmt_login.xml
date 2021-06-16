@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="viewmodel"
-            type="com.caressa.security.viewmodel.LoginViewModel"/>
+            name="viewModel"
+            type="com.caressa.security.viewmodel.HlmtLoginViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -79,17 +79,18 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_login_emailaddress"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             style="@style/VivantEditTextStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:hint="@string/EMAIL_PHONE"
                             android:imeOptions="actionNext"
-                            android:inputType="textEmailAddress"
-                            android:maxLength="50"
-                            android:textSize="@dimen/_12sdp"
+                            android:inputType="number"
+                            android:maxLength="15"
+                            android:text="8600688818"
                             android:paddingStart="@dimen/_40sdp"
                             android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_15sdp" />
+                            android:paddingBottom="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,6 +150,7 @@
                             android:paddingBottom="@dimen/_15sdp"
                             android:textSize="@dimen/_12sdp"
                             android:hint="@string/PASSWORD"
+                            android:text="02011989"
                             android:imeOptions="actionDone"
                             android:inputType="textPassword"
                             android:maxLength="30" />

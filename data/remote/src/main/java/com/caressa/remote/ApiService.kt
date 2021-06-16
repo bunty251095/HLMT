@@ -34,6 +34,15 @@ interface ApiService{
     @POST(Constants.strProxyRegistrationUrl)
     fun registerDocumentProxyAPI(@Query("Data") registerEncryptedQuery: String): Deferred<ApiResponse<Users>>
 
+    // **********New API**************
+    @POST("Security/api/Account/CheckIfLoginNameExists/")
+    fun checkLoginNameExistsAPI(@Body loginNameExistsModel: LoginNameExistsModel): Deferred<BaseResponse<LoginNameExistsModel.IsExistResponse>>
+
+    @POST(Constants.strProxyLoginUrl)
+    fun hlmtLoginAPI(@Body loginModel: LoginModel): Deferred<BaseResponse<LoginModel.Response>>
+
+
+    // ************************
     @POST("security/api/account/CheckIfEmailExists/")
     fun checkEmailExistsAPI(@Body emailOrPhoneExistsModel: EmailExistsModel): Deferred<BaseResponse<EmailExistsModel.IsExistResponse>>
 

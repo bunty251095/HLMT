@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_security_feature"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/stepOneFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -222,6 +222,42 @@
         <action
             android:id="@+id/action_loginViaOTPFragment_to_main_activity2"
             app:destination="@id/splash_activity" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/stepOneFragment"
+        android:name="com.caressa.security.ui.HlmtStepOneFragment"
+        android:label="HLMT Login"
+        tools:layout="@layout/fragment_hlmt_step_one">
+
+        <action
+            android:id="@+id/action_stepOneFragmentToStepTwofragment"
+            app:destination="@+id/stepTwoFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/stepTwoFragment"
+        android:name="com.caressa.security.ui.HlmtStepTwoFragment"
+        android:label="HLMT Login"
+        tools:layout="@layout/fragment_hlmt_step_two">
+
+        <action
+            android:id="@+id/action_stepOneFragmentToLoginFragement"
+            app:destination="@+id/vivantLoginFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/vivantLoginFragment"
+        android:name="com.caressa.security.ui.HlmtLoginFragment"
+        android:label="HLMT Login"
+        tools:layout="@layout/fragment_hlmt_step_one">
+
+        <action
+            android:id="@+id/action_loginFragment_to_main_activity"
+            app:destination="@id/splash_activity"/>
 
     </fragment>
 

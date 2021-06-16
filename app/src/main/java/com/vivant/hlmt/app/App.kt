@@ -1,9 +1,9 @@
-package vivant.me.app
+package com.vivant.hlmt.app
 
 import android.app.Application
 import org.koin.android.ext.android.startKoin
 import timber.log.Timber
-import vivant.me.app.di.appComponent
+import com.vivant.hlmt.app.di.appComponent
 
 open class App : Application() {
     override fun onCreate() {

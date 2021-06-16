@@ -13,7 +13,6 @@ import androidx.navigation.ui.NavigationUI
 import com.caressa.common.utils.AppColorHelper
 import kotlinx.android.synthetic.main.toolbar_layout_security.*
 import com.caressa.security.R
-import com.google.firebase.FirebaseApp
 
 
 class SecurityActivity : AppCompatActivity() {
@@ -23,7 +22,6 @@ class SecurityActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_security)
-        FirebaseApp.initializeApp(applicationContext)
 
         setSupportActionBar(toolBar)
         // Setting up a back button

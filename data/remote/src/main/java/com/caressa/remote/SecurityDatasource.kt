@@ -22,4 +22,9 @@ class SecurityDatasource(private val defaultUserService: ApiService, private val
     fun getValidateOTPResponse(data : GenerateOtpModel) = encryptedUserService.validateOTPforUserAPI(data)
 
     fun updatePasswordResponse(data : ChangePasswordModel) = encryptedUserService.updatePasswordAPI(data)
+
+    fun fetchLoginNameExistResponse(data : LoginNameExistsModel) = encryptedUserService.checkLoginNameExistsAPI(data)
+
+    fun fetchHlmtLoginResponse(data : LoginModel) = encryptedUserService.hlmtLoginAPI(data)
+
 }

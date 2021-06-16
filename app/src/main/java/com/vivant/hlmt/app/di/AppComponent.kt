@@ -1,4 +1,4 @@
-package vivant.me.app.di
+package com.vivant.hlmt.app.di
 
 import com.caressa.blogs.di.featureBlogsModule
 import com.caressa.home.di.featureHomeModule

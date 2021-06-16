@@ -92,7 +92,7 @@ class LoginViewModel(private val userManagementUseCase: UserManagementUseCase, p
         val requestData = EmailExistsModel(Gson().toJson(EmailExistsModel.JSONDataRequest(
                     emailAddress = emailStr), EmailExistsModel.JSONDataRequest::class.java))
 
-        _progressBar.value = Event("Validating Email..")
+        _progressBar.value = Event("Validating Username..")
         _isEmail.removeSource(socialLoginUserSource)
         withContext(dispatchers.io){ socialLoginUserSource = userManagementUseCase.invokeEmailExist(true,requestData)}
         _isEmail.addSource(socialLoginUserSource){

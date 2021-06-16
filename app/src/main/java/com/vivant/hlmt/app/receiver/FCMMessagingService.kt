@@ -1,4 +1,4 @@
-package vivant.me.app.receiver
+package com.vivant.hlmt.app.receiver
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,8 +8,6 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
-import android.os.Handler
-import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -18,14 +16,11 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.NavigationConstants
-import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.Utilities
-import com.caressa.home.ui.HomeMainActivity
 import com.caressa.home.viewmodel.BackgroundCallViewModel
 import com.caressa.medication_tracker.R
 import com.caressa.medication_tracker.model.ReminderNotification
 import com.caressa.medication_tracker.viewmodel.MedicineTrackerViewModel
-import com.caressa.model.entity.UserRelatives
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import org.json.JSONObject

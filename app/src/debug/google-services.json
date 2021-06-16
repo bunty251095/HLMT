@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "574906239931",
+    "project_id": "hlmt-internal",
+    "storage_bucket": "hlmt-internal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574906239931:android:22d8d55f9b4c7306b6929e",
+        "android_client_info": {
+          "package_name": "com.vivant.hlmt.app.uat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "574906239931-m53criia34fcje6oivjmo6pni39bcbup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiD_2-HsbPO_n72_fsn-2W09Xp8nT7AOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "574906239931-m53criia34fcje6oivjmo6pni39bcbup.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "574906239931-p127snqtbsnbedha1dskertfnnn7pgv2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vivant.hlmt.app.uat",
+                "app_store_id": "123321123"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

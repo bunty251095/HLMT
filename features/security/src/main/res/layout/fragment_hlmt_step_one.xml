@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.caressa.security.viewmodel.LoginWithOtpViewModel"/>
+            type="com.caressa.security.viewmodel.LoginViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,7 +71,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/lbl_forgot_password_desc"/>
 
                 <com.caressa.common.view.ArcButton
-                    android:id="@+id/btn_add_family_member"
+                    android:id="@+id/btn_have_account"
                     app:isTemplate="true"
                     style="@style/HlmtRoundRightButton"
                     android:layout_width="match_parent"

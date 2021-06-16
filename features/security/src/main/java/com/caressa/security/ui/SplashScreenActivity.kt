@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.security.R
-import com.google.firebase.FirebaseApp
 import org.koin.android.viewmodel.ext.android.viewModel
 import androidx.lifecycle.Observer
 import com.caressa.common.utils.DefaultNotificationDialog
@@ -40,7 +39,6 @@ class SplashScreenActivity : AppCompatActivity(),DefaultNotificationDialog.OnDia
 /*        val animation = AnimationUtils.loadAnimation(this, R.anim.anim_pulse)
         logo_vivant.startAnimation(animation)*/
 
-        FirebaseApp.initializeApp(applicationContext)
         registerObserver()
         proceedInApp()
     }

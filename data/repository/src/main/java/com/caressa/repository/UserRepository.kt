@@ -23,6 +23,11 @@ interface UserRepository {
     suspend fun getGenerateOTPResponse(forceRefresh: Boolean = false, data: GenerateOtpModel) :LiveData<Resource<GenerateOtpModel.GenerateOTPResponse>>
     suspend fun getValidateOTPResponse(forceRefresh: Boolean = false, data: GenerateOtpModel) :LiveData<Resource<GenerateOtpModel.GenerateOTPResponse>>
     suspend fun updatePassword(forceRefresh: Boolean = false, data: ChangePasswordModel) : LiveData<Resource<ChangePasswordModel.ChangePasswordResponse>>
+
+    suspend fun isLoginNameExist(forceRefresh: Boolean = false, data: LoginNameExistsModel) :LiveData<Resource<LoginNameExistsModel.IsExistResponse>>
+    suspend fun hlmtLoginResponse(forceRefresh: Boolean = false, data: LoginModel) :LiveData<Resource<LoginModel.Response>>
+    suspend fun saveUserInfo(data: Users)
+
 }
 
  class UserRepositoryImpl(private val datasource: SecurityDatasource,
@@ -120,6 +125,74 @@ interface UserRepository {
 
         }.build().asLiveData()
     }
+
+     override suspend fun isLoginNameExist(forceRefresh: Boolean, data: LoginNameExistsModel): LiveData<Resource<LoginNameExistsModel.IsExistResponse>> {
+
+         return object : NetworkBoundResource<LoginNameExistsModel.IsExistResponse,BaseResponse<LoginNameExistsModel.IsExistResponse>>(){
+
+             override fun shouldStoreInDb(): Boolean = false
+
+             override fun processResponse(response: BaseResponse<LoginNameExistsModel.IsExistResponse>): LoginNameExistsModel.IsExistResponse {
+                 return response.jSONData
+             }
+
+             override suspend fun saveCallResults(items: LoginNameExistsModel.IsExistResponse) {
+
+             }
+
+             override fun shouldFetch(data: LoginNameExistsModel.IsExistResponse?): Boolean {
+                 return true
+             }
+
+             override suspend fun loadFromDb(): LoginNameExistsModel.IsExistResponse {
+                 return LoginNameExistsModel.IsExistResponse()
+             }
+
+             override fun createCallAsync(): Deferred<BaseResponse<LoginNameExistsModel.IsExistResponse>> {
+                 return datasource.fetchLoginNameExistResponse(data)
+             }
+
+
+         }.build().asLiveData()
+     }
+
+     override suspend fun hlmtLoginResponse(
+         forceRefresh: Boolean,
+         data: LoginModel
+     ): LiveData<Resource<LoginModel.Response>> {
+         return object : NetworkBoundResource<LoginModel.Response,BaseResponse<LoginModel.Response>>(){
+             override fun processResponse(response: BaseResponse<LoginModel.Response>): LoginModel.Response {
+                 Timber.i("processResponse=> "+response.jSONData)
+                 return response.jSONData
+             }
+
+             override suspend fun saveCallResults(items: LoginModel.Response) {
+
+             }
+
+             override fun shouldFetch(data: LoginModel.Response?): Boolean {
+                 return true
+             }
+
+             override fun shouldStoreInDb(): Boolean {
+                 return false
+             }
+
+             override suspend fun loadFromDb(): LoginModel.Response {
+                 return LoginModel.Response()
+             }
+
+             override fun createCallAsync(): Deferred<BaseResponse<LoginModel.Response>> {
+                 return datasource.fetchHlmtLoginResponse(data)
+             }
+
+         }.build().asLiveData()
+     }
+
+     override suspend fun saveUserInfo(data: Users) {
+         vudao.deleteAllRecords()
+         vudao.insert(data)
+     }
 
      override suspend fun updatePassword(forceRefresh: Boolean, data: ChangePasswordModel)
              : LiveData<Resource<ChangePasswordModel.ChangePasswordResponse>> {

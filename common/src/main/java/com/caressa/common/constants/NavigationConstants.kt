@@ -2,6 +2,7 @@ package com.caressa.common.constants
 
 object NavigationConstants {
     const val APPID = "com.vivant.hlmt.app.uat"
+//    const val APPID = "com.vivant.hlmt.app"
     const val HOME = "com.caressa.home.ui.HomeMainActivity"
     const val COMMOM_WEBVIEW = "com.caressa.home.ui.WebViews.CommonWebViewActivity"
     //const val MY_PROFILE = "com.caressa.home.ui.ProfileAndFamilyMember.MyProfileActivity"

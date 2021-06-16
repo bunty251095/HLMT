@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.caressa.model.entity.AppCacheMaster
 import com.caressa.model.entity.AppVersion
 import com.caressa.model.entity.UserRelatives
 import com.caressa.model.entity.Users
@@ -37,6 +38,12 @@ interface VivantUserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUserRelative( userRelatives : List<UserRelatives>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAppCacheData(cache: AppCacheMaster)
+
+    @Query("SELECT * FROM AppCacheMaster WHERE mapKey=:key")
+    fun getAppCache(key: String): List<AppCacheMaster>
 
     @Query("SELECT * FROM UserRelativesTable")
     fun geAllRelativeList() : List<UserRelatives>
