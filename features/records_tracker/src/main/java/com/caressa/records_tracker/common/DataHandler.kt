@@ -87,10 +87,12 @@ class DataHandler(val context: Context) {
     fun openDownloadedFile( file : File , type :String ,  context: Context) {
         val builder = StrictMode.VmPolicy.Builder()
         StrictMode.setVmPolicy(builder.build())
-        val uri = Uri.fromFile(file)
+
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.setDataAndType(uri, type)
+        intent.setDataAndType(Uri.fromFile(file),type)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
+        //val openIntent = Intent.createChooser(intent,"Open using")
+
         try {
             context.startActivity(intent)
         } catch (e: ActivityNotFoundException) {

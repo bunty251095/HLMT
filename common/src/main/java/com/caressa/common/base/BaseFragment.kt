@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
@@ -18,10 +17,9 @@ import com.caressa.common.R
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.extension.setupSnackbar
 import com.caressa.common.extension.setupSnackbarMessenger
-import com.caressa.common.extension.setupToast
-import com.caressa.common.extension.setupToastError
 import com.caressa.common.utils.DefaultNotificationDialog
 import com.caressa.common.utils.Event
+import com.caressa.common.utils.Utilities
 import com.caressa.navigation.NavigationCommand
 import com.google.android.material.snackbar.Snackbar
 
@@ -32,14 +30,32 @@ abstract class BaseFragment : Fragment() {
         CustomProgressBar(requireContext())
     }
 
+    private val sessionExpiryDialog by lazy {
+        val dialogData = DefaultNotificationDialog.DialogData()
+        dialogData.title = resources.getString(R.string.SESSION)
+        dialogData.message = resources.getString(R.string.MSG_SESSION_EXPIRED)
+        dialogData.showLeftButton = false
+        dialogData.showDismiss = false
+        DefaultNotificationDialog(requireContext(),
+            object : DefaultNotificationDialog.OnDialogValueListener {
+                override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
+                    if (isButtonRight) {
+                        val intent = Intent()
+                        intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.LOGIN)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    }
+                }
+            }, dialogData)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         observeNavigation(getViewModel())
         observeSession(getViewModel())
         setupSnackbar(this, getViewModel().snackBarError, Snackbar.LENGTH_LONG)
         setupSnackbarMessenger(this, getViewModel().snackMessenger, Snackbar.LENGTH_LONG)
-        setupToast(this, getViewModel().toastError, Toast.LENGTH_LONG)
-        setupToastError(this, getViewModel().toastMessage, Toast.LENGTH_LONG)
+        setUpToast(this, getViewModel().toastMessage)
         setUpProgressBar(this, getViewModel().progressBar)
 
         if (Build.VERSION.SDK_INT > 9) {
@@ -50,37 +66,25 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
+    fun setUpToast(
+        lifecycleOwner: LifecycleOwner,
+        toastEvent: LiveData<Event<String>>,
+    ) {
+        toastEvent.observe(lifecycleOwner, { event ->
+            event.getContentIfNotHandled()?.let { data ->
+                showToast(data)
+            }
+        })
+    }
+
+    private fun showToast(data: String) {
+        Utilities.toastMessageShort(requireContext(),data)
+    }
+
     private fun observeSession(viewModel: BaseViewModel) {
         viewModel.sessionError.observe(viewLifecycleOwner, {
-            val dialogData = DefaultNotificationDialog.DialogData()
-            dialogData.title = resources.getString(R.string.SESSION)
-            dialogData.message = resources.getString(R.string.MSG_SESSION_EXPIRED)
-            dialogData.showLeftButton = false
-            dialogData.showDismiss = false
-            val defaultNotificationDialog = DefaultNotificationDialog(context,
-                object : DefaultNotificationDialog.OnDialogValueListener {
-                    override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
-                        if (isButtonRight) {
-                            val intent = Intent()
-                            intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.LOGIN)
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            startActivity(intent)
-                        }
-                    }
-                }, dialogData)
-            defaultNotificationDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            defaultNotificationDialog.show()
-/*            val alertDialog = AlertDialog.Builder(activity).create()
-            alertDialog.setTitle(resources.getString(R.string.SESSION))
-            alertDialog.setMessage(resources.getString(R.string.MSG_SESSION_EXPIRED))
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.OK)) { dialog, which ->
-                dialog.dismiss()
-                val intent = Intent()
-                intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.LOGIN)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-            }
-            alertDialog.show()*/
+            sessionExpiryDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            sessionExpiryDialog.show()
         })
     }
 

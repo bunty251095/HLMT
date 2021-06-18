@@ -1,19 +1,23 @@
 package com.caressa.records_tracker.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.utils.PermissionUtil
+import com.caressa.common.utils.Utilities
 import com.caressa.records_tracker.R
 import com.caressa.records_tracker.databinding.FragmentHealthRecordsDashboardBinding
 import com.caressa.records_tracker.viewmodel.HealthRecordsViewModel
@@ -26,6 +30,16 @@ class HealthRecordsDashboardFragment : BaseFragment() {
     private lateinit var binding : FragmentHealthRecordsDashboardBinding
 
     private var from = ""
+    private var action = ""
+    private val permissionListener = object : PermissionUtil.AppPermissionListener {
+        override fun isPermissionGranted(isGranted: Boolean) {
+            Timber.e("$isGranted")
+            if ( isGranted ) {
+                Timber.e("action-> $action")
+                navigateTo(action)
+            }
+        }
+    }
 
     override fun getViewModel(): BaseViewModel = viewModel
 
@@ -144,24 +158,19 @@ class HealthRecordsDashboardFragment : BaseFragment() {
     private fun setClickable() {
 
         binding.layoutUploadRecords.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(Constants.CODE,"ALL")
-            bundle.putString(Constants.FROM,Constants.DASHBOARD)
-            it.findNavController().navigate(R.id.action_healthRecordsDashboardFragment_to_documentTypeFragment,bundle)
+            routeToScreen(Constants.UPLOAD)
         }
 
         binding.layoutViewRecords.setOnClickListener {
-            launchViewAndShareRecords(it)
+            routeToScreen(Constants.VIEW)
         }
 
         binding.layoutShareRecords.setOnClickListener {
-            launchViewAndShareRecords(it)
+            routeToScreen(Constants.SHARE)
         }
 
         binding.layoutDigitizeRecords.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(Constants.CODE,"LAB")
-            it.findNavController().navigate(R.id.action_healthRecordsDashboardFragment_to_digitizedRecordsListFragment,bundle)
+            routeToScreen(Constants.DIGITIZE)
         }
 
         binding.imgBack.setOnClickListener {
@@ -170,11 +179,64 @@ class HealthRecordsDashboardFragment : BaseFragment() {
 
     }
 
-    private fun launchViewAndShareRecords( view: View ) {
+    private fun routeToScreen(act: String) {
+        action = act
+        Timber.e("action-> $act")
+        val isGranted = PermissionUtil().getInstance()!!.checkStoragePermissionFromFragment(
+            permissionListener,requireContext(),this)
+        if (isGranted) {
+            navigateTo(act)
+        }
+    }
+
+    private fun launchUploadRecords() {
         val bundle = Bundle()
         bundle.putString(Constants.CODE,"ALL")
         bundle.putString(Constants.FROM,Constants.DASHBOARD)
-        view.findNavController().navigate(R.id.action_healthRecordsDashboardFragment_to_viewRecordsFragment,bundle)
+        findNavController().navigate(R.id.action_healthRecordsDashboardFragment_to_documentTypeFragment,bundle)
+    }
+
+    private fun launchViewAndShareRecords() {
+        val bundle = Bundle()
+        bundle.putString(Constants.CODE,"ALL")
+        bundle.putString(Constants.FROM,Constants.DASHBOARD)
+        findNavController().navigate(R.id.action_healthRecordsDashboardFragment_to_viewRecordsFragment,bundle)
+    }
+
+    private fun launchDigitizeRecords() {
+        val bundle = Bundle()
+        bundle.putString(Constants.CODE,"LAB")
+        findNavController().navigate(R.id.action_healthRecordsDashboardFragment_to_digitizedRecordsListFragment,bundle)
+    }
+
+    private fun navigateTo(act: String) {
+        Timber.e("action---> $act")
+        when(act) {
+            Constants.UPLOAD -> launchUploadRecords()
+            Constants.VIEW,Constants.SHARE -> launchViewAndShareRecords()
+            Constants.DIGITIZE -> launchDigitizeRecords()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        try {
+            val per = Environment.isExternalStorageManager()
+            Timber.e("requestCode---> $requestCode")
+            Timber.e("permissionGranted---> $per")
+            when(requestCode) {
+                Constants.REQ_CODE_STORAGE -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        if (per) {
+                            permissionListener.isPermissionGranted(true)
+                        } else {
+                            Utilities.toastMessageShort(requireContext(),resources.getString(R.string.ERROR_STORAGE_PERMISSION))
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 }

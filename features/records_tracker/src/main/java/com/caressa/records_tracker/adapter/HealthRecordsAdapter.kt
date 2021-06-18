@@ -129,19 +129,19 @@ class HealthRecordsAdapter(val context : Context, val viewModel : HealthRecordsV
             }
 
             holder.imgDownload.setOnClickListener {
-                performActionWithStoragePermission(Constants.DOWNLOAD,record)
+                performAction(Constants.DOWNLOAD,record)
             }
 
             holder.itemView.setOnClickListener {
-                performActionWithStoragePermission(Constants.VIEW,record)
+                performAction(Constants.VIEW,record)
             }
 
             holder.imgShare.setOnClickListener {
-                performActionWithStoragePermission(Constants.SHARE,record)
+                performAction(Constants.SHARE,record)
             }
 
             holder.txtDigitize.setOnClickListener {
-                performActionWithStoragePermission(Constants.DIGITIZE,record)
+                performAction(Constants.DIGITIZE,record)
             }
 
             holder.imgDelete.setOnClickListener {
@@ -171,53 +171,28 @@ class HealthRecordsAdapter(val context : Context, val viewModel : HealthRecordsV
                 defaultNotificationDialog.show()
             }
 
-        } catch (e: java.lang.Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         }
     }
 
-    private fun performActionWithStoragePermission(action: String, record : HealthDocument ) {
+    private fun performAction(action: String, record : HealthDocument ) {
         val file = File(record.Path , record.Name!!)
-        val permissionResult : Boolean = PermissionUtil().getInstance()!!.checkStoragePermission( object : PermissionUtil.AppPermissionListener {
-            override fun isPermissionGranted(isGranted: Boolean) {
-                Timber.e("$isGranted")
-                if ( isGranted ) {
-                    if (file.exists()) {
-                        when {
-                            action.equals(Constants.VIEW,ignoreCase = true) -> {
-                                DataHandler(context).viewRecord(record)
-                            }
-                            action.equals(Constants.SHARE,ignoreCase = true) -> {
-                                DataHandler(context).shareDataWithAppSingle(record,viewModel)
-                            }
-                            action.equals(Constants.DIGITIZE,ignoreCase = true) -> {
-                                viewModel.callDigitizeDocumentApi(from,categoryCode,record)
-                            }
-                        }
-                    } else {
-                        RecordSingleton.getInstance()!!.setHealthRecord(record)
-                        viewModel.callDownloadRecordApi( action,record )
-                    }
+        if (file.exists()) {
+            when {
+                action.equals(Constants.VIEW,ignoreCase = true) -> {
+                    DataHandler(context).viewRecord(record)
+                }
+                action.equals(Constants.SHARE,ignoreCase = true) -> {
+                    DataHandler(context).shareDataWithAppSingle(record,viewModel)
+                }
+                action.equals(Constants.DIGITIZE,ignoreCase = true) -> {
+                    viewModel.callDigitizeDocumentApi(from,categoryCode,record)
                 }
             }
-        },activity)
-        if (permissionResult) {
-            if (file.exists()) {
-                when {
-                    action.equals(Constants.VIEW,ignoreCase = true) -> {
-                        DataHandler(context).viewRecord(record)
-                    }
-                    action.equals(Constants.SHARE,ignoreCase = true) -> {
-                        DataHandler(context).shareDataWithAppSingle(record,viewModel)
-                    }
-                    action.equals(Constants.DIGITIZE,ignoreCase = true) -> {
-                        viewModel.callDigitizeDocumentApi(from,categoryCode,record)
-                    }
-                }
-            } else {
-                RecordSingleton.getInstance()!!.setHealthRecord(record)
-                viewModel.callDownloadRecordApi( action,record )
-            }
+        } else {
+            RecordSingleton.getInstance()!!.setHealthRecord(record)
+            viewModel.callDownloadRecordApi( action,record )
         }
     }
 

@@ -27,12 +27,8 @@ abstract class BaseViewModel : ViewModel() {
     val snackMessenger: LiveData<Event<String>> get() = _snackbarMessage
 
     // FOR ERROR HANDLER
-    protected val _toastError = MutableLiveData<Event<String>>()
-    val toastError: LiveData<Event<String>> get() = _toastError
-
-    // FOR ERROR HANDLER
-    protected val _toastMessage = MutableLiveData<Event<Int>>()
-    val toastMessage: LiveData<Event<Int>> get() = _toastMessage
+    protected val _toastMessage = MutableLiveData<Event<String>>()
+    val toastMessage: LiveData<Event<String>> get() = _toastMessage
 
     // FOR NAVIGATION
     private val _navigation = MutableLiveData<Event<NavigationCommand>>()
@@ -46,7 +42,7 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     fun toastMessage(message: String = "") {
-        _toastError.value = Event(message)
+        _toastMessage.value = Event(message)
     }
 
     fun snackMessage(message: String = "") {

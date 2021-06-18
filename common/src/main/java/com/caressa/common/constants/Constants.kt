@@ -196,6 +196,7 @@ object Constants {
     const val HRA = "HRA"
     const val TRACK_PARAMETER = "TrackParameter"
     const val CODE = "code"
+    const val UPLOAD = "Upload"
     const val VIEW = "View"
     const val SHARE = "Share"
     const val DIGITIZE = "Digitize"
@@ -295,6 +296,8 @@ object Constants {
     const val HEIGHT_MAX = 240
     const val WEIGHT_MIN_METRIC = 30
     const val WEIGHT_MAX_METRIC = 150
+
+    const val REQ_CODE_STORAGE = 2296
 
     object UserConstants {
         const val EMAIL_ADDRESS = "EmailAddress"

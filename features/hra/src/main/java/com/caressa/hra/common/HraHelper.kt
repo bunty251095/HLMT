@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Environment
 import android.os.StrictMode
 import android.view.Gravity
 import android.view.View
@@ -215,39 +216,44 @@ object HraHelper {
     @SuppressLint("BinaryOperationInTimber")
     fun writeResponseBodyToDisk(body: ResponseBody, context: Context): Boolean {
         try {
-            val path = context.getExternalFilesDir(null)
-            val file = File(path, RealPathUtil.generateUniqueFileName(Configuration.strAppIdentifier, ".pdf"))
-            Timber.i("downloadReportPath: ----->$file")
+            if (RealPathUtil.isExternalStorageAvailable && RealPathUtil.isExternalStorageWritable) {
+                //val path = context.getExternalFilesDir(null)
+                val path = Environment.getExternalStorageDirectory()
+                val file = File(path, RealPathUtil.generateUniqueFileName(Configuration.strAppIdentifier, ".pdf"))
+                Timber.i("downloadReportPath: ----->$file")
 
-            var inputStream: InputStream? = null
-            var outputStream: OutputStream? = null
+                var inputStream: InputStream? = null
+                var outputStream: OutputStream? = null
 
-            try {
-                val fileReader = ByteArray(4096)
-                //val fileSize = body.contentLength()
-                var fileSizeDownloaded: Long = 0
+                try {
+                    val fileReader = ByteArray(4096)
+                    //val fileSize = body.contentLength()
+                    var fileSizeDownloaded: Long = 0
 
-                inputStream = body.byteStream()
-                outputStream = FileOutputStream(file)
+                    inputStream = body.byteStream()
+                    outputStream = FileOutputStream(file)
 
-                while (true) {
-                    val read = inputStream!!.read(fileReader)
-                    if (read == -1) {
-                        break
+                    while (true) {
+                        val read = inputStream!!.read(fileReader)
+                        if (read == -1) {
+                            break
+                        }
+                        outputStream.write(fileReader, 0, read)
+                        fileSizeDownloaded += read.toLong()
+                        //  Timber.i("file download: $fileSizeDownloaded of $fileSize")
                     }
-                    outputStream.write(fileReader, 0, read)
-                    fileSizeDownloaded += read.toLong()
-                    //  Timber.i("file download: $fileSizeDownloaded of $fileSize")
+                    outputStream.flush()
+                    openDownloadedFile(file.toString(), context)
+                    return true
+                } catch (e: Exception) {
+                    Timber.i("Error..." + e.printStackTrace())
+                    return false
+                } finally {
+                    inputStream?.close()
+                    outputStream?.close()
                 }
-                outputStream.flush()
-                openDownloadedFile(file.toString(), context)
-                return true
-            } catch (e: Exception) {
-                Timber.i("Error..." + e.printStackTrace())
+            } else {
                 return false
-            } finally {
-                inputStream?.close()
-                outputStream?.close()
             }
         } catch (e: Exception) {
             Timber.i("Error!!!" + e.printStackTrace())

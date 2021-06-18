@@ -1,5 +1,6 @@
 package com.caressa.common.utils
 
+import android.content.ContentResolver
 import android.content.ContentUris
 import android.content.Context
 import android.database.Cursor
@@ -606,7 +607,7 @@ object RealPathUtil {
             }
         }
         // MediaStore (and general)
-        else if ("content".equals(uri.scheme!!, ignoreCase = true)) {
+        else if (ContentResolver.SCHEME_CONTENT.equals(uri.scheme!!, ignoreCase = true)) {
             // Return the remote address
             if (isGooglePhotosUri(uri)) {
                 return uri.lastPathSegment
@@ -618,7 +619,7 @@ object RealPathUtil {
             return getDataColumn(context, uri, null, null)
         }
         // File
-        else if ("file".equals(uri.scheme!!, ignoreCase = true)) {
+        else if (ContentResolver.SCHEME_FILE.equals(uri.scheme!!, ignoreCase = true)) {
             return uri.path
         }
 

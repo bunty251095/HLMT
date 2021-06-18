@@ -1,5 +1,6 @@
 package com.caressa.home.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -40,6 +41,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
+@SuppressLint("StaticFieldLeak")
 class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCase, private val dispatchers: AppDispatchers,
                          private val sharedPref: SharedPreferences , private val dataHandler : DataHandler,
                          val context: Context) : BaseViewModel() {
@@ -315,24 +317,19 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
 
     }
 
-    fun navigateToMyProfileActivityWithStoragePermission(activity:HomeMainActivity) {
-        val permissionResult : Boolean = PermissionUtil().getInstance()!!.checkStoragePermission( object : PermissionUtil.AppPermissionListener {
-            override fun isPermissionGranted(isGranted: Boolean) {
-                Timber.e("$isGranted")
-                if ( isGranted ) {
-                    val intent = Intent()
-                    intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.MY_PROFILE)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    context.startActivity(intent)
-                }
-            }
-        },activity)
-        if (permissionResult) {
-            val intent = Intent()
-            intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.MY_PROFILE)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
+    fun navigateToMyProfileActivityWithStoragePermission(activity:HomeMainActivity,listener: PermissionUtil.AppPermissionListener) {
+        val isGranted = PermissionUtil().getInstance()!!.checkStoragePermissionFromActivity(
+            listener,activity,activity)
+        if (isGranted) {
+            navigateToMyProfileActivity()
         }
+    }
+
+    fun navigateToMyProfileActivity() {
+        val intent = Intent()
+        intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.MY_PROFILE)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
     }
 
     fun navigateToFamilyProfileActivity() {
