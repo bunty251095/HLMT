@@ -220,12 +220,12 @@ class HealthRecordsDashboardFragment : BaseFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
-            val per = Environment.isExternalStorageManager()
-            Timber.e("requestCode---> $requestCode")
-            Timber.e("permissionGranted---> $per")
-            when(requestCode) {
-                Constants.REQ_CODE_STORAGE -> {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val per = Environment.isExternalStorageManager()
+                Timber.e("requestCode---> $requestCode")
+                Timber.e("permissionGranted---> $per")
+                when(requestCode) {
+                    Constants.REQ_CODE_STORAGE -> {
                         if (per) {
                             permissionListener.isPermissionGranted(true)
                         } else {

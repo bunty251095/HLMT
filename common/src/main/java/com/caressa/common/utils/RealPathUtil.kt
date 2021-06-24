@@ -542,10 +542,6 @@ object RealPathUtil {
      * Get a file path from a Uri. This will get the the path for Storage Access
      * Framework Documents, as well as the _data field for the MediaStore and
      * other file-based ContentProviders.
-     *
-     * @param context The context.
-     * @param uri     The Uri to query.
-     * @author paulburke
      */
     fun getPath(context: Context, uri: Uri): String? {
         val isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
@@ -560,6 +556,14 @@ object RealPathUtil {
                 if ("primary".equals(type, ignoreCase = true)) {
                     return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
                 }
+
+                if ("home".equals(type, ignoreCase = true)) {
+                    return Environment.getExternalStorageDirectory().toString() + "/Documents/" + split[1]
+                }
+
+/*                if (uri.toString().startsWith("content://com.android.externalstorage.documents/document/home%3A")) {
+                    return Environment.getExternalStorageDirectory().toString() + "/Documents/" + split[1]
+                }*/
 
             }
             // DownloadsProvider
