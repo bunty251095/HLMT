@@ -105,7 +105,11 @@ class AddMedicineFragment : BaseFragment(),MedicineTypeAdapter.OnMedTypeListener
         val onItemClickListener = AdapterView.OnItemClickListener { adapterView, _, i, _ ->
             isSelectedMedicine = true
             val medicineModel = adapterView.getItemAtPosition(i) as DrugsModel.DrugsResponse.Drug
-            binding.edtMedicineName.setText(medicineModel.name + " - " + medicineModel.strength)
+            if ( !Utilities.isNullOrEmpty(medicineModel.strength) ) {
+                binding.edtMedicineName.setText(medicineModel.name + " - " + medicineModel.strength)
+            } else {
+                binding.edtMedicineName.setText(medicineModel.name)
+            }
             drugId = medicineModel.iD.toInt()
             //Utilities.hideKeyboard(view, requireContext())
             KeyboardUtils.hideSoftInput(context as Activity)

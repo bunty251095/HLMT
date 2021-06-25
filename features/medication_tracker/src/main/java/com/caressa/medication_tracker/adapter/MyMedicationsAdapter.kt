@@ -54,7 +54,13 @@ class MyMedicationsAdapter(val viewModel : MedicineTrackerViewModel, val context
                     holder.txtMedType.text = context.resources.getString(medicationTrackerHelper.getMedTypeByCode(medicine.DrugTypeCode!!))
                 }
             }
-            val medName = medicine.drug.name + " - " +medicine.drug.strength
+
+            val medName = if ( !Utilities.isNullOrEmpty(medicine.drug.strength) ) {
+                medicine.drug.name + " - " +medicine.drug.strength
+            } else {
+                medicine.drug.name
+            }
+
             holder.txtMedicineName.text = medName
             if (medicine.scheduleList.isNotEmpty()) {
                 holder.txtDose.text = medicine.scheduleList[0].dosage + " Dose"
