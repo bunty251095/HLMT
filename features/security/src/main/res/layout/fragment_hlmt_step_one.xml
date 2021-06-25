@@ -74,7 +74,7 @@
                     android:id="@+id/btn_have_account"
                     app:isTemplate="true"
                     app:isRound="true"
-                    style="@style/HlmtRoundLeftButton"
+                    style="@style/HlmtRoundRightButton"
                     android:layout_width="match_parent"
                     android:text="@string/YES_I_HAVE"
                     android:layout_marginTop="@dimen/_10sdp"

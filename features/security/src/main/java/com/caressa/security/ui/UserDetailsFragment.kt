@@ -89,9 +89,6 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
                 imgPath = fPath)
         }
 
-        binding.btnBack.setOnClickListener {
-
-        }
         binding.layoutDob.setOnClickListener {
             showDatePickerDialog()
         }
@@ -99,9 +96,6 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
             if (MotionEvent.ACTION_UP == event.action) showDatePickerDialog() // Instead of your Toast
             false
         }
-//        binding.edtDob.setOnClickListener {
-//            showDatePickerDialog()
-//        }
 
         binding.imgEditPic.setOnClickListener {
             viewBottomSheet()

@@ -53,7 +53,8 @@ class SplashScreenActivity : AppCompatActivity(),DefaultNotificationDialog.OnDia
                     Timber.i("DATA--->${it.data}")
                     if (it!!.data!!.hRAHistory!!.previousWellnessScore.isEmpty()) {
                         appConfigurationSingleton.hraHistory = it.data!!.hRAHistory!!
-                        intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HRA_START)
+//                        intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HRA_START)
+                        intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HOME)
                         startActivity(intentToPass)
                     } else {
                         intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HOME)
@@ -65,7 +66,8 @@ class SplashScreenActivity : AppCompatActivity(),DefaultNotificationDialog.OnDia
                 Timber.i("ERROR--->${it.errorMessage} :: ${it.errorNumber}")
                 when {
                     it.errorNumber.equals("111",true) -> {
-                        intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HRA_START)
+//                        intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HRA_START)
+                        intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HOME)
                         startActivity(intentToPass)
                     }
                     it.errorNumber.equals("0",true) -> {
