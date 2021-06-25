@@ -14,9 +14,9 @@ android {
         debug {
             applicationIdSuffix ".uat"
         }
-        release {
-            applicationIdSuffix ".uat"
-        }
+//        release {
+//            applicationIdSuffix ".uat"
+//        }
     }
 
 }

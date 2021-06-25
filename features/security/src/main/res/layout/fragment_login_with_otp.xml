@@ -106,7 +106,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:maxLength="12"
-                            android:text="9899889888"
+                            android:text=""
                             android:paddingStart="@dimen/_40sdp"
                             android:paddingTop="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_15sdp"
