@@ -106,7 +106,7 @@ class ParameterDetailViewModel(
     }
 
     fun showMessage(msg: String){
-        _toastError.value = Event(msg)
+        _toastMessage.value = Event(msg)
     }
 
 

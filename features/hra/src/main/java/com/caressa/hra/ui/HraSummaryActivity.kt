@@ -8,13 +8,13 @@ import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
@@ -48,6 +48,14 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
     private var observation = ""
     private var hraLabTestsAdapter: HraLabTestsAdapter? = null
     private var labTestsDoctorSuggestedAdapter: HraLabTestsAdapter? = null
+    private val permissionListener = object : PermissionUtil.AppPermissionListener {
+        override fun isPermissionGranted(isGranted: Boolean) {
+            Timber.e("$isGranted")
+            if ( isGranted ) {
+                viewModel.callDownloadReport()
+            }
+        }
+    }
 
     override fun getViewModel(): BaseViewModel = viewModel
 
@@ -83,9 +91,9 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
     }
 
     private fun registerObservers() {
-        viewModel.medicalProfileSummary.observe( this , Observer { } )
-        viewModel.assessmentSummary.observe( this , Observer { } )
-        viewModel.listRecommendedTests.observe( this , Observer { } )
+        viewModel.medicalProfileSummary.observe( this , { })
+        viewModel.assessmentSummary.observe( this , { })
+        viewModel.listRecommendedTests.observe( this , { })
     }
 
     private fun setClickable() {
@@ -107,7 +115,11 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
         }
 
         binding.btnDownloadReport.setOnClickListener {
-            downloadReportWithGrantedPermission()
+            val permissionResult = PermissionUtil().getInstance()!!.checkStoragePermissionFromActivity(
+                permissionListener,this,this)
+            if (permissionResult) {
+                viewModel.callDownloadReport()
+            }
         }
 
     }
@@ -117,7 +129,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
 
         binding.indicatorScore.setOnTouchListener { _: View?, _: MotionEvent? -> true }
 
-        viewModel.hraSummaryDetails.observe(this, Observer {
+        viewModel.hraSummaryDetails.observe(this, {
             if (it != null) {
                 val wellnessSummary = it
                 //Timber.i("HraSummaryDetails :- " + wellnessSummary)
@@ -199,7 +211,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
         val moderateList: ArrayList<HraAssessmentSummaryModel.AssessmentDetails> = ArrayList()
         val highList: ArrayList<HraAssessmentSummaryModel.AssessmentDetails> = ArrayList()
         binding.layoutRiskSummery.visibility = View.GONE
-        viewModel.hraAssessmentSummaryDetails.observe(this, Observer {
+        viewModel.hraAssessmentSummaryDetails.observe(this, {
             if (it != null) {
                 for (i in it) {
                     if (i.riskLevel == "At Risk") {
@@ -311,7 +323,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
     private fun setLabTestsList() {
         binding.layoutLabTests.visibility = View.GONE
 
-        viewModel.hraRecommendedTests.observe(this, Observer {
+        viewModel.hraRecommendedTests.observe(this, {
             val labTestsDetailsList = it
             Timber.e("TotalTests--->%s", labTestsDetailsList.size.toString())
 
@@ -365,20 +377,6 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
         }
     }
 
-    private fun downloadReportWithGrantedPermission() {
-        val permissionResult : Boolean = PermissionUtil().getInstance()!!.checkStoragePermission( object : PermissionUtil.AppPermissionListener {
-            override fun isPermissionGranted(isGranted: Boolean) {
-                Timber.e("$isGranted")
-                if ( isGranted ) {
-                    viewModel.callDownloadReport()
-                }
-            }
-        },this)
-        if (permissionResult) {
-            viewModel.callDownloadReport()
-        }
-    }
-
     fun showLabTestDetailsDialog( labTest : HraLabTest) {
         showDialog(
             listener = this,
@@ -417,5 +415,27 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
     }
 
     override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {}
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val per = Environment.isExternalStorageManager()
+                Timber.e("requestCode---> $requestCode")
+                Timber.e("permissionGranted---> $per")
+                when(requestCode) {
+                    Constants.REQ_CODE_STORAGE -> {
+                        if (per) {
+                            permissionListener.isPermissionGranted(true)
+                        } else {
+                            Utilities.toastMessageShort(this,resources.getString(R.string.ERROR_STORAGE_PERMISSION))
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
 }

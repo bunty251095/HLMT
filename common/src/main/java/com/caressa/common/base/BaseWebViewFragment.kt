@@ -34,7 +34,6 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.R
 import com.caressa.common.extension.setupSnackbar
 import com.caressa.common.extension.setupSnackbarMessenger
-import com.caressa.common.extension.setupToast
 import com.caressa.common.utils.Event
 import com.caressa.common.utils.SmartWebViewHelper
 import com.caressa.common.utils.Utilities
@@ -90,7 +89,7 @@ abstract class BaseWebViewFragment : Fragment() {
         observeNavigation(getViewModel())
         setupSnackbar(this, getViewModel().snackBarError, Snackbar.LENGTH_LONG)
         setupSnackbarMessenger(this, getViewModel().snackMessenger, Snackbar.LENGTH_LONG)
-        setupToast(this, getViewModel().toastError, Toast.LENGTH_LONG)
+        setUpToast(this, getViewModel().toastMessage)
         setUpProgressBar(this, getViewModel().progressBar)
         if (Build.VERSION.SDK_INT > 9) {
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
@@ -280,6 +279,21 @@ abstract class BaseWebViewFragment : Fragment() {
             aswm_view(path!!, false)
         }
         //**********************************
+    }
+
+    fun setUpToast(
+        lifecycleOwner: LifecycleOwner,
+        toastEvent: LiveData<Event<String>>,
+    ) {
+        toastEvent.observe(lifecycleOwner, { event ->
+            event.getContentIfNotHandled()?.let { data ->
+                showToast(data)
+            }
+        })
+    }
+
+    private fun showToast(data: String) {
+        Utilities.toastMessageShort(requireContext(),data)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {

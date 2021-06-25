@@ -2,15 +2,15 @@ package com.caressa.home.ui
 
 import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -32,7 +32,6 @@ import com.caressa.model.singleton.ToolsTrackerSingleton
 import com.caressa.repository.utils.Resource
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
-import com.karumi.dexter.Dexter
 import kotlinx.android.synthetic.main.app_bar_home_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -41,7 +40,7 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
     DefaultNotificationDialog.OnDialogValueListener {
 
     private val viewModel: DashboardViewModel by viewModel()
-    private val backgroudCallViewModel: BackgroundCallViewModel by viewModel()
+    private val backGroundCallViewModel: BackgroundCallViewModel by viewModel()
     private lateinit var binding : ActivityHomeMainBinding
 
     private val appColorHelper = AppColorHelper.instance!!
@@ -51,14 +50,22 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
     private var navigationDrawerListAdapter : NavigationDrawerListAdapter? = null
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var scoreListener:ScoreListener
+    private val permissionListener = object : PermissionUtil.AppPermissionListener {
+        override fun isPermissionGranted(isGranted: Boolean) {
+            Timber.e("$isGranted")
+            if ( isGranted ) {
+                viewModel.navigateToMyProfileActivity()
+            }
+        }
+    }
 
-    override fun getViewModel(): BaseViewModel = backgroudCallViewModel
+    override fun getViewModel(): BaseViewModel = backGroundCallViewModel
 
     override fun onCreateEvent(savedInstanceState: Bundle?) {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_main)
         binding.viewModel = viewModel
-        binding.backViewModel = backgroudCallViewModel
+        binding.backViewModel = backGroundCallViewModel
         binding.lifecycleOwner = this
         setSupportActionBar(toolbar)
         configureNavController()
@@ -74,13 +81,13 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
 
         Timber.i("HOME onCreate")
 
-        backgroudCallViewModel.saveCloudMessagingId.observe(this, {})
-        backgroudCallViewModel.refreshPersonId()
+        backGroundCallViewModel.saveCloudMessagingId.observe(this, {})
+        backGroundCallViewModel.refreshPersonId()
         viewModel.refreshPersonId()
 
         // This observer is written because In background thread we are listening .
-        backgroudCallViewModel.medicalProfileSummary.observe(this, {
-            Timber.i("backgroudCallViewModel.medicalProfileSummary")
+        backGroundCallViewModel.medicalProfileSummary.observe(this, {
+            Timber.i("backGroundCallViewModel.medicalProfileSummary")
             if (it.data != null && it.status == Resource.Status.SUCCESS) {
 //                Timber.i("Summery :: "+it.data?.MedicalProfileSummary)
 //                viewModel.hraDetails.value = it.data?.MedicalProfileSummary
@@ -136,21 +143,21 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
         if ( intent.hasExtra(Constants.FROM) &&
             intent.getStringExtra(Constants.FROM).equals(Constants.NOTIFICATION_ACTION,ignoreCase = true) ) {
             showProgress = true
-            backgroudCallViewModel.isBackgroundApiCall = false
+            backGroundCallViewModel.isBackgroundApiCall = false
         }
 
         if ( showProgress ) {
             navigateToMedicineDashboard()
         } else {
-            backgroudCallViewModel.getAppVersionDetails(this)
-            backgroudCallViewModel.checkAppUpdate.observe(this, { })
+            backGroundCallViewModel.getAppVersionDetails(this)
+            backGroundCallViewModel.checkAppUpdate.observe(this, { })
         }
 
-        backgroudCallViewModel.refreshPersonId()
+        backGroundCallViewModel.refreshPersonId()
         viewModel.refreshPersonId()
-        backgroudCallViewModel.callBackgroundApiCall(showProgress)
+        backGroundCallViewModel.callBackgroundApiCall(showProgress)
 
-        backgroudCallViewModel.listRelatives.observe(this, {
+        backGroundCallViewModel.listRelatives.observe(this, {
             if (it.data != null && it.status == Resource.Status.SUCCESS) {
                 viewModel.getUserRelatives()
             }
@@ -164,30 +171,30 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
             // Get new FCM registration token
             val token = task.result!!
             Timber.e("\nToken=>$token")
-            backgroudCallViewModel.callSaveCloudMessagingIdApi(token, true)
+            backGroundCallViewModel.callSaveCloudMessagingIdApi(token, true)
         })
     }
 
     override fun onStop() {
         super.onStop()
-        backgroudCallViewModel.isBackgroundApiCall = false
+        backGroundCallViewModel.isBackgroundApiCall = false
         navigationDrawerListAdapter?.isProfileUpdate = false
     }
 
     fun refreshView() {
         drawerLayout.closeDrawers()
-        backgroudCallViewModel.refreshPersonId()
+        backGroundCallViewModel.refreshPersonId()
         viewModel.refreshPersonId()
-        backgroudCallViewModel.isBackgroundApiCall = false
-        backgroudCallViewModel.profileSwitched = true
-        backgroudCallViewModel.callBackgroundApiCall(true)
+        backGroundCallViewModel.isBackgroundApiCall = false
+        backGroundCallViewModel.profileSwitched = true
+        backGroundCallViewModel.callBackgroundApiCall(true)
         viewModel.getDrawerOptionList()
     }
 
     override fun onDrawerClick(item: DataHandler.NavDrawerOption) {
         drawerLayout.closeDrawers()
         when (item.id) {
-            DataHandler.NavDrawer.MY_PRO -> viewModel.navigateToMyProfileActivityWithStoragePermission(this)
+            DataHandler.NavDrawer.MY_PRO -> viewModel.navigateToMyProfileActivityWithStoragePermission(this,permissionListener)
             DataHandler.NavDrawer.FAMILY_PRO -> viewModel.navigateToFamilyProfileActivity()
             DataHandler.NavDrawer.FAMILY_DOCTOR -> viewModel.navigateToFamilyDoctorsActivity()
             DataHandler.NavDrawer.CONTACT_US -> viewModel.navigateToContactUsActivity()
@@ -232,5 +239,27 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
     }
 
     override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) { }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val per = Environment.isExternalStorageManager()
+                Timber.e("requestCode---> $requestCode")
+                Timber.e("permissionGranted---> $per")
+                when(requestCode) {
+                    Constants.REQ_CODE_STORAGE -> {
+                        if (per) {
+                            permissionListener.isPermissionGranted(true)
+                        } else {
+                            Utilities.toastMessageShort(this,resources.getString(R.string.ERROR_STORAGE_PERMISSION))
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
 }

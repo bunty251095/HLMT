@@ -241,7 +241,7 @@ class DashboardViewModel (
                 if(it.errorNumber.equals("1100014",true)){
                     _sessionError.value = Event(true)
                 }else {
-                    _toastError.value = Event(it.errorMessage)
+                    toastMessage(it.errorMessage)
                 }
             }
         }

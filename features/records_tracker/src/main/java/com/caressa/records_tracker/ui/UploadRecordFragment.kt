@@ -136,11 +136,11 @@ class UploadRecordFragment : BaseFragment()  {
         }
 
         binding.layoutFile.setOnClickListener {
-            showFileChooserWithGrantedPermission(fileSelectCode)
+            showFileChooser(fileSelectCode)
         }
 
         binding.layoutGallery.setOnClickListener {
-            showFileChooserWithGrantedPermission(gallerySelectCode)
+            showFileChooser(gallerySelectCode)
         }
 
         binding.btnBackUploadRecord.setOnClickListener {
@@ -232,20 +232,6 @@ class UploadRecordFragment : BaseFragment()  {
         startActivityForResult(Intent.createChooser(galleryIntent, resources.getString(R.string.SELECT_RECORDS)), From)
     }
 
-    private fun showFileChooserWithGrantedPermission(from : Int) {
-        val permissionResult : Boolean = PermissionUtil().getInstance()!!.checkStoragePermission( object : PermissionUtil.AppPermissionListener {
-            override fun isPermissionGranted(isGranted: Boolean) {
-                Timber.e("$isGranted")
-                if ( isGranted ) {
-                    showFileChooser(from)
-                }
-            }
-        },requireContext())
-        if (permissionResult) {
-            showFileChooser(from)
-        }
-    }
-
     private fun createRecordInSession( OriginalFileName  :String ,Name: String , Path: String, ImageType: String ) :RecordInSession {
         val id = (0..100000).random().toString()
         return RecordInSession(
@@ -275,8 +261,6 @@ class UploadRecordFragment : BaseFragment()  {
                                     val mainDirectoryPath = RealPathUtil.getRecordFolderLocation()
                                     if ( save) {
                                         val rsData = createRecordInSession(fileName,fileName,mainDirectoryPath,documentType )
-                                        //listToUpload.add(rsData)
-                                        //populateList(listToUpload)
                                         addRecordToList(rsData)
                                     }
                                 } catch (e: IOException) {
@@ -290,8 +274,9 @@ class UploadRecordFragment : BaseFragment()  {
                         try {
                             val uri = data.data
                             val flePathF = RealPathUtil.getPath(requireContext(), uri!!)
+                            println("File path--->: $flePathF")
                             fileSize = RealPathUtil.calculateFileSize(flePathF!!)
-                            println("File Size : " + RealPathUtil.calculateFileSize(flePathF))
+                            println("File Size : $fileSize")
                             val save: Boolean
                             if (fileSize <= 6) {
                                 val extension = RealPathUtil.getFileExt(flePathF)
@@ -319,12 +304,10 @@ class UploadRecordFragment : BaseFragment()  {
                                     if (save) {
                                         val origFileName = flePathF.substring(flePathF.lastIndexOf("/") + 1)
                                         val rsData = createRecordInSession( origFileName,fileName,mainDirectoryPath,documentType )
-                                        //listToUpload.add(rsData)
-                                        //populateList(listToUpload)
                                         addRecordToList(rsData)
                                     }
                                 } else {
-                                    Utilities.toastMessageLong(context, extension + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
+                                    Utilities.toastMessageLong(context, extension + " " + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
                                 }
                             } else {
                                 Utilities.toastMessageLong(context, resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
@@ -366,12 +349,10 @@ class UploadRecordFragment : BaseFragment()  {
                                 if (save1) {
                                     val origFileName = flePathG.substring(flePathG.lastIndexOf("/") + 1)
                                     val rsData = createRecordInSession(origFileName,fileName,mainDirectoryPath,documentType)
-                                    //listToUpload.add(rsData)
-                                    //populateList(listToUpload)
                                     addRecordToList(rsData)
                                 }
                             } else {
-                                Utilities.toastMessageLong(context, extension1 + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
+                                Utilities.toastMessageLong(context, extension1 + " " + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
                             }
                         } else {
                             Utilities.toastMessageLong(context, resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))

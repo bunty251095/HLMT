@@ -207,7 +207,7 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
 
                 if (it.status == Resource.Status.ERROR) {
                     if(it.errorNumber.equals("1100014",true)){
-                        _toastError.value = Event(it.errorMessage)
+                        _sessionError.value = Event(true)
                         logoutUser()
                     }else {
                         toastMessage(it.errorMessage)
@@ -234,7 +234,12 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
             if (it.status == Resource.Status.SUCCESS) { }
 
             if (it.status == Resource.Status.ERROR) {
-                toastMessage(it.errorMessage)
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if(it.errorNumber.equals("1100014",true)){
+                    _sessionError.value = Event(true)
+                }else {
+                    toastMessage(it.errorMessage)
+                }
             }
         }
     }
@@ -254,7 +259,12 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
             if (it.status == Resource.Status.SUCCESS) { }
 
             if (it.status == Resource.Status.ERROR) {
-                toastMessage(it.errorMessage)
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if(it.errorNumber.equals("1100014",true)){
+                    _sessionError.value = Event(true)
+                }else {
+                    toastMessage(it.errorMessage)
+                }
             }
         }
     }
@@ -272,7 +282,12 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
             if (it.status == Resource.Status.SUCCESS) { }
 
             if (it.status == Resource.Status.ERROR) {
-                toastMessage(it.errorMessage)
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if(it.errorNumber.equals("1100014",true)){
+                    _sessionError.value = Event(true)
+                }else {
+                    toastMessage(it.errorMessage)
+                }
             }
         }
     }
@@ -363,7 +378,8 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
                     _sessionError.value = Event(true)
                 }else {
                     snackMessage(it.errorMessage)
-                }            }
+                }
+            }
         }
     }
 
@@ -385,7 +401,12 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
             if (it.status == Resource.Status.SUCCESS) { }
 
             if (it.status == Resource.Status.ERROR) {
-                toastMessage(it.errorMessage)
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if(it.errorNumber.equals("1100014",true)){
+                    _sessionError.value = Event(true)
+                }else {
+                    toastMessage(it.errorMessage)
+                }
             }
         }
     }
@@ -405,7 +426,7 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
 
                 if (it.status == Resource.Status.ERROR) {
                     if(it.errorNumber.equals("1100014",true)){
-                        _toastError.value = Event(it.errorMessage)
+                        _sessionError.value = Event(true)
                         logoutUser()
                     }else {
                         toastMessage(it.errorMessage)
@@ -433,7 +454,12 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
             if (it.status == Resource.Status.SUCCESS) { }
 
             if (it.status == Resource.Status.ERROR) {
-                toastMessage(it.errorMessage)
+                if(it.errorNumber.equals("1100014",true)){
+                    _sessionError.value = Event(true)
+                    logoutUser()
+                }else {
+                    toastMessage(it.errorMessage)
+                }
             }
         }
     }
@@ -461,7 +487,12 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
             if (it.status == Resource.Status.SUCCESS) { }
 
             if (it.status == Resource.Status.ERROR) {
-                toastMessage(it.errorMessage)
+                if(it.errorNumber.equals("1100014",true)){
+                    _sessionError.value = Event(true)
+                    logoutUser()
+                }else {
+                    toastMessage(it.errorMessage)
+                }
             }
         }
     }
