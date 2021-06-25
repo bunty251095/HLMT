@@ -3,11 +3,14 @@ package com.caressa.security.domain
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.caressa.model.entity.Users
+import com.caressa.model.home.UploadProfileImageResponce
 import com.caressa.model.security.*
+import com.caressa.repository.HomeRepository
 import com.caressa.repository.UserRepository
 import com.caressa.repository.utils.Resource
+import okhttp3.RequestBody
 
-class UserManagementUseCase(private val repository: UserRepository){
+class UserManagementUseCase(private val repository: UserRepository,private val homeRepository: HomeRepository){
 
     suspend operator fun invoke(isForceRefresh : Boolean, data: String): LiveData<Resource<Users>> {
         return Transformations.map(
@@ -84,6 +87,19 @@ class UserManagementUseCase(private val repository: UserRepository){
     suspend fun invokeAddUserInfo(data: Users) {
             repository.saveUserInfo(data)
 
+    }
+
+    suspend fun invokeUploadProfileImage(personID: RequestBody, fileName: RequestBody, documentTypeCode: RequestBody,
+                                         byteArray: RequestBody, authTicket: RequestBody
+    ): LiveData<Resource<UploadProfileImageResponce>> {
+        return Transformations.map(
+            homeRepository.uploadProfileImage(personID,fileName,documentTypeCode,byteArray,authTicket)) {
+            it
+        }
+    }
+
+    suspend fun invokeUpdateUserProfileImgPath( name : String ,path : String  ) {
+        return homeRepository.updateUserProfileImgPath( name , path )
     }
 
 }

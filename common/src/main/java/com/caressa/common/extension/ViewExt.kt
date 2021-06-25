@@ -35,7 +35,7 @@ fun Fragment.showToast(toastText: String, timeLength: Int) {
     activity?.let {
         val toast = Toast.makeText(context, toastText, timeLength)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
-            toast.setGravity(Gravity.CENTER, 0, 0)
+            toast.setGravity(Gravity.BOTTOM, 0, 0)
             val view = toast.view
             view?.background?.colorFilter = PorterDuffColorFilter(appColorHelper.primaryColor(), PorterDuff.Mode.SRC_IN)
             val text = view?.findViewById<TextView>(android.R.id.message)

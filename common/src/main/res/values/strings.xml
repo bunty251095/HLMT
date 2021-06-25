@@ -38,6 +38,14 @@
     <string name="UPLOAD_PRESCRIPTION">Upload Prescription</string>
     <string name="ORDER_MEDICINE">Order Medicine</string>
     <string name="ADD_MEDICATION">Add Medication</string>
+
+    <string name="OPEN_GALLERY">Open Gallery</string>
+    <string name="TAKE_PHOTO">Take Photo</string>
+    <string name="REMOVE_PHOTO">Remove Photo</string>
+
+    <string name="GALLERY">Gallery</string>
+    <string name="PHOTO">Photo</string>
+    <string name="REMOVE">Remove</string>
     <!--Button Strings-->
 
     <string name="YES">Yes</string>

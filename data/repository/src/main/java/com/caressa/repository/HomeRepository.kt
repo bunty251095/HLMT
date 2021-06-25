@@ -17,6 +17,7 @@ import com.caressa.repository.utils.Resource
 import core.model.BaseResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.RequestBody
+import timber.log.Timber
 
 interface HomeRepository{
 
@@ -650,6 +651,7 @@ class HomeRepositoryImpl(private val datasource : HomeDatasource, private val da
     }
 
     override suspend fun updateUserProfileImgPath( name : String ,path : String ) {
+        Timber.e("ProfileImagePath_Updated")
         return homeDao.updateUserProfileImgPath( name , path)
     }
 

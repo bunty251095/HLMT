@@ -34,11 +34,6 @@
     <string name="FEEDBACK">Feedback</string>
     <string name="RATE_US">Rate Us</string>
 
-    <string name="VIEW">View</string>
-    <string name="OPEN_GALLERY">Open Gallery</string>
-    <string name="TAKE_PHOTO">Take Photo</string>
-    <string name="REMOVE_PHOTO">Remove Photo</string>
-
     <!--Dashboard Buttons-->
     <string name="MY_HEALTH_SCORE">My Health Score</string>
     <string name="WELLNESS_SCORE">Wellness Score</string>

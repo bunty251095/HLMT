@@ -16,6 +16,9 @@ buildscript {
 }
 
 buildscript {
+    ext {
+        kotlin_version = '1.5.0'
+    }
     configurations.all {
         resolutionStrategy {
             force("net.sf.proguard:proguard-base:6.2.0")

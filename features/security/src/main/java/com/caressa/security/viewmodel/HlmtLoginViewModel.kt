@@ -2,6 +2,8 @@ package com.caressa.security.viewmodel
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.BitmapFactory
+import android.util.Base64
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,10 +12,9 @@ import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Configuration
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.PreferenceConstants
-import com.caressa.common.utils.DateHelper
-import com.caressa.common.utils.EncryptionUtility
-import com.caressa.common.utils.Event
+import com.caressa.common.utils.*
 import com.caressa.model.entity.Users
+import com.caressa.model.home.UploadProfileImageResponce
 import com.caressa.model.security.EmailExistsModel
 import com.caressa.model.security.LoginModel
 import com.caressa.model.security.LoginNameExistsModel
@@ -28,8 +29,12 @@ import com.caressa.security.viewmodel.LoginViewModel.LoginEncryption.getEncrypte
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import org.json.JSONObject
 import timber.log.Timber
+import java.io.File
+import java.io.FileInputStream
 import java.util.*
 
 class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCase, private val dispatchers: AppDispatchers,
@@ -57,6 +62,10 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
     private val _isPhone = MediatorLiveData<PhoneExistsModel.IsExistResponse>()
     val isPhone: LiveData<PhoneExistsModel.IsExistResponse> get() = _isPhone
     var phoneSource: LiveData<Resource<PhoneExistsModel.IsExistResponse>> = MutableLiveData()
+
+    var uploadProfileImageSource: LiveData<Resource<UploadProfileImageResponce>> = MutableLiveData()
+    val _uploadProfileImage = MediatorLiveData<UploadProfileImageResponce>()
+    val uploadProfileImage: LiveData<UploadProfileImageResponce> get() = _uploadProfileImage
 
 
     fun callLogin(forceRefresh: Boolean, name: String = "", mobileStr: String = "", passwordStr: String = "") = viewModelScope.launch(dispatchers.main) {
@@ -164,7 +173,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
             }
         }
     }
-    fun fetchRegistrationResponse(name: String = "", phoneNumber: String, passwordStr: String = "",gender:String,dob:String,emailStr: String) = viewModelScope.launch(dispatchers.main){
+    fun fetchRegistrationResponse(name: String = "", phoneNumber: String, passwordStr: String = "",gender:String,dob:String,emailStr: String,fName:String,imgPath:String) = viewModelScope.launch(dispatchers.main){
 
         if(validateData(name,phoneNumber,emailStr,dob)) {
             val requestData = LoginModel(
@@ -220,7 +229,12 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                     // Added by Rohit
                     //RealPathUtil.creatingLocalDirctories()
                     saveUserData(loginData)
-                    navigate(UserDetailsFragmentDirections.actionUserDetailsToHomeScreen())
+                    if ( !Utilities.isNullOrEmpty(fName)
+                        && !Utilities.isNullOrEmpty(imgPath)) {
+                        callUploadProfileImageApi(pid.toString(),loginData.context,fName,imgPath)
+                    } else {
+                        navigate(UserDetailsFragmentDirections.actionUserDetailsToHomeScreen())
+                    }
                 }
 
                 if (it.status == Resource.Status.ERROR) {
@@ -228,6 +242,65 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                     toastMessage(it.errorMessage)
                 }
             }
+        }
+    }
+
+    fun callUploadProfileImageApi( personId:String,authToken:String,name:String, path:String)
+            = viewModelScope.launch(dispatchers.main) {
+
+        var encodedImage =""
+        try {
+            val file = File(path , name )
+            val bitmap = BitmapFactory.decodeFile(file.getAbsolutePath())
+            if (bitmap != null) {
+                val bytesFile = ByteArray(file.length().toInt())
+                val fileInputStream = FileInputStream(file)
+                fileInputStream.read(bytesFile)
+                encodedImage = Base64.encodeToString(bytesFile, Base64.DEFAULT)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        val PersonID = RequestBody.create(MediaType.parse("text/plain"), personId)
+        val FileName = RequestBody.create(MediaType.parse("text/plain"), name)
+        val DocumentTypeCode = RequestBody.create(MediaType.parse("text/plain"), "PROFPIC")
+        val ByteArray = RequestBody.create(MediaType.parse("text/plain"), encodedImage)
+        val AuthTicket = RequestBody.create(MediaType.parse("text/plain"), authToken)
+        //Utilities.deleteFileFromLocalSystem(cropImgPath)
+
+        _progressBar.value = Event("Uploading Profile Photo.....")
+        _uploadProfileImage.removeSource(uploadProfileImageSource)
+        withContext(dispatchers.io) {
+            uploadProfileImageSource = userManagementUseCase.invokeUploadProfileImage(PersonID,FileName,DocumentTypeCode,ByteArray,AuthTicket)
+        }
+        _uploadProfileImage.addSource(uploadProfileImageSource) {
+            _uploadProfileImage.value = it.data
+
+            if (it.status == Resource.Status.SUCCESS) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if (it.data != null) {
+                    val profileImageID = it.data!!.profileImageID
+                    Timber.i("UploadProfileImage----->$profileImageID")
+                    if ( !Utilities.isNullOrEmptyOrZero(profileImageID) ) {
+                        updateUserProfileImgPath( name , path )
+                        navigate(UserDetailsFragmentDirections.actionUserDetailsToHomeScreen())
+                    }
+                }
+            }
+            if (it.status == Resource.Status.ERROR) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if(it.errorNumber.equals("1100014",true)){
+                    _sessionError.value = Event(true)
+                }else {
+                    toastMessage(it.errorMessage)
+                }
+            }
+        }
+    }
+
+    private fun updateUserProfileImgPath(name : String, path : String ) = viewModelScope.launch {
+        withContext(dispatchers.io) {
+            userManagementUseCase.invokeUpdateUserProfileImgPath( name , path )
         }
     }
 
