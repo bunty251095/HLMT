@@ -11,7 +11,7 @@ import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
 val featureSecurityModule = module {
-    factory { UserManagementUseCase(get()) }
+    factory { UserManagementUseCase(get(),get()) }
     factory { HraManagementUseCase(get()) }
     viewModel { LoginViewModel(get(), get(), get() , get() ) }
     viewModel { HlmtLoginViewModel(get(), get(), get() , get() ) }
