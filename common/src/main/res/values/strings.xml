@@ -57,6 +57,7 @@
     <string name="AGE">Age</string>
     <string name="DATE_OF_BIRTH">Date Of Birth</string>
     <string name="MOBILE_NUMBER">Mobile Number</string>
+    <string name="REG_MOBILE_NUMBER">Registered Mobile Number</string>
     <string name="AND">and</string>
     <string name="DATE">Date</string>
     <string name="DAY">Day</string>

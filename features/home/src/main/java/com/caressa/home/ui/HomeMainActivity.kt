@@ -70,6 +70,8 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
         toggle.syncState()
         configureDrawerRecyclerView()
 
+
+
         Timber.i("HOME onCreate")
 
         backgroudCallViewModel.saveCloudMessagingId.observe(this, {})

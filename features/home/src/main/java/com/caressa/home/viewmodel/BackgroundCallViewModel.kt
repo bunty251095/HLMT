@@ -29,8 +29,6 @@ import com.caressa.model.shr.ListDocumentTypesModel
 import com.caressa.model.shr.ListRelativesModel
 import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
-import com.google.firebase.iid.FirebaseInstanceId
-import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

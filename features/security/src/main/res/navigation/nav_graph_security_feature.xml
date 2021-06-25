@@ -6,6 +6,88 @@
     android:id="@+id/nav_graph_security_feature"
     app:startDestination="@id/stepOneFragment">
 
+    <activity
+        android:id="@+id/splash_activity"
+        tools:layout="@layout/activity_splash_screen"
+        android:name="com.caressa.security.ui.SplashScreenActivity" />
+
+
+    <fragment
+        android:id="@+id/loginViaOTPFragment"
+        android:name="com.caressa.security.ui.LoginWithOtpFragment"
+        android:label="LoginViaOTPFragment"
+        tools:layout="@layout/fragment_login_with_otp">
+
+        <action
+            android:id="@+id/action_loginViaOTPFragment_to_main_activity"
+            app:destination="@id/splash_activity"/>
+
+        <action
+            android:id="@+id/action_loginViaOTPFragment_to_user_info_screen"
+            app:destination="@id/userDetailsFragment">
+            <argument
+                android:name="mobileNo"
+                app:argType="string"
+                android:defaultValue=" "/>
+        </action>
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/stepOneFragment"
+        android:name="com.caressa.security.ui.HlmtStepOneFragment"
+        android:label="HLMT Login"
+        tools:layout="@layout/fragment_hlmt_step_one">
+
+        <action
+            android:id="@+id/action_stepOneFragmentToLoginWithOtpfragment"
+            app:destination="@+id/loginViaOTPFragment"/>
+
+        <action
+            android:id="@+id/action_stepOneFragmentToHLMTLoginFragment"
+            app:destination="@+id/hlmtLoginFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/hlmtLoginFragment"
+        android:name="com.caressa.security.ui.HlmtLoginFragment"
+        tools:layout="@layout/fragment_hlmt_login">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/userDetailsFragment"
+        android:name="com.caressa.security.ui.UserDetailsFragment"
+        android:label="User Information"
+        tools:layout="@layout/fragment_user_details">
+
+        <argument
+            android:name="mobileNo"
+            app:argType="string"
+            android:defaultValue=" "/>
+
+        <action
+            android:id="@+id/action_userDetailsToHomeScreen"
+            app:destination="@id/splash_activity"/>
+
+    </fragment>
+
+    <!--// Old flow-->
+
+    <fragment
+        android:id="@+id/vivantLoginFragment"
+        android:name="com.caressa.security.ui.HlmtLoginFragment"
+        android:label="HLMT Login"
+        tools:layout="@layout/fragment_hlmt_step_one">
+
+        <action
+            android:id="@+id/action_loginFragment_to_main_activity"
+            app:destination="@id/splash_activity"/>
+
+    </fragment>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.caressa.security.ui.LoginFragment"
@@ -210,60 +292,23 @@
             app:destination="@id/splash_activity" />
     </fragment>
 
-    <fragment
-        android:id="@+id/loginViaOTPFragment"
-        android:name="com.caressa.security.ui.LoginWithOtpFragment"
-        android:label="LoginViaOTPFragment"
-        tools:layout="@layout/fragment_login_with_otp">
 
-        <action
-            android:id="@+id/action_loginViaOTPFragment_to_main_activity"
-            app:destination="@id/splash_activity"/>
-        <action
-            android:id="@+id/action_loginViaOTPFragment_to_main_activity2"
-            app:destination="@id/splash_activity" />
 
-    </fragment>
 
-    <fragment
-        android:id="@+id/stepOneFragment"
-        android:name="com.caressa.security.ui.HlmtStepOneFragment"
-        android:label="HLMT Login"
-        tools:layout="@layout/fragment_hlmt_step_one">
 
-        <action
-            android:id="@+id/action_stepOneFragmentToStepTwofragment"
-            app:destination="@+id/stepTwoFragment"/>
-
-    </fragment>
-
-    <fragment
+   <!-- <fragment
         android:id="@+id/stepTwoFragment"
         android:name="com.caressa.security.ui.HlmtStepTwoFragment"
         android:label="HLMT Login"
         tools:layout="@layout/fragment_hlmt_step_two">
 
         <action
-            android:id="@+id/action_stepOneFragmentToLoginFragement"
-            app:destination="@+id/vivantLoginFragment"/>
+            android:id="@+id/action_stepTwoFragmentToLoginWithOtpFragment"
+            app:destination="@+id/loginViaOTPFragment"/>
 
-    </fragment>
 
-    <fragment
-        android:id="@+id/vivantLoginFragment"
-        android:name="com.caressa.security.ui.HlmtLoginFragment"
-        android:label="HLMT Login"
-        tools:layout="@layout/fragment_hlmt_step_one">
+    </fragment>-->
 
-        <action
-            android:id="@+id/action_loginFragment_to_main_activity"
-            app:destination="@id/splash_activity"/>
 
-    </fragment>
-
-    <activity
-        android:id="@+id/splash_activity"
-        tools:layout="@layout/activity_splash_screen"
-        android:name="com.caressa.security.ui.SplashScreenActivity" />
 
 </navigation>

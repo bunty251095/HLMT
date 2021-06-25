@@ -70,10 +70,11 @@
                     app:layout_constraintStart_toStartOf="@+id/lbl_forgot_password_desc"
                     app:layout_constraintTop_toBottomOf="@+id/lbl_forgot_password_desc"/>
 
-                <com.caressa.common.view.ArcButton
+                <com.caressa.common.view.ArcBorderButton
                     android:id="@+id/btn_have_account"
                     app:isTemplate="true"
-                    style="@style/HlmtRoundRightButton"
+                    app:isRound="true"
+                    style="@style/HlmtRoundLeftButton"
                     android:layout_width="match_parent"
                     android:text="@string/YES_I_HAVE"
                     android:layout_marginTop="@dimen/_10sdp"

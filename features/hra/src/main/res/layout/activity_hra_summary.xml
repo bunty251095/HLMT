@@ -822,7 +822,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_3sdp"
                     android:orientation="horizontal"
-                    android:weightSum="2"
+                    android:weightSum="1"
                     app:layout_constraintEnd_toEndOf="@+id/card_wellness_score"
                     app:layout_constraintStart_toStartOf="@+id/card_wellness_score"
                     app:layout_constraintTop_toBottomOf="@+id/layout_lab_tests">
@@ -835,7 +835,8 @@
                         app:isTemplate="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/btn_download_report"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:visibility="gone" />
 
                     <com.caressa.common.view.ArcButton
                         android:id="@+id/btn_download_report"
@@ -849,23 +850,17 @@
 
                 </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <com.caressa.common.view.ArcButton
                     android:id="@+id/btn_restart_hra"
-                    style="@style/HRACustomButton"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_38sdp"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:layout_marginBottom="@dimen/_4sdp"
-                    android:background="@drawable/btn_fill_normal"
-                    android:backgroundTint="@color/vivant_marigold"
+                    style="@style/CustomButtonRight"
+                    android:layout_marginEnd="0dp"
                     android:text="@string/RESTART_HRA"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_13sdp"
+                    app:isTemplate="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/layout_btn_summary"
                     app:layout_constraintStart_toStartOf="@+id/layout_btn_summary"
                     app:layout_constraintTop_toBottomOf="@+id/layout_btn_summary"
-                    tools:targetApi="lollipop" />
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -57,11 +57,11 @@ object TrackParameterHelper {
         return profileName
     }
 
-    fun getObservationColor(observation: String, profileCode: String): Int {
+    fun getObservationColor(observation: String?, profileCode: String): Int {
         var color: Int = R.color.vivant_charcoal_grey_55
         if (!Utilities.isNullOrEmpty(observation)) {
             color =
-                when (observation.toUpperCase()) {
+                when (observation!!.toUpperCase()) {
                     "VERY HIGH", "HIGH", "DIABETIC", "MILDLY HIGH", "VERY LOW", "LOW", "POOR", "MILDLY LOW" -> R.color.vivant_watermelon
                     "BORDERLINE HIGH", "EARLY DIABETIC", "MODERATE", "BETTER", "NEAR OPTIMAL", "MODERATE LOW", "MILD LOW", "MILD HIGH", "MODERATE HIGH" -> R.color.vivant_orange_yellow
                     "DESIRABLE", "BEST", "NORMAL", "OPTIMAL", "GOOD" -> R.color.vivant_nasty_green

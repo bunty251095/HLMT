@@ -30,7 +30,10 @@ class HlmtStepOneFragment : BaseFragment() {
 
     private fun setClickable() {
         binding.btnIDont.setOnClickListener {
-            viewModel.navigate(HlmtStepOneFragmentDirections.actionStepOneFragmentToStepTwofragment())
+            viewModel.navigate(HlmtStepOneFragmentDirections.actionStepOneFragmentToLoginWithOtpfragment())
+        }
+        binding.btnHaveAccount.setOnClickListener {
+            viewModel.navigate(HlmtStepOneFragmentDirections.actionStepOneFragmentToHLMTLoginFragment())
         }
     }
 
