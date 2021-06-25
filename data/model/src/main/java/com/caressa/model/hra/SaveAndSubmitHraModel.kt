@@ -21,6 +21,18 @@ class SaveAndSubmitHraModel(
         private val personID: String = ""
     )
 
+    data class JSONDataRequestForEmptyParam(
+        @SerializedName("HraResponse")
+        @Expose
+        private val HraResponse: HraResponse = HraResponse(),
+        @SerializedName("LabRecords")
+        @Expose
+        private val LabRecords: String = "",
+        @SerializedName("PersonID")
+        @Expose
+        private val personID: String = ""
+    )
+
     data class HraResponse(
         @SerializedName("HRARESPONSE")
         @Expose

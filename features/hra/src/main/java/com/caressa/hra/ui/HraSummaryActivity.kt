@@ -105,14 +105,14 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
             startActivity(intentToPass)
         }
 
-        binding.btnBookPackage.setOnClickListener {
+        /*binding.btnBookPackage.setOnClickListener {
             val intentToPass = Intent()
             intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.COMMOM_WEBVIEW)
             intentToPass.putExtra(Constants.Toobar_Title, Constants.TOOLBAR_HEALTH_PACKAGES)
             intentToPass.putExtra(Constants.WEB_URL, Constants.strBookAppointmentURL)
             intentToPass.putExtra(Constants.HAS_COOKIES, true)
             startActivity(intentToPass)
-        }
+        }*/
 
         binding.btnDownloadReport.setOnClickListener {
             val permissionResult = PermissionUtil().getInstance()!!.checkStoragePermissionFromActivity(
@@ -121,7 +121,6 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
                 viewModel.callDownloadReport()
             }
         }
-
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -327,26 +327,61 @@ class HraViewModel(
                 templateId = "5"
             }
 
-            requestData = SaveAndSubmitHraModel(
-                Gson().toJson(
-                    JSONDataRequest(
-                        HraResponse = HraResponse(
-                            response = HraResp(
-                                VITALS = VITALS(
-                                    Height = vitalDetailsObject.getString(HRAConstants.VitalKey_Height),
-                                    Weight = vitalDetailsObject.getString(HRAConstants.VitalKey_Weight),
-                                    SaveBMI = vitalDetailsObject.getString(HRAConstants.VitalKey_SaveBMI),
-                                    BMI = vitalDetailsObject.getString(HRAConstants.VitalKey_BMI),
-                                    SaveBP = vitalDetailsObject.getString(HRAConstants.VitalKey_SaveBP),
-                                    SystolicBP = vitalDetailsObject.getString(HRAConstants.VitalKey_SystolicBP),
-                                    Mode = vitalDetailsObject.getString(HRAConstants.VitalKey_Mode),
-                                    DiastolicBP = vitalDetailsObject.getString(HRAConstants.VitalKey_DiastolicBP)),
-                                SETGENHEALTH = strGenHealthDetails,
-                                SETFAMILYHIST = strFamilyHistDetails,
-                                PERSONID = hraPersonId,
-                                TEMPLATEID = templateId)),
-                        LabRecords = labRecordsList,
-                        personID = hraPersonId), JSONDataRequest::class.java), authToken)
+            if(labRecordsList.size != 0) {
+                requestData = SaveAndSubmitHraModel(
+                    Gson().toJson(
+                        JSONDataRequest(
+                            HraResponse = HraResponse(
+                                response = HraResp(
+                                    VITALS = VITALS(
+                                        Height = vitalDetailsObject.getString(HRAConstants.VitalKey_Height),
+                                        Weight = vitalDetailsObject.getString(HRAConstants.VitalKey_Weight),
+                                        SaveBMI = vitalDetailsObject.getString(HRAConstants.VitalKey_SaveBMI),
+                                        BMI = vitalDetailsObject.getString(HRAConstants.VitalKey_BMI),
+                                        SaveBP = vitalDetailsObject.getString(HRAConstants.VitalKey_SaveBP),
+                                        SystolicBP = vitalDetailsObject.getString(HRAConstants.VitalKey_SystolicBP),
+                                        Mode = vitalDetailsObject.getString(HRAConstants.VitalKey_Mode),
+                                        DiastolicBP = vitalDetailsObject.getString(HRAConstants.VitalKey_DiastolicBP)
+                                    ),
+                                    SETGENHEALTH = strGenHealthDetails,
+                                    SETFAMILYHIST = strFamilyHistDetails,
+                                    PERSONID = hraPersonId,
+                                    TEMPLATEID = templateId
+                                )
+                            ),
+                            LabRecords = labRecordsList,
+                            personID = hraPersonId
+                        ), JSONDataRequest::class.java
+                    ), authToken
+                )
+            }else{
+                requestData = SaveAndSubmitHraModel(
+                    Gson().toJson(
+                        JSONDataRequestForEmptyParam(
+                            HraResponse = HraResponse(
+                                response = HraResp(
+                                    VITALS = VITALS(
+                                        Height = vitalDetailsObject.getString(HRAConstants.VitalKey_Height),
+                                        Weight = vitalDetailsObject.getString(HRAConstants.VitalKey_Weight),
+                                        SaveBMI = vitalDetailsObject.getString(HRAConstants.VitalKey_SaveBMI),
+                                        BMI = vitalDetailsObject.getString(HRAConstants.VitalKey_BMI),
+                                        SaveBP = vitalDetailsObject.getString(HRAConstants.VitalKey_SaveBP),
+                                        SystolicBP = vitalDetailsObject.getString(HRAConstants.VitalKey_SystolicBP),
+                                        Mode = vitalDetailsObject.getString(HRAConstants.VitalKey_Mode),
+                                        DiastolicBP = vitalDetailsObject.getString(HRAConstants.VitalKey_DiastolicBP)
+                                    ),
+                                    SETGENHEALTH = strGenHealthDetails,
+                                    SETFAMILYHIST = strFamilyHistDetails,
+                                    PERSONID = hraPersonId,
+                                    TEMPLATEID = templateId
+                                )
+                            ),
+                            LabRecords = "",
+                            personID = hraPersonId
+                        ), JSONDataRequestForEmptyParam::class.java
+                    ), authToken
+                )
+            }
         }
 
         _progressBar.value = Event(context.resources.getString(R.string.submitting_hra_details))

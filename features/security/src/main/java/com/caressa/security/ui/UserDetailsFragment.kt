@@ -51,9 +51,6 @@ class UserDetailsFragment: BaseFragment() {
             passwordStr = "123456",gender = gender,dob = binding.edtDob.text.toString(),emailStr = binding.edtEmail.text.toString())
         }
 
-        binding.btnBack.setOnClickListener {
-
-        }
         binding.layoutDob.setOnClickListener {
             showDatePickerDialog()
         }
@@ -61,9 +58,7 @@ class UserDetailsFragment: BaseFragment() {
             if (MotionEvent.ACTION_UP == event.action) showDatePickerDialog() // Instead of your Toast
             false
         })
-//        binding.edtDob.setOnClickListener {
-//            showDatePickerDialog()
-//        }
+
     }
 
     private fun registerObserver() {
