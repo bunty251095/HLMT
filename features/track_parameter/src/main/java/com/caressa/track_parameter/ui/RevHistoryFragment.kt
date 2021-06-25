@@ -240,9 +240,10 @@ class RevHistoryFragment : BaseFragment() {
 
     private fun parameterSelection(history: TrackParameterMaster.History) {
 
+        try {
 //        val recordDate:String = history.recordDate
         binding.txtLastCheckedDate.text = history.recordDate.replace("-"," ",true)
-        val color = TrackParameterHelper.getObservationColor(history.observation!!,history.profileCode!!)
+        val color = TrackParameterHelper.getObservationColor(history.observation,history.profileCode!!)
 
         binding.layoutSelectedParameterDetails.setBackgroundColor(resources.getColor(color))
         binding.txtParamTitle.setText(history.description)
@@ -271,6 +272,7 @@ class RevHistoryFragment : BaseFragment() {
             binding.layoutSelectedParameterDetails.setBackgroundColor(
                 resources.getColor(TrackParameterHelper.getObservationColor(observation, "BLOODPRESSURE")))
         }
+        }catch (e: Exception){e.printStackTrace()}
     }
 
     private fun selectTabDetails() {

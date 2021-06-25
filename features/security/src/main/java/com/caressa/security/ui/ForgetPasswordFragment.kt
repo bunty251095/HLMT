@@ -36,7 +36,7 @@ class ForgetPasswordFragment : BaseFragment() {
 
     private fun initialise() {
 
-        binding.edtForgotEmail.addTextChangedListener(object : TextWatcher {
+        binding.edtMobileNumber.addTextChangedListener(object : TextWatcher {
 
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
 
@@ -90,7 +90,7 @@ class ForgetPasswordFragment : BaseFragment() {
     }
 
     private fun validate() {
-        val email: String = binding.edtForgotEmail.getText().toString()
+        val email: String = binding.edtMobileNumber.getText().toString()
         if (Utilities.isNullOrEmpty(email) || !Validation.isValidEmail(email)) {
             binding.tilEdtForgotEmail.setErrorEnabled(true)
             binding.tilEdtForgotEmail.setError("Please enter valid Email")

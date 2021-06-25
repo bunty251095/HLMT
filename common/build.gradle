@@ -25,7 +25,10 @@ dependencies {
     implementation Libraries.koinViewModel
     implementation AndroidLibraries.androidxLegacySupport
 
-    //api Libraries.firebaseCrashlytics
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:28.1.0')
 
-//    implementation "org.jetbrains.anko:anko-commons:0.10.8"
+    // Declare the dependency for the Analytics library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }

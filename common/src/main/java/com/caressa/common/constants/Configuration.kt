@@ -8,4 +8,6 @@ object Configuration {
     const val ApplicationCode: String = "AIH_HRA_PORTAL"
     const val EntityType: String = "P"
     const val Handshake: String = "PER"
+    const val UTMSource: String = "VIVANT_HLMT_REG"
+    const val UTMMedium: String = "android"
 }

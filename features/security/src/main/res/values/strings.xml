@@ -64,7 +64,7 @@
 
     <string name="PASSWORD_CRITERIA">Your Password Criteria</string>
     <string name="PASSWORD_CRITERIA_DESC">Your Password length Should be minimum 6 characters</string>
-    <string name="OTP_SENT_DESC">OTP code has been sent to your \nemail address, please verify</string>
+    <string name="OTP_SENT_DESC">OTP code has been sent to your \nmobile number, please verify</string>
 
     <!--    <string name="error_invalid_otp">Please enter a valid OTP</string>-->
     <string name="GOOGLE_SIGN_IN_FAILED">Google sign in failed</string>
