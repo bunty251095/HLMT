@@ -49,7 +49,7 @@
     <string name="DASH_ACTIVITY_TRACKER">Activity\nTracker</string>
     <string name="DASH_STORE_HEALTH_RECORD">Store Health\nRecords</string>
     <string name="DASH_WELLNESS_CENTRE">Wellness\nCentre</string>
-    <string name="DASH_TOOLS_TRACKER">Tools and\nTracker</string>
+    <string name="DASH_TOOLS_TRACKER">Tools and\nCalculator</string>
     <string name="DASH_HOSPITAL_NEAR_ME">Hospitals\nNear Me</string>
     <string name="DASH_HEALTH_LIBRARY">Health\nLibrary</string>
     <string name="DASH_CHAT_DIETITIAN">Chat with Dietitian/Counsellor</string>
