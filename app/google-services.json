@@ -7,49 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:574906239931:android:17e480186a4d2e2bb6929e",
-        "android_client_info": {
-          "package_name": "com.vivant.hlmt.app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "574906239931-m53criia34fcje6oivjmo6pni39bcbup.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBiD_2-HsbPO_n72_fsn-2W09Xp8nT7AOo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "574906239931-m53criia34fcje6oivjmo6pni39bcbup.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "574906239931-p127snqtbsnbedha1dskertfnnn7pgv2.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.vivant.hlmt.app.uat",
-                "app_store_id": "123321123"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:574906239931:android:22d8d55f9b4c7306b6929e",
         "android_client_info": {
           "package_name": "com.vivant.hlmt.app.uat"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "574906239931-qnspmmsht9kijt6gduqlvkapkq5akls9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vivant.hlmt.app.uat",
+            "certificate_hash": "2ed46bab90ec46b69a77b4c9f43319b80a67d897"
+          }
+        },
         {
           "client_id": "574906239931-m53criia34fcje6oivjmo6pni39bcbup.apps.googleusercontent.com",
           "client_type": 3
