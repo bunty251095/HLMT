@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.security.R
 import com.caressa.security.databinding.FragmentHlmtStepOneBinding
 import com.caressa.security.databinding.FragmentLoginBinding
@@ -43,14 +44,15 @@ class HlmtStepOneFragment : BaseFragment() {
     }
 
     private fun googlePlusInit() {
-        val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.google_web_client_id))
-            .requestEmail()
-            .build()
-        googleSignInClient = GoogleSignIn.getClient(
-            activity as SecurityActivity,
-            googleSignInOptions)
-        googleSignOut()
+//        val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken(getString(R.string.google_web_client_id))
+//            .requestEmail()
+//            .build()
+//        googleSignInClient = GoogleSignIn.getClient(
+//            activity as SecurityActivity,
+//            googleSignInOptions)
+//        googleSignOut()
+        FitnessDataManager(context).signOutGoogleAccount()
     }
 
     private fun googleSignOut() {

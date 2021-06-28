@@ -29,7 +29,7 @@ object Modules {
 
 object Releases {
     const val versionCode = 1
-    const val versionName = "1.0.0"
+    const val versionName = "1.0.1"
 }
 
 object Versions {
@@ -57,7 +57,7 @@ object Versions {
     val timber = "4.7.1"
     val lifecycle = "2.1.0-alpha04"
     val nav = "2.3.5"
-    val googleMaterialDesign = "1.3.0"
+    val googleMaterialDesign = "1.2.0"
 //    val room = "2.1.0-alpha06"
     val room = "2.2.4"
     val recyclerview = "1.0.0"

@@ -87,7 +87,7 @@ class RevInputParamAdapter(var profileCode: String): RecyclerView.Adapter<RevInp
         var bpList:MutableList<ParameterListModel.InputParameterModel> = mutableListOf()
         var systolic:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
         var diastolic:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
-        var pulse:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
+//        var pulse:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
         for(item in items){
             if (item.parameterCode.equals("BP_SYS")){
                 systolic = item
@@ -95,13 +95,13 @@ class RevInputParamAdapter(var profileCode: String): RecyclerView.Adapter<RevInp
             if (item.parameterCode.equals("BP_DIA")){
                 diastolic = item
             }
-            if (item.parameterCode.equals("BP_PULSE")) {
-                pulse = item
-            }
+//            if (item.parameterCode.equals("BP_PULSE")) {
+//                pulse = item
+//            }
         }
         bpList.add(systolic)
         bpList.add(diastolic)
-        bpList.add(pulse)
+//        bpList.add(pulse)
         return bpList
     }
 
