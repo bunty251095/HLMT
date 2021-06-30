@@ -35,7 +35,13 @@ open class BaseRequest(
             private val entityType: String = Configuration.EntityType,
         @SerializedName("HandShake")
             @Expose
-            private val handShake: String = Configuration.Handshake
+            private val handShake: String = Configuration.Handshake,
+        @SerializedName("UTMSource")
+        @Expose
+        private val utmSource: String = Configuration.UTMSource,
+        @SerializedName("UTMMedium")
+        @Expose
+        private val utmMedium: String = Configuration.UTMMedium
     )
 
     companion object {

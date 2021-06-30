@@ -167,13 +167,13 @@ class MyMedicationsFragment : BaseFragment(),DefaultNotificationDialog.OnDialogV
             startActivity(launchIntent)
         }
 
-        binding.btnMedicationsOrderMedicine.setOnClickListener {
+      /*  binding.btnMedicationsOrderMedicine.setOnClickListener {
             val launchIntent = Intent()
             launchIntent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.ORDER_MEDICINE)
             //launchIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             launchIntent.putExtra(Constants.FROM, Constants.MEDICATION)
             startActivity(launchIntent)
-        }
+        }*/
 
     }
 

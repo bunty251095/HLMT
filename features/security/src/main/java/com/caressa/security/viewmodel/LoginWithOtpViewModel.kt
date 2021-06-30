@@ -8,8 +8,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.Event
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Validation
 import com.caressa.model.entity.Users
 import com.caressa.model.security.GenerateOtpModel
@@ -238,9 +240,11 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                             .apply()
                         // Added by Rohit
                         //RealPathUtil.creatingLocalDirctories()
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_LOGIN_SUCCESSFUL_EVENT,false)
                         saveUserData(loginData)
                         navigate(LoginWithOtpFragmentDirections.actionLoginViaOTPFragmentToMainActivity())
                     }else{
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_LOGIN_FAIL_EVENT,false)
                         toastMessage("Unable to login with this user.")
                     }
                 }catch (e: Exception){e.printStackTrace()}

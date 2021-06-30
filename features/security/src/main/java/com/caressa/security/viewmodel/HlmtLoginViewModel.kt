@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Configuration
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.*
 import com.caressa.model.entity.Users
@@ -67,43 +68,6 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
     val _uploadProfileImage = MediatorLiveData<UploadProfileImageResponce>()
     val uploadProfileImage: LiveData<UploadProfileImageResponce> get() = _uploadProfileImage
 
-
-    fun callLogin(forceRefresh: Boolean, name: String = "", mobileStr: String = "", passwordStr: String = "") = viewModelScope.launch(dispatchers.main) {
-        argsLogin = LoginEncryption.getHlmtEncryptedData("LOGIN",mobileStr,passwordStr,name)
-        _progressBar.value = Event("Authenticating..")
-        _user.removeSource(loginUserSource) // We make sure there is only one source of livedata (allowing us properly refresh)
-        withContext(dispatchers.io) { loginUserSource = userManagementUseCase(isForceRefresh = forceRefresh, data = argsLogin) }
-        _user.addSource(loginUserSource) {
-            _progressBar.value = Event(Event.HIDE_PROGRESS)
-            Timber.i("Login Data=> "+it.data)
-            _user.value = it.data
-
-            if (it.status == Resource.Status.SUCCESS){
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                /*sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN,true).apply()
-                sharedPref.edit().putString(PreferenceConstants.EMAIL,it.data?.emailAddress).apply()
-                sharedPref.edit().putString(PreferenceConstants.PHONE,it.data?.phoneNumber).apply()
-                sharedPref.edit().putString(PreferenceConstants.TOKEN, it.data?.authToken).apply()
-                // sharedPref.edit().putString(PreferenceConstants.PERSONID, it.data?.personId).apply()
-                sharedPref.edit().putString(PreferenceConstants.ACCOUNTID, it.data?.accountId?.toDouble()?.toInt().toString()).apply()
-                sharedPref.edit().putString(PreferenceConstants.FIRSTNAME, it.data?.firstName).apply()
-                sharedPref.edit().putString(PreferenceConstants.GENDER, it.data?.gender).apply()
-                val pid = it.data?.personId?.toDouble()?.toInt()
-                Timber.i("Person Id => "+pid)
-                sharedPref.edit().putString(PreferenceConstants.PERSONID, pid.toString()).apply()
-                sharedPref.edit().putString(PreferenceConstants.ADMIN_PERSON_ID, pid.toString()).apply()
-                sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE, Constants.SELF_RELATIONSHIP_CODE).apply()
-                // Added by Rohit
-                //RealPathUtil.creatingLocalDirctories()
-                navigate(LoginFragmentDirections.actionLoginFragmentToMainActivity())*/
-            }
-
-            if (it.status == Resource.Status.ERROR) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                toastMessage(it.errorMessage)
-            }
-        }
-    }
 
     fun checkLoginNameExistOrNot(name: String = "", username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
 
@@ -228,6 +192,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                         .apply()
                     // Added by Rohit
                     //RealPathUtil.creatingLocalDirctories()
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_REGISTRATION_SUCCESSFUL_EVENT,false)
                     saveUserData(loginData)
                     if ( !Utilities.isNullOrEmpty(fName)
                         && !Utilities.isNullOrEmpty(imgPath)) {
@@ -235,11 +200,14 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                     } else {
                         navigate(UserDetailsFragmentDirections.actionUserDetailsToHomeScreen())
                     }
+                }else{
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_REGISTRATION_FAIL_EVENT,false)
                 }
 
                 if (it.status == Resource.Status.ERROR) {
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
                     toastMessage(it.errorMessage)
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_REGISTRATION_FAIL_EVENT,false)
                 }
             }
         }
@@ -360,35 +328,6 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
             val loginEncrypted = EncryptionUtility.encrypt(Configuration.SecurityKey, registerObject.toString(), Configuration.SecurityKey)
             return loginEncrypted
         }
-    }
-
-    private fun callRegisterAPI(
-        name: String = "",
-        emailStr: String,
-        passwordStr: String = "",
-        phoneNumber: String = "",
-        dateOfBirthCal: Calendar = Calendar.getInstance(),
-        socialLogin: Boolean = false,
-        socialId: String = "") = viewModelScope.launch(dispatchers.main) {
-
-        val registerEnc = getEncryptedData(username = emailStr, password = passwordStr, dob = DateHelper.convertDateToStr(dateOfBirthCal.time, DateHelper.SERVER_DATE_YYYYMMDD), phoneNumber = phoneNumber, name = name, gender = "1", isSocial = socialLogin)
-        _user.removeSource(registerUserSource)
-        withContext(dispatchers.io) { registerUserSource = userManagementUseCase.invokeRegistration(data = registerEnc) }
-        _user.addSource(registerUserSource) {
-            _user.value = it.data
-            if (it.status == Resource.Status.SUCCESS) {
-                _snackbarMessage.value = Event("Register Successful")
-                sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN,true).apply()
-                sharedPref.edit().putString(PreferenceConstants.EMAIL,it.data?.emailAddress).apply()
-                sharedPref.edit().putString(PreferenceConstants.PHONE,it.data?.phoneNumber).apply()
-                sharedPref.edit().putString(PreferenceConstants.TOKEN, it.data?.authToken).apply()
-                sharedPref.edit().putString(PreferenceConstants.PERSONID, it.data?.personId.toString()).apply()
-                sharedPref.edit().putString(PreferenceConstants.ADMIN_PERSON_ID, it.data?.personId.toString()).apply()
-                sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE, Constants.SELF_RELATIONSHIP_CODE).apply()
-                navigate(LoginFragmentDirections.actionLoginFragmentToMainActivity())
-            }
-        }
-
     }
 
     fun getLoginStatus(): Boolean{

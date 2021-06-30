@@ -8,6 +8,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.databinding.FragmentDueDateInputBinding
 import com.caressa.tools_calculators.viewmodel.ToolsCalculatorsViewModel
@@ -39,7 +41,8 @@ class DueDateInputFragment : BaseFragment() {
       binding.viewModel = viewModel
       binding.lifecycleOwner = viewLifecycleOwner
       initialise()
-      return binding.root
+       FirebaseHelper.logScreenEvent(FirebaseConstants.DUE_DATE_CALCULATOR_SCREEN)
+       return binding.root
    }
 
     private fun initialise() {

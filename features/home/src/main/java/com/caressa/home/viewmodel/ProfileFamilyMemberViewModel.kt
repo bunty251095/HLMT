@@ -12,11 +12,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.PreferenceConstants
-import com.caressa.common.utils.DateHelper
-import com.caressa.common.utils.Event
-import com.caressa.common.utils.RealPathUtil
-import com.caressa.common.utils.Utilities
+import com.caressa.common.utils.*
 import com.caressa.home.R
 import com.caressa.home.common.DataHandler
 import com.caressa.home.domain.HomeManagementUseCase
@@ -131,6 +129,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                     toastMessage(context.resources.getString(R.string.MEMBER_ADDED))
                     navigate(AddFamilyMemberFragmentDirections.actionAddFamilyMemberFragmentToFamilyMembersListFragment())
                 }
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_MEMBER_ADD_EVENT)
             }
             if (it.status == Resource.Status.ERROR) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)

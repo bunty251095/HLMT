@@ -12,14 +12,12 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
-import com.caressa.common.utils.AppColorHelper
-import com.caressa.common.utils.CalculateParameters
-import com.caressa.common.utils.DateHelper
-import com.caressa.common.utils.Utilities
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.fitness_tracker.R
 import com.caressa.fitness_tracker.common.StepsDataSingleton
 import com.caressa.fitness_tracker.databinding.FragmentStepsDetailBinding
 import com.caressa.common.fitness.FitnessDataManager
+import com.caressa.common.utils.*
 import com.caressa.fitness_tracker.util.FitnessHelper
 import com.caressa.fitness_tracker.util.WeekDay
 import com.caressa.fitness_tracker.viewmodel.FitnessViewModel
@@ -78,6 +76,7 @@ class StepsDetailFragment : BaseFragment(), KoinComponent {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+        FirebaseHelper.logScreenEvent(FirebaseConstants.ACTIVITY_TRACKER_MONTHLY_DETAIL_SCREEN)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

@@ -128,6 +128,7 @@ class RevDashboardFragment : BaseFragment(), DashboardGridAdapter.ParameterSelec
             "SUGAR" -> routeToUpdateParameter("DIABETIC")
             "CHOL" -> routeToUpdateParameter("LIPID")
             "HEMOGLOBIN" -> routeToUpdateParameter("HEMOGRAM")
+            "ADD" -> routeToUpdateParameter("BMI")
         }
     }
 

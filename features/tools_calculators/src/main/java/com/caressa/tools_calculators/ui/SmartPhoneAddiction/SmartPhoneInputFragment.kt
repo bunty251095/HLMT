@@ -15,6 +15,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.common.DataHandler
@@ -63,6 +65,7 @@ class SmartPhoneInputFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         initialise()
         setClickable()
+        FirebaseHelper.logScreenEvent(FirebaseConstants.SMART_PHONE_CALCULATOR_SCREEN)
         return binding.root
     }
 

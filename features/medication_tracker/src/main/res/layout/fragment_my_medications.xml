@@ -127,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
-        android:weightSum="2"
+        android:weightSum="1"
         android:orientation="horizontal"
         android:layout_marginStart="@dimen/_14sdp"
         android:layout_marginEnd="@dimen/_14sdp"
@@ -138,16 +138,16 @@
 
         <com.caressa.common.view.ArcButton
             android:id="@+id/btn_medications_upload_pre"
-            style="@style/CustomButtonLeft"
-            app:isLeftButton="true"
+            style="@style/CustomButtonRight"
             app:isTemplate="true"
             android:text="@string/UPLOAD_PRESCRIPTION"/>
-
+<!--
         <com.caressa.common.view.ArcButton
             android:id="@+id/btn_medications_order_medicine"
             style="@style/CustomButtonRight"
             app:isTemplate="true"
-            android:text="@string/ORDER_MEDICINE"/>
+            android:visibility="gone"
+            android:text="@string/ORDER_MEDICINE"/>-->
 
     </LinearLayout>
 

@@ -12,10 +12,12 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.fitness.FitRequestCode
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.fitness.FitnessDataManager
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.fitness_tracker.util.StepCountHelper
 import com.caressa.fitness_tracker.viewmodel.FitnessViewModel
 import kotlinx.android.synthetic.main.activity_fitness_home.*
@@ -37,7 +39,7 @@ class FitnessHomeActivity : AppCompatActivity() , KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fitness_home)
-
+        FirebaseHelper.logScreenEvent(FirebaseConstants.ACTIVITY_TRACKER_SCREEN)
         setSupportActionBar(toolBar_fitness)
         // Setting up a back button
         navController = nav_host_fragment.findNavController()

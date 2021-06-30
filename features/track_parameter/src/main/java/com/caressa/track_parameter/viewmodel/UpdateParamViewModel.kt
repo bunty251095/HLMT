@@ -7,9 +7,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDirections
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.Event
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.model.entity.TrackParameterMaster
 import com.caressa.model.parameter.*
 import com.caressa.repository.AppDispatchers
@@ -168,6 +170,7 @@ class UpdateParamViewModel(
                 _saveParam.value = it.data
                 if (it.status == Resource.Status.SUCCESS) {
                     toastMessage("Parameter is successfully updated")
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEALTH_PARAM_UPLOAD_EVENT)
                 }
 
                 if (it.status == Resource.Status.ERROR) {

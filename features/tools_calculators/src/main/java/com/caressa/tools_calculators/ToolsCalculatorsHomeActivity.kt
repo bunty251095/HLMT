@@ -9,7 +9,9 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.AppColorHelper
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.model.toolscalculators.UserInfoModel
 import kotlinx.android.synthetic.main.activity_tools_calculators_home.*
 import kotlinx.android.synthetic.main.toolbar_tools_calculators.*
@@ -72,6 +74,7 @@ class ToolsCalculatorsHomeActivity : AppCompatActivity() {
             toolBarToolsCalculator.navigationIcon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
                 appColorHelper.primaryColor(), BlendModeCompat.SRC_ATOP)
         }
+        FirebaseHelper.logScreenEvent(FirebaseConstants.TOOLS_CALCULATORS_SCREEN)
 
     }
 
