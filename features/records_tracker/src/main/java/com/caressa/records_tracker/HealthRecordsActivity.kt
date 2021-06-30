@@ -14,8 +14,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.AppColorHelper
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.karumi.dexter.Dexter
 import kotlinx.android.synthetic.main.activity_health_records.*
@@ -81,6 +83,7 @@ class HealthRecordsActivity : AppCompatActivity() {
             intentToPass.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intentToPass)
         }
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HEALTH_RECORDS_SCREEN)
     }
 
     override fun onSupportNavigateUp(): Boolean {

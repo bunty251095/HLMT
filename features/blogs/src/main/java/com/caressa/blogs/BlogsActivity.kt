@@ -11,8 +11,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.AppColorHelper
+import com.caressa.common.utils.FirebaseHelper
 import kotlinx.android.synthetic.main.activity_blogs.*
 import kotlinx.android.synthetic.main.toolbar_layout_blogs.*
 
@@ -56,6 +58,7 @@ class BlogsActivity : AppCompatActivity() {
             intentToPass.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intentToPass)
         }
+        FirebaseHelper.logScreenEvent(FirebaseConstants.BLOGS_SCREEN)
     }
 
     override fun onSupportNavigateUp(): Boolean {

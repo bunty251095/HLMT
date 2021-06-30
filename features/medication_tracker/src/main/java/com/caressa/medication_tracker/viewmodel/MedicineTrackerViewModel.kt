@@ -17,12 +17,10 @@ import androidx.lifecycle.*
 import androidx.navigation.findNavController
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.constants.PreferenceConstants
-import com.caressa.common.utils.DateHelper
-import com.caressa.common.utils.EncryptionUtility
-import com.caressa.common.utils.Event
-import com.caressa.common.utils.Utilities
+import com.caressa.common.utils.*
 import com.caressa.medication_tracker.MedNotificationApiService
 import com.caressa.medication_tracker.R
 import com.caressa.medication_tracker.common.MedicationSingleton
@@ -265,6 +263,7 @@ class MedicineTrackerViewModel(
                 if (it.data!!.medication.medicationId != 0) {
                     toastMessage(context.resources.getString(R.string.MEDICINE_ADDED))
                     navigate(ScheduleDetailsFragmentDirections.actionScheduleMedicineFragmentToMedicineHome("", ""))
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICINE_UPLOAD_EVENT)
                 }
             }
 

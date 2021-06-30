@@ -102,7 +102,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/selector_edit_text_color"
-                            android:hint="@string/REG_MOBILE_NUMBER"
+                            android:hint="@string/MOBILE_NUMBER"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:maxLength="12"

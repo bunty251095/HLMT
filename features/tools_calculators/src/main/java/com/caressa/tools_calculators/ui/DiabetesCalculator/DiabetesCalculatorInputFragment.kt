@@ -16,6 +16,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.ParameterDataModel
 import com.caressa.common.utils.Utilities
 import com.caressa.common.view.SpinnerAdapter
@@ -76,6 +78,7 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
             initialise()
             setClickable()
             loadUserData()
+            FirebaseHelper.logScreenEvent(FirebaseConstants.DIABETES_CALCULATOR_SCREEN)
         } catch ( e : Exception ) {
             e.printStackTrace()
         }

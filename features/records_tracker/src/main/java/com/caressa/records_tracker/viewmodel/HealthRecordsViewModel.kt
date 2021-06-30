@@ -14,8 +14,10 @@ import androidx.navigation.findNavController
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Configuration
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.Event
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.RealPathUtil
 import com.caressa.model.entity.*
 import com.caressa.model.shr.*
@@ -145,6 +147,7 @@ class HealthRecordsViewModel(
                             bundle.putString("code",code)
                             view.findNavController().navigate(R.id.action_selectRelationFragment_to_viewRecordsFragment,bundle)
                         }
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEALTH_RECORDS_UPLOAD_EVENT)
                     }
                 }
                 if (it.status == Resource.Status.ERROR) {

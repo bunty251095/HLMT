@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.hra.common.HraDataSingleton
 import com.caressa.hra.databinding.FragmentHraLastPageBinding
 import com.caressa.hra.viewmodel.HraViewModel
@@ -34,6 +36,7 @@ class HraLastPageFragment(val qCode: String) : BaseFragment() {
             initialise()
             setClickable()
         }
+        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_COMPLETED_EVENT)
         return binding.root
     }
 

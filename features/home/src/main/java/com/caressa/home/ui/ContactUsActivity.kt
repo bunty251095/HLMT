@@ -9,10 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
-import com.caressa.common.utils.AppColorHelper
-import com.caressa.common.utils.NetworkUtility
-import com.caressa.common.utils.Utilities
-import com.caressa.common.utils.Validation
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.*
 import com.caressa.home.R
 import com.caressa.home.databinding.ActivityContactUsBinding
 import com.caressa.home.viewmodel.DashboardViewModel
@@ -33,6 +31,7 @@ class ContactUsActivity : BaseActivity() {
         binding.lifecycleOwner = this
         initialise()
         setClickable()
+        FirebaseHelper.logScreenEvent(FirebaseConstants.CONTACT_US_SCREEN)
     }
 
     private fun initialise() {

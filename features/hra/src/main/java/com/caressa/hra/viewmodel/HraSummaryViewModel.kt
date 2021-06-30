@@ -232,16 +232,20 @@ class HraSummaryViewModel(
         call.enqueue(object : Callback<ResponseBody> {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                val result = response.body()!!
-                if (response.isSuccessful) {
-                    Timber.i("Server contacted and has file--> ")
-                    //val writtenToDisk =  dataHandler.writeResponseBodyToDisk(result)
-                    val writtenToDisk =  HraHelper.writeResponseBodyToDisk(result,context)
-                    Timber.i("File download was---->$writtenToDisk")
-                } else {
-                    Timber.i("Server Contact failed")
-                }
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if(response.body() != null) {
+                    val result = response.body()!!
+                    if (response.isSuccessful) {
+                        Timber.i("Server contacted and has file--> ")
+                        //val writtenToDisk =  dataHandler.writeResponseBodyToDisk(result)
+                        val writtenToDisk = HraHelper.writeResponseBodyToDisk(result, context)
+                        Timber.i("File download was---->$writtenToDisk")
+                    } else {
+                        Timber.i("Server Contact failed")
+                    }
+                }else{
+                    _snackbarMessage.value = Event("Unable to download.")
+                }
             }
             @SuppressLint("BinaryOperationInTimber")
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

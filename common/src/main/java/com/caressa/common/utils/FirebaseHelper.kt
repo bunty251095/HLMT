@@ -18,11 +18,15 @@ object FirebaseHelper {
 
     }
 
-    fun logCustomFirebaseEvent(eventName:String){
-        firebaseAnalytics.logEvent(FirebaseConstants.PARTNER_IDENTIFIER+eventName, Bundle())
+    fun logCustomFirebaseEvent(eventName:String, addPrefix:Boolean = true){
+        if(addPrefix) {
+            firebaseAnalytics.logEvent(FirebaseConstants.PARTNER_IDENTIFIER + eventName, Bundle())
+        }else{
+            firebaseAnalytics.logEvent(eventName, Bundle())
+        }
     }
 
-    fun logScreenEvent(eventName: String){
-        firebaseAnalytics.logEvent(FirebaseConstants.PARTNER_IDENTIFIER+eventName, Bundle())
+    fun logScreenEvent(eventName: String, addPrefix: Boolean= true){
+        logCustomFirebaseEvent(FirebaseConstants.PARTNER_IDENTIFIER+eventName, addPrefix)
     }
 }

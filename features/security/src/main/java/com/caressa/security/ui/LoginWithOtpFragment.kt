@@ -28,7 +28,7 @@ class LoginWithOtpFragment : BaseFragment() {
         binding = FragmentLoginWithOtpBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        FirebaseHelper.logScreenEvent(FirebaseConstants.NON_HLMT_LOGIN_SCREEN_EVENT)
+        FirebaseHelper.logScreenEvent(FirebaseConstants.NON_HLMT_LOGIN_SCREEN_EVENT,false)
         init()
         setClickable()
         setObserver()

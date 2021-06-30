@@ -13,8 +13,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.AppColorHelper
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.medication_tracker.viewmodel.MedicineTrackerViewModel
 import kotlinx.android.synthetic.main.activity_medication_home.*
 import kotlinx.android.synthetic.main.toolbar_layout_medication.*
@@ -91,7 +93,7 @@ class MedicationHomeActivity : AppCompatActivity() {
             intentToPass.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intentToPass)
         }
-
+        FirebaseHelper.logScreenEvent(FirebaseConstants.MEDICINE_TRACKER_SCREEN)
     }
 
     override fun onSupportNavigateUp(): Boolean {

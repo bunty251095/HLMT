@@ -16,6 +16,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.common.view.SpinnerAdapter
 import com.caressa.common.view.SpinnerModel
@@ -83,6 +85,7 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
             initialise()
             setClickable()
             loadUserData()
+            FirebaseHelper.logScreenEvent(FirebaseConstants.HEART_AGE_CALCULATOR_SCREEN)
         } catch ( e : Exception ) {
             e.printStackTrace()
         }

@@ -286,8 +286,11 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
         todayStepGoal = if (todayStepGoal > 0) todayStepGoal else 3000
         val stepsToGo = if (todayStepGoal - todayStepCount < 0) 0 else todayStepGoal - todayStepCount
         binding.txtStepsToGo.text = stepsToGo.toString()
-        binding.txtTodayActTime.text = DateHelper.getHourMinFromStrMinutes(selectedFitnessData.activeTime)
-        //binding.txtTodayActTime.text = fitnessHelper.getActiveTime(todayStepCount)
+//        if(selectedFitnessData.activeTime.contains('h',true) || selectedFitnessData.activeTime.contains('m',true))
+//            binding.txtTodayActTime.text = selectedFitnessData.activeTime
+//        else
+//            binding.txtTodayActTime.text = DateHelper.getHourMinFromStrMinutes(selectedFitnessData.activeTime)
+        binding.txtTodayActTime.text = fitnessHelper.getActiveTime(todayStepCount)
     }
 
     private fun updateStepsData( ) {

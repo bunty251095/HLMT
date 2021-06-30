@@ -8,6 +8,8 @@ import androidx.navigation.findNavController
 import com.caressa.hra.R
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.hra.viewmodel.HraViewModel
 import com.caressa.hra.databinding.FragmentIntroductionBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -38,6 +40,7 @@ class IntroductionFragment : BaseFragment() {
     private fun setClickable() {
 
             binding.btnStartHra.setOnClickListener {
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_INITIATED_EVENT)
             it.findNavController().navigate(R.id.action_introductionFragment_to_selectFamilyMemberFragment)
         }
 
