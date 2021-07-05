@@ -19,11 +19,11 @@ object FirebaseHelper {
     }
 
     fun logCustomFirebaseEvent(eventName:String, addPrefix:Boolean = true){
-        if(addPrefix) {
+//        if(addPrefix) {
             firebaseAnalytics.logEvent(FirebaseConstants.PARTNER_IDENTIFIER + eventName, Bundle())
-        }else{
-            firebaseAnalytics.logEvent(eventName, Bundle())
-        }
+//        }else{
+//            firebaseAnalytics.logEvent(eventName, Bundle())
+//        }
     }
 
     fun logScreenEvent(eventName: String, addPrefix: Boolean= true){

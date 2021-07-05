@@ -41,6 +41,9 @@ interface ApiService{
     @POST(Constants.strProxyLoginUrl)
     fun hlmtLoginAPI(@Body loginModel: LoginModel): Deferred<BaseResponse<LoginModel.Response>>
 
+    @POST("PHR/api/Person/HLMT360Authentication")
+    fun hlmt360UserLogin(@Body hlmtLoginModel: HLMTLoginModel): Deferred<BaseResponse<HLMTLoginModel.LoginResponse>>
+
 
     // ************************
     @POST("security/api/account/CheckIfEmailExists/")

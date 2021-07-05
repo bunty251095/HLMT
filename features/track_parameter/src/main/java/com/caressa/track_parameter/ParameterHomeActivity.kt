@@ -44,6 +44,19 @@ class ParameterHomeActivity : AppCompatActivity() {
         // Setting up a back button
         navController = nav_host_fragment_medication.findNavController()
         setupActionBarWithNavController(navController)
+        val bundle = Bundle()
+        if ( intent.hasExtra(Constants.FROM) ) {
+            when(intent.getStringExtra(Constants.FROM)) {
+                "DashboardBP" -> {
+                    bundle.putString(Constants.FROM,"DashboardBP")
+                }
+                "DashboardBMI" -> {
+                    bundle.putString(Constants.FROM,"DashboardBMI")
+                }
+            }
+        }
+        navController.setGraph(R.navigation.track_param_nav_graph,bundle)
+
         navController.addOnDestinationChangedListener{ controller, destination, _ ->
 
             toolbar_title.text = when (destination.id) {

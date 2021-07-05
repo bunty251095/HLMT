@@ -23,6 +23,7 @@ import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Configuration
 import com.caressa.common.constants.Constants
 import com.caressa.common.utils.*
+import com.caressa.model.home.UpdateUserDetailsModel
 import com.caressa.security.databinding.FragmentUserDetailsBinding
 import com.caressa.security.viewmodel.HlmtLoginViewModel
 import com.yalantis.ucrop.UCrop
@@ -68,25 +69,41 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
 
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
+
+        if(!args.hlmtUserID.isEmpty()){
+            binding.layoutMobileEdit.visibility = View.GONE
+        }else{
+            binding.layoutMobileEdit.visibility = View.VISIBLE
+        }
+
         RealPathUtil.makeFilderDirectories()
         binding.edtPhoneNumber.setText(args.mobileNo)
 
         binding.btnDone.setOnClickListener {
 
-            var gender = "M"
-            if(binding.rbMale.isChecked){
-                gender = "M"
+            if(args.isRegister.equals("true")) {
+                var gender = "M"
+                if (binding.rbMale.isChecked) {
+                    gender = "M"
+                } else {
+                    gender = "F"
+                }
+                viewModel.fetchRegistrationResponse(
+                    name = binding.edtUsername.text.toString(),
+                    phoneNumber = args.mobileNo,
+                    passwordStr = "123456",
+                    gender = gender,
+                    dob = binding.edtDob.text.toString(),
+                    emailStr = binding.edtEmail.text.toString(),
+                    fName = fName,
+                    imgPath = fPath,
+                    hlmtLoginStatus = args.loginStatus,
+                    hlmtEmpId = args.hlmtEmployeeID,
+                    hlmtUserId = args.hlmtUserID
+                )
             }else{
-                gender = "F"
+//                viewModel.callUpdateUserDetailsApi()
             }
-            viewModel.fetchRegistrationResponse(name = binding.edtUsername.text.toString(),
-                phoneNumber = args.mobileNo,
-                passwordStr = "123456",
-                gender = gender,
-                dob = binding.edtDob.text.toString(),
-                emailStr = binding.edtEmail.text.toString(),
-                fName = fName,
-                imgPath = fPath)
         }
 
         binding.layoutDob.setOnClickListener {
@@ -111,6 +128,33 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
             Timber.i("Data=> "+it)
         })
         viewModel.uploadProfileImage.observe( viewLifecycleOwner , {})
+    }
+
+    private fun validateAndUpdate(name:String) {
+        println("Inside 1")
+        val username = name
+        val newEmail = ""
+        val newAlternateEmail = ""
+        val newNumber = ""
+        val newAlternateNumber = ""
+        val address = ""
+
+//            //Helper.showMessage(getContext(),"Details Updated");
+//            val newUserDetails = UpdateUserDetailsModel.PersonRequest(
+//                id = user.id,
+//                firstName = username,
+//                dateOfBirth = user.dateOfBirth,
+//                gender = user.gender.toString(),
+//                contact = UpdateUserDetailsModel.Contact(
+//                    emailAddress = user.contact.emailAddress,
+//                    primaryContactNo = user.contact.primaryContactNo,
+//                    alternateEmailAddress = newAlternateEmail,
+//                    alternateContactNo = newAlternateNumber,),
+//                address = UpdateUserDetailsModel.Address(
+//                    addressLine1 = address)
+//            )
+//            viewModel.callUpdateUserDetailsApi()
+
     }
 
     private fun showDatePickerDialog() {

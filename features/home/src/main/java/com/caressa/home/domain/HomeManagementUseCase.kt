@@ -177,4 +177,8 @@ class HomeManagementUseCase( private val homeRepository: HomeRepository , privat
         homeRepository.clearTablesForSwitchProfile()
     }
 
+    suspend fun invokeGetUserRelativeDetailsByRelativeId( relativeId : String ) : UserRelatives {
+        return homeRepository.getUserRelativeDetailsByRelativeId( relativeId )
+    }
+
 }

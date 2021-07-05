@@ -13,6 +13,7 @@ import com.caressa.security.databinding.FragmentHlmtLoginBinding
 import com.caressa.security.databinding.FragmentHlmtStepOneBinding
 import com.caressa.security.viewmodel.HlmtLoginViewModel
 import com.caressa.security.viewmodel.LoginViewModel
+import kotlinx.android.synthetic.main.fragment_hlmt_login.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -40,9 +41,13 @@ class HlmtLoginFragment : BaseFragment() {
             Timber.i("Login Response=> "+it)
         })
 
+        viewModel.hlmt360LoginResponse.observe(viewLifecycleOwner,{})
+
        binding.btnLogin.setOnClickListener {
+           viewModel.checkLoginNameExistOrNot(username = binding.edtUsername.text.toString(),passwordStr = binding.edtLoginPassword.text.toString())
 //           viewModel.checkLoginNameExistOrNot(name = "",username = binding.edtLoginEmailaddress.text.toString(),passwordStr = binding.edtLoginPassword.text.toString())
 //           viewModel.callLogin(true,"Mayuresh",binding.edtLoginEmailaddress.text.toString(),binding.edtLoginPassword.text.toString())
        }
     }
+
 }

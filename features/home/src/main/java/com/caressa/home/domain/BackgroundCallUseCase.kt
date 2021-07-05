@@ -140,6 +140,10 @@ class BackgroundCallUseCase(private val homeRepository: HomeRepository, private 
         trackParamRepo.deleteHistoryWithOtherPersonId(personId)
     }
 
+    suspend fun getVitalsData(profileCode: String,profileCodeTwo: String, personId: String): List<TrackParameterMaster.History>? {
+        return trackParamRepo.getLatestParameterBasedOnProfileCodes(profileCode,profileCodeTwo, personId)
+    }
+
     suspend fun invokeLogout() {
         trackParamRepo.logoutUser()
         hraRepository.logoutUser()

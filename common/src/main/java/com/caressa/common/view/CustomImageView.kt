@@ -25,6 +25,6 @@ class CustomImageView : AppCompatImageView {
     }
 
     companion object {
-        var radius = 10.0f
+        var radius = 20.0f
     }
 }

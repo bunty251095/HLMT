@@ -48,7 +48,7 @@ class DueDateInputFragment : BaseFragment() {
     private fun initialise() {
 
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.YEAR, -10)
+        calendar.add(Calendar.MONTH, -10)
         binding.datePicker.maxDate = Calendar.getInstance().timeInMillis - 1000
         binding.datePicker.minDate = calendar.timeInMillis
 

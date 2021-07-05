@@ -12,5 +12,7 @@ object PreferenceConstants {
     const val ACCOUNTID = "AccountID"
     const val FIRSTNAME = "FIRSTNAME"
     const val GENDER = "GENDER"
+    const val AGE = "AGE"
+    const val DOB = "DOB"
     const val SELECTION_PARAM = "sel_param"
 }

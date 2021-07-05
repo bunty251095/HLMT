@@ -15,6 +15,7 @@ import com.caressa.home.di.ScoreListener
 import com.caressa.home.viewmodel.BackgroundCallViewModel
 import com.caressa.home.viewmodel.DashboardViewModel
 import com.caressa.model.entity.HRASummary
+import com.caressa.model.entity.TrackParameterMaster
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DashboardFragment : BaseFragment() , ScoreListener {
@@ -44,7 +45,7 @@ class DashboardFragment : BaseFragment() , ScoreListener {
     private fun setClickable() {
 
         binding.layoutHra.setOnClickListener {
-            viewModel.goToHRA()
+//            viewModel.goToHRA()
         }
 
         binding.layoutTakeHealthCheckup.setOnClickListener {
@@ -112,6 +113,14 @@ class DashboardFragment : BaseFragment() , ScoreListener {
 
     override fun onScore(hraSummary: HRASummary?) {
         viewModel.getHraSummaryDetails()
+    }
+
+    override fun onVitalDataUpdateListener(history: List<TrackParameterMaster.History>) {
+
+    }
+
+    override fun onStepGoalReceived(goal: Int) {
+
     }
 
 }

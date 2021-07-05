@@ -3,6 +3,7 @@ package com.caressa.security.domain
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.caressa.model.entity.Users
+import com.caressa.model.home.UpdateUserDetailsModel
 import com.caressa.model.home.UploadProfileImageResponce
 import com.caressa.model.security.*
 import com.caressa.repository.HomeRepository
@@ -84,6 +85,13 @@ class UserManagementUseCase(private val repository: UserRepository,private val h
         }
     }
 
+    suspend fun invokeHLMT360LoginResponse(isForceRefresh : Boolean, data: HLMTLoginModel): LiveData<Resource<HLMTLoginModel.LoginResponse>> {
+        return Transformations.map(
+            repository.hlmt360LoginResponse(isForceRefresh,data)) {
+            it // Place here your specific logic actions
+        }
+    }
+
     suspend fun invokeAddUserInfo(data: Users) {
             repository.saveUserInfo(data)
 
@@ -102,4 +110,10 @@ class UserManagementUseCase(private val repository: UserRepository,private val h
         return homeRepository.updateUserProfileImgPath( name , path )
     }
 
+    suspend fun invokeUpdateUserDetails(isForceRefresh : Boolean, data: UpdateUserDetailsModel): LiveData<Resource<UpdateUserDetailsModel.UpdateUserDetailsResponse>> {
+        return Transformations.map(
+            homeRepository.updateUserDetails(isForceRefresh, data)) {
+            it
+        }
+    }
 }

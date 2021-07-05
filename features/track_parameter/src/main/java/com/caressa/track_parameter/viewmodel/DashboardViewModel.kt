@@ -161,7 +161,7 @@ class DashboardViewModel (
                     list.add(DashboardParamGridModel(R.drawable.img_calories,R.color.hlmt_warm_grey,context.resources.getString(R.string.calories), "0", "CAL"))
                 }
 
-                list.add(DashboardParamGridModel(R.drawable.add,R.color.white,context.resources.getString(R.string.add_more), "", "ADD"))
+//                list.add(DashboardParamGridModel(R.drawable.add,R.color.white,context.resources.getString(R.string.add_more), "", "ADD"))
 
                 listHistoryWithLatestRecord.postValue(list)
 

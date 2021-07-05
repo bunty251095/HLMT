@@ -89,12 +89,14 @@ class RevDashboardFragment : BaseFragment(), DashboardGridAdapter.ParameterSelec
                     data.distance = todayData.get(Constants.DISTANCE).toString().toDouble()
                     data.activeTime = todayData.getString(Constants.ACTIVE_TIME).toString().toInt()
                     viewModel.listHistoryWithLatestRecord(data)
+                    viewModel.hideProgressBar()
                 } else {
                     Timber.e("Fitness Data not Available")
                     viewModel.hideProgressBar()
                 }
             }
         } catch (e : Exception) {
+            viewModel.hideProgressBar()
             e.printStackTrace()
         }
     }
@@ -128,7 +130,7 @@ class RevDashboardFragment : BaseFragment(), DashboardGridAdapter.ParameterSelec
             "SUGAR" -> routeToUpdateParameter("DIABETIC")
             "CHOL" -> routeToUpdateParameter("LIPID")
             "HEMOGLOBIN" -> routeToUpdateParameter("HEMOGRAM")
-            "ADD" -> routeToUpdateParameter("BMI")
+//            "ADD" -> routeToUpdateParameter("BMI")
         }
     }
 

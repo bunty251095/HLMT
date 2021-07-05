@@ -72,6 +72,7 @@ class UpdateParamViewModel(
 //    }
 
     fun getParameterByProfileCodeAndDate(profileCode: String,serverDate:String) = viewModelScope.launch(dispatchers.main) {
+        Timber.i("Server Date :: " + serverDate)
         withContext(dispatchers.io){
             if(serverDate.equals(DateHelper.currentDateAsStringddMMMyyyy)) {
                 val data = useCase.invokeGetLatestParametersData(

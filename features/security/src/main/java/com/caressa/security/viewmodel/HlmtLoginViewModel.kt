@@ -15,18 +15,17 @@ import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.*
 import com.caressa.model.entity.Users
+import com.caressa.model.home.UpdateUserDetailsModel
 import com.caressa.model.home.UploadProfileImageResponce
-import com.caressa.model.security.EmailExistsModel
-import com.caressa.model.security.LoginModel
-import com.caressa.model.security.LoginNameExistsModel
-import com.caressa.model.security.PhoneExistsModel
+import com.caressa.model.security.*
 import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
+import com.caressa.security.R
 import com.caressa.security.domain.UserManagementUseCase
+import com.caressa.security.ui.HlmtLoginFragmentDirections
 import com.caressa.security.ui.LoginFragmentDirections
 import com.caressa.security.ui.LoginWithOtpFragmentDirections
 import com.caressa.security.ui.UserDetailsFragmentDirections
-import com.caressa.security.viewmodel.LoginViewModel.LoginEncryption.getEncryptedData
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -36,7 +35,6 @@ import org.json.JSONObject
 import timber.log.Timber
 import java.io.File
 import java.io.FileInputStream
-import java.util.*
 
 class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCase, private val dispatchers: AppDispatchers,
                          private val sharedPref: SharedPreferences, val context: Context) : BaseViewModel() {
@@ -57,6 +55,10 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
     val loginResponse: LiveData<LoginModel.Response> get() = _loginResponse
     var hlmtLoginUserSource: LiveData<Resource<LoginModel.Response>> = MutableLiveData()
 
+    private val _hlmt360LoginResponse = MediatorLiveData<HLMTLoginModel.LoginResponse>()
+    val hlmt360LoginResponse: LiveData<HLMTLoginModel.LoginResponse> get() = _hlmt360LoginResponse
+    var hlmt360LoginUserSource: LiveData<Resource<HLMTLoginModel.LoginResponse>> = MutableLiveData()
+
     private val _socialUser = MediatorLiveData<EmailExistsModel.IsExistResponse>()
     val socialUser: LiveData<EmailExistsModel.IsExistResponse> get() = _socialUser
 
@@ -67,6 +69,13 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
     var uploadProfileImageSource: LiveData<Resource<UploadProfileImageResponce>> = MutableLiveData()
     val _uploadProfileImage = MediatorLiveData<UploadProfileImageResponce>()
     val uploadProfileImage: LiveData<UploadProfileImageResponce> get() = _uploadProfileImage
+
+    var updateUserDetailsSource: LiveData<Resource<UpdateUserDetailsModel.UpdateUserDetailsResponse>> = MutableLiveData()
+    val _updateUserDetails = MediatorLiveData<UpdateUserDetailsModel.UpdateUserDetailsResponse>()
+    val updateUserDetails: LiveData<UpdateUserDetailsModel.UpdateUserDetailsResponse> get() = _updateUserDetails
+
+
+    var isAccountExist = false
 
 
     fun checkLoginNameExistOrNot(name: String = "", username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
@@ -83,10 +92,11 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
             if (it.status == Resource.Status.SUCCESS){
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if (it.data?.isExist.equals("true",true)) {
-                    fetchLoginResponse(name=name,username=username,passwordStr=passwordStr)
+                    isAccountExist = true
                 }else {
-                    toastMessage("Invalid User Details")
+                    isAccountExist = false
                 }
+                fetchHLMT360LoginResponse(username=username,passwordStr = passwordStr)
             }
 
             if (it.status == Resource.Status.ERROR) {
@@ -96,11 +106,11 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
         }
     }
 
-    fun fetchLoginResponse(name: String = "", username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
+    fun fetchLoginResponse(name: String = "", username: String, passwordStr: String = "",hlmtUserId: String,hlmtEmpId: String,hlmtLoginStatus: String) = viewModelScope.launch(dispatchers.main){
 
         val requestData = LoginModel(Gson().toJson(
             LoginModel.JSONDataRequest(
-                mode = "LOGIN",name=name,phoneNumber = username,password = passwordStr), LoginModel.JSONDataRequest::class.java))
+                mode = "LOGIN",name=name,phoneNumber = username,password = "123456",hlmtLoginStatus = hlmtLoginStatus,hlmtUserID = hlmtUserId,employeeID = hlmtEmpId), LoginModel.JSONDataRequest::class.java))
 
         _progressBar.value = Event("Validating Username..")
         _loginResponse.removeSource(hlmtLoginUserSource)
@@ -112,14 +122,16 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 Timber.i("Data=> "+it)
                 var loginData = it.data?.response?.loginData!!
+
                 sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN,true).apply()
                 sharedPref.edit().putString(PreferenceConstants.EMAIL,loginData.emailAddress).apply()
                 sharedPref.edit().putString(PreferenceConstants.PHONE,loginData.phoneNumber).apply()
                 sharedPref.edit().putString(PreferenceConstants.TOKEN, loginData.context).apply()
                 sharedPref.edit().putString(PreferenceConstants.ACCOUNTID, loginData.accountID.toString()).apply()
                 sharedPref.edit().putString(PreferenceConstants.FIRSTNAME, loginData.name).apply()
-                sharedPref.edit().putString(PreferenceConstants.GENDER, "1").apply()
+                sharedPref.edit().putString(PreferenceConstants.GENDER, if(loginData.gender.equals("Male",true))"0" else "1").apply()
                 sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE, Constants.SELF_RELATIONSHIP_CODE).apply()
+                sharedPref.edit().putString(PreferenceConstants.DOB,loginData.dateOfBirth).apply()
 
                 val pid = loginData?.personID?.toDouble()?.toInt()
                 Timber.i("Person Id => "+pid)
@@ -127,8 +139,13 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                 sharedPref.edit().putString(PreferenceConstants.ADMIN_PERSON_ID, pid.toString()).apply()
                 // Added by Rohit
                 //RealPathUtil.creatingLocalDirctories()
-                saveUserData(loginData)
-                navigate(LoginWithOtpFragmentDirections.actionLoginViaOTPFragmentToMainActivity())
+                    saveUserData(loginData)
+                    navigate(HlmtLoginFragmentDirections.actionHlmtloginfragmentToMainactivity())
+
+                if (loginData.gender.isNullOrEmpty() || loginData.dateOfBirth.isNullOrEmpty()){
+//                    navigate(HlmtLoginFragmentDirections.actionLoginFragmentToUserDetailFragment(hlmtEmployeeID = username, hlmtUserID = it.data!!.HLMTUserID.toString(),loginStatus = it.data!!.loginStatus.toString(),isRegister = "false",mobileNo = ""))
+                }
+
             }
 
             if (it.status == Resource.Status.ERROR) {
@@ -137,9 +154,39 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
             }
         }
     }
-    fun fetchRegistrationResponse(name: String = "", phoneNumber: String, passwordStr: String = "",gender:String,dob:String,emailStr: String,fName:String,imgPath:String) = viewModelScope.launch(dispatchers.main){
 
-        if(validateData(name,phoneNumber,emailStr,dob)) {
+    fun fetchHLMT360LoginResponse(username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
+
+        val requestData = HLMTLoginModel(Gson().toJson(
+            HLMTLoginModel.JSONDataRequest(username = username,password = passwordStr), HLMTLoginModel.JSONDataRequest::class.java))
+
+        _progressBar.value = Event("Validating Username..")
+        _hlmt360LoginResponse.removeSource(hlmt360LoginUserSource)
+        withContext(dispatchers.io){ hlmt360LoginUserSource = userManagementUseCase.invokeHLMT360LoginResponse(true,requestData)}
+        _hlmt360LoginResponse.addSource(hlmt360LoginUserSource){
+            _hlmt360LoginResponse.value = it.data
+
+            if (it.status == Resource.Status.SUCCESS){
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if (!isAccountExist){
+                    navigate(HlmtLoginFragmentDirections.actionLoginFragmentToUserDetailFragment(hlmtEmployeeID = username, hlmtUserID = it.data!!.HLMTUserID.toString(),loginStatus = it.data!!.loginStatus.toString(),isRegister = "true",mobileNo = ""))
+                }else{
+                    fetchLoginResponse(hlmtLoginStatus = it.data!!.loginStatus.toString(),hlmtUserId = it.data!!.HLMTUserID.toString(),hlmtEmpId = username,username = "")
+                }
+                Timber.i("Data=> "+it)
+            }
+
+            if (it.status == Resource.Status.ERROR) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                toastMessage(it.errorMessage)
+            }
+        }
+    }
+
+    fun fetchRegistrationResponse(name: String = "", phoneNumber: String, passwordStr: String = "",gender:String,dob:String,emailStr: String,fName:String,imgPath:String,
+    hlmtUserId:String="",hlmtLoginStatus:String="",hlmtEmpId:String="") = viewModelScope.launch(dispatchers.main){
+
+        if(validateData(name,phoneNumber,emailStr,dob,hlmtEmpId)) {
             val requestData = LoginModel(
                 Gson().toJson(
                     LoginModel.JSONDataRequest(
@@ -149,7 +196,10 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                         password = passwordStr,
                         gender = gender,
                         dateOfBirth = dob,
-                        emailAddress = emailStr
+                        emailAddress = emailStr,
+                        hlmtUserID = hlmtUserId,
+                        hlmtLoginStatus = hlmtLoginStatus,
+                        employeeID = hlmtEmpId
                     ), LoginModel.JSONDataRequest::class.java
                 )
             )
@@ -178,6 +228,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                         .apply()
                     sharedPref.edit().putString(PreferenceConstants.FIRSTNAME, loginData.name)
                         .apply()
+                    sharedPref.edit().putString(PreferenceConstants.DOB,loginData.dateOfBirth).apply()
                     sharedPref.edit().putString(PreferenceConstants.GENDER, "1").apply()
                     sharedPref.edit().putString(
                         PreferenceConstants.RELATIONSHIPCODE,
@@ -276,14 +327,15 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
         name: String,
         phoneNumber: String,
         emailStr: String,
-        dob: String
+        dob: String,
+        hlmtEmpId: String
     ): Boolean {
         var isValid = false
         val emailPattern:Regex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
 
         if (name.isNullOrEmpty()){
             toastMessage("Please Enter Name.")
-        }else if(phoneNumber.isNullOrEmpty() || phoneNumber.length < 10){
+        }else if((phoneNumber.isNullOrEmpty() || phoneNumber.length < 10) && hlmtEmpId.isEmpty()){
             toastMessage("Invalid Phone Number")
         }else if(emailStr.isNullOrEmpty() || !emailStr.matches(emailPattern)){
             toastMessage("Invalid email Address")
@@ -332,6 +384,55 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
 
     fun getLoginStatus(): Boolean{
         return sharedPref.getBoolean(PreferenceConstants.IS_LOGIN,false)
+    }
+
+    fun callUpdateUserDetailsApi( name: String = "", phoneNumber: String, passwordStr: String = "",gender:String,dob:String,emailStr: String,fName:String) = viewModelScope.launch(dispatchers.main) {
+
+        val person = UpdateUserDetailsModel.PersonRequest(
+            id = sharedPref.getString(PreferenceConstants.PERSONID,"")!!.toInt(),
+            firstName = "",
+            dateOfBirth = "",
+            gender = "1",
+            contact = UpdateUserDetailsModel.Contact(
+                emailAddress = emailStr,
+                primaryContactNo = "",
+                alternateEmailAddress = "",
+                alternateContactNo = "",),
+            address = UpdateUserDetailsModel.Address(
+                addressLine1 = "")
+        )
+
+        val requestData = UpdateUserDetailsModel(Gson().toJson(
+            UpdateUserDetailsModel.JSONDataRequest(
+                personID = sharedPref.getString(PreferenceConstants.PERSONID,"")!!,
+                person = person),
+            UpdateUserDetailsModel.JSONDataRequest::class.java) , sharedPref.getString(PreferenceConstants.TOKEN,"")!! )
+
+        _progressBar.value = Event("Updating Profile Details.....")
+        _updateUserDetails.removeSource(updateUserDetailsSource)
+        withContext(dispatchers.io) {
+            updateUserDetailsSource = userManagementUseCase.invokeUpdateUserDetails(isForceRefresh = true, data = requestData)
+        }
+        _updateUserDetails.addSource(updateUserDetailsSource) {
+            _updateUserDetails.value = it.data
+
+            if (it.status == Resource.Status.SUCCESS) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if (it.data != null ) {
+                    Timber.e("UpdateUserDetails----->${it.data!!.person}")
+//                    _toastMessage.value = Event(R.string.PRO)
+//                    Utilities.toastMessageShort(context,context.resources.getString(R.string.PROFILE_UPDATED))
+                }
+            }
+            if (it.status == Resource.Status.ERROR) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if(it.errorNumber.equals("1100014",true)){
+                    _sessionError.value = Event(true)
+                }else {
+                    toastMessage(it.errorMessage)
+                }
+            }
+        }
     }
 
 }

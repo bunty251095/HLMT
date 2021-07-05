@@ -18,6 +18,7 @@ import com.caressa.common.constants.Configuration
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.constants.PreferenceConstants
+import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.Event
 import com.caressa.common.utils.PermissionUtil
 import com.caressa.common.utils.Utilities
@@ -25,7 +26,7 @@ import com.caressa.home.common.DataHandler
 import com.caressa.home.common.DataHandler.DashboardFeature
 import com.caressa.home.common.DataHandler.NavDrawerOption
 import com.caressa.home.domain.HomeManagementUseCase
-import com.caressa.home.ui.DashboardFragmentDirections
+import com.caressa.home.ui.HlmtDashboardFragmentDirections
 import com.caressa.home.ui.HomeMainActivity
 import com.caressa.home.ui.PasswordChangeActivity
 import com.caressa.model.entity.HRASummary
@@ -56,6 +57,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
 
     var userDetails = MutableLiveData<Users>()
     val userRelativesList = MutableLiveData<List<UserRelatives>>()
+    val currentSelectedPerson = MutableLiveData<UserRelatives>()
     val trackersList = MutableLiveData<List<DashboardFeature>>()
     val facilitiesAndResourcesList = MutableLiveData<List<DashboardFeature>>()
     val settingsOptionList = MutableLiveData<List<DataHandler.Option>>()
@@ -129,6 +131,8 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         sharedPref.edit().putString(PreferenceConstants.PHONE,userRelative.contactNo).apply()
         sharedPref.edit().putString(PreferenceConstants.FIRSTNAME,userRelative.firstName).apply()
         sharedPref.edit().putString(PreferenceConstants.GENDER,userRelative.gender).apply()
+        sharedPref.edit().putString(PreferenceConstants.AGE,userRelative.age).apply()
+        sharedPref.edit().putString(PreferenceConstants.DOB,userRelative.dateOfBirth).apply()
         clearTablesForSwitchProfile()
     }
 
@@ -150,34 +154,53 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         return sharedPref.getString(PreferenceConstants.PERSONID,"") == sharedPref.getString(PreferenceConstants.ADMIN_PERSON_ID,"")
     }
 
-    fun goToHRA() {
-        if (hraDetails.value != null) {
-            val hraSummary = hraDetails.value
-            val currentHRAHistoryID = hraSummary?.currentHRAHistoryID.toString()
-            val wellnessScore = hraSummary?.scorePercentile.toString()
-            val hraCutOff = hraSummary?.hraCutOff
-            if (!Utilities.isNullOrEmpty(currentHRAHistoryID) && currentHRAHistoryID != "0") {
-                if (hraCutOff.equals("0")) {
-                    navigateToHraStart()
-                } else if (!Utilities.isNullOrEmpty(wellnessScore)) {
-                    navigateToHraSummary()
-                } else {
-                    navigateToHraStart()
-                }
-            } else {
-                navigateToHraStart()
-            }
-        } else {
-            navigateToHraStart()
+    fun getDOBOfPerson() = viewModelScope.launch(dispatchers.main){
+        withContext(dispatchers.io) {
+           val user = homeManagementUseCase.invokeGetUserRelativeDetailsByRelativeId(sharedPref.getString(PreferenceConstants.PERSONID,"")!!)
+            currentSelectedPerson.postValue(user)
         }
+
+    }
+
+    fun goToHRA(user: UserRelatives) {
+        try {
+            val dob = user.dateOfBirth
+            if (dob.isNullOrEmpty()){
+                toastMessage("HRA is allowed for 18+ members only")
+            }else {
+                if(DateHelper.isDateAbove18Years(dob)) {
+                    if (hraDetails.value != null) {
+                        val hraSummary = hraDetails.value
+                        val currentHRAHistoryID = hraSummary?.currentHRAHistoryID.toString()
+                        val wellnessScore = hraSummary?.scorePercentile.toString()
+                        val hraCutOff = hraSummary?.hraCutOff
+                        if (!Utilities.isNullOrEmpty(currentHRAHistoryID) && currentHRAHistoryID != "0") {
+                            if (hraCutOff.equals("0")) {
+                                navigateToHraStart()
+                            } else if (!Utilities.isNullOrEmpty(wellnessScore)) {
+                                navigateToHraSummary()
+                            } else {
+                                navigateToHraStart()
+                            }
+                        } else {
+                            navigateToHraStart()
+                        }
+                    } else {
+                        navigateToHraStart()
+                    }
+                }else{
+                    toastMessage("HRA is allowed for 18+ members only")
+                }
+            }
+        }catch (e:Exception){e.printStackTrace()}
     }
 
     private fun navigateToHraStart( ) {
-        navigate(DashboardFragmentDirections.actionDashboardFragmentToHraActivity())
+        navigate(HlmtDashboardFragmentDirections.actionDashboardFragmentToHraActivity())
     }
 
     private fun navigateToHraSummary( ) {
-        navigate(DashboardFragmentDirections.actionDashboardFragmentToHraSummaryActivity2())
+        navigate(HlmtDashboardFragmentDirections.actionDashboardFragmentToHraSummaryActivity2())
     }
 
     fun callSaveFeedbackApi( context: Context,feedback : String) = viewModelScope.launch(dispatchers.main) {

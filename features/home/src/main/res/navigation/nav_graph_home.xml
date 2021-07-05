@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.caressa.home.ui.DashboardFragment"
+        android:name="com.caressa.home.ui.HlmtDashboardFragment"
         tools:layout="@layout/fragment_dashboard">
 
         <action android:id="@+id/action_dashboardFragment_to_homeFragment"

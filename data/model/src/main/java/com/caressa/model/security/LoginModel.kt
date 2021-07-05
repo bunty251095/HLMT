@@ -43,6 +43,15 @@ data class LoginModel(@SerializedName("JSONData")
         @SerializedName("Gender")
         @Expose
         private val gender: String = "",
+        @SerializedName("EmployeeID")
+        @Expose
+        private val employeeID: String = "",
+        @SerializedName("HLMTUserID ")
+        @Expose
+        private val hlmtUserID : String = "",
+        @SerializedName("HLMTLoginStatus")
+        @Expose
+        private val hlmtLoginStatus: String = "",
         )
 
 

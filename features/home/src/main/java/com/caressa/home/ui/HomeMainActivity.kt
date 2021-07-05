@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -96,6 +97,18 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
                 ToolsTrackerSingleton.instance.hraSummary = it!!.data!!.MedicalProfileSummary!!
                 scoreListener.onScore(it.data!!.MedicalProfileSummary)
 
+            }
+        })
+        // Mayuresh: This observer is written for getting parameter data in dashboard screen
+        backGroundCallViewModel.labRecordList.observe(this,{})
+        backGroundCallViewModel.labParameterList.observe(this, Observer {
+                scoreListener.onVitalDataUpdateListener(it)
+
+        })
+        backGroundCallViewModel.getStepsGoal.observe(this,{
+            Timber.i("Steps=> "+it)
+            if (it!=null && it.latestGoal!= null && it.latestGoal.goal!= null) {
+                scoreListener.onStepGoalReceived(it.latestGoal.goal)
             }
         })
     }
@@ -230,7 +243,11 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
         }
     }
 
-    fun registerListener(dashboardFragment: DashboardFragment) {
+//    fun registerListener(dashboardFragment: DashboardFragment) {
+//        scoreListener = dashboardFragment
+//    }
+
+    fun registerListener(dashboardFragment: ScoreListener) {
         scoreListener = dashboardFragment
     }
 

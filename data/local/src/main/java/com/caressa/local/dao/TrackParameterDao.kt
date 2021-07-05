@@ -65,6 +65,9 @@ abstract class TrackParameterDao {
     @Query("SELECT personID,parameterCode,description,profileCode,value,observation,recordDate,max(recordDateMillisec) as recordDateMillisec,textValue,ownerCode,sync,unit,createdBy,createdDate,modifiedBy FROM TrackParameterHistory WHERE personID =:personId  group by parameterCode HAVING ProfileCode =:pCode")
     abstract suspend fun getLatestParametersBaseOnHisProfileCode(pCode: String, personId: String):List<TrackParameterMaster.History>
 
+    @Query("SELECT personID,parameterCode,description,profileCode,value,observation,recordDate,max(recordDateMillisec) as recordDateMillisec,textValue,ownerCode,sync,unit,createdBy,createdDate,modifiedBy FROM TrackParameterHistory WHERE personID =:personId  group by parameterCode HAVING ProfileCode =:pCode OR ProfileCode =:pCodeTwo")
+    abstract suspend fun getLatestParametersBaseOnHisProfileCodes(pCode: String, pCodeTwo: String, personId: String):List<TrackParameterMaster.History>
+
     @Query("select * from TrackParameterHistory where personID =:personId and parameterCode=:paramCode and  (modifiedDate) in (select max(modifiedDate) from TrackParameterHistory group by parameterCode)")
     abstract suspend fun getLatestParameterBaseOnHisParameterCode(paramCode: String, personId: String):List<TrackParameterMaster.History>
 
@@ -77,6 +80,7 @@ abstract class TrackParameterDao {
     @Query("SELECT A.code as parameterCode, A.parameterType, A.description, A.profileCode, A.profileName, A.unit as parameterUnit,A.minPermissibleValue, A.maxPermissibleValue, B.textValue as parameterTextVal, B.value as parameterVal FROM TrackParameterMaster A LEFT JOIN TrackParameterHistory B ON A.profileCode=B.profileCode AND A.code=B.parameterCode AND B.personID = :personId AND A.profileCode = :profileCode AND B.recordDate= :recordDate  AND B.parameterCode NOT LIKE \"%RATIO%\" where A.profileCode = :profileCode AND A.code NOT LIKE '%RATIO%' ORDER BY A.profileCode DESC , A.code DESC")
     abstract suspend fun getParameterDataByRecordDate(profileCode: String, recordDate:String, personId: String):List<ParameterListModel.InputParameterModel>
 
+//    @Query("SELECT personID,parameterCode,description,profileCode,value,observation,recordDate,max(recordDateMillisec) as recordDateMillisec,textValue,ownerCode,sync,unit,createdBy,createdDate,modifiedBy FROM TrackParameterHistory WHERE personID =:personId  group by parameterCode HAVING ProfileCode =:pCode")
     @Query("select A.code as parameterCode, A.parameterType, A.description, A.profileCode, A.profileName, A.unit as parameterUnit,A.minPermissibleValue, A.maxPermissibleValue, B.textValue as parameterTextVal, B.value as parameterVal from TrackParameterMaster A  LEFT JOIN (select max(recordDate) as maxDate, value, profileCode, textValue, parameterCode, personID, recordDate, unit from TrackParameterHistory where personID= :personId group by parameterCode having profileCode = :profileCode) B ON A.code = B.parameterCode AND A.profileCode = B.profileCode where A.profileCode = :profileCode  AND A.code NOT LIKE '%RATIO%' ORDER BY A.profileCode DESC , A.code DESC")
     abstract suspend fun getLatestDataOfParameter(profileCode: String, personId: String):List<ParameterListModel.InputParameterModel>
 

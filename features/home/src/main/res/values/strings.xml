@@ -44,15 +44,16 @@
     <string name="DASH_TAKE_HEALTH_CHECKUP">Take a Health Checkup</string>
     <string name="DASH_CHAT_WITH_DOCTOR">Chat With Doctor</string>
     <string name="DASH_ORDER_YOUR_MEDICINES">Order Your Medicines</string>
-    <string name="DASH_TRACK_PARAMETER">Track Health\nParameters</string>
-    <string name="DASH_MEDICINE_TRACKER">Medicine\nTracker</string>
-    <string name="DASH_ACTIVITY_TRACKER">Activity\nTracker</string>
-    <string name="DASH_STORE_HEALTH_RECORD">Store Health\nRecords</string>
+    <string name="DASH_TRACK_PARAMETER">Track Health Parameters</string>
+    <string name="DASH_MEDICINE_TRACKER">Medicine Tracker</string>
+    <string name="DASH_ACTIVITY_TRACKER">Activity Tracker</string>
+    <string name="DASH_STORE_HEALTH_RECORD">Store Health Records</string>
     <string name="DASH_WELLNESS_CENTRE">Wellness\nCentre</string>
-    <string name="DASH_TOOLS_TRACKER">Tools and\nCalculators</string>
+    <string name="DASH_TOOLS_TRACKER">Tools and Calculators</string>
     <string name="DASH_HOSPITAL_NEAR_ME">Hospitals\nNear Me</string>
-    <string name="DASH_HEALTH_LIBRARY">Health\nLibrary</string>
+    <string name="DASH_HEALTH_LIBRARY">Health Library</string>
     <string name="DASH_CHAT_DIETITIAN">Chat with Dietitian/Counsellor</string>
+    <string name="DASH_REWARD">Rewards</string>
     <!--Dashboard Buttons-->
 
     <string name="CHECKOUT_PROFILE">Checkout your\nprofile</string>
@@ -63,6 +64,7 @@
 
     <!--HRA Strings-->
     <string name="COMPLETE_YOUR_HRA">Complete Your HRA</string>
+    <string name="HRA">Health Risk Assessment</string>
     <string name="HIGH_RISK">High Risk</string>
     <string name="NEED_IMPROVEMENT">Needs Improvement</string>
     <string name="HEALTHY">Healthy</string>

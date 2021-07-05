@@ -334,6 +334,48 @@ object ApiConstants{
 
 object FirebaseConstants{
     const val PARTNER_IDENTIFIER = "hlmt_"
+
+    const val IS_HLMT_USER_YES_EVENT = "is_hlmt_user_yes"
+    const val IS_HLMT_USER_NO_EVENT = "is_hlmt_user_no"
+    const val HLMT_LOGIN_SUCCESSFUL_EVENT = "hlmt360_login_successful"
+    const val HLMT_LOGIN_FAIL_EVENT = "hlmt360_login_fail"
+    const val HLMT_REG_SUCCESSFUL_EVENT = "hlmt360_registration_successful"
+    const val HLMT_REG_FAIL_EVENT = "hlmt360_registration_fail"
+    const val SEND_OTP_SUCCESSFUL_EVENT = "send_otp_successful"
+    const val SEND_OTP_FAIL_EVENT = "send_otp_fail"
+    const val SEND_OTP_VERIFICATION_SUCCESSFUL_EVENT = "otp_verification_successful"
+    const val SEND_OTP_VERIFICATION_FAIL_EVENT = "otp_verification_fail"
+    const val RESEND_OTP_EVENT = "resend_otp"
+    const val NON_HLMT_LOGIN_SUCCESSFUL_EVENT = "regular_login_successful"
+    const val NON_HLMT_LOGIN_FAIL_EVENT = "regular_login_fail"
+    const val NON_HLMT_REGISTRATION_SUCCESSFUL_EVENT = "regular_registration_successful"
+    const val NON_HLMT_REGISTRATION_FAIL_EVENT = "regular_registration_fail"
+
+    const val HRA_INITIATED_EVENT = "hra_initiated"
+    const val HRA_COMPLETED_EVENT = "hra_completed"
+    const val FAMILY_MEMBER_ADD_EVENT = "family_member_add"
+    const val HEALTH_RECORDS_UPLOAD_EVENT = "health_records_uploaded"
+    const val MEDICINE_UPLOAD_EVENT = "medicine_uploaded"
+    const val HEALTH_PARAM_UPLOAD_EVENT = "health_parameter_uploaded"
+
+    const val ACTIVITY_TRACKER_SCREEN = "activity_tracker_screen"
+    const val ACTIVITY_TRACKER_MONTHLY_DETAIL_SCREEN = "activity_monthly_detail_screen"
+    const val MEDICINE_TRACKER_SCREEN = "medicine_tracker_screen"
+    const val HEALTH_PARAMETERS_TRACKER_SCREEN = "health_parameters_tracker_screen"
+    const val HEALTH_RECORDS_SCREEN = "health_records_screen"
+    const val TOOLS_CALCULATORS_SCREEN = "tools_calculators_screen"
+    const val HEART_AGE_CALCULATOR_SCREEN = "heart_age_calculator_screen"
+    const val DIABETES_CALCULATOR_SCREEN = "diabetes_calculator_screen"
+    const val HYPERTENSION_CALCULATOR_SCREEN = "hypertension_calculator_screen"
+    const val STRESS_CALCULATOR_SCREEN = "stress_anxiety_calculator_screen"
+    const val BLOGS_SCREEN = "blogs_screen"
+    const val CONTACT_US_SCREEN = "contact_us_screen"
+    const val NON_HLMT_LOGIN_SCREEN = "non_hlmt_login_screen"
+    const val DUE_DATE_CALCULATOR_SCREEN = "due_date_calculator_screen"
+    const val SMART_PHONE_CALCULATOR_SCREEN = "smart_phone_calculator_screen"
+
+
+    /*const val PARTNER_IDENTIFIER = "hlmt_"
     const val LOGIN_EVENT = "login_completed"
     const val HRA_INITIATED_EVENT = "hra_initiated"
     const val HRA_COMPLETED_EVENT = "hra_completed"
@@ -384,6 +426,6 @@ object FirebaseConstants{
     const val NON_HLMT_LOGIN_SCREEN_EVENT = "non_hlmt_login"
     const val UPDATE_PROFILE_REGISTRATION_SCREEN_EVENT = "update_profile_for_registration"
     const val USER_SELECTION_SCREEN_EVENT = "is_hlmt_user"
-//    const val _EVENT = ""
+//    const val _EVENT = ""*/
 
 }

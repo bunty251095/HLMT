@@ -26,6 +26,7 @@ interface UserRepository {
 
     suspend fun isLoginNameExist(forceRefresh: Boolean = false, data: LoginNameExistsModel) :LiveData<Resource<LoginNameExistsModel.IsExistResponse>>
     suspend fun hlmtLoginResponse(forceRefresh: Boolean = false, data: LoginModel) :LiveData<Resource<LoginModel.Response>>
+    suspend fun hlmt360LoginResponse(forceRefresh: Boolean = false, data: HLMTLoginModel) :LiveData<Resource<HLMTLoginModel.LoginResponse>>
     suspend fun saveUserInfo(data: Users)
 
 }
@@ -184,6 +185,38 @@ interface UserRepository {
 
              override fun createCallAsync(): Deferred<BaseResponse<LoginModel.Response>> {
                  return datasource.fetchHlmtLoginResponse(data)
+             }
+
+         }.build().asLiveData()
+     }
+
+     override suspend fun hlmt360LoginResponse(
+         forceRefresh: Boolean,
+         data: HLMTLoginModel
+     ): LiveData<Resource<HLMTLoginModel.LoginResponse>> {
+         return object : NetworkBoundResource<HLMTLoginModel.LoginResponse,BaseResponse<HLMTLoginModel.LoginResponse>>(){
+             override fun processResponse(response: BaseResponse<HLMTLoginModel.LoginResponse>): HLMTLoginModel.LoginResponse {
+                 return response.jSONData
+             }
+
+             override suspend fun saveCallResults(items: HLMTLoginModel.LoginResponse) {
+
+             }
+
+             override fun shouldFetch(data: HLMTLoginModel.LoginResponse?): Boolean {
+                 return true
+             }
+
+             override fun shouldStoreInDb(): Boolean {
+                 return false
+             }
+
+             override suspend fun loadFromDb(): HLMTLoginModel.LoginResponse {
+                 return HLMTLoginModel.LoginResponse()
+             }
+
+             override fun createCallAsync(): Deferred<BaseResponse<HLMTLoginModel.LoginResponse>> {
+                 return datasource.fetchHLMT360LoginResponse(data)
              }
 
          }.build().asLiveData()

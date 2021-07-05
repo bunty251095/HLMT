@@ -30,8 +30,6 @@
                 app:argType="string"
                 android:defaultValue=" "/>
         </action>
-
-
     </fragment>
 
     <fragment
@@ -55,6 +53,40 @@
         android:name="com.caressa.security.ui.HlmtLoginFragment"
         tools:layout="@layout/fragment_hlmt_login">
 
+        <action
+            android:id="@+id/action_login_fragment_to_user_detail_fragment"
+            app:destination="@id/userDetailsFragment">
+
+            <argument
+                android:name="hlmtUserID"
+                app:argType="string"
+                android:defaultValue=" "/>
+
+            <argument
+                android:name="hlmtEmployeeID"
+                app:argType="string"
+                android:defaultValue=" "/>
+
+            <argument
+                android:name="loginStatus"
+                app:argType="string"
+                android:defaultValue=" "/>
+
+            <argument
+                android:name="isRegister"
+                app:argType="string"
+                android:defaultValue="true"/>
+
+            <argument
+                android:name="mobileNo"
+                app:argType="string"
+                android:defaultValue=" "/>
+        </action>
+
+        <action
+            android:id="@+id/action_hlmtloginfragment_to_mainactivity"
+            app:destination="@id/splash_activity"/>
+
     </fragment>
 
     <fragment
@@ -68,6 +100,26 @@
             app:argType="string"
             android:defaultValue=" "/>
 
+        <argument
+            android:name="hlmtUserID"
+            app:argType="string"
+            android:defaultValue=" "/>
+
+        <argument
+            android:name="hlmtEmployeeID"
+            app:argType="string"
+            android:defaultValue=" "/>
+
+        <argument
+            android:name="loginStatus"
+            app:argType="string"
+            android:defaultValue=" "/>
+
+        <argument
+            android:name="isRegister"
+            app:argType="string"
+            android:defaultValue="true"/>
+
         <action
             android:id="@+id/action_userDetailsToHomeScreen"
             app:destination="@id/splash_activity"/>
@@ -76,7 +128,7 @@
 
     <!--// Old flow-->
 
-    <fragment
+    <!--<fragment
         android:id="@+id/vivantLoginFragment"
         android:name="com.caressa.security.ui.HlmtLoginFragment"
         android:label="HLMT Login"
@@ -86,7 +138,7 @@
             android:id="@+id/action_loginFragment_to_main_activity"
             app:destination="@id/splash_activity"/>
 
-    </fragment>
+    </fragment>-->
 
     <fragment
         android:id="@+id/loginFragment"

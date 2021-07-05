@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.Constants
 import com.caressa.common.utils.DateHelper
 import com.caressa.model.parameter.ParameterListModel
 import com.caressa.track_parameter.adapter.RevInputParamAdapter
@@ -33,6 +36,7 @@ class RevUpdateParameterFragment : BaseFragment(){
     var isValidateSuccess = false
     var validationMessage = ""
     var isFirstTime = true
+//    private var from = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = RevUpdateParameterFragmentBinding.inflate(inflater, container, false)
@@ -42,9 +46,39 @@ class RevUpdateParameterFragment : BaseFragment(){
         return binding.root
     }
 
-    private fun initialise() {
-        profileCode = args.profileCode
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // callback to Handle back button event
 
+//        arguments?.let {
+//            from = it.getString(Constants.FROM,"")!!
+//            Timber.e("from,selectedDate--->$from")
+//        }
+//        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                performBackClick()
+//            }
+//        }
+//        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+//    fun performBackClick() {
+//        val bundle = Bundle()
+//        if ( from.equals("DashboardBP",ignoreCase = true) || from.equals("DashboardBMI") )  {
+//            requireActivity().finish()
+//        }
+//    }
+
+    private fun initialise() {
+//        if(!from.isNullOrEmpty()){
+//            if(from.equals("DashboardBP",true)) {
+//                profileCode = "BLOODPRESSURE"
+//            }else{
+//                profileCode = "BMI"
+//            }
+//        }else {
+            profileCode = args.profileCode
+//        }
         val profileAdapter = RevSelectedParamAdapter(true)
         binding.rvSelectedParameters.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         binding.rvSelectedParameters.adapter = profileAdapter

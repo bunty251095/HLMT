@@ -134,7 +134,7 @@ object CalculateParameters {
             feet += 1
             inch = 0
         }
-        strConvertedValue = "$feet/$inch"
+        strConvertedValue = "$feet ft, $inch in"
         return strConvertedValue
     }
 

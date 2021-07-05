@@ -28,7 +28,11 @@
             android:id="@+id/action_homeFragment_to_updateParameterFragment"
             app:destination="@id/updateParameterFragment"
             app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right">
+
+            <argument android:name="profileCode" app:argType="string" android:defaultValue="BMI"/>
+            <argument android:name="showAllProfile" app:argType="string" android:defaultValue="false"/>
+        </action>
 
         <action
             android:id="@+id/action_homeFragment_to_parameterDashboard"

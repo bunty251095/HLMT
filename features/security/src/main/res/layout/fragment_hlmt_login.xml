@@ -78,18 +78,18 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_login_emailaddress"
+                            android:id="@+id/edt_username"
                             style="@style/VivantEditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="HLMT User ID"
                             android:imeOptions="actionNext"
-                            android:inputType="number"
-                            android:maxLength="20"
-                            android:text=""
+                            android:inputType="text"
+                            android:maxLength="40"
                             android:paddingStart="@dimen/_40sdp"
                             android:paddingTop="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_15sdp"
+                            android:text=""
                             android:textSize="@dimen/_12sdp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -153,7 +153,7 @@
                             android:text=""
                             android:imeOptions="actionDone"
                             android:inputType="textPassword"
-                            android:maxLength="30" />
+                            android:maxLength="20" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

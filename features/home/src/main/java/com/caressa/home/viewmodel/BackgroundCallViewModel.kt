@@ -82,8 +82,8 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
     val bloodPressureHistoryList: LiveData<BloodPressureHistoryModel.Response> get() = _bloodPressureHistoryList
 
     var labRecordUserSource: LiveData<Resource<TrackParameterMaster.HistoryResponse>> = MutableLiveData()
-    val _labRecordList = MediatorLiveData<TrackParameterMaster.HistoryResponse>()
-    val labRecordList: LiveData<TrackParameterMaster.HistoryResponse> get() = _labRecordList
+    val _labRecordList = MediatorLiveData<Resource<TrackParameterMaster.HistoryResponse>>()
+    val labRecordList: LiveData<Resource<TrackParameterMaster.HistoryResponse>> get() = _labRecordList
 
     var getStepsGoalSource: LiveData<Resource<GetStepsGoalModel.Response>> = MutableLiveData()
     val _getStepsGoal = MediatorLiveData<GetStepsGoalModel.Response>()
@@ -98,6 +98,8 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
     var checkAppUpdateSource: LiveData<Resource<CheckAppUpdateModel.CheckAppUpdateResponse>> = MutableLiveData()
     val _checkAppUpdate = MediatorLiveData<CheckAppUpdateModel.CheckAppUpdateResponse>()
     val checkAppUpdate: LiveData<CheckAppUpdateModel.CheckAppUpdateResponse> get() = _checkAppUpdate
+
+    val labParameterList = MutableLiveData<List<TrackParameterMaster.History>>()
 
     fun callBackgroundApiCall(showProgress:Boolean) = viewModelScope.launch(dispatchers.main){
         if ( showProgress ) {
@@ -397,8 +399,10 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
         _labRecordList.removeSource(labRecordUserSource)
         withContext(dispatchers.io){ labRecordUserSource = useCase.invokeLabRecordsList(data = requestData,personId = personId)}
         _labRecordList.addSource(labRecordUserSource){
-            _labRecordList.value = it.data
-            if (it.status == Resource.Status.SUCCESS) { }
+            _labRecordList.value = it
+            if (it.status == Resource.Status.SUCCESS) {
+                getParameterData("BMI","BLOODPRESSURE",personId)
+            }
 
             if (it.status == Resource.Status.ERROR) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
@@ -408,6 +412,12 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
                     toastMessage(it.errorMessage)
                 }
             }
+        }
+    }
+
+    private fun getParameterData(profileCode:String,profileCodeTwo:String,personId:String)= viewModelScope.launch(dispatchers.main){
+        withContext(dispatchers.io){
+            labParameterList.postValue(useCase.getVitalsData(profileCode,profileCodeTwo,personId))
         }
     }
 

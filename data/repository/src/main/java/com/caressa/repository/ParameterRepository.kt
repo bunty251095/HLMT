@@ -46,6 +46,7 @@ interface ParameterRepository{
     suspend fun fetchParamListBaseOnCode(pCode: String):List<TrackParameterMaster.Parameter>
     suspend fun fetchParamHisBaseOnCode(pCode: String, personId: String):List<TrackParameterMaster.History>
     suspend fun getLatestParameterBasedOnProfileCode(pCode: String, personId: String):List<TrackParameterMaster.History>
+    suspend fun getLatestParameterBasedOnProfileCodes(pCode: String,pCodeTwo: String, personId: String):List<TrackParameterMaster.History>
     suspend fun getLatestRecordBasedOnParamCode(paramCode: String, personId: String):List<TrackParameterMaster.History>
     suspend fun deleteSelectedParameters(profileCode: String)
     suspend fun deleteHistoryWithOtherPersonId(personId:String)
@@ -538,6 +539,14 @@ class ParameterRepositoryImpl(private val dataSource: ParameterDatasource, priva
         personId: String
     ): List<TrackParameterMaster.History> {
         return paramDao.getLatestParametersBaseOnHisProfileCode(pCode,personId)
+    }
+
+    override suspend fun getLatestParameterBasedOnProfileCodes(
+        pCode: String,
+        pCodeTwo: String,
+        personId: String
+    ): List<TrackParameterMaster.History> {
+        return paramDao.getLatestParametersBaseOnHisProfileCodes(pCode,pCodeTwo,personId)
     }
 
     override suspend fun getLatestRecordBasedOnParamCode(

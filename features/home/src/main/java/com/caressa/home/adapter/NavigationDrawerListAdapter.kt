@@ -74,7 +74,7 @@ class NavigationDrawerListAdapter(val viewModel:DashboardViewModel,val activity:
                 if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
                     v.setBackgroundColor(ContextCompat.getColor(context,R.color.white))
                     ImageViewCompat.setImageTintList(holder.navIcon,
-                        ColorStateList.valueOf(ContextCompat.getColor(context,R.color.hlmt_warm_grey)))
+                        ColorStateList.valueOf(ContextCompat.getColor(context,R.color.colorAccent)))
                     holder.navTitle.setTextColor(ContextCompat.getColor(context,R.color.textViewColor))
                 }
                 false

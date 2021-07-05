@@ -27,4 +27,6 @@ class SecurityDatasource(private val defaultUserService: ApiService, private val
 
     fun fetchHlmtLoginResponse(data : LoginModel) = encryptedUserService.hlmtLoginAPI(data)
 
+    fun fetchHLMT360LoginResponse(data : HLMTLoginModel) = encryptedUserService.hlmt360UserLogin(data)
+
 }
