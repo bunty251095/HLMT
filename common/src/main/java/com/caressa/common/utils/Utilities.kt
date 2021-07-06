@@ -150,13 +150,11 @@ object Utilities {
             println("context: $context")
             if (context != null && !isNullOrEmpty(message)) {
                 val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
-                    toast.setGravity(Gravity.BOTTOM, 0, 0)
-                    val view = toast.view
-                    view?.background?.colorFilter = PorterDuffColorFilter(appColorHelper.primaryColor(),PorterDuff.Mode.SRC_IN)
-                    val text = view?.findViewById<TextView>(android.R.id.message)
-                    text?.setTextColor(ContextCompat.getColor(context, R.color.white))
-                }
+                toast.setGravity(Gravity.BOTTOM, 0, 0)
+                val view = toast.view
+                view?.background?.colorFilter = PorterDuffColorFilter(appColorHelper.primaryColor(),PorterDuff.Mode.SRC_IN)
+                val text = view?.findViewById<TextView>(android.R.id.message)
+                text?.setTextColor(ContextCompat.getColor(context, R.color.white))
                 toast.show()
             }
         } catch (e: Exception) {
@@ -170,13 +168,11 @@ object Utilities {
             println("context: $context")
             if (context != null && !isNullOrEmpty(message)) {
                 val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
-                    toast.setGravity(Gravity.BOTTOM, 0, 0)
-                    val view = toast.view
-                    view!!.background.colorFilter = PorterDuffColorFilter(appColorHelper.primaryColor(),PorterDuff.Mode.SRC_IN)
-                    val text = view.findViewById<TextView>(android.R.id.message)
-                    text.setTextColor(ContextCompat.getColor(context, R.color.white))
-                }
+                toast.setGravity(Gravity.BOTTOM, 0, 0)
+                val view = toast.view
+                view!!.background.colorFilter = PorterDuffColorFilter(appColorHelper.primaryColor(),PorterDuff.Mode.SRC_IN)
+                val text = view.findViewById<TextView>(android.R.id.message)
+                text.setTextColor(ContextCompat.getColor(context, R.color.white))
                 toast.show()
             }
         } catch (e: Exception) {
