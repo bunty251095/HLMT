@@ -198,6 +198,11 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
                     binding.tilEdtMemberEmail.error = "Please Enter Valid Email"
                 }
 
+                if ( !DateHelper.isDateAbove18Years(DateHelper.getDateTimeAs_ddMMMyyyy(relativeDob)) ) {
+                    binding.tilEdtMemberDob.isErrorEnabled = true
+                    binding.tilEdtMemberDob.error = "Age must be more than 18 years"
+                }
+
                 if (!binding.tilEdtMemberName.isErrorEnabled && !binding.tilEdtMemberDob.isErrorEnabled
                     && !binding.tilEdtMemberMobile.isErrorEnabled && !binding.tilEdtMemberEmail.isErrorEnabled) {
                     viewModel.alreadyExistRelatives.observe( viewLifecycleOwner , {
@@ -314,6 +319,7 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
     }
 
     private fun showDatePicker() {
+        cal.add(Calendar.YEAR, -18)
         val dateOnCalender = dateOfBirth
         val dob = dateOnCalender.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         val year = Integer.parseInt(dob[0])

@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.caressa.common.constants.Constants
 import com.caressa.common.utils.AppColorHelper
+import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.DefaultNotificationDialog
 import com.caressa.common.utils.Utilities
 import com.caressa.home.R
@@ -35,7 +36,7 @@ class NavigationDrawerListAdapter(val viewModel:DashboardViewModel,val activity:
     var mIsSpinnerTouched: Boolean = false
     var isProfileUpdate: Boolean = false
     private val navDrawerList: MutableList<NavDrawerOption> = mutableListOf()
-    private val userRelativesList: MutableList<UserRelatives> = mutableListOf()
+    private var userRelativesList: MutableList<UserRelatives> = mutableListOf()
     private var drawerClickListener: DrawerClickListener = activity
     private val appColorHelper = AppColorHelper.instance!!
 
@@ -139,6 +140,11 @@ class NavigationDrawerListAdapter(val viewModel:DashboardViewModel,val activity:
                                 Timber.i("RelativesList--->$it")
                                 userRelativesList.clear()
                                 userRelativesList.addAll(it)
+
+                                userRelativesList = userRelativesList.filter {
+                                    DateHelper.isDateAbove18Years(it.dateOfBirth)
+                                }.toMutableList()
+
                                 val familyProfileAdapter = FamilyProfileAdapter(viewModel,userRelativesList,binding.spFamilyprofile,context)
                                 binding.spFamilyprofile.adapter = familyProfileAdapter
                                 keepDefaultFamilyProfileSelected()

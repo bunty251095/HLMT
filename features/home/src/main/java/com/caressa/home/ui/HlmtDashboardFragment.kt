@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
@@ -167,16 +168,17 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener {
 
     override fun onScore(hraSummary: HRASummary?) {
         viewModel.getHraSummaryDetails()
-        Timber.i("HRAData=> "+hraSummary)
+        Timber.i("HRAData---> $hraSummary")
         try {
             if (hraSummary!!.hraCutOff.equals("1")) {
                 binding.txtNoHra.visibility = View.GONE
                 binding.txtHraValue.visibility = View.VISIBLE
-                binding.txtHraValue.text = "${hraSummary!!.scorePercentile.toInt()}"
+                binding.txtHraValue.text = "${hraSummary.scorePercentile.toInt()}"
+                binding.txtHraValue.setTextColor(ContextCompat.getColor(requireContext(),Utilities.getHraObservationColorFromScore(hraSummary.scorePercentile.toInt())))
             }else{
                 binding.txtNoHra.visibility = View.VISIBLE
                 binding.txtHraValue.visibility = View.INVISIBLE
-                binding.txtHraValue.text = "${hraSummary!!.scorePercentile.toInt()}"
+                binding.txtHraValue.text = "${hraSummary.scorePercentile.toInt()}"
             }
         }catch (e: Exception){e.printStackTrace()}
 
