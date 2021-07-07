@@ -111,13 +111,7 @@
     <fragment
             android:id="@+id/updateParameterFragment"
             android:name="com.caressa.track_parameter.ui.UpdateParameterFragment"
-            android:label="UpdateParameterFragment" >
-        <action
-            android:id="@+id/action_updateFragment_to_detailHistoryFragment"
-            app:destination="@id/detailHistoryFragment"
-            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
+            android:label="UpdateParameterFragment" />
 
     <fragment
         android:id="@+id/dashboardFragment"
