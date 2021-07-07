@@ -1296,4 +1296,12 @@ object DateHelper {
             return null
         }
     }
+
+    fun returnTwoDigitFromDate(date: Int): String {
+        var twoDigit = "" + date
+        if (date < 10) {
+            twoDigit = "0$twoDigit"
+        }
+        return twoDigit
+    }
 }

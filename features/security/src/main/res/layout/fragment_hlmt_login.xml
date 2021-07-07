@@ -84,7 +84,7 @@
                             android:layout_height="match_parent"
                             android:hint="HLMT User ID"
                             android:imeOptions="actionNext"
-                            android:inputType="text"
+                            android:inputType="textEmailAddress"
                             android:maxLength="40"
                             android:paddingStart="@dimen/_40sdp"
                             android:paddingTop="@dimen/_10sdp"

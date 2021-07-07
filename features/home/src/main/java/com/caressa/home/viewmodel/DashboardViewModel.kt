@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Build
-import android.text.Html
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -40,7 +39,6 @@ import com.caressa.repository.utils.Resource
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 @SuppressLint("StaticFieldLeak")
 class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCase, private val dispatchers: AppDispatchers,
@@ -60,6 +58,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
     val currentSelectedPerson = MutableLiveData<UserRelatives>()
     val trackersList = MutableLiveData<List<DashboardFeature>>()
     val facilitiesAndResourcesList = MutableLiveData<List<DashboardFeature>>()
+    val dashboardFeatureList = MutableLiveData<List<DataHandler.DashboardFeatureGrid>>()
     val settingsOptionList = MutableLiveData<List<DataHandler.Option>>()
     val navDrawerOptionList = MutableLiveData<List<NavDrawerOption>>()
     var hraDetails = MutableLiveData<HRASummary>()
@@ -75,6 +74,8 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
     private var contactUsSource: LiveData<Resource<ContactUsModel.ContactUsResponse>> = MutableLiveData()
     private val _contactUs = MediatorLiveData<ContactUsModel.ContactUsResponse>()
     val contactUs: LiveData<ContactUsModel.ContactUsResponse> get() = _contactUs
+    var hraSummary: HRASummary? =null
+    var stepsData: String =""
 
     fun getLoggedInPersonDetails( ) = viewModelScope.launch {
         withContext(dispatchers.io) {
@@ -99,6 +100,14 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
             navDrawerOptionList.postValue(dataHandler.getNavDrawerList())
         }else{
             navDrawerOptionList.postValue(dataHandler.getSwitchProfileNavDrawerList())
+        }
+    }
+
+    fun refreshDashboardFeatureList() {
+        if (isSelfUser()) {
+            dashboardFeatureList.postValue(dataHandler.getDashboardList(hraSummary,stepsData))
+        }else{
+            dashboardFeatureList.postValue(dataHandler.getSwitchProfileDashboardList(hraSummary,stepsData))
         }
     }
 
@@ -162,13 +171,13 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
 
     }
 
-    fun goToHRA(user: UserRelatives) {
+    fun goToHRA() {
         try {
-            val dob = user.dateOfBirth
-            if (dob.isNullOrEmpty()){
-                toastMessage("HRA is allowed for 18+ members only")
-            }else {
-                if(DateHelper.isDateAbove18Years(dob)) {
+//            val dob = user.dateOfBirth
+//            if (dob.isNullOrEmpty()){
+//                toastMessage("HRA is allowed for 18+ members only")
+//            }else {
+//                if(DateHelper.isDateAbove18Years(dob)) {
                     if (hraDetails.value != null) {
                         val hraSummary = hraDetails.value
                         val currentHRAHistoryID = hraSummary?.currentHRAHistoryID.toString()
@@ -188,10 +197,10 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                     } else {
                         navigateToHraStart()
                     }
-                }else{
-                    toastMessage("HRA is allowed for 18+ members only")
-                }
-            }
+//                }else{
+//                    toastMessage("HRA is allowed for 18+ members only")
+//                }
+//            }
         }catch (e:Exception){e.printStackTrace()}
     }
 
