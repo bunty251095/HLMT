@@ -45,26 +45,26 @@ class DashboardGridAdapter(
         holder.txtParamName.setTextColor(ContextCompat.getColor(mContext,R.color.textViewColor))
         holder.txtParamValue.setTextColor(ContextCompat.getColor(mContext,parameter.colorId))
 
-        if (position == parametersList.size - 1) {
-            holder.layoutParameter.setBackgroundColor(appColorHelper.primaryColor())
-            holder.txtParamName.setTextColor(ContextCompat.getColor(mContext,parameter.colorId))
-        }
+//        if (position == parametersList.size - 1) {
+//            holder.layoutParameter.setBackgroundColor(appColorHelper.primaryColor())
+//            holder.txtParamName.setTextColor(ContextCompat.getColor(mContext,parameter.colorId))
+//        }
 
         holder.layoutParameter.setOnTouchListener { v: View, event: MotionEvent ->
-            if ( position != parametersList.size - 1 ) {
-                if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_MOVE) {
-                    v.setBackgroundColor( appColorHelper.primaryColor() )
-                    ImageViewCompat.setImageTintList(holder.imgParam,ColorStateList.valueOf(ContextCompat.getColor(mContext,R.color.white)))
-                    holder.txtParamName.setTextColor(ContextCompat.getColor(mContext,R.color.white))
-                    holder.txtParamValue.setTextColor(ContextCompat.getColor(mContext,R.color.white))
-                }
-                if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
-                    v.setBackgroundColor(ContextCompat.getColor(mContext,R.color.white))
-                    ImageViewCompat.setImageTintList(holder.imgParam,ColorStateList.valueOf(ContextCompat.getColor(mContext,parameter.colorId)))
-                    holder.txtParamName.setTextColor(ContextCompat.getColor(mContext,R.color.textViewColor))
-                    holder.txtParamValue.setTextColor(ContextCompat.getColor(mContext,parameter.colorId))
-                }
-            }
+//            if ( position != parametersList.size - 1 ) {
+//                if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_MOVE) {
+//                    v.setBackgroundColor( appColorHelper.primaryColor() )
+//                    ImageViewCompat.setImageTintList(holder.imgParam,ColorStateList.valueOf(ContextCompat.getColor(mContext,R.color.white)))
+//                    holder.txtParamName.setTextColor(ContextCompat.getColor(mContext,R.color.white))
+//                    holder.txtParamValue.setTextColor(ContextCompat.getColor(mContext,R.color.white))
+//                }
+//                if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
+//                    v.setBackgroundColor(ContextCompat.getColor(mContext,R.color.white))
+//                    ImageViewCompat.setImageTintList(holder.imgParam,ColorStateList.valueOf(ContextCompat.getColor(mContext,parameter.colorId)))
+//                    holder.txtParamName.setTextColor(ContextCompat.getColor(mContext,R.color.textViewColor))
+//                    holder.txtParamValue.setTextColor(ContextCompat.getColor(mContext,parameter.colorId))
+//                }
+//            }
             false
         }
 

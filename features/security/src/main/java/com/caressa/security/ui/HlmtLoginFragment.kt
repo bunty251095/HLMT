@@ -45,8 +45,6 @@ class HlmtLoginFragment : BaseFragment() {
 
        binding.btnLogin.setOnClickListener {
            viewModel.checkLoginNameExistOrNot(username = binding.edtUsername.text.toString(),passwordStr = binding.edtLoginPassword.text.toString())
-//           viewModel.checkLoginNameExistOrNot(name = "",username = binding.edtLoginEmailaddress.text.toString(),passwordStr = binding.edtLoginPassword.text.toString())
-//           viewModel.callLogin(true,"Mayuresh",binding.edtLoginEmailaddress.text.toString(),binding.edtLoginPassword.text.toString())
        }
     }
 

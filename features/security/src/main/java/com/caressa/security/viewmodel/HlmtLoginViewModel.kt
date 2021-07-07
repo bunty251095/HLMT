@@ -77,31 +77,39 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
 
     var isAccountExist = false
 
-
     fun checkLoginNameExistOrNot(name: String = "", username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
 
-        val requestData = LoginNameExistsModel(Gson().toJson(LoginNameExistsModel.JSONDataRequest(
-            loginName = username), LoginNameExistsModel.JSONDataRequest::class.java))
-
-        _progressBar.value = Event("Validating Username..")
-        _isLoginName.removeSource(socialLoginUserSource)
-        withContext(dispatchers.io){ socialLoginUserSource = userManagementUseCase.invokeLoginNameExist(true,requestData)}
-        _isLoginName.addSource(socialLoginUserSource){
-            _isLoginName.value = it.data
-
-            if (it.status == Resource.Status.SUCCESS){
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if (it.data?.isExist.equals("true",true)) {
-                    isAccountExist = true
-                }else {
-                    isAccountExist = false
-                }
-                fetchHLMT360LoginResponse(username=username,passwordStr = passwordStr)
+        if(validateLoginData(username,passwordStr)) {
+            val requestData = LoginNameExistsModel(
+                Gson().toJson(
+                    LoginNameExistsModel.JSONDataRequest(
+                        loginName = username
+                    ), LoginNameExistsModel.JSONDataRequest::class.java
+                )
+            )
+            _progressBar.value = Event("Validating Username..")
+            _isLoginName.removeSource(socialLoginUserSource)
+            withContext(dispatchers.io) {
+                socialLoginUserSource =
+                    userManagementUseCase.invokeLoginNameExist(true, requestData)
             }
+            _isLoginName.addSource(socialLoginUserSource) {
+                _isLoginName.value = it.data
 
-            if (it.status == Resource.Status.ERROR) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                toastMessage(it.errorMessage)
+                if (it.status == Resource.Status.SUCCESS) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.data?.isExist.equals("true", true)) {
+                        isAccountExist = true
+                    } else {
+                        isAccountExist = false
+                    }
+                    fetchHLMT360LoginResponse(username = username, passwordStr = passwordStr)
+                }
+
+                if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    toastMessage(it.errorMessage)
+                }
             }
         }
     }
@@ -347,6 +355,22 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
             isValid = true
         }
         return isValid
+    }
+
+    private fun validateLoginData(username: String, passwordStr: String): Boolean {
+        val emailPattern:Regex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
+
+        var isValidate:Boolean = false
+        if (username.isNullOrEmpty() || !username.matches(emailPattern)){
+            toastMessage("Please enter valid user ID.")
+        }else if(passwordStr.isNullOrEmpty()){
+            toastMessage("Please enter valid password.")
+        }else if(passwordStr.length < 6){
+            toastMessage("Please enter valid password.")
+        }else{
+            isValidate = true
+        }
+        return isValidate
     }
 
     private fun saveUserData(usr: LoginModel.Data)= viewModelScope.launch {

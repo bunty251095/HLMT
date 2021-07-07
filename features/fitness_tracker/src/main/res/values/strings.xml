@@ -26,7 +26,7 @@
     <string name="FORCE_SYNC_CONFORMATION">Are you sure you want to force sync your entire Google Fit steps data for past one year?
 Please be noted that your entire history of fitness data will be overwritten.</string>
 
-    <string name="err_enter_value_in_30_10000">Please enter value between 30 to 10000</string>
+    <string name="err_enter_value_in_30_50000">Please enter value between 30 to 50000</string>
     <string name="err_enter_steps">Please enter the steps</string>
     <string name="NO_FITNESS_DATA">Fitness Data Not Available</string>
 

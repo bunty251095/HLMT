@@ -143,11 +143,11 @@ class StepsDetailFragment : BaseFragment(), KoinComponent {
             binding.layoutCalories.setDataValue(fitnessHelper.getCaloriesWithUnit(selectedItem.calories.toString()))
             binding.layoutDistance.setDataValue(CalculateParameters.convertMtrToKms(selectedItem.distance.toString()))
             //binding.layoutActiveTime.setDataValue(DateHelper.getHourMinFromStrMinutes(selectedItem.activeTime))
-            if ( !Utilities.isNullOrEmptyOrZero(selectedItem.activeTime) ) {
-                binding.layoutActiveTime.setDataValue(DateHelper.getHourMinFromStrMinutes(selectedItem.activeTime))
-            } else {
+//            if ( !Utilities.isNullOrEmptyOrZero(selectedItem.activeTime) ) {
+//                binding.layoutActiveTime.setDataValue(DateHelper.getHourMinFromStrMinutes(selectedItem.activeTime))
+//            } else {
                 binding.layoutActiveTime.setDataValue( fitnessHelper.getActiveTime(steps) )
-            }
+//            }
         } else {
             binding.layoutFitnessData.visibility = View.GONE
             binding.lblNoData.visibility = View.VISIBLE

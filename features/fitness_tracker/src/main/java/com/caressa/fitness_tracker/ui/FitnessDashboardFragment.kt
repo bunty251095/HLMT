@@ -257,12 +257,12 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
             binding.txtSteps.text = steps.toString()
             binding.txtCalories.text = fitnessHelper.getCaloriesWithUnit(selectedFitnessData.calories.toString())
             binding.txtDistance.text = CalculateParameters.convertMtrToKms(selectedFitnessData.distance.toString())
-            //binding.txtActTime.text = DateHelper.getHourMinFromStrMinutes(selectedFitnessData.activeTime)
-            if ( !Utilities.isNullOrEmptyOrZero(selectedFitnessData.activeTime) ) {
-                binding.txtActTime.text = DateHelper.getHourMinFromStrMinutes(selectedFitnessData.activeTime)
-            } else {
+//            binding.txtActTime.text = DateHelper.getHourMinFromStrMinutes(selectedFitnessData.activeTime)
+//            if ( !Utilities.isNullOrEmptyOrZero(selectedFitnessData.activeTime) ) {
+//                binding.txtActTime.text = DateHelper.getHourMinFromStrMinutes(selectedFitnessData.activeTime)
+//            } else {
                 binding.txtActTime.text = fitnessHelper.getActiveTime(steps)
-            }
+//            }
             selectedFitnessData.activeTime = binding.txtActTime.text.toString().split(" ").toTypedArray()[0]
             stepsDataSingleton.selectedDateHistory = selectedFitnessData
         }
@@ -317,11 +317,11 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
                 val strValue = dialog.dialog_et.text.toString()
                 if (!Utilities.isNullOrEmptyOrZero(strValue)) {
                     val value = Integer.parseInt(strValue)
-                    if (value in 30..10000) {
+                    if (value in 30..50000) {
                         viewModel.saveStepsGoal(this,value)
                         dialog.dismiss()
                     } else {
-                        Utilities.toastMessageLong(context, resources.getString(R.string.err_enter_value_in_30_10000))
+                        Utilities.toastMessageLong(context, resources.getString(R.string.err_enter_value_in_30_50000))
                     }
                 } else {
                     Utilities.toastMessageLong(context, resources.getString(R.string.err_enter_steps))

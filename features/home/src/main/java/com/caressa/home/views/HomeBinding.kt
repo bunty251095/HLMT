@@ -217,6 +217,15 @@ object HomeBinding {
         }
     }
 
+    @BindingAdapter("app:dashboardFeaturesGrid")
+    @JvmStatic fun RecyclerView.setDashboardFeaturesList( list: List<DataHandler.DashboardFeatureGrid>? ) {
+        with(this.adapter as DashboardFeaturesGridAdapter) {
+            layoutManager = GridLayoutManager(context,2)
+//            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            list?.let { updateData(it) }
+        }
+    }
+
     @BindingAdapter("app:drawerItems")
     @JvmStatic fun RecyclerView.setDrawerItems( list: List<NavDrawerOption>? ) {
         with(this.adapter as NavigationDrawerListAdapter) {

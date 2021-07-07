@@ -6,15 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
-import com.caressa.common.fitness.FitRequestCode
 import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.common.utils.CalculateParameters
 import com.caressa.common.utils.RealPathUtil
 import com.caressa.common.utils.Utilities
 import com.caressa.home.R
+import com.caressa.home.adapter.DashboardFeaturesGridAdapter
+import com.caressa.home.common.DataHandler
 import com.caressa.home.databinding.FragmentHlmtDashboardBinding
 import com.caressa.home.di.ScoreListener
 import com.caressa.home.viewmodel.BackgroundCallViewModel
@@ -25,8 +27,11 @@ import com.caressa.model.parameter.FitnessData
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.*
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.caressa.common.fitness.FitRequestCode
 
-class HlmtDashboardFragment : BaseFragment() , ScoreListener {
+class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGridAdapter.OnItemSelectionListener {
 
     private lateinit var binding: FragmentHlmtDashboardBinding
     private val viewModel: DashboardViewModel by viewModel()
@@ -34,6 +39,8 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener {
     private var fitnessDataManager : FitnessDataManager? = null
     private val data = FitnessData()
     private var stepGoal = 3000
+    private var dashboardGridAdapter: DashboardFeaturesGridAdapter? = null
+
 
     override fun getViewModel(): BaseViewModel = viewModel
 
@@ -50,8 +57,9 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener {
 
     private fun setObserver() {
         viewModel.currentSelectedPerson.observe(viewLifecycleOwner,{
-            viewModel.goToHRA(it)
+//            viewModel.goToHRA(it)
         })
+        viewModel.dashboardFeatureList.observe(viewLifecycleOwner,{})
     }
 
     private fun initialise() {
@@ -66,13 +74,19 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener {
             Timber.e("oAuthPermissionsApproved---> false")
             fitnessDataManager!!.fitSignIn(FitRequestCode.READ_DATA)
         }
+        dashboardGridAdapter = DashboardFeaturesGridAdapter(requireContext(), this,viewModel)
+        binding.rvDashboardGrid.layoutManager = GridLayoutManager(requireContext(),2)
+        binding.rvDashboardGrid.adapter = dashboardGridAdapter
+
+        viewModel.refreshDashboardFeatureList()
+
     }
 
     private fun setClickable() {
 
-        binding.cardHra.setOnClickListener {
-            viewModel.getDOBOfPerson()
-        }
+//        binding.cardHra.setOnClickListener {
+//            viewModel.getDOBOfPerson()
+//        }
 
 //        binding.layoutTakeHealthCheckup.setOnClickListener {
 //            val bundle = Bundle()
@@ -96,27 +110,27 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener {
 //            it.findNavController().navigate(R.id.action_dashboardFragment_to_orderMedicinesActivity,bundle)
 //        }
 
-        binding.cardTrackParameter.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(Constants.FROM, "Dashboard")
-            it.findNavController().navigate(R.id.action_dashboardFragment_to_trackParamActivity,bundle)
-        }
-
-        binding.cardStoreRecord.setOnClickListener {
-            it.findNavController().navigate(R.id.action_dashboardFragment_to_shrActivity)
-        }
-
-        binding.cardMedicationTracker.setOnClickListener {
-            it.findNavController().navigate(R.id.action_dashboardFragment_to_medicationActivity)
-        }
-
-        binding.cardSteps.setOnClickListener {
-            it.findNavController().navigate(R.id.action_dashboardFragment_to_fitnessActivity)
-        }
-
-        binding.cardToolsCalculator.setOnClickListener {
-            it.findNavController().navigate(R.id.action_dashboardFragment_to_toolsCalculatorsHomeActivity)
-        }
+//        binding.cardTrackParameter.setOnClickListener {
+//            val bundle = Bundle()
+//            bundle.putString(Constants.FROM, "Dashboard")
+//            it.findNavController().navigate(R.id.action_dashboardFragment_to_trackParamActivity,bundle)
+//        }
+//
+//        binding.cardStoreRecord.setOnClickListener {
+//            it.findNavController().navigate(R.id.action_dashboardFragment_to_shrActivity)
+//        }
+//
+//        binding.cardMedicationTracker.setOnClickListener {
+//            it.findNavController().navigate(R.id.action_dashboardFragment_to_medicationActivity)
+//        }
+//
+//        binding.cardSteps.setOnClickListener {
+//            it.findNavController().navigate(R.id.action_dashboardFragment_to_fitnessActivity)
+//        }
+//
+//        binding.cardToolsCalculator.setOnClickListener {
+//            it.findNavController().navigate(R.id.action_dashboardFragment_to_toolsCalculatorsHomeActivity)
+//        }
 
 //        binding.layoutWellnessCentre.setOnClickListener {
 //            it.findNavController().navigate(R.id.action_dashboardFragment_to_toolsCalculatorsHomeActivity)
@@ -127,9 +141,9 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener {
 //            viewModel.navigateToHospitalsNearMe(requireContext())
 //        }
 
-        binding.cardBlog.setOnClickListener {
-            it.findNavController().navigate(R.id.action_dashboardFragment_to_blogsActivity)
-        }
+//        binding.cardBlog.setOnClickListener {
+//            it.findNavController().navigate(R.id.action_dashboardFragment_to_blogsActivity)
+//        }
 
 //        binding.layoutChatWithDietitian.setOnClickListener {
 //            val bundle = Bundle()
@@ -139,9 +153,10 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener {
 //            it.findNavController().navigate(R.id.action_dashboardFragment_to_commonWebViewActivity, bundle)
 //        }
 
-        binding.cardReward.setOnClickListener {
-            viewModel.toastMessage("Coming Soon..")
-        }
+//        binding.cardReward.setOnClickListener {
+//            viewModel.toastMessage("Coming Soon..")
+//        }
+
         binding.layoutHeight.setOnClickListener {
             val bundle = Bundle()
             bundle.putString(Constants.FROM, "DashboardBMI")
@@ -168,19 +183,20 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener {
 
     override fun onScore(hraSummary: HRASummary?) {
         viewModel.getHraSummaryDetails()
-        Timber.i("HRAData---> $hraSummary")
-        try {
-            if (hraSummary!!.hraCutOff.equals("1")) {
-                binding.txtNoHra.visibility = View.GONE
-                binding.txtHraValue.visibility = View.VISIBLE
-                binding.txtHraValue.text = "${hraSummary.scorePercentile.toInt()}"
-                binding.txtHraValue.setTextColor(ContextCompat.getColor(requireContext(),Utilities.getHraObservationColorFromScore(hraSummary.scorePercentile.toInt())))
-            }else{
-                binding.txtNoHra.visibility = View.VISIBLE
-                binding.txtHraValue.visibility = View.INVISIBLE
-                binding.txtHraValue.text = "${hraSummary.scorePercentile.toInt()}"
-            }
-        }catch (e: Exception){e.printStackTrace()}
+        Timber.i("HRAData=> "+hraSummary)
+        viewModel.hraSummary = hraSummary
+        viewModel.refreshDashboardFeatureList()
+//        try {
+//            if (hraSummary!!.hraCutOff.equals("1")) {
+//                binding.txtNoHra.visibility = View.GONE
+//                binding.txtHraValue.visibility = View.VISIBLE
+//                binding.txtHraValue.text = "${hraSummary!!.scorePercentile.toInt()}"
+//            }else{
+//                binding.txtNoHra.visibility = View.VISIBLE
+//                binding.txtHraValue.visibility = View.INVISIBLE
+//                binding.txtHraValue.text = "${hraSummary!!.scorePercentile.toInt()}"
+//            }
+//        }catch (e: Exception){e.printStackTrace()}
 
     }
 
@@ -244,7 +260,9 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener {
                     data.calories = todayData.getString(Constants.CALORIES)
                     data.distance = todayData.get(Constants.DISTANCE).toString().toDouble()
                     data.activeTime = todayData.getString(Constants.ACTIVE_TIME).toString().toInt()
-                    binding.txtStepsCount.text = "${data.stepsCount} steps of ${stepGoal}"
+                    viewModel.stepsData = "${data.stepsCount} steps of ${stepGoal}"
+                    viewModel.refreshDashboardFeatureList()
+//                    binding.txtStepsCount.text = "${data.stepsCount} steps of ${stepGoal}"
                     viewModel.hideProgressBar()
                 } else {
                     Timber.e("Fitness Data not Available")
@@ -254,6 +272,27 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener {
         } catch (e : Exception) {
             viewModel.hideProgressBar()
             e.printStackTrace()
+        }
+    }
+
+    override fun onItemSelected(item: DataHandler.DashboardFeatureGrid) {
+        when(item.code){
+            "HRA"-> viewModel.goToHRA()
+            "STEP"->{findNavController().navigate(R.id.action_dashboardFragment_to_fitnessActivity)}
+                "PARAM"->{
+                val bundle = Bundle()
+                bundle.putString(Constants.FROM, "Dashboard")
+                findNavController().navigate(R.id.action_dashboardFragment_to_trackParamActivity,bundle)
+            }
+            "RECORD"->{
+                findNavController().navigate(R.id.action_dashboardFragment_to_shrActivity)
+            }
+            "MED"->{
+                findNavController().navigate(R.id.action_dashboardFragment_to_medicationActivity)
+            }
+            "CAL"->{findNavController().navigate(R.id.action_dashboardFragment_to_toolsCalculatorsHomeActivity)}
+            "REW"->{viewModel.toastMessage("Coming Soon..")}
+            "BLOG"->{findNavController().navigate(R.id.action_dashboardFragment_to_blogsActivity)}
         }
     }
 

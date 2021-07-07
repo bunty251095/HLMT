@@ -160,14 +160,22 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
     private fun showDatePickerDialog() {
         mCalendar = Calendar.getInstance()
         mCalendar?.add(Calendar.YEAR, -18)
-        val year = mCalendar!!.get(Calendar.YEAR)
+
+        DialogHelper().showDatePickerDialog("Your Date of Birth",requireContext(), mCalendar,null, mCalendar, object :DialogHelper.DateListener{
+            override fun onDateSet(date: String, year: String, month: String, dayOfMonth: String) {
+                binding.edtDob.setText(date)
+            }
+        })
+
+
+        /*val year = mCalendar!!.get(Calendar.YEAR)
         val month = mCalendar!!.get(Calendar.MONTH)
         val day = mCalendar!!.get(Calendar.DAY_OF_MONTH)
         val dpd = DatePickerDialog(requireContext(),
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
 
-                val _monthOf = returnTwoDigitFromDate(monthOfYear + 1)
-                val _monthOfDay = returnTwoDigitFromDate(dayOfMonth)
+                val _monthOf = DateHelper.returnTwoDigitFromDate(monthOfYear + 1)
+                val _monthOfDay = DateHelper.returnTwoDigitFromDate(dayOfMonth)
 
                 val dob = "$year-$_monthOf-$_monthOfDay"
                 val strDate = DateHelper.formatDateValue(dob)
@@ -177,49 +185,13 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
         )
         dpd.setTitle("Your Date of Birth")
         dpd.datePicker.setMaxDate(mCalendar!!.timeInMillis)
-        dpd.show()
-    }
-
-    fun returnTwoDigitFromDate(date: Int): String {
-        var twoDigit = "" + date
-        if (date < 10) {
-            twoDigit = "0$twoDigit"
-        }
-        return twoDigit
+        dpd.show()*/
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mCalendar = Calendar.getInstance()
         mCalendar?.add(Calendar.YEAR, -18)
-
-/*
-        binding.btnBack.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.back_signup) )
-
-
-
-        binding.btnDone.setOnClickListener {
-
-            if (DateHelper.isDateAbove18Years(DateHelper.convertDateToStr(mCalendar?.time, DateHelper.DISPLAY_DATE_DDMMMYYYY))) {
-//                if (args.passCode.equals("123456",true)){
-//                    viewModel.callRegisterAPI(name = args.name, emailStr = args.email, passwordStr = "", phoneNumber = args.mobileNo, gender = (if (binding.rbMale.isChecked) 1 else 2).toString(),
-//                        dob = DateHelper.convertDateToStr(mCalendar?.time,
-//                            DateHelper.SERVER_DATE_YYYYMMDD), socialLogin = true)
-//                }else {
-//                    viewModel.callRegisterAPI(
-//                        name = args.name,
-//                        emailStr = args.email,
-//                        passwordStr = args.passCode,
-//                        phoneNumber = args.mobileNo,
-//                        gender = (if (binding.rbMale.isChecked) 1 else 2).toString(),
-//                        dob = DateHelper.convertDateToStr(mCalendar?.time, DateHelper.SERVER_DATE_YYYYMMDD))
-//                }
-            } else {
-                viewModel.toastMessage(resources.getString(R.string.ERROR_AGE_GREATER_THEN_18_YEARS))
-            }
-        }
-*/
 
     }
 

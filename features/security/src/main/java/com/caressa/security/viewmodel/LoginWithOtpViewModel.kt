@@ -64,31 +64,41 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
 
     fun checkLoginNameExistOrNot(phoneNumber: String) = viewModelScope.launch(dispatchers.main){
 
-        val requestData = LoginNameExistsModel(Gson().toJson(
-            LoginNameExistsModel.JSONDataRequest(
-            loginName = phoneNumber), LoginNameExistsModel.JSONDataRequest::class.java))
+        if(!phoneNumber.isNullOrEmpty() && phoneNumber.length>=10) {
+            val requestData = LoginNameExistsModel(
+                Gson().toJson(
+                    LoginNameExistsModel.JSONDataRequest(
+                        loginName = phoneNumber
+                    ), LoginNameExistsModel.JSONDataRequest::class.java
+                )
+            )
 
-        _progressBar.value = Event("Validating Username..")
-        _isLoginName.removeSource(loginNameUserSource)
-        withContext(dispatchers.io){ loginNameUserSource = userManagementUseCase.invokeLoginNameExist(true,requestData)}
-        _isLoginName.addSource(loginNameUserSource){
-            _isLoginName.value = it.data
+            _progressBar.value = Event("Validating Username..")
+            _isLoginName.removeSource(loginNameUserSource)
+            withContext(dispatchers.io) {
+                loginNameUserSource = userManagementUseCase.invokeLoginNameExist(true, requestData)
+            }
+            _isLoginName.addSource(loginNameUserSource) {
+                _isLoginName.value = it.data
 
-            if (it.status == Resource.Status.SUCCESS){
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if (it.data?.isExist.equals("true",true)) {
-                    isLogin = true
-                    calIGenerateOTPApi(phoneNumber)
-                }else {
-                    isLogin = false
-                    calIGenerateOTPApi(phoneNumber)
+                if (it.status == Resource.Status.SUCCESS) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.data?.isExist.equals("true", true)) {
+                        isLogin = true
+                        calIGenerateOTPApi(phoneNumber)
+                    } else {
+                        isLogin = false
+                        calIGenerateOTPApi(phoneNumber)
+                    }
+                }
+
+                if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    toastMessage(it.errorMessage)
                 }
             }
-
-            if (it.status == Resource.Status.ERROR) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                toastMessage(it.errorMessage)
-            }
+        }else{
+            toastMessage("Please Enter valid mobile number")
         }
     }
 

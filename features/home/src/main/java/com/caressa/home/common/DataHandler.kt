@@ -11,6 +11,7 @@ import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.Utilities
 import com.caressa.home.R
 import com.caressa.home.viewmodel.BackgroundCallViewModel
+import com.caressa.model.entity.HRASummary
 
 class DataHandler( val context: Context) {
 
@@ -50,6 +51,137 @@ class DataHandler( val context: Context) {
         list.add(NavDrawerOption(R.drawable.img_drawer_contact_us,context.resources.getString(R.string.MENU_CONTACT_US),NavDrawer.CONTACT_US,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
         list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.MENU_SPREAD_THE_WORD),NavDrawer.SPREAD_THE_WORD,ContextCompat.getColor(context,R.color.vivant_bright_sky_blue)))
         list.add(NavDrawerOption(R.drawable.ic_settings,context.resources.getString(R.string.MENU_SETTINGS),NavDrawer.SETTINGS,ContextCompat.getColor(context,R.color.vivant_watermelon)))
+        return list
+    }
+
+    fun getDashboardList(hraSummary: HRASummary?, stepsData: String): List<DashboardFeatureGrid>{
+
+
+        val list:ArrayList<DashboardFeatureGrid> = ArrayList()
+        if (hraSummary == null){
+
+            list.add(
+                DashboardFeatureGrid(
+                    imageId = R.drawable.dash_hra,
+                    title = context.resources.getString(R.string.HRA),
+                    color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                    data = "Take Assessment",
+                    code = "HRA"
+                )
+            )
+        }else {
+            try {
+                var hraObservation = " -- "
+                if (hraSummary!!.hraCutOff.equals("1")) {
+                    hraObservation = "${hraSummary!!.scorePercentile.toInt()}"
+                }else{
+                    hraObservation = "Take Assessment"
+                }
+                list.add(
+                    DashboardFeatureGrid(
+                        imageId = R.drawable.dash_hra,
+                        title = context.resources.getString(R.string.HRA),
+                        color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                        data = hraObservation,
+                        code = "HRA"
+                    )
+                )
+            }catch (e: Exception){
+                e.printStackTrace()
+                list.add(
+                    DashboardFeatureGrid(
+                        imageId = R.drawable.dash_hra,
+                        title = context.resources.getString(R.string.HRA),
+                        color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                        data = " -- ",
+                        code = "HRA"
+                    )
+                )
+            }
+
+        }
+        if (stepsData.isNullOrEmpty()) {
+            list.add(
+                DashboardFeatureGrid(
+                    imageId = R.drawable.dash_step_counter,
+                    title = context.resources.getString(R.string.DASH_ACTIVITY_TRACKER),
+                    color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                    data = " -- ",
+                    code = "STEP"
+                )
+            )
+        }else{
+            list.add(
+                DashboardFeatureGrid(
+                    imageId = R.drawable.dash_step_counter,
+                    title = context.resources.getString(R.string.DASH_ACTIVITY_TRACKER),
+                    color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                    data = stepsData,
+                    code = "STEP"
+                )
+            )
+        }
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_track_parameter,title = context.resources.getString(R.string.DASH_TRACK_PARAMETER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "PARAM"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_store_records,title = context.resources.getString(R.string.DASH_STORE_HEALTH_RECORD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "RECORD"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_medicine_tracker,title = context.resources.getString(R.string.DASH_MEDICINE_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "MED"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_tools_calculators,title = context.resources.getString(R.string.DASH_TOOLS_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "CAL"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_rewards,title = context.resources.getString(R.string.DASH_REWARD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "REW"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_health_library,title = context.resources.getString(R.string.DASH_HEALTH_LIBRARY),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "BLOG"))
+        return list
+    }
+
+    fun getSwitchProfileDashboardList(hraSummary: HRASummary?, stepsData: String): List<DashboardFeatureGrid>{
+        val list:ArrayList<DashboardFeatureGrid> = ArrayList()
+        if (hraSummary == null){
+
+            list.add(
+                DashboardFeatureGrid(
+                    imageId = R.drawable.dash_hra,
+                    title = context.resources.getString(R.string.HRA),
+                    color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                    data = "Take Assessment",
+                    code = "HRA"
+                )
+            )
+        }else {
+            try {
+                var hraObservation = " -- "
+                if (hraSummary!!.hraCutOff.equals("1")) {
+                    hraObservation = "${hraSummary!!.scorePercentile.toInt()}"
+                }else{
+                    hraObservation = "Take Assessment"
+                }
+                list.add(
+                    DashboardFeatureGrid(
+                        imageId = R.drawable.dash_hra,
+                        title = context.resources.getString(R.string.HRA),
+                        color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                        data = hraObservation,
+                        code = "HRA"
+                    )
+                )
+            }catch (e: Exception){
+                e.printStackTrace()
+                list.add(
+                    DashboardFeatureGrid(
+                        imageId = R.drawable.dash_hra,
+                        title = context.resources.getString(R.string.HRA),
+                        color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                        data = " -- ",
+                        code = "HRA"
+                    )
+                )
+            }
+
+        }
+//        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_hra,title = context.resources.getString(R.string.HRA),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = ""))
+//        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_step_counter,title = context.resources.getString(R.string.DASH_ACTIVITY_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = ""))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_track_parameter,title = context.resources.getString(R.string.DASH_TRACK_PARAMETER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "PARAM"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_store_records,title = context.resources.getString(R.string.DASH_STORE_HEALTH_RECORD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "RECORD"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_medicine_tracker,title = context.resources.getString(R.string.DASH_MEDICINE_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "MED"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_tools_calculators,title = context.resources.getString(R.string.DASH_TOOLS_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "CAL"))
+//        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_rewards,title = context.resources.getString(R.string.DASH_REWARD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "REW"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_health_library,title = context.resources.getString(R.string.DASH_HEALTH_LIBRARY),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "BLOG"))
         return list
     }
 
@@ -157,6 +289,7 @@ class DataHandler( val context: Context) {
     // DoctorDetailsModel
     data class Option(val imageId: Int, val title: String , val color : Int ,val code: String)
     data class DashboardFeature(val  imageId: Int, val title: String , val color : Int )
+    data class DashboardFeatureGrid(val  imageId: Int, val title: String , val color : Int,val data:String, val code:String )
     data class NavDrawerOption(val  imageId: Int, val title: String , val id: String , val color : Int)
     data class WellnessCentreDetails(  val title: String ,  val tag: String ,  val desc: String , val  img: Int , val color : Int )
     data class FamilyRelationOption(val  relationImgId: Int, val relation: String , val relationshipCode: String , val gender: String )

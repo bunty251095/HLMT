@@ -18,7 +18,6 @@
             android:id="@+id/layout_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/layout_btns"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +25,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_banner"
@@ -41,6 +41,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_150sdp"
                         android:scaleType="centerCrop"
+                        android:visibility="gone"
                         android:src="@drawable/img_banner_profile"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +79,7 @@
                     android:id="@+id/layout_user_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/_45sdp"
                     android:padding="@dimen/_8sdp"
                     android:layout_gravity="center_horizontal"
@@ -459,7 +460,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="true"
                                 android:text="@string/MALE"
-                                android:textColor="@color/selector_radio_color"
+                                android:buttonTint="@color/colorPrimary"
                                 android:textSize="@dimen/_15sdp" />
 
                             <androidx.appcompat.widget.AppCompatRadioButton
@@ -469,7 +470,7 @@
                                 android:checked="false"
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:text="@string/FEMALE"
-                                android:textColor="@color/selector_radio_color"
+                                android:buttonTint="@color/colorPrimary"
                                 android:textSize="@dimen/_15sdp" />
 
                         </RadioGroup>
@@ -529,37 +530,41 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
+                <LinearLayout
+                    android:id="@+id/layout_btns"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_14sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_edit_details">
+
+                    <!--<androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_back"
+                        style="@style/CustomButtonLeft"
+                        android:visibility="gone"
+                        android:text="@string/BACK"/>-->
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_done"
+                        style="@style/CustomButtonRight"
+                        android:text="@string/PROCEED" />
+
+                </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </ScrollView>
 
-        <LinearLayout
-        android:id="@+id/layout_btns"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal"
-        android:weightSum="1"
-        android:orientation="horizontal"
-        android:layout_marginStart="@dimen/_14sdp"
-        android:layout_marginEnd="@dimen/_14sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
 
-        <!--<androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_back"
-            style="@style/CustomButtonLeft"
-            android:visibility="gone"
-            android:text="@string/BACK"/>-->
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_done"
-            style="@style/CustomButtonRight"
-            android:text="@string/PROCEED"/>
-
-    </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
