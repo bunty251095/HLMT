@@ -111,7 +111,8 @@
     <fragment
             android:id="@+id/updateParameterFragment"
             android:name="com.caressa.track_parameter.ui.UpdateParameterFragment"
-            android:label="UpdateParameterFragment" />
+            android:label="UpdateParameterFragment" >
+    </fragment>
 
     <fragment
         android:id="@+id/dashboardFragment"
@@ -144,6 +145,12 @@
         android:label="Update Parameter">
         <argument android:name="profileCode" app:argType="string"/>
         <argument android:name="showAllProfile" app:argType="string"/>
+
+        <action
+            android:id="@+id/action_updateFragment_to_detailHistoryFragment"
+            app:destination="@id/detailHistoryFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment

@@ -520,6 +520,7 @@
                                 android:textSize="@dimen/_13sdp"
                                 android:imeOptions="actionDone"
                                 android:inputType="text"
+                                android:maxLength="13"
                                 android:minLines="2"
                                 android:maxLines="2"
                                 android:paddingTop="@dimen/_10sdp" />
