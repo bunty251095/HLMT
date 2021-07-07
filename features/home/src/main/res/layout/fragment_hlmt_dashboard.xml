@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.caressa.home.viewmodel.DashboardViewModel"/>
+            type="com.caressa.home.viewmodel.DashboardViewModel" />
 
         <variable
             name="backViewModel"
-            type="com.caressa.home.viewmodel.BackgroundCallViewModel"/>
+            type="com.caressa.home.viewmodel.BackgroundCallViewModel" />
 
     </data>
 
@@ -23,10 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -55,9 +54,12 @@
                         <com.caressa.common.view.ArcImageView
                             android:layout_width="@dimen/_45sdp"
                             android:layout_height="@dimen/_45sdp"
-                            android:scaleType="fitCenter"
                             android:layout_gravity="center_horizontal"
-                            app:srcCompat="@drawable/dash_height" />
+                            android:background="@drawable/circle_bg"
+                            android:backgroundTint="@color/hlmt_light_blue"
+                            android:padding="@dimen/_5sdp"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/ic_height_new" />
 
                         <com.caressa.common.view.ArcTextView
                             style="@style/VivantTitle"
@@ -97,8 +99,10 @@
                             android:layout_width="@dimen/_45sdp"
                             android:layout_height="@dimen/_45sdp"
                             android:layout_gravity="center_horizontal"
+                            android:background="@drawable/circle_bg"
+                            android:padding="@dimen/_8sdp"
                             android:scaleType="fitCenter"
-                            app:srcCompat="@drawable/dash_weight" />
+                            app:srcCompat="@drawable/ic_weight_new" />
 
                         <com.caressa.common.view.ArcTextView
                             style="@style/VivantTitle"
@@ -137,9 +141,12 @@
                         <com.caressa.common.view.ArcImageView
                             android:layout_width="@dimen/_45sdp"
                             android:layout_height="@dimen/_45sdp"
-                            android:scaleType="centerCrop"
                             android:layout_gravity="center_horizontal"
-                            app:srcCompat="@drawable/dash_bmi" />
+                            android:background="@drawable/circle_bg"
+                            android:backgroundTint="@color/hlmt_dark_grey"
+                            android:padding="@dimen/_5sdp"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/ic_bmi_new" />
 
                         <com.caressa.common.view.ArcTextView
                             style="@style/VivantTitle"
@@ -178,9 +185,12 @@
                         <com.caressa.common.view.ArcImageView
                             android:layout_width="@dimen/_45sdp"
                             android:layout_height="@dimen/_45sdp"
-                            android:scaleType="centerCrop"
                             android:layout_gravity="center_horizontal"
-                            app:srcCompat="@drawable/dash_blood_pressure" />
+                            android:background="@drawable/circle_bg"
+                            android:backgroundTint="@color/hlmt_warm_grey"
+                            android:padding="@dimen/_5sdp"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/ic_bp_new" />
 
                         <com.caressa.common.view.ArcTextView
                             style="@style/VivantTitle"
@@ -220,11 +230,11 @@
                         android:id="@+id/card_hra"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
                         android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        app:cardElevation="@dimen/_5sdp"
                         app:cardCornerRadius="@dimen/_8sdp"
+                        app:cardElevation="@dimen/_5sdp"
                         app:layout_constraintEnd_toStartOf="@+id/card_steps"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
@@ -242,63 +252,64 @@
                             <com.caressa.common.view.CustomImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
-                                android:scaleType="fitCenter"
-                                android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginRight="@dimen/_5sdp"
+                                android:scaleType="fitCenter"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:srcCompat="@drawable/dash_hra" />
 
 
                             <com.caressa.common.view.ArcTextView
+                                style="@style/VivantDescription"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_1sdp"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginEnd="@dimen/_1sdp"
                                 android:gravity="center"
-                                style="@style/VivantDescription"
-                                app:isTemplate="true"
-                                app:isPrimary="true"
                                 android:text="@string/HRA"
                                 android:textColor="@color/textViewColorSecondary"
                                 android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                app:isPrimary="true"
+                                app:isTemplate="true" />
 
                             <RelativeLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
-                            <com.caressa.common.view.ArcTextView
-                                android:id="@+id/txt_hra_value"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:layout_marginBottom="@dimen/_14sdp"
-                                android:gravity="center"
-                                android:text=" -- "
-                                style="@style/VivantDescription"
-                                app:isTemplate="true"
-                                android:textStyle="bold"
-                                android:textSize="@dimen/_20sdp" />
 
-                            <com.caressa.common.view.ArcTextView
-                                android:id="@+id/txt_no_hra"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:layout_marginBottom="@dimen/_14sdp"
-                                android:gravity="center"
-                                android:visibility="invisible"
-                                android:text=" Take Assessment "
-                                style="@style/VivantDescription"
-                                app:isTemplate="true"
-                                android:textStyle="bold"
-                                android:textSize="@dimen/_10sdp" />
+                                <com.caressa.common.view.ArcTextView
+                                    android:id="@+id/txt_hra_value"
+                                    style="@style/VivantDescription"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_14sdp"
+                                    android:gravity="center"
+                                    android:text=" -- "
+                                    android:textSize="@dimen/_20sdp"
+                                    android:textStyle="bold"
+                                    app:isTemplate="true" />
+
+                                <com.caressa.common.view.ArcTextView
+                                    android:id="@+id/txt_no_hra"
+                                    style="@style/VivantDescription"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_14sdp"
+                                    android:gravity="center"
+                                    android:text=" Take Assessment "
+                                    android:textSize="@dimen/_10sdp"
+                                    android:textStyle="bold"
+                                    android:visibility="invisible"
+                                    app:isTemplate="true" />
                             </RelativeLayout>
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -309,10 +320,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_15sdp"
-                        app:cardElevation="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         app:cardCornerRadius="@dimen/_8sdp"
+                        app:cardElevation="@dimen/_5sdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/card_hra"
@@ -330,16 +341,17 @@
                             <com.caressa.common.view.CustomImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
-                                android:scaleType="centerCrop"
-                                android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginRight="@dimen/_5sdp"
+                                android:scaleType="centerCrop"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:srcCompat="@drawable/dash_step_counter" />
 
 
                             <com.caressa.common.view.ArcTextView
+                                style="@style/VivantDescription"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_1sdp"
@@ -347,15 +359,15 @@
                                 android:layout_marginEnd="@dimen/_1sdp"
                                 android:gravity="center"
                                 android:text="@string/DASH_ACTIVITY_TRACKER"
-                                style="@style/VivantDescription"
-                                app:isTemplate="true"
-                                app:isPrimary="true"
                                 android:textColor="@color/textViewColorSecondary"
                                 android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                app:isPrimary="true"
+                                app:isTemplate="true" />
 
                             <com.caressa.common.view.ArcTextView
                                 android:id="@+id/txt_steps_count"
+                                style="@style/VivantDescription"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_10sdp"
@@ -363,10 +375,9 @@
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:layout_marginBottom="@dimen/_14sdp"
                                 android:gravity="center"
-                                style="@style/VivantDescription"
-                                app:isTemplate="true"
                                 android:text=" -- "
-                                android:textSize="@dimen/_10sdp" />
+                                android:textSize="@dimen/_10sdp"
+                                app:isTemplate="true" />
 
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -376,10 +387,11 @@
                         android:id="@+id/card_track_parameter"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"                        app:cardElevation="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="@dimen/_3sdp"
                         app:cardMaxElevation="@dimen/_5sdp"
                         app:layout_constraintEnd_toStartOf="@+id/card_store_record"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -398,16 +410,17 @@
                             <com.caressa.common.view.CustomImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_80sdp"
-                                android:scaleType="centerCrop"
-                                android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginRight="@dimen/_5sdp"
+                                android:scaleType="centerCrop"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:srcCompat="@drawable/dash_track_parameter" />
 
 
                             <com.caressa.common.view.ArcTextView
+                                style="@style/VivantDescription"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_1sdp"
@@ -415,13 +428,12 @@
                                 android:layout_marginEnd="@dimen/_1sdp"
                                 android:layout_marginBottom="@dimen/_10sdp"
                                 android:gravity="center"
-                                style="@style/VivantDescription"
-                                app:isTemplate="true"
-                                app:isPrimary="true"
                                 android:text="@string/DASH_TRACK_PARAMETER"
                                 android:textColor="@color/textViewColorSecondary"
                                 android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                app:isPrimary="true"
+                                app:isTemplate="true" />
 
 
                         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -432,8 +444,8 @@
                         android:id="@+id/card_store_record"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         app:cardCornerRadius="@dimen/_5sdp"
                         app:cardElevation="@dimen/_5sdp"
@@ -454,16 +466,17 @@
                             <com.caressa.common.view.CustomImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_80sdp"
-                                android:scaleType="centerCrop"
-                                android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginRight="@dimen/_5sdp"
+                                android:scaleType="centerCrop"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:srcCompat="@drawable/dash_store_records" />
 
 
                             <com.caressa.common.view.ArcTextView
+                                style="@style/VivantDescription"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_1sdp"
@@ -471,13 +484,12 @@
                                 android:layout_marginEnd="@dimen/_1sdp"
                                 android:layout_marginBottom="@dimen/_10sdp"
                                 android:gravity="center"
-                                style="@style/VivantDescription"
-                                app:isTemplate="true"
-                                app:isPrimary="true"
                                 android:text="@string/DASH_STORE_HEALTH_RECORD"
                                 android:textColor="@color/textViewColorSecondary"
                                 android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                app:isPrimary="true"
+                                app:isTemplate="true" />
 
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -487,8 +499,8 @@
                         android:id="@+id/card_medication_tracker"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
                         app:cardCornerRadius="@dimen/_5sdp"
                         app:cardElevation="@dimen/_5sdp"
@@ -509,16 +521,17 @@
                             <com.caressa.common.view.CustomImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_80sdp"
-                                android:scaleType="centerCrop"
-                                android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginRight="@dimen/_5sdp"
+                                android:scaleType="centerCrop"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:srcCompat="@drawable/dash_medicine_tracker" />
 
 
                             <com.caressa.common.view.ArcTextView
+                                style="@style/VivantDescription"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_1sdp"
@@ -526,13 +539,12 @@
                                 android:layout_marginEnd="@dimen/_1sdp"
                                 android:layout_marginBottom="@dimen/_10sdp"
                                 android:gravity="center"
-                                style="@style/VivantDescription"
-                                app:isTemplate="true"
-                                app:isPrimary="true"
                                 android:text="@string/DASH_MEDICINE_TRACKER"
                                 android:textColor="@color/textViewColorSecondary"
                                 android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                app:isPrimary="true"
+                                app:isTemplate="true" />
 
 
                         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -543,8 +555,8 @@
                         android:id="@+id/card_tools_calculator"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         app:cardCornerRadius="@dimen/_5sdp"
                         app:cardElevation="@dimen/_5sdp"
@@ -565,16 +577,17 @@
                             <com.caressa.common.view.CustomImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_80sdp"
-                                android:scaleType="centerCrop"
-                                android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginRight="@dimen/_5sdp"
+                                android:scaleType="centerCrop"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:srcCompat="@drawable/dash_tools_calculators" />
 
 
                             <com.caressa.common.view.ArcTextView
+                                style="@style/VivantDescription"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_1sdp"
@@ -582,13 +595,12 @@
                                 android:layout_marginEnd="@dimen/_1sdp"
                                 android:layout_marginBottom="@dimen/_10sdp"
                                 android:gravity="center"
-                                style="@style/VivantDescription"
-                                app:isTemplate="true"
-                                app:isPrimary="true"
                                 android:text="@string/DASH_TOOLS_TRACKER"
                                 android:textColor="@color/textViewColorSecondary"
                                 android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                app:isPrimary="true"
+                                app:isTemplate="true" />
 
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
