@@ -1036,7 +1036,9 @@ object DateHelper {
 
             val yearsDifference = currentDate.get(Calendar.YEAR) - givenDate.get(Calendar.YEAR)
             Log.d("DateHelper", "isDateAbove18Years - yearsDifference-->  $yearsDifference")
-            return yearsDifference >= 18
+            val isAbove18Year = yearsDifference >= 18
+            Timber.e("isAbove18Year--->$isAbove18Year")
+            return isAbove18Year
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -218,7 +218,7 @@ class HealthRecordsDashboardFragment : BaseFragment() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val per = Environment.isExternalStorageManager()
@@ -237,6 +237,6 @@ class HealthRecordsDashboardFragment : BaseFragment() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
+    }*/
 
 }

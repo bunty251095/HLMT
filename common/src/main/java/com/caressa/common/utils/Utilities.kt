@@ -10,7 +10,6 @@ import android.content.pm.PackageManager
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.net.ConnectivityManager
-import android.os.Build
 import android.util.Base64
 import android.util.Log
 import android.view.Gravity
@@ -26,7 +25,6 @@ import com.caressa.common.constants.Constants
 import com.caressa.common.constants.NavigationConstants
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import org.json.JSONArray
 import timber.log.Timber
 import java.io.File
 import java.math.BigDecimal
@@ -34,8 +32,6 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-import kotlin.math.pow
-import kotlin.math.roundToInt
 
 
 object Utilities {
@@ -150,13 +146,11 @@ object Utilities {
             println("context: $context")
             if (context != null && !isNullOrEmpty(message)) {
                 val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
-                    toast.setGravity(Gravity.BOTTOM, 0, 0)
-                    val view = toast.view
-                    view?.background?.colorFilter = PorterDuffColorFilter(appColorHelper.primaryColor(),PorterDuff.Mode.SRC_IN)
-                    val text = view?.findViewById<TextView>(android.R.id.message)
-                    text?.setTextColor(ContextCompat.getColor(context, R.color.white))
-                }
+                toast.setGravity(Gravity.BOTTOM, 0, 0)
+                val view = toast.view
+                view?.background?.colorFilter = PorterDuffColorFilter(appColorHelper.primaryColor(),PorterDuff.Mode.SRC_IN)
+                val text = view?.findViewById<TextView>(android.R.id.message)
+                text?.setTextColor(ContextCompat.getColor(context, R.color.white))
                 toast.show()
             }
         } catch (e: Exception) {
@@ -170,13 +164,11 @@ object Utilities {
             println("context: $context")
             if (context != null && !isNullOrEmpty(message)) {
                 val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
-                    toast.setGravity(Gravity.BOTTOM, 0, 0)
-                    val view = toast.view
-                    view!!.background.colorFilter = PorterDuffColorFilter(appColorHelper.primaryColor(),PorterDuff.Mode.SRC_IN)
-                    val text = view.findViewById<TextView>(android.R.id.message)
-                    text.setTextColor(ContextCompat.getColor(context, R.color.white))
-                }
+                toast.setGravity(Gravity.BOTTOM, 0, 0)
+                val view = toast.view
+                view!!.background.colorFilter = PorterDuffColorFilter(appColorHelper.primaryColor(),PorterDuff.Mode.SRC_IN)
+                val text = view.findViewById<TextView>(android.R.id.message)
+                text.setTextColor(ContextCompat.getColor(context, R.color.white))
                 toast.show()
             }
         } catch (e: Exception) {
@@ -385,6 +377,32 @@ object Utilities {
 
         }
         return vitalParameter
+    }
+
+    fun getHraObservationColorFromScore( score: Int ): Int {
+        var wellnessScore = score
+        if (wellnessScore <= 0) {
+            wellnessScore = 0
+        }
+        var color : Int = appColorHelper.textColor
+        when {
+            wellnessScore in 0..15 -> {
+                color = R.color.high_risk
+            }
+
+            wellnessScore in 16..45 -> {
+                color = R.color.moderate_risk
+            }
+
+            wellnessScore in 46..85 -> {
+                color = R.color.healthy_risk
+            }
+
+            wellnessScore > 85 -> {
+                color = R.color.optimum_risk
+            }
+        }
+        return color
     }
 
     fun clearStepsData( context: Context ) {

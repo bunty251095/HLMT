@@ -158,6 +158,11 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                 binding.tilEdtMemberEmail.error = "Please Enter Valid Email"
             }
 
+            if ( !DateHelper.isDateAbove18Years(DateHelper.getDateTimeAs_ddMMMyyyy(dob)) ) {
+                binding.tilEdtMemberDob.isErrorEnabled = true
+                binding.tilEdtMemberDob.error = "Age must be more than 18 years"
+            }
+
             if (!binding.tilEdtMemberName.isErrorEnabled && !binding.tilEdtMemberDob.isErrorEnabled
                 && !binding.tilEdtMemberMobile.isErrorEnabled && !binding.tilEdtMemberEmail.isErrorEnabled
             ) {
@@ -280,6 +285,7 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
     }
 
     private fun showDatePicker() {
+        cal.add(Calendar.YEAR, -18)
         val dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
             this@AddFamilyMemberFragment,
             cal.get(Calendar.YEAR),

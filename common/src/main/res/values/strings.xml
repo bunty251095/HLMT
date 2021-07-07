@@ -57,10 +57,10 @@
     <string name="PHONE">Phone</string>
     <string name="PHONE_NUMBER">Phone Number</string>
     <string name="NUMBER">Number</string>
-    <string name="ALTERNATE_NUMBER">Altrernate Number</string>
+    <string name="ALTERNATE_NUMBER">Alternate Number</string>
     <string name="EMAIL">Email</string>
     <string name="EMAIL_ADDRESS">Email Address</string>
-    <string name="ALTERNATE_EMAIL_ADDRESS">Altrernate Email Address</string>
+    <string name="ALTERNATE_EMAIL_ADDRESS">Alternate Email Address</string>
     <string name="ADDRESS">Address</string>
     <string name="AGE">Age</string>
     <string name="DATE_OF_BIRTH">Date Of Birth</string>

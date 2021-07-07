@@ -439,7 +439,7 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
 
             }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+/*            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val per = Environment.isExternalStorageManager()
                 Timber.e("requestCode---> $requestCode")
                 Timber.e("permissionGranted---> $per")
@@ -452,7 +452,7 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
                         }
                     }
                 }
-            }
+            }*/
 
             //Utilities.hideKeyboard(this)
             super.onActivityResult(requestCode, resultCode, data)
