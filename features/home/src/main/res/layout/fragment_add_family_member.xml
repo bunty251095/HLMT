@@ -302,6 +302,7 @@
                                 android:inputType="number"
                                 android:lines="1"
                                 android:imeOptions="actionNext"
+                                android:maxLength="13"
                                 android:text=""
                                 android:textSize="@dimen/_13sdp"
                                 android:paddingTop="@dimen/_10sdp"/>

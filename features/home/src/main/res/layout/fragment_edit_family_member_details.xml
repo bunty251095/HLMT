@@ -307,6 +307,7 @@
                                 android:inputType="number"
                                 android:lines="1"
                                 android:paddingTop="@dimen/_10sdp"
+                                android:maxLength="13"
                                 android:text="@{viewModel.alreadyExistRelatives[0].contactNo}"
                                 android:textSize="@dimen/_13sdp" />
 

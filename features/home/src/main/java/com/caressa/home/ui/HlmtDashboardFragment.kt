@@ -31,7 +31,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.caressa.common.fitness.FitRequestCode
 
-class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGridAdapter.OnItemSelectionListener {
+class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGridAdapter.OnItemSelectionListener,
+    HomeMainActivity.OnGoogleAccountSelectListener {
 
     private lateinit var binding: FragmentHlmtDashboardBinding
     private val viewModel: DashboardViewModel by viewModel()
@@ -43,6 +44,19 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
 
 
     override fun getViewModel(): BaseViewModel = viewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as HomeMainActivity).setDataReceivedListener(this)
+    }
+
+    override fun onGoogleAccountSelection(from:String) {
+        Timber.e("from---> $from")
+        when(from) {
+            Constants.SUCCESS -> proceedWithFitnessData()
+            Constants.FAILURE -> { }
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHlmtDashboardBinding.inflate(inflater, container, false)
@@ -208,7 +222,7 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
     override fun onStepGoalReceived(goal: Int) {
         if (goal == 0){ stepGoal = 3000 }
         else { stepGoal = goal }
-        proceedWithFitnessData()
+        //proceedWithFitnessData()
     }
 
     private fun updateDashboard(history: List<TrackParameterMaster.History>) {
