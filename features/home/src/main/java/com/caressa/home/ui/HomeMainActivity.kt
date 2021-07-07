@@ -1,5 +1,6 @@
 package com.caressa.home.ui
 
+import android.app.Activity
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Build
@@ -21,6 +22,8 @@ import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.NavigationConstants
+import com.caressa.common.fitness.FitRequestCode
+import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.common.utils.*
 import com.caressa.home.R
 import com.caressa.home.adapter.NavigationDrawerListAdapter
@@ -51,6 +54,7 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
     private var navigationDrawerListAdapter : NavigationDrawerListAdapter? = null
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var scoreListener:ScoreListener
+    private var googleAccountListener: OnGoogleAccountSelectListener? = null
     private val permissionListener = object : PermissionUtil.AppPermissionListener {
         override fun isPermissionGranted(isGranted: Boolean) {
             Timber.e("$isGranted")
@@ -256,6 +260,39 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
     }
 
     override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) { }
+
+    fun setDataReceivedListener( listener: OnGoogleAccountSelectListener ) {
+        this.googleAccountListener = listener
+    }
+
+    interface OnGoogleAccountSelectListener {
+        fun onGoogleAccountSelection(from:String)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        try {
+            Timber.e("requestCode-> $requestCode")
+            Timber.e("resultCode-> $resultCode")
+            Timber.e("data-> $data")
+
+            if (resultCode == Activity.RESULT_OK) {
+                if (requestCode == FitRequestCode.READ_DATA.value) {
+                    Timber.e("onActivityResult READ_DATA")
+                    if ( googleAccountListener != null ) {
+                        googleAccountListener!!.onGoogleAccountSelection(Constants.SUCCESS)
+                    }
+                }
+            } else {
+                FitnessDataManager(this).oAuthErrorMsg(requestCode, resultCode)
+                if ( googleAccountListener != null ) {
+                    googleAccountListener!!.onGoogleAccountSelection(Constants.FAILURE)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
 /*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
