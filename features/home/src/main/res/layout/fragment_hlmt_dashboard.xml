@@ -19,18 +19,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+   <!--     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            a>-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/vital_container"
@@ -220,14 +222,13 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:paddingBottom="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vital_container">
-
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvDashboardGrid"
@@ -244,9 +245,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

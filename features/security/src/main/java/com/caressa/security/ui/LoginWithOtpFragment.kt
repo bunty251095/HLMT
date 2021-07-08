@@ -37,7 +37,13 @@ class LoginWithOtpFragment : BaseFragment() {
 
     private fun setObserver() {
         viewModel.isLoginName.observe(viewLifecycleOwner, Observer {
-
+            if (it!=null) {
+                if (it.isExist.equals("TRUE", true)) {
+                    binding.btnVerify.text = "Verify & Login"
+                } else {
+                    binding.btnVerify.text = "Verify"
+                }
+            }
         })
 
         viewModel.otpVerifyData.observe(viewLifecycleOwner, Observer {

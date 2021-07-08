@@ -44,13 +44,15 @@ class SecurityActivity : AppCompatActivity() {
             toolbar_title.text = when (destination.id) {
                 R.id.termsAndConditionFragment -> resources.getString(R.string.TERMS_CONDITIONS)
                 R.id.userInfoFragment -> resources.getString(R.string.ADDITIONAL_DETAILS)
+                R.id.hlmtLoginFragment -> ""
+                R.id.loginViaOTPFragment -> ""
+                R.id.userDetailsFragment -> ""
                 else -> ""
             }
-            if ( destination.id == R.id.termsAndConditionFragment ||
-                destination.id == R.id.userInfoFragment ) {
-                toolBarView.visibility = View.VISIBLE
-            } else {
+            if ( destination.id == R.id.stepOneFragment ) {
                 toolBarView.visibility = View.GONE
+            } else {
+                toolBarView.visibility = View.VISIBLE
             }
             /*            img_vivant_logo.visibility = when (destination.id) {
                 R.id.termsAndConditionFragment -> View.VISIBLE
