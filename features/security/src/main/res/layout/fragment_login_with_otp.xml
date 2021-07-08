@@ -79,6 +79,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/selector_border_button"
                     android:tag="@{viewModel.loginResponse.response}"
                     app:layout_constraintEnd_toEndOf="@+id/lbl_forgot_password_desc"
                     app:layout_constraintStart_toStartOf="@+id/lbl_forgot_password_desc"
@@ -98,6 +99,7 @@
                         android:id="@+id/textView"
                         style="@style/CustomTextRegular"
                         android:text="+60"
+                        android:textSize="@dimen/_14sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -105,10 +107,10 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_edt_forgot_email"
-                        style="@style/VivantTextInputLayoutStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingStart="@dimen/_70sdp"
+                        app:boxBackgroundMode="none"
                         app:hintEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -119,15 +121,17 @@
                             android:id="@+id/edt_mobile_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/selector_edit_text_color"
+                            android:background="@null"
+                            android:fontFamily="@font/dax_regular"
                             android:hint="@string/MOBILE_NUMBER"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:maxLength="13"
+                            android:paddingStart="@dimen/_5sdp"
                             android:paddingTop="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_10sdp"
                             android:text=""
-                            android:textSize="@dimen/_16sdp" />
+                            android:textSize="@dimen/_14sdp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

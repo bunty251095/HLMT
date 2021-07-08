@@ -9,6 +9,7 @@ import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.local.dao.DataSyncMasterDao
 import com.caressa.local.dao.HRADao
+import com.caressa.local.dao.TrackParameterDao
 import com.caressa.model.entity.*
 import com.caressa.model.hra.*
 import com.caressa.remote.HraDatasource
@@ -43,6 +44,8 @@ interface HraRepository {
     suspend fun getSavedDetailsTabNameByCategory( tabName : String) : List<HRAQuestions>
     suspend fun getHraSummaryDetails() : HRASummary
 
+    suspend fun getParameterDataByProfileCode(profileCode: String) : List<TrackParameterMaster.Parameter>
+
     suspend fun clearQuestionResponse(quesCode : String)
     suspend fun clearHRALabValue( parameterCode : String )
     suspend fun clearHraQuestionsTable()
@@ -50,7 +53,7 @@ interface HraRepository {
     suspend fun logoutUser()
 }
 
-class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDao : HRADao,
+class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDao : HRADao,private val paramDao : TrackParameterDao,
                         private val dataSyncMasterDao: DataSyncMasterDao, sharedPref: SharedPreferences) : HraRepository {
 
     override suspend fun startHra(forceRefresh: Boolean, data: HraStartModel,relativeId: String): LiveData<Resource<HraStartModel.HraStartResponse>> {
@@ -354,6 +357,10 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
 
     override suspend fun getHraSummaryDetails(): HRASummary {
         return hraDao.getHRASummary()
+    }
+
+    override suspend fun getParameterDataByProfileCode(profileCode: String): List<TrackParameterMaster.Parameter> {
+        return paramDao.getParameterDataByProfileCode(profileCode)
     }
 
     override suspend fun clearQuestionResponse(quesCode: String) {

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.caressa.security.viewmodel.HlmtLoginViewModel"/>
+            type="com.caressa.security.viewmodel.HlmtLoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,19 +26,19 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_12sdp"
                 android:layout_gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/_12sdp">
 
                 <com.caressa.common.view.ArcImageView
                     android:id="@+id/img_signup_heart"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_80sdp"
                     android:layout_gravity="center"
-                    android:src="@drawable/hlmt_banner"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@drawable/hlmt_banner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -48,12 +47,13 @@
                     android:id="@+id/layout_edt_login_email_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_40sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/img_signup_heart"
+                    android:background="@drawable/selector_border_button"
+                    app:layout_constraintEnd_toEndOf="@+id/img_signup_heart"
                     app:layout_constraintStart_toStartOf="@+id/img_signup_heart"
-                    app:layout_constraintEnd_toEndOf="@+id/img_signup_heart">
+                    app:layout_constraintTop_toBottomOf="@+id/img_signup_heart">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imageView"
@@ -61,7 +61,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:tint="@color/security_grey_light"
-                        android:layout_marginTop="@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/til_edt_login_email_phone"
                         app:srcCompat="@drawable/img_mail" />
@@ -70,27 +70,27 @@
                         android:id="@+id/til_edt_login_email_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:passwordToggleEnabled="false"
                         app:hintEnabled="false"
-                        style="@style/VivantTextInputLayoutStyle"
+                        app:boxBackgroundMode="none"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:passwordToggleEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_username"
-                            style="@style/VivantEditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@null"
+                            android:fontFamily="@font/dax_regular"
                             android:hint="HLMT User ID"
                             android:imeOptions="actionNext"
                             android:inputType="textEmailAddress"
-                            android:maxLength="40"
+                            android:maxLength="50"
                             android:paddingStart="@dimen/_40sdp"
                             android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_15sdp"
-                            android:text=""
-                            android:textSize="@dimen/_12sdp" />
+                            android:paddingBottom="@dimen/_10sdp"
+                            android:textSize="@dimen/_14sdp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,11 +98,11 @@
                         android:id="@+id/img_validation"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
-                        android:visibility="gone"
                         android:src="@drawable/img_validation_tick"
                         android:tint="@color/vivantGreen"
-                        app:layout_constraintTop_toBottomOf="@+id/til_edt_login_email_phone"
-                        app:layout_constraintEnd_toEndOf="@+id/til_edt_login_email_phone" />
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/til_edt_login_email_phone"
+                        app:layout_constraintTop_toBottomOf="@+id/til_edt_login_email_phone" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -110,12 +110,13 @@
                     android:id="@+id/layout_edt_login_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_email_phone"
+                    android:background="@drawable/selector_border_button"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_email_phone"
                     app:layout_constraintStart_toStartOf="@+id/layout_edt_login_email_phone"
-                    app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_email_phone">
+                    app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_email_phone">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/img_signup_password"
@@ -123,7 +124,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:tint="@color/security_grey_light"
-                        android:layout_marginTop="@dimen/_7sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/til_edt_login_password"
                         app:srcCompat="@drawable/img_password" />
@@ -132,28 +133,29 @@
                         android:id="@+id/til_edt_login_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:passwordToggleEnabled="true"
-                        app:passwordToggleTint="@color/security_grey_light"
                         app:hintEnabled="false"
-                        style="@style/VivantTextInputLayoutStyle"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:boxBackgroundMode="none"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/security_grey_light">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_login_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/VivantEditTextStyle"
-                            android:paddingStart="@dimen/_40sdp"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_15sdp"
-                            android:textSize="@dimen/_12sdp"
+                            android:background="@null"
+                            android:fontFamily="@font/dax_regular"
                             android:hint="@string/PASSWORD"
-                            android:text=""
                             android:imeOptions="actionDone"
                             android:inputType="textPassword"
-                            android:maxLength="20" />
+                            android:maxLength="20"
+                            android:paddingStart="@dimen/_40sdp"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_10sdp"
+                            android:text=""
+                            android:textSize="@dimen/_14sdp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -162,48 +164,48 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_forgot_password"
                     style="@style/VivantDescription"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:text="@string/FORGOT_PASSWORD"
                     android:textSize="@dimen/_12sdp"
                     android:visibility="gone"
-                    android:layout_marginTop="@dimen/_20sdp"
                     app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_password"
                     app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_password" />
 
                 <com.caressa.common.view.ArcButton
                     android:id="@+id/btn_login"
-                    app:isTemplate="true"
                     style="@style/CustomButton"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:text="@string/LOGIN"
                     android:textSize="@dimen/_14sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password"
-                    app:layout_constraintStart_toStartOf="@+id/layout_edt_login_password"
-                    app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_password" />
-
-<!--                <com.caressa.common.view.ArcTextView
-                    android:id="@+id/tv_login_signup"
                     app:isTemplate="true"
-                    app:isPrimary="true"
-                    android:visibility="gone"
-                    style="@style/CustomTextviewBold"
-                    android:text="@string/SIGN_UP"
-                    android:textSize="@dimen/_13sdp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_login"
-                    app:layout_constraintStart_toStartOf="@+id/btn_login" />-->
+                    app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_password"
+                    app:layout_constraintStart_toStartOf="@+id/layout_edt_login_password"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password" />
+
+                <!--                <com.caressa.common.view.ArcTextView
+                                    android:id="@+id/tv_login_signup"
+                                    app:isTemplate="true"
+                                    app:isPrimary="true"
+                                    android:visibility="gone"
+                                    style="@style/CustomTextviewBold"
+                                    android:text="@string/SIGN_UP"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textColor="@color/colorPrimary"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    app:layout_constraintTop_toBottomOf="@+id/btn_login"
+                                    app:layout_constraintStart_toStartOf="@+id/btn_login" />-->
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_login_termsofservice"
                     style="@style/VivantDescription"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:text="@string/I_AGREE_CONSENT"
                     android:textSize="@dimen/_12sdp"
                     android:visibility="invisible"
-                    android:layout_marginTop="@dimen/_15sdp"
                     app:layout_constraintEnd_toEndOf="@+id/btn_login"
                     app:layout_constraintStart_toStartOf="@+id/btn_login"
                     app:layout_constraintTop_toBottomOf="@+id/btn_login" />

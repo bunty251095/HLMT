@@ -27,6 +27,22 @@
         <item name="color">@color/colorPrimary</item>
     </style>
 
+    <style name="Widget.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputLayout</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.MaterialComponents.SmallComponent</item>
+        <item name="hintTextColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="ThemeOverlay.App.TextInputLayout" parent="">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnSurface">@color/colorPrimary</item>
+        <item name="colorError">@color/vivant_red</item>
+        <item name="drawableTint">@color/colorPrimary</item>
+        <item name="hintTextColor">@color/hlmt_warm_grey</item>
+        <item name="editTextStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox
+        </item>
+    </style>
+
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>

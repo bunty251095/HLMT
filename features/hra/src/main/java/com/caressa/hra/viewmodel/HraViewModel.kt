@@ -22,7 +22,6 @@ import com.caressa.model.hra.Option
 import com.caressa.model.hra.Question
 import com.caressa.model.hra.QuestionType
 import com.caressa.hra.ui.HraQuestionsActivity
-import com.caressa.hra.ui.HraSummaryActivity
 import com.caressa.model.entity.*
 import com.caressa.model.hra.*
 import com.caressa.model.hra.SaveAndSubmitHraModel.*
@@ -56,6 +55,8 @@ class HraViewModel(
     var prevAnsList = MutableLiveData<List<Option>>()
     var vitalDetailsSavedResponse = MutableLiveData<List<HRAVitalDetails>>()
     var labDetailsSavedResponse = MutableLiveData<List<HRALabDetails>>()
+
+    var labParameter = MutableLiveData<List<TrackParameterMaster.Parameter>>()
 
     private var hraStartSource: LiveData<Resource<HraStartModel.HraStartResponse>> = MutableLiveData()
     private val _hraStart = MediatorLiveData<HraStartModel.HraStartResponse>()
@@ -442,7 +443,7 @@ class HraViewModel(
         }
     }
 
-    fun saveHRALabDetails(parameterCode: String,labValue:String,unit:String=context.resources.getString(R.string.MG_DL)) = viewModelScope.launch {
+    fun saveHRALabDetails(parameterCode: String,labValue:String,unit:String) = viewModelScope.launch {
         val strLabValue = if (Utilities.isNullOrEmpty(labValue)) {
             "0"
         } else {
@@ -580,6 +581,14 @@ class HraViewModel(
         }
     }
 
+    fun getParameterDataByProfileCode(profileCode: String) = viewModelScope.launch {
+        Timber.e("paramCode----> $profileCode")
+        withContext(dispatchers.io) {
+            val data = hraManagementUseCase.invokeGetParameterDataByProfileCode(profileCode)
+            labParameter.postValue(data)
+        }
+    }
+
     fun saveResponse(quesCode:String,ansCode:String,ansDesc:String,Category:String,TabName:String,OthersVal:String) = viewModelScope.launch(dispatchers.main) {
         val list: ArrayList<HRAQuestions> = ArrayList()
         list.add(HRAQuestions(
@@ -710,7 +719,7 @@ class HraViewModel(
         }
     }
 
-    fun saveHRALabDetailsBasedOnType( type : String ,parameterCode: String, labValue: String ) = viewModelScope.launch {
+    fun saveHRALabDetailsBasedOnType( type : String ,parameterCode: String, labValue: String , unit :String ) = viewModelScope.launch {
         withContext(dispatchers.io) {
 
             when( type ) {
@@ -725,7 +734,7 @@ class HraViewModel(
                         || parameterCode.equals("CHOL_LDL",ignoreCase = true)
                         || parameterCode.equals("CHOL_TRY",ignoreCase = true)
                         || parameterCode.equals("CHOL_VLDL",ignoreCase = true) ) {
-                        saveHRALabDetails( parameterCode , labValue )
+                        saveHRALabDetails( parameterCode , labValue , unit )
                     }
                 }
 
@@ -735,7 +744,7 @@ class HraViewModel(
                         || parameterCode.equals("CHOL_LDL",ignoreCase = true)
                         || parameterCode.equals("CHOL_TRY",ignoreCase = true)
                         || parameterCode.equals("CHOL_VLDL",ignoreCase = true) ) {
-                        saveHRALabDetails( parameterCode , labValue )
+                        saveHRALabDetails( parameterCode , labValue , unit )
                     }
                 }
 
@@ -773,11 +782,19 @@ class HraViewModel(
 
             // SUGAR
             "KNWDIANUM" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
-                optionList.add(Option(description = context.resources.getString(R.string.RANDOM_SUGAR), answerCode = "DIAB_RA"))
+
+                val paramDataList : MutableList<TrackParameterMaster.Parameter> = mutableListOf()
+                withContext(dispatchers.io) {
+                    paramDataList.addAll(hraManagementUseCase.invokeGetParameterDataByProfileCode("DIABETIC"))
+                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
+                    for (param in paramDataList) {
+                        optionList.add(Option(description = param.description!!, answerCode = param.code!!))
+                    }
+                }
+/*                optionList.add(Option(description = context.resources.getString(R.string.RANDOM_SUGAR), answerCode = "DIAB_RA"))
                 optionList.add(Option(description = context.resources.getString(R.string.FASTING_SUGAR), answerCode = "DIAB_FS"))
                 optionList.add(Option(description = context.resources.getString(R.string.POST_MEAL_SUGAR), answerCode = "DIAB_PM"))
-                optionList.add(Option(description = context.resources.getString(R.string.HBA1C), answerCode = "DIAB_HBA1C"))
+                optionList.add(Option(description = context.resources.getString(R.string.HBA1C), answerCode = "DIAB_HBA1C"))*/
                 question = Question(
                     qCode = qCode,
                     question = R.string.QUESTION_BLOOD_SUGAR,
@@ -799,12 +816,20 @@ class HraViewModel(
 
             // LIPID
             "KNWLIPNUM" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
-                optionList.add(Option(description = context.resources.getString(R.string.TOTAL_CHOLESTEROL), answerCode = "CHOL_TOTAL"))
+
+                val paramDataList : MutableList<TrackParameterMaster.Parameter> = mutableListOf()
+                withContext(dispatchers.io) {
+                    paramDataList.addAll(hraManagementUseCase.invokeGetParameterDataByProfileCode("LIPID"))
+                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
+                    for (param in paramDataList) {
+                        optionList.add(Option(description = param.description!!, answerCode = param.code!!))
+                    }
+                }
+/*                optionList.add(Option(description = context.resources.getString(R.string.TOTAL_CHOLESTEROL), answerCode = "CHOL_TOTAL"))
                 optionList.add(Option(description = context.resources.getString(R.string.HDL), answerCode = "CHOL_HDL"))
                 optionList.add(Option(description = context.resources.getString(R.string.LDL), answerCode = "CHOL_LDL"))
                 optionList.add(Option(description = context.resources.getString(R.string.TRIGLYCERIDES), answerCode = "CHOL_TRY"))
-                optionList.add(Option(description = context.resources.getString(R.string.VLDL), answerCode = "CHOL_VLDL"))
+                optionList.add(Option(description = context.resources.getString(R.string.VLDL), answerCode = "CHOL_VLDL"))*/
                 question = Question(
                     qCode = qCode,
                     question = R.string.QUESTION_CHOLESTEROL_NEW,

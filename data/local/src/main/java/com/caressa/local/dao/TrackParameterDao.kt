@@ -43,6 +43,9 @@ abstract class TrackParameterDao {
     @Query("SELECT * FROM TrackParameterMaster WHERE profileName != 'Other'")
     abstract suspend fun getParameterData(): List<TrackParameterMaster.Parameter>
 
+    @Query("SELECT * FROM TrackParameterMaster WHERE profileCode =:profileCode AND code NOT LIKE '%RATIO%'")
+    abstract suspend fun getParameterDataByProfileCode(profileCode: String): List<TrackParameterMaster.Parameter>
+
 //    @Query("Select A.code as 'pCode', B.value as 'hVal'  From TrackParameterMaster A inner join TrackParameterHistory B On A.code = B.parameterCode")
 //    abstract suspend fun getParameterDashboardData():List<TrackParameterMaster.ParamDashboardData>
 
