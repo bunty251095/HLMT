@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.caressa.security.viewmodel.LoginWithOtpViewModel"/>
+            type="com.caressa.security.viewmodel.LoginWithOtpViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,13 +32,13 @@
 
                 <com.caressa.common.view.ArcImageView
                     android:id="@+id/img_forgot_password"
-                    app:isTemplate="true"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:src="@drawable/img_phone"
                     android:tint="@color/colorPrimary"
+                    app:isTemplate="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -53,8 +52,8 @@
                     android:layout_marginTop="@dimen/_24sdp"
                     android:text="@string/MOBILE_NUMBER"
                     android:textSize="@dimen/_20sdp"
-                    android:visibility="gone"
                     android:textStyle="bold"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/img_forgot_password"
                     app:layout_constraintStart_toStartOf="@+id/img_forgot_password"
                     app:layout_constraintTop_toBottomOf="@+id/img_forgot_password" />
@@ -64,26 +63,44 @@
                     style="@style/CustomTextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
                     android:text="@string/ENTER_NUMBER_TO_GET_OTP"
                     android:textColor="@color/vivant_track_param_textcolor"
                     android:textSize="@dimen/_12sdp"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/lbl_forgot_password"
                     app:layout_constraintEnd_toEndOf="@+id/lbl_forgot_password"
-                    app:layout_constraintStart_toStartOf="@+id/lbl_forgot_password" />
+                    app:layout_constraintStart_toStartOf="@+id/lbl_forgot_password"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_forgot_password" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_edt_login_email_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:tag="@{viewModel.loginResponse.response}"
                     app:layout_constraintEnd_toEndOf="@+id/lbl_forgot_password_desc"
                     app:layout_constraintStart_toStartOf="@+id/lbl_forgot_password_desc"
                     app:layout_constraintTop_toBottomOf="@+id/lbl_forgot_password_desc">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:tint="@color/security_grey_light"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/img_phone" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        style="@style/CustomTextRegular"
+                        android:text="+60"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -91,6 +108,7 @@
                         style="@style/VivantTextInputLayoutStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/_70sdp"
                         app:hintEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -106,24 +124,12 @@
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:maxLength="13"
-                            android:text=""
-                            android:paddingStart="@dimen/_40sdp"
                             android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_15sdp"
-                            android:textSize="@dimen/_13sdp" />
+                            android:paddingBottom="@dimen/_10sdp"
+                            android:text=""
+                            android:textSize="@dimen/_16sdp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        app:srcCompat="@drawable/img_phone"
-                        android:tint="@color/security_grey_light"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/til_edt_forgot_email" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/img_validation"
@@ -137,17 +143,17 @@
 
                     <com.caressa.common.view.ArcTextView
                         android:id="@+id/txt_resend_mail"
-                        app:isTemplate="true"
-                        app:isPrimary="true"
                         style="@style/CustomTextview"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:text="@string/RESEND_MAIL"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_13sdp"
                         android:textStyle="bold"
                         android:visibility="gone"
-                        android:textSize="@dimen/_13sdp"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/img_validation"
-                        app:layout_constraintEnd_toEndOf="@+id/img_validation" />
+                        app:isPrimary="true"
+                        app:isTemplate="true"
+                        app:layout_constraintEnd_toEndOf="@+id/img_validation"
+                        app:layout_constraintTop_toBottomOf="@+id/img_validation" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -155,14 +161,14 @@
                     android:id="@+id/btn_send_otp"
                     style="@style/VivantButtonRight"
                     android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:text="Send OTP"
                     app:isTemplate="true"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_email_phone"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_email_phone" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/verify_code_layout"
@@ -170,8 +176,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@id/btn_send_otp"
-                    android:padding="@dimen/_12sdp">
+                    android:padding="@dimen/_12sdp"
+                    app:layout_constraintTop_toBottomOf="@id/btn_send_otp">
 
 
                     <com.caressa.common.view.ArcTextView
@@ -179,46 +185,44 @@
                         style="@style/CustomTextview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/OTP_SENT_DESC"
-                        android:textColor="@color/vivant_track_param_textcolor"
-                        android:textSize="@dimen/_12sdp"
-                        android:gravity="center"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_8sdp"
-                         />
+                        android:gravity="center"
+                        android:text="@string/OTP_SENT_DESC"
+                        android:textColor="@color/vivant_track_param_textcolor"
+                        android:textSize="@dimen/_12sdp" />
 
                     <com.caressa.security.view.PinView
                         android:id="@+id/layout_code_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:itemCount="6"
-                        app:itemViewType="rectangle"
-                        app:itemHeight="@dimen/_35sdp"
-                        app:itemWidth="@dimen/_35sdp"
-                        app:itemRadius="@dimen/_2sdp"
-                        app:itemSpacing="@dimen/_6sdp"
-                        app:lineWidth="1dp"
-                        app:lineColor="@color/vivant_charcoal_grey"
-                        android:inputType="number"
-                        android:cursorVisible="true"
-                        android:textColor="@color/vivant_charcoal_grey"
-                        android:textSize="@dimen/_22sdp"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_20sdp"
-                        />
+                        android:cursorVisible="true"
+                        android:inputType="number"
+                        android:textColor="@color/vivant_charcoal_grey"
+                        android:textSize="@dimen/_22sdp"
+                        app:itemCount="6"
+                        app:itemHeight="@dimen/_35sdp"
+                        app:itemRadius="@dimen/_2sdp"
+                        app:itemSpacing="@dimen/_6sdp"
+                        app:itemViewType="rectangle"
+                        app:itemWidth="@dimen/_35sdp"
+                        app:lineColor="@color/vivant_charcoal_grey"
+                        app:lineWidth="1dp" />
 
                     <com.caressa.common.view.ArcTextView
                         android:id="@+id/txt_resend_code"
-                        app:isTemplate="true"
-                        app:isPrimary="true"
                         style="@style/CustomTextview"
+                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_12sdp"
                         android:text="@string/RESEND_CODE"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_13sdp"
                         android:textStyle="bold"
                         android:visibility="visible"
-                        android:layout_gravity="center"
+                        app:isPrimary="true"
+                        app:isTemplate="true"
                         app:layout_constraintEnd_toEndOf="@+id/layout_code_view"
                         app:layout_constraintStart_toStartOf="@+id/layout_code_view"
                         app:layout_constraintTop_toBottomOf="@+id/layout_code_view" />
@@ -227,30 +231,29 @@
                         android:id="@+id/layout_btn_profile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginTop="@dimen/_30sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/verify_code_layout"
+                        android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="@+id/verify_code_layout"
-                        app:layout_constraintStart_toStartOf="@+id/verify_code_layout">
+                        app:layout_constraintStart_toStartOf="@+id/verify_code_layout"
+                        app:layout_constraintTop_toBottomOf="@+id/verify_code_layout">
 
                         <com.caressa.common.view.ArcButton
                             android:id="@+id/btn_back"
                             style="@style/VivantButtonLeft"
                             android:layout_width="0dp"
+                            android:layout_marginEnd="@dimen/_10sdp"
                             android:text="@string/BACK"
+                            android:visibility="gone"
                             app:isLeftButton="true"
                             app:isTemplate="true"
-                            android:visibility="gone"
-                            android:layout_marginEnd="@dimen/_10sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_verify"
-                            app:layout_constraintStart_toStartOf="parent"/>
+                            app:layout_constraintStart_toStartOf="parent" />
 
                         <com.caressa.common.view.ArcButton
                             android:id="@+id/btn_verify"
                             style="@style/VivantButtonRight"
                             android:layout_width="0dp"
-                            android:layout_marginStart="@dimen/_10sdp"
                             android:text="@string/VERIFY"
                             app:isTemplate="true"
                             app:layout_constraintBottom_toBottomOf="parent"
