@@ -131,4 +131,8 @@ class HraManagementUseCase(private val hraRepository: HraRepository,
         return shrRepository.getUserRelatives()
     }
 
+    suspend fun invokeGetParameterDataByProfileCode(profileCode: String): List<TrackParameterMaster.Parameter> {
+        return hraRepository.getParameterDataByProfileCode(profileCode)
+    }
+
 }

@@ -25,8 +25,7 @@
             android:layout_height="@dimen/_22sdp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_20sdp"
-            android:src="@drawable/img_drawer_home"
-            android:tint="@color/colorAccent" />
+            android:src="@drawable/img_drawer_home"/>
 
         <com.caressa.common.view.ArcTextView
             android:id="@+id/txt_drawer_item_title"
