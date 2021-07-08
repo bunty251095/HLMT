@@ -222,7 +222,7 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
     override fun onStepGoalReceived(goal: Int) {
         if (goal == 0){ stepGoal = 3000 }
         else { stepGoal = goal }
-        //proceedWithFitnessData()
+        proceedWithFitnessData()
     }
 
     private fun updateDashboard(history: List<TrackParameterMaster.History>) {

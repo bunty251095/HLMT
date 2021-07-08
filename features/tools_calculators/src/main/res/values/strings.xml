@@ -118,7 +118,7 @@
     <!--Diabetes Questions-->
     <string name="QUES_DIABETES_1">Are you of Asian Origin?</string>
     <string name="QUES_DIABETES_2">Have either of your parents or any of your siblings been diagnosed with Diabetes?</string>
-    <string name="QUES_DIABETES_3">Have you ever been found to have High Blood Sugar(during health checkup/an illness/pregnency)?</string>
+    <string name="QUES_DIABETES_3">Have you ever been found to have High Blood Sugar(during health checkup/an illness/pregnancy)?</string>
     <string name="QUES_DIABETES_4">Are you currently taking medication for high Blood Pressure?</string>
     <string name="QUES_DIABETES_5">Do you currently smoke cigarettes or any other tobacco products on a daily basis?</string>
     <string name="QUES_DIABETES_6">Do you eat fruits and vegetables 2 to 3 times a day?</string>

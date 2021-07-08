@@ -12,7 +12,7 @@
     <string name="title_select_parameters">Select Parameters</string>
     <string name="msg_select_param_to_track">Please Select at least one Parameter to Track</string>
 
-    <string name="blood_presure">Blood\nPresure</string>
+    <string name="blood_presure">Blood\nPressure</string>
     <string name="blood_sugar">Blood\nSugar</string>
     <string name="hemogram_profile">Hemogram\nProfile</string>
     <string name="kidney_profile">Kidney\nProfile</string>

@@ -11,6 +11,7 @@ import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.security.R
 import com.caressa.security.databinding.FragmentHlmtStepOneBinding
 import com.caressa.security.databinding.FragmentLoginBinding
+import com.caressa.security.viewmodel.HlmtLoginViewModel
 import com.caressa.security.viewmodel.LoginViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -19,7 +20,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class HlmtStepOneFragment : BaseFragment() {
 
-    private val viewModel: LoginViewModel by viewModel()
+    private val viewModel: HlmtLoginViewModel by viewModel()
     private lateinit var binding: FragmentHlmtStepOneBinding
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -35,6 +36,7 @@ class HlmtStepOneFragment : BaseFragment() {
     }
 
     private fun setClickable() {
+        viewModel.updateUserPreference()
         binding.btnIDont.setOnClickListener {
             viewModel.navigate(HlmtStepOneFragmentDirections.actionStepOneFragmentToLoginWithOtpfragment())
         }

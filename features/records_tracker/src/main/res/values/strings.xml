@@ -56,7 +56,7 @@
     <string name="MSG_RECORD_SAVED">Record(s) Saved Successfully.</string>
     <string name="MSG_RECORD_DELETED">Record(s) deleted Successfully.</string>
     <string name="MSG_REOCRD_DOWNLOADED">Record Downloaded Successfully.</string>
-    <string name="MSG_DATA_UPLOADED">Data uploded Successfully.</string>
+    <string name="MSG_DATA_UPLOADED">Data uploaded Successfully.</string>
 
     <string name="NO_RECORDS_FOUND">No Records Found</string>
     <string name="NO_RECORDS_CLICK_FOR_UPLOADING">No reports uploaded \n Click on an option below \n to start uploading</string>

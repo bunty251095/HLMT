@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">hra</string>
 
-    <string name="TITLE_HRA">Health Risk Assesment</string>
+    <string name="TITLE_HRA">Health Risk Assessment</string>
     <string name="TITLE_HRA_SUMMARY">HRA Summary</string>
     <string name="I_DONT_REM">I don\'t know/remember</string>
     <string name="START">Start</string>
