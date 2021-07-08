@@ -46,7 +46,7 @@
 
     <string name="VERIFY">Verify</string>
     <string name="RESEND_MAIL">Resend Mail</string>
-    <string name="RESEND_CODE">Resend Code</string>
+    <string name="RESEND_CODE">Resend OTP</string>
     <string name="NEW_PASSWORD">New Password</string>
     <string name="CHANGE_PASSWORD">Change Your Password</string>
     <string name="ENTER_NEW_PASSWORD">Enter your New Password</string>
