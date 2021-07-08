@@ -11,11 +11,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.utils.DecimalDigitsInputFilter
-import com.caressa.common.utils.ParameterDataModel
 import com.caressa.common.utils.Utilities
 import com.caressa.hra.R
 import com.caressa.hra.common.HraHelper
@@ -24,6 +22,7 @@ import com.caressa.hra.databinding.FragmentHraQuesBloodSugarInputBinding
 import com.caressa.model.hra.Option
 import com.caressa.model.hra.Question
 import com.caressa.hra.viewmodel.HraViewModel
+import com.caressa.model.entity.TrackParameterMaster
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -39,6 +38,8 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
     private var prevAnsList: MutableList<Option> = mutableListOf()
     private var isBsExist = false
 
+    private var allParamList : MutableList<TrackParameterMaster.Parameter> = mutableListOf()
+
     private var isRa = false
     private var isFs = false
     private var isPm = false
@@ -49,10 +50,10 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
     private var paramCodePm = "DIAB_PM"
     private var paramCodeHba1c = "DIAB_HBA1C"
 
-    private val rs: ParameterDataModel = HraHelper.getParamData(paramCodeRa)
-    private val fs: ParameterDataModel = HraHelper.getParamData(paramCodeFs)
-    private val ps: ParameterDataModel = HraHelper.getParamData(paramCodePm)
-    private val hb: ParameterDataModel = HraHelper.getParamData(paramCodeHba1c)
+    private var rs = TrackParameterMaster.Parameter()
+    private var fs = TrackParameterMaster.Parameter()
+    private var ps = TrackParameterMaster.Parameter()
+    private var hb = TrackParameterMaster.Parameter()
 
     private val textWatcher: TextWatcher = object : TextWatcher {
 
@@ -108,16 +109,12 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
         Timber.e("qCode----->$qCode")
         Timber.e("CurrentPageNo--->" +viewPagerActivity!!.getCurrentScreen() )
         viewModel.getHRAQuestionData(qCode)
+        viewModel.getParameterDataByProfileCode("DIABETIC")
 
         val filters = arrayOfNulls<InputFilter>(1)
         filters[0] = LengthFilter(4) //Filter to 4 characters
         val decimalFilters = arrayOfNulls<InputFilter>(1)
         decimalFilters[0] = DecimalDigitsInputFilter(5, 1) //Filter to 4 characters and 1 decimal point
-
-        binding.layRandomBs.setHint( "" + rs.minRange.toInt() + " - " + rs.maxRange.toInt() )
-        binding.layFastingBs.setHint( "" + fs.minRange.toInt() + " - " + fs.maxRange.toInt() )
-        binding.layPostMealBs.setHint( "" + ps.minRange.toInt() + " - " + ps.maxRange.toInt() )
-        binding.layHbA1cBs.setHint( "" + hb.minRange.toInt() + " - " + hb.maxRange.toInt() )
 
         binding.layRandomBs.setInputType(InputType.TYPE_CLASS_NUMBER)
         binding.layFastingBs.setInputType(InputType.TYPE_CLASS_NUMBER)
@@ -134,11 +131,6 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
         binding.layPostMealBs.setImage(R.drawable.img_diabetes)
         binding.layHbA1cBs.setImage(R.drawable.img_diabetes)
 
-        binding.layRandomBs.setUnit(resources.getString(R.string.MG_DL))
-        binding.layFastingBs.setUnit(resources.getString(R.string.MG_DL))
-        binding.layPostMealBs.setUnit(resources.getString(R.string.MG_DL))
-        binding.layHbA1cBs.setUnit(resources.getString(R.string.MG_DL))
-
         binding.layRandomBs.editText!!.addTextChangedListener(textWatcher)
         binding.layFastingBs.editText!!.addTextChangedListener(textWatcher)
         binding.layPostMealBs.editText!!.addTextChangedListener(textWatcher)
@@ -151,7 +143,7 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
         Timber.e("prevAnsList---> $prevAnsList")
         if ( prevAnsList.isNotEmpty() ) {
             viewModel.setPreviousAnswersList( prevAnsList )
-            showHideFields(prevAnsList)
+            //showHideFields(prevAnsList)
         }
     }
 
@@ -169,6 +161,15 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
                     hraDataSingleton.question = it
                     toProceed = false
                 }
+            }
+        })
+
+        viewModel.labParameter.observe(viewLifecycleOwner, {
+            if ( it != null ) {
+                Utilities.printData("allParamList",allParamList,true)
+                allParamList.clear()
+                allParamList.addAll(it)
+                showHideFields(prevAnsList)
             }
         })
 
@@ -199,7 +200,7 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
                     Timber.i("HRALabBsDetailsFromServer----> $list")
                     for ( record in list) {
                         setSavedData(record.ParameterCode!!,record.Value!!)
-                        viewModel.saveHRALabDetailsBasedOnType("SUGAR",record.ParameterCode!!,record.Value!!)
+                        viewModel.saveHRALabDetailsBasedOnType("SUGAR",record.ParameterCode!!,record.Value!!,record.Unit!!)
                     }
                 }
             }
@@ -282,14 +283,14 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
                 Utilities.toastMessageShort(context, "Please Enter Valid Random Sugar value")
                 return false
             }  else {
-                if ( rbs.toDouble() < rs.minRange || rbs.toDouble() > rs.maxRange ) {
+                if ( rbs.toDouble() < rs.minPermissibleValue!!.toDouble() || rbs.toDouble() > rs.maxPermissibleValue!!.toDouble() ) {
                     Utilities.toastMessageShort(context, "Random Sugar value must be between "
-                            + rs.minRange + "-" + rs.maxRange )
+                            + rs.minPermissibleValue + "-" + rs.maxPermissibleValue )
                     return false
                 } else {
                     isRa = true
-                    viewModel.saveHRALabDetails( paramCodeRa , rbs )
-                    selectedOptionList.add(Option(resources.getString(R.string.RANDOM_SUGAR) + " : $rbs " + resources.getString(R.string.MG_DL), paramCodeRa,true))
+                    viewModel.saveHRALabDetails( paramCodeRa,rbs,rs.unit!! )
+                    selectedOptionList.add(Option(rs.description + " : $rbs " + rs.unit, paramCodeRa,true))
                 }
             }
         } else {
@@ -301,14 +302,14 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
                 Utilities.toastMessageShort(context, "Please Enter Valid Fasting Sugar value")
                 return false
             }  else {
-                if ( fbs.toDouble() < fs.minRange || fbs.toDouble() > fs.maxRange ) {
+                if ( fbs.toDouble() < fs.minPermissibleValue!!.toDouble() || fbs.toDouble() > fs.maxPermissibleValue!!.toDouble() ) {
                     Utilities.toastMessageShort(context, "Fasting Sugar value must be between "
-                            + fs.minRange + "-" + fs.maxRange )
+                            + fs.minPermissibleValue + "-" + fs.maxPermissibleValue )
                     return false
                 } else {
                     isFs = true
-                    viewModel.saveHRALabDetails( paramCodeFs , fbs )
-                    selectedOptionList.add(Option(resources.getString(R.string.FASTING_SUGAR) + " : $fbs " + resources.getString(R.string.MG_DL), paramCodeFs,true))
+                    viewModel.saveHRALabDetails( paramCodeFs,fbs,fs.unit!! )
+                    selectedOptionList.add(Option(fs.description + " : $fbs " + fs.unit, paramCodeFs,true))
                 }
             }
         } else {
@@ -320,14 +321,14 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
                 Utilities.toastMessageShort(context, "Please Enter Valid Post Meal Blood Sugar value")
                 return false
             }  else {
-                if ( pbs.toDouble() < ps.minRange || pbs.toDouble() > ps.maxRange ) {
+                if ( pbs.toDouble() < ps.minPermissibleValue!!.toDouble() || pbs.toDouble() > ps.maxPermissibleValue!!.toDouble() ) {
                     Utilities.toastMessageShort(context, "Post Meal Blood Sugar value must be between "
-                            + ps.minRange + "-" + ps.maxRange )
+                            + ps.minPermissibleValue + "-" + ps.maxPermissibleValue )
                     return false
                 } else {
                     isPm = true
-                    viewModel.saveHRALabDetails( paramCodePm , pbs )
-                    selectedOptionList.add(Option(resources.getString(R.string.POST_MEAL_SUGAR) + " : $pbs " + resources.getString(R.string.MG_DL), paramCodePm,true))
+                    viewModel.saveHRALabDetails( paramCodePm,pbs,ps.unit!! )
+                    selectedOptionList.add(Option(ps.description + " : $pbs " + ps.unit, paramCodePm,true))
                 }
             }
         } else {
@@ -339,14 +340,14 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
                 Utilities.toastMessageShort(context, "Please Enter Valid HbA1c value")
                 return false
             }  else {
-                if ( hab1cbs.toDouble() < hb.minRange || hab1cbs.toDouble() > hb.maxRange ) {
+                if ( hab1cbs.toDouble() < hb.minPermissibleValue!!.toDouble() || hab1cbs.toDouble() > hb.maxPermissibleValue!!.toDouble() ) {
                     Utilities.toastMessageShort(context, "HbA1c value must be between "
-                            + hb.minRange + "-" + hb.maxRange )
+                            + hb.minPermissibleValue + "-" + hb.maxPermissibleValue )
                     return false
                 } else {
                     isHba1c = true
-                    viewModel.saveHRALabDetails( paramCodeHba1c , hab1cbs , "%" )
-                    selectedOptionList.add(Option(resources.getString(R.string.HBA1C) + " : $hab1cbs " + resources.getString(R.string.MG_DL), paramCodeHba1c,true))
+                    viewModel.saveHRALabDetails( paramCodeHba1c,hab1cbs ,hb.unit!! )
+                    selectedOptionList.add(Option(hb.description + " : $hab1cbs " + hb.unit, paramCodeHba1c,true))
                 }
             }
         } else {
@@ -359,24 +360,44 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
     private fun showHideFields( prevAnsList : MutableList<Option> ) {
 
         if ( prevAnsList.any { it.answerCode.equals(paramCodeRa,ignoreCase = true) } ) {
+            rs =  allParamList.find { it.code.equals(paramCodeRa, true) }!!
+            Utilities.printData("paramCodeRa",rs,true)
+            binding.lblQuesRandomBs.text = rs.description
+            binding.layRandomBs.setHint( "" + rs.minPermissibleValue + " - " + rs.maxPermissibleValue )
+            binding.layRandomBs.setUnit(rs.unit!!)
             binding.randomBs.visibility = View.VISIBLE
         } else {
             binding.randomBs.visibility = View.GONE
         }
 
         if ( prevAnsList.any { it.answerCode.equals(paramCodeFs,ignoreCase = true) } ) {
+            fs =  allParamList.find { it.code.equals(paramCodeFs, true) }!!
+            Utilities.printData("paramCodeFs",fs,true)
+            binding.lblQuesFastingBs.text = fs.description
+            binding.layFastingBs.setHint( "" + fs.minPermissibleValue + " - " + fs.maxPermissibleValue )
+            binding.layFastingBs.setUnit(fs.unit!!)
             binding.fastingBs.visibility = View.VISIBLE
         } else {
             binding.fastingBs.visibility = View.GONE
         }
 
         if ( prevAnsList.any { it.answerCode.equals(paramCodePm,ignoreCase = true) } ) {
+            ps =  allParamList.find { it.code.equals(paramCodePm, true) }!!
+            Utilities.printData("paramCodePm",ps,true)
+            binding.lblQuesPostMealBs.text = ps.description
+            binding.layPostMealBs.setHint( "" + ps.minPermissibleValue + " - " + ps.maxPermissibleValue )
+            binding.layPostMealBs.setUnit(ps.unit!!)
             binding.postMealBs.visibility = View.VISIBLE
         } else {
             binding.postMealBs.visibility = View.GONE
         }
 
         if ( prevAnsList.any { it.answerCode.equals(paramCodeHba1c,ignoreCase = true) } ) {
+            hb =  allParamList.find { it.code.equals(paramCodeHba1c, true) }!!
+            Utilities.printData("paramCodeHba1c",hb,true)
+            binding.lblQuesHbA1cBs.text = hb.description
+            binding.layHbA1cBs.setHint( "" + hb.minPermissibleValue + " - " + hb.maxPermissibleValue )
+            binding.layHbA1cBs.setUnit(hb.unit!!)
             binding.hab1cBs.visibility = View.VISIBLE
         } else {
             binding.hab1cBs.visibility = View.GONE

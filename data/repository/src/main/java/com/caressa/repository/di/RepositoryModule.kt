@@ -10,7 +10,7 @@ val repositoryModule = module {
     factory { HomeRepositoryImpl(get(),get(),get(),get(),get(),get(),get()) as HomeRepository }
     factory { MedicationRepositoryImpl(get(),get(), get()) as MedicationRepository }
     factory { FitnessRepositoryImpl(get(),get()) as FitnessRepository }
-    factory { HraRepositoryImpl( get() , get(), get() , get() ) as HraRepository}
+    factory { HraRepositoryImpl( get() , get(), get() , get() , get() ) as HraRepository}
     factory { ToolsRepositoryImpl( get()) as ToolsRepository}
     factory { ParameterRepositoryImpl(get(), get(), get()) as ParameterRepository}
     factory { ShrRepositoryImpl( get() , get() , get() , get() ) as StoreRecordRepository}

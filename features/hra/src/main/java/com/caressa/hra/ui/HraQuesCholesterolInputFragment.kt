@@ -10,10 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
-import com.caressa.common.utils.ParameterDataModel
 import com.caressa.common.utils.Utilities
 import com.caressa.hra.R
 import com.caressa.hra.common.HraHelper
@@ -22,6 +20,7 @@ import com.caressa.hra.databinding.FragmentHraQuesCholestrolInputBinding
 import com.caressa.model.hra.Option
 import com.caressa.model.hra.Question
 import com.caressa.hra.viewmodel.HraViewModel
+import com.caressa.model.entity.TrackParameterMaster
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -37,6 +36,8 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
     private var prevAnsList: MutableList<Option> = mutableListOf()
     private var isCholesterolExist = false
 
+    private var allParamList : MutableList<TrackParameterMaster.Parameter> = mutableListOf()
+
     private var isTotalChol = false
     private var isHdl = false
     private var isLdl = false
@@ -49,11 +50,11 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
     private var paramCodeTry = "CHOL_TRY"
     private var paramCodeVldl = "CHOL_VLDL"
 
-    private val cholTotal: ParameterDataModel = HraHelper.getParamData(paramCodeTotalChol)
-    private val hdl: ParameterDataModel = HraHelper.getParamData(paramCodeHdl)
-    private val ldl: ParameterDataModel = HraHelper.getParamData(paramCodeLdl)
-    private val triglyceride: ParameterDataModel = HraHelper.getParamData(paramCodeTry)
-    private val vldl: ParameterDataModel = HraHelper.getParamData(paramCodeVldl)
+    private var cholTotal = TrackParameterMaster.Parameter()
+    private var hdl = TrackParameterMaster.Parameter()
+    private var ldl = TrackParameterMaster.Parameter()
+    private var triglyceride = TrackParameterMaster.Parameter()
+    private var vldl = TrackParameterMaster.Parameter()
 
     private val textWatcher: TextWatcher = object : TextWatcher {
 
@@ -108,15 +109,10 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
         Timber.e("qCode----->$qCode")
         Timber.e("CurrentPageNo--->" +viewPagerActivity!!.getCurrentScreen() )
         viewModel.getHRAQuestionData(qCode)
+        viewModel.getParameterDataByProfileCode("LIPID")
 
         val filters = arrayOfNulls<InputFilter>(1)
         filters[0] = InputFilter.LengthFilter(4) //Filter to 4 characters
-
-        binding.layTotalChol.setHint( "" + cholTotal.minRange.toInt() + " - " + cholTotal.maxRange.toInt() )
-        binding.layHdl.setHint( "" + hdl.minRange.toInt() + " - " + hdl.maxRange.toInt() )
-        binding.layLdl.setHint( "" + ldl.minRange.toInt() + " - " + ldl.maxRange.toInt() )
-        binding.layTriglycerides.setHint( "" + triglyceride.minRange.toInt() + " - " + triglyceride.maxRange.toInt() )
-        binding.layVldl.setHint( "" + vldl.minRange.toInt() + " - " + vldl.maxRange.toInt() )
 
         binding.layTotalChol.setInputType(InputType.TYPE_CLASS_NUMBER)
         binding.layHdl.setInputType(InputType.TYPE_CLASS_NUMBER)
@@ -136,12 +132,6 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
         binding.layTriglycerides.setImage(R.drawable.img_cholesteroal)
         binding.layVldl.setImage(R.drawable.img_cholesteroal)
 
-        binding.layTotalChol.setUnit(resources.getString(R.string.MG_DL))
-        binding.layHdl.setUnit(resources.getString(R.string.MG_DL))
-        binding.layLdl.setUnit(resources.getString(R.string.MG_DL))
-        binding.layTriglycerides.setUnit(resources.getString(R.string.MG_DL))
-        binding.layVldl.setUnit(resources.getString(R.string.MG_DL))
-
         binding.layTotalChol.editText!!.addTextChangedListener(textWatcher)
         binding.layHdl.editText!!.addTextChangedListener(textWatcher)
         binding.layLdl.editText!!.addTextChangedListener(textWatcher)
@@ -155,7 +145,7 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
         Timber.e("prevAnsList---> $prevAnsList")
         if ( prevAnsList.isNotEmpty() ) {
             viewModel.setPreviousAnswersList( prevAnsList )
-            showHideFields(prevAnsList)
+            //showHideFields(prevAnsList)
         }
     }
 
@@ -173,6 +163,14 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
                     hraDataSingleton.question = it
                     toProceed = false
                 }
+            }
+        })
+
+        viewModel.labParameter.observe(viewLifecycleOwner, {
+            if ( it != null ) {
+                allParamList.clear()
+                allParamList.addAll(it)
+                showHideFields(prevAnsList)
             }
         })
 
@@ -203,7 +201,7 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
                     Timber.i("HRALabCholDetailsFromServer----> $list")
                     for ( record in list) {
                         setSavedData(record.ParameterCode!!,record.Value!!)
-                        viewModel.saveHRALabDetailsBasedOnType("LIPID",record.ParameterCode!!,record.Value!!)
+                        viewModel.saveHRALabDetailsBasedOnType("LIPID",record.ParameterCode!!,record.Value!!,record.Unit!!)
                     }
                 }
             }
@@ -293,14 +291,14 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
                 Utilities.toastMessageShort(context, "Please Enter Valid Total Cholesterol value")
                 return false
             }  else {
-                if ( totalChol.toDouble() < cholTotal.minRange || totalChol.toDouble() > cholTotal.maxRange ) {
+                if ( totalChol.toDouble() < cholTotal.minPermissibleValue!!.toDouble() || totalChol.toDouble() > cholTotal.maxPermissibleValue!!.toDouble() ) {
                     Utilities.toastMessageShort(context, "Total Cholesterol value must be between "
-                            + cholTotal.minRange + "-" + cholTotal.maxRange )
+                            + cholTotal.minPermissibleValue + "-" + cholTotal.maxPermissibleValue )
                     return false
                 } else {
                     isTotalChol = true
-                    viewModel.saveHRALabDetails( paramCodeTotalChol , totalChol )
-                    selectedOptionList.add(Option(resources.getString(R.string.TOTAL_CHOLESTEROL) + " : $totalChol " + resources.getString(R.string.MG_DL), paramCodeTotalChol,true))
+                    viewModel.saveHRALabDetails( paramCodeTotalChol,totalChol,cholTotal.unit!! )
+                    selectedOptionList.add(Option(cholTotal.description + " : $totalChol " + cholTotal.unit, paramCodeTotalChol,true))
                 }
             }
         } else {
@@ -312,14 +310,14 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
                 Utilities.toastMessageShort(context, "Please Enter Valid HDL value")
                 return false
             }  else {
-                if ( hdlChol.toDouble() < hdl.minRange || hdlChol.toDouble() > hdl.maxRange ) {
+                if ( hdlChol.toDouble() < hdl.minPermissibleValue!!.toDouble() || hdlChol.toDouble() > hdl.maxPermissibleValue!!.toDouble() ) {
                     Utilities.toastMessageShort(context, "HDL value must be between "
-                            + hdl.minRange + "-" + hdl.maxRange )
+                            + hdl.minPermissibleValue + "-" + hdl.maxPermissibleValue )
                     return false
                 } else {
                     isHdl = true
-                    viewModel.saveHRALabDetails( paramCodeHdl , hdlChol )
-                    selectedOptionList.add(Option(resources.getString(R.string.HDL) + " : $hdlChol " + resources.getString(R.string.MG_DL), paramCodeHdl,true))
+                    viewModel.saveHRALabDetails( paramCodeHdl,hdlChol,hdl.unit!! )
+                    selectedOptionList.add(Option(hdl.description + " : $hdlChol " + hdl.unit, paramCodeHdl,true))
                 }
             }
         } else {
@@ -331,14 +329,14 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
                 Utilities.toastMessageShort(context, "Please Enter Valid LDL value")
                 return false
             }  else {
-                if ( ldlChol.toDouble() < ldl.minRange || ldlChol.toDouble() > ldl.maxRange ) {
+                if ( ldlChol.toDouble() < ldl.minPermissibleValue!!.toDouble() || ldlChol.toDouble() > ldl.maxPermissibleValue!!.toDouble() ) {
                     Utilities.toastMessageShort(context, "LDL value must be between "
-                            + ldl.minRange + "-" + ldl.maxRange )
+                            + ldl.minPermissibleValue + "-" + ldl.maxPermissibleValue )
                     return false
                 } else {
                     isLdl = true
-                    viewModel.saveHRALabDetails( paramCodeLdl , ldlChol )
-                    selectedOptionList.add(Option(resources.getString(R.string.LDL) + " : $ldlChol " + resources.getString(R.string.MG_DL), paramCodeLdl,true))
+                    viewModel.saveHRALabDetails( paramCodeLdl,ldlChol,ldl.unit!! )
+                    selectedOptionList.add(Option(ldl.description + " : $ldlChol " + ldl.unit, paramCodeLdl,true))
                 }
             }
         } else {
@@ -350,14 +348,14 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
                 Utilities.toastMessageShort(context, "Please Enter Valid Triglycerides value")
                 return false
             }  else {
-                if ( triglycerideChol.toDouble() < triglyceride.minRange || triglycerideChol.toDouble() > triglyceride.maxRange ) {
+                if ( triglycerideChol.toDouble() < triglyceride.minPermissibleValue!!.toDouble() || triglycerideChol.toDouble() > triglyceride.maxPermissibleValue!!.toDouble() ) {
                     Utilities.toastMessageShort(context, "Triglycerides value must be between "
-                            + triglyceride.minRange + "-" + triglyceride.maxRange )
+                            + triglyceride.minPermissibleValue + "-" + triglyceride.maxPermissibleValue )
                     return false
                 } else {
                     isTry = true
-                    viewModel.saveHRALabDetails( paramCodeTry , triglycerideChol )
-                    selectedOptionList.add(Option(resources.getString(R.string.TRIGLYCERIDES) + " : $triglycerideChol " + resources.getString(R.string.MG_DL), paramCodeTry,true))
+                    viewModel.saveHRALabDetails( paramCodeTry,triglycerideChol,triglyceride.unit!! )
+                    selectedOptionList.add(Option(triglyceride.description + " : $triglycerideChol " + triglyceride.unit, paramCodeTry,true))
                 }
             }
         } else {
@@ -369,14 +367,14 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
                 Utilities.toastMessageShort(context, "Please Enter Valid VLDL value")
                 return false
             }  else {
-                if ( vldlChol.toDouble() < vldl.minRange || vldlChol.toDouble() > vldl.maxRange ) {
+                if ( vldlChol.toDouble() < vldl.minPermissibleValue!!.toDouble() || vldlChol.toDouble() > vldl.maxPermissibleValue!!.toDouble() ) {
                     Utilities.toastMessageShort(context, "VLDL value must be between "
-                            + vldl.minRange + "-" + vldl.maxRange )
+                            + vldl.minPermissibleValue + "-" + vldl.maxPermissibleValue )
                     return false
                 } else {
                     isVldl = true
-                    viewModel.saveHRALabDetails( paramCodeVldl , vldlChol )
-                    selectedOptionList.add(Option(resources.getString(R.string.VLDL) + " : $vldlChol " + resources.getString(R.string.MG_DL), paramCodeVldl,true))
+                    viewModel.saveHRALabDetails( paramCodeVldl,vldlChol,vldl.unit!! )
+                    selectedOptionList.add(Option(vldl.description + " : $vldlChol " + vldl.unit, paramCodeVldl,true))
                 }
             }
         } else {
@@ -388,30 +386,55 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
     private fun showHideFields( prevAnsList : MutableList<Option> ) {
 
         if ( prevAnsList.any { it.answerCode.equals(paramCodeTotalChol,ignoreCase = true) } ) {
+            cholTotal =  allParamList.find { it.code.equals(paramCodeTotalChol, true) }!!
+            Utilities.printData("paramCodeTotalChol",cholTotal,true)
+            binding.lblTotalChol.text = cholTotal.description
+            binding.layTotalChol.setHint( "" + cholTotal.minPermissibleValue + " - " + cholTotal.maxPermissibleValue )
+            binding.layTotalChol.setUnit(cholTotal.unit!!)
             binding.totalChol.visibility = View.VISIBLE
         } else {
             binding.totalChol.visibility = View.GONE
         }
 
         if ( prevAnsList.any { it.answerCode.equals(paramCodeHdl,ignoreCase = true) } ) {
+            hdl =  allParamList.find { it.code.equals(paramCodeHdl, true) }!!
+            Utilities.printData("paramCodeHdl",hdl,true)
+            binding.lblHdl.text = hdl.description
+            binding.layHdl.setHint( "" + hdl.minPermissibleValue + " - " + hdl.maxPermissibleValue )
+            binding.layHdl.setUnit(hdl.unit!!)
             binding.hdl.visibility = View.VISIBLE
         } else {
             binding.hdl.visibility = View.GONE
         }
 
         if ( prevAnsList.any { it.answerCode.equals(paramCodeLdl,ignoreCase = true) } ) {
+            ldl =  allParamList.find { it.code.equals(paramCodeLdl, true) }!!
+            Utilities.printData("paramCodeLdl",ldl,true)
+            binding.lblLdl.text = ldl.description
+            binding.layLdl.setHint( "" + ldl.minPermissibleValue + " - " + ldl.maxPermissibleValue )
+            binding.layLdl.setUnit(ldl.unit!!)
             binding.ldl.visibility = View.VISIBLE
         } else {
             binding.ldl.visibility = View.GONE
         }
 
         if ( prevAnsList.any { it.answerCode.equals(paramCodeTry,ignoreCase = true) } ) {
+            triglyceride =  allParamList.find { it.code.equals(paramCodeTry, true) }!!
+            Utilities.printData("paramCodeTry",triglyceride,true)
+            binding.lblTriglycerides.text = triglyceride.description
+            binding.layTriglycerides.setHint( "" + triglyceride.minPermissibleValue + " - " + triglyceride.maxPermissibleValue )
+            binding.layTriglycerides.setUnit(triglyceride.unit!!)
             binding.triglycerides.visibility = View.VISIBLE
         } else {
             binding.triglycerides.visibility = View.GONE
         }
 
         if ( prevAnsList.any { it.answerCode.equals(paramCodeVldl,ignoreCase = true) } ) {
+            vldl =  allParamList.find { it.code.equals(paramCodeVldl, true) }!!
+            Utilities.printData("paramCodeVldl",vldl,true)
+            binding.lblVldl.text = vldl.description
+            binding.layVldl.setHint( "" + vldl.minPermissibleValue + " - " + vldl.maxPermissibleValue )
+            binding.layVldl.setUnit(vldl.unit!!)
             binding.vldl.visibility = View.VISIBLE
         } else {
             binding.vldl.visibility = View.GONE

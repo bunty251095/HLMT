@@ -22,6 +22,7 @@ import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.DefaultNotificationDialog
 import com.caressa.common.utils.Utilities
 import com.caressa.home.R
+import com.caressa.home.common.DataHandler
 import com.caressa.home.common.DataHandler.NavDrawerOption
 import com.caressa.home.databinding.NavHeaderHomeMainBinding
 import com.caressa.home.ui.HomeMainActivity
@@ -64,18 +65,27 @@ class NavigationDrawerListAdapter(val viewModel:DashboardViewModel,val activity:
             holder.navIcon.setImageResource( navDrawerItem.imageId )
             holder.navTitle.text = navDrawerItem.title
 
+            if ( navDrawerItem.id != DataHandler.NavDrawer.LINK ) {
+                ImageViewCompat.setImageTintList(holder.navIcon,
+                    ColorStateList.valueOf(ContextCompat.getColor(context,R.color.colorAccent)))
+            }
+
             holder.layoutDrawer.setOnTouchListener { v: View, event: MotionEvent ->
                 if (event.action == MotionEvent.ACTION_DOWN ||
                     event.action == MotionEvent.ACTION_MOVE) {
                     v.setBackgroundColor(navDrawerItem.color)
-                    ImageViewCompat.setImageTintList(holder.navIcon,
-                        ColorStateList.valueOf(ContextCompat.getColor(context,R.color.white)))
+                    if ( navDrawerItem.id != DataHandler.NavDrawer.LINK ) {
+                        ImageViewCompat.setImageTintList(holder.navIcon,
+                            ColorStateList.valueOf(ContextCompat.getColor(context,R.color.white)))
+                    }
                     holder.navTitle.setTextColor(ContextCompat.getColor(context,R.color.white))
                 }
                 if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
                     v.setBackgroundColor(ContextCompat.getColor(context,R.color.white))
-                    ImageViewCompat.setImageTintList(holder.navIcon,
-                        ColorStateList.valueOf(ContextCompat.getColor(context,R.color.colorAccent)))
+                    if ( navDrawerItem.id != DataHandler.NavDrawer.LINK ) {
+                        ImageViewCompat.setImageTintList(holder.navIcon,
+                            ColorStateList.valueOf(ContextCompat.getColor(context,R.color.colorAccent)))
+                    }
                     holder.navTitle.setTextColor(ContextCompat.getColor(context,R.color.textViewColor))
                 }
                 false
