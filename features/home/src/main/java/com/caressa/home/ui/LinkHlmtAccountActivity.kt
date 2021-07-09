@@ -3,6 +3,7 @@ package com.caressa.home.ui
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import androidx.databinding.DataBindingUtil
@@ -22,6 +23,7 @@ class LinkHlmtAccountActivity : BaseActivity() {
     private lateinit var binding : ActivityLinkHlmtAccountBinding
 
     private val appColorHelper = AppColorHelper.instance!!
+    private var isAccountLinked = false
 
     override fun getViewModel(): BaseViewModel = viewModel
 
@@ -29,8 +31,19 @@ class LinkHlmtAccountActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_link_hlmt_account)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        initialise()
         setupToolbar()
         setClickable()
+    }
+
+    private fun initialise() {
+        if ( isAccountLinked ) {
+            binding.layoutAccLinked.visibility = View.VISIBLE
+            binding.layoutAccNotLinked.visibility = View.GONE
+        } else {
+            binding.layoutAccLinked.visibility = View.GONE
+            binding.layoutAccNotLinked.visibility = View.VISIBLE
+        }
     }
 
     private fun setClickable() {
