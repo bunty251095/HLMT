@@ -459,4 +459,9 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
         }
     }
 
+    fun updateUserPreference() {
+        sharedPref.edit().putString(PreferenceConstants.HEIGHT_PREFERENCE, "cm").apply()
+        sharedPref.edit().putString(PreferenceConstants.WEIGHT_PREFERENCE, "kg").apply()
+    }
+
 }

@@ -79,11 +79,49 @@ class DataHandler( val context: Context) {
                 }else{
                     hraObservation = "Take Assessment"
                 }
+                var color = ContextCompat.getColor(context, R.color.vivant_bright_blue)
+
+                if ( hraSummary != null ) {
+                    var wellnessScore = 0
+                    var hraCutOff = ""
+                    var currentHRAHistoryID = ""
+                    wellnessScore = hraSummary.scorePercentile.toInt()
+                    hraCutOff = hraSummary.hraCutOff
+                    currentHRAHistoryID = hraSummary.currentHRAHistoryID.toString()
+                    if (wellnessScore <= 0) {
+                        wellnessScore = 0
+                    }
+
+                    if ( !Utilities.isNullOrEmpty( currentHRAHistoryID) && !currentHRAHistoryID.equals("0", ignoreCase = true) ) {
+                        when {
+                            hraCutOff.equals("0", ignoreCase = true) -> {
+                                color = ContextCompat.getColor(context,R.color.colorPrimary)
+                            }
+                            wellnessScore in 0..15 -> {
+                                color = ContextCompat.getColor(context,R.color.high_risk)
+                            }
+                            wellnessScore in 16..45 -> {
+                                color = ContextCompat.getColor(context,R.color.moderate_risk)
+                            }
+                            wellnessScore in 46..85 -> {
+                                color = ContextCompat.getColor(context,R.color.healthy_risk)
+                            }
+                            wellnessScore > 85 -> {
+                                color = ContextCompat.getColor(context,R.color.optimum_risk)
+                            }
+                        }
+                    } else {
+                        color = ContextCompat.getColor(context,R.color.colorPrimary)
+                    }
+                } else {
+                    ContextCompat.getColor(context,R.color.colorPrimary)
+                }
+
                 list.add(
                     DashboardFeatureGrid(
                         imageId = R.drawable.dash_hra,
                         title = context.resources.getString(R.string.HRA),
-                        color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                        color = color,
                         data = hraObservation,
                         code = "HRA"
                     )

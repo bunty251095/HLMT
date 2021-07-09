@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.caressa.home.R
@@ -50,8 +51,12 @@ class DashboardFeaturesGridAdapter(
         private val binding = ItemDashboardFeaturesBinding.bind(parent)
 
         fun bindTo(item: DataHandler.DashboardFeatureGrid) {
-            if (item.title.contains("risk",true)) {
+            if (item.code.equals("HRA",true)) {
                 binding.icon.scaleType = ImageView.ScaleType.FIT_CENTER
+                binding.txtData.setTextColor(item.color)
+//                binding.txtData.textSize = binding.txtData.resources.getDimension(R.dimen._13sdp)
+            }else{
+                binding.txtData.setTextColor(ContextCompat.getColor(binding.txtData.context,R.color.colorAccent))
             }
             binding.icon.setImageResource(item.imageId)
             binding.title.text = item.title

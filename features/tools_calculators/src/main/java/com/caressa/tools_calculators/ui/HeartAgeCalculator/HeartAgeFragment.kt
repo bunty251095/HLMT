@@ -418,6 +418,7 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
     }
 
     override fun onDialogValueListener(dialogType: String, height: String, weight: String, unit: String, visibleValue: String) {
+        viewModel.updateUserPreference(unit)
         paramList = parameterAdapter!!.paramList
         if (dialogType.equals("Height", ignoreCase = true)) {
             paramList[0].unit = unit

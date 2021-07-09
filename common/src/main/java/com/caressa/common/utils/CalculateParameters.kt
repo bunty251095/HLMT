@@ -127,15 +127,18 @@ object CalculateParameters {
     }*/
 
     fun convertCmToFeetInch(strValue: String): String {
-        val strConvertedValue: String
-        var feet = floor(java.lang.Double.parseDouble(strValue) / 30.48).toInt()
-        var inch = (java.lang.Double.parseDouble(strValue) / 2.54 - feet * 12).roundToLong().toInt()
-        if (inch >= 12) {
-            feet += 1
-            inch = 0
-        }
-        strConvertedValue = "$feet ft, $inch in"
-        return strConvertedValue
+        try {
+            val strConvertedValue: String
+            var feet = floor(java.lang.Double.parseDouble(strValue) / 30.48).toInt()
+            var inch = (java.lang.Double.parseDouble(strValue) / 2.54 - feet * 12).roundToLong().toInt()
+            if (inch >= 12) {
+                feet += 1
+                inch = 0
+            }
+            strConvertedValue = "$feet ft, $inch in"
+            return strConvertedValue
+        }catch (e:Exception){e.printStackTrace()}
+        return "0"
     }
 
 /*    fun convertCmToInch2(strValue: String): String {
@@ -197,8 +200,11 @@ object CalculateParameters {
     }
 
     fun convertKgToLbs(strValue: String): String {
-        val strConvertedValue: Double = (strValue.toDouble() * 2.20462)
-        return roundOffPrecision(strConvertedValue, 1).toString()
+        try {
+            val strConvertedValue: Double = (strValue.toDouble() * 2.20462)
+            return roundOffPrecision(strConvertedValue, 1).toString()
+        }catch (e:Exception){e.printStackTrace()}
+        return "0"
     }
 
     fun convertLbsToKg(strValue: String): String {

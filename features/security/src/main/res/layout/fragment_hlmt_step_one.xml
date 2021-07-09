@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.caressa.security.viewmodel.LoginViewModel"/>
+            type="com.caressa.security.viewmodel.HlmtLoginViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

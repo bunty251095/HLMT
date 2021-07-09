@@ -1,5 +1,7 @@
 package com.caressa.track_parameter.adapter
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
@@ -11,17 +13,20 @@ import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.caressa.common.constants.Constants
 import com.caressa.common.utils.DecimalValueFilter
+import com.caressa.common.utils.HeightWeightDialog
+import com.caressa.common.utils.ParameterDataModel
 import com.caressa.model.parameter.ParameterListModel
 import com.caressa.track_parameter.R
 import com.caressa.track_parameter.databinding.ItemInputParametersBinding
 import com.caressa.track_parameter.util.TrackParameterHelper
+import com.caressa.track_parameter.viewmodel.UpdateParamViewModel
 import timber.log.Timber
 import java.text.DecimalFormat
 import java.text.NumberFormat
-import java.util.ArrayList
+import java.util.*
 import java.util.regex.Pattern
 
-class RevInputParamAdapter(var profileCode: String): RecyclerView.Adapter<RevInputParamAdapter.InputParameterViewHolder>() {
+class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamViewModel): RecyclerView.Adapter<RevInputParamAdapter.InputParameterViewHolder>() {
 
     val dataList: MutableList<ParameterListModel.InputParameterModel> = mutableListOf()
     private var edtBMI: EditText? = null
@@ -266,6 +271,73 @@ class RevInputParamAdapter(var profileCode: String): RecyclerView.Adapter<RevInp
                     }
                 }
             })
+            if(parameter.parameterCode.equals("HEIGHT")){
+                binding.edtInputValue.isFocusable = false
+                binding.edtInputValue.isCursorVisible = false
+                binding.edtInputValue.isFocusableInTouchMode = false
+                binding.edtInputValue.setOnClickListener {
+                    val data = ParameterDataModel()
+                    data.title = "Height"
+                    data.value = " - - "
+                    if (dataList.get(adapterPosition).parameterVal.isNullOrEmpty()) {
+                        data.finalValue = "0"
+                    }else{
+                        data.finalValue = dataList.get(adapterPosition).parameterVal!!
+
+                    }
+                        data.unit = "cm"
+//                        data.unit = "Feet/inch"
+//                        data.unit = "lbs"
+//                        data.unit = "Kg"
+                    data.code = "HEIGHT"
+                    val heightWeightDialog = HeightWeightDialog(binding.edtInputValue.context,object:HeightWeightDialog.OnDialogValueListener {
+                        override fun onDialogValueListener(
+                            dialogType: String,
+                            height: String,
+                            weight: String,
+                            unit: String,
+                            visibleValue: String
+                        ) {
+                            viewModel.updateUserPreference(unit)
+                            binding.edtInputValue.setText(height)
+                        }
+                    },"Height", data)
+                    heightWeightDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    heightWeightDialog.show()
+                }
+            }
+
+            if(parameter.parameterCode.equals("WEIGHT")){
+                binding.edtInputValue.isFocusable = false
+                binding.edtInputValue.isCursorVisible = false
+                binding.edtInputValue.isFocusableInTouchMode = false
+                binding.edtInputValue.setOnClickListener {
+                    val data = ParameterDataModel()
+                    data.title = "Weight"
+                    data.value = " - - "
+                    if (dataList.get(adapterPosition).parameterVal.isNullOrEmpty()) {
+                        data.finalValue = "0"
+                    }else{
+                        data.finalValue = dataList.get(adapterPosition).parameterVal!!
+                    }
+                    data.unit = "Kg"
+                    data.code = "WEIGHT"
+                    val heightWeightDialog = HeightWeightDialog(binding.edtInputValue.context,object:HeightWeightDialog.OnDialogValueListener {
+                        override fun onDialogValueListener(
+                            dialogType: String,
+                            height: String,
+                            weight: String,
+                            unit: String,
+                            visibleValue: String
+                        ) {
+                            viewModel.updateUserPreference(unit)
+                            binding.edtInputValue.setText(weight)
+                        }
+                    },"Weight", data)
+                    heightWeightDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    heightWeightDialog.show()
+                }
+            }
         }
 
         private fun getHint(parameter: ParameterListModel.InputParameterModel): String {

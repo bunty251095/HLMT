@@ -441,4 +441,13 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         }
     }
 
+    fun getPreference(type: String): String {
+        if (type.equals("HEIGHT",true)){
+            return sharedPref.getString(PreferenceConstants.HEIGHT_PREFERENCE,"cm")!!
+        }else if(type.equals("WEIGHT",true)){
+            return sharedPref.getString(PreferenceConstants.HEIGHT_PREFERENCE,"kg")!!
+        }
+        return ""
+    }
+
 }

@@ -71,10 +71,29 @@ class UpdateParamViewModel(
 //
 //    }
 
+    fun updateUserPreference(unit: String?) {
+        if(!unit.isNullOrEmpty()){
+            when(unit.toLowerCase()){
+                "cm"->{
+                    sharedPref.edit().putString(PreferenceConstants.HEIGHT_PREFERENCE, "cm").apply()
+                }
+                "kg"->{
+                    sharedPref.edit().putString(PreferenceConstants.WEIGHT_PREFERENCE, "kg").apply()
+                }
+                "lbs"->{
+                    sharedPref.edit().putString(PreferenceConstants.WEIGHT_PREFERENCE, "lib").apply()
+                }
+                "feet/inch"->{
+                    sharedPref.edit().putString(PreferenceConstants.HEIGHT_PREFERENCE, "feet").apply()
+                }
+            }
+        }
+    }
+
     fun getParameterByProfileCodeAndDate(profileCode: String,serverDate:String) = viewModelScope.launch(dispatchers.main) {
         Timber.i("Server Date :: " + serverDate)
         withContext(dispatchers.io){
-            if(serverDate.equals(DateHelper.currentDateAsStringddMMMyyyy)) {
+            if(serverDate.equals(DateHelper.currentDateAsStringddMMMyyyy) && profileCode.equals("BMI",true)) {
                 val data = useCase.invokeGetLatestParametersData(
                     profileCode,
                     sharedPref.getString(PreferenceConstants.PERSONID, "0")!!
@@ -162,12 +181,13 @@ class UpdateParamViewModel(
                     SaveParameterModel.JSONDataRequest::class.java
                 ), sharedPref.getString(PreferenceConstants.TOKEN, "")!!
             )
-
+            _progressBar.value = Event("Saving Parameter values...")
             _saveParam.removeSource(saveParamUserSource)
             withContext(dispatchers.io) {
                 saveParamUserSource = useCase.invokeSaveParameter(data = requestData)
             }
             _saveParam.addSource(saveParamUserSource) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
                 _saveParam.value = it.data
                 if (it.status == Resource.Status.SUCCESS) {
                     toastMessage("Parameter is successfully updated")
@@ -175,6 +195,7 @@ class UpdateParamViewModel(
                 }
 
                 if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
                     if(it.errorNumber.equals("1100014",true)){
                         _sessionError.value = Event(true)
                     }else {

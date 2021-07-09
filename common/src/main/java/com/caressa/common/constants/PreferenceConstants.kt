@@ -15,4 +15,6 @@ object PreferenceConstants {
     const val AGE = "AGE"
     const val DOB = "DOB"
     const val SELECTION_PARAM = "sel_param"
+    const val HEIGHT_PREFERENCE = "heightPreference"
+    const val WEIGHT_PREFERENCE = "weightPreference"
 }

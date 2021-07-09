@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/toolBarView"
-        android:visibility="gone"
+        android:visibility="visible"
         layout="@layout/toolbar_layout_security"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

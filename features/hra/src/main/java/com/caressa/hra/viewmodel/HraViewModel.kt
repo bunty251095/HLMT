@@ -1195,6 +1195,25 @@ class HraViewModel(
         }
     }
 
+    fun updateUserPreference(unit: String?) {
+        if(!unit.isNullOrEmpty()){
+            when(unit.toLowerCase()){
+                "cm"->{
+                    sharedPref.edit().putString(PreferenceConstants.HEIGHT_PREFERENCE, "cm").apply()
+                }
+                "kg"->{
+                    sharedPref.edit().putString(PreferenceConstants.WEIGHT_PREFERENCE, "kg").apply()
+                }
+                "lbs"->{
+                    sharedPref.edit().putString(PreferenceConstants.WEIGHT_PREFERENCE, "lib").apply()
+                }
+                "feet/inch"->{
+                    sharedPref.edit().putString(PreferenceConstants.HEIGHT_PREFERENCE, "feet").apply()
+                }
+            }
+        }
+    }
+
 /*    fun saveHRALabDetailsBasedOnType( type : String ,parameterCode: String, labValue: String ) = viewModelScope.launch {
         withContext(dispatchers.io) {
             when( type ) {

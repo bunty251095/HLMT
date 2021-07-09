@@ -264,6 +264,7 @@ class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterA
     }
 
     override fun onDialogValueListener(dialogType: String, height: String, weight: String, unit: String, visibleValue: String) {
+        viewModel.updateUserPreference(unit)
 
     }
 
