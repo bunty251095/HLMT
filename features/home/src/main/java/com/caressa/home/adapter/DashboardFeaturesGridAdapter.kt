@@ -51,7 +51,7 @@ class DashboardFeaturesGridAdapter(
         private val binding = ItemDashboardFeaturesBinding.bind(parent)
 
         fun bindTo(item: DataHandler.DashboardFeatureGrid) {
-            if (item.title.contains("risk",true)) {
+            if (item.code.equals("HRA",true)) {
                 binding.icon.scaleType = ImageView.ScaleType.FIT_CENTER
                 binding.txtData.setTextColor(item.color)
 //                binding.txtData.textSize = binding.txtData.resources.getDimension(R.dimen._13sdp)

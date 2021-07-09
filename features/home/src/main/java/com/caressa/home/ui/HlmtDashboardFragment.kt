@@ -98,79 +98,6 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
 
     private fun setClickable() {
 
-//        binding.cardHra.setOnClickListener {
-//            viewModel.getDOBOfPerson()
-//        }
-
-//        binding.layoutTakeHealthCheckup.setOnClickListener {
-//            val bundle = Bundle()
-//            bundle.putString(Constants.Toobar_Title, Constants.TOOLBAR_HEALTH_PACKAGES)
-//            bundle.putString(Constants.WEB_URL, Constants.strBookAppointmentURL)
-//            bundle.putBoolean(Constants.HAS_COOKIES, true)
-//            it.findNavController().navigate(R.id.action_dashboardFragment_to_commonWebViewActivity, bundle)
-//        }
-
-//        binding.layoutChatWithDoctor.setOnClickListener {
-//            val bundle = Bundle()
-//            bundle.putString(Constants.Toobar_Title, Constants.TOOLBAR_CHAT_WITH_DOCTOR)
-//            bundle.putString(Constants.WEB_URL, Constants.strWebChatDoctorURL)
-//            bundle.putBoolean(Constants.HAS_COOKIES, false)
-//            it.findNavController().navigate(R.id.action_dashboardFragment_to_commonWebViewActivity, bundle)
-//        }
-
-//        binding.layoutOrderMedicines.setOnClickListener {
-//            val bundle = Bundle()
-//            bundle.putString(Constants.FROM,"Dashboard")
-//            it.findNavController().navigate(R.id.action_dashboardFragment_to_orderMedicinesActivity,bundle)
-//        }
-
-//        binding.cardTrackParameter.setOnClickListener {
-//            val bundle = Bundle()
-//            bundle.putString(Constants.FROM, "Dashboard")
-//            it.findNavController().navigate(R.id.action_dashboardFragment_to_trackParamActivity,bundle)
-//        }
-//
-//        binding.cardStoreRecord.setOnClickListener {
-//            it.findNavController().navigate(R.id.action_dashboardFragment_to_shrActivity)
-//        }
-//
-//        binding.cardMedicationTracker.setOnClickListener {
-//            it.findNavController().navigate(R.id.action_dashboardFragment_to_medicationActivity)
-//        }
-//
-//        binding.cardSteps.setOnClickListener {
-//            it.findNavController().navigate(R.id.action_dashboardFragment_to_fitnessActivity)
-//        }
-//
-//        binding.cardToolsCalculator.setOnClickListener {
-//            it.findNavController().navigate(R.id.action_dashboardFragment_to_toolsCalculatorsHomeActivity)
-//        }
-
-//        binding.layoutWellnessCentre.setOnClickListener {
-//            it.findNavController().navigate(R.id.action_dashboardFragment_to_toolsCalculatorsHomeActivity)
-//            //it.findNavController().navigate(R.id.action_dashboardFragment_to_wellnessCentreActivity)
-//        }
-
-//        binding.layoutHospitalNearMe.setOnClickListener {
-//            viewModel.navigateToHospitalsNearMe(requireContext())
-//        }
-
-//        binding.cardBlog.setOnClickListener {
-//            it.findNavController().navigate(R.id.action_dashboardFragment_to_blogsActivity)
-//        }
-
-//        binding.layoutChatWithDietitian.setOnClickListener {
-//            val bundle = Bundle()
-//            bundle.putString(Constants.Toobar_Title, Constants.TOOLBAR_CHAT_WITH_DIETICIAN)
-//            bundle.putString(Constants.WEB_URL, Constants.sirWebChatDietitianURL)
-//            bundle.putBoolean(Constants.HAS_COOKIES, true)
-//            it.findNavController().navigate(R.id.action_dashboardFragment_to_commonWebViewActivity, bundle)
-//        }
-
-//        binding.cardReward.setOnClickListener {
-//            viewModel.toastMessage("Coming Soon..")
-//        }
-
         binding.layoutHeight.setOnClickListener {
             val bundle = Bundle()
             bundle.putString(Constants.FROM, "DashboardBMI")
@@ -197,21 +124,8 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
 
     override fun onScore(hraSummary: HRASummary?) {
         viewModel.getHraSummaryDetails()
-        Timber.i("HRAData=> "+hraSummary)
         viewModel.hraSummary = hraSummary
         viewModel.refreshDashboardFeatureList()
-//        try {
-//            if (hraSummary!!.hraCutOff.equals("1")) {
-//                binding.txtNoHra.visibility = View.GONE
-//                binding.txtHraValue.visibility = View.VISIBLE
-//                binding.txtHraValue.text = "${hraSummary!!.scorePercentile.toInt()}"
-//            }else{
-//                binding.txtNoHra.visibility = View.VISIBLE
-//                binding.txtHraValue.visibility = View.INVISIBLE
-//                binding.txtHraValue.text = "${hraSummary!!.scorePercentile.toInt()}"
-//            }
-//        }catch (e: Exception){e.printStackTrace()}
-
     }
 
     override fun onVitalDataUpdateListener(history: List<TrackParameterMaster.History>) {
@@ -226,7 +140,10 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
     }
 
     private fun updateDashboard(history: List<TrackParameterMaster.History>) {
-
+        binding.txtBmiValue.text = " -- "
+        binding.txtHeightValue.text = " -- "
+        binding.txtWeightValue.text = " -- "
+        binding.txtBpValue.text = " -- "
             if (history.isNotEmpty()){
                 try {
                     var systolic = 0
@@ -236,8 +153,8 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
                             binding.txtBmiValue.text = "${item.value} ${item.unit}"
                         }
                         if (item.parameterCode.equals("HEIGHT",true)){
-                            val feetInch = CalculateParameters.convertCmToFeetInch(item.value.toString())
-                            binding.txtHeightValue.text = "${feetInch}"
+//                            val feetInch = CalculateParameters.convertCmToFeetInch(item.value.toString())
+                            binding.txtHeightValue.text = "${item.value.toString()} ${item.unit}"
                         }
                         if (item.parameterCode.equals("WEIGHT",true)){
                             binding.txtWeightValue.text = "${item.value} ${item.unit}"
@@ -254,11 +171,6 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
                     }
 
                 }catch (e: Exception){e.printStackTrace()}
-            }else{
-                binding.txtBmiValue.text = " -- "
-                binding.txtHeightValue.text = " -- "
-                binding.txtWeightValue.text = " -- "
-                binding.txtBpValue.text = " -- "
             }
     }
 
@@ -276,7 +188,6 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
                     data.activeTime = todayData.getString(Constants.ACTIVE_TIME).toString().toInt()
                     viewModel.stepsData = "${data.stepsCount} steps of ${stepGoal}"
                     viewModel.refreshDashboardFeatureList()
-//                    binding.txtStepsCount.text = "${data.stepsCount} steps of ${stepGoal}"
                     viewModel.hideProgressBar()
                 } else {
                     Timber.e("Fitness Data not Available")
