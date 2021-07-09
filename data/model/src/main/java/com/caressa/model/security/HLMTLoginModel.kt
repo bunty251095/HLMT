@@ -18,6 +18,12 @@ class HLMTLoginModel(@SerializedName("JSONData")
         @SerializedName("Source")
         @Expose
         private val source: String = "ANDROID_MOBILE",
+        @SerializedName("AccountID")
+        @Expose
+        private val accountID: String = "",
+        @SerializedName("Mode")
+        @Expose
+        private val mode: String = "",
         )
 
     data class LoginResponse(
@@ -27,7 +33,13 @@ class HLMTLoginModel(@SerializedName("JSONData")
         var HLMTUserID: String? = "",
         @SerializedName("LoginStatus")
         @Expose
-        var loginStatus: String? = ""
+        var loginStatus: String? = "",
+        @SerializedName("IsHLMTUser")
+    @Expose
+    var isHLMTUser: String? = "",
+    @SerializedName("HLMTUserName")
+    @Expose
+    var hlmtUserName: String? = ""
 
     )
 

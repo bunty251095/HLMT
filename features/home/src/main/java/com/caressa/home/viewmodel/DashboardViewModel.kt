@@ -34,11 +34,13 @@ import com.caressa.model.entity.Users
 import com.caressa.model.home.ContactUsModel
 import com.caressa.model.home.PasswordChangeModel
 import com.caressa.model.home.SaveFeedbackModel
+import com.caressa.model.security.HLMTLoginModel
 import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 @SuppressLint("StaticFieldLeak")
 class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCase, private val dispatchers: AppDispatchers,
@@ -70,6 +72,10 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
     private var passwordChangeSource: LiveData<Resource<PasswordChangeModel.ChangePasswordResponse>> = MutableLiveData()
     private val _passwordChange = MediatorLiveData<PasswordChangeModel.ChangePasswordResponse>()
     val passwordChange: LiveData<PasswordChangeModel.ChangePasswordResponse> get() = _passwordChange
+
+    private val _hlmt360LoginResponse = MediatorLiveData<HLMTLoginModel.LoginResponse>()
+    val hlmt360LoginResponse: LiveData<HLMTLoginModel.LoginResponse> get() = _hlmt360LoginResponse
+    var hlmt360LoginUserSource: LiveData<Resource<HLMTLoginModel.LoginResponse>> = MutableLiveData()
 
     private var contactUsSource: LiveData<Resource<ContactUsModel.ContactUsResponse>> = MutableLiveData()
     private val _contactUs = MediatorLiveData<ContactUsModel.ContactUsResponse>()
@@ -449,5 +455,31 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         }
         return ""
     }
+
+    fun fetchHLMT360LoginResponse(username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
+
+        val requestData = HLMTLoginModel(Gson().toJson(
+            HLMTLoginModel.JSONDataRequest(username = username,password = passwordStr,accountID = accountID,mode = "LINKACCOUNT"), HLMTLoginModel.JSONDataRequest::class.java))
+
+        _progressBar.value = Event("Validating Username..")
+        _hlmt360LoginResponse.removeSource(hlmt360LoginUserSource)
+        withContext(dispatchers.io){ hlmt360LoginUserSource = homeManagementUseCase.invokeHLMT360LoginResponse(true,requestData)}
+        _hlmt360LoginResponse.addSource(hlmt360LoginUserSource){
+            _hlmt360LoginResponse.value = it.data
+
+            if (it.status == Resource.Status.SUCCESS){
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER,it.data!!.isHLMTUser)
+                sharedPref.edit().putString(PreferenceConstants.HLMT_USERNAME,it.data!!.hlmtUserName)
+                Timber.i("Data=> "+it)
+            }
+
+            if (it.status == Resource.Status.ERROR) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                toastMessage(it.errorMessage)
+            }
+        }
+    }
+
 
 }

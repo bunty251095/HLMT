@@ -90,6 +90,15 @@ class UpdateParamViewModel(
         }
     }
 
+    fun getPreference(type: String): String {
+        if (type.equals("HEIGHT",true)){
+            return sharedPref.getString(PreferenceConstants.HEIGHT_PREFERENCE,"cm")!!
+        }else if(type.equals("WEIGHT",true)){
+            return sharedPref.getString(PreferenceConstants.HEIGHT_PREFERENCE,"kg")!!
+        }
+        return ""
+    }
+
     fun getParameterByProfileCodeAndDate(profileCode: String,serverDate:String) = viewModelScope.launch(dispatchers.main) {
         Timber.i("Server Date :: " + serverDate)
         withContext(dispatchers.io){

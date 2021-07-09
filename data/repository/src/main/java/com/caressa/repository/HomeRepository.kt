@@ -8,6 +8,7 @@ import com.caressa.model.entity.DataSyncMaster
 import com.caressa.model.entity.UserRelatives
 import com.caressa.model.entity.Users
 import com.caressa.model.home.*
+import com.caressa.model.security.HLMTLoginModel
 import com.caressa.model.shr.ListRelativesModel
 import com.caressa.model.singleton.ToolsTrackerSingleton
 import com.caressa.remote.HomeDatasource
@@ -58,6 +59,8 @@ interface HomeRepository{
     suspend fun saveSyncDetails(data: DataSyncMaster)
     suspend fun clearTablesForSwitchProfile()
     suspend fun logoutUser()
+    suspend fun hlmt360LoginResponse(forceRefresh: Boolean = false, data: HLMTLoginModel) :LiveData<Resource<HLMTLoginModel.LoginResponse>>
+
 
 }
 
@@ -702,6 +705,38 @@ class HomeRepositoryImpl(private val datasource : HomeDatasource, private val da
     override suspend fun logoutUser() {
         homeDao.deleteAllRecords()
         homeDao.deleteUserRelativesTable()
+    }
+
+    override suspend fun hlmt360LoginResponse(
+        forceRefresh: Boolean,
+        data: HLMTLoginModel
+    ): LiveData<Resource<HLMTLoginModel.LoginResponse>> {
+        return object : NetworkBoundResource<HLMTLoginModel.LoginResponse,BaseResponse<HLMTLoginModel.LoginResponse>>(){
+            override fun processResponse(response: BaseResponse<HLMTLoginModel.LoginResponse>): HLMTLoginModel.LoginResponse {
+                return response.jSONData
+            }
+
+            override suspend fun saveCallResults(items: HLMTLoginModel.LoginResponse) {
+
+            }
+
+            override fun shouldFetch(data: HLMTLoginModel.LoginResponse?): Boolean {
+                return true
+            }
+
+            override fun shouldStoreInDb(): Boolean {
+                return false
+            }
+
+            override suspend fun loadFromDb(): HLMTLoginModel.LoginResponse {
+                return HLMTLoginModel.LoginResponse()
+            }
+
+            override fun createCallAsync(): Deferred<BaseResponse<HLMTLoginModel.LoginResponse>> {
+                return datasource.fetchHLMT360LoginResponse(data)
+            }
+
+        }.build().asLiveData()
     }
 
 }

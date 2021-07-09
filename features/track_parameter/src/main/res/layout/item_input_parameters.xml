@@ -55,75 +55,154 @@
                     app:layout_constraintStart_toEndOf="@+id/view"
                     app:layout_constraintTop_toTopOf="@+id/view" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:id="@+id/layout_input"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_8sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/txt_param_name"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="0.65"
                     app:layout_constraintStart_toEndOf="@+id/txt_param_name"
                     app:layout_constraintTop_toTopOf="@+id/txt_param_name">
-
-                    <com.caressa.common.view.ArcImageView
-                        android:id="@+id/img_param"
-                        android:layout_width="@dimen/_27sdp"
-                        android:layout_height="@dimen/_27sdp"
-                        android:paddingBottom="@dimen/_4sdp"
-                        android:src="@drawable/img_bp"
-                        android:tint="@color/hlmt_warm_grey"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="@+id/til_input_value"
-                        app:layout_constraintStart_toStartOf="@+id/til_input_value"
-                        app:layout_constraintTop_toTopOf="@+id/til_input_value" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_input_value"
-                        style="@style/VivantTextInputLayoutStyle"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_input_non_bmi"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/_8sdp"
-                        app:hintEnabled="false"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true">
 
-                        <com.caressa.common.view.ArcEditText
-                            android:id="@+id/edt_input_value"
-                            style="@style/VivantTextInputEditText"
-                            android:layout_width="match_parent"
+                        <com.caressa.common.view.ArcImageView
+                            android:id="@+id/img_param"
+                            android:layout_width="@dimen/_27sdp"
+                            android:layout_height="@dimen/_27sdp"
+                            android:paddingBottom="@dimen/_4sdp"
+                            android:src="@drawable/img_bp"
+                            android:tint="@color/hlmt_warm_grey"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/til_input_value"
+                            app:layout_constraintStart_toStartOf="@+id/til_input_value"
+                            app:layout_constraintTop_toTopOf="@+id/til_input_value" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_input_value"
+                            style="@style/VivantTextInputLayoutStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/_8sdp"
+                            app:hintEnabled="false"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.caressa.common.view.ArcEditText
+                                android:id="@+id/edt_input_value"
+                                style="@style/VivantTextInputEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:hint=""
+                                android:imeOptions="actionNext"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_30sdp"
+                                android:text=""
+                                android:textColorHint="#DADADA"
+                                android:textSize="@dimen/_13sdp"
+                                app:isTemplate="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.caressa.common.view.ArcTextView
+                            android:id="@+id/txt_param_unit"
+                            style="@style/VivantDescription"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
-                            android:hint=""
-                            android:imeOptions="actionNext"
-                            android:inputType="numberDecimal"
-                            android:maxLines="1"
-                            android:paddingStart="@dimen/_5sdp"
-                            android:paddingEnd="@dimen/_30sdp"
+                            android:gravity="end"
+                            android:maxLength="8"
                             android:text=""
-                            android:textColorHint="#DADADA"
-                            android:textSize="@dimen/_13sdp"
-                            app:isTemplate="true" />
+                            android:textSize="@dimen/_11sdp"
+                            app:layout_constraintBottom_toBottomOf="@+id/til_input_value"
+                            app:layout_constraintEnd_toEndOf="@+id/til_input_value"
+                            app:layout_constraintTop_toTopOf="@+id/til_input_value" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.caressa.common.view.ArcTextView
-                        android:id="@+id/txt_param_unit"
-                        style="@style/VivantDescription"
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_height_weight"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:gravity="end"
-                        android:maxLength="8"
-                        android:text=""
-                        android:textSize="@dimen/_11sdp"
-                        app:layout_constraintBottom_toBottomOf="@+id/til_input_value"
-                        app:layout_constraintEnd_toEndOf="@+id/til_input_value"
-                        app:layout_constraintTop_toTopOf="@+id/til_input_value" />
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        >
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <com.caressa.common.view.ArcImageView
+                            android:id="@+id/img_param1"
+                            android:layout_width="@dimen/_27sdp"
+                            android:layout_height="@dimen/_27sdp"
+                            android:paddingBottom="@dimen/_4sdp"
+                            android:src="@drawable/img_bp"
+                            android:tint="@color/hlmt_warm_grey"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/til_input_value_bmi"
+                            app:layout_constraintStart_toStartOf="@+id/til_input_value_bmi"
+                            app:layout_constraintTop_toTopOf="@+id/til_input_value_bmi" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_input_value_bmi"
+                            style="@style/VivantTextInputLayoutStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/_8sdp"
+                            app:hintEnabled="false"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.caressa.common.view.ArcEditText
+                                android:id="@+id/edt_input_value_bmi"
+                                style="@style/VivantTextInputEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:hint=""
+                                android:imeOptions="actionNext"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_30sdp"
+                                android:text=""
+                                android:textColorHint="#DADADA"
+                                android:textSize="@dimen/_13sdp"
+                                app:isTemplate="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.caressa.common.view.ArcTextView
+                            android:id="@+id/txt_param_unit_bmi"
+                            style="@style/VivantDescription"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:gravity="end"
+                            android:maxLength="8"
+                            android:text=""
+                            android:textSize="@dimen/_11sdp"
+                            app:layout_constraintBottom_toBottomOf="@+id/til_input_value_bmi"
+                            app:layout_constraintEnd_toEndOf="@+id/til_input_value_bmi"
+                            app:layout_constraintTop_toTopOf="@+id/til_input_value_bmi" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </RelativeLayout>
+
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
