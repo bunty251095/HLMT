@@ -138,6 +138,7 @@ class BlogViewModel (private val dispatchers: AppDispatchers,
         val bundle = Bundle()
         bundle.putString(Constants.TITLE,blog.title)
         bundle.putString(Constants.BODY,blog.body)
+        bundle.putString("LINK",blog.link)
         view.findNavController().navigate(R.id.action_blogsDashboardFragment_to_blogDetailFragment , bundle )
     }
 
