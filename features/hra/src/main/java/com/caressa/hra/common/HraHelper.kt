@@ -13,6 +13,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.*
 import com.caressa.common.constants.Configuration
+import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.*
 import com.caressa.common.view.FlowLayout
 import com.caressa.hra.R
@@ -35,7 +36,6 @@ object HraHelper {
         data.title = "Height"
         data.value = " - - "
         data.finalValue = height.toString()
-
         if (layHeight.getUnit().toLowerCase(Locale.ROOT).contains("cm")) {
             data.unit = "cm"
         } else {

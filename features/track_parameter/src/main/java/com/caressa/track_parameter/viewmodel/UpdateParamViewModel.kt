@@ -71,6 +71,25 @@ class UpdateParamViewModel(
 //
 //    }
 
+    fun updateUserPreference(unit: String?) {
+        if(!unit.isNullOrEmpty()){
+            when(unit.toLowerCase()){
+                "cm"->{
+                    sharedPref.edit().putString(PreferenceConstants.HEIGHT_PREFERENCE, "cm").apply()
+                }
+                "kg"->{
+                    sharedPref.edit().putString(PreferenceConstants.WEIGHT_PREFERENCE, "kg").apply()
+                }
+                "lbs"->{
+                    sharedPref.edit().putString(PreferenceConstants.WEIGHT_PREFERENCE, "lib").apply()
+                }
+                "feet/inch"->{
+                    sharedPref.edit().putString(PreferenceConstants.HEIGHT_PREFERENCE, "feet").apply()
+                }
+            }
+        }
+    }
+
     fun getParameterByProfileCodeAndDate(profileCode: String,serverDate:String) = viewModelScope.launch(dispatchers.main) {
         Timber.i("Server Date :: " + serverDate)
         withContext(dispatchers.io){

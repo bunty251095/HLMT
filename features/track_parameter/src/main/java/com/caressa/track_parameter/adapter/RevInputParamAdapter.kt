@@ -15,18 +15,18 @@ import com.caressa.common.constants.Constants
 import com.caressa.common.utils.DecimalValueFilter
 import com.caressa.common.utils.HeightWeightDialog
 import com.caressa.common.utils.ParameterDataModel
-import com.caressa.common.utils.Utilities
 import com.caressa.model.parameter.ParameterListModel
 import com.caressa.track_parameter.R
 import com.caressa.track_parameter.databinding.ItemInputParametersBinding
 import com.caressa.track_parameter.util.TrackParameterHelper
+import com.caressa.track_parameter.viewmodel.UpdateParamViewModel
 import timber.log.Timber
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
 import java.util.regex.Pattern
 
-class RevInputParamAdapter(var profileCode: String): RecyclerView.Adapter<RevInputParamAdapter.InputParameterViewHolder>() {
+class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamViewModel): RecyclerView.Adapter<RevInputParamAdapter.InputParameterViewHolder>() {
 
     val dataList: MutableList<ParameterListModel.InputParameterModel> = mutableListOf()
     private var edtBMI: EditText? = null
@@ -298,6 +298,7 @@ class RevInputParamAdapter(var profileCode: String): RecyclerView.Adapter<RevInp
                             unit: String,
                             visibleValue: String
                         ) {
+                            viewModel.updateUserPreference(unit)
                             binding.edtInputValue.setText(height)
                         }
                     },"Height", data)
@@ -329,6 +330,7 @@ class RevInputParamAdapter(var profileCode: String): RecyclerView.Adapter<RevInp
                             unit: String,
                             visibleValue: String
                         ) {
+                            viewModel.updateUserPreference(unit)
                             binding.edtInputValue.setText(weight)
                         }
                     },"Weight", data)

@@ -5,13 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
-import com.caressa.common.constants.Constants
 import com.caressa.common.utils.DateHelper
 import com.caressa.model.parameter.ParameterListModel
 import com.caressa.track_parameter.adapter.RevInputParamAdapter
@@ -83,7 +80,7 @@ class RevUpdateParameterFragment : BaseFragment(){
         binding.rvSelectedParameters.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         binding.rvSelectedParameters.adapter = profileAdapter
 
-        var paramAdapter = RevInputParamAdapter(profileCode)
+        var paramAdapter = RevInputParamAdapter(profileCode,viewModel)
         binding.rvInputParameters.layoutManager = LinearLayoutManager(context,
             LinearLayoutManager.VERTICAL,false)
         binding.rvInputParameters.adapter = paramAdapter
@@ -93,7 +90,7 @@ class RevUpdateParameterFragment : BaseFragment(){
 
         profileAdapter.setOnItemClickListener {
             Timber.i("Position: "+it.iconPosition+" :: "+it.profileName)
-            paramAdapter = RevInputParamAdapter(it.profileCode)
+            paramAdapter = RevInputParamAdapter(it.profileCode, viewModel)
             binding.rvInputParameters.layoutManager = LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL,false)
             binding.rvInputParameters.adapter = paramAdapter
@@ -155,7 +152,7 @@ class RevUpdateParameterFragment : BaseFragment(){
                     profileAdapter.selectedPosition = counter
                     profileAdapter.updateData(it)
 
-                    paramAdapter = RevInputParamAdapter(profileCode)
+                    paramAdapter = RevInputParamAdapter(profileCode, viewModel)
                     binding.rvInputParameters.layoutManager = LinearLayoutManager(
                         context,
                         LinearLayoutManager.VERTICAL, false

@@ -239,6 +239,7 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
     }
 
     override fun onDialogValueListener(dialogType: String, height: String, weight: String, unit: String, visibleValue: String) {
+        viewModel.updateUserPreference(unit)
         if (dialogType.equals("Height", ignoreCase = true)) {
             this.height = height.toDouble()
             binding.layHeight.setValue(visibleValue)

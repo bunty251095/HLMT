@@ -153,11 +153,18 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
                             binding.txtBmiValue.text = "${item.value} ${item.unit}"
                         }
                         if (item.parameterCode.equals("HEIGHT",true)){
-//                            val feetInch = CalculateParameters.convertCmToFeetInch(item.value.toString())
-                            binding.txtHeightValue.text = "${item.value.toString()} ${item.unit}"
+                            if(viewModel.getPreference("HEIGHT").equals("cm")){
+                                binding.txtHeightValue.text = "${item.value.toString()} cm"
+                            }else{
+                                binding.txtHeightValue.text = CalculateParameters.convertCmToFeetInch(item.value.toString())
+                            }
                         }
                         if (item.parameterCode.equals("WEIGHT",true)){
-                            binding.txtWeightValue.text = "${item.value} ${item.unit}"
+                            if(viewModel.getPreference("WEIGHT").equals("kg")){
+                                binding.txtWeightValue.text = "${item.value} kg"
+                            }else{
+                                binding.txtWeightValue.text = CalculateParameters.convertKgToLbs(item.value.toString())+" lbs"
+                            }
                         }
                         if (item.parameterCode.equals("BP_DIA",true)){
                             diastolic = item.value!!.toInt()
