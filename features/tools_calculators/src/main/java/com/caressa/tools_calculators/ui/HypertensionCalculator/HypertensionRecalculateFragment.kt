@@ -1,5 +1,6 @@
 package com.caressa.tools_calculators.ui.HypertensionCalculator
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -30,11 +31,12 @@ import com.caressa.model.toolscalculators.UserInfoModel
 import com.caressa.tools_calculators.viewmodel.ToolsCalculatorsViewModel
 import com.caressa.common.utils.HeightWeightDialog
 import com.caressa.tools_calculators.views.SystolicDiastolicDialogManager
+import kotlinx.android.synthetic.main.dialog_input_parameter.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.get
 import timber.log.Timber
-import java.util.ArrayList
+import java.util.*
 
 class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterAdapter.ParameterOnClickListener,
     SystolicDiastolicDialogManager.OnDialogValueListener, HeightWeightDialog.OnDialogValueListener {
@@ -256,16 +258,84 @@ class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterA
     }
 
     override fun onParameterClick(parameterDataModel: ParameterDataModel, position: Int) {
+        if (parameterDataModel.title.equals("Height", ignoreCase = true)) {
+            val heightWeightDialog = HeightWeightDialog(requireContext(), this, "Height", parameterAdapter!!.paramList[0])
+            heightWeightDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            heightWeightDialog.show()
+        } else if (parameterDataModel.title.equals("Weight", ignoreCase = true)) {
+            val heightWeightDialog = HeightWeightDialog(requireContext(), this, "Weight", parameterAdapter!!.paramList[2])
+            heightWeightDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            heightWeightDialog.show()
+        } else if (parameterDataModel.code.equals("SYSTOLIC_BP", ignoreCase = true)
+            || parameterDataModel.code.equals("DIASTOLIC_BP", ignoreCase = true)) {
+            val customDialogManager = SystolicDiastolicDialogManager(requireContext(), this, parameterAdapter!!.paramList, position)
+            customDialogManager.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            customDialogManager.show()
+        } else {
+            showInputDialog(parameterDataModel, position)
+        }
+    }
 
+    @SuppressLint("SetTextI18n")
+    private fun showInputDialog(param: ParameterDataModel, position: Int) {
+        dialogInput!!.title_input.text = param.title
+        dialogInput!!.txtMessage.text = "Enter your " + param.title.toLowerCase(Locale.ROOT) + " parameter value."
+
+        dialogInput!!.inpLayout_input.hint = param.minRange.toString() + " - " + param.maxRange
+        dialogInput!!.inpLayout_input.setText(param.finalValue)
+        paramList = parameterAdapter!!.paramList
+
+        dialogInput!!.btn_save_input.setOnClickListener {
+            if (!Utilities.isNullOrEmpty(inpLayout_input.text.toString())) {
+                val value: Double = inpLayout_input.text.toString().toDouble()
+                if (value >= param.minRange && value <= param.maxRange) {
+                    paramList[position].value = inpLayout_input.text.toString()
+                    paramList[position].finalValue = inpLayout_input.text.toString()
+                    parameterAdapter!!.notifyDataSetChanged()
+                    //parameterAdapter!!.updateList(paramList)
+                    dialogInput!!.dismiss()
+                } else {
+                    Utilities.toastMessageShort(context, "Please input value between " + param.minRange + " to " + param.maxRange)
+                }
+            } else {
+                dialogInput!!.dismiss()
+            }
+        }
+        dialogInput!!.img_close_input.setOnClickListener{
+            dialogInput!!.dismiss()
+        }
+        dialogInput!!.show()
     }
 
     override fun onDialogValueListener(systolic: String, diastolic: String) {
-
+        paramList = parameterAdapter!!.paramList
+        Timber.e("systolic,diastolic=>$systolic,$diastolic")
+        if (!systolic.equals("", ignoreCase = true)) {
+            paramList[1].value = systolic
+            paramList[1].finalValue = systolic
+        }
+        if (!diastolic.equals("", ignoreCase = true)) {
+            paramList[3].value = diastolic
+            paramList[3].finalValue = diastolic
+        }
+        parameterAdapter!!.notifyDataSetChanged()
+        //parameterAdapter!!.updateList(paramList)
     }
 
     override fun onDialogValueListener(dialogType: String, height: String, weight: String, unit: String, visibleValue: String) {
         viewModel.updateUserPreference(unit)
-
+        paramList = parameterAdapter!!.paramList
+        if (dialogType.equals("Height", ignoreCase = true)) {
+            paramList[0].unit = unit
+            paramList[0].value = visibleValue
+            paramList[0].finalValue = height
+        } else {
+            paramList[2].unit = unit
+            paramList[2].value = visibleValue
+            paramList[2].finalValue = weight
+        }
+        parameterAdapter!!.notifyDataSetChanged()
+        //parameterAdapter!!.updateList(paramList)
     }
 
 }
