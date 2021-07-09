@@ -205,6 +205,7 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
         backGroundCallViewModel.isBackgroundApiCall = false
         backGroundCallViewModel.profileSwitched = true
         backGroundCallViewModel.callBackgroundApiCall(true)
+        configureDrawerRecyclerView()
         viewModel.getDrawerOptionList()
     }
 
