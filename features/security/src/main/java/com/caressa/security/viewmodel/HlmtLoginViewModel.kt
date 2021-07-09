@@ -140,6 +140,9 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                 sharedPref.edit().putString(PreferenceConstants.GENDER, if(loginData.gender.equals("Male",true))"0" else "1").apply()
                 sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE, Constants.SELF_RELATIONSHIP_CODE).apply()
                 sharedPref.edit().putString(PreferenceConstants.DOB,loginData.dateOfBirth).apply()
+                sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER,loginData.IsHLMTUser).apply()
+                sharedPref.edit().putString(PreferenceConstants.HLMT_USER_ID,loginData.HLMTUserID).apply()
+                sharedPref.edit().putString(PreferenceConstants.HLMT_USERNAME,loginData.HLMTUserName).apply()
 
                 val pid = loginData?.personID?.toDouble()?.toInt()
                 Timber.i("Person Id => "+pid)
@@ -242,6 +245,9 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                         PreferenceConstants.RELATIONSHIPCODE,
                         Constants.SELF_RELATIONSHIP_CODE
                     ).apply()
+                    sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER,loginData.IsHLMTUser).apply()
+                    sharedPref.edit().putString(PreferenceConstants.HLMT_USER_ID,loginData.HLMTUserID).apply()
+                    sharedPref.edit().putString(PreferenceConstants.HLMT_USERNAME,loginData.HLMTUserName).apply()
 
                     val pid = loginData?.personID?.toDouble()?.toInt()
                     Timber.i("Person Id => " + pid)

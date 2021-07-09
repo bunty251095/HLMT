@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.utils.DateHelper
+import com.caressa.common.utils.DialogHelper
 import com.caressa.model.parameter.ParameterListModel
 import com.caressa.track_parameter.adapter.RevInputParamAdapter
 import com.caressa.track_parameter.adapter.RevSelectedParamAdapter
@@ -122,15 +123,36 @@ class RevUpdateParameterFragment : BaseFragment(){
 
         }, year, month, day)
 
+
         binding.layoutDate.setOnClickListener(View.OnClickListener { view: View? ->
             if (fragmentManager != null) {
-                dpd.show()
+//                dpd.show()
+
+                DialogHelper().showDatePickerDialog("Record Date",requireContext(), Calendar.getInstance(),null, Calendar.getInstance(), object :DialogHelper.DateListener{
+                    override fun onDateSet(date: String, year: String, month: String, dayOfMonth: String) {
+                        val selectedDate:String = dayOfMonth + "/" + month + "/" + year
+                        if (!selectedDate.isNullOrEmpty()) {
+                            serverDate = DateHelper.convertDateTimeValue(selectedDate,DateHelper.DISPLAY_DATE_DDMMYYYY,DateHelper.DISPLAY_DATE_DDMMMYYYY).toString()
+                            binding.edtDate.setText(serverDate)
+                            viewModel.getParameterByProfileCodeAndDate(profileCode,serverDate)
+                        }
+                    }
+                })
             }
         })
 
         binding.edtDate.setOnClickListener(View.OnClickListener { view: View? ->
             if (fragmentManager != null) {
-                dpd.show()
+                DialogHelper().showDatePickerDialog("Record Date",requireContext(), Calendar.getInstance(),null, Calendar.getInstance(), object :DialogHelper.DateListener{
+                    override fun onDateSet(date: String, year: String, month: String, dayOfMonth: String) {
+                        val selectedDate:String = dayOfMonth + "/" + month + "/" + year
+                        if (!selectedDate.isNullOrEmpty()) {
+                            serverDate = DateHelper.convertDateTimeValue(selectedDate,DateHelper.DISPLAY_DATE_DDMMYYYY,DateHelper.DISPLAY_DATE_DDMMMYYYY).toString()
+                            binding.edtDate.setText(serverDate)
+                            viewModel.getParameterByProfileCodeAndDate(profileCode,serverDate)
+                        }
+                    }
+                })
             }
         })
 

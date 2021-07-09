@@ -451,7 +451,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         if (type.equals("HEIGHT",true)){
             return sharedPref.getString(PreferenceConstants.HEIGHT_PREFERENCE,"cm")!!
         }else if(type.equals("WEIGHT",true)){
-            return sharedPref.getString(PreferenceConstants.HEIGHT_PREFERENCE,"kg")!!
+            return sharedPref.getString(PreferenceConstants.WEIGHT_PREFERENCE,"kg")!!
         }
         return ""
     }
@@ -471,6 +471,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER,it.data!!.isHLMTUser)
                 sharedPref.edit().putString(PreferenceConstants.HLMT_USERNAME,it.data!!.hlmtUserName)
+                sharedPref.edit().putString(PreferenceConstants.HLMT_USER_ID,it.data!!.HLMTUserID)
                 Timber.i("Data=> "+it)
             }
 

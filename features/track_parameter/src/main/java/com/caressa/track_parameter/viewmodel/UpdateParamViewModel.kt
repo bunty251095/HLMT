@@ -94,7 +94,7 @@ class UpdateParamViewModel(
         if (type.equals("HEIGHT",true)){
             return sharedPref.getString(PreferenceConstants.HEIGHT_PREFERENCE,"cm")!!
         }else if(type.equals("WEIGHT",true)){
-            return sharedPref.getString(PreferenceConstants.HEIGHT_PREFERENCE,"kg")!!
+            return sharedPref.getString(PreferenceConstants.WEIGHT_PREFERENCE,"kg")!!
         }
         return ""
     }

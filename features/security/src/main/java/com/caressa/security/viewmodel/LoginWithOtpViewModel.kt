@@ -241,6 +241,11 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                             Constants.SELF_RELATIONSHIP_CODE
                         ).apply()
 
+                        sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER,loginData.IsHLMTUser).apply()
+                        sharedPref.edit().putString(PreferenceConstants.HLMT_USER_ID,loginData.HLMTUserID).apply()
+                        sharedPref.edit().putString(PreferenceConstants.HLMT_USERNAME,loginData.HLMTUserName).apply()
+
+
                         val pid = loginData?.personID?.toDouble()?.toInt()
                         Timber.i("Person Id => " + pid)
                         sharedPref.edit().putString(PreferenceConstants.PERSONID, pid.toString())
