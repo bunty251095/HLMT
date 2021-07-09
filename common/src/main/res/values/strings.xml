@@ -32,6 +32,8 @@
     <string name="TAKEN">Taken</string>
     <string name="SKIP">Skip</string>
     <string name="REFRESH">Refresh</string>
+    <string name="LOGIN">Login</string>
+    <string name="PASSWORD">Password</string>
     <string name="RESEND_OTP">Resend OTP</string>
     <string name="NO_THANKS">No thanks</string>
     <string name="UPLOAD_REPORT">Upload Report</string>
@@ -100,6 +102,9 @@
     <string name="OPTIMUM">Optimum</string>
     <!--HRA-->
 
+    <string name="LINK_HLMT_360_ACCOUNT">Link HLMT 360 Account</string>
+    <string name="LINK_MY_HLMT_360_ACCOUNT">Link my HLMT 360 Account</string>
+    <string name="TO_LINK_HLMT_360_ACCOUNT_CLICK_ON_BUTTON">To Link your HLMT 360 Account with Wellness App Profile , Login to your Account and click on button Link my HLMT 360 Account</string>
     <string name="PERMISSION_REQUIRED">Permission Required</string>
     <string name="NEED_STORAGE_PERMISSION">For storing and reading files, we need storage permission.</string>
     <string name="NEED_CAMERA_PERMISSION">For clicking snap to upload we need camera permission.</string>

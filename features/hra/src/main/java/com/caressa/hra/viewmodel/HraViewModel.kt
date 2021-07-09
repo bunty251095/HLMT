@@ -88,7 +88,10 @@ class HraViewModel(
                 val list = hraManagementUseCase.invokeGetUserRelatives().filter { it.relativeID == personId }
                 userRelativesList.postValue(list)
             } else {
-                userRelativesList.postValue(hraManagementUseCase.invokeGetUserRelatives())
+                val list = hraManagementUseCase.invokeGetUserRelatives().filter {
+                    DateHelper.isDateAbove18Years(it.dateOfBirth)
+                }.toMutableList()
+                userRelativesList.postValue(list)
             }
         }
     }
