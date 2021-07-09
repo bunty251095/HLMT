@@ -40,148 +40,196 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_80sdp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:src="@drawable/hlmt_banner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.caressa.common.view.ArcTextView
-                    android:id="@+id/lbl_link_account_desc"
-                    android:layout_width="0dp"
-                    app:isTemplate="true"
-                    app:isPrimary="true"
-                    style="@style/CustomTextview"
-                    android:text="@string/TO_LINK_HLMT_360_ACCOUNT_CLICK_ON_BUTTON"
-                    android:textSize="@dimen/_16sdp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginTop="@dimen/_20sdp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_acc_not_linked"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
                     app:layout_constraintTop_toBottomOf="@+id/img_banner"
-                    app:layout_constraintStart_toStartOf="@+id/img_banner"
-                    app:layout_constraintEnd_toEndOf="@+id/img_banner"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_edt_login_email_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/selector_border_button"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    app:layout_constraintEnd_toEndOf="@+id/lbl_link_account_desc"
-                    app:layout_constraintStart_toStartOf="@+id/lbl_link_account_desc"
-                    app:layout_constraintTop_toBottomOf="@+id/lbl_link_account_desc">
+                    <com.caressa.common.view.ArcTextView
+                        android:id="@+id/lbl_link_account_desc"
+                        android:layout_width="0dp"
+                        app:isTemplate="true"
+                        app:isPrimary="true"
+                        style="@style/CustomTextview"
+                        android:text="@string/TO_LINK_HLMT_360_ACCOUNT_CLICK_ON_BUTTON"
+                        android:textSize="@dimen/_16sdp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:tint="@color/security_grey_light"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/til_edt_login_email_phone"
-                        app:srcCompat="@drawable/img_mail" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_edt_login_email_phone"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_edt_login_email_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintEnabled="false"
-                        app:boxBackgroundMode="none"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:passwordToggleEnabled="false">
+                        android:background="@drawable/selector_border_button"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:layout_constraintEnd_toEndOf="@+id/lbl_link_account_desc"
+                        app:layout_constraintStart_toStartOf="@+id/lbl_link_account_desc"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_link_account_desc">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_username"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@null"
-                            android:fontFamily="@font/dax_regular"
-                            android:hint="HLMT User ID"
-                            android:imeOptions="actionNext"
-                            android:inputType="textEmailAddress"
-                            android:maxLength="50"
-                            android:paddingStart="@dimen/_40sdp"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_10sdp"
-                            android:textSize="@dimen/_14sdp" />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:tint="@color/security_grey_light"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/til_edt_login_email_phone"
+                            app:srcCompat="@drawable/img_mail" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_edt_login_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:background="@drawable/selector_border_button"
-                    app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_email_phone"
-                    app:layout_constraintStart_toStartOf="@+id/layout_edt_login_email_phone"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_email_phone">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/img_signup_password"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:tint="@color/security_grey_light"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/til_edt_login_password"
-                        app:srcCompat="@drawable/img_password" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_edt_login_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hintEnabled="false"
-                        app:boxBackgroundMode="none"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:passwordToggleEnabled="true"
-                        app:passwordToggleTint="@color/security_grey_light">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_login_password"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_edt_login_email_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:fontFamily="@font/dax_regular"
-                            android:hint="@string/PASSWORD"
-                            android:imeOptions="actionDone"
-                            android:inputType="textPassword"
-                            android:maxLength="20"
-                            android:paddingStart="@dimen/_40sdp"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_10sdp"
-                            android:text=""
-                            android:textSize="@dimen/_14sdp" />
+                            app:hintEnabled="false"
+                            app:boxBackgroundMode="none"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:passwordToggleEnabled="false">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_username"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:fontFamily="@font/dax_regular"
+                                android:hint="HLMT User ID"
+                                android:imeOptions="actionNext"
+                                android:inputType="textEmailAddress"
+                                android:maxLength="50"
+                                android:paddingStart="@dimen/_40sdp"
+                                android:paddingTop="@dimen/_10sdp"
+                                android:paddingBottom="@dimen/_10sdp"
+                                android:textSize="@dimen/_14sdp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_edt_login_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/selector_border_button"
+                        app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_email_phone"
+                        app:layout_constraintStart_toStartOf="@+id/layout_edt_login_email_phone"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_email_phone">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_signup_password"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:tint="@color/security_grey_light"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/til_edt_login_password"
+                            app:srcCompat="@drawable/img_password" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_edt_login_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:hintEnabled="false"
+                            app:boxBackgroundMode="none"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:passwordToggleEnabled="true"
+                            app:passwordToggleTint="@color/security_grey_light">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_login_password"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:fontFamily="@font/dax_regular"
+                                android:hint="@string/PASSWORD"
+                                android:imeOptions="actionDone"
+                                android:inputType="textPassword"
+                                android:maxLength="20"
+                                android:paddingStart="@dimen/_40sdp"
+                                android:paddingTop="@dimen/_10sdp"
+                                android:paddingBottom="@dimen/_10sdp"
+                                android:text=""
+                                android:textSize="@dimen/_14sdp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.caressa.common.view.ArcButton
+                        android:id="@+id/btn_link_account"
+                        app:isTemplate="true"
+                        style="@style/CustomButton"
+                        android:text="@string/LINK_HLMT_360_ACCOUNT"
+                        android:textSize="@dimen/_14sdp"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_password"
+                        app:layout_constraintStart_toStartOf="@+id/layout_edt_login_password"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_password" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.caressa.common.view.ArcButton
-                    android:id="@+id/btn_link_account"
-                    app:isTemplate="true"
-                    style="@style/CustomButton"
-                    android:text="@string/LINK_HLMT_360_ACCOUNT"
-                    android:textSize="@dimen/_14sdp"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_password"
-                    app:layout_constraintStart_toStartOf="@+id/layout_edt_login_password"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_password" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_acc_linked"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/img_banner"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_password_changed"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/img_tick_green"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lbl_password_changed"
+                        style="@style/CustomTextview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/ACCOUNT_LINKED"
+                        android:textSize="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        app:layout_constraintEnd_toEndOf="@+id/img_password_changed"
+                        app:layout_constraintStart_toStartOf="@+id/img_password_changed"
+                        app:layout_constraintTop_toBottomOf="@+id/img_password_changed"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
