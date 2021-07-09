@@ -17,6 +17,7 @@ import com.caressa.model.parameter.*
 import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
 import com.caressa.track_parameter.domain.ParameterManagementUseCase
+import com.caressa.track_parameter.util.TrackParameterHelper
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -149,7 +150,7 @@ class UpdateParamViewModel(
         val personId = sharedPref.getString(PreferenceConstants.PERSONID,"")!!
 
         for (item in parameterDataList){
-            if(!item.parameterVal.isNullOrEmpty()) {
+            if(!item.parameterVal.isNullOrEmpty() && !TrackParameterHelper.isNullOrEmptyOrZero(item.parameterVal)) {
                 val record = SaveParameterModel.Record(
                     personId,
                     DateHelper.currentUTCDatetimeInMillisecAsString,
@@ -164,7 +165,7 @@ class UpdateParamViewModel(
                     ""
                 )
                 recordList.add(record)
-            }else if(!item.parameterTextVal.isNullOrEmpty()){
+            }else if(!item.parameterTextVal.isNullOrEmpty() && !TrackParameterHelper.isNullOrEmptyOrZero(item.parameterTextVal)){
                 val record = SaveParameterModel.Record(
                     personId,
                     DateHelper.currentUTCDatetimeInMillisecAsString,

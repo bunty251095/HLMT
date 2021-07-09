@@ -134,6 +134,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_height_weight"
                         android:layout_width="0dp"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_alignParentStart="true"

@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.NavigationConstants
@@ -37,6 +38,10 @@ class LinkHlmtAccountActivity : BaseActivity() {
     }
 
     private fun initialise() {
+        viewModel.hlmt360LoginResponse.observe(this, Observer {
+
+        })
+        isAccountLinked = viewModel.getPreference("ISHLMT").equals("true",false)
         if ( isAccountLinked ) {
             binding.layoutAccLinked.visibility = View.VISIBLE
             binding.layoutAccNotLinked.visibility = View.GONE
@@ -49,7 +54,7 @@ class LinkHlmtAccountActivity : BaseActivity() {
     private fun setClickable() {
 
         binding.btnLinkAccount.setOnClickListener {
-
+            viewModel.fetchHLMT360LoginResponse(binding.edtUsername.text.toString(),binding.edtLoginPassword.text.toString())
         }
 
     }

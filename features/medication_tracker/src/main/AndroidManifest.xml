@@ -9,7 +9,9 @@
 
         <activity
             android:name=".MedicationHomeActivity"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait"
+            >
         </activity>
 
         <receiver

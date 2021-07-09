@@ -265,7 +265,7 @@ class RevUpdateParameterFragment : BaseFragment(){
         })
 
         binding.layoutHistory.setOnClickListener {
-            viewModel.navigateParam(RevUpdateParameterFragmentDirections.actionUpdateFragmentToDetailHistoryFragment())
+            viewModel.navigateParam(RevUpdateParameterFragmentDirections.actionUpdateFragmentToHistoryFragment())
         }
     }
 

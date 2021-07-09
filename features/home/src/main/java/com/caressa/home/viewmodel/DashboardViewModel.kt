@@ -452,34 +452,68 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
             return sharedPref.getString(PreferenceConstants.HEIGHT_PREFERENCE,"cm")!!
         }else if(type.equals("WEIGHT",true)){
             return sharedPref.getString(PreferenceConstants.WEIGHT_PREFERENCE,"kg")!!
+        }else if(type.equals("ISHLMT",true)){
+            return sharedPref.getString(PreferenceConstants.IS_HLMT_USER,"false")!!
         }
         return ""
     }
 
     fun fetchHLMT360LoginResponse(username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
 
-        val requestData = HLMTLoginModel(Gson().toJson(
-            HLMTLoginModel.JSONDataRequest(username = username,password = passwordStr,accountID = accountID,mode = "LINKACCOUNT"), HLMTLoginModel.JSONDataRequest::class.java))
+        if(validateLoginData(username,passwordStr)) {
+            val requestData = HLMTLoginModel(
+                Gson().toJson(
+                    HLMTLoginModel.JSONDataRequest(
+                        username = username,
+                        password = passwordStr,
+                        accountID = accountID,
+                        mode = "LINKACCOUNT"
+                    ), HLMTLoginModel.JSONDataRequest::class.java
+                )
+            )
 
-        _progressBar.value = Event("Validating Username..")
-        _hlmt360LoginResponse.removeSource(hlmt360LoginUserSource)
-        withContext(dispatchers.io){ hlmt360LoginUserSource = homeManagementUseCase.invokeHLMT360LoginResponse(true,requestData)}
-        _hlmt360LoginResponse.addSource(hlmt360LoginUserSource){
-            _hlmt360LoginResponse.value = it.data
-
-            if (it.status == Resource.Status.SUCCESS){
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER,it.data!!.isHLMTUser)
-                sharedPref.edit().putString(PreferenceConstants.HLMT_USERNAME,it.data!!.hlmtUserName)
-                sharedPref.edit().putString(PreferenceConstants.HLMT_USER_ID,it.data!!.HLMTUserID)
-                Timber.i("Data=> "+it)
+            _progressBar.value = Event("Validating Username..")
+            _hlmt360LoginResponse.removeSource(hlmt360LoginUserSource)
+            withContext(dispatchers.io) {
+                hlmt360LoginUserSource =
+                    homeManagementUseCase.invokeHLMT360LoginResponse(true, requestData)
             }
+            _hlmt360LoginResponse.addSource(hlmt360LoginUserSource) {
+                _hlmt360LoginResponse.value = it.data
 
-            if (it.status == Resource.Status.ERROR) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                toastMessage(it.errorMessage)
+                if (it.status == Resource.Status.SUCCESS) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    sharedPref.edit()
+                        .putString(PreferenceConstants.IS_HLMT_USER, it.data!!.isHLMTUser)
+                    sharedPref.edit()
+                        .putString(PreferenceConstants.HLMT_USERNAME, it.data!!.hlmtUserName)
+                    sharedPref.edit()
+                        .putString(PreferenceConstants.HLMT_USER_ID, it.data!!.HLMTUserID)
+                    Timber.i("Data=> " + it)
+                }
+
+                if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    toastMessage(it.errorMessage)
+                }
             }
         }
+    }
+
+    private fun validateLoginData(username: String, passwordStr: String): Boolean {
+        val emailPattern:Regex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
+
+        var isValidate:Boolean = false
+        if (username.isNullOrEmpty() || !username.matches(emailPattern)){
+            toastMessage("Please enter valid user ID.")
+        }else if(passwordStr.isNullOrEmpty()){
+            toastMessage("Please enter valid password.")
+        }else if(passwordStr.length < 6){
+            toastMessage("Please enter valid password.")
+        }else{
+            isValidate = true
+        }
+        return isValidate
     }
 
 

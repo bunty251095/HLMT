@@ -12,10 +12,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.caressa.common.constants.Constants
-import com.caressa.common.utils.CalculateParameters
-import com.caressa.common.utils.DecimalValueFilter
-import com.caressa.common.utils.HeightWeightDialog
-import com.caressa.common.utils.ParameterDataModel
+import com.caressa.common.utils.*
 import com.caressa.model.parameter.ParameterListModel
 import com.caressa.track_parameter.R
 import com.caressa.track_parameter.databinding.ItemInputParametersBinding
@@ -60,6 +57,8 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
             filterList = updateWHRSequence(items)
         }else if (items.get(0).profileCode.equals("BLOODPRESSURE")) {
             filterList = updateBPSequence(items)
+        }else if(items.get(0).profileCode.equals("DIABETIC")){
+            filterList = items.sortedBy { it.description }
         }else{
             filterList = items
 //                items.filter { !it.parameterCode.equals("WBC") && !it.parameterCode.equals("DLC") }
@@ -280,7 +279,13 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                 binding.edtInputValueBmi.isFocusableInTouchMode = false
                 binding.edtInputValueBmi.setHint(binding.edtInputValue.hint)
                 if(viewModel.getPreference("HEIGHT").equals("cm")){
-                    binding.edtInputValueBmi.text = binding.edtInputValue.text
+                    var heightValue:String = ""
+                    if(!binding.edtInputValue.text.toString().isNullOrEmpty() && binding.edtInputValue.text.toString().contains(".",true)){
+                        heightValue = binding.edtInputValue.text.toString().toDouble().toInt().toString()
+                        binding.edtInputValueBmi.setText(heightValue)
+                    }else {
+                        binding.edtInputValueBmi.text = binding.edtInputValue.text
+                    }
                     binding.txtParamUnitBmi.text = binding.txtParamUnit.text
                 }else{
                     var text:String = binding.edtInputValue.text.toString()
@@ -301,7 +306,6 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                         data.finalValue = "0"
                     }else{
                         data.finalValue = dataList.get(adapterPosition).parameterVal!!
-
                     }
                     if(viewModel.getPreference("HEIGHT").equals("cm")) {
                         data.unit = "cm"
