@@ -166,7 +166,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
     fun fetchHLMT360LoginResponse(username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
 
         val requestData = HLMTLoginModel(Gson().toJson(
-            HLMTLoginModel.JSONDataRequest(username = username,password = passwordStr), HLMTLoginModel.JSONDataRequest::class.java))
+            HLMTLoginModel.JSONDataRequest(username = username,password = passwordStr,accountID = "",mode = "LOGIN"), HLMTLoginModel.JSONDataRequest::class.java))
 
         _progressBar.value = Event("Validating Username..")
         _hlmt360LoginResponse.removeSource(hlmt360LoginUserSource)

@@ -1,6 +1,7 @@
 package com.caressa.remote
 
 import com.caressa.model.home.*
+import com.caressa.model.security.HLMTLoginModel
 import com.caressa.model.shr.ListRelativesModel
 import okhttp3.RequestBody
 
@@ -46,4 +47,7 @@ class HomeDatasource( private val defaultService: ApiService, private val encryp
     fun checkAppUpdateResponse( data : CheckAppUpdateModel) = encryptedUserService.checkAppUpdateApi(data)
 
     fun saveCloudMessagingId( data : SaveCloudMessagingIdModel ) = encryptedUserService.saveCloudMessagingId(data)
+
+    fun fetchHLMT360LoginResponse(data : HLMTLoginModel) = encryptedUserService.hlmt360UserLogin(data)
+
 }

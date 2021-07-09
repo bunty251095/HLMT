@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.caressa.common.constants.Constants
+import com.caressa.common.utils.CalculateParameters
 import com.caressa.common.utils.DecimalValueFilter
 import com.caressa.common.utils.HeightWeightDialog
 import com.caressa.common.utils.ParameterDataModel
@@ -272,10 +273,20 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                 }
             })
             if(parameter.parameterCode.equals("HEIGHT")){
-                binding.edtInputValue.isFocusable = false
-                binding.edtInputValue.isCursorVisible = false
-                binding.edtInputValue.isFocusableInTouchMode = false
-                binding.edtInputValue.setOnClickListener {
+                binding.layoutInputNonBmi.visibility = View.GONE
+                binding.layoutHeightWeight.visibility = View.VISIBLE
+                binding.edtInputValueBmi.isFocusable = false
+                binding.edtInputValueBmi.isCursorVisible = false
+                binding.edtInputValueBmi.isFocusableInTouchMode = false
+                binding.edtInputValueBmi.setHint(binding.edtInputValue.hint)
+                if(viewModel.getPreference("HEIGHT").equals("cm")){
+                    binding.edtInputValueBmi.text = binding.edtInputValue.text
+                }else{
+                    var text:String = binding.edtInputValue.text.toString()
+                    if(!text.isNullOrEmpty())
+                    binding.edtInputValueBmi.setText(CalculateParameters.convertCmToFeetInch(text))
+                }
+                binding.edtInputValueBmi.setOnClickListener {
                     val data = ParameterDataModel()
                     data.title = "Height"
                     data.value = " - - "
@@ -300,6 +311,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                         ) {
                             viewModel.updateUserPreference(unit)
                             binding.edtInputValue.setText(height)
+                            binding.edtInputValueBmi.setText(CalculateParameters.convertCmToFeetInch(height))
                         }
                     },"Height", data)
                     heightWeightDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

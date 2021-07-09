@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.caressa.model.entity.*
 import com.caressa.model.home.*
+import com.caressa.model.security.HLMTLoginModel
 import com.caressa.model.security.PhoneExistsModel
 import com.caressa.model.shr.ListRelativesModel
 import com.caressa.repository.*
@@ -181,4 +182,10 @@ class HomeManagementUseCase( private val homeRepository: HomeRepository , privat
         return homeRepository.getUserRelativeDetailsByRelativeId( relativeId )
     }
 
+    suspend fun invokeHLMT360LoginResponse(isForceRefresh : Boolean, data: HLMTLoginModel): LiveData<Resource<HLMTLoginModel.LoginResponse>> {
+        return Transformations.map(
+            homeRepository.hlmt360LoginResponse(isForceRefresh,data)) {
+            it // Place here your specific logic actions
+        }
+    }
 }

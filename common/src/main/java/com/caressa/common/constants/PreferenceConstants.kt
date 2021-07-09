@@ -17,4 +17,6 @@ object PreferenceConstants {
     const val SELECTION_PARAM = "sel_param"
     const val HEIGHT_PREFERENCE = "heightPreference"
     const val WEIGHT_PREFERENCE = "weightPreference"
+    const val IS_HLMT_USER = "isHLMTUser"
+    const val HLMT_USERNAME = "hlmtUsername"
 }
