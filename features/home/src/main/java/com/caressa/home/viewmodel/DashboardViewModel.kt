@@ -357,6 +357,13 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         }
     }
 
+    fun navigateToLinkAccountActivity() {
+        val intent = Intent()
+        intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.LINK_ACCOUNT)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+    }
+
     fun navigateToMyProfileActivity() {
         val intent = Intent()
         intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.MY_PROFILE)

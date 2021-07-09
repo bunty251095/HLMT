@@ -7,6 +7,7 @@ object NavigationConstants {
     const val COMMOM_WEBVIEW = "com.caressa.home.ui.WebViews.CommonWebViewActivity"
     //const val MY_PROFILE = "com.caressa.home.ui.ProfileAndFamilyMember.MyProfileActivity"
     const val MY_PROFILE = "com.caressa.home.ui.ProfileAndFamilyMember.MyProfileNewActivity"
+    const val LINK_ACCOUNT = "com.caressa.home.ui.LinkHlmtAccountActivity"
     const val FAMILY_PROFILE = "com.caressa.home.ui.ProfileAndFamilyMember.FamilyProfileActivity"
     const val FAMILY_DOCTOR = "com.caressa.home.ui.FamilyDoctor.FamilyDoctorListActivity"
     const val FAMILY_DOCTOR_ADD_UPDATE = "com.caressa.home.ui.FamilyDoctor.FamilyDoctorAddOrUpdateActivity"

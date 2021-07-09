@@ -26,12 +26,10 @@
     <string name="MSG_USER_LESS_THAN_18_TO_ACCESS_HRA">Do we have your correct date of birth? if not, please update.Please note that to access Health Risk Assessment, you must be at least 18 years old.
     </string>
     <string name="EMAIL_OR_PHONE">Email Or Phone</string>
-    <string name="PASSWORD">Password</string>
     <string name="CONFIRM_PASSWORD">Confirm Password</string>
     <string name="OTP">OTP</string>
     <string name="EMAIL_PHONE">Registered Mobile Number</string>
     <string name="LOG_IN">Log In</string>
-    <string name="LOGIN">Login</string>
     <string name="SIGN_IN">Sign In</string>
     <string name="SIGN_UP">Sign Up</string>
     <string name="FORGOT_PASSWORD">Forgot Password?</string>
