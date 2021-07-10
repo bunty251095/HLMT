@@ -489,7 +489,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
 
                 if (it.status == Resource.Status.SUCCESS) {
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
-                    if(it.data != null && !it.data.HLMTUserID.isNullOrEmpty()) {
+                    if(it.data != null && !it.data!!.HLMTUserID.isNullOrEmpty()) {
                         sharedPref.edit()
                             .putString(PreferenceConstants.IS_HLMT_USER, it.data!!.isHLMTUser)
                             .apply()
