@@ -128,7 +128,7 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
             val mobile = binding.edtMemberMobile.text.toString()
             val email = binding.edtMemberEmail.text.toString()
 
-            if (Utilities.isNullOrEmpty(name)) {
+            if ( !Validation.isValidName(name) ) {
                 binding.tilEdtMemberName.isErrorEnabled = true
                 binding.tilEdtMemberName.error = "Please Enter Valid Name"
             }

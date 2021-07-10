@@ -168,7 +168,7 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
                 val email = binding.edtMemberEmail.text.toString().trim { it <= ' ' }
                 val relativeDob = dateOfBirth
 
-                if (Utilities.isNullOrEmpty(username)) {
+                if ( !Validation.isValidName(username) ) {
                     binding.tilEdtMemberName.isErrorEnabled = true
                     binding.tilEdtMemberName.error = "Please Enter Valid Name"
                 }
