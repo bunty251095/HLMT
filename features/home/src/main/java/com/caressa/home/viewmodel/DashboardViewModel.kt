@@ -489,10 +489,23 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
 
                 if (it.status == Resource.Status.SUCCESS) {
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
-                    sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER, it.data!!.isHLMTUser).apply()
-                    sharedPref.edit().putString(PreferenceConstants.HLMT_USERNAME, it.data!!.hlmtUserName).apply()
-                    sharedPref.edit().putString(PreferenceConstants.HLMT_USER_ID, it.data!!.HLMTUserID).apply()
-                    sharedPref.edit().putString(PreferenceConstants.ACCOUNT_LINK_STATUS, it.data!!.accountLinkStatus).apply()
+                    if(it.data != null && !it.data.HLMTUserID.isNullOrEmpty()) {
+                        sharedPref.edit()
+                            .putString(PreferenceConstants.IS_HLMT_USER, it.data!!.isHLMTUser)
+                            .apply()
+                        sharedPref.edit()
+                            .putString(PreferenceConstants.HLMT_USERNAME, it.data!!.hlmtUserName)
+                            .apply()
+                        sharedPref.edit()
+                            .putString(PreferenceConstants.HLMT_USER_ID, it.data!!.HLMTUserID)
+                            .apply()
+                        sharedPref.edit().putString(
+                            PreferenceConstants.ACCOUNT_LINK_STATUS,
+                            it.data!!.accountLinkStatus
+                        ).apply()
+                    }else{
+                        toastMessage("Unable to connect, please try again")
+                    }
                     Timber.i("Data=> " + it)
                 }
 
