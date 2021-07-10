@@ -116,6 +116,8 @@ data class LoginModel(@SerializedName("JSONData")
         var pROFILEIMGPATH: String = "",
         @SerializedName("IsHLMTUser")
         var IsHLMTUser: String = "",
+        @SerializedName("AccountLinkStatus")
+        var accountLinkStatus: String = "",
         @SerializedName("HLMTUserID")
         var HLMTUserID: String = "",
         @SerializedName("HLMTUserName")

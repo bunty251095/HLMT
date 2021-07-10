@@ -213,6 +213,7 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
         drawerLayout.closeDrawers()
         when (item.id) {
             DataHandler.NavDrawer.MY_PRO -> viewModel.navigateToMyProfileActivityWithStoragePermission(this,permissionListener)
+//            DataHandler.NavDrawer.LINK -> Utilities.toastMessageShort(this,"Coming Soon..")
             DataHandler.NavDrawer.LINK -> viewModel.navigateToLinkAccountActivity()
             DataHandler.NavDrawer.FAMILY_PRO -> viewModel.navigateToFamilyProfileActivity()
             DataHandler.NavDrawer.FAMILY_DOCTOR -> viewModel.navigateToFamilyDoctorsActivity()

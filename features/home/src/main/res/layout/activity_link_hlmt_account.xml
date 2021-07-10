@@ -217,7 +217,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/lbl_password_changed"
+                        android:id="@+id/lbl_account_link"
                         style="@style/CustomTextview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

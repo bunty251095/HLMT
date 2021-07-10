@@ -20,4 +20,5 @@ object PreferenceConstants {
     const val IS_HLMT_USER = "isHLMTUser"
     const val HLMT_USERNAME = "hlmtUsername"
     const val HLMT_USER_ID= "hlmtUserId"
+    const val ACCOUNT_LINK_STATUS= "AccountLinkStatus"
 }

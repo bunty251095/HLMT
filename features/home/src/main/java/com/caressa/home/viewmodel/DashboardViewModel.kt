@@ -454,6 +454,12 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
             return sharedPref.getString(PreferenceConstants.WEIGHT_PREFERENCE,"kg")!!
         }else if(type.equals("ISHLMT",true)){
             return sharedPref.getString(PreferenceConstants.IS_HLMT_USER,"false")!!
+        }else if(type.equals(PreferenceConstants.HLMT_USER_ID,true)){
+            return sharedPref.getString(PreferenceConstants.HLMT_USER_ID,"")!!
+        }else if(type.equals(PreferenceConstants.ACCOUNT_LINK_STATUS,true)){
+            return sharedPref.getString(PreferenceConstants.ACCOUNT_LINK_STATUS,"false")!!
+        }else if(type.equals(PreferenceConstants.HLMT_USERNAME,true)){
+            return sharedPref.getString(PreferenceConstants.HLMT_USERNAME,"")!!
         }
         return ""
     }
@@ -483,12 +489,10 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
 
                 if (it.status == Resource.Status.SUCCESS) {
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
-                    sharedPref.edit()
-                        .putString(PreferenceConstants.IS_HLMT_USER, it.data!!.isHLMTUser)
-                    sharedPref.edit()
-                        .putString(PreferenceConstants.HLMT_USERNAME, it.data!!.hlmtUserName)
-                    sharedPref.edit()
-                        .putString(PreferenceConstants.HLMT_USER_ID, it.data!!.HLMTUserID)
+                    sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER, it.data!!.isHLMTUser).apply()
+                    sharedPref.edit().putString(PreferenceConstants.HLMT_USERNAME, it.data!!.hlmtUserName).apply()
+                    sharedPref.edit().putString(PreferenceConstants.HLMT_USER_ID, it.data!!.HLMTUserID).apply()
+                    sharedPref.edit().putString(PreferenceConstants.ACCOUNT_LINK_STATUS, it.data!!.accountLinkStatus).apply()
                     Timber.i("Data=> " + it)
                 }
 

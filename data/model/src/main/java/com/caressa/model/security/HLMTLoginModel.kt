@@ -39,7 +39,10 @@ class HLMTLoginModel(@SerializedName("JSONData")
     var isHLMTUser: String? = "",
     @SerializedName("HLMTUserName")
     @Expose
-    var hlmtUserName: String? = ""
+    var hlmtUserName: String? = "",
+        @SerializedName("AccountLinkStatus")
+        @Expose
+        var accountLinkStatus: String? = ""
 
     )
 
