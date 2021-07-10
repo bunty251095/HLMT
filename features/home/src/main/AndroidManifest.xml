@@ -8,13 +8,27 @@
     <application
         android:largeHeap="true"
         android:screenOrientation="portrait">
-        <activity android:name=".ui.LinkHlmtAccountActivity"/>
-        <activity android:name=".ui.PasswordChangeActivity" />
-        <activity android:name=".ui.ProfileAndFamilyMember.MyProfileNewActivity" />
-        <activity android:name=".ui.FeedbackActivity" />
-        <activity android:name=".ui.SettingsActivity" />
-        <activity android:name=".ui.FamilyDoctor.FamilyDoctorAddOrUpdateActivity" />
-        <activity android:name=".ui.FamilyDoctor.FamilyDoctorListActivity" />
+        <activity android:name=".ui.LinkHlmtAccountActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.PasswordChangeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.ProfileAndFamilyMember.MyProfileNewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.FeedbackActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.FamilyDoctor.FamilyDoctorAddOrUpdateActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.FamilyDoctor.FamilyDoctorListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
             android:name=".ui.ContactUsActivity"
             android:screenOrientation="sensorPortrait" />

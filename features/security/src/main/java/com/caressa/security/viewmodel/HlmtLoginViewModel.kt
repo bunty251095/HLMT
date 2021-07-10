@@ -140,6 +140,10 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                 sharedPref.edit().putString(PreferenceConstants.GENDER, if(loginData.gender.equals("Male",true))"0" else "1").apply()
                 sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE, Constants.SELF_RELATIONSHIP_CODE).apply()
                 sharedPref.edit().putString(PreferenceConstants.DOB,loginData.dateOfBirth).apply()
+                sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER,loginData.IsHLMTUser).apply()
+                sharedPref.edit().putString(PreferenceConstants.HLMT_USER_ID,loginData.HLMTUserID).apply()
+                sharedPref.edit().putString(PreferenceConstants.HLMT_USERNAME,loginData.HLMTUserName).apply()
+                sharedPref.edit().putString(PreferenceConstants.ACCOUNT_LINK_STATUS,loginData.accountLinkStatus).apply()
 
                 val pid = loginData?.personID?.toDouble()?.toInt()
                 Timber.i("Person Id => "+pid)
@@ -176,10 +180,27 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
 
             if (it.status == Resource.Status.SUCCESS){
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if (!isAccountExist){
-                    navigate(HlmtLoginFragmentDirections.actionLoginFragmentToUserDetailFragment(hlmtEmployeeID = username, hlmtUserID = it.data!!.HLMTUserID.toString(),loginStatus = it.data!!.loginStatus.toString(),isRegister = "true",mobileNo = ""))
+                if(it.data!= null && !it.data!!.HLMTUserID.isNullOrEmpty()) {
+                    if (!isAccountExist) {
+                        navigate(
+                            HlmtLoginFragmentDirections.actionLoginFragmentToUserDetailFragment(
+                                hlmtEmployeeID = username,
+                                hlmtUserID = it.data!!.HLMTUserID.toString(),
+                                loginStatus = it.data!!.loginStatus.toString(),
+                                isRegister = "true",
+                                mobileNo = ""
+                            )
+                        )
+                    } else {
+                        fetchLoginResponse(
+                            hlmtLoginStatus = it.data!!.loginStatus.toString(),
+                            hlmtUserId = it.data!!.HLMTUserID.toString(),
+                            hlmtEmpId = username,
+                            username = ""
+                        )
+                    }
                 }else{
-                    fetchLoginResponse(hlmtLoginStatus = it.data!!.loginStatus.toString(),hlmtUserId = it.data!!.HLMTUserID.toString(),hlmtEmpId = username,username = "")
+                    _toastMessage.value = Event("Unable to connect, please try again")
                 }
                 Timber.i("Data=> "+it)
             }
@@ -194,7 +215,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
     fun fetchRegistrationResponse(name: String = "", phoneNumber: String, passwordStr: String = "",gender:String,dob:String,emailStr: String,fName:String,imgPath:String,
     hlmtUserId:String="",hlmtLoginStatus:String="",hlmtEmpId:String="") = viewModelScope.launch(dispatchers.main){
 
-        if(validateData(name,phoneNumber,emailStr,dob,hlmtEmpId)) {
+        if(validateData(name.trim(),phoneNumber.trim(),emailStr.trim(),dob.trim(),hlmtEmpId.trim())) {
             val requestData = LoginModel(
                 Gson().toJson(
                     LoginModel.JSONDataRequest(
@@ -223,41 +244,76 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                 if (it.status == Resource.Status.SUCCESS) {
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
                     Timber.i("Data=> " + it)
-                    var loginData = it.data?.response?.loginData!!
-                    sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN, true).apply()
-                    sharedPref.edit().putString(PreferenceConstants.EMAIL, loginData.emailAddress)
-                        .apply()
-                    sharedPref.edit().putString(PreferenceConstants.PHONE, loginData.phoneNumber)
-                        .apply()
-                    sharedPref.edit().putString(PreferenceConstants.TOKEN, loginData.context)
-                        .apply()
-                    sharedPref.edit()
-                        .putString(PreferenceConstants.ACCOUNTID, loginData.accountID.toString())
-                        .apply()
-                    sharedPref.edit().putString(PreferenceConstants.FIRSTNAME, loginData.name)
-                        .apply()
-                    sharedPref.edit().putString(PreferenceConstants.DOB,loginData.dateOfBirth).apply()
-                    sharedPref.edit().putString(PreferenceConstants.GENDER, "1").apply()
-                    sharedPref.edit().putString(
-                        PreferenceConstants.RELATIONSHIPCODE,
-                        Constants.SELF_RELATIONSHIP_CODE
-                    ).apply()
+                    if(it.data != null) {
+                        var loginData = it.data?.response?.loginData!!
+                        sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN, true).apply()
+                        sharedPref.edit()
+                            .putString(PreferenceConstants.EMAIL, loginData.emailAddress)
+                            .apply()
+                        sharedPref.edit()
+                            .putString(PreferenceConstants.PHONE, loginData.phoneNumber)
+                            .apply()
+                        sharedPref.edit().putString(PreferenceConstants.TOKEN, loginData.context)
+                            .apply()
+                        sharedPref.edit()
+                            .putString(
+                                PreferenceConstants.ACCOUNTID,
+                                loginData.accountID.toString()
+                            )
+                            .apply()
+                        sharedPref.edit().putString(PreferenceConstants.FIRSTNAME, loginData.name)
+                            .apply()
+                        sharedPref.edit().putString(PreferenceConstants.DOB, loginData.dateOfBirth)
+                            .apply()
+                        sharedPref.edit().putString(PreferenceConstants.GENDER, "1").apply()
+                        sharedPref.edit().putString(
+                            PreferenceConstants.RELATIONSHIPCODE,
+                            Constants.SELF_RELATIONSHIP_CODE
+                        ).apply()
+                        sharedPref.edit()
+                            .putString(PreferenceConstants.IS_HLMT_USER, loginData.IsHLMTUser)
+                            .apply()
+                        sharedPref.edit()
+                            .putString(PreferenceConstants.ACCOUNT_LINK_STATUS, loginData.IsHLMTUser)
+                            .apply()
+                        sharedPref.edit()
+                            .putString(PreferenceConstants.ACCOUNT_LINK_STATUS, loginData.accountLinkStatus)
+                            .apply()
+                        sharedPref.edit()
+                            .putString(PreferenceConstants.HLMT_USER_ID, loginData.HLMTUserID)
+                            .apply()
+                        sharedPref.edit()
+                            .putString(PreferenceConstants.HLMT_USERNAME, loginData.HLMTUserName)
+                            .apply()
 
-                    val pid = loginData?.personID?.toDouble()?.toInt()
-                    Timber.i("Person Id => " + pid)
-                    sharedPref.edit().putString(PreferenceConstants.PERSONID, pid.toString())
-                        .apply()
-                    sharedPref.edit().putString(PreferenceConstants.ADMIN_PERSON_ID, pid.toString())
-                        .apply()
-                    // Added by Rohit
-                    //RealPathUtil.creatingLocalDirctories()
-                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_REGISTRATION_SUCCESSFUL_EVENT,false)
-                    saveUserData(loginData)
-                    if ( !Utilities.isNullOrEmpty(fName)
-                        && !Utilities.isNullOrEmpty(imgPath)) {
-                        callUploadProfileImageApi(pid.toString(),loginData.context,fName,imgPath)
-                    } else {
-                        navigate(UserDetailsFragmentDirections.actionUserDetailsToHomeScreen())
+                        val pid = loginData?.personID?.toDouble()?.toInt()
+                        Timber.i("Person Id => " + pid)
+                        sharedPref.edit().putString(PreferenceConstants.PERSONID, pid.toString())
+                            .apply()
+                        sharedPref.edit()
+                            .putString(PreferenceConstants.ADMIN_PERSON_ID, pid.toString())
+                            .apply()
+                        // Added by Rohit
+                        //RealPathUtil.creatingLocalDirctories()
+                        FirebaseHelper.logCustomFirebaseEvent(
+                            FirebaseConstants.NON_HLMT_REGISTRATION_SUCCESSFUL_EVENT,
+                            false
+                        )
+                        saveUserData(loginData)
+                        if (!Utilities.isNullOrEmpty(fName)
+                            && !Utilities.isNullOrEmpty(imgPath)
+                        ) {
+                            callUploadProfileImageApi(
+                                pid.toString(),
+                                loginData.context,
+                                fName,
+                                imgPath
+                            )
+                        } else {
+                            navigate(UserDetailsFragmentDirections.actionUserDetailsToHomeScreen())
+                        }
+                    }else{
+                        _toastMessage.value = Event("Unable to connect, please try again")
                     }
                 }else{
                     FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_REGISTRATION_FAIL_EVENT,false)
@@ -340,9 +396,10 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
     ): Boolean {
         var isValid = false
         val emailPattern:Regex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
+        val namePattern:Regex = "^[a-zA-Z\\s]*\$".toRegex()
 
-        if (name.isNullOrEmpty()){
-            toastMessage("Please Enter Name.")
+        if (name.isNullOrEmpty() || name.length<=3 || !name.matches(namePattern)){
+            toastMessage("Please Enter Valid Name.")
         }else if((phoneNumber.isNullOrEmpty() || phoneNumber.length < 10) && hlmtEmpId.isEmpty()){
             toastMessage("Invalid Phone Number")
         }else if(emailStr.isNullOrEmpty() || !emailStr.matches(emailPattern)){
@@ -462,6 +519,10 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
     fun updateUserPreference() {
         sharedPref.edit().putString(PreferenceConstants.HEIGHT_PREFERENCE, "cm").apply()
         sharedPref.edit().putString(PreferenceConstants.WEIGHT_PREFERENCE, "kg").apply()
+        sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER,"false").apply()
+        sharedPref.edit().putString(PreferenceConstants.HLMT_USER_ID,"").apply()
+        sharedPref.edit().putString(PreferenceConstants.HLMT_USERNAME,"").apply()
+        sharedPref.edit().putString(PreferenceConstants.ACCOUNT_LINK_STATUS,"false").apply()
     }
 
 }

@@ -154,7 +154,7 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
                         }
                         if (item.parameterCode.equals("HEIGHT",true)){
                             if(viewModel.getPreference("HEIGHT").equals("cm")){
-                                binding.txtHeightValue.text = "${item.value.toString()} cm"
+                                binding.txtHeightValue.text = "${item.value.toString().toDouble().toInt()} cm"
                             }else{
                                 binding.txtHeightValue.text = CalculateParameters.convertCmToFeetInch(item.value.toString())
                             }

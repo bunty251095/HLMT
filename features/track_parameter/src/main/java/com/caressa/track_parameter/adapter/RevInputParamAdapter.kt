@@ -12,10 +12,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.caressa.common.constants.Constants
-import com.caressa.common.utils.CalculateParameters
-import com.caressa.common.utils.DecimalValueFilter
-import com.caressa.common.utils.HeightWeightDialog
-import com.caressa.common.utils.ParameterDataModel
+import com.caressa.common.utils.*
 import com.caressa.model.parameter.ParameterListModel
 import com.caressa.track_parameter.R
 import com.caressa.track_parameter.databinding.ItemInputParametersBinding
@@ -60,6 +57,8 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
             filterList = updateWHRSequence(items)
         }else if (items.get(0).profileCode.equals("BLOODPRESSURE")) {
             filterList = updateBPSequence(items)
+        }else if(items.get(0).profileCode.equals("DIABETIC")){
+            filterList = items.sortedBy { it.description }
         }else{
             filterList = items
 //                items.filter { !it.parameterCode.equals("WBC") && !it.parameterCode.equals("DLC") }
@@ -280,11 +279,24 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                 binding.edtInputValueBmi.isFocusableInTouchMode = false
                 binding.edtInputValueBmi.setHint(binding.edtInputValue.hint)
                 if(viewModel.getPreference("HEIGHT").equals("cm")){
-                    binding.edtInputValueBmi.text = binding.edtInputValue.text
+                    var heightValue:String = ""
+                    if(!binding.edtInputValue.text.toString().isNullOrEmpty() && binding.edtInputValue.text.toString().contains(".",true)){
+                        heightValue = binding.edtInputValue.text.toString().toDouble().toInt().toString()
+                        binding.edtInputValueBmi.setText(heightValue)
+                    }else {
+                        binding.edtInputValueBmi.text = binding.edtInputValue.text
+                    }
+                    binding.txtParamUnitBmi.text = binding.txtParamUnit.text
                 }else{
                     var text:String = binding.edtInputValue.text.toString()
-                    if(!text.isNullOrEmpty())
-                    binding.edtInputValueBmi.setText(CalculateParameters.convertCmToFeetInch(text))
+                    if(!text.isNullOrEmpty()) {
+                        binding.edtInputValueBmi.setText(
+                            CalculateParameters.convertCmToFeetInch(
+                                text
+                            )
+                        )
+                        binding.txtParamUnitBmi.text = ""
+                    }
                 }
                 binding.edtInputValueBmi.setOnClickListener {
                     val data = ParameterDataModel()
@@ -294,9 +306,12 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                         data.finalValue = "0"
                     }else{
                         data.finalValue = dataList.get(adapterPosition).parameterVal!!
-
                     }
+                    if(viewModel.getPreference("HEIGHT").equals("cm")) {
                         data.unit = "cm"
+                    }else{
+                        data.unit = "Feet/inch"
+                    }
 //                        data.unit = "Feet/inch"
 //                        data.unit = "lbs"
 //                        data.unit = "Kg"
@@ -311,7 +326,17 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                         ) {
                             viewModel.updateUserPreference(unit)
                             binding.edtInputValue.setText(height)
-                            binding.edtInputValueBmi.setText(CalculateParameters.convertCmToFeetInch(height))
+                            if(unit.equals("cm",true)) {
+                                binding.edtInputValueBmi.setText(height)
+                                binding.txtParamUnitBmi.setText("cm")
+                            }else{
+                                binding.edtInputValueBmi.setText(
+                                    CalculateParameters.convertCmToFeetInch(
+                                        height
+                                    )
+                                )
+                                binding.txtParamUnitBmi.setText("")
+                            }
                         }
                     },"Height", data)
                     heightWeightDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -320,6 +345,74 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
             }
 
             if(parameter.parameterCode.equals("WEIGHT")){
+                binding.layoutInputNonBmi.visibility = View.GONE
+                binding.layoutHeightWeight.visibility = View.VISIBLE
+                binding.edtInputValueBmi.isFocusable = false
+                binding.edtInputValueBmi.isCursorVisible = false
+                binding.edtInputValueBmi.isFocusableInTouchMode = false
+                binding.edtInputValueBmi.setHint(binding.edtInputValue.hint)
+                if(viewModel.getPreference("WEIGHT").equals("kg")){
+                    binding.edtInputValueBmi.text = binding.edtInputValue.text
+                    binding.txtParamUnitBmi.text = binding.txtParamUnit.text
+                }else{
+                    var text:String = binding.edtInputValue.text.toString()
+                    if(!text.isNullOrEmpty()) {
+                        binding.edtInputValueBmi.setText(
+                            CalculateParameters.convertKgToLbs(
+                                text
+                            )
+                        )
+                        binding.txtParamUnitBmi.text = "lbs"
+                    }
+                }
+                binding.edtInputValueBmi.setOnClickListener {
+                    val data = ParameterDataModel()
+                    data.title = "Weight"
+                    data.value = " - - "
+                    if (dataList.get(adapterPosition).parameterVal.isNullOrEmpty()) {
+                        data.finalValue = "0"
+                    }else{
+                        data.finalValue = dataList.get(adapterPosition).parameterVal!!
+
+                    }
+                    if(viewModel.getPreference("WEIGHT").equals("kg")) {
+                        data.unit = "kg"
+                    }else{
+                        data.unit = "lbs"
+                    }
+//                        data.unit = "Feet/inch"
+//                        data.unit = "lbs"
+//                        data.unit = "Kg"
+                    data.code = "WEIGHT"
+                    val heightWeightDialog = HeightWeightDialog(binding.edtInputValue.context,object:HeightWeightDialog.OnDialogValueListener {
+                        override fun onDialogValueListener(
+                            dialogType: String,
+                            height: String,
+                            weight: String,
+                            unit: String,
+                            visibleValue: String
+                        ) {
+                            viewModel.updateUserPreference(unit)
+                            binding.edtInputValue.setText(weight)
+                            if(unit.equals("kg",true)) {
+                                binding.edtInputValueBmi.setText(weight)
+                                binding.txtParamUnitBmi.setText("kg")
+                            }else{
+                                binding.edtInputValueBmi.setText(
+                                    CalculateParameters.convertKgToLbs(
+                                        weight
+                                    )
+                                )
+                                binding.txtParamUnitBmi.setText("lbs")
+                            }
+                        }
+                    },"Weight", data)
+                    heightWeightDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    heightWeightDialog.show()
+                }
+            }
+
+            /*if(parameter.parameterCode.equals("WEIGHT")){
                 binding.edtInputValue.isFocusable = false
                 binding.edtInputValue.isCursorVisible = false
                 binding.edtInputValue.isFocusableInTouchMode = false
@@ -349,7 +442,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                     heightWeightDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                     heightWeightDialog.show()
                 }
-            }
+            }*/
         }
 
         private fun getHint(parameter: ParameterListModel.InputParameterModel): String {
