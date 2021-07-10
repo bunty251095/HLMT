@@ -278,6 +278,7 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
         binding.txtGoal.text = item.totalGoal.toString()
 
         todayStepCount = item.stepsCount
+        todayStepGoal = item.totalGoal
         binding.txtStepCount.text = todayStepCount.toString()
 
         val progress = ( todayStepCount * 100) / todayStepGoal

@@ -88,15 +88,6 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
 
             override fun afterTextChanged(editable: Editable) {
                 if (!editable.toString().equals("", ignoreCase = true)) {
-                    if (!Validation.isValidEmail(editable.toString())) {
-                        binding.tilEdtAlternateEmail.isErrorEnabled = true
-                        binding.tilEdtAlternateEmail.error = "Please Enter Valid Email Address"
-                    } else {
-                        binding.tilEdtAlternateEmail.error = null
-                        binding.tilEdtAlternateEmail.isErrorEnabled = false
-                    }
-                }
-                if (editable.toString().equals("", ignoreCase = true)) {
                     binding.tilEdtAlternateEmail.error = null
                     binding.tilEdtAlternateEmail.isErrorEnabled = false
                 }
@@ -109,16 +100,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
 
             override fun afterTextChanged(editable: Editable) {
-                if (editable.toString().length > 3) {
-                    if (!Validation.isValidPhoneNumber(editable.toString())) {
-                        binding.tilEdtAlternateNumber.isErrorEnabled = true
-                        binding.tilEdtAlternateNumber.error = "Please Enter valid Phone Number"
-                    } else {
-                        binding.tilEdtAlternateNumber.error = null
-                        binding.tilEdtAlternateNumber.isErrorEnabled = false
-                    }
-                }
-                if (editable.toString().equals("", ignoreCase = true)) {
+                if (!editable.toString().equals("", ignoreCase = true)) {
                     binding.tilEdtAlternateNumber.error = null
                     binding.tilEdtAlternateNumber.isErrorEnabled = false
                 }
@@ -243,7 +225,6 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
     }
 
     private fun validateAndUpdate() {
-        println("Inside 1")
         val username = binding.edtUsername.text.toString().trim { it <= ' ' }
         val newEmail = binding.edtEmail.text.toString().trim { it <= ' ' }
         val newAlternateEmail = binding.edtAlternateEmail.text.toString().trim { it <= ' ' }
@@ -251,7 +232,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         val newAlternateNumber = binding.edtAlternateNumber.text.toString().trim { it <= ' ' }
         val address = binding.edtAddress.text.toString().trim { it <= ' ' }
 
-        if (Utilities.isNullOrEmpty(username)) {
+        if ( !Validation.isValidName(username) ) {
             binding.tilEdtUsername.isErrorEnabled = true
             binding.tilEdtUsername.error = "Please Enter Valid Username"
         }
@@ -274,7 +255,6 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
 
         if (!binding.tilEdtUsername.isErrorEnabled && !binding.tilEdtAlternateEmail.isErrorEnabled
             && !binding.tilEdtAlternateNumber.isErrorEnabled && !binding.tilEdtAddress.isErrorEnabled) {
-            println("Inside 2")
             //Helper.showMessage(getContext(),"Details Updated");
             val newUserDetails = UpdateUserDetailsModel.PersonRequest(
                 id = user.id,

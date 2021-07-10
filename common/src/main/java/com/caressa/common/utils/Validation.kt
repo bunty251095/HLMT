@@ -26,7 +26,9 @@ object Validation {
             "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
         pattern = Pattern.compile(EMAIL_PATTERN)
         matcher = pattern.matcher(email)
-        return matcher.matches()
+        val isValid = matcher.matches()
+        Timber.d("isValidEmail--->$isValid")
+        return isValid
     }
 
     /**
@@ -37,20 +39,26 @@ object Validation {
      */
     fun isValidName(name: String): Boolean {
         var isValidName = false
-        //		final String Regex = "[a-zA-Z]+";
-        val Regex = "^[a-zA-Z][a-zA-Z ]+$".toRegex()
-        isValidName = if (name.matches(Regex)) {
-            true
-        } else {
-            false
+        val namePattern : Regex = "^[a-zA-Z\\s]*\$".toRegex()
+        if ( !Utilities.isNullOrEmpty(name) && name.length > 3 && name.matches(namePattern)) {
+            isValidName = true
         }
         return isValidName
     }
+/*    fun isValidName(name: String): Boolean {
+        var isValidName = false
+        //		final String Regex = "[a-zA-Z]+";
+        val Regex = "^[a-zA-Z][a-zA-Z ]+$".toRegex()
+        isValidName = name.matches(Regex)
+        return isValidName
+    }*/
 
     fun isValidPhoneNumber(phoneNumber: String): Boolean {
         val Regex = "[^\\d]"
         val PhoneDigits = phoneNumber.replace(Regex.toRegex(), "")
-        return PhoneDigits.length > 7
+        val isValid = PhoneDigits.length > 7
+        Timber.d("isValidPhoneNumber--->$isValid")
+        return isValid
         /*String Regex = "[^\\d]";
         String PhoneDigits = phoneNumber.replaceAll(Regex, "");
 		return (PhoneDigits.length()!=10);*/
