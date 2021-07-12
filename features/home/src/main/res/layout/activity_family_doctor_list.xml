@@ -62,7 +62,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
+<!--    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_no_doctors"
         style="@style/VivantTitle"
         android:visibility="gone"
@@ -71,7 +71,40 @@
         android:gravity="center"
         android:padding="@dimen/_5sdp"
         android:text="@string/NO_DOCTORS"
-        android:textSize="@dimen/_17sdp"/>
+        android:textSize="@dimen/_17sdp"/>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_no_doctors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_no_doctors"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:src="@drawable/img_no_doctor"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/VivantTitle"
+            android:text="@string/NO_DOCTORS"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_13sdp"
+            app:layout_constraintTop_toBottomOf="@+id/img_no_doctors"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.caressa.common.view.ArcImageView
         android:id="@+id/btn_add_doctor"

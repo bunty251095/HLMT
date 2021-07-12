@@ -268,7 +268,13 @@ class MedicineDashboardFragment : BaseFragment(),MedCalenderAdapter.OnDateClickL
     fun showUpdateMedicineAlertDialog( medicineDetails : MedicineListByDayModel.Medication ) {
         dialogClickType = "Alert"
         medicine = medicineDetails
-        val medName = medicineDetails.drug.name + " - " + medicineDetails.drug.strength
+        //val medName = medicineDetails.drug.name + " - " + medicineDetails.drug.strength
+        val medName = if ( !Utilities.isNullOrEmpty(medicineDetails.drug.strength) ) {
+            medicineDetails.drug.name + " - " + medicineDetails.drug.strength
+        } else {
+            medicineDetails.drug.name
+        }
+
         val toDo: String = if (medicine.notification!!.setAlert!!) {
             " " + resources.getString(R.string.ENABLE) + " "
         } else {

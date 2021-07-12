@@ -211,6 +211,12 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
     private fun setClickable() {
 
         binding.rgPrevious.setOnCheckedChangeListener { _, _ ->
+            Utilities.hideKeyboard(requireActivity())
+            viewModel.removeSource(qCode)
+            viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() - 1)
+        }
+
+/*        binding.rgPrevious.setOnCheckedChangeListener { _, _ ->
             if ( !Utilities.isNullOrEmpty(binding.layRandomBs.getValue()) ||
                 !Utilities.isNullOrEmpty(binding.layFastingBs.getValue()) ||
                 !Utilities.isNullOrEmpty(binding.layPostMealBs.getValue()) ||
@@ -229,7 +235,7 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
                 viewModel.removeSource(qCode)
                 viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() - 1)
             }
-        }
+        }*/
 
         binding.btnNext.setOnClickListener {
             if ( validateValuesAndSaveData() ) {

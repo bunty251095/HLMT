@@ -48,11 +48,11 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/vivant_v" />
+            android:resource="@drawable/img_hlmt_logo_notification" />
 
-        <meta-data
+<!--        <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorPrimary" />
+            android:resource="@color/colorPrimary" />-->
 
     </application>
 

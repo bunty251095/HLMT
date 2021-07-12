@@ -345,7 +345,12 @@ class StepsDetailFragment : BaseFragment(), KoinComponent {
 
             val leftAxis = binding.graphMonthly.axisLeft
             leftAxis.removeAllLimitLines() // reset all limit lines to avoid overlapping lines
-            val axisMaximum = if (maxValue < 5000) maxValue + 500 else maxValue + 1000
+            //val axisMaximum = if (maxValue < 5000) maxValue + 500 else maxValue + 1000
+            val axisMaximum = if (maxValue < 10000) {
+                maxValue + 5000
+            } else {
+                maxValue + 10000
+            }
             leftAxis.axisMaximum = axisMaximum.toFloat()
             leftAxis.isEnabled = false
             leftAxis.setDrawZeroLine(false)

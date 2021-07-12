@@ -213,7 +213,7 @@ class MedicationTrackerHelper( val context: Context) {
             val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
             val customNotification = NotificationCompat.Builder(context,channelId)
-                .setSmallIcon(R.drawable.vivant_v_green)
+                .setSmallIcon(R.drawable.img_hlmt_logo_notification)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
                 .setAutoCancel(true) //.setDefaults(Notification.DEFAULT_SOUND)

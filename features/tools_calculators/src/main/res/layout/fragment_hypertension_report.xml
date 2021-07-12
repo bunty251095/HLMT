@@ -339,7 +339,7 @@
                     android:layout_height="@dimen/_32sdp"
                     android:background="@drawable/circle_bg"
                     android:backgroundTint="@color/vivant_orange_yellow"
-                    android:padding="@dimen/_5sdp"
+                    android:padding="@dimen/_7sdp"
                     android:tint="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -382,11 +382,11 @@
                     android:layout_width="@dimen/_32sdp"
                     android:layout_height="@dimen/_32sdp"
                     android:background="@drawable/circle_bg"
-                    android:padding="@dimen/_5sdp"
+                    android:padding="@dimen/_7sdp"
                     android:tint="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/img_bp" />
+                    app:srcCompat="@drawable/img_blood_pressure" />
 
                 <com.caressa.common.view.ArcTextView
                     android:id="@+id/txt_bp_title"

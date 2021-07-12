@@ -41,6 +41,16 @@ class ExpandedParametersAdapter(private val mContext: Context, private val fragm
             }
             holder.bindTo( parameter,color )
 
+            if( parameter.profileCode.equals("URINE",ignoreCase = true) ) {
+                if ( !Utilities.isNullOrEmpty(parameter.textValue) ) {
+                    holder.txtParamValue.text = parameter.textValue
+                }
+            } else {
+                if ( !Utilities.isNullOrEmpty(parameter.value.toString()) ) {
+                    holder.txtParamValue.text = parameter.value.toString()
+                }
+            }
+
             holder.layoutParent.setOnTouchListener { v: View, event: MotionEvent ->
                 if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_MOVE) {
                     v.setBackgroundColor(appColorHelper.primaryColor())
