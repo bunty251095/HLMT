@@ -589,7 +589,7 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
         sharedPref.edit().putString(PreferenceConstants.EMAIL,"").apply()
         sharedPref.edit().putString(PreferenceConstants.PHONE,"").apply()
         sharedPref.edit().putString(PreferenceConstants.TOKEN,"").apply()
-        //sharedPref.edit().putString(PreferenceConstants.FCM_REGISTRATION_ID,"").apply()
+        sharedPref.edit().putString(PreferenceConstants.FCM_REGISTRATION_ID,"").apply()
         sharedPref.edit().putString(PreferenceConstants.PERSONID,"").apply()
         sharedPref.edit().putString(PreferenceConstants.ADMIN_PERSON_ID,"").apply()
         sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE,"").apply()

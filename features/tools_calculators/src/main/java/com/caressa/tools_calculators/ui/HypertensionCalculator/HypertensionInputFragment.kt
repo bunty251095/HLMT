@@ -315,11 +315,11 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
         paramList = parameterAdapter!!.paramList
 
         dialogInput!!.btn_save_input.setOnClickListener {
-            if (!Utilities.isNullOrEmpty(inpLayout_input.text.toString())) {
-                val value: Double = inpLayout_input.text.toString().toDouble()
+            if (!Utilities.isNullOrEmpty(dialogInput!!.inpLayout_input.text.toString())) {
+                val value: Double = dialogInput!!.inpLayout_input.text.toString().toDouble()
                 if (value >= param.minRange && value <= param.maxRange) {
-                    paramList[position].value = inpLayout_input.text.toString()
-                    paramList[position].finalValue = inpLayout_input.text.toString()
+                    paramList[position].value = dialogInput!!.inpLayout_input.text.toString()
+                    paramList[position].finalValue = dialogInput!!.inpLayout_input.text.toString()
                     parameterAdapter!!.notifyDataSetChanged()
                     //parameterAdapter!!.updateList(paramList)
                     dialogInput!!.dismiss()
