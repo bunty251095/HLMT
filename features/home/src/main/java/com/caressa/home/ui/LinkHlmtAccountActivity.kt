@@ -57,7 +57,7 @@ class LinkHlmtAccountActivity : BaseActivity() {
                 }
             }
         })
-        isAccountLinked = viewModel.getPreference(PreferenceConstants.ACCOUNT_LINK_STATUS).equals("true",false)
+        isAccountLinked = viewModel.getPreference(PreferenceConstants.ACCOUNT_LINK_STATUS).equals("false",true)
         if ( isAccountLinked ) {
             var lblText:String = "Your HLMT 360 Account <b> "+viewModel.getPreference(PreferenceConstants.HLMT_USERNAME)+" </b> is already link with your wellness app profile."
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
