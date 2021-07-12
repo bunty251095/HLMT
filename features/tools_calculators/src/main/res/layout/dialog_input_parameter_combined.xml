@@ -129,7 +129,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/_20sdp"
-                        android:hint="30 - 300"
+                        android:hint="0.01 - 500"
                         android:focusable="true"
                         android:imeOptions="actionDone"
                         android:inputType="number"
@@ -163,7 +163,7 @@
                         android:layout_marginEnd="@dimen/_20sdp"
                         android:imeOptions="actionDone"
                         android:inputType="number"
-                        android:hint="10 - 150"
+                        android:hint="10 - 500"
                         android:focusable="true"
                         android:maxLength="4"
                         android:text="" />

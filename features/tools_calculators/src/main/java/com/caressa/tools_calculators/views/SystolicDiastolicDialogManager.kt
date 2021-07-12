@@ -99,24 +99,24 @@ class SystolicDiastolicDialogManager(context: Context, listener: OnDialogValueLi
 
             if (!binding.editBox1.text.toString().equals("", ignoreCase = true)) {
                 sys = binding.editBox1.text.toString().toDouble()
-                isSystolic = sys in 30.0..300.0
+                isSystolic = sys in 0.01..500.0
             } else {
                 isSystolic = true
             }
 
             if (!binding.editBox2.text.toString().equals("", ignoreCase = true)) {
                 dia = binding.editBox2.text.toString().toDouble()
-                isDiastolic = dia in 10.0..150.0
+                isDiastolic = dia in 10.0..500.0
             } else {
                 isDiastolic = true
             }
 
             if (!isSystolic && !isDiastolic) {
-                Utilities.toastMessageShort(context, "Please insert Systolic BP value between 30 to 300.")
+                Utilities.toastMessageShort(context, "Please insert Systolic BP value between 0.01 to 500.")
             } else if (!isSystolic) {
-                Utilities.toastMessageShort(context, "Please insert Systolic BP value between 30 to 300.")
+                Utilities.toastMessageShort(context, "Please insert Systolic BP value between 0.01 to 500.")
             } else if (!isDiastolic) {
-                Utilities.toastMessageShort(context, "Please insert Diastolic BP value between 10 to 150.")
+                Utilities.toastMessageShort(context, "Please insert Diastolic BP value between 10 to 500.")
             }
 
             if (isSystolic && isDiastolic) {

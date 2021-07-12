@@ -153,13 +153,13 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = "mmHg"
+            data.unit = "mm Hg"
             data.code = "SYSTOLIC_BP"
             data.color = R.color.vivant_bright_sky_blue
             data.img = R.drawable.systolic
             data.description = "Today via mobile entry"
-            data.minRange = 30.0
-            data.maxRange = 300.0
+            data.minRange = 0.01
+            data.maxRange = 500.0
             paramList.add(data)
             data = ParameterDataModel()
             data.title = "Weight"
@@ -186,13 +186,13 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = "mmHg"
+            data.unit = "mm Hg"
             data.code = "DIASTOLIC_BP"
             data.color = R.color.vivant_watermelon
             data.img = R.drawable.systolic
             data.description = "Today via mobile entry"
             data.minRange = 10.0
-            data.maxRange = 150.0
+            data.maxRange = 500.0
             paramList.add(data)
         } else if (model.equals("LIPID", ignoreCase = true)) {
             data.title = "Cholesterol"
@@ -204,12 +204,12 @@ class DataHandler(val context: Context) {
                 data.value = "- -"
             }
             data.description = "Today via mobile entry"
-            data.unit = "mg/dL"
+            data.unit = "mmol/L"
             data.code = "TOTAL_CHOL"
             data.color = R.color.vivant_nasty_green
             data.img = R.drawable.cholesteroal
-            data.minRange = 101.0
-            data.maxRange = 405.0
+            data.minRange = 0.01
+            data.maxRange = 100.0
             paramList.add(data)
             data = ParameterDataModel()
             data.title = "Systolic BP"
@@ -220,13 +220,13 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = "mmHg"
+            data.unit = "mm Hg"
             data.code = "SYSTOLIC_BP"
             data.color = R.color.vivantCyan
             data.img = R.drawable.systolic
             data.description = "Today via mobile entry"
-            data.minRange = 30.0
-            data.maxRange = 300.0
+            data.minRange = 0.01
+            data.maxRange = 500.0
             paramList.add(data)
             data = ParameterDataModel()
             data.title = "HDL"
@@ -237,12 +237,12 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = "mg/dL"
+            data.unit = "mmol/L"
             data.code = "HDL"
             data.color = R.color.vivant_marigold
             data.img = R.drawable.hdl
             data.description = "Today via mobile entry"
-            data.minRange = 10.0
+            data.minRange = 0.01
             data.maxRange = 100.0
             paramList.add(data)
             data = ParameterDataModel()
@@ -254,13 +254,13 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = "mmHg"
+            data.unit = "mm Hg"
             data.code = "DIASTOLIC_BP"
             data.color = R.color.vivant_watermelon
             data.img = R.drawable.systolic
             data.description = "Today via mobile entry"
             data.minRange = 10.0
-            data.maxRange = 150.0
+            data.maxRange = 500.0
             paramList.add(data)
         }
         return paramList
