@@ -8,6 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -129,9 +131,9 @@ class FCMMessagingService : FirebaseMessagingService(),LifecycleOwner,KoinCompon
             val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
             val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.vivant_v_green)
+                .setSmallIcon(R.drawable.img_hlmt_logo_notification)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
-                //.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round))
+                .setLargeIcon(BitmapFactory.decodeResource(resources,R.drawable.img_hlmt_logo_notification))
                 .setContentTitle(title)
                 .setContentText(message)
                 .setStyle( NotificationCompat.BigTextStyle().bigText(message))

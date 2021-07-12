@@ -91,7 +91,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_4sdp"
                 android:gravity="end"
-                android:NotNullEmptyText="@{history.value.toString()}"
                 android:textColor="@{color}"
                 android:textSize="@dimen/_14sdp"
                 app:layout_constraintEnd_toStartOf="@+id/txt_param_unit"

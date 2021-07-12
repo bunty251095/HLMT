@@ -448,7 +448,13 @@ class ParameterRepositoryImpl(private val dataSource: ParameterDatasource, priva
     }
 
     override suspend fun listHistoryByProfileCodeAndMonthYear(personId: String, profileCode: String, month: String, year: String): List<TrackParameterMaster.History> {
-        return paramDao.listHistoryByProfileCodeAndMonthYear(personId,profileCode,month,year)
+
+        return if ( profileCode.equals("URINE",ignoreCase = true) ) {
+            paramDao.listHistoryByProfileCodeAndMonthYearForUrineProfile(personId,profileCode,month,year)
+        } else {
+            paramDao.listHistoryByProfileCodeAndMonthYear(personId,profileCode,month,year)
+        }
+
     }
 
     override suspend fun listHistoryWithLatestRecord(personId: String, profileCode: String, parameterCode: String): List<TrackParameterMaster.History> {

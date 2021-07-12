@@ -502,7 +502,7 @@ class MedicineTrackerViewModel(
                 val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
                 //Update the Notification to show that the Status has been Updated.
                 val repliedNotification = NotificationCompat.Builder(context, "fcm_medication_channel")
-                    .setSmallIcon(R.drawable.vivant_v)
+                    .setSmallIcon(R.drawable.img_hlmt_logo_notification)
                     .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                     .setSound(alarmSound)
                     .setTicker(context.resources.getString(R.string.app_name))

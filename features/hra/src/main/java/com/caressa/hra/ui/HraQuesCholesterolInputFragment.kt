@@ -212,6 +212,12 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
     private fun setClickable() {
 
         binding.rgPrevious.setOnCheckedChangeListener { _, _ ->
+            Utilities.hideKeyboard(requireActivity())
+            viewModel.removeSource(qCode)
+            viewPagerActivity!!.setCurrentScreen( viewPagerActivity!!.getCurrentScreen() - 1 )
+        }
+
+/*        binding.rgPrevious.setOnCheckedChangeListener { _, _ ->
             if ( !Utilities.isNullOrEmpty(binding.layTotalChol.getValue()) ||
                 !Utilities.isNullOrEmpty(binding.layHdl.getValue()) ||
                 !Utilities.isNullOrEmpty(binding.layLdl.getValue()) ||
@@ -232,7 +238,7 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
                 viewPagerActivity!!.setCurrentScreen( viewPagerActivity!!.getCurrentScreen() - 1 )
             }
 
-        }
+        }*/
 
         binding.btnNext.setOnClickListener {
             if ( validateValuesAndSaveData() ) {

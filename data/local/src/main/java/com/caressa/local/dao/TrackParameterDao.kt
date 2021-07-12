@@ -119,6 +119,9 @@ abstract class TrackParameterDao {
     @Query("SELECT * FROM TrackParameterHistory where profileCode =:profileCode AND recordDate LIKE :month AND recordDate LIKE :year AND value != 'NULL' AND value != 'null' AND personID =:personId ORDER BY recordDate DESC,parameterID")
     abstract suspend fun listHistoryByProfileCodeAndMonthYear(personId: String,profileCode: String,month: String,year: String): List<TrackParameterMaster.History>
 
+    @Query("SELECT * FROM TrackParameterHistory where profileCode =:profileCode AND recordDate LIKE :month AND recordDate LIKE :year AND textValue != 'NULL' AND textValue != 'null' AND personID =:personId ORDER BY recordDate DESC,parameterID")
+    abstract suspend fun listHistoryByProfileCodeAndMonthYearForUrineProfile(personId: String,profileCode: String,month: String,year: String): List<TrackParameterMaster.History>
+
     @Query("SELECT personID,parameterCode,description,profileCode,value,observation,recordDate,max(recordDateMillisec) as recordDateMillisec,textValue,ownerCode,sync,unit,createdBy,createdDate,modifiedBy FROM TrackParameterHistory WHERE personID =:personId  group by parameterCode HAVING ProfileCode =:profileCode  AND parameterCode =:parameterCode")
     abstract suspend fun listHistoryWithLatestRecord(personId: String,profileCode: String,parameterCode: String): List<TrackParameterMaster.History>
 

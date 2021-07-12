@@ -70,13 +70,13 @@ class FamilyDoctorListActivity : BaseActivity() {
                 if (familyDoctorsList.isNotEmpty()) {
                     Timber.e("RecordCount----->${familyDoctorsList.size}")
                     binding.rvFamilyDoctorsList.visibility = View.VISIBLE
-                    binding.txtNoDoctors.visibility = View.GONE
+                    binding.layoutNoDoctors.visibility = View.GONE
                     binding.rvFamilyDoctorsList.layoutAnimation = animation
                     familyDoctorsAdapter!!.updateFamilyDoctorsList(familyDoctorsList)
                     binding.rvFamilyDoctorsList.scheduleLayoutAnimation()
                 } else {
                     binding.rvFamilyDoctorsList.visibility = View.GONE
-                    binding.txtNoDoctors.visibility = View.VISIBLE
+                    binding.layoutNoDoctors.visibility = View.VISIBLE
                 }
                 stopShimmer()
             }
