@@ -218,6 +218,7 @@
     <string name="UNDER_WEIGHT">Underweight</string>
     <string name="NORMAL">Normal</string>
     <string name="OVER_WEIGHT">Overweight</string>
+    <string name="OBESE">Obese</string>
     <string name="PRE_OBESE">Pre-Obese</string>
     <string name="OBESS_LEVEL_1">Obese Level 1</string>
     <string name="OBESS_LEVEL_2">Obese Level 2</string>
@@ -225,6 +226,8 @@
     <!--BMI Observations-->
 
     <!--BloodPressure Observations-->
+    <string name="HIGH_NORMAL">High normal</string>
+    <string name="ABNORMAL">Abnormal</string>
     <string name="PRE_HYPERTENSION">PreHypertension</string>
     <string name="HYP_TENSION_STAGE1">Hypertension- Stage 1</string>
     <string name="HYP_TENSION_STAGE2">Hypertension- Stage 2</string>
