@@ -5,7 +5,7 @@
     <application>
         <activity android:name=".ParameterHomeActivity"
                 android:windowSoftInputMode="stateHidden|adjustPan"
-                android:screenOrientation="sensorPortrait"/>
+                android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

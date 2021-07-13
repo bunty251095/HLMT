@@ -3,9 +3,10 @@
           package="com.caressa.records_tracker">
 
     <application>
-        <activity android:name="com.caressa.records_tracker.HealthRecordsActivity"
-                android:screenOrientation="sensorPortrait"
-                android:windowSoftInputMode="adjustPan">
+        <activity
+            android:name="com.caressa.records_tracker.HealthRecordsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
     </application>
 
