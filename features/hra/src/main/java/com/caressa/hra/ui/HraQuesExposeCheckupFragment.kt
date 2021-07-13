@@ -243,6 +243,7 @@ class HraQuesExposeCheckupFragment(val qCode: String) : BaseFragment() {
         if ( selectedOptionList.any { option -> !option.description.equals("None",ignoreCase = true) && option.isSelected } ) {
             HraHelper.deselectExceptNone(binding.optionContainer)
         }
+        selectedOptionList[0].isSelected = true
         if ( !qCode.equals("CHECKUP", ignoreCase = true) ) {
             nextButtonClick()
         }

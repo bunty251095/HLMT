@@ -49,7 +49,7 @@
                     android:layout_width="@dimen/_32sdp"
                     android:layout_height="@dimen/_32sdp"
                     app:srcCompat="@drawable/icon_mother"
-                    android:tint="@color/vivant_track_param_textcolor"
+                    android:tint="@color/colorPrimary"
                     android:loadImage="@{viewModel.getRelationImgId(familyMember.relationshipCode)}"
                     android:layout_marginStart="@dimen/_18sdp"
                     app:layout_constraintTop_toTopOf="@+id/view5"
