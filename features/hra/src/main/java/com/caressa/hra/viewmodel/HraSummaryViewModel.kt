@@ -130,7 +130,7 @@ class HraSummaryViewModel(
                  _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if (it != null) {
                     val assessmentSummaryData = it.data!!.hraSummaryReport
-                    val assessmentSummaryList: MutableList<AssessmentDetails> = mutableListOf()
+                    var assessmentSummaryList: MutableList<AssessmentDetails> = mutableListOf()
                     Timber.i("AssessmentSummary :- $it")
                     if (assessmentSummaryData.suggestedAssessments.isNotEmpty()) {
                         assessmentSummaryList.addAll(assessmentSummaryData.suggestedAssessments)
@@ -138,6 +138,9 @@ class HraSummaryViewModel(
                     if (assessmentSummaryData.otherAssessments.isNotEmpty()) {
                         assessmentSummaryList.addAll(assessmentSummaryData.otherAssessments)
                     }
+                    assessmentSummaryList = assessmentSummaryList.filter {
+                        it.riskCategory != "Fitness"
+                                && it.riskCategory != "Nutrition" }.toMutableList()
                     hraAssessmentSummaryDetails.postValue( assessmentSummaryList )
                 }
             }

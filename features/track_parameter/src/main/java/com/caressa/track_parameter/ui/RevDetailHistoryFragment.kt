@@ -167,10 +167,34 @@ class RevDetailHistoryFragment: BaseFragment(),PreviousMonthsAdapter.OnMonthClic
     }
 
     fun showDetailsDialog( parameter : TrackParameterMaster.History,color: Int) {
-        val msg = if ( !Utilities.isNullOrEmpty(parameter.observation) ) {
-            "${parameter.value}  ${parameter.unit} \n ${parameter.observation} \n (${parameter.recordDate})"
+
+        var value = ""
+        var obs = ""
+        var unit = ""
+        if( parameter.profileCode.equals("URINE",ignoreCase = true) ) {
+            if ( !Utilities.isNullOrEmpty(parameter.textValue) ) {
+                value = parameter.textValue!!
+            }
         } else {
-            "${parameter.value}  ${parameter.unit} \n (${parameter.recordDate})"
+            if ( !Utilities.isNullOrEmpty(parameter.value.toString()) ) {
+                value = parameter.value.toString()
+            }
+        }
+
+        if ( !Utilities.isNullOrEmpty(parameter.observation)  ) {
+            if ( !parameter.observation.equals("NA",ignoreCase = true) ) {
+                obs = parameter.observation!!
+            }
+        }
+
+        if ( !Utilities.isNullOrEmpty(parameter.unit)  ) {
+            unit = parameter.unit!!
+        }
+
+        val msg = if ( !Utilities.isNullOrEmpty(obs) ) {
+            "$value  $unit \n $obs \n (${parameter.recordDate})"
+        } else {
+            "$value  $unit \n (${parameter.recordDate})"
         }
         showDialog(
             listener = this,

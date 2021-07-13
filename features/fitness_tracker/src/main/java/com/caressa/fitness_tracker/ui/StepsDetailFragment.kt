@@ -330,7 +330,7 @@ class StepsDetailFragment : BaseFragment(), KoinComponent {
             //val width = displayMetrics.widthPixels
             binding.graphMonthly.setExtraOffsets(30f, 20f, 30f, 0f)
 
-            binding.graphMonthly.animateXY(1200, 1200)
+            binding.graphMonthly.animateXY(1000, 1000)
             binding.graphMonthly.centerViewTo(stepsEntries[selectedDataSetIndex].x, stepsEntries[selectedDataSetIndex].y, YAxis.AxisDependency.RIGHT)
             binding.graphMonthly.highlightValue(stepsEntries[selectedDataSetIndex].x, stepsEntries[selectedDataSetIndex].y, selectedDataSetIndex, true)
 

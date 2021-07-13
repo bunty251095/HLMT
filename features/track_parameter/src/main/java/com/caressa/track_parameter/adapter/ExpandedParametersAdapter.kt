@@ -51,6 +51,12 @@ class ExpandedParametersAdapter(private val mContext: Context, private val fragm
                 }
             }
 
+            if ( !Utilities.isNullOrEmpty(parameter.observation)  ) {
+                if ( !parameter.observation.equals("NA",ignoreCase = true) ) {
+                    holder.txtParamObs.text = parameter.observation
+                }
+            }
+
             holder.layoutParent.setOnTouchListener { v: View, event: MotionEvent ->
                 if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_MOVE) {
                     v.setBackgroundColor(appColorHelper.primaryColor())

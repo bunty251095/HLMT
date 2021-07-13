@@ -57,6 +57,9 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
                     medicationDao.deleteMedicationTable()
                     if ( items.medication.isNotEmpty() ) {
                         for ( medicine in items.medication ) {
+                            if ( Utilities.isNullOrEmpty(medicine.DrugTypeCode) ) {
+                                medicine.DrugTypeCode = ""
+                            }
                             if ( !Utilities.isNullOrEmpty(medicine.PrescribedDate) ) {
                                 medicine.PrescribedDate = medicine.PrescribedDate!!.split("T").toTypedArray()[0]
                             }
