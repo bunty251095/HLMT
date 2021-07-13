@@ -60,7 +60,7 @@
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:tint="@color/vivant_track_param_textcolor"
+                    android:tint="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="@+id/img_blog"
                     app:layout_constraintTop_toBottomOf="@+id/img_blog"
                     app:srcCompat="@drawable/img_calender2"/>
@@ -132,7 +132,7 @@
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     app:srcCompat="@drawable/ic_menu_share"
-                    android:tint="@color/hlmt_warm_grey"
+                    android:tint="@color/colorPrimary"
                     android:onClick="@{(view) -> viewModel.shareBlog(blog)}"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
