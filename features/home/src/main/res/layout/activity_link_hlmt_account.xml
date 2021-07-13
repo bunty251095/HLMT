@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.caressa.home.viewmodel.DashboardViewModel" />
@@ -18,7 +19,7 @@
             layout="@layout/toolbar_home"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollview"
@@ -40,8 +41,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_80sdp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:src="@drawable/hlmt_banner"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -53,34 +54,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="visible"
-                    app:layout_constraintTop_toBottomOf="@+id/img_banner"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_banner">
 
-                    <com.caressa.common.view.ArcTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/lbl_link_account_desc"
-                        android:layout_width="0dp"
-                        app:isTemplate="true"
-                        app:isPrimary="true"
                         style="@style/CustomTextview"
-                        android:text="@string/TO_LINK_HLMT_360_ACCOUNT_CLICK_ON_BUTTON"
-                        android:textSize="@dimen/_16sdp"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_width="0dp"
                         android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/TO_LINK_HLMT_360_ACCOUNT_CLICK_ON_BUTTON"
+                        android:textColor="@color/hlmt_dark_grey"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_edt_login_email_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/selector_border_button"
-                        android:layout_marginTop="@dimen/_30sdp"
                         android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_30sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/selector_border_button"
                         app:layout_constraintEnd_toEndOf="@+id/lbl_link_account_desc"
                         app:layout_constraintStart_toStartOf="@+id/lbl_link_account_desc"
                         app:layout_constraintTop_toBottomOf="@+id/lbl_link_account_desc">
@@ -100,8 +98,8 @@
                             android:id="@+id/til_edt_login_email_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:hintEnabled="false"
                             app:boxBackgroundMode="none"
+                            app:hintEnabled="false"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -153,13 +151,13 @@
                             android:id="@+id/til_edt_login_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:hintEnabled="false"
                             app:boxBackgroundMode="none"
+                            app:hintEnabled="false"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:passwordToggleEnabled="true"
-                            app:passwordToggleTint="@color/security_grey_light">
+                            app:passwordToggleTint="@color/colorPrimary">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/edt_login_password"
@@ -183,13 +181,13 @@
 
                     <com.caressa.common.view.ArcButton
                         android:id="@+id/btn_link_account"
-                        app:isTemplate="true"
                         style="@style/CustomButton"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:text="@string/LINK_HLMT_360_ACCOUNT"
                         android:textSize="@dimen/_14sdp"
-                        android:layout_marginTop="@dimen/_30sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:isTemplate="true"
                         app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_password"
                         app:layout_constraintStart_toStartOf="@+id/layout_edt_login_password"
                         app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_password" />
@@ -201,17 +199,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@+id/img_banner"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_banner">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/img_password_changed"
                         android:layout_width="@dimen/_60sdp"
                         android:layout_height="@dimen/_60sdp"
                         android:layout_gravity="center"
-                        android:src="@drawable/img_tick_green"
                         android:layout_marginTop="@dimen/_30sdp"
+                        android:src="@drawable/img_tick_green"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -221,13 +219,14 @@
                         style="@style/CustomTextview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_30sdp"
                         android:gravity="center"
                         android:text="@string/ACCOUNT_LINKED"
+                        android:textColor="@color/hlmt_dark_grey"
                         android:textSize="@dimen/_16sdp"
-                        android:layout_marginTop="@dimen/_30sdp"
                         app:layout_constraintEnd_toEndOf="@+id/img_password_changed"
                         app:layout_constraintStart_toStartOf="@+id/img_password_changed"
-                        app:layout_constraintTop_toBottomOf="@+id/img_password_changed"/>
+                        app:layout_constraintTop_toBottomOf="@+id/img_password_changed" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
