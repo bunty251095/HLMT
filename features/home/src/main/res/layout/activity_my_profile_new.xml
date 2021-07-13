@@ -244,7 +244,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_6sdp"
                         app:srcCompat="@drawable/img_name"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -291,7 +291,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_7sdp"
                         app:srcCompat="@drawable/img_email"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -338,7 +338,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_7sdp"
                         app:srcCompat="@drawable/img_email"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -385,7 +385,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_7sdp"
                         app:srcCompat="@drawable/img_phone"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -431,7 +431,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_7sdp"
                         app:srcCompat="@drawable/img_phone"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -477,7 +477,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_7sdp"
                         app:srcCompat="@drawable/img_address"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -525,7 +525,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_7sdp"
                         app:srcCompat="@drawable/img_dob"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -587,7 +587,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_6sdp"
                         app:srcCompat="@drawable/img_name"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -639,7 +639,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_7sdp"
                         app:srcCompat="@drawable/img_email"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -690,7 +690,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_7sdp"
                         app:srcCompat="@drawable/img_email"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -742,7 +742,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_7sdp"
                         app:srcCompat="@drawable/img_phone"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -792,7 +792,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_7sdp"
                         app:srcCompat="@drawable/img_phone"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -842,7 +842,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:padding="@dimen/_7sdp"
                         app:srcCompat="@drawable/img_address"
-                        android:tint="@color/vivantInactive"
+                        android:tint="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 

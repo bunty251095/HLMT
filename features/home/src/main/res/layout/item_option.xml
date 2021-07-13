@@ -39,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_25sdp"
                 app:layout_constraintHorizontal_weight="0.2"
-                android:tint="@color/vivant_edit_textcolor"
+                android:tint="@color/colorPrimary"
                 android:loadImage="@{option.imageId}"
                 android:layout_marginStart="@dimen/_8sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
