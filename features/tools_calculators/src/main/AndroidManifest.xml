@@ -5,7 +5,7 @@
     <application>
         <activity android:name=".ToolsCalculatorsHomeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden">
+            android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
     </application>
 
