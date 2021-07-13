@@ -346,7 +346,8 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
         var maxValueGoal = 0
         var counter = 0f
         //Timber.e("weeklyList---> $weeklyList")
-        for (i in weeklyDataList.indices ) {
+        if ( !weeklyDataList.isNullOrEmpty() ) {
+                    for (i in weeklyDataList.indices ) {
             val item = weeklyDataList[i]
             val stepsCount = item.stepsCount
             var totalGoal = item.totalGoal
@@ -380,7 +381,7 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
             }*/
         }
         setDataToChart(entriesSteps,entriesGoals,dateLabels,maxValue)
-        //setDataToChart(entriesSteps, entriesGoals, colors, dateLabels, maxValue)
+        }
     }
 
     private fun setDataToChart(

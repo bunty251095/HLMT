@@ -186,7 +186,8 @@ class DataHandler(val context: Context) {
     }
 
     fun shareDataWithAppSingle(recordData : HealthDocument,viewModel : HealthRecordsViewModel) {
-        val completePath = recordData.Path + recordData.Name
+        val completePath = recordData.Path + "/" + recordData.Name
+        Timber.e("completePath--->$completePath")
         if (!Utilities.isNullOrEmpty(completePath)) {
             val file = File(completePath)
             val fileToShare = Uri.fromFile(file)

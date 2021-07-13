@@ -90,9 +90,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_4sdp"
-                android:gravity="end"
+                android:gravity="start"
                 android:textColor="@{color}"
                 android:textSize="@dimen/_14sdp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 app:layout_constraintEnd_toStartOf="@+id/txt_param_unit"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,7 +117,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:gravity="end"
-                android:NotNullEmptyText="@{history.observation.toString()}"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@{color}"
                 app:layout_constraintEnd_toEndOf="@+id/txt_param_unit"

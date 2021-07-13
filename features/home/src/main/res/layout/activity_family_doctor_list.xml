@@ -62,17 +62,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txt_no_doctors"
-        style="@style/VivantTitle"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:padding="@dimen/_5sdp"
-        android:text="@string/NO_DOCTORS"
-        android:textSize="@dimen/_17sdp"/>-->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_no_doctors"
         android:layout_width="match_parent"

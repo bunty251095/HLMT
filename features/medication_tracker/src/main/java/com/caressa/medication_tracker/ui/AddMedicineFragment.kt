@@ -199,7 +199,12 @@ class AddMedicineFragment : BaseFragment(),MedicineTypeAdapter.OnMedTypeListener
                 for (i in list.indices) {
                     val textView = TextView(context)
                     textView.apply {
-                        text = list[i].drug.name + " - " +list[i].drug.strength
+                        //text = list[i].drug.name + " - " +list[i].drug.strength
+                        text = if ( !Utilities.isNullOrEmpty(list[i].drug.strength) ) {
+                            list[i].drug.name + " - " + list[i].drug.strength
+                        } else {
+                            list[i].drug.name
+                        }
                         tag = i
                         setTextSize(TypedValue.COMPLEX_UNIT_SP, R.dimen.size_12sp.toFloat())
                         setPadding(dpToPx(18f).toInt(), dpToPx(10f).toInt(), dpToPx(18f).toInt(), dpToPx(10f).toInt())
@@ -236,29 +241,42 @@ class AddMedicineFragment : BaseFragment(),MedicineTypeAdapter.OnMedTypeListener
 
     @SuppressLint("SetTextI18n")
     private fun setMedicineDetails(details: MedicationEntity.Medication) {
-        try{
 
-
-        if (details.DrugTypeCode.equals("MOUTHWASH",ignoreCase = true)) {
-            binding.txtMedicine.text = "Mouth\nwash"
-        } else {
-            binding.txtMedicine.text = resources.getString(medicationTrackerHelper.getMedTypeByCode(details.DrugTypeCode!!))
-        }
-        binding.imgMedicine.setImageResource(medicationTrackerHelper.getMedTypeImageByCode(details.DrugTypeCode!!))
-        binding.edtMedicineName.setText(details.drug.name + " - " +details.drug.strength)
-        binding.edtMedicineName.setSelection(binding.edtMedicineName.text.length)
-        drugTypeCode = details.DrugTypeCode!!
-        drugId = details.drugID
-        var medTypePos = 0
-        for (i in medTypeList.indices) {
-            if (medTypeList[i].medTypeCode.equals(details.DrugTypeCode,ignoreCase = true)) {
-                medicineTypeAdapter!!.updateSelectedPos(i)
-                medTypePos = i
-                break
+        try {
+            Utilities.printData("details",details,true)
+            //drugTypeCode = details.DrugTypeCode!!
+            if ( !Utilities.isNullOrEmpty(details.DrugTypeCode!!)) {
+                drugTypeCode = details.DrugTypeCode!!
+            } else {
+                drugTypeCode = "TAB"
             }
+
+            if (drugTypeCode.equals("MOUTHWASH",ignoreCase = true)) {
+                binding.txtMedicine.text = "Mouth\nwash"
+            } else {
+                binding.txtMedicine.text = resources.getString(medicationTrackerHelper.getMedTypeByCode(drugTypeCode))
+            }
+            binding.imgMedicine.setImageResource(medicationTrackerHelper.getMedTypeImageByCode(drugTypeCode))
+            //binding.edtMedicineName.setText(details.drug.name + " - " +details.drug.strength)
+            if ( !Utilities.isNullOrEmpty(details.drug.strength) ) {
+                binding.edtMedicineName.setText(details.drug.name + " - " +details.drug.strength)
+            } else {
+                binding.edtMedicineName.setText(details.drug.name)
+            }
+            binding.edtMedicineName.setSelection(binding.edtMedicineName.text.length)
+            drugId = details.drugID
+            var medTypePos = 0
+            for (i in medTypeList.indices) {
+                if (medTypeList[i].medTypeCode.equals(drugTypeCode,ignoreCase = true)) {
+                    medicineTypeAdapter!!.updateSelectedPos(i)
+                    medTypePos = i
+                    break
+                }
+            }
+            println("Position,DrugTypeCode,DrugID==>" + medTypePos + "," + drugTypeCode + "," + drugId)
+        } catch ( e : Exception ) {
+            e.printStackTrace()
         }
-        println("Position,DrugTypeCode,DrugID==>" + medTypePos + "," + details.DrugTypeCode + "," + drugId)
-        }catch (e: Exception){e.printStackTrace()}
     }
 
     override fun onMedTypeSelection(position: Int, medType: MedTypeModel) {
