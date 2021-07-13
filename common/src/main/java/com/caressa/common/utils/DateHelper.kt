@@ -326,6 +326,7 @@ object DateHelper {
     fun convertMaterialPickerDateToServerdate(dateValue: String): String {
         var strDate = ""
         val dateFormat = SimpleDateFormat(DATEFORMAT_MATERIAL, Locale.getDefault())
+        val dateFormatSecond = SimpleDateFormat(DATEFORMAT_MATERIAL, Locale.getDefault())
         var date1 = Calendar.getInstance().time
         try {
             if ( !Utilities.isNullOrEmpty(dateValue) ) {
@@ -366,6 +367,24 @@ object DateHelper {
             if (dateValue != null) {
                 val df = SimpleDateFormat(destinationFormat, Locale.getDefault())
                 strDate = df.format(dateValue)
+            } else {
+                strDate = ""
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return strDate
+    }
+
+    fun convertDateSourceToDestination(dateValue: String?, sourceFormat: String, destinationFormat: String): String {
+        var strDate = ""
+        try {
+
+            if (dateValue != null) {
+                val srcFormat = SimpleDateFormat(sourceFormat, Locale.getDefault())
+                val destFormat = SimpleDateFormat(destinationFormat, Locale.getDefault())
+                strDate = destFormat.format(srcFormat.parse(dateValue))
             } else {
                 strDate = ""
             }

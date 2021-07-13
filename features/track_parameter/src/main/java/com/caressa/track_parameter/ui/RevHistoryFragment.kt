@@ -129,7 +129,18 @@ class RevHistoryFragment : BaseFragment() {
         viewModel.spinnerHistoryLiveData.observe(viewLifecycleOwner, Observer {
             spinnerAdapter = ParameterSpinnerAdapter(requireContext())
             binding.paramSpinner.adapter = spinnerAdapter
-            spinnerAdapter.updateList(it)
+            if(it!= null && it.size>0) {
+                var list = it.filter { item ->
+                    !item.parameterCode.equals(
+                        "WBC",
+                        true
+                    ) && !item.parameterCode.equals("DLC", true)
+                }
+                spinnerAdapter.updateList(list)
+            }else{
+                spinnerAdapter.updateList(it)
+            }
+
             binding.paramSpinner.setSelection(0)
         })
 

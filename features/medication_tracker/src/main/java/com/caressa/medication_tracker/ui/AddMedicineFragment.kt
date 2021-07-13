@@ -236,6 +236,9 @@ class AddMedicineFragment : BaseFragment(),MedicineTypeAdapter.OnMedTypeListener
 
     @SuppressLint("SetTextI18n")
     private fun setMedicineDetails(details: MedicationEntity.Medication) {
+        try{
+
+
         if (details.DrugTypeCode.equals("MOUTHWASH",ignoreCase = true)) {
             binding.txtMedicine.text = "Mouth\nwash"
         } else {
@@ -255,6 +258,7 @@ class AddMedicineFragment : BaseFragment(),MedicineTypeAdapter.OnMedTypeListener
             }
         }
         println("Position,DrugTypeCode,DrugID==>" + medTypePos + "," + details.DrugTypeCode + "," + drugId)
+        }catch (e: Exception){e.printStackTrace()}
     }
 
     override fun onMedTypeSelection(position: Int, medType: MedTypeModel) {

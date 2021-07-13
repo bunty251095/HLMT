@@ -293,9 +293,9 @@ object Constants {
     const val TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss"
 
     // BMI CALCULATION VALUES
-    const val HEIGHT_MIN = 120
-    const val HEIGHT_MAX = 240
-    const val WEIGHT_MIN_METRIC = 30
+    const val HEIGHT_MIN = 119
+    const val HEIGHT_MAX = 245
+    const val WEIGHT_MIN_METRIC = 29
     const val WEIGHT_MAX_METRIC = 150
 
     const val REQ_CODE_STORAGE = 2296

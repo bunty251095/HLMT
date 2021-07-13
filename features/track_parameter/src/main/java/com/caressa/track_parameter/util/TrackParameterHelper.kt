@@ -1,5 +1,6 @@
 package com.caressa.track_parameter.util
 
+import android.content.Context
 import com.caressa.common.utils.Utilities
 import com.caressa.track_parameter.R
 
@@ -62,7 +63,7 @@ object TrackParameterHelper {
         if (!Utilities.isNullOrEmpty(observation)) {
             color =
                 when (observation!!.toUpperCase()) {
-                    "VERY HIGH", "HIGH", "DIABETIC", "MILDLY HIGH", "VERY LOW", "LOW", "POOR", "MILDLY LOW" -> R.color.vivant_watermelon
+                    "VERY HIGH", "HIGH","HIGH NORMAL", "DIABETIC", "MILDLY HIGH", "VERY LOW", "LOW", "POOR", "MILDLY LOW" -> R.color.vivant_watermelon
                     "BORDERLINE HIGH", "EARLY DIABETIC", "MODERATE", "BETTER", "NEAR OPTIMAL", "MODERATE LOW", "MILD LOW", "MILD HIGH", "MODERATE HIGH" -> R.color.vivant_orange_yellow
                     "DESIRABLE", "BEST", "NORMAL", "OPTIMAL", "GOOD" -> R.color.vivant_nasty_green
                     else -> R.color.vivant_charcoal_grey_55
@@ -105,7 +106,24 @@ object TrackParameterHelper {
         return observation
     }
 
-    fun getBPObservation(systolicParam: Int, diastolicParam: Int): String {
+    fun getBPObservation(systolic: Int, diastolic: Int): String {
+        var strObservation = ""
+        if (systolic < 90 || diastolic < 60) {
+            strObservation = "Low"
+        }
+        if (systolic in 90..120 && diastolic in 60..80) {
+            strObservation = "Normal"
+        }
+        if (systolic in 121..139 || diastolic in 81..89) {
+            strObservation =  "High normal"
+        }
+        if (systolic >= 140 || diastolic >= 90) {
+            strObservation =  "Abnormal"
+        }
+        return strObservation
+    }
+
+    /*fun getBPObservation(systolicParam: Int, diastolicParam: Int): String {
         var strObservation = ""
         var S = 0
         var D = 0
@@ -154,7 +172,7 @@ object TrackParameterHelper {
             strObservation = "Hypertension- Critical"
         }
         return strObservation
-    }
+    }*/
 
     fun convertFeetInchToCm(strFeetValue: String, strInchValue: String?): String {
         var strConvertedValue = ""
