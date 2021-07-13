@@ -204,8 +204,8 @@ class DataHandler(val context: Context) {
             shareIntent.action = Intent.ACTION_SEND
             shareIntent.putExtra(Intent.EXTRA_STREAM, fileToShare)
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, viewModel.firstName + " has shared Health Document")
-            val himORher = if (viewModel.firstName.equals("1",ignoreCase = true)) " him " else " her "
-            val hisORher = if (viewModel.firstName.equals("1",ignoreCase = true)) " his " else " her "
+            val himORher = if (viewModel.gender.equals("1",ignoreCase = true)) " him " else " her "
+            val hisORher = if (viewModel.gender.equals("1",ignoreCase = true)) " his " else " her "
             val shareBody = ("Hello," + "\n\n" + viewModel.firstName + " has shared  health records with you." + "\n" +
                     Html.fromHtml("<br>" +
                             "Kindly review the records and guide" +

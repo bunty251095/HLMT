@@ -44,28 +44,6 @@ class RevUpdateParameterFragment : BaseFragment(){
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // callback to Handle back button event
-
-//        arguments?.let {
-//            from = it.getString(Constants.FROM,"")!!
-//            Timber.e("from,selectedDate--->$from")
-//        }
-//        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                performBackClick()
-//            }
-//        }
-//        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
-
-//    fun performBackClick() {
-//        val bundle = Bundle()
-//        if ( from.equals("DashboardBP",ignoreCase = true) || from.equals("DashboardBMI") )  {
-//            requireActivity().finish()
-//        }
-//    }
 
     private fun initialise() {
 //        if(!from.isNullOrEmpty()){
