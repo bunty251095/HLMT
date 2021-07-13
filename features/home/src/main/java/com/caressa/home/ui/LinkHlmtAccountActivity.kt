@@ -43,11 +43,11 @@ class LinkHlmtAccountActivity : BaseActivity() {
     private fun initialise() {
         viewModel.hlmt360LoginResponse.observe(this, Observer {
             if(it!=null){
-                if ( it.accountLinkStatus.equals("true") ) {
+                if ( it.accountLinkStatus.equals("true",true) ) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        binding.lblAccountLink.setText(Html.fromHtml("Your HLMT 360 Account <b>${it.hlmtUserName} </b> has been linked Successfully with your wellness app profile.", Html.FROM_HTML_MODE_COMPACT));
+                        binding.lblAccountLink.setText(Html.fromHtml("Your HLMT 360 Account <b>${binding.edtUsername.text.toString()} </b> has been linked Successfully with your wellness app profile.", Html.FROM_HTML_MODE_COMPACT));
                     } else {
-                        binding.lblAccountLink.setText(Html.fromHtml("Your HLMT 360 Account <b>${it.hlmtUserName} </b> has been linked Successfully with your wellness app profile."));
+                        binding.lblAccountLink.setText(Html.fromHtml("Your HLMT 360 Account <b>${binding.edtUsername.text.toString()} </b> has been linked Successfully with your wellness app profile."));
                     }
                     binding.layoutAccLinked.visibility = View.VISIBLE
                     binding.layoutAccNotLinked.visibility = View.GONE
@@ -57,7 +57,7 @@ class LinkHlmtAccountActivity : BaseActivity() {
                 }
             }
         })
-        isAccountLinked = viewModel.getPreference(PreferenceConstants.ACCOUNT_LINK_STATUS).equals("false",true)
+        isAccountLinked = viewModel.getPreference(PreferenceConstants.ACCOUNT_LINK_STATUS).equals("true",true)
         if ( isAccountLinked ) {
             var lblText:String = "Your HLMT 360 Account <b> "+viewModel.getPreference(PreferenceConstants.HLMT_USERNAME)+" </b> is already link with your wellness app profile."
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

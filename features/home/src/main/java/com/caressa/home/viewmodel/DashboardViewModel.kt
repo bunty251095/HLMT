@@ -494,7 +494,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                             .putString(PreferenceConstants.IS_HLMT_USER, it.data!!.isHLMTUser)
                             .apply()
                         sharedPref.edit()
-                            .putString(PreferenceConstants.HLMT_USERNAME, it.data!!.hlmtUserName)
+                            .putString(PreferenceConstants.HLMT_USERNAME, username)
                             .apply()
                         sharedPref.edit()
                             .putString(PreferenceConstants.HLMT_USER_ID, it.data!!.HLMTUserID)
