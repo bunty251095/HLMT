@@ -10,8 +10,10 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
@@ -26,19 +28,27 @@ class DiabetesSummaryFragment : BaseFragment(),KoinComponent {
 
     private lateinit var binding: FragmentDiabetesSummaryBinding
     private val viewModel: ToolsCalculatorsViewModel by viewModel()
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
     override fun getViewModel(): BaseViewModel = viewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let { }
+
+        // callback to Handle back button event
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.action_diabetesSummaryFragment_to_diabetesCalculatorFragment)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentDiabetesSummaryBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         setClickable()
         return binding.root
@@ -48,12 +58,12 @@ class DiabetesSummaryFragment : BaseFragment(),KoinComponent {
     private fun initialise() {
 
         binding.txtDibProbability.text = ("Based on your Score you have "
-                + calculatorDataSingleton.diabetesSummeryModel.probabilityPercentage
+                + calculatorDataSingleton!!.diabetesSummeryModel.probabilityPercentage
                 + "% Probability of getting diabetes.")
         binding.indicatorDiabetesRisk.setOnTouchListener { _: View?, _: MotionEvent? -> true }
 
-        setDiabetesRiskDetails(calculatorDataSingleton.diabetesSummeryModel.totalScore.toDouble(),
-            calculatorDataSingleton.diabetesSummeryModel.riskLabel)
+        setDiabetesRiskDetails(calculatorDataSingleton!!.diabetesSummeryModel.totalScore.toDouble(),
+            calculatorDataSingleton!!.diabetesSummeryModel.riskLabel)
     }
 
     private fun setDiabetesRiskDetails(riskPercentage: Double, riskType: String) {
@@ -96,16 +106,11 @@ class DiabetesSummaryFragment : BaseFragment(),KoinComponent {
     private fun setClickable() {
 
         binding.btnViewReportDiabetes.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(Constants.FROM, "Home")
-            it.findNavController().navigate(R.id.action_diabetesSummaryFragment_to_diabetesReportFragment)
+            findNavController().navigate(R.id.action_diabetesSummaryFragment_to_diabetesReportFragment)
         }
 
         binding.btnRestartDiabetes.setOnClickListener {
-            calculatorDataSingleton.clearData()
-            val bundle = Bundle()
-            bundle.putString(Constants.FROM, "Home")
-            it.findNavController().navigate(R.id.action_diabetesSummaryFragment_to_toolsCalculatorsDashboardFragment)
+            findNavController().navigate(R.id.action_diabetesSummaryFragment_to_diabetesCalculatorFragment)
         }
 
     }

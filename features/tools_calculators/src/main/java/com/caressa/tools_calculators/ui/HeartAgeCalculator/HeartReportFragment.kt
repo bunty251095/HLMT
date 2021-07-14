@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
@@ -33,21 +35,28 @@ class HeartReportFragment : BaseFragment() {
 
     private var heartRiskReportAdapter: HeartRiskReportAdapter? = null
     private var paramDataReportAdapter: ParamDataReportAdapter? = null
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
     override fun getViewModel(): BaseViewModel = viewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
 
+        // callback to Handle back button event
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                calculatorDataSingleton!!.clearData()
+                findNavController().navigate(R.id.action_heartReportFragment_to_toolsCalculatorsDashboardFragment)
+            }
         }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHeartReportBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         initialiseChart()
         setClickable()
@@ -56,25 +65,24 @@ class HeartReportFragment : BaseFragment() {
 
     private fun initialise() {
 
-        heartRiskReportAdapter = HeartRiskReportAdapter(calculatorDataSingleton.heartAgeSummery.heartRiskReport, requireContext())
+        heartRiskReportAdapter = HeartRiskReportAdapter(calculatorDataSingleton!!.heartAgeSummery.heartRiskReport, requireContext())
         binding.heartRiskRecycler.adapter = heartRiskReportAdapter
 
-        paramDataReportAdapter = ParamDataReportAdapter(calculatorDataSingleton.heartAgeSummery.parameterReport, requireContext())
+        paramDataReportAdapter = ParamDataReportAdapter(calculatorDataSingleton!!.heartAgeSummery.parameterReport, requireContext())
         binding.paramListRecyler.adapter = paramDataReportAdapter
 
-        binding.txtRecommendationTitle.text = calculatorDataSingleton.heartAgeSummery.heartAgeReport.title
+        binding.txtRecommendationTitle.text = calculatorDataSingleton!!.heartAgeSummery.heartAgeReport.title
 
-        binding.txtRecommendationDescription.text = calculatorDataSingleton.heartAgeSummery.heartAgeReport.description
+        binding.txtRecommendationDescription.text = calculatorDataSingleton!!.heartAgeSummery.heartAgeReport.description
 
-        binding.txtHeartAge.text = calculatorDataSingleton.heartAge
-        binding.txtHeartRisk.text = calculatorDataSingleton.riskScorePercentage
-        binding.txtRisk2.text = calculatorDataSingleton.riskLabel
+        binding.txtHeartAge.text = calculatorDataSingleton!!.heartAge
+        binding.txtHeartRisk.text = calculatorDataSingleton!!.riskScorePercentage
+        binding.txtRisk2.text = calculatorDataSingleton!!.riskLabel
 
         try {
-            val riskPercentage = calculatorDataSingleton.riskScorePercentage.toDouble()
-            val color: Int
+            val riskPercentage = calculatorDataSingleton!!.riskScorePercentage.toDouble()
 
-            color = when  {
+            val color: Int = when  {
                 riskPercentage < 1 -> {
                     R.color.vivant_green_blue_two
                 }
@@ -140,10 +148,9 @@ class HeartReportFragment : BaseFragment() {
 
     private fun setHeartAgeChartData() {
         val entries: ArrayList<BarEntry> = ArrayList()
-        val personAge: Float = calculatorDataSingleton.personAge.toFloat()
+        val personAge: Float = calculatorDataSingleton!!.personAge.toFloat()
         entries.add(BarEntry(0f, personAge))
-        val summeryModelArrayList: ArrayList<HeartAgeSummeryModel> =
-            calculatorDataSingleton.heartAgeSummeryList
+        val summeryModelArrayList: ArrayList<HeartAgeSummeryModel> = calculatorDataSingleton!!.heartAgeSummeryList
         val colorArray = IntArray(summeryModelArrayList.size + 1)
         colorArray[0] = R.color.vivant_bright_sky_blue
         for (i in 1..summeryModelArrayList.size) {
@@ -184,7 +191,7 @@ class HeartReportFragment : BaseFragment() {
 
     private fun setHeartRiskChartData() {
         val entries: MutableList<BarEntry> = ArrayList()
-        val summeryModelArrayList: ArrayList<HeartAgeSummeryModel> = calculatorDataSingleton.heartAgeSummeryList
+        val summeryModelArrayList: ArrayList<HeartAgeSummeryModel> = calculatorDataSingleton!!.heartAgeSummeryList
         val colorArray = IntArray(summeryModelArrayList.size)
         for (i in summeryModelArrayList.indices) {
             val heartRisk: Float = summeryModelArrayList[i].heartRisk.toFloat()
@@ -222,9 +229,6 @@ class HeartReportFragment : BaseFragment() {
     private fun setClickable() {
 
         binding.btnRestart.setOnClickListener {
-            calculatorDataSingleton.clearData()
-            val bundle = Bundle()
-            bundle.putString(Constants.FROM, "Home")
             it.findNavController().navigate(R.id.action_heartReportFragment_to_heartAgeFragment)
         }
 

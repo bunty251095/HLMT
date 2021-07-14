@@ -6,8 +6,10 @@ import android.util.ArrayMap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
@@ -31,28 +33,34 @@ class HypertensionSummeryFragment : BaseFragment() {
     private lateinit var binding: FragmentHypertensionSummeryBinding
     private val viewModel: ToolsCalculatorsViewModel by viewModel()
 
-    private val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
     override fun getViewModel(): BaseViewModel = viewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
 
+        // callback to Handle back button event
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.action_hypertensionSummeryFragment_to_hypertensionInputFragment)
+            }
         }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHypertensionSummeryBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         setClickable()
         return binding.root
     }
 
     private fun initialise() {
-        if (calculatorDataSingleton.hypertensionSummery.hypertensionRisk.containsKey("RISK2")) {
+        if (calculatorDataSingleton!!.hypertensionSummery.hypertensionRisk.containsKey("RISK2")) {
             binding.btnRecalculate.text = resources.getString(R.string.RESTART)
         }
         initialiseChart()
@@ -107,7 +115,7 @@ class HypertensionSummeryFragment : BaseFragment() {
             }
 
         //ArrayList<HeartAgeSummeryModel> summeryModelArrayList = CalculatorDataSingleton.getInstance().getHeartAgeSummeryList();
-        val hypertensionRiskList:ArrayMap<String, ArrayList<String>> = calculatorDataSingleton.hypertensionSummery.hypertensionRisk
+        val hypertensionRiskList:ArrayMap<String, ArrayList<String>> = calculatorDataSingleton!!.hypertensionSummery.hypertensionRisk
         val entries1: MutableList<BarEntry> = ArrayList()
         val entries2: MutableList<BarEntry> = ArrayList()
         val entries3: MutableList<BarEntry> = ArrayList()
@@ -144,6 +152,7 @@ class HypertensionSummeryFragment : BaseFragment() {
             barWidth = 0.26f
         }
 
+        data.setValueTextSize(12f)
         data.barWidth = barWidth // set the width of each bar
 
         binding.barChartHeartRisk.data = data
@@ -156,26 +165,20 @@ class HypertensionSummeryFragment : BaseFragment() {
     @SuppressLint("SetTextI18n")
     private fun setClickable() {
 
-        if ( calculatorDataSingleton.heartAgeSummeryList.size >= 1) {
+        if ( calculatorDataSingleton!!.heartAgeSummeryList.size >= 1) {
             binding.btnRecalculate.text = resources.getString(R.string.RESTART_ASSESSMENT)
         }
 
         binding.btnRecalculate.setOnClickListener {
-            if (binding.btnRecalculate.text.toString().equals("restart", ignoreCase = true)) {
-                val bundle = Bundle()
-                bundle.putString(Constants.FROM, "Home")
-                it.findNavController().navigate(R.id.action_hypertensionSummeryFragment_to_toolsCalculatorsDashboardFragment)
+            if (binding.btnRecalculate.text.toString().equals(Constants.RESTART, ignoreCase = true)) {
+                findNavController().navigate(R.id.action_hypertensionSummeryFragment_to_hypertensionInputFragment)
             } else {
-                val bundle = Bundle()
-                bundle.putString(Constants.FROM, "Home")
-                it.findNavController().navigate(R.id.action_hypertensionSummeryFragment_to_hypertensionRecalculateFragment)
+                findNavController().navigate(R.id.action_hypertensionSummeryFragment_to_hypertensionRecalculateFragment)
             }
         }
 
         binding.btnViewReportGraph.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(Constants.FROM, "Home")
-            it.findNavController().navigate(R.id.action_hypertensionSummeryFragment_to_hypertensionReportFragment)
+            findNavController().navigate(R.id.action_hypertensionSummeryFragment_to_hypertensionReportFragment)
         }
 
     }

@@ -2,6 +2,7 @@ package com.caressa.tools_calculators.model
 
 import android.util.ArrayMap
 import com.caressa.model.toolscalculators.UserInfoModel
+import timber.log.Timber
 import java.util.*
 
 class CalculatorDataSingleton private constructor() {
@@ -30,6 +31,7 @@ class CalculatorDataSingleton private constructor() {
 
     fun clearData() {
         instance = null
+        Timber.e("Cleared ToolsTracker Data")
     }
 
     companion object {

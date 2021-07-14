@@ -35,7 +35,7 @@ class HypertensionReportFragment : BaseFragment() {
     private lateinit var binding: FragmentHypertensionReportBinding
     private val viewModel: ToolsCalculatorsViewModel by viewModel()
 
-    private val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
     override fun getViewModel(): BaseViewModel = viewModel
 
@@ -46,7 +46,7 @@ class HypertensionReportFragment : BaseFragment() {
         // callback to Handle back button event
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                calculatorDataSingleton.clearData()
+                calculatorDataSingleton!!.clearData()
                 findNavController().navigate(R.id.action_hypertensionReportFragment_to_toolsCalculatorsDashboardFragment)
             }
         }
@@ -57,6 +57,7 @@ class HypertensionReportFragment : BaseFragment() {
         binding = FragmentHypertensionReportBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialiseChart()
         setClickable()
         updateData()
@@ -110,7 +111,7 @@ class HypertensionReportFragment : BaseFragment() {
             }
 
 //        ArrayList<HeartAgeSummeryModel> summeryModelArrayList = CalculatorDataSingleton.getInstance().getHeartAgeSummeryList();
-        val hypertensionRiskList: ArrayMap<String, ArrayList<String>> = calculatorDataSingleton.hypertensionSummery.hypertensionRisk
+        val hypertensionRiskList: ArrayMap<String, ArrayList<String>> = calculatorDataSingleton!!.hypertensionSummery.hypertensionRisk
         val entries1: MutableList<BarEntry> = ArrayList()
         val entries2: MutableList<BarEntry> = ArrayList()
         val entries3: MutableList<BarEntry> = ArrayList()
@@ -148,6 +149,7 @@ class HypertensionReportFragment : BaseFragment() {
             barWidth = 0.26f
         }
 
+        data.setValueTextSize(12f)
         data.barWidth = barWidth // set the width of each bar
 
         binding.barChartHeartAge.data = data
@@ -160,7 +162,7 @@ class HypertensionReportFragment : BaseFragment() {
     @SuppressLint("SetTextI18n")
     private fun updateData() {
         try {
-            val model = calculatorDataSingleton.hypertensionSummery
+            val model = calculatorDataSingleton!!.hypertensionSummery
             val sysBp: String = model.systolicBp
             val diaBp: String = model.diastolicBp
             val status: String = model.status
@@ -191,9 +193,6 @@ class HypertensionReportFragment : BaseFragment() {
     private fun setClickable() {
 
         binding.btnRestart.setOnClickListener {
-            calculatorDataSingleton.clearData()
-            val bundle = Bundle()
-            bundle.putString(Constants.FROM, "Home")
             it.findNavController().navigate(R.id.action_hypertensionReportFragment_to_hypertensionInputFragment)
         }
 

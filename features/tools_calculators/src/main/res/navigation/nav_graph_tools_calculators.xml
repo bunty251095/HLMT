@@ -144,6 +144,12 @@
         android:name="com.caressa.tools_calculators.ui.DiabetesCalculator.DiabetesSummaryFragment">
 
         <action
+            android:id="@+id/action_diabetesSummaryFragment_to_diabetesCalculatorFragment"
+            app:popUpTo="@id/diabetesCalculatorFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+        <action
             android:id="@+id/action_diabetesSummaryFragment_to_diabetesReportFragment"
             app:destination="@id/diabetesReportFragment"
             app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
@@ -164,7 +170,7 @@
 
         <action
             android:id="@+id/action_diabetesReportFragment_to_diabetesCalculatorFragment"
-            app:destination="@id/diabetesCalculatorFragment"
+            app:popUpTo="@id/diabetesCalculatorFragment"
             app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
 
@@ -201,6 +207,12 @@
         android:name="com.caressa.tools_calculators.ui.HypertensionCalculator.HypertensionSummeryFragment">
 
         <action
+            android:id="@+id/action_hypertensionSummeryFragment_to_hypertensionInputFragment"
+            app:popUpTo="@id/hypertensionInputFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+        <action
             android:id="@+id/action_hypertensionSummeryFragment_to_hypertensionReportFragment"
             app:destination="@id/hypertensionReportFragment"
             app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
@@ -227,7 +239,7 @@
 
         <action
             android:id="@+id/action_hypertensionReportFragment_to_hypertensionInputFragment"
-            app:destination="@id/hypertensionInputFragment"
+            app:popUpTo="@id/hypertensionInputFragment"
             app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
 
@@ -277,6 +289,12 @@
         android:name="com.caressa.tools_calculators.ui.StressAndAnxietyCalculator.StressAndAnxietySummeryFragment">
 
         <action
+            android:id="@+id/action_stressAndAnxietySummeryFragment_to_stressAndAnxietyInputFragment"
+            app:popUpTo="@id/stressAndAnxietyInputFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
+
+        <action
             android:id="@+id/action_stressAndAnxietySummeryFragment_to_toolsCalculatorsDashboardFragment"
             app:popUpTo="@id/toolsCalculatorsDashboardFragment"
             app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
@@ -312,6 +330,12 @@
             android:name="Score"
             app:argType="string"
             android:defaultValue=" "/>
+
+        <action
+            android:id="@+id/action_smartPhoneAddictionSummaryFragment_to_smartPhoneInputFragment"
+            app:popUpTo="@id/smartPhoneInputFragment"
+            app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
 
         <action
             android:id="@+id/action_smartPhoneAddictionSummaryFragment_to_toolsCalculatorsDashboardFragment"

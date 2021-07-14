@@ -203,6 +203,7 @@ object Constants {
     const val DIGITIZE = "Digitize"
     const val DASHBOARD = "Dashboard"
     const val DOWNLOAD = "Download"
+    const val RESTART = "Restart"
 
     const val NOTIFICATION = "Notification"
     const val NOTIFICATION_ID = "NotificationId"

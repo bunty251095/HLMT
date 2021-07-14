@@ -47,10 +47,10 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
     private lateinit var binding: FragmentHypertensionInputBinding
     val viewModel: ToolsCalculatorsViewModel by viewModel()
     private val dataHandler : DataHandler = get()
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
-    private var quizID = calculatorDataSingleton.quizId
-    private var participationID = calculatorDataSingleton.participantID
+    private var quizID = ""
+    private var participationID = ""
     private var genderAdapter : SpinnerAdapter? = null
     private var parameterAdapter: ParameterAdapter? = null
     private var genderList = ArrayList<SpinnerModel>()
@@ -63,11 +63,11 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.i("QuizID,ParticipationID---> $quizID , $participationID")
 
         // callback to Handle back button event
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                calculatorDataSingleton!!.clearData()
                 findNavController().navigate(R.id.action_hypertensionInputFragment_to_toolsCalculatorsDashboardFragment)
             }
         }
@@ -79,6 +79,10 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         try {
+            calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+            quizID = calculatorDataSingleton!!.quizId
+            participationID = calculatorDataSingleton!!.participantID
+            Timber.e("QuizID,ParticipationID---> $quizID , $participationID")
             initialise()
             setClickable()
             loadUserData()
@@ -161,8 +165,8 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
         binding.btnCalculate.setOnClickListener {
             if (validateParameter()) {
                 saveParameter()
-                calculatorDataSingleton.answerArrayMap = answerArrayMap
-                calculatorDataSingleton.userPreferences = userPreferenceModel
+                calculatorDataSingleton!!.answerArrayMap = answerArrayMap
+                calculatorDataSingleton!!.userPreferences = userPreferenceModel
                 viewModel.callHypertensionSaveResponseApi("First",participationID,quizID,getAnswerList())
             }
         }
@@ -206,7 +210,7 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
         answer = Answer("AGE", binding.edtAge.text.toString(), "0")
         answerArrayMap["AGE"] = answer
 
-        calculatorDataSingleton.personAge = binding.edtAge.text.toString()
+        calculatorDataSingleton!!.personAge = binding.edtAge.text.toString()
         userPreferenceModel.isMale = !binding.txtGender.text.toString().equals("female", ignoreCase = true)
     }
 
@@ -369,8 +373,8 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
 
     @SuppressLint("SetTextI18n")
     override fun onHealthConditionValueListener() {
-        Timber.e("Selected :: ${calculatorDataSingleton.healthConditionSelection.size}")
-        binding.txtSelection.text = "( You have selected ${calculatorDataSingleton.healthConditionSelection.size} health condition )"
+        Timber.e("Selected :: ${calculatorDataSingleton!!.healthConditionSelection.size}")
+        binding.txtSelection.text = "( You have selected ${calculatorDataSingleton!!.healthConditionSelection.size} health condition )"
     }
 
 }
