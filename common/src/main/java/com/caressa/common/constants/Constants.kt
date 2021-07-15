@@ -294,9 +294,9 @@ object Constants {
     const val TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss"
 
     // BMI CALCULATION VALUES
-    const val HEIGHT_MIN = 120
-    const val HEIGHT_MAX = 240
-    const val WEIGHT_MIN_METRIC = 30
+    const val HEIGHT_MIN = 119
+    const val HEIGHT_MAX = 245
+    const val WEIGHT_MIN_METRIC = 29
     const val WEIGHT_MAX_METRIC = 150
 
     const val REQ_CODE_STORAGE = 2296
@@ -351,6 +351,8 @@ object FirebaseConstants{
     const val NON_HLMT_LOGIN_FAIL_EVENT = "regular_login_fail"
     const val NON_HLMT_REGISTRATION_SUCCESSFUL_EVENT = "regular_registration_successful"
     const val NON_HLMT_REGISTRATION_FAIL_EVENT = "regular_registration_fail"
+    const val LINK_ACCOUNT_SUCCESSFUL = "link_account_successful"
+    const val LINK_ACCOUNT_FAIL = "link_account_fail"
 
     const val HRA_INITIATED_EVENT = "hra_initiated"
     const val HRA_COMPLETED_EVENT = "hra_completed"
@@ -374,6 +376,8 @@ object FirebaseConstants{
     const val NON_HLMT_LOGIN_SCREEN = "non_hlmt_login_screen"
     const val DUE_DATE_CALCULATOR_SCREEN = "due_date_calculator_screen"
     const val SMART_PHONE_CALCULATOR_SCREEN = "smart_phone_calculator_screen"
+    const val LINK_ACCOUNT_SCREEN = "smart_phone_calculator_screen"
+    const val LINK_ACCOUNT_STATUS_SCREEN  = "smart_phone_calculator_screen"
 
 
     /*const val PARTNER_IDENTIFIER = "hlmt_"

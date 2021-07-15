@@ -1,6 +1,7 @@
 package com.caressa.security.ui
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +9,12 @@ import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.FirebaseConstants
-import com.caressa.common.utils.Event
 import com.caressa.common.utils.FirebaseHelper
-import com.caressa.repository.utils.Resource
 import com.caressa.security.databinding.FragmentLoginWithOtpBinding
-import org.koin.android.viewmodel.ext.android.viewModel
 import com.caressa.security.viewmodel.LoginWithOtpViewModel
-import com.caressa.security.R
 import kotlinx.android.synthetic.main.fragment_login_with_otp.*
+import org.koin.android.viewmodel.ext.android.viewModel
+
 
 class LoginWithOtpFragment : BaseFragment() {
 
@@ -62,14 +61,26 @@ class LoginWithOtpFragment : BaseFragment() {
                     FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.SEND_OTP_SUCCESSFUL_EVENT)
                     binding.verifyCodeLayout.visibility = View.VISIBLE
                     binding.btnSendOtp.visibility = View.GONE
+                    binding.txtEditNumber.visibility = View.VISIBLE
+                    binding.edtMobileNumber.isClickable = false
+                    binding.edtMobileNumber.isCursorVisible = false
+                    binding.edtMobileNumber.isEnabled = false
                 } else {
                     binding.verifyCodeLayout.visibility = View.GONE
                     binding.btnSendOtp.visibility = View.VISIBLE
+                    binding.txtEditNumber.visibility = View.GONE
+                    binding.edtMobileNumber.isClickable = false
+                    binding.edtMobileNumber.isCursorVisible = false
+                    binding.edtMobileNumber.isEnabled = false
                     FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.SEND_OTP_FAIL_EVENT)
                 }
             }else{
                 binding.verifyCodeLayout.visibility = View.GONE
                 binding.btnSendOtp.visibility = View.VISIBLE
+                binding.txtEditNumber.visibility = View.GONE
+                binding.edtMobileNumber.isClickable = true
+                binding.edtMobileNumber.isCursorVisible = true
+                binding.edtMobileNumber.isEnabled = true
 
             }
         })
@@ -83,6 +94,7 @@ class LoginWithOtpFragment : BaseFragment() {
 
         binding.btnSendOtp.setOnClickListener {
             viewModel.checkLoginNameExistOrNot(binding.edtMobileNumber.text.toString())
+            startCountdownTimer(120)
         }
 
         binding.btnBack.setOnClickListener {
@@ -93,12 +105,35 @@ class LoginWithOtpFragment : BaseFragment() {
             viewModel.callValidateOTPforUserAPI(binding.layoutCodeView.text.toString(),binding.edtMobileNumber.text.toString());
         }
 
+        binding.txtEditNumber.setOnClickListener {
+            binding.layoutCodeView.setText("")
+            binding.edtMobileNumber.isClickable = true
+            binding.edtMobileNumber.isCursorVisible = true
+            binding.edtMobileNumber.isEnabled = true
+            binding.verifyCodeLayout.visibility = View.GONE
+            binding.btnSendOtp.visibility = View.VISIBLE
+            binding.txtEditNumber.visibility = View.GONE
+        }
+
         binding.txtResendCode.setOnClickListener {
             binding.layoutCodeView.setText("")
             viewModel.checkLoginNameExistOrNot(binding.edtMobileNumber.text.toString())
             FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.RESEND_OTP_EVENT)
         }
 
+    }
+
+    private fun startCountdownTimer(i: Int) {
+        /*object : CountDownTimer(30000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                mTextField.setText("seconds remaining: " + millisUntilFinished / 1000)
+                //here you can have your logic to set text to edittext
+            }
+
+            override fun onFinish() {
+                mTextField.setText("done!")
+            }
+        }.start()*/
     }
 
 }

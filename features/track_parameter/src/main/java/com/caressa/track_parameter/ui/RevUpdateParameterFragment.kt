@@ -44,39 +44,10 @@ class RevUpdateParameterFragment : BaseFragment(){
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // callback to Handle back button event
-
-//        arguments?.let {
-//            from = it.getString(Constants.FROM,"")!!
-//            Timber.e("from,selectedDate--->$from")
-//        }
-//        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                performBackClick()
-//            }
-//        }
-//        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
-
-//    fun performBackClick() {
-//        val bundle = Bundle()
-//        if ( from.equals("DashboardBP",ignoreCase = true) || from.equals("DashboardBMI") )  {
-//            requireActivity().finish()
-//        }
-//    }
 
     private fun initialise() {
-//        if(!from.isNullOrEmpty()){
-//            if(from.equals("DashboardBP",true)) {
-//                profileCode = "BLOODPRESSURE"
-//            }else{
-//                profileCode = "BMI"
-//            }
-//        }else {
-            profileCode = args.profileCode
-//        }
+        profileCode = args.profileCode
+        Timber.i("Profile Code => "+profileCode )
         val profileAdapter = RevSelectedParamAdapter(true)
         binding.rvSelectedParameters.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         binding.rvSelectedParameters.adapter = profileAdapter

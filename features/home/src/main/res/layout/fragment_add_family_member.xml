@@ -296,16 +296,16 @@
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/edt_member_mobile"
+                                style="@style/VivantEditTextStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                style="@style/VivantEditTextStyle"
+                                android:imeOptions="actionNext"
                                 android:inputType="number"
                                 android:lines="1"
-                                android:imeOptions="actionNext"
-                                android:maxLength="13"
+                                android:maxLength="10"
+                                android:paddingTop="@dimen/_10sdp"
                                 android:text=""
-                                android:textSize="@dimen/_13sdp"
-                                android:paddingTop="@dimen/_10sdp"/>
+                                android:textSize="@dimen/_13sdp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 

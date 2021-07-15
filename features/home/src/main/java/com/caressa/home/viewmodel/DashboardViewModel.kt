@@ -13,14 +13,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.caressa.home.R
 import com.caressa.common.base.BaseViewModel
-import com.caressa.common.constants.Configuration
-import com.caressa.common.constants.Constants
-import com.caressa.common.constants.NavigationConstants
-import com.caressa.common.constants.PreferenceConstants
-import com.caressa.common.utils.DateHelper
-import com.caressa.common.utils.Event
-import com.caressa.common.utils.PermissionUtil
-import com.caressa.common.utils.Utilities
+import com.caressa.common.constants.*
+import com.caressa.common.utils.*
 import com.caressa.home.common.DataHandler
 import com.caressa.home.common.DataHandler.DashboardFeature
 import com.caressa.home.common.DataHandler.NavDrawerOption
@@ -490,11 +484,12 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                 if (it.status == Resource.Status.SUCCESS) {
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
                     if(it.data != null && !it.data!!.HLMTUserID.isNullOrEmpty()) {
+                        FirebaseHelper.logScreenEvent(FirebaseConstants.LINK_ACCOUNT_SUCCESSFUL)
                         sharedPref.edit()
                             .putString(PreferenceConstants.IS_HLMT_USER, it.data!!.isHLMTUser)
                             .apply()
                         sharedPref.edit()
-                            .putString(PreferenceConstants.HLMT_USERNAME, it.data!!.hlmtUserName)
+                            .putString(PreferenceConstants.HLMT_USERNAME, username)
                             .apply()
                         sharedPref.edit()
                             .putString(PreferenceConstants.HLMT_USER_ID, it.data!!.HLMTUserID)
@@ -504,12 +499,14 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                             it.data!!.accountLinkStatus
                         ).apply()
                     }else{
+                        FirebaseHelper.logScreenEvent(FirebaseConstants.LINK_ACCOUNT_FAIL)
                         toastMessage("Unable to connect, please try again")
                     }
                     Timber.i("Data=> " + it)
                 }
 
                 if (it.status == Resource.Status.ERROR) {
+                    FirebaseHelper.logScreenEvent(FirebaseConstants.LINK_ACCOUNT_FAIL)
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
                     toastMessage(it.errorMessage)
                 }

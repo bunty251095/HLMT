@@ -48,6 +48,7 @@ class HealthRecordsViewModel(
     val personId = sharedPref.getString(PreferenceConstants.PERSONID,"")!!
     val authToken = sharedPref.getString(PreferenceConstants.TOKEN,"")!!
     val firstName = sharedPref.getString(PreferenceConstants.FIRSTNAME,"")!!
+    val gender = sharedPref.getString(PreferenceConstants.GENDER,"")!!
 
     val documentTypeList = MutableLiveData<List<DocumentType>>()
     val recordsInSessionList = MutableLiveData<List<RecordInSession>>()

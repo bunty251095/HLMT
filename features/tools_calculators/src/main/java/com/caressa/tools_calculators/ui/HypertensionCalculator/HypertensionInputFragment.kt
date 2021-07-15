@@ -247,7 +247,7 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
         if (isValid) {
             for (i in paramList.indices) {
                 if (paramList[i].title.equals("Height", ignoreCase = true)) {
-                    if (!paramList[i].finalValue.equals("", ignoreCase = true)) {
+                    if (!Utilities.isNullOrEmptyOrZero(paramList[i].finalValue)) {
                         isValid = true
                         saveUserPreference(paramList[i])
                     } else {
@@ -256,7 +256,7 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
                         break
                     }
                 } else if (paramList[i].title.equals("Weight", ignoreCase = true)) {
-                    if (!paramList[i].finalValue.equals("", ignoreCase = true)) {
+                    if (!Utilities.isNullOrEmptyOrZero(paramList[i].finalValue)) {
                         isValid = true
                         saveUserPreference(paramList[i])
                     } else {

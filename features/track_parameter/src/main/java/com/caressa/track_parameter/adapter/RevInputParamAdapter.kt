@@ -60,8 +60,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
         }else if(items.get(0).profileCode.equals("DIABETIC")){
             filterList = items.sortedBy { it.description }
         }else{
-            filterList = items
-//                items.filter { !it.parameterCode.equals("WBC") && !it.parameterCode.equals("DLC") }
+            filterList = items.filter { item -> !item.parameterCode.equals("WBC",true) && !item.parameterCode.equals("DLC",true) }
         }
         return filterList
     }
@@ -398,11 +397,13 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                                 binding.edtInputValueBmi.setText(weight)
                                 binding.txtParamUnitBmi.setText("kg")
                             }else{
-                                binding.edtInputValueBmi.setText(
-                                    CalculateParameters.convertKgToLbs(
+                                var strWeight = ""
+                                if(!weight.isNullOrEmpty()){
+                                    strWeight = Utilities.roundOffPrecision(CalculateParameters.convertKgToLbs(
                                         weight
-                                    )
-                                )
+                                    ).toDouble(),0).toInt().toString()
+                                }
+                                binding.edtInputValueBmi.setText(strWeight)
                                 binding.txtParamUnitBmi.setText("lbs")
                             }
                         }

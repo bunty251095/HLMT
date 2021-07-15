@@ -58,11 +58,8 @@
                             android:layout_width="@dimen/_45sdp"
                             android:layout_height="@dimen/_45sdp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/circle_bg"
-                            android:backgroundTint="@color/hlmt_light_blue"
-                            android:padding="@dimen/_5sdp"
                             android:scaleType="fitCenter"
-                            app:srcCompat="@drawable/ic_height_new" />
+                            app:srcCompat="@drawable/dash_height" />
 
                         <com.caressa.common.view.ArcTextView
                             style="@style/VivantTitle"
@@ -102,10 +99,8 @@
                             android:layout_width="@dimen/_45sdp"
                             android:layout_height="@dimen/_45sdp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/circle_bg"
-                            android:padding="@dimen/_8sdp"
                             android:scaleType="fitCenter"
-                            app:srcCompat="@drawable/ic_weight_new" />
+                            app:srcCompat="@drawable/dash_weight" />
 
                         <com.caressa.common.view.ArcTextView
                             style="@style/VivantTitle"
@@ -145,11 +140,8 @@
                             android:layout_width="@dimen/_45sdp"
                             android:layout_height="@dimen/_45sdp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/circle_bg"
-                            android:backgroundTint="@color/hlmt_dark_grey"
-                            android:padding="@dimen/_5sdp"
                             android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_bmi_new" />
+                            app:srcCompat="@drawable/dash_bmi" />
 
                         <com.caressa.common.view.ArcTextView
                             style="@style/VivantTitle"
@@ -189,11 +181,8 @@
                             android:layout_width="@dimen/_45sdp"
                             android:layout_height="@dimen/_45sdp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/circle_bg"
-                            android:backgroundTint="@color/hlmt_warm_grey"
-                            android:padding="@dimen/_5sdp"
                             android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_bp_new" />
+                            app:srcCompat="@drawable/dash_blood_pressure" />
 
                         <com.caressa.common.view.ArcTextView
                             style="@style/VivantTitle"
@@ -223,7 +212,6 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:paddingBottom="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -234,13 +222,17 @@
                         android:id="@+id/rvDashboardGrid"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:paddingStart="@dimen/_5sdp"
+                        android:paddingEnd="@dimen/_5sdp"
                         app:dashboardFeaturesGrid="@{viewModel.dashboardFeatureList}"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_dashboard_features"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:listitem="@layout/item_dashboard_features" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

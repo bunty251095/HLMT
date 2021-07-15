@@ -16,10 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
-import com.caressa.common.utils.AppColorHelper
-import com.caressa.common.utils.DateHelper
-import com.caressa.common.utils.NetworkUtility
-import com.caressa.common.utils.Utilities
+import com.caressa.common.utils.*
 import com.caressa.medication_tracker.R
 import com.caressa.medication_tracker.adapter.MealTimeAdapter
 import com.caressa.medication_tracker.adapter.MedFreuencyAdapter
@@ -296,7 +293,37 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
 
     private fun showStartDatePicker() {
         try {
-            val materialDatePicker = MaterialDatePicker.Builder.datePicker()
+            DialogHelper().showDatePickerDialog("Start Date",requireContext(), Calendar.getInstance(),
+                Calendar.getInstance(), null, object :
+                DialogHelper.DateListener{
+                override fun onDateSet(date: String, year: String, month: String, dayOfMonth: String) {
+                    val selectedDate = DateHelper.convertDateSourceToDestination(date,DateHelper.DISPLAY_DATE_DDMMMYYYY,DateHelper.SERVER_DATE_YYYYMMDD)
+                    Timber.e("SelectedStartDate--->$selectedDate")
+                    if ( !Utilities.isNullOrEmpty(selectedDate) ) {
+                        if (!Utilities.isNullOrEmpty(serverEndDate)) {
+                            val startDate = DateHelper.getDate(selectedDate, DateHelper.SERVER_DATE_YYYYMMDD)
+                            val endDate = DateHelper.getDate(serverEndDate, DateHelper.SERVER_DATE_YYYYMMDD)
+                            if (startDate == endDate || startDate.before(endDate)) {
+                                serverStartDate = selectedDate
+                                val date = DateHelper.getDateTimeAs_ddMMMyyyyNew(selectedDate)
+                                binding.edtStartDate.setText(date)
+                            } else {
+                                Utilities.toastMessageShort(context, "Start Date must be less than or Equal to End Date")
+                            }
+                        } else {
+                            serverStartDate = selectedDate
+                            binding.edtStartDate.setText(DateHelper.getDateTimeAs_ddMMMyyyyNew(selectedDate))
+                        }
+
+                        if (medFreqPos == 1 && !Utilities.isNullOrEmptyOrZero(binding.edtDuration.text.toString())) {
+                            val endDate = DateHelper.getDateBeforeOrAfterGivenDays(serverStartDate,binding.edtDuration.text.toString().toInt())
+                            serverEndDate = endDate
+                            binding.edtEndDate.setText(DateHelper.getDateTimeAs_ddMMMyyyyNew(endDate))
+                        }
+                    }
+                }
+            })
+            /*val materialDatePicker = MaterialDatePicker.Builder.datePicker()
             materialDatePicker.setTitleText("Start Date")
 
             val constraintsBuilder = CalendarConstraints.Builder()
@@ -313,6 +340,7 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
 
             picker.addOnPositiveButtonClickListener {
                 Timber.e( "Start_Date----->${picker.headerText}:: Date epoch value = $it")
+
                 val selectedDate = DateHelper.convertMaterialPickerDateToServerdate(picker.headerText)
                 Timber.e("SelectedStartDate--->$selectedDate")
                 if ( !Utilities.isNullOrEmpty(selectedDate) ) {
@@ -337,7 +365,7 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
                         binding.edtEndDate.setText(DateHelper.getDateTimeAs_ddMMMyyyyNew(endDate))
                     }
                 }
-            }
+            }*/
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -345,7 +373,42 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
 
     private fun showEndDatePicker() {
         try {
-            val materialDatePicker = MaterialDatePicker.Builder.datePicker()
+            DialogHelper().showDatePickerDialog("Start Date",requireContext(), Calendar.getInstance(),
+                Calendar.getInstance(), null, object :
+                    DialogHelper.DateListener {
+                    override fun onDateSet(
+                        date: String,
+                        year: String,
+                        month: String,
+                        dayOfMonth: String
+                    ) {
+                        val selectedDate = DateHelper.convertDateSourceToDestination(date,DateHelper.DISPLAY_DATE_DDMMMYYYY,DateHelper.SERVER_DATE_YYYYMMDD)
+                        Timber.e("SelectedEndDate--->$selectedDate")
+                        if (!Utilities.isNullOrEmpty(selectedDate)) {
+                            val startDate =
+                                DateHelper.getDate(serverStartDate, DateHelper.SERVER_DATE_YYYYMMDD)
+                            val endDate =
+                                DateHelper.getDate(selectedDate, DateHelper.SERVER_DATE_YYYYMMDD)
+                            if (endDate == startDate || endDate.after(startDate)) {
+                                serverEndDate = selectedDate
+                                binding.edtDuration.setText(
+                                    (DateHelper.getDateDifference(
+                                        serverStartDate,
+                                        selectedDate
+                                    ) + 1).toString()
+                                )
+                            } else {
+                                Utilities.toastMessageShort(
+                                    context,
+                                    "End Date must be Greater than or Equal to Start Date"
+                                )
+                            }
+                        }
+                    }
+
+                })
+
+            /*val materialDatePicker = MaterialDatePicker.Builder.datePicker()
             materialDatePicker.setTitleText("End Date")
             val constraintsBuilder = CalendarConstraints.Builder()
             calendarStart = setDayMonthYearToCalender(serverStartDate,calendarStart)
@@ -377,7 +440,7 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
                         Utilities.toastMessageShort(context, "End Date must be Greater than or Equal to Start Date")
                     }
                 }
-            }
+            }*/
         } catch (e: Exception) {
             e.printStackTrace()
         }

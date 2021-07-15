@@ -475,6 +475,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_15sdp"
                         android:gravity="center"
+                        android:textSize="@dimen/_14sdp"
                         android:text="No History Available"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

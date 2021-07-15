@@ -241,6 +241,7 @@ class AddMedicineFragment : BaseFragment(),MedicineTypeAdapter.OnMedTypeListener
 
     @SuppressLint("SetTextI18n")
     private fun setMedicineDetails(details: MedicationEntity.Medication) {
+
         try {
             Utilities.printData("details",details,true)
             //drugTypeCode = details.DrugTypeCode!!

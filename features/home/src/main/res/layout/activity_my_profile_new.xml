@@ -770,7 +770,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:maxLines="1"
-                            android:maxLength="13"
+                            android:maxLength="10"
                             android:paddingTop="@dimen/_10sdp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -820,7 +820,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:maxLines="1"
-                            android:maxLength="13"
+                            android:maxLength="10"
                             android:paddingTop="@dimen/_10sdp" />
 
                     </com.google.android.material.textfield.TextInputLayout>

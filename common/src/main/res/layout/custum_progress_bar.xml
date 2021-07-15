@@ -8,10 +8,10 @@
 
     <com.caressa.common.view.ArcImageView
         android:id="@+id/img_custom_progress"
-        app:isTemplate="true"
         android:layout_width="@dimen/_70sdp"
         android:layout_height="@dimen/_70sdp"
         android:src="@drawable/loader_petal"
+        android:tint="@color/hlmt_european_blue_loader"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

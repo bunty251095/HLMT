@@ -27,6 +27,6 @@ object FirebaseHelper {
     }
 
     fun logScreenEvent(eventName: String, addPrefix: Boolean= true){
-        logCustomFirebaseEvent(FirebaseConstants.PARTNER_IDENTIFIER+eventName, addPrefix)
+        logCustomFirebaseEvent(eventName, addPrefix)
     }
 }

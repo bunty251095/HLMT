@@ -6,6 +6,7 @@
 
     <!-- HLMT Colors -->
     <color name="hlmt_european_blue">#002D62</color>
+    <color name="hlmt_european_blue_loader">#00142B</color>
     <color name="hlmt_poppy_red">#FF0000</color>
     <color name="hlmt_dark_grey">#747678</color>
     <color name="hlmt_cool_grey">#9A9B9C</color>

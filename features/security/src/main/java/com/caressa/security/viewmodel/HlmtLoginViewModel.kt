@@ -255,11 +255,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                             .apply()
                         sharedPref.edit().putString(PreferenceConstants.TOKEN, loginData.context)
                             .apply()
-                        sharedPref.edit()
-                            .putString(
-                                PreferenceConstants.ACCOUNTID,
-                                loginData.accountID.toString()
-                            )
+                        sharedPref.edit().putString(PreferenceConstants.ACCOUNTID, loginData.accountID.toString())
                             .apply()
                         sharedPref.edit().putString(PreferenceConstants.FIRSTNAME, loginData.name)
                             .apply()
@@ -272,9 +268,6 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                         ).apply()
                         sharedPref.edit()
                             .putString(PreferenceConstants.IS_HLMT_USER, loginData.IsHLMTUser)
-                            .apply()
-                        sharedPref.edit()
-                            .putString(PreferenceConstants.ACCOUNT_LINK_STATUS, loginData.IsHLMTUser)
                             .apply()
                         sharedPref.edit()
                             .putString(PreferenceConstants.ACCOUNT_LINK_STATUS, loginData.accountLinkStatus)

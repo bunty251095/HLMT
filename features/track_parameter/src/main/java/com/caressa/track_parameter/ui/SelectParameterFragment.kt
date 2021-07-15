@@ -43,8 +43,9 @@ class SelectParameterFragment : BaseFragment(){
         binding.btnNextSelectParameters.setOnClickListener {
             if ( validate() ) {
                 viewModel.saveSelectedParameter( selectParameterAdapter!!.dataList )
+                Timber.i("Datalist=> "+selectParameterAdapter!!.dataList)
                 viewModel.navigateParam(SelectParameterFragmentDirections.actionSelectParamFragmentToUpdateParameterFragment(
-                    selectParameterAdapter!!.dataList.get(0).profileCode,"false"))
+                    selectParameterAdapter!!.getSelectedParameterList().get(0).profileCode,"false"))
             } else {
                 Utilities.toastMessageShort(requireContext(),"Please Select a Profile to Proceed")
             }

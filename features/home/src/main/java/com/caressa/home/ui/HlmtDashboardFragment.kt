@@ -163,7 +163,7 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
                             if(viewModel.getPreference("WEIGHT").equals("kg")){
                                 binding.txtWeightValue.text = "${item.value} kg"
                             }else{
-                                binding.txtWeightValue.text = CalculateParameters.convertKgToLbs(item.value.toString())+" lbs"
+                                binding.txtWeightValue.text = Utilities.roundOffPrecision(CalculateParameters.convertKgToLbs(item.value.toString()).toDouble(),0).toInt().toString()+" lbs"
                             }
                         }
                         if (item.parameterCode.equals("BP_DIA",true)){

@@ -51,7 +51,19 @@ object TrackParameterBinding {
 
         Timber.i("BindingAdapter=> "+resource)
         with(view.adapter as RevSavedParamAdapter) {
-            resource?.let { updateData(it) }
+            resource?.let {
+                if(it!= null && it.size>0) {
+                    var list = it.filter { item ->
+                        !item.parameterCode.equals(
+                            "WBC",
+                            true
+                        ) && !item.parameterCode.equals("DLC", true)
+                    }
+                    updateData(list)
+                }else{
+                    updateData(it)
+                }
+            }
         }
     }
 
@@ -79,7 +91,21 @@ object TrackParameterBinding {
 //        view.adapter = ParameterSpinnerAdapter(view.context)
         Timber.i("BindingAdapter=> "+resource)
         with(view.adapter as ParameterSpinnerAdapter) {
-            resource?.let { updateList(it) }
+            resource?.let {
+
+                if(it!= null && it.size>0) {
+                    var list = it.filter { item ->
+                        !item.parameterCode.equals(
+                            "WBC",
+                            true
+                        ) && !item.parameterCode.equals("DLC", true)
+                    }
+                    updateList(list)
+                }else{
+                    updateList(it)
+                }
+
+            }
         }
     }
 
