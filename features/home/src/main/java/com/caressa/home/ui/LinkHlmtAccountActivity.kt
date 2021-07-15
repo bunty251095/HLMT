@@ -12,9 +12,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.AppColorHelper
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.home.R
 import com.caressa.home.databinding.ActivityLinkHlmtAccountBinding
 import com.caressa.home.viewmodel.DashboardViewModel
@@ -41,6 +43,7 @@ class LinkHlmtAccountActivity : BaseActivity() {
     }
 
     private fun initialise() {
+
         viewModel.hlmt360LoginResponse.observe(this, Observer {
             if(it!=null){
                 if ( it.accountLinkStatus.equals("true",true) ) {
@@ -59,6 +62,7 @@ class LinkHlmtAccountActivity : BaseActivity() {
         })
         isAccountLinked = viewModel.getPreference(PreferenceConstants.ACCOUNT_LINK_STATUS).equals("true",true)
         if ( isAccountLinked ) {
+            FirebaseHelper.logScreenEvent(FirebaseConstants.LINK_ACCOUNT_STATUS_SCREEN)
             var lblText:String = "Your HLMT 360 Account <b> "+viewModel.getPreference(PreferenceConstants.HLMT_USERNAME)+" </b> is already link with your wellness app profile."
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 binding.lblAccountLink.setText(Html.fromHtml(lblText, Html.FROM_HTML_MODE_COMPACT));
@@ -68,6 +72,7 @@ class LinkHlmtAccountActivity : BaseActivity() {
             binding.layoutAccLinked.visibility = View.VISIBLE
             binding.layoutAccNotLinked.visibility = View.GONE
         } else {
+            FirebaseHelper.logScreenEvent(FirebaseConstants.LINK_ACCOUNT_SCREEN)
             binding.layoutAccLinked.visibility = View.GONE
             binding.layoutAccNotLinked.visibility = View.VISIBLE
         }

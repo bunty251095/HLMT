@@ -67,6 +67,15 @@ class SelectParameterAdapter(private val mContext: Context,private  val viewMode
             viewModel.hideProgressBar()
         }, 1000)
     }
+    fun getSelectedParameterList(): ArrayList<ParameterProfile> {
+        var list:ArrayList<ParameterProfile> = arrayListOf()
+        for(item in dataList){
+            if (item.isSelection){
+                list.add(item)
+            }
+        }
+        return list
+    }
 
     class SelectParameterViewHolder(parent: View): RecyclerView.ViewHolder(parent) {
 

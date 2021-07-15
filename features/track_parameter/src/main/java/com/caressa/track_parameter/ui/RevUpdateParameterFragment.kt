@@ -46,15 +46,8 @@ class RevUpdateParameterFragment : BaseFragment(){
 
 
     private fun initialise() {
-//        if(!from.isNullOrEmpty()){
-//            if(from.equals("DashboardBP",true)) {
-//                profileCode = "BLOODPRESSURE"
-//            }else{
-//                profileCode = "BMI"
-//            }
-//        }else {
-            profileCode = args.profileCode
-//        }
+        profileCode = args.profileCode
+        Timber.i("Profile Code => "+profileCode )
         val profileAdapter = RevSelectedParamAdapter(true)
         binding.rvSelectedParameters.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         binding.rvSelectedParameters.adapter = profileAdapter
