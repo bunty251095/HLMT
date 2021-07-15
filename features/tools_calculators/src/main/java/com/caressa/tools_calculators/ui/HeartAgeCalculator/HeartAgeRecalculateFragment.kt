@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
@@ -38,10 +37,10 @@ class HeartAgeRecalculateFragment : BaseFragment(), KoinComponent, ParameterAdap
     private lateinit var binding: FragmentHeartAgeRecalculateBinding
     private val viewModel: ToolsCalculatorsViewModel by viewModel()
     private val dataHandler : DataHandler = get()
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
-    private var quizID = calculatorDataSingleton.quizId
-    private var participationID = calculatorDataSingleton.participantID
+    private var quizID = ""
+    private var participationID = ""
     private var parameterAdapter: ParameterAdapter? = null
     private var paramList: MutableList<ParameterDataModel> = mutableListOf()
     private var answerArrayMap = ArrayMap<String, Answer>()
@@ -49,19 +48,14 @@ class HeartAgeRecalculateFragment : BaseFragment(), KoinComponent, ParameterAdap
 
     override fun getViewModel(): BaseViewModel = viewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-/*        arguments?.let {
-            quizID = requireArguments().getString("QuizId", "")!!
-            participationID = requireArguments().getString("ParticipationID", "")!!
-        }*/
-        Timber.i("QuizID,ParticipationID---> $quizID , $participationID")
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHeartAgeRecalculateBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+        quizID = calculatorDataSingleton!!.quizId
+        participationID = calculatorDataSingleton!!.participantID
+        Timber.e("QuizID,ParticipationID---> $quizID , $participationID")
         initialise()
         setClickable()
         return binding.root
@@ -69,10 +63,10 @@ class HeartAgeRecalculateFragment : BaseFragment(), KoinComponent, ParameterAdap
 
     private fun initialise() {
 
-        binding.txtHeartAgeValue.text = calculatorDataSingleton.heartAge
-        binding.txtHeartRiskValue.text = calculatorDataSingleton.riskScorePercentage
+        binding.txtHeartAgeValue.text = calculatorDataSingleton!!.heartAge
+        binding.txtHeartRiskValue.text = calculatorDataSingleton!!.riskScorePercentage
 
-        paramList = dataHandler.getParameterList(calculatorDataSingleton.heartAgeModel, this)
+        paramList = dataHandler.getParameterList(calculatorDataSingleton!!.heartAgeModel, this)
         parameterAdapter = ParameterAdapter(paramList,this, requireContext())
         binding.paramRecyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.paramRecyclerView.adapter = parameterAdapter
@@ -83,7 +77,7 @@ class HeartAgeRecalculateFragment : BaseFragment(), KoinComponent, ParameterAdap
         dialogInput!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialogInput!!.window!!.currentFocus
 
-        viewModel.heartAgeSaveResp.observe( viewLifecycleOwner , Observer {})
+        viewModel.heartAgeSaveResp.observe( viewLifecycleOwner , {})
     }
 
     private fun setClickable() {

@@ -64,7 +64,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
 
     fun checkLoginNameExistOrNot(phoneNumber: String) = viewModelScope.launch(dispatchers.main){
 
-        if(!phoneNumber.isNullOrEmpty() && phoneNumber.length>=10) {
+        if(!phoneNumber.isNullOrEmpty() && Validation.isValidPhoneNumber(phoneNumber)) {
             val requestData = LoginNameExistsModel(
                 Gson().toJson(
                     LoginNameExistsModel.JSONDataRequest(

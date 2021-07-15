@@ -3,7 +3,6 @@ package com.caressa.tools_calculators.ui.SmartPhoneAddiction
 import android.annotation.SuppressLint
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
@@ -13,8 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.caressa.tools_calculators.R
@@ -31,7 +28,7 @@ class SmartPhoneAddictionSummaryFragment : BaseFragment() {
 
     private val viewModel : ToolsCalculatorsViewModel by viewModel()
     private lateinit var binding : FragmentSmartPhoneAddictionSummaryBinding
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
     var score = "0"
 
@@ -47,7 +44,7 @@ class SmartPhoneAddictionSummaryFragment : BaseFragment() {
         // callback to Handle back button event
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                calculatorDataSingleton.clearData()
+                calculatorDataSingleton!!.clearData()
                 findNavController().navigate(R.id.action_smartPhoneAddictionSummaryFragment_to_toolsCalculatorsDashboardFragment)
             }
         }
@@ -58,6 +55,7 @@ class SmartPhoneAddictionSummaryFragment : BaseFragment() {
         binding = FragmentSmartPhoneAddictionSummaryBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         setClickable()
         return binding.root
@@ -118,8 +116,7 @@ class SmartPhoneAddictionSummaryFragment : BaseFragment() {
         binding.indicatorRisk.setOnTouchListener { _: View?, _: MotionEvent? -> true }
 
         binding.btnRestart.setOnClickListener {
-            calculatorDataSingleton.clearData()
-            it.findNavController().navigate(R.id.action_smartPhoneAddictionSummaryFragment_to_toolsCalculatorsDashboardFragment)
+            it.findNavController().navigate(R.id.action_smartPhoneAddictionSummaryFragment_to_smartPhoneInputFragment)
         }
 
     }

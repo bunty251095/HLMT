@@ -42,10 +42,10 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
     private lateinit var binding: FragmentDiabetesCalculatorInputBinding
     private val viewModel: ToolsCalculatorsViewModel by viewModel()
     private val dataHandler : DataHandler = get()
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
-    private var quizID = calculatorDataSingleton.quizId
-    private var participationID = calculatorDataSingleton.participantID
+    private var quizID = ""
+    private var participationID = ""
     private var genderAdapter : SpinnerAdapter? = null
     private var modelAdapter : SpinnerAdapter? = null
     private var parameterAdapter: ParameterAdapter? = null
@@ -59,11 +59,11 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.i("QuizID,ParticipationID---> $quizID , $participationID")
 
         // callback to Handle back button event
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                calculatorDataSingleton!!.clearData()
                 findNavController().navigate(R.id.action_diabetesCalculatorFragment_to_toolsCalculatorsDashboardFragment)
             }
         }
@@ -75,6 +75,10 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         try {
+            calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+            quizID = calculatorDataSingleton!!.quizId
+            participationID = calculatorDataSingleton!!.participantID
+            Timber.e("QuizID,ParticipationID---> $quizID , $participationID")
             initialise()
             setClickable()
             loadUserData()

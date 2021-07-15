@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.RadioButton
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
@@ -44,10 +43,10 @@ class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterA
     private lateinit var binding: FragmentHypertensionRecalculateBinding
     private val viewModel: ToolsCalculatorsViewModel by viewModel()
     private val dataHandler : DataHandler = get()
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
-    private var quizID = calculatorDataSingleton.quizId
-    private var participationID = calculatorDataSingleton.participantID
+    private var quizID = ""
+    private var participationID = ""
     private var genderAdapter : SpinnerAdapter? = null
     private var parameterAdapter: ParameterAdapter? = null
     private var genderList = ArrayList<SpinnerModel>()
@@ -58,19 +57,14 @@ class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterA
 
     override fun getViewModel(): BaseViewModel = viewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-/*        arguments?.let {
-            quizID = requireArguments().getString("QuizId","")!!
-            participationID = requireArguments().getString("ParticipationID","")!!
-        }*/
-        Timber.i("QuizID,ParticipationID---> $quizID , $participationID")
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHypertensionRecalculateBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+        quizID = calculatorDataSingleton!!.quizId
+        participationID = calculatorDataSingleton!!.participantID
+        Timber.e("QuizID,ParticipationID---> $quizID , $participationID")
         initialise()
         setClickable()
         loadUserData()
@@ -84,7 +78,7 @@ class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterA
         genderAdapter = SpinnerAdapter(requireContext(), genderList)
         binding.spinnerGender.adapter = genderAdapter
 
-        binding.edtAge.getBackground().setColorFilter(ContextCompat.getColor(requireContext(),R.color.textViewColor), PorterDuff.Mode.SRC_IN)
+        binding.edtAge.background.setColorFilter(ContextCompat.getColor(requireContext(),R.color.textViewColor),PorterDuff.Mode.SRC_IN)
 
         dialogInput = Dialog(requireContext(), R.style.NoTitleDialog)
         dialogInput!!.setContentView(R.layout.dialog_input_parameter)
@@ -97,12 +91,12 @@ class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterA
         binding.paramRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.paramRecyclerView.adapter = parameterAdapter
 
-        var answer: Answer = Answer("WEIGHT", "0", "0")
+        var answer = Answer("WEIGHT", "0", "0")
         answerArrayMap["WEIGHT"] = answer
         answer = Answer("HEIGHT", "0", "0")
         answerArrayMap["HEIGHT"] = answer
 
-        viewModel.hypertensionSaveResp.observe( viewLifecycleOwner , Observer {})
+        viewModel.hypertensionSaveResp.observe( viewLifecycleOwner , {})
     }
 
     private fun loadUserData() {
@@ -146,8 +140,8 @@ class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterA
         binding.btnCalculate.setOnClickListener {
             if (validateParameter()) {
                 saveParameter()
-                calculatorDataSingleton.answerArrayMap = answerArrayMap
-                calculatorDataSingleton.userPreferences = userPreferenceModel
+                calculatorDataSingleton!!.answerArrayMap = answerArrayMap
+                calculatorDataSingleton!!.userPreferences = userPreferenceModel
                 viewModel.callHypertensionSaveResponseApi("",participationID,quizID,getAnswerList())
             }
         }
@@ -191,7 +185,7 @@ class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterA
         answer = Answer("AGE", binding.edtAge.text.toString(), "0")
         answerArrayMap["AGE"] = answer
 
-        calculatorDataSingleton.personAge = binding.edtAge.text.toString()
+        calculatorDataSingleton!!.personAge = binding.edtAge.text.toString()
         userPreferenceModel.isMale = !binding.txtGender.text.toString().equals("female", ignoreCase = true)
     }
 

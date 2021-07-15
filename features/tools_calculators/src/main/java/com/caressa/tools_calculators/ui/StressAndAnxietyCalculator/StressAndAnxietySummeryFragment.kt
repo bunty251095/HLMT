@@ -12,13 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.Constants
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.adapter.StressDetailReportAdapter
 import com.caressa.tools_calculators.adapter.SummarySuggestionsAdapter
@@ -34,7 +33,7 @@ class StressAndAnxietySummeryFragment : BaseFragment() {
 
     private val viewModel : ToolsCalculatorsViewModel by viewModel()
     private lateinit var binding : FragmentStressAndAnxietySummeryBinding
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
     private var summarySuggestionsAdapter1: SummarySuggestionsAdapter? = null
     private var summarySuggestionsAdapter2: SummarySuggestionsAdapter? = null
@@ -50,7 +49,7 @@ class StressAndAnxietySummeryFragment : BaseFragment() {
         // callback to Handle back button event
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                calculatorDataSingleton.clearData()
+                calculatorDataSingleton!!.clearData()
                 findNavController().navigate(R.id.action_stressAndAnxietySummeryFragment_to_toolsCalculatorsDashboardFragment)
             }
         }
@@ -61,6 +60,7 @@ class StressAndAnxietySummeryFragment : BaseFragment() {
         binding = FragmentStressAndAnxietySummeryBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         setClickable()
         return binding.root
@@ -100,8 +100,7 @@ class StressAndAnxietySummeryFragment : BaseFragment() {
         })
 
         binding.btnRestartAssessment.setOnClickListener {
-            calculatorDataSingleton.clearData()
-            it.findNavController().navigate(R.id.action_stressAndAnxietySummeryFragment_to_toolsCalculatorsDashboardFragment)
+            it.findNavController().navigate(R.id.action_stressAndAnxietySummeryFragment_to_stressAndAnxietyInputFragment)
         }
 
         updateData(0)

@@ -34,10 +34,10 @@ class StressAndAnxietyInputFragment : BaseFragment() {
 
     private lateinit var binding : FragmentStressAndAnxietyInputBinding
     private val viewModel : ToolsCalculatorsViewModel by viewModel()
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
-    private var quizID = calculatorDataSingleton.quizId
-    private var participationID = calculatorDataSingleton.participantID
+    private var quizID = ""
+    private var participationID = ""
     private var currentQuestion = "FIRST"
     private var isPrevious = false
     private var question : Question? = null
@@ -49,11 +49,11 @@ class StressAndAnxietyInputFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.i("QuizID,ParticipationID---> $quizID , $participationID")
 
         // callback to Handle back button event
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                calculatorDataSingleton!!.clearData()
                 findNavController().navigate(R.id.action_stressAndAnxietyInputFragment_to_toolsCalculatorsDashboardFragment)
             }
         }
@@ -64,9 +64,17 @@ class StressAndAnxietyInputFragment : BaseFragment() {
         binding = FragmentStressAndAnxietyInputBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        initialise()
-        setClickable()
-        FirebaseHelper.logScreenEvent(FirebaseConstants.STRESS_CALCULATOR_SCREEN)
+        try {
+            calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+            quizID = calculatorDataSingleton!!.quizId
+            participationID = calculatorDataSingleton!!.participantID
+            Timber.e("QuizID,ParticipationID---> $quizID , $participationID")
+            initialise()
+            setClickable()
+            FirebaseHelper.logScreenEvent(FirebaseConstants.STRESS_CALCULATOR_SCREEN)
+        } catch ( e : Exception ) {
+            e.printStackTrace()
+        }
         return binding.root
     }
 

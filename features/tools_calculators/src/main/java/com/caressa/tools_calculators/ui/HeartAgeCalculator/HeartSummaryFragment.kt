@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
@@ -28,19 +30,15 @@ class HeartSummaryFragment : BaseFragment() {
     private var yourAge = 0
     private var heartAge = 0
     private var riskPercent = 0
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
     override fun getViewModel(): BaseViewModel = viewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let { }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHeartSummaryBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         setClickable()
         return binding.root
@@ -55,13 +53,13 @@ class HeartSummaryFragment : BaseFragment() {
         binding.indicatorHeartRisk.setOnTouchListener { _: View?, _: MotionEvent? -> true }
 
         try {
-            yourAge = calculatorDataSingleton.personAge.toInt()
-            heartAge = calculatorDataSingleton.heartAge.toInt()
-            val riskPer: Double = calculatorDataSingleton.riskScorePercentage.toDouble()
+            yourAge = calculatorDataSingleton!!.personAge.toInt()
+            heartAge = calculatorDataSingleton!!.heartAge.toInt()
+            val riskPer: Double = calculatorDataSingleton!!.riskScorePercentage.toDouble()
             riskPercent = riskPer.toInt()
             seHeartAgeIndicatorDetails(heartAge, yourAge)
             setYourIndicatorDetails(yourAge, R.color.vivant_bright_sky_blue, heartAge)
-            seHeartRiskIndicatorDetails(riskPer,calculatorDataSingleton.riskLabel)
+            seHeartRiskIndicatorDetails(riskPer,calculatorDataSingleton!!.riskLabel)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -86,15 +84,11 @@ class HeartSummaryFragment : BaseFragment() {
         })
 
         binding.btnRecalculate.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(Constants.FROM, "Home")
-            it.findNavController().navigate(R.id.action_heartSummaryFragment_to_heartAgeRecalculateFragment)
+            findNavController().navigate(R.id.action_heartSummaryFragment_to_heartAgeRecalculateFragment)
         }
 
         binding.btnViewReport.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(Constants.FROM, "Home")
-            it.findNavController().navigate(R.id.action_heartSummaryFragment_to_heartReportFragment)
+            findNavController().navigate(R.id.action_heartSummaryFragment_to_heartReportFragment)
         }
 
     }
@@ -136,9 +130,8 @@ class HeartSummaryFragment : BaseFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun seHeartRiskIndicatorDetails(riskPercentage: Double, riskType: String ) {
-        var heartColour: Int = R.color.vivant_green_blue_two
 
-        heartColour = when  {
+        val heartColour: Int = when  {
             riskPercentage < 1 -> {
                 R.color.vivant_green_blue_two
             }
@@ -171,7 +164,7 @@ class HeartSummaryFragment : BaseFragment() {
 
      override fun onResume() {
          super.onResume()
-         if (calculatorDataSingleton.heartAgeSummeryList.size >= 3) {
+         if (calculatorDataSingleton!!.heartAgeSummeryList.size >= 3) {
             binding.btnRecalculate.visibility = View.INVISIBLE
         }
     }

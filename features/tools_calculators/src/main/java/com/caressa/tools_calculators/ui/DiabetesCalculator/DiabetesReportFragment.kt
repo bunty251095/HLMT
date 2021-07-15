@@ -35,7 +35,7 @@ class DiabetesReportFragment : BaseFragment() {
 
     private lateinit var binding: FragmentDiabetesReportBinding
     private val viewModel: ToolsCalculatorsViewModel by viewModel()
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
     private var detailReportList: ArrayMap<String, ArrayList<SubSectionModel>> = ArrayMap()
     private var diabetesSummarySuggestionsAdapter1: SummarySuggestionsAdapter? = null
@@ -47,12 +47,11 @@ class DiabetesReportFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {}
 
         // callback to Handle back button event
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                calculatorDataSingleton.clearData()
+                calculatorDataSingleton!!.clearData()
                 findNavController().navigate(R.id.action_diabetesReportFragment_to_toolsCalculatorsDashboardFragment)
             }
         }
@@ -63,6 +62,7 @@ class DiabetesReportFragment : BaseFragment() {
         binding = FragmentDiabetesReportBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         setClickable()
         return binding.root
@@ -71,7 +71,7 @@ class DiabetesReportFragment : BaseFragment() {
     @SuppressLint("ClickableViewAccessibility")
     private fun initialise() {
 
-        detailReportList = calculatorDataSingleton.diabetesSummeryModel.detailReport
+        detailReportList = calculatorDataSingleton!!.diabetesSummeryModel.detailReport
         val arrayList: MutableList<ExpandModel> = ArrayList()
         for (i in 0..9) {
             arrayList.add(ExpandModel())
@@ -84,13 +84,11 @@ class DiabetesReportFragment : BaseFragment() {
 
         binding.indicatorDiabetesRiskReport.setOnTouchListener { _: View?, _: MotionEvent? -> true }
 
-        setDiabetesRiskDetails(
-            calculatorDataSingleton.diabetesSummeryModel.totalScore.toDouble(),
-            calculatorDataSingleton.diabetesSummeryModel.riskLabel)
+        setDiabetesRiskDetails(calculatorDataSingleton!!.diabetesSummeryModel.totalScore.toDouble(),calculatorDataSingleton!!.diabetesSummeryModel.riskLabel)
 
         var doingGoodList: List<String> = ArrayList()
-        if (calculatorDataSingleton.diabetesSummeryModel.goodIn.isNotEmpty()) {
-            val arrDoingGood: Array<String> = calculatorDataSingleton.diabetesSummeryModel.goodIn.split(
+        if (calculatorDataSingleton!!.diabetesSummeryModel.goodIn.isNotEmpty()) {
+            val arrDoingGood: Array<String> = calculatorDataSingleton!!.diabetesSummeryModel.goodIn.split(
                 ",").toTypedArray()
             doingGoodList = listOf(*arrDoingGood)
             binding.layoutDoingGood.visibility = View.VISIBLE
@@ -102,8 +100,8 @@ class DiabetesReportFragment : BaseFragment() {
         binding.rvDoingGood.adapter = diabetesSummarySuggestionsAdapter1
 
         var needImpList: List<String> = ArrayList()
-        if (calculatorDataSingleton.diabetesSummeryModel.needImprovement.isNotEmpty()) {
-            val arrNeedImp: Array<String> = calculatorDataSingleton.diabetesSummeryModel.needImprovement.split(
+        if (calculatorDataSingleton!!.diabetesSummeryModel.needImprovement.isNotEmpty()) {
+            val arrNeedImp: Array<String> = calculatorDataSingleton!!.diabetesSummeryModel.needImprovement.split(
                 ",").toTypedArray()
             needImpList = listOf(*arrNeedImp)
             binding.layoutNeedToImprove.visibility = View.VISIBLE
@@ -115,8 +113,8 @@ class DiabetesReportFragment : BaseFragment() {
         binding.rvNeedToImprove.adapter = diabetesSummarySuggestionsAdapter2
 
         var nonModRiskList: List<String> = ArrayList()
-        if (calculatorDataSingleton.diabetesSummeryModel.nonModifiableRisk.isNotEmpty()) {
-            val arrNonModRisk: Array<String> = calculatorDataSingleton.diabetesSummeryModel.nonModifiableRisk.split(
+        if (calculatorDataSingleton!!.diabetesSummeryModel.nonModifiableRisk.isNotEmpty()) {
+            val arrNonModRisk: Array<String> = calculatorDataSingleton!!.diabetesSummeryModel.nonModifiableRisk.split(
                 ",").toTypedArray()
             nonModRiskList = listOf(*arrNonModRisk)
             binding.layoutHaveFollowingNonModerateRisk.visibility = View.VISIBLE
@@ -169,9 +167,6 @@ class DiabetesReportFragment : BaseFragment() {
     private fun setClickable() {
 
         binding.btnRestartDiabetesReport.setOnClickListener {
-            calculatorDataSingleton.clearData()
-            val bundle = Bundle()
-            bundle.putString(Constants.FROM, "Home")
             it.findNavController().navigate(R.id.action_diabetesReportFragment_to_diabetesCalculatorFragment)
         }
 

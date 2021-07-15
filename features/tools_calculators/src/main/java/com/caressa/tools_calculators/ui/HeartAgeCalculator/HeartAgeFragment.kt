@@ -47,10 +47,10 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
     private lateinit var binding: FragmentHeartAgeBinding
     private val viewModel: ToolsCalculatorsViewModel by viewModel()
     private val dataHandler : DataHandler = get()
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
-    private var quizID = calculatorDataSingleton.quizId
-    private var participationID = calculatorDataSingleton.participantID
+    private var quizID = ""
+    private var participationID = ""
     private var genderAdapter : SpinnerAdapter? = null
     private var modelAdapter :SpinnerAdapter? = null
     private var parameterAdapter: ParameterAdapter? = null
@@ -66,11 +66,11 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.i("QuizID,ParticipationID---> $quizID , $participationID")
 
         // callback to Handle back button event
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                calculatorDataSingleton!!.clearData()
                 findNavController().navigate(R.id.action_heartAgeFragment_to_toolsCalculatorsDashboardFragment)
             }
         }
@@ -82,6 +82,10 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         try {
+            calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+            quizID = calculatorDataSingleton!!.quizId
+            participationID = calculatorDataSingleton!!.participantID
+            Timber.e("QuizID,ParticipationID---> $quizID , $participationID")
             initialise()
             setClickable()
             loadUserData()
@@ -205,8 +209,8 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
         binding.btnCalculate.setOnClickListener {
             if (validateParameter()) {
                 saveParameter()
-                calculatorDataSingleton.answerArrayMap = answerArrayMap
-                calculatorDataSingleton.userPreferences = userPreferenceModel
+                calculatorDataSingleton!!.answerArrayMap = answerArrayMap
+                calculatorDataSingleton!!.userPreferences = userPreferenceModel
                 viewModel.callHeartAgeCalculateApi("First",participationID,quizID,getAnswerList())
             }
 /*            val bundle = Bundle()
@@ -274,7 +278,7 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
         answerArrayMap["CHOL_LEVEL"] = answer
         answer = Answer("AGE", binding.edtAge.text.toString(), "0")
         answerArrayMap["AGE"] = answer
-        calculatorDataSingleton.personAge = binding.edtAge.text.toString()
+        calculatorDataSingleton!!.personAge = binding.edtAge.text.toString()
     }
 
     private fun validateParameter(): Boolean {
@@ -435,8 +439,8 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
 
     @SuppressLint("SetTextI18n")
     override fun onHealthConditionValueListener() {
-        Timber.e("Selected :: ${calculatorDataSingleton.healthConditionSelection.size}")
-        binding.txtSelection.text = "( You have selected ${calculatorDataSingleton.healthConditionSelection.size} health condition )"
+        Timber.e("Selected :: ${calculatorDataSingleton!!.healthConditionSelection.size}")
+        binding.txtSelection.text = "( You have selected ${calculatorDataSingleton!!.healthConditionSelection.size} health condition )"
     }
 
 }

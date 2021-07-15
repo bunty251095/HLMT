@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.Constants
 import com.caressa.common.utils.Utilities
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.adapter.TrackersDashboardAdapter
@@ -18,12 +18,13 @@ import com.caressa.model.toolscalculators.UserInfoModel
 import com.caressa.tools_calculators.viewmodel.ToolsCalculatorsViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.standalone.KoinComponent
+import timber.log.Timber
 
 class ToolsCalculatorsDashboardFragment : BaseFragment(),KoinComponent,TrackersDashboardAdapter.OnCalculatorClickListener {
 
     private lateinit var binding : FragmentToolsCalculatorsDashboardBinding
     private val viewModel : ToolsCalculatorsViewModel by viewModel()
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
     private val userInfoModel = UserInfoModel.getInstance()!!
     private var trackersDashboardAdapter: TrackersDashboardAdapter? = null
@@ -34,7 +35,12 @@ class ToolsCalculatorsDashboardFragment : BaseFragment(),KoinComponent,TrackersD
         binding = FragmentToolsCalculatorsDashboardBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        initialise()
+        try {
+            calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+            initialise()
+        } catch ( e : Exception ) {
+            e.printStackTrace()
+        }
         return binding.root
     }
 
@@ -47,14 +53,18 @@ class ToolsCalculatorsDashboardFragment : BaseFragment(),KoinComponent,TrackersD
             viewModel.getMedicalProfileSummary(true)
         }
 
-        viewModel.medicalProfileSummary.observe(viewLifecycleOwner, Observer {})
-        viewModel.labRecords.observe(viewLifecycleOwner, Observer {})
-        viewModel.startQuiz.observe(viewLifecycleOwner, Observer {})
+        viewModel.medicalProfileSummary.observe(viewLifecycleOwner, {})
+        viewModel.labRecords.observe(viewLifecycleOwner, {})
+        viewModel.startQuiz.observe(viewLifecycleOwner, {})
     }
 
     override fun onCalculatorSelection(trackerDashboardModel: TrackerDashboardModel, view: View) {
-        calculatorDataSingleton.clearData()
-        when (trackerDashboardModel.code) {
+        calculatorDataSingleton!!.clearData()
+        startQuiz(trackerDashboardModel.code)
+    }
+
+    private fun startQuiz(code : String) {
+        when (code) {
 
             "HAC" -> {
                 viewModel.callStartQuizApi(true, resources.getString(R.string.QUIZ_CODE_HEART_AGE))
@@ -77,10 +87,9 @@ class ToolsCalculatorsDashboardFragment : BaseFragment(),KoinComponent,TrackersD
                 //SessionInfoSingleton.getInstance().setQuizId("4")
             }
             "DDC" -> {
-                view.findNavController()
-                    .navigate(R.id.action_toolsCalculatorsDashboardFragment_to_dueDateInputFragment)
+                findNavController().navigate(R.id.action_toolsCalculatorsDashboardFragment_to_dueDateInputFragment)
             }
-            else -> Utilities.toastMessageShort(context, "Under Development")
+            //else -> Utilities.toastMessageShort(context, "Under Development")
 
         }
     }

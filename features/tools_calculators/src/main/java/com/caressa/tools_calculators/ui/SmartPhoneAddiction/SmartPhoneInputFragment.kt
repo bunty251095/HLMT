@@ -33,10 +33,10 @@ class SmartPhoneInputFragment : BaseFragment() {
 
     private lateinit var binding : FragmentSmartPhoneInputBinding
     private val viewModel : ToolsCalculatorsViewModel by viewModel()
-    private  val calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+    private var calculatorDataSingleton : CalculatorDataSingleton? = null
 
-    private var quizID = calculatorDataSingleton.quizId
-    private var participationID = calculatorDataSingleton.participantID
+    private var quizID = ""
+    private var participationID = ""
     private var score = "1"
     private var currentQuestion = "FIRST"
     private var answerArrayMap: ArrayMap<String, Answer>? = ArrayMap()
@@ -53,6 +53,7 @@ class SmartPhoneInputFragment : BaseFragment() {
         // callback to Handle back button event
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                calculatorDataSingleton!!.clearData()
                 findNavController().navigate(R.id.action_smartPhoneInputFragment_to_toolsCalculatorsDashboardFragment)
             }
         }
@@ -63,9 +64,17 @@ class SmartPhoneInputFragment : BaseFragment() {
         binding = FragmentSmartPhoneInputBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        initialise()
-        setClickable()
-        FirebaseHelper.logScreenEvent(FirebaseConstants.SMART_PHONE_CALCULATOR_SCREEN)
+        try {
+            calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
+            quizID = calculatorDataSingleton!!.quizId
+            participationID = calculatorDataSingleton!!.participantID
+            Timber.e("QuizID,ParticipationID---> $quizID , $participationID")
+            initialise()
+            setClickable()
+            FirebaseHelper.logScreenEvent(FirebaseConstants.SMART_PHONE_CALCULATOR_SCREEN)
+        } catch ( e : Exception ) {
+            e.printStackTrace()
+        }
         return binding.root
     }
 
