@@ -34,7 +34,7 @@
     <string name="REFRESH">Refresh</string>
     <string name="LOGIN">Login</string>
     <string name="PASSWORD">Password</string>
-    <string name="RESEND_OTP">Resend OTP</string>
+    <string name="RESEND_OTP">Resend TAC</string>
     <string name="NO_THANKS">No thanks</string>
     <string name="UPLOAD_REPORT">Upload Report</string>
     <string name="UPLOAD_PRESCRIPTION">Upload Prescription</string>
@@ -133,10 +133,10 @@
     <string name="NO_INTERNET_AVAILABLE">No Internet Available</string>
     <string name="MSG_SESSION_EXPIRED">Seems your session is expired, please login again.</string>
     <string name="ERROR_INTERNET_UNAVAILABLE">Seems like you are offline. Please check your internet connection and try again.</string>
-    <string name="MSG_OTP">OTP has been sent to your registered mobile number, please wait while we are retrieving</string>
+    <string name="MSG_OTP">TAC has been sent to your registered mobile number, please wait while we are retrieving</string>
 
     <!--Error Msg-->
-    <string name="VALIDATE_OTP">Please Enter a Valid OTP</string>
+    <string name="VALIDATE_OTP">Please Enter a Valid TAC</string>
     <string name="VALIDATE_EMAIL">Please Enter Valid Email</string>
     <string name="VALIDATE_EMAIL_MUST_INCLUDE">Email must include @</string>
     <string name="VALIDATE_PHONE">Please Enter Valid Phone Number</string>
@@ -146,7 +146,7 @@
     <string name="ERROR_MOBILE_ALREADY_REGISTERED">This Numbert is already Registered with us</string>
     <string name="VALIDATE_NAME">Please Enter valid Name</string>
     <string name="VALIDATE_DATE_OF_BIRTH">Please Enter valid Date of Birth</string>
-    <string name="ERROR_UNABLE_VERIFY_OTP">Unable to verify OTP provided, please try again</string>
+    <string name="ERROR_UNABLE_VERIFY_OTP">Unable to verify TAC provided, please try again</string>
     <string name="ERROR_CONTACT_US_QUERY">Query Should be between 5–1000 letter\'s</string>
     <!--Error Msg-->
 
