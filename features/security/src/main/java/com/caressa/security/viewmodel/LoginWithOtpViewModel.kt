@@ -111,9 +111,9 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                         loginName = phoneNumber,
                         emailAddress = "",
                         primaryPhone = phoneNumber),
-                    from = "102", message = "Generating One Time Password (OTP)"), GenerateOtpModel.JSONDataRequest::class.java))
+                    from = "102", message = "Generating One Time Password (TAC)"), GenerateOtpModel.JSONDataRequest::class.java))
 
-        _progressBar.value = Event("Generating OTP...")
+        _progressBar.value = Event("Generating TAC...")
         _otpGenerateData.removeSource(userSourceGenerateOTP)
         withContext(dispatchers.io) {
             userSourceGenerateOTP = userManagementUseCase.invokeGenerateOTP(true, requestData)

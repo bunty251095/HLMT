@@ -145,12 +145,12 @@
                             android:text="Low Risk"
                             android:textColor="@color/textViewColor"
                             android:textSize="@dimen/_12sdp"
-                            app:layout_constraintEnd_toStartOf="@+id/textView2"
+                            app:layout_constraintEnd_toStartOf="@+id/txt_edit_mobile_number"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textView2"
+                            android:id="@+id/txt_edit_mobile_number"
                             style="@style/VivantDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -575,6 +575,7 @@
                 app:isTemplate="true"
                 android:text="@string/RESTART_ASSESSMENT"
                 style="@style/CustomButton"
+                android:visibility="invisible"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"

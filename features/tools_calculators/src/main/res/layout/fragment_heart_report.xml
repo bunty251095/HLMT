@@ -332,6 +332,7 @@
                 app:isTemplate="true"
                 android:text="@string/RESTART_ASSESSMENT"
                 style="@style/CustomButton"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="0dp"

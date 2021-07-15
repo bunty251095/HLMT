@@ -215,12 +215,14 @@ class DataHandler(val context: Context) {
                             "health related queries." +
                             "</br>" +
                             "<br><br>" +
-                            "We hope this electronic health record sharing feature has saved your precious time and provided you with the necessary information. " +
-                            "If you've liked this feature, please share the Vivant portal " +
-                            "<a href=\"https://portal.vivant.me\">portal.vivant.vivant.me</a> " +
-                            "to connect with your other patients too!" + "</br></br>") +
-                    Html.fromHtml(("<br><br>" + "Team Vivant</br><br>" +
-                            "<a href=\"https://vivant.me\">www.vivant.vivant.me</a></br></br>")))
+                            "We hope this electronic health record sharing feature has saved your precious time and provided you with the necessary information. "
+//                            +
+//                            "If you've liked this feature, please share the Vivant portal " +
+//                            "<a href=\"https://portal.vivant.me\">portal.vivant.vivant.me</a> " +
+//                            "to connect with your other patients too!" + "</br></br>") +
+//                    Html.fromHtml(("<br><br>" + "Team Vivant</br><br>" +
+//                            "<a href=\"https://vivant.me\">www.vivant.vivant.me</a></br></br>"
+                            ))
 
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
             shareIntent.type = "*/*"

@@ -270,7 +270,9 @@ object Utilities {
     fun isValidPhoneNumber(phoneNumber: String): Boolean {
         val Regex = "[^\\d]"
         val PhoneDigits = phoneNumber.replace(Regex.toRegex(), "")
-        return PhoneDigits.length > 7
+        val isValid = PhoneDigits.length > 8 && !phoneNumber.startsWith("000")
+        Timber.d("isValidPhoneNumber--->$isValid")
+        return isValid
     }
 
     fun isPhoneValid(phoneNumber: String): Boolean {
