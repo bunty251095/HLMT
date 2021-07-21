@@ -10,9 +10,11 @@ import androidx.core.graphics.BlendModeCompat
 import androidx.databinding.DataBindingUtil
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.utils.DefaultNotificationDialog
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.showDialog
 import com.caressa.home.R
 import com.caressa.home.adapter.OptionSettingsAdapter
@@ -45,6 +47,7 @@ class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionLi
     }
 
     private fun initialise() {
+        FirebaseHelper.logScreenEvent(FirebaseConstants.SETTINGS_SCREEN)
         viewModel.getSettingsOptionList1()
         optionSettingsAdapter = OptionSettingsAdapter(viewModel, this,this)
         binding.rvOptions.adapter = optionSettingsAdapter

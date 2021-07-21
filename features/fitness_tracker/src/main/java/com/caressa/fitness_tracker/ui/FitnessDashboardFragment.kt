@@ -281,7 +281,10 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
         todayStepGoal = item.totalGoal
         binding.txtStepCount.text = todayStepCount.toString()
 
-        val progress = ( todayStepCount * 100) / todayStepGoal
+        var progress = 0
+        if(todayStepCount != 0){
+            progress = ( todayStepCount * 100) / todayStepGoal
+        }
         binding.progressBar.setValueAnimated(progress.toFloat(),1000)
 
         todayStepGoal = if (todayStepGoal > 0) todayStepGoal else 3000

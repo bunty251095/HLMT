@@ -393,7 +393,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
 
         if (name.isNullOrEmpty() || name.length<=3 || !name.matches(namePattern)){
             toastMessage("Please Enter Valid Name.")
-        }else if((phoneNumber.isNullOrEmpty() || phoneNumber.length < 10) && hlmtEmpId.isEmpty()){
+        }else if((phoneNumber.isNullOrEmpty() || !Validation.isValidPhoneNumber(phoneNumber)) && hlmtEmpId.isEmpty()){
             toastMessage("Invalid Phone Number")
         }else if(emailStr.isNullOrEmpty() || !emailStr.matches(emailPattern)){
             toastMessage("Invalid email Address")

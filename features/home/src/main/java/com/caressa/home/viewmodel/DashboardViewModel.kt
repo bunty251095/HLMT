@@ -404,7 +404,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         try {
             var himOrHer = ""
             val userName = firstName
-            val appName = "HLMT"
+            val appName = "HL Pace"
 
             when(gender) {
                 "1" -> himOrHer = " him "
@@ -421,7 +421,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                     + Html.fromHtml("<br><br>" + "Team Vivant</br><br>" +
                     "<a href=\"https://vivant.me\">www.vivant.vivant.me</a></br></br>");*/
             val text = "Hello," + "\n\n" +  title + "\n\n" + "Join" + himOrHer + "on "+appName+", the Health & Wellness App that helps you to Store, Track and Manage your Health Data." +
-                    "\n\n" + "Track your steps, get your wellness score, receive personalised recommendations and health goal, chat with a Doctor, all for free !!" +
+                    "\n\n" + "Track your steps, get your wellness score, receive personalised recommendations and health goal, all for free !!" +
                     "\n\n" + "What`s more! Earn and redeem rewards while managing your health from our wellness partners." /*+
                     Html.fromHtml("<br><br>" + "Play Store : " +
                             "<a href=\"https://bit.ly/33d2un5\">https://bit.ly/33d2un5</a> " + "</br></br>") +

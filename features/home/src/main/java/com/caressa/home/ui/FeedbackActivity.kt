@@ -5,6 +5,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.home.R
 import com.caressa.home.databinding.ActivityFeedbackBinding
@@ -22,6 +24,7 @@ class FeedbackActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_feedback)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        FirebaseHelper.logScreenEvent(FirebaseConstants.FEEDBACK_SCREEN)
         setClickable()
     }
 
