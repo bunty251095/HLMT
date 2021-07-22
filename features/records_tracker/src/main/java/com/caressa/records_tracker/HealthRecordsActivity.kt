@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import androidx.navigation.NavController
@@ -19,7 +18,6 @@ import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
-import com.karumi.dexter.Dexter
 import kotlinx.android.synthetic.main.activity_health_records.*
 import kotlinx.android.synthetic.main.toolbar_layout_shr.*
 

@@ -22,7 +22,6 @@ import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
 import com.caressa.security.R
 import com.caressa.security.domain.UserManagementUseCase
-import com.caressa.security.ui.LoginFragmentDirections
 import com.caressa.security.ui.LoginWithOtpFragmentDirections
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
@@ -235,7 +234,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                             .apply()
                         sharedPref.edit().putString(PreferenceConstants.FIRSTNAME, loginData.name)
                             .apply()
-                        sharedPref.edit().putString(PreferenceConstants.GENDER, "1").apply()
+                        sharedPref.edit().putString(PreferenceConstants.GENDER, if(loginData.gender.equals("Male",true))"1" else "2").apply()
                         sharedPref.edit().putString(
                             PreferenceConstants.RELATIONSHIPCODE,
                             Constants.SELF_RELATIONSHIP_CODE
@@ -260,11 +259,11 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                             .apply()
                         // Added by Rohit
                         //RealPathUtil.creatingLocalDirctories()
-                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_LOGIN_SUCCESSFUL_EVENT,false)
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_LOGIN_SUCCESSFUL_EVENT)
                         saveUserData(loginData)
                         navigate(LoginWithOtpFragmentDirections.actionLoginViaOTPFragmentToMainActivity())
                     }else{
-                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_LOGIN_FAIL_EVENT,false)
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_LOGIN_FAIL_EVENT)
                         toastMessage("Unable to login with this user.")
                     }
                 }catch (e: Exception){e.printStackTrace()}
@@ -278,7 +277,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
     }
 
     private fun saveUserData(usr: LoginModel.Data)= viewModelScope.launch {
-        var user = Users(accountId = usr.accountID,personId = usr.personID.toDouble().toInt(),firstName = usr.name,dateOfBirth = usr.dateOfBirth,gender = if(usr.gender.equals("Male",true))"0" else "1",age = usr.age
+        var user = Users(accountId = usr.accountID,personId = usr.personID.toDouble().toInt(),firstName = usr.name,dateOfBirth = usr.dateOfBirth,gender = if(usr.gender.equals("Male",true))"1" else "2",age = usr.age
             ,emailAddress = usr.emailAddress,phoneNumber = usr.phoneNumber,path = "",authToken = usr.context,
             partnerCode = usr.partnerCode,accountStatus = usr.accountStatus,accountType = usr.accountType,countryName = "",
             dialingCode = usr.dialingCode, isActive = usr.isActive, isAuthenticated = usr.isAuthenticated,profileImgPath = "",

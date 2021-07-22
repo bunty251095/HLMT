@@ -19,10 +19,8 @@ import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.common.utils.FirebaseHelper
 import com.caressa.fitness_tracker.util.StepCountHelper
-import com.caressa.fitness_tracker.viewmodel.FitnessViewModel
 import kotlinx.android.synthetic.main.activity_fitness_home.*
 import kotlinx.android.synthetic.main.fitness_toolbar_layout.*
-import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.get
 import timber.log.Timber

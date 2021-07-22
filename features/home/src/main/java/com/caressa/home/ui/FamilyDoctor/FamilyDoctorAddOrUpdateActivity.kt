@@ -217,7 +217,7 @@ class FamilyDoctorAddOrUpdateActivity : BaseActivity() {
         }
         if (Utilities.isNullOrEmpty(contact) || !Validation.isValidPhoneNumber(contact)) {
             binding.tilDoctorContact.isErrorEnabled = true
-            binding.tilDoctorContact.error = "Please Enter Valid Phone Number"
+            binding.tilDoctorContact.error = "Please Enter Valid Mobile Number"
         }
         if (Utilities.isNullOrEmpty(email) || !Validation.isValidEmail(email)) {
             binding.tilDoctorEmail.isErrorEnabled = true

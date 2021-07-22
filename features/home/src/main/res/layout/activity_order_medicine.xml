@@ -37,7 +37,7 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/_5sdp"
             android:padding="@dimen/_5sdp"
-            android:src="@drawable/banner_appolo" />
+            android:src="@drawable/dash_tools_calculators" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/CustomTextview"
@@ -65,7 +65,8 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/_5sdp"
             android:padding="@dimen/_5sdp"
-            android:src="@drawable/banner_medlife" />
+            android:tag="Medlife Banner"
+            android:src="@drawable/dash_tools_calculators" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/CustomTextview"

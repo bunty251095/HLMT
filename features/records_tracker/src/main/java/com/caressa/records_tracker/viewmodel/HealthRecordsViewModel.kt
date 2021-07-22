@@ -3,7 +3,6 @@ package com.caressa.records_tracker.viewmodel
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Environment
 import android.util.Base64
 import android.view.View
 import androidx.lifecycle.LiveData
@@ -31,11 +30,9 @@ import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.caressa.records_tracker.R
-import com.caressa.records_tracker.adapter.HealthRecordsAdapter
 import com.caressa.records_tracker.common.DataHandler
 import com.caressa.records_tracker.common.RecordSingleton
 import com.caressa.records_tracker.ui.*
-import com.google.gson.GsonBuilder
 import okhttp3.*
 import timber.log.Timber
 import java.io.*

@@ -20,11 +20,9 @@ import com.caressa.common.fitness.FitRequestCode
 import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.utils.FirebaseHelper
-import com.caressa.track_parameter.util.TrackParameterHelper
 import kotlinx.android.synthetic.main.activity_parameter_home.*
 import kotlinx.android.synthetic.main.toolbar_layout_parameter.*
 import kotlinx.android.synthetic.main.toolbar_layout_parameter.view.*
-import kotlinx.android.synthetic.main.toolbar_layout_parameter.view.toolbar_title
 import timber.log.Timber
 import java.util.*
 

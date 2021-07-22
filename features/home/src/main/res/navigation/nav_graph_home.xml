@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.caressa.home.ui.HlmtDashboardFragment"
-        tools:layout="@layout/fragment_dashboard">
+        tools:layout="@layout/fragment_hlmt_dashboard">
 
         <action android:id="@+id/action_dashboardFragment_to_homeFragment"
             app:destination="@id/homeFragment"/>
@@ -95,11 +95,11 @@
             app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
 
     </fragment>
-
+<!--
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.caressa.home.HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home"/>-->
 
     <fragment
             android:id="@+id/commonWebViewFragment"
