@@ -160,7 +160,7 @@ object HraHelper {
                 chk.apply {
                     id = i
                     tag = option.answerCode
-                    text = Html.fromHtml("<a><B>" + option.description + " +" + "</B></a>")
+                    text = option.description
                     layoutParams = par
                     buttonDrawable = null
                     setPadding(40, 25, 40, 25)
