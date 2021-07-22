@@ -75,7 +75,7 @@ object HraBinding : KoinComponent {
                     radioButton.apply {
                         id = i
                         tag = list[i].answerCode
-                        text = list[i].description
+                        text = list[i].description.replace(" +","")
                         layoutParams = par
                         gravity = Gravity.CENTER
                         buttonDrawable = null

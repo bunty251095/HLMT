@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Environment
 import android.os.StrictMode
+import android.text.Html
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -159,7 +160,7 @@ object HraHelper {
                 chk.apply {
                     id = i
                     tag = option.answerCode
-                    text = option.description
+                    text = Html.fromHtml("<a><B>" + option.description + " +" + "</B></a>")
                     layoutParams = par
                     buttonDrawable = null
                     setPadding(40, 25, 40, 25)

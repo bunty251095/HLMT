@@ -656,6 +656,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
         }
     }
 
+
     fun getFamilyRelationshipList() = viewModelScope.launch{
         withContext(dispatchers.io){
             var user = homeManagementUseCase.invokeGetUserRelativeDetailsByRelativeId(sharedPref.getString(PreferenceConstants.PERSONID,"")!!)
