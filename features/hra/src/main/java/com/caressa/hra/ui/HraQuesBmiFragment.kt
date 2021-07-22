@@ -34,6 +34,7 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
     private lateinit var binding : FragmentHraQuesBmiBinding
     private val viewModel: HraViewModel by viewModel()
 
+    private var toShow : Boolean = true
     private var bmi : Double = 0.0
     private var height : Double = 0.0
     private var weight : Double = 0.0
@@ -140,6 +141,7 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
                     if ( vital.VitalsKey.equals(HRAConstants.VitalKey_Height, ignoreCase = true)
                         && !Utilities.isNullOrEmpty(vital.VitalsValue) ) {
                         height = vital.VitalsValue.toDouble()
+                        toShow = false
                         binding.layHeight.setValue(height.toInt().toString())
                         binding.layHeight.setUnit(resources.getString(R.string.cm))
                     }
@@ -217,7 +219,7 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
         }
 
         binding.layHeight.editText!!.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
+            if (hasFocus && toShow ) {
                 HraHelper.showHeightDialog(height.toInt(),binding.layHeight,this@HraQuesBmiFragment,requireContext())
             }
         }

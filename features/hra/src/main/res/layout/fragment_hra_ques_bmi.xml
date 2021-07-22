@@ -64,13 +64,13 @@
 
             <com.caressa.hra.views.CustomEditTextHra
                 android:id="@+id/lay_height"
-                android:layout_width="@dimen/_150sdp"
+                android:layout_width="@dimen/_160sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"/>
 
             <com.caressa.hra.views.CustomEditTextHra
                 android:id="@+id/lay_weight"
-                android:layout_width="@dimen/_150sdp"
+                android:layout_width="@dimen/_160sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"/>
 

@@ -62,6 +62,12 @@ class SelectFamilyMemberFragment : BaseFragment(), DefaultNotificationDialog.OnD
     private fun initialise() {
         binding.rgSelection.clearCheck()
         viewModel.getUserRelatives()
+
+        if ( viewModel.adminPersonId != viewModel.personId ) {
+            binding.btnAddFamilyMember.visibility = View.INVISIBLE
+        } else {
+            binding.btnAddFamilyMember.visibility = View.VISIBLE
+        }
     }
 
     private fun registerObservers() {
@@ -76,7 +82,7 @@ class SelectFamilyMemberFragment : BaseFragment(), DefaultNotificationDialog.OnD
             if ( !Utilities.isNullOrEmptyOrZero(relativeId) ) {
                 Timber.e("Selected RelativeId,RelativeName--->$relativeId,$relativeName")
                 if ( viewModel.personId != relativeId ) {
-                    showLabTestDetailsDialog()
+                    showSwitchProfileDialog()
                 } else {
                     viewModel.clearSavedQuestionsData()
                     viewModel.startHra(relativeId,relativeName)
@@ -94,7 +100,7 @@ class SelectFamilyMemberFragment : BaseFragment(), DefaultNotificationDialog.OnD
 
     }
 
-    private fun showLabTestDetailsDialog() {
+    private fun showSwitchProfileDialog() {
         showDialog(
             listener = this,
             title = resources.getString(R.string.SWITCH_PROFILE),

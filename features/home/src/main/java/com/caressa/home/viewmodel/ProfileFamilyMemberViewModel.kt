@@ -657,7 +657,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
     }
 
     fun getFamilyRelationshipList() {
-        val gender = sharedPref.getString(PreferenceConstants.TOKEN, "")!!
+        val gender = sharedPref.getString(PreferenceConstants.GENDER, "")!!
         if (gender.contains("1", ignoreCase = true)) {
             familyRelationList.postValue(dataHandler.getFamilyRelationListMale())
         } else {

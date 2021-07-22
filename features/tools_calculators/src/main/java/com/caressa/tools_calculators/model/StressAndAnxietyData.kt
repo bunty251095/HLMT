@@ -74,7 +74,7 @@ class StressAndAnxietyData {
             "DASS-21_A_ABSENCEPHYSICALEXERTION" -> {
                 question.qCode = qCode
                 question.question = "I was aware of the action of my heart in the absence of physical exertion\n" +
-                        "(eg, sense of heart rate increase, heart missing a beat)"
+                        "(e.g. Sense of a heart rate increase, heart missing a beat)"
                 opCodeList.add("NEVER")
                 opCodeList.add("SOMETIMES")
                 opCodeList.add("OFTEN")
@@ -98,7 +98,7 @@ class StressAndAnxietyData {
             }
             "DASS-21_A_EXPERIENCEDTREMBLING" -> {
                 question.qCode = qCode
-                question.question = "I experienced trembling\n" + "(eg, in the hands)"
+                question.question = "I experienced trembling in the hands"
                 opCodeList.add("NEVER")
                 opCodeList.add("SOMETIMES")
                 opCodeList.add("OFTEN")
