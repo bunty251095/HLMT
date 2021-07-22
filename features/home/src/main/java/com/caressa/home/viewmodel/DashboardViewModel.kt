@@ -16,7 +16,6 @@ import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.*
 import com.caressa.common.utils.*
 import com.caressa.home.common.DataHandler
-import com.caressa.home.common.DataHandler.DashboardFeature
 import com.caressa.home.common.DataHandler.NavDrawerOption
 import com.caressa.home.domain.HomeManagementUseCase
 import com.caressa.home.ui.HlmtDashboardFragmentDirections
@@ -52,8 +51,6 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
     var userDetails = MutableLiveData<Users>()
     val userRelativesList = MutableLiveData<List<UserRelatives>>()
     val currentSelectedPerson = MutableLiveData<UserRelatives>()
-    val trackersList = MutableLiveData<List<DashboardFeature>>()
-    val facilitiesAndResourcesList = MutableLiveData<List<DashboardFeature>>()
     val dashboardFeatureList = MutableLiveData<List<DataHandler.DashboardFeatureGrid>>()
     val settingsOptionList = MutableLiveData<List<DataHandler.Option>>()
     val navDrawerOptionList = MutableLiveData<List<NavDrawerOption>>()

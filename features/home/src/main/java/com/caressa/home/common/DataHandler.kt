@@ -66,7 +66,7 @@ class DataHandler( val context: Context) {
                 DashboardFeatureGrid(
                     imageId = R.drawable.dash_hra,
                     title = context.resources.getString(R.string.HRA),
-                    color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                    color = ContextCompat.getColor(context, R.color.colorAccent),
                     data = "Take Assessment",
                     code = "HRA"
                 )
@@ -79,7 +79,7 @@ class DataHandler( val context: Context) {
                 }else{
                     hraObservation = "Take Assessment"
                 }
-                var color = ContextCompat.getColor(context, R.color.vivant_bright_blue)
+                var color = ContextCompat.getColor(context, R.color.colorAccent)
 
                 if ( hraSummary != null ) {
                     var wellnessScore = 0
@@ -132,7 +132,7 @@ class DataHandler( val context: Context) {
                     DashboardFeatureGrid(
                         imageId = R.drawable.dash_hra,
                         title = context.resources.getString(R.string.HRA),
-                        color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                        color = ContextCompat.getColor(context, R.color.colorAccent),
                         data = " -- ",
                         code = "HRA"
                     )
@@ -145,7 +145,7 @@ class DataHandler( val context: Context) {
                 DashboardFeatureGrid(
                     imageId = R.drawable.dash_step_counter,
                     title = context.resources.getString(R.string.DASH_ACTIVITY_TRACKER),
-                    color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                    color = ContextCompat.getColor(context, R.color.colorAccent),
                     data = " -- ",
                     code = "STEP"
                 )
@@ -155,7 +155,7 @@ class DataHandler( val context: Context) {
                 DashboardFeatureGrid(
                     imageId = R.drawable.dash_step_counter,
                     title = context.resources.getString(R.string.DASH_ACTIVITY_TRACKER),
-                    color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                    color = ContextCompat.getColor(context, R.color.colorAccent),
                     data = stepsData,
                     code = "STEP"
                 )
@@ -178,7 +178,7 @@ class DataHandler( val context: Context) {
                 DashboardFeatureGrid(
                     imageId = R.drawable.dash_hra,
                     title = context.resources.getString(R.string.HRA),
-                    color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                    color = ContextCompat.getColor(context, R.color.colorAccent),
                     data = "Take Assessment",
                     code = "HRA"
                 )
@@ -195,7 +195,7 @@ class DataHandler( val context: Context) {
                     DashboardFeatureGrid(
                         imageId = R.drawable.dash_hra,
                         title = context.resources.getString(R.string.HRA),
-                        color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                        color = ContextCompat.getColor(context, R.color.colorAccent),
                         data = hraObservation,
                         code = "HRA"
                     )
@@ -206,7 +206,7 @@ class DataHandler( val context: Context) {
                     DashboardFeatureGrid(
                         imageId = R.drawable.dash_hra,
                         title = context.resources.getString(R.string.HRA),
-                        color = ContextCompat.getColor(context, R.color.vivant_bright_blue),
+                        color = ContextCompat.getColor(context, R.color.colorAccent),
                         data = " -- ",
                         code = "HRA"
                     )
@@ -328,7 +328,7 @@ class DataHandler( val context: Context) {
 
     // DoctorDetailsModel
     data class Option(val imageId: Int, val title: String , val color : Int ,val code: String)
-    data class DashboardFeature(val  imageId: Int, val title: String , val color : Int )
+//    data class DashboardFeature(val  imageId: Int, val title: String , val color : Int )
     data class DashboardFeatureGrid(val  imageId: Int, val title: String , val color : Int,val data:String, val code:String )
     data class NavDrawerOption(val  imageId: Int, val title: String , val id: String , val color : Int)
     data class WellnessCentreDetails(  val title: String ,  val tag: String ,  val desc: String , val  img: Int , val color : Int )

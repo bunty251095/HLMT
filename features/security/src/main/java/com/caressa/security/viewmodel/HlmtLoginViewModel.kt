@@ -20,11 +20,9 @@ import com.caressa.model.home.UploadProfileImageResponce
 import com.caressa.model.security.*
 import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
-import com.caressa.security.R
 import com.caressa.security.domain.UserManagementUseCase
 import com.caressa.security.ui.HlmtLoginFragmentDirections
 import com.caressa.security.ui.LoginFragmentDirections
-import com.caressa.security.ui.LoginWithOtpFragmentDirections
 import com.caressa.security.ui.UserDetailsFragmentDirections
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
@@ -137,7 +135,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                 sharedPref.edit().putString(PreferenceConstants.TOKEN, loginData.context).apply()
                 sharedPref.edit().putString(PreferenceConstants.ACCOUNTID, loginData.accountID.toString()).apply()
                 sharedPref.edit().putString(PreferenceConstants.FIRSTNAME, loginData.name).apply()
-                sharedPref.edit().putString(PreferenceConstants.GENDER, if(loginData.gender.equals("Male",true))"0" else "1").apply()
+                sharedPref.edit().putString(PreferenceConstants.GENDER, if(loginData.gender.equals("Male",true))"1" else "2").apply()
                 sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE, Constants.SELF_RELATIONSHIP_CODE).apply()
                 sharedPref.edit().putString(PreferenceConstants.DOB,loginData.dateOfBirth).apply()
                 sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER,loginData.IsHLMTUser).apply()
@@ -261,7 +259,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                             .apply()
                         sharedPref.edit().putString(PreferenceConstants.DOB, loginData.dateOfBirth)
                             .apply()
-                        sharedPref.edit().putString(PreferenceConstants.GENDER, "1").apply()
+                        sharedPref.edit().putString(PreferenceConstants.GENDER, if(loginData.gender.equals("Male",true))"1" else "2").apply()
                         sharedPref.edit().putString(
                             PreferenceConstants.RELATIONSHIPCODE,
                             Constants.SELF_RELATIONSHIP_CODE
@@ -288,10 +286,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                             .apply()
                         // Added by Rohit
                         //RealPathUtil.creatingLocalDirctories()
-                        FirebaseHelper.logCustomFirebaseEvent(
-                            FirebaseConstants.NON_HLMT_REGISTRATION_SUCCESSFUL_EVENT,
-                            false
-                        )
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_REGISTRATION_SUCCESSFUL_EVENT)
                         saveUserData(loginData)
                         if (!Utilities.isNullOrEmpty(fName)
                             && !Utilities.isNullOrEmpty(imgPath)
@@ -309,13 +304,13 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                         _toastMessage.value = Event("Unable to connect, please try again")
                     }
                 }else{
-                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_REGISTRATION_FAIL_EVENT,false)
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_REGISTRATION_FAIL_EVENT)
                 }
 
                 if (it.status == Resource.Status.ERROR) {
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
                     toastMessage(it.errorMessage)
-                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_REGISTRATION_FAIL_EVENT,false)
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_REGISTRATION_FAIL_EVENT)
                 }
             }
         }
@@ -424,7 +419,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
     }
 
     private fun saveUserData(usr: LoginModel.Data)= viewModelScope.launch {
-        var user = Users(accountId = usr.accountID,personId = usr.personID.toDouble().toInt(),firstName = usr.firstName,dateOfBirth = usr.dateOfBirth,gender = if(usr.gender.equals("Male",true))"0" else "1",age = usr.age
+        var user = Users(accountId = usr.accountID,personId = usr.personID.toDouble().toInt(),firstName = usr.firstName,dateOfBirth = usr.dateOfBirth,gender = if(usr.gender.equals("Male",true))"1" else "2",age = usr.age
             ,emailAddress = usr.emailAddress,phoneNumber = usr.phoneNumber,path = "",authToken = usr.context,
             partnerCode = usr.partnerCode,accountStatus = usr.accountStatus,accountType = usr.accountType,countryName = "",
             dialingCode = usr.dialingCode, isActive = usr.isActive, isAuthenticated = usr.isAuthenticated,profileImgPath = "",

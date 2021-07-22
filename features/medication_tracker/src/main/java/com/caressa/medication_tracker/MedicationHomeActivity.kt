@@ -7,7 +7,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -22,7 +21,6 @@ import kotlinx.android.synthetic.main.activity_medication_home.*
 import kotlinx.android.synthetic.main.toolbar_layout_medication.*
 import kotlinx.android.synthetic.main.toolbar_layout_medication.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class MedicationHomeActivity : AppCompatActivity() {
 

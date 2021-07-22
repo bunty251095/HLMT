@@ -19,7 +19,6 @@ import com.caressa.common.view.ArcTextView
 import com.caressa.home.R
 import com.caressa.home.adapter.*
 import com.caressa.home.common.DataHandler
-import com.caressa.home.common.DataHandler.DashboardFeature
 import com.caressa.home.common.DataHandler.WellnessCentreDetails
 import com.caressa.home.common.DataHandler.FamilyRelationOption
 import com.caressa.home.common.DataHandler.NavDrawerOption
@@ -209,13 +208,6 @@ object HomeBinding {
         }
     }
 
-    @BindingAdapter("app:dashboardFeatures")
-    @JvmStatic fun RecyclerView.setDashboardFeatures( list: List<DashboardFeature>? ) {
-        with(this.adapter as DashboardFeaturesAdapter) {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            list?.let { updateDashboardOptionsList(it) }
-        }
-    }
 
     @BindingAdapter("app:dashboardFeaturesGrid")
     @JvmStatic fun RecyclerView.setDashboardFeaturesList( list: List<DataHandler.DashboardFeatureGrid>? ) {

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants

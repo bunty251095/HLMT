@@ -1,7 +1,6 @@
 package com.caressa.security.ui
 
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +26,7 @@ class LoginWithOtpFragment : BaseFragment() {
         binding = FragmentLoginWithOtpBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        FirebaseHelper.logScreenEvent(FirebaseConstants.NON_HLMT_LOGIN_SCREEN,false)
+        FirebaseHelper.logScreenEvent(FirebaseConstants.NON_HLMT_LOGIN_SCREEN)
         init()
         setClickable()
         setObserver()

@@ -3,8 +3,6 @@ package com.caressa.home.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseActivity
@@ -93,8 +91,8 @@ class ContactUsActivity : BaseActivity() {
                 binding.tilEdtEmail.error = resources.getString(R.string.VALIDATE_EMAIL)
             }
 
-            val strDialingCode = "+91"
-            if (!Validation.isValidPhoneNumberDialingCodeBased(fromMobile, strDialingCode)) {
+            val strDialingCode = "+60"
+            if (!Validation.isValidPhoneNumber(fromMobile)) {
                 binding.tilEdtPhoneNumber.error = resources.getString(R.string.VALIDATE_PHONE)
             }
             if (Validation.isEmpty(message)) {
