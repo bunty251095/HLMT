@@ -996,7 +996,7 @@ class HraViewModel(
 
             "BALWF" -> {
                 optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "68_BALWFALWAYS"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_SOMETIMES), answerCode = "68_BALWFSOMETIME"))
+                optionList.add(Option(description = context.resources.getString(R.string.RB_USUALLY), answerCode = "68_BALWFSOMETIME"))
                 optionList.add(Option(description = context.resources.getString(R.string.RB_RARELY), answerCode = "68_BALWFRAR"))
                 optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "68_BALWFNEVER"))
                 question = Question(
@@ -1038,7 +1038,7 @@ class HraViewModel(
 
             "JPT" -> {
                 optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "67_JPTALWAYS"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_SOMETIMES), answerCode = "67_JPTSOMETIME"))
+                optionList.add(Option(description = context.resources.getString(R.string.RB_USUALLY), answerCode = "67_JPTSOMETIME"))
                 optionList.add(Option(description = context.resources.getString(R.string.RB_RARELY), answerCode = "67_JPTRAR"))
                 optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "67_JPTNEVER"))
                 question = Question(
@@ -1094,7 +1094,8 @@ class HraViewModel(
                 optionList.add(Option(description = context.resources.getString(R.string.PHYSICAL_PROBLEM), answerCode = "66_PHYABUSE"))
                 optionList.add(Option(description = context.resources.getString(R.string.ONGOING_MEDICATION), answerCode = "66_PHYNMEDON"))
                 optionList.add(Option(description = context.resources.getString(R.string.FINANCIAL_MATTER), answerCode = "66_PHYFINMATTER"))
-                optionList.add(Option(description = context.resources.getString(R.string.HEALTH_CONCERN), answerCode = "66_PHYHLTHCONCERN"))
+//                optionList.add(Option(description = context.resources.getString(R.string.HEALTH_CONCERN), answerCode = "66_PHYHLTHCONCERN"))
+                optionList.add(Option(description = context.resources.getString(R.string.MEDICAL_ILLNESS), answerCode = "66_PHYHLTHCONCERN"))
                 question = Question(
                     qCode = qCode,
                     question = R.string.QUESTION_PHY,

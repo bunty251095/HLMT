@@ -67,6 +67,7 @@
     <string name="ONGOING_MEDICATION">Ongoing Medication</string>
     <string name="FINANCIAL_MATTER">Financial Issues/Lost Job</string>
     <string name="HEALTH_CONCERN">Health Concerns</string>
+    <string name="MEDICAL_ILLNESS">Medical Illness</string>
 
     <string name="GESTATION_DIAB">Gestational diabetes</string>
     <string name="WOMEN_UTI">Urinary Tract Infection</string>

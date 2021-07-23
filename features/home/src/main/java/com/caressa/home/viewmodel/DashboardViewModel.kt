@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Build
+import android.text.Html
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -417,14 +418,23 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                             "<a href=\"https://wk2w7.app.goo.gl/reffral\">https://wk2w7.app.goo.gl/reffral</a> " + "</br></br>")
                     + Html.fromHtml("<br><br>" + "Team Vivant</br><br>" +
                     "<a href=\"https://vivant.me\">www.vivant.vivant.me</a></br></br>");*/
-            val text = "Hello," + "\n\n" +  title + "\n\n" + "Join" + himOrHer + "on "+appName+", the Health & Wellness App that helps you to Store, Track and Manage your Health Data." +
-                    "\n\n" + "Track your steps, get your wellness score, receive personalised recommendations and health goal, all for free !!" +
-                    "\n\n" + "What`s more! Earn and redeem rewards while managing your health from our wellness partners." /*+
-                    Html.fromHtml("<br><br>" + "Play Store : " +
+//            val text = "Hello," + "\n\n" +  title + "\n\n" + "Join" + himOrHer + "on "+appName+", the Health & Wellness App that helps you to Store, Track and Manage your Health Data." +
+//                    "\n\n" + "Track your steps, get your wellness score, receive personalised recommendations and health goal, all for free !!" +
+//                    "\n\n" + "What`s more! Earn and redeem rewards while managing your health from our wellness partners."
+            /*+
+                    Html.fromHtml("<br><br>" + "IOS : " +
                             "<a href=\"https://bit.ly/33d2un5\">https://bit.ly/33d2un5</a> " + "</br></br>") +
-                    Html.fromHtml("<br><br>" + " App Store : " +
+                    Html.fromHtml("<br><br>" + " Android : " +
                             "<a href=\"https://apple.co/3jZI72s\">https://apple.co/3jZI72s</a> " + "</br></br>")+
-                    Html.fromHtml("<br><br>" + "Team Vivant</br><br>" + "<a href=\"https://vivant.me\">www.vivant.vivant.me</a></br></br>")*/
+                    Html.fromHtml("<br><br>" + "Know the right pace !</br></br>")*/
+
+            val text = "Hello," + "\n\n" +  title + "\n\n" + "This Health & Wellness App that helps you to Store, Track and Manage your Health Data." +
+                    "\n\n" + "Join" + himOrHer + "on "+
+                    Html.fromHtml("<br><br>" + "IOS : " +
+                            " -- </a> " + "</br></br>") +
+                    Html.fromHtml("<br><br>" + " Android : " +
+                            " -- " + "</br></br>")+
+                    Html.fromHtml("<br><br>" + "Know the right pace !</br></br>")
 
             val sendIntent = Intent()
             sendIntent.action = Intent.ACTION_SEND

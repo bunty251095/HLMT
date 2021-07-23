@@ -198,10 +198,10 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
                     binding.tilEdtMemberEmail.error = "Please Enter Valid Email"
                 }
 
-                if ( !DateHelper.isDateAbove18Years(DateHelper.getDateTimeAs_ddMMMyyyy(relativeDob)) ) {
-                    binding.tilEdtMemberDob.isErrorEnabled = true
-                    binding.tilEdtMemberDob.error = "Age must be more than 18 years"
-                }
+//                if ( !DateHelper.isDateAbove18Years(DateHelper.getDateTimeAs_ddMMMyyyy(relativeDob)) ) {
+//                    binding.tilEdtMemberDob.isErrorEnabled = true
+//                    binding.tilEdtMemberDob.error = "Age must be more than 18 years"
+//                }
 
                 if (!binding.tilEdtMemberName.isErrorEnabled && !binding.tilEdtMemberDob.isErrorEnabled
                     && !binding.tilEdtMemberMobile.isErrorEnabled && !binding.tilEdtMemberEmail.isErrorEnabled) {

@@ -89,7 +89,7 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
             initialise()
             setClickable()
             loadUserData()
-            FirebaseHelper.logScreenEvent(FirebaseConstants.HEART_AGE_CALCULATOR_SCREEN)
+            FirebaseHelper.logScreenEvent(FirebaseConstants.HEART_AGE_BMI_CALCULATOR_SCREEN)
         } catch ( e : Exception ) {
             e.printStackTrace()
         }
