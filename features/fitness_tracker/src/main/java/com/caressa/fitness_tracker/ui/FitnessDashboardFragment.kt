@@ -282,8 +282,12 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
         binding.txtStepCount.text = todayStepCount.toString()
 
         var progress = 0
-        if(todayStepCount != 0){
-            progress = ( todayStepCount * 100) / todayStepGoal
+        try {
+            if(todayStepCount != 0){
+                progress = ( todayStepCount * 100) / todayStepGoal
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
         binding.progressBar.setValueAnimated(progress.toFloat(),1000)
 
@@ -298,7 +302,14 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
     }
 
     private fun updateStepsData( ) {
-        val progress = ( todayStepCount * 100) / todayStepGoal
+        var progress = 0
+        try {
+            if(todayStepCount != 0){
+                progress = ( todayStepCount * 100) / todayStepGoal
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         binding.progressBar.setValueAnimated(progress.toFloat())
 
         binding.txtGoal.text = todayStepGoal.toString()
