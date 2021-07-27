@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.caressa.common.view.ArcConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/logo_container"
@@ -40,16 +37,4 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:indeterminateTint="@color/white"
-        android:indeterminateTintMode="src_atop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo_container"/>
-
-</com.caressa.common.view.ArcConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

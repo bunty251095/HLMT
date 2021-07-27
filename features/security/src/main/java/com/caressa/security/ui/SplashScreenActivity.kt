@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -36,8 +37,8 @@ class SplashScreenActivity : AppCompatActivity(),DefaultNotificationDialog.OnDia
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-/*        val animation = AnimationUtils.loadAnimation(this, R.anim.anim_pulse)
-        logo_vivant.startAnimation(animation)*/
+        val animation = AnimationUtils.loadAnimation(this, R.anim.anim_pulse)
+        logo_container.startAnimation(animation)
 
         registerObserver()
         proceedInApp()
@@ -91,16 +92,18 @@ class SplashScreenActivity : AppCompatActivity(),DefaultNotificationDialog.OnDia
     private fun proceedInApp() {
         val  intentToPass = Intent()
         intentToPass.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//               Handler().postDelayed(Runnable {
+               Handler().postDelayed(Runnable {
         if( viewModel.getLoginStatus() ) {
-            viewModel.getMedicalProfileSummary(forceRefresh = true)
-            viewModel.getHraHistory()
+//            viewModel.getMedicalProfileSummary(forceRefresh = true)
+//            viewModel.getHraHistory()
+            intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HOME)
+            startActivity(intentToPass)
         } else {
             intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.LOGIN)
             startActivity(intentToPass)
             finish()
         }
-//               },1000)
+               },3000)
     }
 
     override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {}

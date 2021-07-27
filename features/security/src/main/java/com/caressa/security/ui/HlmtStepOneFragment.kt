@@ -31,7 +31,7 @@ class HlmtStepOneFragment : BaseFragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         setClickable()
-        googlePlusInit()
+//        googlePlusInit()
         return binding.root
     }
 
@@ -45,22 +45,5 @@ class HlmtStepOneFragment : BaseFragment() {
         }
     }
 
-    private fun googlePlusInit() {
-//        val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//            .requestIdToken(getString(R.string.google_web_client_id))
-//            .requestEmail()
-//            .build()
-//        googleSignInClient = GoogleSignIn.getClient(
-//            activity as SecurityActivity,
-//            googleSignInOptions)
-//        googleSignOut()
-        FitnessDataManager(context).signOutGoogleAccount()
-    }
-
-    private fun googleSignOut() {
-        try {
-            googleSignInClient.signOut()
-        }catch (e: Exception){e.printStackTrace()}
-    }
 
 }

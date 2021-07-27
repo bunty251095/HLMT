@@ -193,7 +193,7 @@
     </style>
 
     <style name="VivantButtonLeft">
-        <item name="android:layout_height">@dimen/_38sdp</item>
+        <item name="android:layout_height">@dimen/_35sdp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/btn_oval_round</item>
@@ -221,7 +221,7 @@
 
     <style name="CustomButton">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/_36sdp</item>
+        <item name="android:layout_height">@dimen/_35sdp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/btn_oval_selected</item>

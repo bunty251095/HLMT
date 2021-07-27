@@ -39,7 +39,7 @@ class DataHandler( val context: Context) {
         list.add(NavDrawerOption(R.drawable.img_link,context.resources.getString(R.string.MENU_LINK),NavDrawer.LINK,ContextCompat.getColor(context,R.color.colorPrimary)))
         list.add(NavDrawerOption(R.drawable.img_drawer_my_profile,context.resources.getString(R.string.MENU_MY_PROFILE),NavDrawer.MY_PRO,ContextCompat.getColor(context,R.color.vivant_soft_pink)))
         list.add(NavDrawerOption(R.drawable.img_drawer_family,context.resources.getString(R.string.MENU_FAMILY_MEMBERS),NavDrawer.FAMILY_PRO,ContextCompat.getColor(context,R.color.vivant_purple)))
-        list.add(NavDrawerOption(R.drawable.img_doctor,context.resources.getString(R.string.MENU_FAMILY_DOCTORS),NavDrawer.FAMILY_DOCTOR,ContextCompat.getColor(context,R.color.vivant_green_blue_two)))
+//        list.add(NavDrawerOption(R.drawable.img_doctor,context.resources.getString(R.string.MENU_FAMILY_DOCTORS),NavDrawer.FAMILY_DOCTOR,ContextCompat.getColor(context,R.color.vivant_green_blue_two)))
         list.add(NavDrawerOption(R.drawable.img_drawer_contact_us,context.resources.getString(R.string.MENU_CONTACT_US),NavDrawer.CONTACT_US,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
         list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.MENU_SPREAD_THE_WORD),NavDrawer.SPREAD_THE_WORD,ContextCompat.getColor(context,R.color.vivant_bright_sky_blue)))
         list.add(NavDrawerOption(R.drawable.ic_settings,context.resources.getString(R.string.MENU_SETTINGS),NavDrawer.SETTINGS,ContextCompat.getColor(context,R.color.vivant_watermelon)))
@@ -49,7 +49,7 @@ class DataHandler( val context: Context) {
     fun getSwitchProfileNavDrawerList() : List<NavDrawerOption>{
         val list:ArrayList<NavDrawerOption> = ArrayList()
         list.add(NavDrawerOption(R.drawable.img_drawer_home,context.resources.getString(R.string.MENU_HOME),NavDrawer.HOME,ContextCompat.getColor(context,R.color.vivant_bright_blue)))
-        list.add(NavDrawerOption(R.drawable.img_doctor,context.resources.getString(R.string.MENU_FAMILY_DOCTORS),NavDrawer.FAMILY_DOCTOR,ContextCompat.getColor(context,R.color.vivant_green_blue_two)))
+//        list.add(NavDrawerOption(R.drawable.img_doctor,context.resources.getString(R.string.MENU_FAMILY_DOCTORS),NavDrawer.FAMILY_DOCTOR,ContextCompat.getColor(context,R.color.vivant_green_blue_two)))
         list.add(NavDrawerOption(R.drawable.img_drawer_contact_us,context.resources.getString(R.string.MENU_CONTACT_US),NavDrawer.CONTACT_US,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
         list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.MENU_SPREAD_THE_WORD),NavDrawer.SPREAD_THE_WORD,ContextCompat.getColor(context,R.color.vivant_bright_sky_blue)))
         list.add(NavDrawerOption(R.drawable.ic_settings,context.resources.getString(R.string.MENU_SETTINGS),NavDrawer.SETTINGS,ContextCompat.getColor(context,R.color.vivant_watermelon)))

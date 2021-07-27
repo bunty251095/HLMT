@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_security_feature"
-    app:startDestination="@id/stepOneFragment">
+    app:startDestination="@id/loginSelectionFragment">
 
     <activity
         android:id="@+id/splash_activity"
@@ -30,6 +30,17 @@
                 app:argType="string"
                 android:defaultValue=" "/>
         </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginSelectionFragment"
+        android:name="com.caressa.security.ui.LoginSelectionFragment"
+        tools:layout="@layout/fragment_account_selection">
+
+        <action
+            android:id="@+id/action_loginSelctionToStepOneFragment"
+            app:destination="@id/stepOneFragment"/>
+
     </fragment>
 
     <fragment

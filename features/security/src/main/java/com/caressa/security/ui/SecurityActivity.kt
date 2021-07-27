@@ -49,7 +49,7 @@ class SecurityActivity : AppCompatActivity() {
                 R.id.userDetailsFragment -> ""
                 else -> ""
             }
-            if ( destination.id == R.id.stepOneFragment ) {
+            if ( destination.id == R.id.loginSelectionFragment ) {
                 toolBarView.visibility = View.GONE
             } else {
                 toolBarView.visibility = View.VISIBLE

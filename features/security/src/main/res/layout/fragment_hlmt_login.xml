@@ -30,18 +30,27 @@
                 android:orientation="vertical"
                 android:padding="@dimen/_12sdp">
 
-                <com.caressa.common.view.ArcImageView
-                    android:id="@+id/img_signup_heart"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_80sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:src="@drawable/hlmt_banner"
+                <include
+                    android:id="@+id/logo_container"
+                    layout="@layout/hlpace_logo_layout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <com.caressa.common.view.ArcTextView
+                    android:id="@+id/lbl_hlmt_login_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/HLMT_LOGIN_DESCRIPTION"
+                    style="@style/VivantTitle"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/logo_container"
+                    app:layout_constraintStart_toStartOf="@+id/logo_container"
+                    app:layout_constraintTop_toBottomOf="@+id/logo_container"
+                    />
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_edt_login_email_phone"
@@ -51,9 +60,9 @@
                     android:layout_marginTop="@dimen/_40sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@drawable/selector_border_button"
-                    app:layout_constraintEnd_toEndOf="@+id/img_signup_heart"
-                    app:layout_constraintStart_toStartOf="@+id/img_signup_heart"
-                    app:layout_constraintTop_toBottomOf="@+id/img_signup_heart">
+                    app:layout_constraintEnd_toEndOf="@+id/lbl_hlmt_login_info"
+                    app:layout_constraintStart_toStartOf="@+id/lbl_hlmt_login_info"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_hlmt_login_info">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imageView"
@@ -180,10 +189,24 @@
                     android:text="@string/LOGIN"
                     android:textSize="@dimen/_14sdp"
                     app:isTemplate="true"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_password"
                     app:layout_constraintStart_toStartOf="@+id/layout_edt_login_password"
                     app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password" />
 
+                <com.caressa.common.view.ArcImageView
+                    android:id="@+id/img_submit"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/circle_bg"
+                    android:padding="@dimen/_10sdp"
+                    android:tint="@color/white"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_password"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password"
+                    app:srcCompat="@drawable/arrow_right" />
                 <!--                <com.caressa.common.view.ArcTextView
                                     android:id="@+id/tv_login_signup"
                                     app:isTemplate="true"

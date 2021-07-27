@@ -59,7 +59,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/img_forgot_password" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/lbl_forgot_password_desc"
+                    android:id="@+id/lbl_enter_number_desc"
                     style="@style/CustomTextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                     android:textColor="@color/vivant_charcoal_grey"
                     android:textSize="@dimen/_24sdp"
                     android:layout_marginTop="@dimen/_40sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/lbl_forgot_password_desc"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_enter_number_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">
 
