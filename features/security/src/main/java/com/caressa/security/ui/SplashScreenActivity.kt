@@ -100,8 +100,9 @@ class SplashScreenActivity : AppCompatActivity(), DefaultNotificationDialog.OnDi
 
     private fun proceedInApp() {
         if (viewModel.getLoginStatus()) {
-            viewModel.getMedicalProfileSummary(forceRefresh = true)
-            viewModel.getHraHistory()
+//            viewModel.getMedicalProfileSummary(forceRefresh = true)
+//            viewModel.getHraHistory()
+            navigateToHome()
         } else {
             navigateToLogin()
         }
