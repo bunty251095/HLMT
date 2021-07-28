@@ -91,6 +91,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="POWERED_BY">Powered By</string>
     <string name="CHANGE_MOBILE_NUMBER">Change Mobile Number?</string>
+    <string name="HLMT_USER_ID">HLMT User ID</string>
 </resources>

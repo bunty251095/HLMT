@@ -14,81 +14,63 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/scrollview"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/_12sdp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
+                android:id="@+id/logo_container"
+                layout="@layout/hlpace_logo_layout" />
+
+            <com.caressa.common.view.ArcTextView
+                android:id="@+id/lbl_enter_number_desc"
+                style="@style/VivantTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:gravity="center"
+                android:text="@string/DO_YOU_HAVE_HLM_360_ACCOUNT"
+                android:textSize="@dimen/_14sdp" />
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/_40sdp"
-                android:orientation="vertical"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="horizontal">
 
-                <include
-                    android:id="@+id/logo_container"
-                    layout="@layout/hlpace_logo_layout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <com.caressa.common.view.ArcBorderButton
+                    android:id="@+id/btn_have_account"
+                    style="@style/HlmtRoundLeftButton"
+                    android:layout_width="0dp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:text="@string/YES_I_HAVE"
+                    app:isRound="true"
+                    app:isTemplate="true" />
 
-                <com.caressa.common.view.ArcTextView
-                    android:id="@+id/lbl_enter_number_desc"
-                    style="@style/VivantTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:gravity="center"
-                    android:text="@string/DO_YOU_HAVE_HLM_360_ACCOUNT"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintEnd_toEndOf="@+id/logo_container"
-                    app:layout_constraintStart_toStartOf="@+id/logo_container"
-                    app:layout_constraintTop_toBottomOf="@+id/logo_container" />
+                <com.caressa.common.view.ArcBorderButton
+                    android:id="@+id/btn_i_dont"
+                    style="@style/HlmtRoundLeftButton"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:text="@string/NO_DONT"
+                    app:isRound="true"
+                    app:isTemplate="true" />
 
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/button_conatiner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="@+id/lbl_enter_number_desc"
-                    app:layout_constraintStart_toStartOf="@+id/lbl_enter_number_desc"
-                    app:layout_constraintTop_toBottomOf="@+id/lbl_enter_number_desc">
-
-                    <com.caressa.common.view.ArcBorderButton
-                        android:id="@+id/btn_have_account"
-                        style="@style/HlmtRoundLeftButton"
-                        android:layout_width="0dp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:text="@string/YES_I_HAVE"
-                        app:isRound="true"
-                        app:isTemplate="true" />
-
-                    <com.caressa.common.view.ArcBorderButton
-                        android:id="@+id/btn_i_dont"
-                        style="@style/HlmtRoundLeftButton"
-                        android:layout_width="0dp"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:text="@string/NO_DONT"
-                        app:isRound="true"
-                        app:isTemplate="true" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.core.widget.NestedScrollView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -102,6 +102,7 @@
     <string name="OPTIMUM">Optimum</string>
     <!--HRA-->
 
+    <string name="POWERED_BY">Powered By</string>
     <string name="LINK_HLMT_360_ACCOUNT">Link HLMT 360 Account</string>
     <string name="LINK_MY_HLMT_360_ACCOUNT">Link my HLMT 360 Account</string>
     <string name="TO_LINK_HLMT_360_ACCOUNT_CLICK_ON_BUTTON">To Link your HLMT 360 Account with Wellness App Profile , Login to your Account and click on button Link my HLMT 360 Account</string>

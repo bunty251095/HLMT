@@ -43,9 +43,12 @@ class HlmtLoginFragment : BaseFragment() {
 
         viewModel.hlmt360LoginResponse.observe(viewLifecycleOwner,{})
 
-       binding.btnLogin.setOnClickListener {
-           viewModel.checkLoginNameExistOrNot(username = binding.edtUsername.text.toString(),passwordStr = binding.edtLoginPassword.text.toString())
-       }
+//       binding.btnLogin.setOnClickListener {
+//           viewModel.checkLoginNameExistOrNot(username = binding.edtUsername.text.toString(),passwordStr = binding.edtLoginPassword.text.toString())
+//       }
+        binding.imgSubmit.setOnClickListener {
+            viewModel.checkLoginNameExistOrNot(username = binding.edtUsername.text.toString(),passwordStr = binding.edtLoginPassword.text.toString())
+        }
     }
 
 }
