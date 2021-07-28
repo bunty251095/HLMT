@@ -18,7 +18,6 @@ import com.caressa.model.parameter.*
 import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
 import com.caressa.track_parameter.domain.ParameterManagementUseCase
-import com.caressa.track_parameter.ui.DashboardFragmentDirections
 import com.caressa.track_parameter.util.TrackParameterHelper
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
@@ -251,7 +250,4 @@ class DashboardViewModel (
         navigate(action)
     }
 
-    fun openParameterDetails(item: TrackParamDashboardDataSet) {
-        navigate(DashboardFragmentDirections.actionDashboardFragmentToParameterDetailFragment(item.profileName!!,item.profileCode!!))
-    }
 }

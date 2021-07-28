@@ -24,15 +24,6 @@
             app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
 
-        <action
-            android:id="@+id/action_homeFragment_to_updateParameterFragment"
-            app:destination="@id/updateParameterFragment"
-            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right">
-
-            <argument android:name="profileCode" app:argType="string" android:defaultValue="BMI"/>
-            <argument android:name="showAllProfile" app:argType="string" android:defaultValue="false"/>
-        </action>
 
         <action
             android:id="@+id/action_homeFragment_to_parameterDashboard"
@@ -108,35 +99,6 @@
         </action>
     </fragment>
 
-    <fragment
-            android:id="@+id/updateParameterFragment"
-            android:name="com.caressa.track_parameter.ui.UpdateParameterFragment"
-            android:label="UpdateParameterFragment" >
-    </fragment>
-
-    <fragment
-        android:id="@+id/dashboardFragment"
-        android:name="com.caressa.track_parameter.ui.DashboardFragment"
-        tools:layout="@layout/dashboard_fragment"
-        android:label="Dashboard">
-
-        <action
-            android:id="@+id/action_dashboardFragment_to_parameterDetailFragment"
-            app:destination="@id/parameterDetailFragment" >
-            <argument android:name="profileName" app:argType="string" android:defaultValue="NA" />
-            <argument android:name="profileCode" app:argType="string" android:defaultValue="NA"/>
-        </action>
-
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/parameterDetailFragment"
-        android:name="com.caressa.track_parameter.ui.ParameterDetailFragment"
-        android:label="Track Health Parameters" >
-        <argument android:name="profileName" app:argType="string"/>
-        <argument android:name="profileCode" app:argType="string"/>
-    </fragment>
 
     <fragment
         android:id="@+id/updateParameterFrag"

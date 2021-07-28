@@ -16,13 +16,6 @@ class ParameterManagementUseCase(private val repository: ParameterRepository){
         }
     }
 
-    suspend fun invokeLabRecordsList(isForceRefresh : Boolean = true,data : LabRecordsListModel,personId: String): LiveData<Resource<TrackParameterMaster.HistoryResponse>> {
-        return Transformations.map(
-            repository.fetchLabRecordsList(data,personId)){
-            it
-        }
-    }
-
     suspend fun invokeGetSelectParamList(selectedParameter: String, showAllProfile:String = "true"): List<ParameterListModel.SelectedParameter>{
         return repository.getSelectParameterList(selectedParameter,showAllProfile)
     }
@@ -31,9 +24,6 @@ class ParameterManagementUseCase(private val repository: ParameterRepository){
         return repository.getParametersFromDB()
     }
 
-    suspend fun invokeParameterListBaseOnCode(pCode: String): List<TrackParameterMaster.Parameter>? {
-        return repository.fetchParamListBaseOnCode(pCode)
-    }
 
     suspend fun invokeParameterHisBaseOnCode(pCode: String, personId: String): List<TrackParameterMaster.History>? {
         return repository.fetchParamHisBaseOnCode(pCode, personId)
@@ -54,26 +44,6 @@ class ParameterManagementUseCase(private val repository: ParameterRepository){
         }
     }
 
-    suspend fun invokeBMIHistory(data : BMIHistoryModel, personId: String): LiveData<Resource<BMIHistoryModel.Response>>{
-        return Transformations.map(
-            repository.fetchBMIHistory(data,personId)){
-            it
-        }
-    }
-
-    suspend fun invokeWHRHistory(data : WHRHistoryModel, personId: String): LiveData<Resource<WHRHistoryModel.Response>>{
-        return Transformations.map(
-            repository.fetchWHRHistory(data,personId)){
-            it
-        }
-    }
-
-    suspend fun invokeBloodPressureHistory(data : BloodPressureHistoryModel, personId: String): LiveData<Resource<BloodPressureHistoryModel.Response>>{
-        return Transformations.map(
-            repository.fetchBloodPressureHistory(data,personId)){
-            it
-        }
-    }
 
     suspend fun invokeSaveParameter(data : SaveParameterModel): LiveData<Resource<SaveParameterModel.Response>>{
         return Transformations.map(

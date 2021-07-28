@@ -58,12 +58,8 @@ class ParameterHomeActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener{ controller, destination, _ ->
 
             toolbar_title.text = when (destination.id) {
-                R.id.parameterDashboard -> "Track Health Parameters"
                 R.id.homeFragment -> "Track Health Parameters"
                 R.id.selectParameterFragment -> "Select Parameters"
-                R.id.updateParameterFragment -> "UpdateParameters"
-                R.id.dashboardFragment -> "Parameters Dashboard"
-                R.id.parameterDetailFragment -> "Track Health Parameters"
 
                 R.id.selectParameterFragment -> "Select Parameters"
                 R.id.updateParameterFrag -> "Update Parameters"

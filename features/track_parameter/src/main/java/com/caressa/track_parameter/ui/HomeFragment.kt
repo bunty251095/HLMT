@@ -15,13 +15,13 @@ import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
 import com.caressa.track_parameter.databinding.HomeFragmentBinding
-import com.caressa.track_parameter.viewmodel.ParameterHomeViewModel
+import com.caressa.track_parameter.viewmodel.DashboardViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class HomeFragment : BaseFragment(){
 
-    private val viewModel: ParameterHomeViewModel by viewModel()
+    private val viewModel: DashboardViewModel by viewModel()
     private lateinit var binding: HomeFragmentBinding
 
     override fun getViewModel(): BaseViewModel = viewModel
