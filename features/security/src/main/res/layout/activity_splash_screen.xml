@@ -1,55 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.caressa.common.view.ArcConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.SplashScreenActivity">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <include
         android:id="@+id/logo_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        layout="@layout/hlpace_logo_layout" />
 
-        <com.caressa.common.view.ArcImageView
-            android:layout_width="@dimen/_180sdp"
-            android:layout_height="@dimen/_70sdp"
-            android:scaleType="fitEnd"
-            app:srcCompat="@drawable/hl_pace_logo" />
-
-        <com.caressa.common.view.ArcTextView
-            style="@style/VivantTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/POWERED_BY"
-            android:textSize="@dimen/_10sdp" />
-
-        <com.caressa.common.view.ArcImageView
-            android:layout_width="@dimen/_130sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/hlmt_banner" />
-
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:indeterminateTint="@color/white"
-        android:indeterminateTintMode="src_atop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo_container"/>
-
-</com.caressa.common.view.ArcConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

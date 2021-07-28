@@ -56,7 +56,7 @@
     <string name="ENTER_NUMBER_TO_GET_OTP">Enter your mobile number</string>
     <string name="HLMT_LOGIN_DESCRIPTION">Enter your HLMTakaful360&#xb0; account\ndetails to login</string>
 
-    <string name="DO_YOU_HAVE_HLM_360_ACCOUNT">Already an HLMTTakaful360&#xb0; policy holder?</string>
+    <string name="DO_YOU_HAVE_HLM_360_ACCOUNT">Already an HLMTakaful360&#xb0; certificate holder?</string>
     <string name="NO_DONT">No, I am not</string>
     <string name="YES_I_HAVE">Yes, I am</string>
     <string name="I_AM_NEW">I\'m New</string>
@@ -64,7 +64,7 @@
 
     <string name="PASSWORD_CRITERIA">Your Password Criteria</string>
     <string name="PASSWORD_CRITERIA_DESC">Your Password length Should be minimum 6 characters</string>
-    <string name="OTP_SENT_DESC">Enter TAC(you will receive an SMS)</string>
+    <string name="OTP_SENT_DESC">Enter TAC (you will receive an SMS)</string>
     <string name="LOGIN_SELECTION_INFO">Know the right Pace!\nAdjust my daily pace together with my\nhealth pace. </string>
 
     <!--    <string name="error_invalid_otp">Please enter a valid TAC</string>-->

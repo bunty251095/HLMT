@@ -27,29 +27,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:orientation="vertical"
                 android:padding="@dimen/_12sdp">
 
                 <include
                     android:id="@+id/logo_container"
                     layout="@layout/hlpace_logo_layout"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <com.caressa.common.view.ArcTextView
                     android:id="@+id/lbl_hlmt_login_info"
+                    style="@style/VivantTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/HLMT_LOGIN_DESCRIPTION"
-                    style="@style/VivantTitle"
                     android:layout_margin="@dimen/_10sdp"
                     android:gravity="center"
+                    android:text="@string/HLMT_LOGIN_DESCRIPTION"
                     android:textSize="@dimen/_13sdp"
                     app:layout_constraintEnd_toEndOf="@+id/logo_container"
                     app:layout_constraintStart_toStartOf="@+id/logo_container"
-                    app:layout_constraintTop_toBottomOf="@+id/logo_container"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/logo_container" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -79,8 +76,8 @@
                         android:id="@+id/til_edt_login_email_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintEnabled="false"
                         app:boxBackgroundMode="none"
+                        app:hintEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -142,8 +139,8 @@
                         android:id="@+id/til_edt_login_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintEnabled="false"
                         app:boxBackgroundMode="none"
+                        app:hintEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -188,8 +185,8 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:text="@string/LOGIN"
                     android:textSize="@dimen/_14sdp"
-                    app:isTemplate="true"
                     android:visibility="gone"
+                    app:isTemplate="true"
                     app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_password"
                     app:layout_constraintStart_toStartOf="@+id/layout_edt_login_password"
                     app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password" />
@@ -198,12 +195,12 @@
                     android:id="@+id/img_submit"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:background="@drawable/circle_bg"
-                    android:padding="@dimen/_10sdp"
-                    android:tint="@color/white"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/circle_bg"
+                    android:padding="@dimen/_10sdp"
+                    android:tint="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_password"
                     app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password"
                     app:srcCompat="@drawable/arrow_right" />

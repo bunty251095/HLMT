@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.caressa.security.viewmodel.HlmtLoginViewModel"/>
+            type="com.caressa.security.viewmodel.HlmtLoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,8 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:orientation="vertical"
                 android:layout_marginBottom="@dimen/_40sdp"
+                android:orientation="vertical"
                 android:padding="@dimen/_12sdp">
 
                 <include
@@ -41,15 +40,13 @@
 
                 <com.caressa.common.view.ArcTextView
                     android:id="@+id/lbl_enter_number_desc"
-                    app:isTemplate="true"
                     style="@style/VivantTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/DO_YOU_HAVE_HLM_360_ACCOUNT"
-                    android:textColor="@color/vivant_track_param_textcolor"
-                    android:textSize="@dimen/_14sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
                     android:gravity="center"
-                    android:layout_marginTop="@dimen/_50sdp"
+                    android:text="@string/DO_YOU_HAVE_HLM_360_ACCOUNT"
+                    android:textSize="@dimen/_14sdp"
                     app:layout_constraintEnd_toEndOf="@+id/logo_container"
                     app:layout_constraintStart_toStartOf="@+id/logo_container"
                     app:layout_constraintTop_toBottomOf="@+id/logo_container" />
@@ -59,35 +56,33 @@
                     android:id="@+id/button_conatiner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_50sdp"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="@+id/lbl_enter_number_desc"
                     app:layout_constraintStart_toStartOf="@+id/lbl_enter_number_desc"
                     app:layout_constraintTop_toBottomOf="@+id/lbl_enter_number_desc">
 
                     <com.caressa.common.view.ArcBorderButton
-                        android:id="@+id/btn_i_dont"
-                        app:isTemplate="true"
-                        app:isRound="true"
+                        android:id="@+id/btn_have_account"
                         style="@style/HlmtRoundLeftButton"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        android:text="@string/NO_DONT"
-                        />
+                        android:layout_weight="1"
+                        android:text="@string/YES_I_HAVE"
+                        app:isRound="true"
+                        app:isTemplate="true" />
 
                     <com.caressa.common.view.ArcBorderButton
-                        android:id="@+id/btn_have_account"
-                        app:isTemplate="true"
-                        app:isRound="true"
+                        android:id="@+id/btn_i_dont"
                         style="@style/HlmtRoundLeftButton"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:text="@string/YES_I_HAVE"
-                        />
+                        android:layout_weight="1"
+                        android:text="@string/NO_DONT"
+                        app:isRound="true"
+                        app:isTemplate="true" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

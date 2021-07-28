@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -28,14 +27,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:orientation="vertical"
                 android:layout_marginBottom="@dimen/_10sdp"
+                android:orientation="vertical"
                 android:padding="@dimen/_12sdp">
 
                 <include
                     android:id="@+id/img_forgot_password"
-                    layout="@layout/hlpace_logo_layout"/>
-
+                    layout="@layout/hlpace_logo_layout" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -58,7 +56,7 @@
                     style="@style/VivantTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:gravity="center"
                     android:text="@string/ENTER_NUMBER_TO_GET_OTP"
                     android:textSize="@dimen/_13sdp"
@@ -163,8 +161,8 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:text="Send TAC"
-                    app:isTemplate="true"
                     android:visibility="gone"
+                    app:isTemplate="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_edit_number" />
@@ -218,8 +216,8 @@
                         android:layout_height="@dimen/_25sdp"
                         android:layout_gravity="end"
                         android:layout_marginTop="@dimen/_12sdp"
-                        android:text="@string/RESEND_CODE"
                         android:layout_marginEnd="@dimen/_10sdp"
+                        android:text="@string/RESEND_CODE"
                         android:textSize="@dimen/_11sdp"
                         android:textStyle="bold"
                         android:visibility="visible"
@@ -257,8 +255,8 @@
                             style="@style/VivantButtonRight"
                             android:layout_width="0dp"
                             android:text="@string/VERIFY"
-                            app:isTemplate="true"
                             android:visibility="gone"
+                            app:isTemplate="true"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/btn_back" />
@@ -276,9 +274,9 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
+                    android:visibility="gone"
                     app:isPrimary="true"
                     app:isTemplate="true"
-                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_email_phone"
                     app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_email_phone" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -289,11 +287,11 @@
             android:id="@+id/img_submit"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/circle_bg"
             android:padding="@dimen/_10sdp"
             android:tint="@color/white"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/arrow_right" />

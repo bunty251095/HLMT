@@ -285,13 +285,13 @@ object HomeBinding {
             if ( !Utilities.isNullOrEmpty(imgUrl) ) {
                 Picasso.get()
                     .load(imgUrl)
-                    .placeholder(R.drawable.hlmt_logo)
+                    .placeholder(R.drawable.hl_pace_logo)
                     //.resize(6000,3000)
                     //.onlyScaleDown()
-                    .error(R.drawable.hlmt_logo)
+                    .error(R.drawable.hl_pace_logo)
                     .into(this)
             } else {
-                setImageResource(R.drawable.hlmt_logo)
+                setImageResource(R.drawable.hl_pace_logo)
             }
         } catch (e:Exception) {
             e.printStackTrace()
