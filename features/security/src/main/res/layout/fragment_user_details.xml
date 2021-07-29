@@ -30,13 +30,10 @@
 
                 <com.caressa.common.view.ArcImageView
                     android:id="@+id/img_hlmt_logo"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_80sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:src="@drawable/hlmt_banner"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:scaleType="fitEnd"
+                    app:srcCompat="@drawable/hl_pace_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -47,6 +44,7 @@
                     android:gravity="center"
                     android:paddingStart="@dimen/_10sdp"
                     android:paddingEnd="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:text="Welcome to HL Pace,\nplease provide your basic information to build your health profile."
                     android:textColor="@color/hlmt_dark_grey"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -520,18 +518,31 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/img_phone" />
 
+                        <TextView
+                            android:id="@+id/textView"
+                            style="@style/CustomTextRegular"
+                            android:text="+60"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/_12sdp"
+                            android:paddingTop="@dimen/_2sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            app:layout_constraintBottom_toBottomOf="@id/img_address__edit"
+                            app:layout_constraintStart_toEndOf="@+id/img_address__edit"
+                            app:layout_constraintTop_toTopOf="@id/img_address__edit" />
+
+
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/til_edt_phone_number"
                             style="@style/VivantTextInputLayoutStyle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_6sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
                             android:enabled="false"
                             app:hintEnabled="false"
-                            app:layout_constraintBottom_toBottomOf="@+id/img_address__edit"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/img_address__edit"
-                            app:layout_constraintTop_toTopOf="@+id/img_address__edit"
+                            app:layout_constraintStart_toEndOf="@+id/textView"
+                            app:layout_constraintTop_toTopOf="@+id/textView"
                             app:passwordToggleEnabled="false">
 
                             <com.google.android.material.textfield.TextInputEditText

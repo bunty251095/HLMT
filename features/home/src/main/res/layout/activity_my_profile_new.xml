@@ -389,6 +389,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
+                    <TextView
+                        android:id="@+id/textView"
+                        style="@style/CustomTextRegular"
+                        android:text="+60"
+                        android:textSize="@dimen/_13sdp"
+                        app:layout_constraintBottom_toBottomOf="@id/img_number"
+                        app:layout_constraintStart_toEndOf="@+id/img_number"
+                        app:layout_constraintTop_toTopOf="@id/img_number" />
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_number"
                         style="@style/VivantDescription"
@@ -399,10 +408,12 @@
                         android:textSize="@dimen/_13sdp"
                         android:gravity="center_vertical"
                         android:layout_marginStart="@dimen/_10sdp"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_number"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        app:layout_constraintBottom_toBottomOf="@id/img_number"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/img_number"
-                        app:layout_constraintTop_toTopOf="@+id/img_number"/>
+                        app:layout_constraintStart_toEndOf="@+id/textView"
+                        app:layout_constraintTop_toTopOf="@id/img_number"/>
 
                     <View
                         android:id="@+id/view_number"
@@ -435,6 +446,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
+                    <TextView
+                        android:id="@+id/textView2"
+                        style="@style/CustomTextRegular"
+                        android:text="+60"
+                        android:textSize="@dimen/_13sdp"
+                        app:layout_constraintBottom_toBottomOf="@id/img_alternate_number"
+                        app:layout_constraintStart_toEndOf="@+id/img_alternate_number"
+                        app:layout_constraintTop_toTopOf="@id/img_alternate_number" />
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_alternate_number"
                         style="@style/VivantDescription"
@@ -443,12 +463,14 @@
                         android:text=""
                         android:textColor="@color/textViewColor"
                         android:textSize="@dimen/_13sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
                         android:gravity="center_vertical"
                         android:layout_marginStart="@dimen/_10sdp"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_alternate_number"
+                        app:layout_constraintBottom_toBottomOf="@id/img_alternate_number"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/img_alternate_number"
-                        app:layout_constraintTop_toTopOf="@+id/img_alternate_number"/>
+                        app:layout_constraintStart_toEndOf="@+id/textView2"
+                        app:layout_constraintTop_toTopOf="@id/img_alternate_number"/>
 
                     <View
                         android:id="@+id/view_alternate_number"
@@ -796,6 +818,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
+                    <TextView
+                        android:id="@+id/textView3"
+                        style="@style/CustomTextRegular"
+                        android:text="+60"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintBottom_toBottomOf="@id/img_alternate_number_edit"
+                        app:layout_constraintStart_toEndOf="@+id/img_alternate_number_edit"
+                        app:layout_constraintTop_toTopOf="@id/img_alternate_number_edit" />
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_edt_alternate_number"
                         style="@style/VivantTextInputLayoutStyle"
@@ -806,22 +837,23 @@
                         android:layout_marginStart= "@dimen/_6sdp"
                         app:layout_constraintBottom_toBottomOf="@+id/img_alternate_number_edit"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/img_alternate_number_edit"
+                        app:layout_constraintStart_toEndOf="@+id/textView3"
                         app:layout_constraintTop_toTopOf="@+id/img_alternate_number_edit">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_alternate_number"
+                            style="@style/VivantEditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/VivantEditTextStyle"
                             android:hint="@string/ALTERNATE_NUMBER"
-                            android:text=""
-                            android:textSize="@dimen/_13sdp"
                             android:imeOptions="actionNext"
                             android:inputType="number"
-                            android:maxLines="1"
                             android:maxLength="10"
-                            android:paddingTop="@dimen/_10sdp" />
+                            android:maxLines="1"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_2sdp"
+                            android:text=""
+                            android:textSize="@dimen/_13sdp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

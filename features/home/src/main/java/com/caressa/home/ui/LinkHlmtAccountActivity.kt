@@ -48,22 +48,24 @@ class LinkHlmtAccountActivity : BaseActivity() {
             if(it!=null){
                 if ( it.accountLinkStatus.equals("true",true) ) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        binding.lblAccountLink.setText(Html.fromHtml("Your HLMT 360 Account <b>${binding.edtUsername.text.toString()} </b> has been linked Successfully with your wellness app profile.", Html.FROM_HTML_MODE_COMPACT));
+                        binding.lblAccountLink.setText(Html.fromHtml("Your HLMTakaful360 account <b>${binding.edtUsername.text.toString()} </b> has been linked Successfully with your HL Pace profile.", Html.FROM_HTML_MODE_COMPACT));
                     } else {
-                        binding.lblAccountLink.setText(Html.fromHtml("Your HLMT 360 Account <b>${binding.edtUsername.text.toString()} </b> has been linked Successfully with your wellness app profile."));
+                        binding.lblAccountLink.setText(Html.fromHtml("Your HLMTakaful360 account <b>${binding.edtUsername.text.toString()} </b> has been linked Successfully with your HL Pace profile."));
                     }
                     binding.layoutAccLinked.visibility = View.VISIBLE
                     binding.layoutAccNotLinked.visibility = View.GONE
+                    binding.imgSubmit.visibility = View.GONE
                 } else {
                     binding.layoutAccLinked.visibility = View.GONE
                     binding.layoutAccNotLinked.visibility = View.VISIBLE
+                    binding.imgSubmit.visibility = View.VISIBLE
                 }
             }
         })
         isAccountLinked = viewModel.getPreference(PreferenceConstants.ACCOUNT_LINK_STATUS).equals("true",true)
         if ( isAccountLinked ) {
             FirebaseHelper.logScreenEvent(FirebaseConstants.LINK_ACCOUNT_STATUS_SCREEN)
-            var lblText:String = "Your HLMT 360 Account <b> "+viewModel.getPreference(PreferenceConstants.HLMT_USERNAME)+" </b> is already link with your wellness app profile."
+            var lblText:String = "Your HLMTakaful360 account <b> "+viewModel.getPreference(PreferenceConstants.HLMT_USERNAME)+" </b> is already link with your HL Pace wellness profile."
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 binding.lblAccountLink.setText(Html.fromHtml(lblText, Html.FROM_HTML_MODE_COMPACT));
             } else {
@@ -71,16 +73,22 @@ class LinkHlmtAccountActivity : BaseActivity() {
             }
             binding.layoutAccLinked.visibility = View.VISIBLE
             binding.layoutAccNotLinked.visibility = View.GONE
+            binding.imgSubmit.visibility = View.GONE
         } else {
             FirebaseHelper.logScreenEvent(FirebaseConstants.LINK_ACCOUNT_SCREEN)
             binding.layoutAccLinked.visibility = View.GONE
             binding.layoutAccNotLinked.visibility = View.VISIBLE
+            binding.imgSubmit.visibility = View.VISIBLE
         }
     }
 
     private fun setClickable() {
 
-        binding.btnLinkAccount.setOnClickListener {
+//        binding.btnLinkAccount.setOnClickListener {
+//            viewModel.fetchHLMT360LoginResponse(binding.edtUsername.text.toString(),binding.edtLoginPassword.text.toString())
+//        }
+
+        binding.imgSubmit.setOnClickListener {
             viewModel.fetchHLMT360LoginResponse(binding.edtUsername.text.toString(),binding.edtLoginPassword.text.toString())
         }
 
