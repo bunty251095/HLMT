@@ -138,6 +138,7 @@ object Constants {
 
     //Template Constants
     const val PRIMARY_COLOR = "primaryColor"
+    const val SECONDARY_COLOR = "secondaryColor"
     const val TEXT_COLOR = "textColor"
     const val ICON_TINT_COLOR = "iconTintColor"
     const val LEFT_BUTTON_COLOR = "leftButtonColor"

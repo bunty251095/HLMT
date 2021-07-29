@@ -174,7 +174,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                                 )
                             )
                         }
-                        toastMessage("OTP verified successfully")
+                        //toastMessage("OTP verified successfully")
                     } else {
                         toastMessage(context.resources.getString(R.string.ERROR_UNABLE_VERIFY_OTP))
                     }

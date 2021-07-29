@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">@color/hlmt_european_blue</color>
+    <color name="colorSecondary">#95979A</color>
     <color name="ColorPrimaryDark">#FFFFFF</color>
     <color name="colorAccent">@color/hlmt_european_blue</color>
 
