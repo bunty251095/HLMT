@@ -104,7 +104,6 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/btn_fill_selected"
-                    android:backgroundTint="@color/vivant_marigold"
                     android:gravity="start|center_vertical"
                     android:padding="@dimen/_8sdp"
                     android:text="June 2020"

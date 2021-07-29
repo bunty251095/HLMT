@@ -9,6 +9,7 @@ import org.json.JSONObject
 class AppColorHelper {
 
     private var primaryColor = Color.GREEN
+    private var secondaryColor = Color.GREEN
 
     val textColor: Int
         get() {
@@ -26,7 +27,8 @@ class AppColorHelper {
         get() {
             if (templateJSON.has(Constants.ICON_TINT_COLOR)) {
                 try {
-                    primaryColor = Color.parseColor(templateJSON.getString(Constants.ICON_TINT_COLOR))
+                    primaryColor =
+                        Color.parseColor(templateJSON.getString(Constants.ICON_TINT_COLOR))
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -38,7 +40,8 @@ class AppColorHelper {
         get() {
             if (templateJSON.has(Constants.LEFT_BUTTON_COLOR)) {
                 try {
-                    primaryColor = Color.parseColor(templateJSON.getString(Constants.LEFT_BUTTON_COLOR))
+                    primaryColor =
+                        Color.parseColor(templateJSON.getString(Constants.LEFT_BUTTON_COLOR))
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -50,7 +53,8 @@ class AppColorHelper {
         get() {
             if (templateJSON.has(Constants.RIGHT_BUTTON_COLOR)) {
                 try {
-                    primaryColor = Color.parseColor(templateJSON.getString(Constants.RIGHT_BUTTON_COLOR))
+                    primaryColor =
+                        Color.parseColor(templateJSON.getString(Constants.RIGHT_BUTTON_COLOR))
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -62,7 +66,8 @@ class AppColorHelper {
         get() {
             if (templateJSON.has(Constants.LEFT_BUTTON_TEXT_COLOR)) {
                 try {
-                    primaryColor = Color.parseColor(templateJSON.getString(Constants.LEFT_BUTTON_TEXT_COLOR))
+                    primaryColor =
+                        Color.parseColor(templateJSON.getString(Constants.LEFT_BUTTON_TEXT_COLOR))
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -74,7 +79,8 @@ class AppColorHelper {
         get() {
             if (templateJSON.has(Constants.RIGHT_BUTTON_TEXT_COLOR)) {
                 try {
-                    primaryColor = Color.parseColor(templateJSON.getString(Constants.RIGHT_BUTTON_TEXT_COLOR))
+                    primaryColor =
+                        Color.parseColor(templateJSON.getString(Constants.RIGHT_BUTTON_TEXT_COLOR))
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -86,7 +92,8 @@ class AppColorHelper {
         get() {
             if (templateJSON.has(Constants.SELECTION_COLOR)) {
                 try {
-                    primaryColor = Color.parseColor(templateJSON.getString(Constants.SELECTION_COLOR))
+                    primaryColor =
+                        Color.parseColor(templateJSON.getString(Constants.SELECTION_COLOR))
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -98,7 +105,8 @@ class AppColorHelper {
         get() {
             if (templateJSON.has(Constants.DESELECTION_COLOR)) {
                 try {
-                    primaryColor = Color.parseColor(templateJSON.getString(Constants.DESELECTION_COLOR))
+                    primaryColor =
+                        Color.parseColor(templateJSON.getString(Constants.DESELECTION_COLOR))
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -115,6 +123,17 @@ class AppColorHelper {
             }
         }
         return primaryColor
+    }
+
+    fun secondaryColor(): Int {
+        if (templateJSON.has(Constants.SECONDARY_COLOR)) {
+            try {
+                secondaryColor = Color.parseColor(templateJSON.getString(Constants.SECONDARY_COLOR))
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+        }
+        return secondaryColor
     }
 
     val whiteColor: Int = Color.parseColor("#ffffff")

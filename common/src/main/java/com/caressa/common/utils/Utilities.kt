@@ -143,12 +143,12 @@ object Utilities {
 
     fun toastMessageLong(context: Context?, message: String) {
         try {
-            println("context: $context")
             if (context != null && !isNullOrEmpty(message)) {
                 val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.BOTTOM, 0, 0)
+                toast.setGravity(Gravity.BOTTOM, 0, 100)
                 val view = toast.view
-                view?.background?.colorFilter = PorterDuffColorFilter(appColorHelper.primaryColor(),PorterDuff.Mode.SRC_IN)
+                view?.background?.colorFilter =
+                    PorterDuffColorFilter(appColorHelper.secondaryColor(), PorterDuff.Mode.SRC_IN)
                 val text = view?.findViewById<TextView>(android.R.id.message)
                 text?.setTextColor(ContextCompat.getColor(context, R.color.white))
                 toast.show()
@@ -161,12 +161,12 @@ object Utilities {
 
     fun toastMessageShort(context: Context?, message: String) {
         try {
-            println("context: $context")
             if (context != null && !isNullOrEmpty(message)) {
                 val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.BOTTOM, 0, 0)
+                toast.setGravity(Gravity.BOTTOM, 0,  100)
                 val view = toast.view
-                view!!.background.colorFilter = PorterDuffColorFilter(appColorHelper.primaryColor(),PorterDuff.Mode.SRC_IN)
+                view!!.background.colorFilter =
+                    PorterDuffColorFilter(appColorHelper.secondaryColor(), PorterDuff.Mode.SRC_IN)
                 val text = view.findViewById<TextView>(android.R.id.message)
                 text.setTextColor(ContextCompat.getColor(context, R.color.white))
                 toast.show()
@@ -185,19 +185,22 @@ object Utilities {
         if (extension.equals("JPEG", ignoreCase = true) ||
             extension.equals("jpg", ignoreCase = true) ||
             extension.equals("PNG", ignoreCase = true) ||
-            extension.equals("png", ignoreCase = true)) {
+            extension.equals("png", ignoreCase = true)
+        ) {
             documentType = "IMAGE"
         } else if (extension.equals("PDF", ignoreCase = true) || extension.equals(
                 "pdf",
                 ignoreCase = true
-            )) {
+            )
+        ) {
             documentType = "PDF"
         } else if (extension.equals("DOC", ignoreCase = true) ||
             extension.equals("doc", ignoreCase = true) ||
             extension.equals("docx", ignoreCase = true) || extension.equals(
                 "DOCX",
                 ignoreCase = true
-            )) {
+            )
+        ) {
             documentType = "DOC"
         }
         return documentType
@@ -253,7 +256,8 @@ object Utilities {
         //return email.contains("@")
         val pattern: Pattern
         val matcher: Matcher
-        val EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+        val EMAIL_PATTERN =
+            "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
         pattern = Pattern.compile(EMAIL_PATTERN)
         matcher = pattern.matcher(email)
         return matcher.matches()
@@ -276,7 +280,8 @@ object Utilities {
     }
 
     fun isPhoneValid(phoneNumber: String): Boolean {
-        val pattern = Pattern.compile("\\ic_pdf{10}|(?:\\ic_pdf{3}-){2}\\ic_pdf{4}|\\(\\ic_pdf{3}\\)\\ic_pdf{3}-?\\ic_pdf{4}")
+        val pattern =
+            Pattern.compile("\\ic_pdf{10}|(?:\\ic_pdf{3}-){2}\\ic_pdf{4}|\\(\\ic_pdf{3}\\)\\ic_pdf{3}-?\\ic_pdf{4}")
         return phoneNumber.matches(pattern.toRegex())
     }
 
@@ -321,7 +326,8 @@ object Utilities {
 
     fun getAppVersion(context: Context): Int {
         return try {
-            val packageInfo: PackageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+            val packageInfo: PackageInfo =
+                context.packageManager.getPackageInfo(context.packageName, 0)
             packageInfo.versionCode
         } catch (e: PackageManager.NameNotFoundException) {
             throw RuntimeException("Could not get package name: $e")
@@ -330,7 +336,8 @@ object Utilities {
 
     fun getVersionName(context: Context): String {
         return try {
-            val packageInfo: PackageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+            val packageInfo: PackageInfo =
+                context.packageManager.getPackageInfo(context.packageName, 0)
             packageInfo.versionName
         } catch (e: PackageManager.NameNotFoundException) {
             throw RuntimeException("Could not get package name: $e")
@@ -351,7 +358,7 @@ object Utilities {
     fun getVitalParameterData(parameter: String, context: Context): VitalParameter {
         val vitalParameter = VitalParameter()
 
-        when(parameter) {
+        when (parameter) {
 
             context.resources.getString(R.string.ft) -> {
                 vitalParameter.unit = context.resources.getString(R.string.ft)
@@ -381,12 +388,12 @@ object Utilities {
         return vitalParameter
     }
 
-    fun getHraObservationColorFromScore( score: Int ): Int {
+    fun getHraObservationColorFromScore(score: Int): Int {
         var wellnessScore = score
         if (wellnessScore <= 0) {
             wellnessScore = 0
         }
-        var color : Int = appColorHelper.textColor
+        var color: Int = appColorHelper.textColor
         when {
             wellnessScore in 0..15 -> {
                 color = R.color.high_risk
@@ -407,17 +414,18 @@ object Utilities {
         return color
     }
 
-    fun clearStepsData( context: Context ) {
+    fun clearStepsData(context: Context) {
         val intent = Intent()
         intent.action = Constants.CLEAR_FITNESS_DATA
-        intent.component = ComponentName(NavigationConstants.APPID,NavigationConstants.FITNESS_BROADCAST_RECEIVER)
+        intent.component =
+            ComponentName(NavigationConstants.APPID, NavigationConstants.FITNESS_BROADCAST_RECEIVER)
         //intent.putExtra(GlobalConstants.EVENT, event)
         context.sendBroadcast(intent)
     }
 
-    fun printData(tag:String, list: Any, toPretty: Boolean = true) {
+    fun printData(tag: String, list: Any, toPretty: Boolean = true) {
         var jsonArrayString = ""
-        jsonArrayString = if ( toPretty ) {
+        jsonArrayString = if (toPretty) {
             prettyGson.toJson(list)
         } else {
             gson.toJson(list)

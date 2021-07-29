@@ -28,7 +28,6 @@
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_70sdp"
                 android:background="@drawable/btn_fill_selected"
-                android:backgroundTint="#998cba"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/rv_selected_parameters">
 
