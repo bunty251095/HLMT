@@ -434,7 +434,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                             " -- </a> " + "</br></br>") +
                     Html.fromHtml("<br><br>" + " Android : " +
                             " -- " + "</br></br>")+
-                    Html.fromHtml("<br><br>" + "Know the right pace !</br></br>")
+                    Html.fromHtml("<br><br>" + "Keep pace with us!</br></br>")
 
             val sendIntent = Intent()
             sendIntent.action = Intent.ACTION_SEND

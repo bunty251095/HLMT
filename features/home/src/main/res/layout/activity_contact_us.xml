@@ -137,16 +137,16 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_email"
+                            style="@style/VivantEditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/VivantEditTextStyle"
-                            android:text="@{viewModel.userDetails.emailAddress}"
                             android:hint="@string/EMAIL"
                             android:imeOptions="actionNext"
                             android:inputType="textEmailAddress"
                             android:paddingStart="@dimen/_40sdp"
                             android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_15sdp"/>
+                            android:paddingBottom="@dimen/_15sdp"
+                            android:text="@{viewModel.userDetails.emailAddress}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -167,12 +167,23 @@
                         android:id="@+id/img_phone"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
-                        app:srcCompat="@drawable/img_phone"
-                        app:tint="@color/colorPrimary"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:layout_marginTop="@dimen/_6sdp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/til_edt_phone_number" />
+                        app:layout_constraintTop_toTopOf="@+id/til_edt_phone_number"
+                        app:srcCompat="@drawable/img_phone"
+                        app:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        style="@style/CustomTextRegular"
+                        android:text="+60"
+                        android:textSize="@dimen/_12sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:paddingBottom="@dimen/_5sdp"
+                        app:layout_constraintBottom_toBottomOf="@id/til_edt_phone_number"
+                        app:layout_constraintStart_toEndOf="@+id/img_phone"
+                        app:layout_constraintTop_toTopOf="@id/til_edt_phone_number" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_edt_phone_number"
@@ -194,7 +205,8 @@
                             android:hint="@string/PHONE_NUMBER"
                             android:imeOptions="actionNext"
                             android:inputType="number"
-                            android:paddingStart="@dimen/_40sdp"
+                            android:maxLength="10"
+                            android:paddingStart="@dimen/_70sdp"
                             android:paddingTop="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_15sdp"/>
 

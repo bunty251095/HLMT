@@ -269,11 +269,23 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/img_phone"/>
 
+                        <TextView
+                            android:id="@+id/textView"
+                            style="@style/CustomTextRegular"
+                            android:text="+60"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_11sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img_mobile" />
+
+
+
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/lbl_mobile"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_18sdp"
+                            android:layout_marginStart="@dimen/_28sdp"
                             android:text="@string/NUMBER"
                             android:textColor="@color/vivant_greyish"
                             android:textSize="@dimen/_11sdp"

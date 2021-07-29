@@ -27,8 +27,9 @@
             android:textSize="@dimen/_13sdp" />
 
         <com.caressa.common.view.ArcImageView
-            android:layout_width="@dimen/_180sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_230sdp"
+            android:layout_height="@dimen/_33sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/hlmt_banner" />
 

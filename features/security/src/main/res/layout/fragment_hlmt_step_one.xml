@@ -25,9 +25,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <include
-                android:id="@+id/logo_container"
-                layout="@layout/hlpace_logo_layout" />
+            <com.caressa.common.view.ArcImageView
+                android:id="@+id/img_logo"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:scaleType="fitEnd"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/hl_pace_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <com.caressa.common.view.ArcTextView
                 android:id="@+id/lbl_enter_number_desc"
@@ -36,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:text="@string/DO_YOU_HAVE_HLM_360_ACCOUNT"
                 android:textSize="@dimen/_14sdp" />
 
@@ -67,6 +75,31 @@
                     android:text="@string/NO_DONT"
                     app:isRound="true"
                     app:isTemplate="true" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/logo_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_50sdp">
+
+                <com.caressa.common.view.ArcTextView
+                    style="@style/VivantTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/POWERED_BY"
+                    android:textSize="@dimen/_13sdp" />
+
+                <com.caressa.common.view.ArcImageView
+                    android:layout_width="@dimen/_230sdp"
+                    android:layout_height="@dimen/_33sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/hlmt_banner" />
+
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -105,7 +105,7 @@
     <string name="POWERED_BY">Powered By</string>
     <string name="LINK_HLMT_360_ACCOUNT">Link HLMT 360 Account</string>
     <string name="LINK_MY_HLMT_360_ACCOUNT">Link my HLMT 360 Account</string>
-    <string name="TO_LINK_HLMT_360_ACCOUNT_CLICK_ON_BUTTON">To Link your HLMT 360 Account with Wellness App Profile , Login to your Account and click on button Link my HLMT 360 Account</string>
+    <string name="TO_LINK_HLMT_360_ACCOUNT_CLICK_ON_BUTTON">To Link your HLMTakaful360 account with HL Pace Wellness Profile , Login to your Account and click on button Link my HLMTakaful360 account</string>
     <string name="PERMISSION_REQUIRED">Permission Required</string>
     <string name="NEED_STORAGE_PERMISSION">For storing and reading files, we need storage permission.</string>
     <string name="NEED_CAMERA_PERMISSION">For clicking snap to upload we need camera permission.</string>
