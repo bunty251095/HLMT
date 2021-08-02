@@ -369,7 +369,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                     data.title = "Weight"
                     data.value = " - - "
                     if (dataList.get(adapterPosition).parameterVal.isNullOrEmpty()) {
-                        data.finalValue = "0"
+                        data.finalValue = "50"
                     }else{
                         data.finalValue = dataList.get(adapterPosition).parameterVal!!
 
