@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.utils.DecimalDigitsInputFilter
+import com.caressa.common.utils.DecimalValueFilter
 import com.caressa.common.utils.Utilities
 import com.caressa.hra.R
 import com.caressa.hra.common.HraHelper
@@ -111,20 +112,24 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
         viewModel.getHRAQuestionData(qCode)
         viewModel.getParameterDataByProfileCode("DIABETIC")
 
-        val filters = arrayOfNulls<InputFilter>(1)
+/*        val filters = arrayOfNulls<InputFilter>(1)
         filters[0] = LengthFilter(4) //Filter to 4 characters
         val decimalFilters = arrayOfNulls<InputFilter>(1)
-        decimalFilters[0] = DecimalDigitsInputFilter(5, 1) //Filter to 4 characters and 1 decimal point
+        decimalFilters[0] = DecimalDigitsInputFilter(5, 1) //Filter to 4 characters and 1 decimal point*/
 
-        binding.layRandomBs.setInputType(InputType.TYPE_CLASS_NUMBER)
-        binding.layFastingBs.setInputType(InputType.TYPE_CLASS_NUMBER)
-        binding.layPostMealBs.setInputType(InputType.TYPE_CLASS_NUMBER)
+        val decimalValueFilter = DecimalValueFilter(true)
+        decimalValueFilter.setDigits(2)
+        val generalDecimalFilter = arrayOf(decimalValueFilter,LengthFilter(6))
+
+        binding.layRandomBs.setInputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED)
+        binding.layFastingBs.setInputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED)
+        binding.layPostMealBs.setInputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED)
         binding.layHbA1cBs.setInputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED)
 
-        binding.layRandomBs.editText!!.filters = filters
-        binding.layFastingBs.editText!!.filters = filters
-        binding.layPostMealBs.editText!!.filters = filters
-        binding.layHbA1cBs.editText!!.filters = decimalFilters
+        binding.layRandomBs.editText!!.filters = generalDecimalFilter
+        binding.layFastingBs.editText!!.filters = generalDecimalFilter
+        binding.layPostMealBs.editText!!.filters = generalDecimalFilter
+        binding.layHbA1cBs.editText!!.filters = generalDecimalFilter
 
         binding.layRandomBs.setImage(R.drawable.img_diabetes)
         binding.layFastingBs.setImage(R.drawable.img_diabetes)

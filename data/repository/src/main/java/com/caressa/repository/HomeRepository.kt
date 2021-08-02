@@ -48,7 +48,7 @@ interface HomeRepository{
 
     suspend fun getLoggedInPersonDetails() : Users
     suspend fun getAppVersionDetails() : AppVersion
-    suspend fun updateUserDetails( name : String ,phone : String )
+    suspend fun updateUserDetails( name : String , personId : Int )
     suspend fun updateUserProfileImgPath( name : String ,path : String )
     suspend fun getUserRelatives() : List<UserRelatives>
     suspend fun getUserRelativesExceptSelf() : List<UserRelatives>
@@ -649,8 +649,9 @@ class HomeRepositoryImpl(private val datasource : HomeDatasource, private val da
         return homeDao.getAppVersionDetails()
     }
 
-    override suspend fun updateUserDetails( name : String ,phone : String ) {
-        return homeDao.updateUserDetails( name , phone)
+    override suspend fun updateUserDetails( name : String,personId : Int ) {
+        homeDao.updateUserDetails( name,personId)
+        homeDao.updateUserInUserRelativesDetails( name ,personId.toString())
     }
 
     override suspend fun updateUserProfileImgPath( name : String ,path : String ) {

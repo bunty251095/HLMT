@@ -23,8 +23,11 @@ interface VivantUserDao {
     @Query("UPDATE  Users SET PhoneNumber=:phone")
     fun updateUserMobileNumber( phone : String )
 
-    @Query("UPDATE  Users SET firstName=:name , PhoneNumber=:phone")
-    fun updateUserDetails( name : String ,phone : String )
+    @Query("UPDATE  Users SET firstName=:name WHERE personId =:personId")
+    fun updateUserDetails( name : String ,personId : Int )
+
+    @Query("UPDATE  UserRelativesTable SET firstName=:name WHERE relativeID =:personId")
+    fun updateUserInUserRelativesDetails( name : String ,personId : String )
 
     @Query("UPDATE  Users SET name=:name , path=:path")
     fun updateUserProfileImgPath( name : String ,path : String )

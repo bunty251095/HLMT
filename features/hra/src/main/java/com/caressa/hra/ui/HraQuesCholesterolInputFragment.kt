@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.utils.DecimalValueFilter
 import com.caressa.common.utils.Utilities
 import com.caressa.hra.R
 import com.caressa.hra.common.HraHelper
@@ -111,20 +112,24 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
         viewModel.getHRAQuestionData(qCode)
         viewModel.getParameterDataByProfileCode("LIPID")
 
-        val filters = arrayOfNulls<InputFilter>(1)
-        filters[0] = InputFilter.LengthFilter(4) //Filter to 4 characters
+/*        val filters = arrayOfNulls<InputFilter>(1)
+        filters[0] = InputFilter.LengthFilter(4) //Filter to 4 characters*/
 
-        binding.layTotalChol.setInputType(InputType.TYPE_CLASS_NUMBER)
-        binding.layHdl.setInputType(InputType.TYPE_CLASS_NUMBER)
-        binding.layLdl.setInputType(InputType.TYPE_CLASS_NUMBER)
-        binding.layTriglycerides.setInputType(InputType.TYPE_CLASS_NUMBER )
-        binding.layVldl.setInputType(InputType.TYPE_CLASS_NUMBER)
+        val decimalValueFilter = DecimalValueFilter(true)
+        decimalValueFilter.setDigits(2)
+        val generalDecimalFilter = arrayOf(decimalValueFilter, InputFilter.LengthFilter(6))
 
-        binding.layTotalChol.editText!!.filters = filters
-        binding.layHdl.editText!!.filters = filters
-        binding.layLdl.editText!!.filters = filters
-        binding.layTriglycerides.editText!!.filters = filters
-        binding.layVldl.editText!!.filters = filters
+        binding.layTotalChol.setInputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED)
+        binding.layHdl.setInputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED)
+        binding.layLdl.setInputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED)
+        binding.layTriglycerides.setInputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED)
+        binding.layVldl.setInputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED)
+
+        binding.layTotalChol.editText!!.filters = generalDecimalFilter
+        binding.layHdl.editText!!.filters = generalDecimalFilter
+        binding.layLdl.editText!!.filters = generalDecimalFilter
+        binding.layTriglycerides.editText!!.filters = generalDecimalFilter
+        binding.layVldl.editText!!.filters = generalDecimalFilter
 
         binding.layTotalChol.setImage(R.drawable.img_cholesteroal)
         binding.layHdl.setImage(R.drawable.img_cholesteroal)
