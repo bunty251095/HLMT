@@ -129,6 +129,9 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
 
         viewModel.vitalDetailsSavedResponse.observe(viewLifecycleOwner, { vitalDetails ->
             if (vitalDetails != null) {
+                var isHeight = true
+                var isWeight = true
+                var isBmi = true
                 //Timber.i("HraVitalDetails--->$vitalDetails")
                 val bmiDetails = vitalDetails.filter { vital ->
                     vital.VitalsKey.equals(HRAConstants.VitalKey_Height,ignoreCase = true)
@@ -144,21 +147,25 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
                         toShow = false
                         binding.layHeight.setValue(height.toInt().toString())
                         binding.layHeight.setUnit(resources.getString(R.string.cm))
+                        isHeight = false
                     }
                     if (vital.VitalsKey.equals(HRAConstants.VitalKey_Weight, ignoreCase = true)
                         && !Utilities.isNullOrEmpty(vital.VitalsValue) ) {
                         weight = vital.VitalsValue.toDouble()
                         binding.layWeight.setValue(weight.toString())
                         binding.layWeight.setUnit(resources.getString(R.string.kg))
+                        isWeight = false
                     }
                     if (vital.VitalsKey.equals(HRAConstants.VitalKey_BMI, ignoreCase = true)
                         && !Utilities.isNullOrEmpty(vital.VitalsValue) ) {
                         bmi = vital.VitalsValue.toDouble()
+                        isBmi = false
                     }
                 }
-                if ( Utilities.isNullOrEmptyOrZero(height.toString())
+/*                if ( Utilities.isNullOrEmptyOrZero(height.toString())
                     && Utilities.isNullOrEmptyOrZero(weight.toString())
-                    && Utilities.isNullOrEmptyOrZero(bmi.toString()) ) {
+                    && Utilities.isNullOrEmptyOrZero(bmi.toString()) ) {*/
+                if ( isHeight && isWeight && isBmi ) {
                     Timber.e("BMI not Exist...!!!")
                     viewModel.callIsBMIExist(true,viewPagerActivity!!.personId)
                 } else {
