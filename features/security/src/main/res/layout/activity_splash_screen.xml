@@ -38,19 +38,19 @@
             android:layout_alignParentEnd="true"
             android:paddingBottom="@dimen/_10sdp"
             android:orientation="vertical">
-        <com.caressa.common.view.ArcTextView
-            style="@style/VivantTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/POWERED_BY"
-            android:textSize="@dimen/_11sdp" />
+            <com.caressa.common.view.ArcTextView
+                style="@style/VivantTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/POWERED_BY"
+                android:textSize="@dimen/_10sdp" />
 
-        <com.caressa.common.view.ArcImageView
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="@dimen/_28sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/hlmt_banner" />
+            <com.caressa.common.view.ArcImageView
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/hlmt_banner" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </RelativeLayout>

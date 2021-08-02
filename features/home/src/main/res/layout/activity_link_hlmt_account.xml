@@ -51,7 +51,7 @@
                     android:id="@+id/layout_acc_not_linked"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img_hl_pace">
@@ -64,6 +64,7 @@
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:text="@string/TO_LINK_HLMT_360_ACCOUNT_CLICK_ON_BUTTON"
+                        android:textSize="@dimen/_13sdp"
                         android:textColor="@color/hlmt_dark_grey"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -191,41 +192,14 @@
                         app:layout_constraintStart_toStartOf="@+id/layout_edt_login_password"
                         app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_password" />
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/logo_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_link_account">
 
-                        <com.caressa.common.view.ArcTextView
-                            style="@style/VivantTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/POWERED_BY"
-                            android:textSize="@dimen/_13sdp" />
-
-                        <com.caressa.common.view.ArcImageView
-                            android:layout_width="@dimen/_230sdp"
-                            android:layout_height="@dimen/_33sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:scaleType="centerInside"
-                            app:srcCompat="@drawable/hlmt_banner" />
-
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_acc_linked"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img_hl_pace">
@@ -251,39 +225,12 @@
                         android:gravity="center"
                         android:text="@string/ACCOUNT_LINKED"
                         android:textColor="@color/hlmt_dark_grey"
-                        android:textSize="@dimen/_16sdp"
+                        android:textSize="@dimen/_13sdp"
                         app:layout_constraintEnd_toEndOf="@+id/img_password_changed"
                         app:layout_constraintStart_toStartOf="@+id/img_password_changed"
                         app:layout_constraintTop_toBottomOf="@+id/img_password_changed" />
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/logo_container2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_70sdp"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/lbl_account_link">
 
-                        <com.caressa.common.view.ArcTextView
-                            style="@style/VivantTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/POWERED_BY"
-                            android:textSize="@dimen/_13sdp" />
-
-                        <com.caressa.common.view.ArcImageView
-                            android:layout_width="@dimen/_230sdp"
-                            android:layout_height="@dimen/_33sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:scaleType="centerInside"
-                            app:srcCompat="@drawable/hlmt_banner" />
-
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -303,7 +250,37 @@
             android:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/logo_container"
             app:srcCompat="@drawable/arrow_right" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/logo_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+            <com.caressa.common.view.ArcTextView
+                style="@style/VivantTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/POWERED_BY"
+                android:textSize="@dimen/_10sdp" />
+
+            <com.caressa.common.view.ArcImageView
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/hlmt_banner" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
