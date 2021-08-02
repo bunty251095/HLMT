@@ -37,7 +37,7 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
     private var toShow : Boolean = true
     private var bmi : Double = 0.0
     private var height : Double = 0.0
-    private var weight : Double = 0.0
+    private var weight : Double = 50.0
     private var questionData = Question()
     private val hraDataSingleton = HraDataSingleton.getInstance()!!
     private var selectedOptionList: MutableList<Option> = mutableListOf()
@@ -148,7 +148,7 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
                     if (vital.VitalsKey.equals(HRAConstants.VitalKey_Weight, ignoreCase = true)
                         && !Utilities.isNullOrEmpty(vital.VitalsValue) ) {
                         weight = vital.VitalsValue.toDouble()
-                        binding.layWeight.setValue(weight.toInt().toString())
+                        binding.layWeight.setValue(weight.toString())
                         binding.layWeight.setUnit(resources.getString(R.string.kg))
                     }
                     if (vital.VitalsKey.equals(HRAConstants.VitalKey_BMI, ignoreCase = true)
@@ -180,7 +180,7 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
                         binding.layHeight.setValue(height.toInt().toString())
                         binding.layHeight.setUnit(resources.getString(R.string.cm))
 
-                        binding.layWeight.setValue(weight.toInt().toString())
+                        binding.layWeight.setValue(weight.toString())
                         binding.layWeight.setUnit(resources.getString(R.string.kg))
 
                         Observations.setBMIResult(bmiDetails.BMI.Value!!,binding.txtObservation,requireContext())
@@ -225,16 +225,16 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
         }
 
         binding.layWeight.setOnClickListener {
-            HraHelper.showWeightDialog(weight.toInt(),binding.layWeight,this@HraQuesBmiFragment,requireContext())
+            HraHelper.showWeightDialog(weight,binding.layWeight,this@HraQuesBmiFragment,requireContext())
         }
 
         binding.layWeight.editText!!.setOnClickListener {
-            HraHelper.showWeightDialog(weight.toInt(),binding.layWeight,this@HraQuesBmiFragment,requireContext())
+            HraHelper.showWeightDialog(weight,binding.layWeight,this@HraQuesBmiFragment,requireContext())
         }
 
         binding.layWeight.editText!!.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
-                HraHelper.showWeightDialog(weight.toInt(),binding.layWeight,this@HraQuesBmiFragment,requireContext())
+                HraHelper.showWeightDialog(weight,binding.layWeight,this@HraQuesBmiFragment,requireContext())
             }
         }
 

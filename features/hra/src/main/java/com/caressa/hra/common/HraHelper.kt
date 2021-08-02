@@ -48,7 +48,7 @@ object HraHelper {
         heightWeightDialog.show()
     }
 
-    fun showWeightDialog( weight :Int,layWeight: CustomEditTextHra ,listener : HraQuesBmiFragment,context: Context ) {
+    fun showWeightDialog( weight :Double,layWeight: CustomEditTextHra ,listener : HraQuesBmiFragment,context: Context ) {
         val data = ParameterDataModel()
         data.title = "Weight"
         data.value = " - - "

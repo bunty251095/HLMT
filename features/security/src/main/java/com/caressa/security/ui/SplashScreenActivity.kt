@@ -39,7 +39,7 @@ class SplashScreenActivity : AppCompatActivity(), DefaultNotificationDialog.OnDi
             override fun onAnimationStart(animation: Animation?) {}
 
             override fun onAnimationEnd(animation: Animation?) {
-                logo_container.img_logo.startAnimation(animationFadeIn)
+                img_logo.startAnimation(animationFadeIn)
             }
 
             override fun onAnimationRepeat(animation: Animation?) {}
@@ -50,14 +50,14 @@ class SplashScreenActivity : AppCompatActivity(), DefaultNotificationDialog.OnDi
             override fun onAnimationStart(animation: Animation?) {}
 
             override fun onAnimationEnd(animation: Animation?) {
-                logo_container.img_logo.startAnimation(animationFadeOut)
+                img_logo.startAnimation(animationFadeOut)
             }
 
             override fun onAnimationRepeat(animation: Animation?) {}
 
         })
 
-        logo_container.img_logo.startAnimation(animationFadeOut)
+        img_logo.startAnimation(animationFadeOut)
 
         registerObserver()
         proceedInApp()

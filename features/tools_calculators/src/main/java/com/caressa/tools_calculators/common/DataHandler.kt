@@ -169,7 +169,7 @@ class DataHandler(val context: Context) {
                 data.finalValue = `val`
             } else {
                 data.value = "- -"
-                data.finalValue = "0"
+                data.finalValue = "50"
             }
             data.unit = "Kg"
             data.code = "WEIGHT"
