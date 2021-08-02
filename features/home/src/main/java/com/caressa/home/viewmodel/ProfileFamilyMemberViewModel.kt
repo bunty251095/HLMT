@@ -293,10 +293,10 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if ( it != null ) {
                     val personDetails = it.data!!.person
-                    val newNumber = personDetails.contact.primaryContactNo
-                    Timber.i("Updated----->"+personDetails.firstName+","+phoneNumber)
+                    Timber.i("PersonId-----> ${personDetails.id}")
+                    Timber.i("UpdatedName-----> ${personDetails.firstName}")
                     if ( !Utilities.isNullOrEmpty( personDetails.id.toString() ) ) {
-                        updateUserDetails(personDetails.firstName,newNumber)
+                        updateUserDetails(personDetails.firstName,personDetails.id)
                         toastMessage(context.resources.getString(R.string.PROFILE_UPDATED))
                     }
                 }
@@ -417,10 +417,17 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
 
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if (it.data != null ) {
+                if ( it != null ) {
+                    val personDetails = it.data!!.person
                     Timber.e("UpdateUserDetails----->${it.data!!.person}")
-                    Utilities.toastMessageShort(context,context.resources.getString(R.string.PROFILE_UPDATED))
+                    Timber.i("PersonId-----> ${personDetails.id}")
+                    Timber.i("UpdatedName-----> ${personDetails.firstName}")
+                    if ( !Utilities.isNullOrEmpty( personDetails.id.toString() ) ) {
+                        updateUserDetails(personDetails.firstName,personDetails.id)
+                        Utilities.toastMessageShort(context,context.resources.getString(R.string.PROFILE_UPDATED))
+                    }
                 }
+
             }
             if (it.status == Resource.Status.ERROR) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
@@ -626,9 +633,9 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
         }
     }
 
-    fun updateUserDetails( name : String ,phone : String ) = viewModelScope.launch {
+    fun updateUserDetails( name : String ,personId : Int ) = viewModelScope.launch {
         withContext(dispatchers.io) {
-            homeManagementUseCase.invokeUpdateUserDetails( name , phone )
+            homeManagementUseCase.invokeUpdateUserDetails( name , personId )
         }
     }
 

@@ -146,8 +146,8 @@ class HomeManagementUseCase( private val homeRepository: HomeRepository , privat
         return homeRepository.getLoggedInPersonDetails()
     }
 
-    suspend fun invokeUpdateUserDetails( name : String ,phone : String  ) {
-        return homeRepository.updateUserDetails( name , phone )
+    suspend fun invokeUpdateUserDetails( name : String ,personId : Int  ) {
+        return homeRepository.updateUserDetails( name , personId )
     }
 
     suspend fun invokeUpdateUserProfileImgPath( name : String ,path : String  ) {
