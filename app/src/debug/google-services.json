@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "574906239931-qnspmmsht9kijt6gduqlvkapkq5akls9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vivant.hlmt.app.uat",
+            "certificate_hash": "2ed46bab90ec46b69a77b4c9f43319b80a67d897"
+          }
+        },
+        {
           "client_id": "574906239931-m53criia34fcje6oivjmo6pni39bcbup.apps.googleusercontent.com",
           "client_type": 3
         }
