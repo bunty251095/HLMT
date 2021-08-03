@@ -80,7 +80,7 @@ data class HRASummary(
         val DATE_FORMAT_UTC = "yyyy-MM-dd'T'HH:mm:ss"
         val currentUTCDatetimeInMillisecAsString: String
             get() {
-                val sdf = SimpleDateFormat(DATE_FORMAT_UTC)
+                val sdf = SimpleDateFormat(DATE_FORMAT_UTC, Locale.ENGLISH)
                 sdf.timeZone = TimeZone.getTimeZone("UTC")
                 return sdf.format(Date())
             }

@@ -19,7 +19,6 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.webkit.*
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -83,7 +82,7 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
         initBase()
     }
 
-     fun initBase() {
+    fun initBase() {
         //Timber.i("onCreate called-----> ")
         setupSnackbar(this, getViewModel().snackBarError, Snackbar.LENGTH_LONG)
         setupSnackbarMessenger(this, getViewModel().snackMessenger, Snackbar.LENGTH_LONG)
@@ -104,7 +103,11 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
 
         //Getting GPS location of device if given permission
         if (SmartWebViewHelper.ASWP_LOCATION && !check_permission(1)) {
-            ActivityCompat.requestPermissions(this, arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION), loc_perm)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+                loc_perm
+            )
         }
         //Webview settings; defaults are customized for best performance
         val webSettings = asw_view!!.getSettings()
@@ -137,9 +140,12 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
 
         asw_view!!.setDownloadListener(DownloadListener { url, userAgent, contentDisposition, mimeType, contentLength ->
             if (!check_permission(2)) {
-                ActivityCompat.requestPermissions(this, arrayOf(
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE), file_perm)
+                ActivityCompat.requestPermissions(
+                    this, arrayOf(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ), file_perm
+                )
             } else {
                 val request = DownloadManager.Request(Uri.parse(url))
 
@@ -151,10 +157,13 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
                 request.setTitle(URLUtil.guessFileName(url, contentDisposition, mimeType))
                 request.allowScanningByMediaScanner()
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(url, contentDisposition, mimeType))
+                request.setDestinationInExternalPublicDir(
+                    Environment.DIRECTORY_DOWNLOADS,
+                    URLUtil.guessFileName(url, contentDisposition, mimeType)
+                )
                 val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
                 dm.enqueue(request)
-                Utilities.toastMessageLong(this,"Downloading...")
+                Utilities.toastMessageLong(this, "Downloading...")
             }
         })
 
@@ -173,7 +182,11 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
 
         asw_view!!.setWebChromeClient(object : WebChromeClient() {
             //Handling input[type="file"] requests for android API 16+
-            fun openFileChooser(uploadMsg: ValueCallback<Uri>, acceptType: String, capture: String) {
+            fun openFileChooser(
+                uploadMsg: ValueCallback<Uri>,
+                acceptType: String,
+                capture: String
+            ) {
                 if (SmartWebViewHelper.ASWP_FUPLOAD) {
                     asw_file_message = uploadMsg
                     val i = Intent(Intent.ACTION_GET_CONTENT)
@@ -187,7 +200,11 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
             }
 
             //Handling input[type="file"] requests for android API 21+
-            override fun onShowFileChooser(webView: WebView, filePathCallback: ValueCallback<Array<Uri>>, fileChooserParams: WebChromeClient.FileChooserParams): Boolean {
+            override fun onShowFileChooser(
+                webView: WebView,
+                filePathCallback: ValueCallback<Array<Uri>>,
+                fileChooserParams: WebChromeClient.FileChooserParams
+            ): Boolean {
                 if (check_permission(2) && check_permission(3)) {
                     if (SmartWebViewHelper.ASWP_FUPLOAD) {
                         if (asw_file_path != null) {
@@ -251,18 +268,25 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
             }
 
             // overload the geoLocations permissions prompt to always allow instantly as app permission was granted previously
-            override fun onGeolocationPermissionsShowPrompt(origin: String, callback: GeolocationPermissions.Callback) {
+            override fun onGeolocationPermissionsShowPrompt(
+                origin: String,
+                callback: GeolocationPermissions.Callback
+            ) {
                 if (Build.VERSION.SDK_INT < 23 || Build.VERSION.SDK_INT >= 23 && check_permission(1)) {
                     // location permissions were granted previously so auto-approve
                     callback.invoke(origin, true, false)
                 } else {
                     // location permissions not granted so request them
-                    ActivityCompat.requestPermissions(this@BaseWebViewActivity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), loc_perm)
+                    ActivityCompat.requestPermissions(
+                        this@BaseWebViewActivity,
+                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                        loc_perm
+                    )
                 }
             }
         })
 
-        if ( intent.data != null) {
+        if (intent.data != null) {
             val path = intent.dataString
             /*
             If you want to check or use specific directories or schemes or hosts
@@ -287,7 +311,8 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
     private fun setUpProgressBar(
         lifecycleOwner: LifecycleOwner,
         progressBar: LiveData<Event<String>>,
-        message: String = "Loading...") {
+        message: String = "Loading..."
+    ) {
         progressBar.observe(lifecycleOwner, { event ->
             event.getContentIfNotHandled()?.let {
                 //                if(it.equals(Event.HIDE_PROGRESS,true))
@@ -319,7 +344,8 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
     fun setupSnackbar(
         lifecycleOwner: LifecycleOwner,
         snackbarEvent: LiveData<Event<Int>>,
-        timeLength: Int) {
+        timeLength: Int
+    ) {
         snackbarEvent.observe(lifecycleOwner, { event ->
             event.getContentIfNotHandled()?.let { res ->
                 showSnackbar(this.getString(res), timeLength)
@@ -330,7 +356,8 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
     fun setupSnackbarMessenger(
         lifecycleOwner: LifecycleOwner,
         snackbarEvent: LiveData<Event<String>>,
-        timeLength: Int) {
+        timeLength: Int
+    ) {
         snackbarEvent.observe(lifecycleOwner, { event ->
             event.getContentIfNotHandled()?.let {
                 showSnackbar(it, timeLength)
@@ -368,7 +395,7 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
                                     //results = arrayOfNulls(numSelectedFiles)
                                     val numSelectedFiles = intent.data
                                     results = arrayOf<Uri>(numSelectedFiles!!)
-                                    for (i in 0 until  intent.clipData!!.itemCount) {
+                                    for (i in 0 until intent.clipData!!.itemCount) {
                                         results[i] = intent.clipData!!.getItemAt(i).uri
                                     }
                                 }
@@ -377,7 +404,7 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
                     }
                 }
             }
-            asw_file_path!!.onReceiveValue(results )
+            asw_file_path!!.onReceiveValue(results)
             asw_file_path = null
         } else {
             if (requestCode == asw_file_req) {
@@ -407,15 +434,26 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
         val perms = arrayOf(
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA)
+            Manifest.permission.CAMERA
+        )
 
         //Checking for storage permission to write images for upload
-        if (SmartWebViewHelper.ASWP_FUPLOAD && SmartWebViewHelper.ASWP_CAMUPLOAD && !check_permission(2) && !check_permission(3)) {
+        if (SmartWebViewHelper.ASWP_FUPLOAD && SmartWebViewHelper.ASWP_CAMUPLOAD && !check_permission(
+                2
+            ) && !check_permission(3)
+        ) {
             ActivityCompat.requestPermissions(this, perms, file_perm)
 
             //Checking for WRITE_EXTERNAL_STORAGE permission
         } else if (SmartWebViewHelper.ASWP_FUPLOAD && !check_permission(2)) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), file_perm)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ),
+                file_perm
+            )
 
             //Checking for CAMERA permissions
         } else if (SmartWebViewHelper.ASWP_CAMUPLOAD && !check_permission(3)) {
@@ -426,11 +464,20 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
     //Checking if particular permission is given or not
     fun check_permission(permission: Int): Boolean {
         when (permission) {
-            1 -> return ContextCompat.checkSelfPermission(this@BaseWebViewActivity, Manifest.permission.ACCESS_FINE_LOCATION) === PackageManager.PERMISSION_GRANTED
+            1 -> return ContextCompat.checkSelfPermission(
+                this@BaseWebViewActivity,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) === PackageManager.PERMISSION_GRANTED
 
-            2 -> return ContextCompat.checkSelfPermission(this@BaseWebViewActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) === PackageManager.PERMISSION_GRANTED
+            2 -> return ContextCompat.checkSelfPermission(
+                this@BaseWebViewActivity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) === PackageManager.PERMISSION_GRANTED
 
-            3 -> return ContextCompat.checkSelfPermission(this@BaseWebViewActivity, Manifest.permission.CAMERA) === PackageManager.PERMISSION_GRANTED
+            3 -> return ContextCompat.checkSelfPermission(
+                this@BaseWebViewActivity,
+                Manifest.permission.CAMERA
+            ) === PackageManager.PERMISSION_GRANTED
         }
         return false
     }
@@ -439,7 +486,7 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
     @Throws(IOException::class)
     private fun create_image(): File {
         @SuppressLint("SimpleDateFormat")
-        val file_name = SimpleDateFormat("yyyy_mm_ss").format(Date())
+        val file_name = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(Date())
         val new_name = "file_" + file_name + "_"
         val sd_directory =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
@@ -467,11 +514,22 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
             startActivity(mail)
             return true
         } else if (url.startsWith("rate:")) {
-            val app_package = packageName//requesting app package name from Context or Activity object
+            val app_package =
+                packageName//requesting app package name from Context or Activity object
             try {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$app_package")))
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=$app_package")
+                    )
+                )
             } catch (anfe: ActivityNotFoundException) {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$app_package")))
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=$app_package")
+                    )
+                )
             }
 
             //Sharing content from your webview to external apps :: href="share:URL" and remember to place the URL you want to share after share:___
@@ -479,7 +537,10 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
             intent.putExtra(Intent.EXTRA_SUBJECT, view.title)
-            intent.putExtra(Intent.EXTRA_TEXT, view.title + "\nVisit: " + Uri.parse(url).toString().replace("share:", ""))
+            intent.putExtra(
+                Intent.EXTRA_TEXT,
+                view.title + "\nVisit: " + Uri.parse(url).toString().replace("share:", "")
+            )
             startActivity(Intent.createChooser(intent, "Share"))
 
             //Use this in a hyperlink to exit your app :: href="exit:android"
@@ -524,8 +585,13 @@ abstract class BaseWebViewActivity : AppCompatActivity() {
         }
 
         //For android below API 23
-        override fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String) {
-            Utilities.toastMessageShort( applicationContext,getString(R.string.UNEXPECTED_ERROR) )
+        override fun onReceivedError(
+            view: WebView,
+            errorCode: Int,
+            description: String,
+            failingUrl: String
+        ) {
+            Utilities.toastMessageShort(applicationContext, getString(R.string.UNEXPECTED_ERROR))
         }
 
         //Overriding webview URLs

@@ -134,7 +134,7 @@ object RealPathUtil {
         var filename = ""
         if (Extension != null) {
 
-            val sdf = SimpleDateFormat("ddMMyy-hhmmss")
+            val sdf = SimpleDateFormat("ddMMyy-hhmmss", Locale.ENGLISH)
             val random = Random()
             filename = className + "-" + String.format(
                 "%s.%s",
@@ -891,7 +891,7 @@ object RealPathUtil {
             }
             if (sd.canWrite()) {
                 val currentDBPath = "//data//" + context.getPackageName().toString() + "//databases//" + databaseName + ""
-                val backupDBPath = "$databaseName " + SimpleDateFormat(DateHelper.DATETIMEFORMAT, Locale.getDefault()).format(Calendar.getInstance().time) + "_temp.db"
+                val backupDBPath = "$databaseName " + SimpleDateFormat(DateHelper.DATETIMEFORMAT, Locale.ENGLISH).format(Calendar.getInstance().time) + "_temp.db"
                 val currentDB = File(data, currentDBPath)
                 val backupDB = File(dbFolder, backupDBPath)
                 val src = FileInputStream(currentDB).channel

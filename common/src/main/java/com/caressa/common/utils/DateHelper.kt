@@ -68,7 +68,7 @@ object DateHelper {
     /* Current Date : */ val currentDateAsStringyyyyMMdd: String
         get() {
             val calendar = Calendar.getInstance()
-            val df = SimpleDateFormat("yyyy-MM-dd")
+            val df = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             return df.format(calendar.time)
         }
 
@@ -76,14 +76,14 @@ object DateHelper {
     /* Current Date : */ val currentDateAsStringddMMMyyyy: String
         get() {
             val calendar = Calendar.getInstance()
-            val df = SimpleDateFormat("dd-MMM-yyyy")
+            val df = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
             return df.format(calendar.time)
         }
 
     /* Current Date : */ val currentDateAsStringddMMMyyyyNew: String
         get() {
             val calendar = Calendar.getInstance()
-            val df = SimpleDateFormat("dd MMM yyyy")
+            val df = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
             return df.format(calendar.time)
         }
 
@@ -96,7 +96,7 @@ object DateHelper {
 
     val currentUTCdatetimeAsString: String
         get() {
-            val sdf = SimpleDateFormat(DISPLAY_DATE_DDMMMYYYY)
+            val sdf = SimpleDateFormat(DISPLAY_DATE_DDMMMYYYY, Locale.ENGLISH)
             //sdf.timeZone = TimeZone.getTimeZone("UTC")
 
             return sdf.format(Date())
@@ -104,7 +104,7 @@ object DateHelper {
 
     val currentUTCDatetimeInMillisecAsString: String
         get() {
-            val sdf = SimpleDateFormat(DATE_FORMAT_UTC)
+            val sdf = SimpleDateFormat(DATE_FORMAT_UTC, Locale.ENGLISH)
             //sdf.timeZone = TimeZone.getTimeZone("UTC")
 
             return sdf.format(Date())
@@ -165,8 +165,11 @@ object DateHelper {
     fun getDateDifference(dateBeforeString: String, dateAfterString: String): Long {
         var difference_In_Days: Long = 0
         try {
-            if (!Utilities.isNullOrEmpty(dateBeforeString) && !Utilities.isNullOrEmpty(dateBeforeString)) {
-                val sdf = SimpleDateFormat("yyyy-MM-dd")
+            if (!Utilities.isNullOrEmpty(dateBeforeString) && !Utilities.isNullOrEmpty(
+                    dateBeforeString
+                )
+            ) {
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                 val d1 = sdf.parse(dateBeforeString)
                 val d2 = sdf.parse(dateAfterString)
                 val difference_In_Time = d2.time - d1.time
@@ -182,12 +185,12 @@ object DateHelper {
     fun getDateAs_ddmmyy(date: String): String {
         /* Current Date : */
         var RecordDatetemp = ""
-        val dateFormat = SimpleDateFormat("dd-MMM-yyyy")
+        val dateFormat = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
 
         val date1: Date
         try {
             date1 = dateFormat.parse(date)
-            val df = SimpleDateFormat("dd/MM/yyyy")
+            val df = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
             RecordDatetemp = df.format(date1)
 
         } catch (e: ParseException) {
@@ -201,12 +204,12 @@ object DateHelper {
     fun getDateAs_yyyy_mm_dd(date: String): String {
         /* Current Date : */
         var RecordDatetemp = ""
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
         val date1: Date
         try {
             date1 = dateFormat.parse(date)
-            val df = SimpleDateFormat("yyyy-MM-dd")
+            val df = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             RecordDatetemp = df.format(date1)
 
         } catch (e: ParseException) {
@@ -221,12 +224,12 @@ object DateHelper {
     fun getDateTimeAs_EEE_MMM_yyyy(date: String): String {
         /* Current Date : */
         var RecordDatetemp = ""
-        val dateFormat = SimpleDateFormat("dd-MMM-yyyy")
+        val dateFormat = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
 
         val date1: Date
         try {
             date1 = dateFormat.parse(date)
-            val df = SimpleDateFormat("EEEE, MMM")
+            val df = SimpleDateFormat("EEEE, MMM", Locale.ENGLISH)
             RecordDatetemp = df.format(date1)
 
         } catch (e: ParseException) {
@@ -240,7 +243,7 @@ object DateHelper {
     }
 
     fun convertGMTToyyyymmdd(date: String): String {
-        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
         val calendar = Calendar.getInstance()
 
         try {
@@ -256,12 +259,12 @@ object DateHelper {
     fun getDateAs_ddMMyyyy(date: String): String {
         /* Current Date : */
         var RecordDatetemp = ""
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
 
         val date1: Date
         try {
             date1 = dateFormat.parse(date)
-            val df = SimpleDateFormat("dd/MM/yyyy")
+            val df = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
             RecordDatetemp = df.format(date1)
 
         } catch (e: ParseException) {
@@ -275,7 +278,7 @@ object DateHelper {
 
     fun getTimeDifference(t1: String, t2: String): Int {
 
-        val simpleDateFormat = SimpleDateFormat("HH:mm")
+        val simpleDateFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
         var min = 0
         try {
             val date1 = simpleDateFormat.parse(t1)
@@ -304,13 +307,13 @@ object DateHelper {
     ): String? {
         var dateValue = dateValue
         /* Current Date : */
-        val dateFormat = SimpleDateFormat(sourceFormat, Locale.getDefault())
+        val dateFormat = SimpleDateFormat(sourceFormat, Locale.ENGLISH)
 
         val date1: Date
         try {
             if (dateValue != null && dateValue != "") {
                 date1 = dateFormat.parse(dateValue)
-                val df = SimpleDateFormat(destinationFormat, Locale.getDefault())
+                val df = SimpleDateFormat(destinationFormat, Locale.ENGLISH)
                 dateValue = df.format(date1)
             } else {
                 dateValue = ""
@@ -325,16 +328,16 @@ object DateHelper {
 
     fun convertMaterialPickerDateToServerdate(dateValue: String): String {
         var strDate = ""
-        val dateFormat = SimpleDateFormat(DATEFORMAT_MATERIAL, Locale.getDefault())
-        val dateFormatSecond = SimpleDateFormat(DATEFORMAT_MATERIAL, Locale.getDefault())
+        val dateFormat = SimpleDateFormat(DATEFORMAT_MATERIAL, Locale.ENGLISH)
+        val dateFormatSecond = SimpleDateFormat(DATEFORMAT_MATERIAL, Locale.ENGLISH)
         var date1 = Calendar.getInstance().time
         try {
-            if ( !Utilities.isNullOrEmpty(dateValue) ) {
+            if (!Utilities.isNullOrEmpty(dateValue)) {
                 date1 = dateFormat.parse(dateValue)
             }
 
             if (date1 != null) {
-                val df = SimpleDateFormat(SERVER_DATE_YYYYMMDD, Locale.getDefault())
+                val df = SimpleDateFormat(SERVER_DATE_YYYYMMDD, Locale.ENGLISH)
                 strDate = df.format(date1)
             } else {
                 strDate = ""
@@ -348,7 +351,7 @@ object DateHelper {
 
     fun convertStringDateToDate(dateValue: String?, sourceFormat: String): Date {
         /* Current Date : */
-        val dateFormat = SimpleDateFormat(sourceFormat, Locale.getDefault())
+        val dateFormat = SimpleDateFormat(sourceFormat, Locale.ENGLISH)
         var date1 = Calendar.getInstance().time
         try {
             if (dateValue != null && dateValue != "") {
@@ -365,7 +368,7 @@ object DateHelper {
         var strDate = ""
         try {
             if (dateValue != null) {
-                val df = SimpleDateFormat(destinationFormat, Locale.getDefault())
+                val df = SimpleDateFormat(destinationFormat, Locale.ENGLISH)
                 strDate = df.format(dateValue)
             } else {
                 strDate = ""
@@ -377,13 +380,17 @@ object DateHelper {
         return strDate
     }
 
-    fun convertDateSourceToDestination(dateValue: String?, sourceFormat: String, destinationFormat: String): String {
+    fun convertDateSourceToDestination(
+        dateValue: String?,
+        sourceFormat: String,
+        destinationFormat: String
+    ): String {
         var strDate = ""
         try {
 
             if (dateValue != null) {
-                val srcFormat = SimpleDateFormat(sourceFormat, Locale.getDefault())
-                val destFormat = SimpleDateFormat(destinationFormat, Locale.getDefault())
+                val srcFormat = SimpleDateFormat(sourceFormat, Locale.ENGLISH)
+                val destFormat = SimpleDateFormat(destinationFormat, Locale.ENGLISH)
                 strDate = destFormat.format(srcFormat.parse(dateValue))
             } else {
                 strDate = ""
@@ -410,7 +417,7 @@ object DateHelper {
     fun getDateTimeAs_ddMMMyyyy_ToMilliSec(date: String): String {
 
         var RecordDatetemp = ""
-        val dateFormat = SimpleDateFormat(DISPLAY_DATE_DDMMMYYYY)
+        val dateFormat = SimpleDateFormat(DISPLAY_DATE_DDMMMYYYY, Locale.ENGLISH)
 
         val date1: Date
         try {
@@ -432,7 +439,7 @@ object DateHelper {
     fun getDateTimeAs_ddMMMyyyy_FromUtcToMilliSec(date: String): String {
 
         var RecordDatetemp = ""
-        val dateFormat = SimpleDateFormat(DATE_FORMAT_UTC)
+        val dateFormat = SimpleDateFormat(DATE_FORMAT_UTC, Locale.ENGLISH)
 
         val date1: Date
         try {
@@ -455,13 +462,13 @@ object DateHelper {
         val date1: Date
         try {
             if (date != null && date.length == 11) {
-                val df = SimpleDateFormat("dd-MMM-yyyy")
+                val df = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
                 date1 = df.parse(date)
                 RecordDatetemp = df.format(date1)
             } else {
-                val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                 date1 = dateFormat.parse(date)
-                val df = SimpleDateFormat("dd-MMM-yyyy")
+                val df = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
                 RecordDatetemp = df.format(date1)
             }
         } catch (e: ParseException) {
@@ -477,13 +484,13 @@ object DateHelper {
         val date1: Date
         try {
             if (date != null && date.length == 11) {
-                val df = SimpleDateFormat("dd MMM yyyy")
+                val df = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
                 date1 = df.parse(date)
                 RecordDatetemp = df.format(date1)
             } else {
-                val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                 date1 = dateFormat.parse(date)
-                val df = SimpleDateFormat("dd MMM yyyy")
+                val df = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
                 RecordDatetemp = df.format(date1)
             }
         } catch (e: ParseException) {
@@ -496,12 +503,12 @@ object DateHelper {
     fun getDateTimeAs_yyyyMMdd(date: String): String {
         /* Current Date : */
         var RecordDatetemp = ""
-        val dateFormat = SimpleDateFormat("dd-MMM-yyyy")
+        val dateFormat = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
 
         val date1: Date
         try {
             date1 = dateFormat.parse(date)
-            val df = SimpleDateFormat("yyyy-MM-dd")
+            val df = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             RecordDatetemp = df.format(date1)
 
         } catch (e: ParseException) {
@@ -516,7 +523,7 @@ object DateHelper {
 
     fun getDifferenceInDays(startDate: String, endDate: String): Int {
 
-        val myFormat = SimpleDateFormat(SERVER_DATE_YYYYMMDD,Locale.getDefault())
+        val myFormat = SimpleDateFormat(SERVER_DATE_YYYYMMDD, Locale.ENGLISH)
         var daysBetween = 0f
         try {
             val dateBefore = myFormat.parse(startDate)
@@ -536,7 +543,7 @@ object DateHelper {
         val date1 = dateBeforeString.replace("/".toRegex(), " ")
         val date2 = dateAfterString.replace("/".toRegex(), " ")
 
-        val myFormat = SimpleDateFormat("dd MM yyyy")
+        val myFormat = SimpleDateFormat("dd MM yyyy", Locale.ENGLISH)
 
         var daysBetween = 0f
         try {
@@ -557,12 +564,12 @@ object DateHelper {
     fun getDateTimeAs_ddmmyy(date: String): String {
         /* Current Date : */
         var RecordDatetemp = ""
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
 
         val date1: Date
         try {
             date1 = dateFormat.parse(date)
-            val df = SimpleDateFormat("dd/MM/yyyy")
+            val df = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
             RecordDatetemp = df.format(date1)
 
         } catch (e: ParseException) {
@@ -576,10 +583,10 @@ object DateHelper {
 
     fun stringDateToDate(format: String, strDate: String): Date {
         var dateToReturn: Date? = null
-        val dateFormat = SimpleDateFormat(format)
+        val dateFormat = SimpleDateFormat(format, Locale.ENGLISH)
 
 
-        val formatter = SimpleDateFormat(format)
+        val formatter = SimpleDateFormat(format, Locale.ENGLISH)
 
         try {
             // dateToReturn = (Date) dateFormat.parse(strDate);
@@ -595,7 +602,7 @@ object DateHelper {
 
     fun stringDateToDate(StrDate: String): Date? {
         var dateToReturn: Date? = null
-        val dateFormat = SimpleDateFormat(DISPLAY_DATE_DDMMMYYYY)
+        val dateFormat = SimpleDateFormat(DISPLAY_DATE_DDMMMYYYY, Locale.ENGLISH)
 
         try {
             dateToReturn = dateFormat.parse(StrDate) as Date
@@ -614,7 +621,7 @@ object DateHelper {
 
     fun dateToString(date: Date, format: String): String {
         var dateToReturn = ""
-        val dateFormat = SimpleDateFormat(format, Locale.getDefault())
+        val dateFormat = SimpleDateFormat(format, Locale.ENGLISH)
 
         try {
             dateToReturn = dateFormat.format(date)
@@ -626,30 +633,36 @@ object DateHelper {
     }
 
     fun formatDateValue(dateAsString: String): String? {
-        val newformat = SimpleDateFormat("dd-MMM-yyyy")
+        val newformat = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
         try {
 
             if (dateAsString.contains("T")) {
                 if (dateAsString.indexOf("-") <= 3) {
                     val datestring =
-                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-                    val oldformat = SimpleDateFormat("dd-MM-yyyy")
+                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }
+                            .toTypedArray()[0]
+                    val oldformat = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
                     return newformat.format(oldformat.parse(datestring))
                 } else {
                     val datestring =
-                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-                    val oldformat = SimpleDateFormat("yyyy-MM-dd")
+                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }
+                            .toTypedArray()[0]
+                    val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                     return newformat.format(oldformat.parse(datestring))
                 }
             } else {
                 if (dateAsString.indexOf("-") <= 3) {
-                    val oldformat = SimpleDateFormat("dd-MMM-yyyy")
+                    val oldformat = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
                     return newformat.format(oldformat.parse(dateAsString))
-                } else if (Integer.parseInt(dateAsString.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]) > 13) {
-                    val oldformat = SimpleDateFormat("yyyy-MM-dd")
+                } else if (Integer.parseInt(
+                        dateAsString.split("-".toRegex()).dropLastWhile { it.isEmpty() }
+                            .toTypedArray()[0]
+                    ) > 13
+                ) {
+                    val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                     return newformat.format(oldformat.parse(dateAsString))
                 } else {
-                    val oldformat = SimpleDateFormat("MM-dd-yyyy")
+                    val oldformat = SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH)
                     return newformat.format(oldformat.parse(dateAsString))
                 }
             }
@@ -662,21 +675,26 @@ object DateHelper {
     }
 
     fun convertServerDateToTime(dateAsString: String): String {
-        val newformat = SimpleDateFormat("dd-MMM-yyyy")
+        val newformat = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
         var dateVal: Date? = null
         try {
             if (TextUtils.isEmpty(dateAsString) == false) {
                 if (dateAsString.contains("T")) {
                     val datestring =
-                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-                    val oldformat = SimpleDateFormat("yyyy-MM-dd")
+                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }
+                            .toTypedArray()[0]
+                    val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                     dateVal = oldformat.parse(dateAsString)
                 } else {
-                    if (Integer.parseInt(dateAsString.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]) > 13) {
-                        val oldformat = SimpleDateFormat("yyyy-MM-dd")
+                    if (Integer.parseInt(
+                            dateAsString.split("-".toRegex()).dropLastWhile { it.isEmpty() }
+                                .toTypedArray()[0]
+                        ) > 13
+                    ) {
+                        val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                         dateVal = oldformat.parse(dateAsString)
                     } else {
-                        val oldformat = SimpleDateFormat("MM-dd-yyyy")
+                        val oldformat = SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH)
                         dateVal = oldformat.parse(dateAsString)
                     }
                 }
@@ -695,15 +713,20 @@ object DateHelper {
             if (!TextUtils.isEmpty(dateAsString)) {
                 if (dateAsString.contains("T")) {
                     val datestring =
-                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-                    val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }
+                            .toTypedArray()[0]
+                    val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                     dateVal = oldformat.parse(datestring)
                 } else {
-                    if (Integer.parseInt(dateAsString.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]) > 13) {
-                        val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    if (Integer.parseInt(
+                            dateAsString.split("-".toRegex()).dropLastWhile { it.isEmpty() }
+                                .toTypedArray()[0]
+                        ) > 13
+                    ) {
+                        val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                         dateVal = oldformat.parse(dateAsString)
                     } else {
-                        val oldformat = SimpleDateFormat("MM-dd-yyyy", Locale.getDefault())
+                        val oldformat = SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH)
                         dateVal = oldformat.parse(dateAsString)
                     }
                 }
@@ -716,21 +739,26 @@ object DateHelper {
     }
 
     fun convertServerDateToDBDate(dateAsString: String): String {
-        val dbFormat = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
+        val dbFormat = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
         var dateVal: Date? = null
         try {
             if (!TextUtils.isEmpty(dateAsString)) {
                 if (dateAsString.contains("T")) {
                     val datestring =
-                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-                    val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }
+                            .toTypedArray()[0]
+                    val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                     dateVal = oldformat.parse(datestring)
                 } else {
-                    if (Integer.parseInt(dateAsString.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]) > 13) {
-                        val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    if (Integer.parseInt(
+                            dateAsString.split("-".toRegex()).dropLastWhile { it.isEmpty() }
+                                .toTypedArray()[0]
+                        ) > 13
+                    ) {
+                        val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                         dateVal = oldformat.parse(dateAsString)
                     } else {
-                        val oldformat = SimpleDateFormat("MM-dd-yyyy", Locale.getDefault())
+                        val oldformat = SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH)
                         dateVal = oldformat.parse(dateAsString)
                     }
                 }
@@ -744,29 +772,35 @@ object DateHelper {
     }
 
     fun formatDateValue(format: String, dateAsString: String): String? {
-        val newformat = SimpleDateFormat(format)
+        val newformat = SimpleDateFormat(format, Locale.ENGLISH)
         try {
             if (dateAsString.contains("T")) {
                 if (dateAsString.indexOf("-") <= 3) {
                     val datestring =
-                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-                    val oldformat = SimpleDateFormat("dd-MM-yyyy")
+                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }
+                            .toTypedArray()[0]
+                    val oldformat = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
                     return newformat.format(oldformat.parse(datestring))
                 } else {
                     val datestring =
-                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-                    val oldformat = SimpleDateFormat("yyyy-MM-dd")
+                        dateAsString.split("T".toRegex()).dropLastWhile { it.isEmpty() }
+                            .toTypedArray()[0]
+                    val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                     return newformat.format(oldformat.parse(datestring))
                 }
             } else {
                 if (dateAsString.indexOf("-") <= 3) {
-                    val oldformat = SimpleDateFormat("dd-MMM-yyyy")
+                    val oldformat = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
                     return newformat.format(oldformat.parse(dateAsString))
-                } else if (Integer.parseInt(dateAsString.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]) > 13) {
-                    val oldformat = SimpleDateFormat("yyyy-MM-dd")
+                } else if (Integer.parseInt(
+                        dateAsString.split("-".toRegex()).dropLastWhile { it.isEmpty() }
+                            .toTypedArray()[0]
+                    ) > 13
+                ) {
+                    val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                     return newformat.format(oldformat.parse(dateAsString))
                 } else {
-                    val oldformat = SimpleDateFormat("MM-dd-yyyy")
+                    val oldformat = SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH)
                     return newformat.format(oldformat.parse(dateAsString))
                 }
             }
@@ -780,7 +814,7 @@ object DateHelper {
     fun convertTimeValueToDate(timevalue: String): String {
         /* Current Date : */
         var datetemp = ""
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
 
         val date1: Date
         try {
@@ -799,16 +833,19 @@ object DateHelper {
         return datetemp
     }
 
-    fun convertDateToDayName(dateValue: String, sourceFormat: String): String{
-        val date = convertStringDateToDate(dateValue,sourceFormat)
+    fun convertDateToDayName(dateValue: String, sourceFormat: String): String {
+        val date = convertStringDateToDate(dateValue, sourceFormat)
 //        println(SimpleDateFormat("EE", Locale.ENGLISH).format(date.getTime()))
-        return date.date.toString()+"\n"+ SimpleDateFormat("EE", Locale.ENGLISH).format(date.getTime())
+        return date.date.toString() + "\n" + SimpleDateFormat(
+            "EE",
+            Locale.ENGLISH
+        ).format(date.getTime())
     }
 
     fun convertUpdateTimeValueToDate(timevalue: String): String {
         /* Current Date : */
         var datetemp = ""
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
 
         println("Changed updated time :$timevalue")
 
@@ -820,7 +857,7 @@ object DateHelper {
                 datetemp = dateFormat.format(date)
 
 
-                val sdf = SimpleDateFormat("yyyy:MM:dd:HH:mm")
+                val sdf = SimpleDateFormat("yyyy:MM:dd:HH:mm", Locale.ENGLISH)
                 // String currentDateandTime = sdf.format(new Date());
 
                 date = dateFormat.parse(timevalue)
@@ -878,7 +915,8 @@ object DateHelper {
         try {
 
             dateOfBirth = formatDateValue(DISPLAY_DATE_DDMMMYYYY, dateOfBirth)!!
-            val dob = formatDateValue(SERVER_DATE_YYYYMMDD, dateOfBirth)!!.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            val dob = formatDateValue(SERVER_DATE_YYYYMMDD, dateOfBirth)!!.split("-".toRegex())
+                .dropLastWhile { it.isEmpty() }.toTypedArray()
             var years = Integer.parseInt(dob[0])
             var months = Integer.parseInt(dob[1])
             var days = Integer.parseInt(dob[2])
@@ -1035,15 +1073,16 @@ object DateHelper {
 
             if (dateIn_ddMMMyyyy.contains("T")) {
                 val datestring =
-                    dateIn_ddMMMyyyy.split("T".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-                val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    dateIn_ddMMMyyyy.split("T".toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()[0]
+                val oldformat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                 date = oldformat.parse(datestring)
             } else {
                 if (dateIn_ddMMMyyyy.length > 10) {
-                    val oldformat = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
+                    val oldformat = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
                     date = oldformat.parse(dateIn_ddMMMyyyy)
                 } else {
-                    val oldformat = SimpleDateFormat("MM-dd-yyyy", Locale.getDefault())
+                    val oldformat = SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH)
                     date = oldformat.parse(dateIn_ddMMMyyyy)
                 }
             }
@@ -1219,7 +1258,7 @@ object DateHelper {
     }
 
     fun getHourMinFromStrMinutes(strTime: String): String {
-        if ( !Utilities.isNullOrEmptyOrZero(strTime) ) {
+        if (!Utilities.isNullOrEmptyOrZero(strTime)) {
             val time = strTime.toDouble().roundToInt()
             val hours = time / 60 //since both are ints, you get an int
             val minutes = time % 60
@@ -1237,7 +1276,7 @@ object DateHelper {
     }
 
     fun getHourMinFromMinutes(time: Int?): String {
-        if ( time != null && time > 0) {
+        if (time != null && time > 0) {
             val hours = time / 60 //since both are ints, you get an int
             val minutes = time % 60
             return if (hours > 0) {
