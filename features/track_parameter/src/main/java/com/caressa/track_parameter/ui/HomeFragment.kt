@@ -72,7 +72,7 @@ class HomeFragment : BaseFragment(){
             if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
                 v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 ImageViewCompat.setImageTintList(binding.imgUpload,
-                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.hlmt_warm_grey)))
+                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.colorPrimary)))
                 binding.lblUploadRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_title_charcoal_grey))
                 binding.descUploadRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_charcoal_grey_55))
             }
@@ -91,7 +91,7 @@ class HomeFragment : BaseFragment(){
             if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
                 v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 ImageViewCompat.setImageTintList(binding.imgView,
-                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.hlmt_warm_grey)))
+                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.colorPrimary)))
                 binding.lblViewRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_title_charcoal_grey))
                 binding.descViewRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_charcoal_grey_55))
             }
@@ -110,7 +110,7 @@ class HomeFragment : BaseFragment(){
             if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
                 v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 ImageViewCompat.setImageTintList(binding.imgShare,
-                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.hlmt_warm_grey)))
+                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.colorPrimary)))
                 binding.lblShareRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_title_charcoal_grey))
                 binding.descShareRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_charcoal_grey_55))
             }
@@ -129,7 +129,7 @@ class HomeFragment : BaseFragment(){
             if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
                 v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 ImageViewCompat.setImageTintList(binding.imgDigitize,
-                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.hlmt_warm_grey)))
+                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.colorPrimary)))
                 binding.lblDigitizeRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_title_charcoal_grey))
                 binding.descDigitizeRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_charcoal_grey_55))
             }

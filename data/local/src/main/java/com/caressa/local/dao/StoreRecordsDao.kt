@@ -46,8 +46,8 @@ interface StoreRecordsDao {
     @Query("SELECT * FROM HealthDocumentTable WHERE Sync=:sync ORDER BY RecordDate DESC")
     fun getHealthDocumentsWhere(sync : String ): List<HealthDocument>
 
-    @Query("UPDATE  HealthDocumentTable SET Sync=:sync  WHERE Id=:id")
-    fun updateHealthDocument( id : String, sync : String )
+    @Query("UPDATE HealthDocumentTable SET Sync=:sync,RecordDate=:recordDate,PersonName=:name WHERE Id=:id")
+    fun updateHealthDocument( id:String,sync:String,recordDate:String,name:String )
 
     @Query("UPDATE  HealthDocumentTable SET Path=:path , Sync=:sync WHERE Id=:id")
     fun updateHealthDocumentPathSync(id : String, path : String, sync : String )
