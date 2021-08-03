@@ -61,7 +61,7 @@ class FitnessViewModel(private val dispatchers: AppDispatchers,
 
     fun getStepsHistory( fragment:FitnessDashboardFragment,stepCountHelper : StepCountHelper ) = viewModelScope.launch(dispatchers.main) {
 
-        val df = SimpleDateFormat(DateHelper.SERVER_DATE_YYYYMMDD,Locale.getDefault())
+        val df = SimpleDateFormat(DateHelper.SERVER_DATE_YYYYMMDD,Locale.ENGLISH)
         val calEndTime = Calendar.getInstance()
         calEndTime.add(Calendar.DATE, -30)
         val fromDate = df.format(calEndTime.time)

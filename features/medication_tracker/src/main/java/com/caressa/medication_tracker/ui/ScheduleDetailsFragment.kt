@@ -468,9 +468,9 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
                     medicine.comments = intakeInstruction
                     medicine.notes = binding.edtNotes.text.toString()
                     medicine.notification.setAlert = if (binding.swAlert.isChecked)
-                        Constants.TRUE.toLowerCase(Locale.getDefault())
+                        Constants.TRUE.toLowerCase(Locale.ENGLISH)
                     else
-                        Constants.FALSE.toLowerCase(Locale.getDefault())
+                        Constants.FALSE.toLowerCase(Locale.ENGLISH)
 
                     viewModel.callAddOrUpdateMedicineApi(medicine,getScheduleTimeList(),removedScheduleList,medDoseCount)
                 }

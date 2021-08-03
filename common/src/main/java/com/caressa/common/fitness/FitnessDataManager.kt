@@ -300,7 +300,7 @@ class FitnessDataManager(private val mContext: Context?) {
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
-                    val sd = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    val sd = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                     dataJson.put("RecordDate", sd.format(dp.getStartTime(TimeUnit.MILLISECONDS)))
                     dataJson.put("StepsCount", stepsCount.toString())
                     //dataJson.put("Calories", String.valueOf(totalCalories) + " Kcal");

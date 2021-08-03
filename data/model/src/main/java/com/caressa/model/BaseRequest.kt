@@ -51,7 +51,7 @@ open class BaseRequest(
         /* Current Date : */ val currentDateAsStringddMMMyyyy: String
             get() {
                 val calendar = Calendar.getInstance()
-                val df = SimpleDateFormat("dd-MMM-yyyy")
+                val df = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
                 return df.format(calendar.time)
             }
     }
