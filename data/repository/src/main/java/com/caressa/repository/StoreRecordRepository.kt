@@ -151,17 +151,23 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource, private val shrDa
                 var no = 1
                 for ( document in documentList ) {
                     val record = shrDao.getHealthDocumentById(document.Id)
-                    Timber.e(""+ no +")Record_fetched----->"+record)
+                    Timber.e("$no)Record_fetched----->$record")
                     if ( record == null ) {
                         if ( document.PersonId != null ) {
                             document.Relation = shrDao.getRelationShip(document.PersonId.toString())
                         }
                         document.Path = ""
-                        document.Type = Utilities.FindTypeOfDocument(document.Name!!)
-                        document.RecordDate = DateHelper.getDateTimeAs_ddMMMyyyy(document.RecordDate)
+                        if ( !Utilities.isNullOrEmpty(document.Name) ) {
+                            document.Type = Utilities.FindTypeOfDocument(document.Name!!)
+                        }
+                        //document.RecordDate = DateHelper.getDateTimeAs_ddMMMyyyy(document.RecordDate)
+                        document.RecordDate = document.RecordDate!!.split("T").toTypedArray()[0]
                         shrDao.insertDocument( document )
+                        Timber.e("$no)Inserting_record_id----->${document.Id}")
                     } else {
-                        shrDao.updateHealthDocument(document.Id.toString(),"N")
+                        shrDao.updateHealthDocument(document.Id.toString(), "N",
+                            document.RecordDate!!.split("T").toTypedArray()[0],document.PersonName!!)
+                        Timber.e("$no)Updating_record_id----->${document.Id}")
                     }
                     no++
                 }
@@ -262,28 +268,29 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource, private val shrDa
         return object : NetworkBoundResource<SaveDocumentModel.SaveDocumentsResponse,BaseResponse<SaveDocumentModel.SaveDocumentsResponse>>() {
 
             var resp = SaveDocumentModel.SaveDocumentsResponse()
-            var requestData = data
+
             override fun shouldStoreInDb(): Boolean = true
 
             override suspend fun loadFromDb(): SaveDocumentModel.SaveDocumentsResponse {
-               // return SaveDocumentModel.SaveDocumentsResponse()
+                // return SaveDocumentModel.SaveDocumentsResponse()
                 return resp
             }
 
             override suspend fun saveCallResults(items: SaveDocumentModel.SaveDocumentsResponse) {
                 resp = items
                 val uploadedList = items.healthDocuments
-                if ( uploadedList.size > 0 ) {
+                if (uploadedList.isNotEmpty()) {
                     for ( document in uploadedList ) {
                         document.Type = Utilities.FindTypeOfDocument(document.Name!!)
                         for ( reqDoc in healthDocumentsList ) {
                             if ( document.Name.equals(reqDoc.fileName,ignoreCase = true) ) {
-                            document.Path = reqDoc.Path
+                                document.Path = reqDoc.Path
                             }
                         }
                         document.PersonName = personName
                         document.Relation = personRel
-                        document.RecordDate = DateHelper.getDateTimeAs_ddMMMyyyy(document.RecordDate)
+                        //document.RecordDate = DateHelper.getDateTimeAs_ddMMMyyyy(document.RecordDate)
+                        document.RecordDate = document.RecordDate!!.split("T").toTypedArray()[0]
                         shrDao.insertDocument(document)
                     }
                 }

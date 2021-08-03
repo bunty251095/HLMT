@@ -650,7 +650,7 @@ class HomeRepositoryImpl(private val datasource : HomeDatasource, private val da
     }
 
     override suspend fun updateUserDetails( name : String,personId : Int ) {
-        homeDao.updateUserDetails( name,personId)
+        homeDao.updateName( name,personId)
         homeDao.updateUserInUserRelativesDetails( name ,personId.toString())
     }
 

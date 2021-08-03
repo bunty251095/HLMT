@@ -54,11 +54,7 @@ class RevHistoryFragment : BaseFragment() {
     lateinit var spinnerAdapter: ParameterSpinnerAdapter
     lateinit var paramDetailsTableAdapter: RevParamDetailsTableAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentParametersHistoryBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -190,7 +186,7 @@ class RevHistoryFragment : BaseFragment() {
         binding.tabDetail.setOnClickListener {
             selectTabDetails()
         }
-        binding.txtParamSpinner.setOnClickListener(View.OnClickListener { v: View? -> binding.paramSpinner.performClick() })
+        binding.txtParamSpinner.setOnClickListener({ v: View? -> binding.paramSpinner.performClick() })
 
         binding.paramSpinner.setOnItemSelectedListener(object : OnItemSelectedListener {
             override fun onItemSelected(

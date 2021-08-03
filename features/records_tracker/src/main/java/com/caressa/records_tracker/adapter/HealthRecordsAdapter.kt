@@ -17,7 +17,6 @@ import com.caressa.records_tracker.common.DataHandler
 import com.caressa.records_tracker.common.RecordSingleton
 import com.caressa.records_tracker.databinding.ItemDocumentBinding
 import com.caressa.records_tracker.viewmodel.HealthRecordsViewModel
-import timber.log.Timber
 import java.io.File
 import java.util.ArrayList
 
@@ -73,7 +72,7 @@ class HealthRecordsAdapter(val context : Context, val viewModel : HealthRecordsV
             if (!Utilities.isNullOrEmpty(record.RecordDate)) {
                 holder.txtDocDate.text = DateHelper.convertDateTimeValue(
                     record.RecordDate,
-                    DateHelper.DISPLAY_DATE_DDMMMYYYY,
+                    DateHelper.SERVER_DATE_YYYYMMDD,
                     DateHelper.DATEFORMAT_DDMMMYYYY_NEW)
             } else {
                 holder.txtDocDate.text = " -- "
@@ -100,7 +99,7 @@ class HealthRecordsAdapter(val context : Context, val viewModel : HealthRecordsV
                     code.equals("PRE", ignoreCase = true) -> {
                         //holder.view.setBackgroundColor(ContextCompat.getColor(context,color[2]))
                         holder.imgCategory.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.img_prescription))
-                        holder.txtDocCategory.text = context.resources.getString(R.string.prescription)
+                        holder.txtDocCategory.text = context.resources.getString(R.string.doctor_prescription)
                     }
                     code.equals("DIET_PLAN", ignoreCase = true) -> {
                         //holder.view.setBackgroundColor(ContextCompat.getColor(context,color[3]))
@@ -123,7 +122,9 @@ class HealthRecordsAdapter(val context : Context, val viewModel : HealthRecordsV
                         holder.txtDocCategory.text = context.resources.getString(R.string.hra_report)
                     }
                     else -> {
-                        holder.txtDocCategory.text = DataHandler(context).getCategorByCode(code)
+                        //holder.view.setBackgroundColor(ContextCompat.getColor(context,color[5]))
+                        holder.imgCategory.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.img_other))
+                        holder.txtDocCategory.text = DataHandler(context).getCategoryByCode(code)
                     }
                 }
             }

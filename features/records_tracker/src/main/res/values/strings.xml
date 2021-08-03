@@ -22,7 +22,7 @@
     <string name="all">All</string>
     <string name="diet_plan">Diet Plan</string>
     <string name="fitness_plan">Fitness Plan</string>
-    <string name="prescription">Doctor Prescription</string>
+    <string name="doctor_prescription">Doctor Prescription</string>
     <string name="pathology_report">Pathology Report</string>
     <string name="hospital_report">Hospital Report</string>
     <string name="other_document">Other Document</string>

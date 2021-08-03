@@ -256,6 +256,9 @@ class ParameterRepositoryImpl(private val dataSource: ParameterDatasource, priva
                     val recordDate = DateHelper.convertServerDateToDBDate(paramHistory.recordDate)
                     paramHistory.recordDate = recordDate
                     paramHistory.recordDateMillisec = DateHelper.getDateTimeAs_ddMMMyyyy_ToMilliSec(recordDate)
+                    if ( Utilities.isNullOrEmpty(paramHistory.observation) ) {
+                        paramHistory.observation = ""
+                    }
                 }
 
                 paramDao.insertHistory(items.history)
