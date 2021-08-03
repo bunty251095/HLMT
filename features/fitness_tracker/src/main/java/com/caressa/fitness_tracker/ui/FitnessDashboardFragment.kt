@@ -605,9 +605,9 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
                         for (i in fitnessListSize - 1 downTo 0) {
                             try {
                                 val recordDate = Calendar.getInstance()
-                                val sd = SimpleDateFormat(DateHelper.SERVER_DATE_YYYYMMDD, Locale.getDefault())
-                                val sd2 = SimpleDateFormat(DateHelper.DATEFORMAT_DDMMMYYYY_NEW, Locale.getDefault())
-                                val sd3 = SimpleDateFormat(DateHelper.DISPLAY_DATE_DDMMMYYYY, Locale.getDefault())
+                                val sd = SimpleDateFormat(DateHelper.SERVER_DATE_YYYYMMDD, Locale.ENGLISH)
+                                val sd2 = SimpleDateFormat(DateHelper.DATEFORMAT_DDMMMYYYY_NEW, Locale.ENGLISH)
+                                val sd3 = SimpleDateFormat(DateHelper.DISPLAY_DATE_DDMMMYYYY, Locale.ENGLISH)
                                 recordDate.add(Calendar.DATE, -i)
                                 recordDate[Calendar.HOUR_OF_DAY] = 0
                                 recordDate[Calendar.MINUTE] = 0

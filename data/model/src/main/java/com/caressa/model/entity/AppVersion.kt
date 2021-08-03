@@ -36,7 +36,7 @@ data class AppVersion(
         val currentDateInYYYYMMDD: String
             get() {
                 val calendar = Calendar.getInstance()
-                val df = SimpleDateFormat("yyyy-MM-dd",Locale.getDefault())
+                val df = SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH)
                 return df.format(calendar.time)
             }
     }

@@ -49,8 +49,8 @@ class UserInfoFragment: BaseFragment() {
         binding.txtDate.text = DateHelper.getDayOfMonthSuffix( mCalendar?.get(Calendar.DAY_OF_MONTH)!! )
         binding.txtSelectDate.text = DateHelper.getDayOfMonthSuffix(mCalendar?.get(Calendar.DAY_OF_MONTH)!!)
 
-        binding.txtMonth.text = mCalendar?.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
-        binding.txtSelectMonth.text = mCalendar?.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+        binding.txtMonth.text = mCalendar?.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH)
+        binding.txtSelectMonth.text = mCalendar?.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH)
 
         binding.txtYear.text = mCalendar?.get(Calendar.YEAR).toString()
         binding.txtSelectYear.text = mCalendar?.get(Calendar.YEAR).toString()
