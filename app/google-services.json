@@ -1,50 +1,42 @@
 {
   "project_info": {
-    "project_number": "574906239931",
-    "project_id": "hlmt-internal",
-    "storage_bucket": "hlmt-internal.appspot.com"
+    "project_number": "352481778267",
+    "project_id": "hl-pace",
+    "storage_bucket": "hl-pace.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:574906239931:android:22d8d55f9b4c7306b6929e",
+        "mobilesdk_app_id": "1:352481778267:android:079b4dc4d8d1468eea7d7e",
         "android_client_info": {
-          "package_name": "com.vivant.hlmt.app.uat"
+          "package_name": "com.vivant.hlmt.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "574906239931-qnspmmsht9kijt6gduqlvkapkq5akls9.apps.googleusercontent.com",
+          "client_id": "352481778267-2kfqqrdj2nvismr68u1n5610nj1kes07.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.vivant.hlmt.app.uat",
+            "package_name": "com.vivant.hlmt.app",
             "certificate_hash": "2ed46bab90ec46b69a77b4c9f43319b80a67d897"
           }
         },
         {
-          "client_id": "574906239931-m53criia34fcje6oivjmo6pni39bcbup.apps.googleusercontent.com",
+          "client_id": "352481778267-5gj74r92qji8u8rn6lj20n58ohn9vr57.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBiD_2-HsbPO_n72_fsn-2W09Xp8nT7AOo"
+          "current_key": "AIzaSyCHaa9Xn7VAGB5us4NrIbhu_bL3b4GMhx8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "574906239931-m53criia34fcje6oivjmo6pni39bcbup.apps.googleusercontent.com",
+              "client_id": "352481778267-5gj74r92qji8u8rn6lj20n58ohn9vr57.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "574906239931-p127snqtbsnbedha1dskertfnnn7pgv2.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.vivant.hlmt.app.uat",
-                "app_store_id": "123321123"
-              }
             }
           ]
         }

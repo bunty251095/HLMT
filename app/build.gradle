@@ -15,7 +15,7 @@ android {
             applicationIdSuffix ".uat"
         }
         release {
-            applicationIdSuffix ".uat"
+            applicationIdSuffix ""
         }
     }
 

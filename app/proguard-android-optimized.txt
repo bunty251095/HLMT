@@ -69,8 +69,8 @@
 -verbose
 
 -keepattributes *Annotation*
--keep public class com.google.vending.licensing.ILicensingService
--keep public class com.android.vending.licensing.ILicensingService
+-keep public class com.google.vending.licensing.ILicensingService.** { *; }
+-keep public class com.android.vending.licensing.ILicensingService.** { *; }
 -keepattributes SourceFile,LineNumberTable,Exceptions,*Annotation*
 -keepattributes Signature
 
@@ -134,28 +134,41 @@
 -keep class com.crashlytics.** { *; }
 -dontwarn com.crashlytics.**
 
--keep class sun.misc.Unsafe { *; }
+-keep class sun.misc.Unsafe.** { *; }
 
--keep class com.caressa.libs.** { *; }
--keepclassmembers class com.caressa.libs.** {*;}
--keep class com.caressa.libs.blog.** { *; }
--keepclassmembers class com.caressa.libs.blog.** {*;}
--keep class com.caressa.libs.crashreport.** { *; }
--keepclassmembers class com.caressa.libs.crashreport.** {*;}
--keep class com.caressa.libs.fitness.** { *; }
--keepclassmembers class com.caressa.libs.fitness.** {*;}
--keep class com.caressa.libs.healthprio.** { *; }
--keepclassmembers class com.caressa.libs.healthprio.** {*;}
--keep class com.caressa.libs.hra.** { *; }
--keepclassmembers class com.caressa.libs.hra.** {*;}
--keep class com.caressa.libs.personinfo.** { *; }
--keepclassmembers class com.caressa.libs.personinfo.** {*;}
--keep class com.caressa.libs.security.** { *; }
--keepclassmembers class com.caressa.libs.security.** {*;}
--keep class com.caressa.client.configuration.** { *; }
--keepclassmembers class com.caressa.client.configuration.** {*;}
--keep class com.caressa.libs.utilities.** { *; }
--keepclassmembers class com.caressa.libs.utilities.** {*;}
+#Keep Vivant Modules
+-keep class com.caressa.blogs.** { *; }
+-keepclassmembers class com.caressa.blogs.** { *; }
+-keep class com.caressa.common.** { *; }
+-keepclassmembers class com.caressa.common.** { *; }
+-keep class com.caressa.local.** { *; }
+-keepclassmembers class com.caressa.local.** { *; }
+-keep class com.caressa.model.** { *; }
+-keepclassmembers class com.caressa.model.** { *; }
+-keep class com.caressa.remote.** { *; }
+-keepclassmembers class com.caressa.remote.** { *; }
+-keep class com.caressa.repository.** { *; }
+-keepclassmembers class com.caressa.repository.** { *; }
+-keep class com.caressa.fitness_tracker.** { *; }
+-keepclassmembers class com.caressa.fitness_tracker.** { *; }
+-keep class com.caressa.home.** { *; }
+-keepclassmembers class com.caressa.home.** { *; }
+-keep class com.caressa.hra.** { *; }
+-keepclassmembers class com.caressa.hra.** { *; }
+-keep class com.caressa.medication_tracker.** { *; }
+-keepclassmembers class com.caressa.medication_tracker.** { *; }
+-keep class com.caressa.navigation.** { *; }
+-keepclassmembers class com.caressa.navigation.** { *; }
+-keep class com.caressa.records_tracker.** { *; }
+-keepclassmembers class com.caressa.records_tracker.** { *; }
+-keep class com.caressa.security.** { *; }
+-keepclassmembers class com.caressa.security.** { *; }
+-keep class com.caressa.tools_calculators.** { *; }
+-keepclassmembers class com.caressa.tools_calculators.** { *; }
+-keep class com.caressa.track_parameter.** { *; }
+-keepclassmembers class com.caressa.track_parameter.** { *; }
+
+
 
 
 # keep setters in Views so that animations can still work.
