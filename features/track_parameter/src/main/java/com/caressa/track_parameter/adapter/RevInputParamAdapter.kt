@@ -641,7 +641,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
         var counter = 0
         try {
             for (param in list) {
-                if (!TrackParameterHelper.isNullOrEmptyOrZero(param.maxPermissibleValue) && !TrackParameterHelper.isNullOrEmptyOrZero(param.minPermissibleValue)
+                if (!TrackParameterHelper.isNullOrEmptyOrZero(param.maxPermissibleValue) && !param.minPermissibleValue.isNullOrEmpty()
                 ) {
                     if (!TrackParameterHelper.isNullOrEmptyOrZero(param.parameterVal)) {
                         try {
