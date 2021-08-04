@@ -35,7 +35,9 @@ android {
             manifestPlaceholders = [crashlyticsCollectionEnabled: "true"]
         }
         release {
-            minifyEnabled true
+            //for testing only
+            debuggable true
+            minifyEnabled false
             useProguard true
             shrinkResources false
             signingConfig signingConfigs.config

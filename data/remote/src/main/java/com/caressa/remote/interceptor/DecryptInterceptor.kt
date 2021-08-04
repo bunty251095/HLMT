@@ -32,21 +32,36 @@ class DecryptInterceptor : Interceptor {
             Log.d("DecryptInterceptor", "encryptedStream  " + responseBodyString)
             var decrypted: String? = responseBodyString
             try {
-                decrypted = EncryptionUtility.decrypt(Configuration.SecurityKey, responseBodyString!!, Configuration.SecurityKey)
-                val baseResponse = Gson().fromJson(decrypted.toString(),BaseResponse::class.java)
-                val resultResponse = Gson().fromJson(baseResponse.jSONData.toString(), TermsConditionsModel.TermsConditionsResponse::class.java)
-                if(resultResponse.termsConditions == null)
-                {
+                decrypted = EncryptionUtility.decrypt(
+                    Configuration.SecurityKey,
+                    responseBodyString!!,
+                    Configuration.SecurityKey
+                )
+                val baseResponse = Gson().fromJson(decrypted.toString(), BaseResponse::class.java)
+                val resultResponse = Gson().fromJson(
+                    baseResponse.jSONData.toString(),
+                    TermsConditionsModel.TermsConditionsResponse::class.java
+                )
+                if (resultResponse.termsConditions == null) {
                     decrypted = getJsonString(decrypted)
-                }else{
-                    val jsonObject:JSONObject = JSONObject()
-                    val headerJsonObject:JSONObject = JSONObject(Gson().toJson(baseResponse.header,BaseResponse.Header::class.java))
-                    val jsonObjJsonObject:JSONObject = JSONObject(Gson().toJson(resultResponse,
-                        TermsConditionsModel.TermsConditionsResponse::class.java))
-                    jsonObject.put("Header",headerJsonObject)
-                    jsonObject.put("JSONData",jsonObjJsonObject)
-                    jsonObject.put("Data","")
-                    Log.i("Response===> ",""+jsonObject)
+                } else {
+                    val jsonObject: JSONObject = JSONObject()
+                    val headerJsonObject: JSONObject = JSONObject(
+                        Gson().toJson(
+                            baseResponse.header,
+                            BaseResponse.Header::class.java
+                        )
+                    )
+                    val jsonObjJsonObject: JSONObject = JSONObject(
+                        Gson().toJson(
+                            resultResponse,
+                            TermsConditionsModel.TermsConditionsResponse::class.java
+                        )
+                    )
+                    jsonObject.put("Header", headerJsonObject)
+                    jsonObject.put("JSONData", jsonObjJsonObject)
+                    jsonObject.put("Data", "")
+                    Log.i("Response===> ", "" + jsonObject)
                     decrypted = jsonObject.toString()
                 }
 
@@ -61,12 +76,12 @@ class DecryptInterceptor : Interceptor {
     }
 
     private fun getJsonString(decrypted: String?): String? {
-       /* val decryptedResponse: String = decrypted!!
-            .replace("\\r\\n", "")
-            .replace("\\\"", "\"")
-            .replace("\"{", "{")
-            .replace("}\"", "}")
-        return decryptedResponse*/
+        /* val decryptedResponse: String = decrypted!!
+             .replace("\\r\\n", "")
+             .replace("\\\"", "\"")
+             .replace("\"{", "{")
+             .replace("}\"", "}")
+         return decryptedResponse*/
         val decryptedResponse: String = decrypted!!
             .replace("\\r\\n", "")
             .replace("\\\\r\\\\n", "")

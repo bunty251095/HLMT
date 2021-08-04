@@ -26,7 +26,7 @@ data class UserRelatives(
     @SerializedName("RelationshipCode")
     var relationshipCode: String = "",
     @SerializedName("Relationship")
-    var relationship: String = "" ,
+    var relationship: String = "",
     @SerializedName("RelationShipID")
     var relationShipID: String = ""
 )

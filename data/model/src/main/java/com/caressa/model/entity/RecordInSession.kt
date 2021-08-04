@@ -5,20 +5,20 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "RecordsInSessionTable")
-data class RecordInSession (
+data class RecordInSession(
     @SerializedName("Id")
-    val Id: String = "" ,
+    val Id: String = "",
     @PrimaryKey
     @SerializedName("Name")
-    val Name: String = "" ,
+    val Name: String = "",
     @SerializedName("OriginalFileName")
-    val OriginalFileName: String = "" ,
+    val OriginalFileName: String = "",
     @SerializedName("Path")
-    val Path: String = "" ,
+    val Path: String = "",
     @SerializedName("Type")
-    val Type: String = "" ,
+    val Type: String = "",
     @SerializedName("Sync")
-    val Sync: String = "" ,
+    val Sync: String = "",
     @SerializedName("LastUpdatedTime")
     val LastUpdatedTime: String = ""
 )

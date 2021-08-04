@@ -48,7 +48,7 @@
     <color name="vivant_light_grey">#efefef</color>
     <!-- Vivant Revamp New Colors-->
 
-<!--     Vivant Original Colours-->
+    <!--     Vivant Original Colours-->
     <color name="vivantGreen">#00d2a0</color>
     <color name="vivantCyan">#00cfff</color>
     <color name="vivantPurple">#341976</color>
@@ -76,7 +76,7 @@
     <color name="yellow">#FFD600</color>
     <color name="purple">#A78DE9</color>
     <color name="green">#62E1B0</color>
-    <color name="navy">#608CBB </color>
+    <color name="navy">#608CBB</color>
     <!--     Vivant New Branding Guideline Colours-->
 
     <color name="high_risk">@color/vivant_watermelon</color>

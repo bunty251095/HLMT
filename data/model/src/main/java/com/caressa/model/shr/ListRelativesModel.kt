@@ -8,14 +8,15 @@ import com.google.gson.annotations.SerializedName
 class ListRelativesModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(  Header(authTicket = authToken) ) {
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("PersonID")
-        val personID : String = ""
+        val personID: String = ""
     )
 
-    data class  ListRelativesResponse(
+    data class ListRelativesResponse(
         @SerializedName("Persons")
         val persons: List<Person> = listOf(),
         var relativeList: List<UserRelatives> = listOf()

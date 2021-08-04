@@ -7,7 +7,8 @@ import com.google.gson.annotations.SerializedName
 class SaveAndSubmitHraModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String , private val authToken: String ) : BaseRequest(Header(authTicket = authToken))   {
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("HraResponse")
@@ -81,28 +82,28 @@ class SaveAndSubmitHraModel(
         private val R: String = "SETVITALS",
         @SerializedName("Height")
         @Expose
-        private val Height: String = "" ,
+        private val Height: String = "",
         @SerializedName("Weight")
         @Expose
-        private val Weight: String = "" ,
+        private val Weight: String = "",
         @SerializedName("SaveBMI")
         @Expose
-        private val SaveBMI: String = "" ,
+        private val SaveBMI: String = "",
         @SerializedName("BMI")
         @Expose
-        private val BMI: String = ""  ,
+        private val BMI: String = "",
         @SerializedName("Pulse")
         @Expose
-        private val Pulse: String = ""  ,
+        private val Pulse: String = "",
         @SerializedName("SaveBP")
         @Expose
-        private val SaveBP: String  = "",
+        private val SaveBP: String = "",
         @SerializedName("SystolicBP")
         @Expose
-        private val SystolicBP: String = "" ,
+        private val SystolicBP: String = "",
         @SerializedName("Mode")
         @Expose
-        private val Mode: String = "" ,
+        private val Mode: String = "",
         @SerializedName("DiastolicBP")
         @Expose
         private val DiastolicBP: String = ""
@@ -111,25 +112,23 @@ class SaveAndSubmitHraModel(
     data class LabDetails(
         @SerializedName("ParameterCode")
         @Expose
-        private val ParameterCode : String = ""  ,
+        private val ParameterCode: String = "",
         @SerializedName("RecordDate")
         @Expose
-        private val RecordDate : String = "" ,
+        private val RecordDate: String = "",
         @SerializedName("Value")
         @Expose
-        private val Value : String = "" ,
+        private val Value: String = "",
         @SerializedName("PersonID")
         @Expose
-        private val PersonID : String = "" ,
+        private val PersonID: String = "",
         @SerializedName("Unit")
         @Expose
-        private val Unit : String = ""
+        private val Unit: String = ""
     )
 
 
-
-
-    data class  SaveAndSubmitHraResponse(
+    data class SaveAndSubmitHraResponse(
         @SerializedName("WellnessScoreSummary")
         @Expose
         var WellnessScoreSummary: WellnessScoreSummary = WellnessScoreSummary(),
@@ -162,7 +161,7 @@ class SaveAndSubmitHraModel(
         val WellnessScore: String = ""
     )
 
-    data class  HRASummaryReport(
+    data class HRASummaryReport(
         @SerializedName("AssessmentsInProgress")
         @Expose
         val AssessmentsInProgress: List<Any> = listOf(),

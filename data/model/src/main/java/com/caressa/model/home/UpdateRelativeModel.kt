@@ -7,16 +7,18 @@ import com.google.gson.annotations.SerializedName
 class UpdateRelativeModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(Header(authTicket = authToken)) {
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     //************************Request************************
     data class JSONDataRequest(
 /*        @SerializedName("Message")
         val message: String = "" ,*/
         @SerializedName("PersonID")
-        val personID: String = "" ,
+        val personID: String = "",
         @SerializedName("Person")
-        val person: Person = Person())
+        val person: Person = Person()
+    )
 
     data class Person(
         @SerializedName("ID")
@@ -24,7 +26,7 @@ class UpdateRelativeModel(
         @SerializedName("FirstName")
         val firstName: String = "",
         @SerializedName("LastName")
-        val lastName: String = "" ,
+        val lastName: String = "",
         @SerializedName("DateOfBirth")
         val dateOfBirth: String = "",
         @SerializedName("Gender")

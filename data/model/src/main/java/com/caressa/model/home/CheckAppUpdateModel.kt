@@ -8,8 +8,8 @@ import com.google.gson.annotations.SerializedName
 class CheckAppUpdateModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(Header(authTicket = authToken))
-{
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("App")

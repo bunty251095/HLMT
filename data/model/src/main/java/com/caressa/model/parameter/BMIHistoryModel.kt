@@ -5,10 +5,12 @@ import com.caressa.model.BaseRequest
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class BMIHistoryModel(@SerializedName("JSONData")
-                           @Expose
-                           private val jsonData: String,
-                           private val authToken: String): BaseRequest(Header(authTicket = authToken)) {
+data class BMIHistoryModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String,
+    private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("PersonID")
@@ -22,8 +24,9 @@ data class BMIHistoryModel(@SerializedName("JSONData")
         var numberOfReadings: String = "5"
     )
 
-    data class Response( @SerializedName("BMIHistory")
-                         val bMIHistory: List<BMIHistory> = listOf()
+    data class Response(
+        @SerializedName("BMIHistory")
+        val bMIHistory: List<BMIHistory> = listOf()
     )
 
     data class BMIHistory(

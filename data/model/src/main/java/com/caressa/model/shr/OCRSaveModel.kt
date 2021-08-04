@@ -7,7 +7,8 @@ import com.google.gson.annotations.SerializedName
 class OCRSaveModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(  Header(authTicket = authToken) ) {
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("LabRecords")
@@ -31,6 +32,6 @@ class OCRSaveModel(
 
     data class OCRSaveResponse(
         @SerializedName("IsExist")
-        val isSaved : Boolean = false
+        val isSaved: Boolean = false
     )
 }

@@ -4,10 +4,12 @@ import com.caressa.model.BaseRequest
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class ParameterPreferenceModel(@SerializedName("JSONData")
-                     @Expose
-                     private val jsonData: String,
-                     private val authToken: String): BaseRequest(Header(authTicket = authToken)) {
+data class ParameterPreferenceModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String,
+    private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
 
     data class JSONDataRequest(
@@ -22,8 +24,9 @@ data class ParameterPreferenceModel(@SerializedName("JSONData")
         var message: String = ""
     )
 
-    data class Response(@SerializedName("Records")
-                        val records: List<Record> = listOf()
+    data class Response(
+        @SerializedName("Records")
+        val records: List<Record> = listOf()
     )
 
     data class Record(

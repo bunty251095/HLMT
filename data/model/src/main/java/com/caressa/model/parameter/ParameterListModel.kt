@@ -9,7 +9,7 @@ data class ParameterListModel(
     @Expose
     private val jsonData: String,
     private val authToken: String
-): BaseRequest(Header(authTicket = authToken)) {
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("from")
@@ -95,15 +95,15 @@ data class ParameterListModel(
     )
 
     data class InputParameterModel(
-        var parameterCode: String?="",
-        var parameterType: String?="",
-        var description: String?="",
-        var profileCode: String?="",
-        var profileName: String?="",
-        var parameterUnit: String?="",
-        var minPermissibleValue: String?="",
-        var maxPermissibleValue: String?="",
-        var parameterTextVal: String? ="",
+        var parameterCode: String? = "",
+        var parameterType: String? = "",
+        var description: String? = "",
+        var profileCode: String? = "",
+        var profileName: String? = "",
+        var parameterUnit: String? = "",
+        var minPermissibleValue: String? = "",
+        var maxPermissibleValue: String? = "",
+        var parameterTextVal: String? = "",
         var parameterVal: String? = ""
     )
 

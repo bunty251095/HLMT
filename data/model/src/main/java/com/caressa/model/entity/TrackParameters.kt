@@ -4,8 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity( tableName = "TrackParameters")
-data class TrackParameters (
+@Entity(tableName = "TrackParameters")
+data class TrackParameters(
     @PrimaryKey
     @SerializedName("ProfileCode")
     var ProfileCode: String = "",

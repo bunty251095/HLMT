@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
@@ -41,9 +39,9 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lbl_title"
+                style="@style/VivantTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/VivantTitle"
                 android:layout_margin="@dimen/_15sdp"
                 android:text=""
                 android:textSize="@dimen/_16sdp"
@@ -57,9 +55,9 @@
                 android:layout_margin="@dimen/_5sdp"
                 android:text=""
                 android:textSize="@dimen/_12sdp"
-                app:layout_constraintTop_toBottomOf="@+id/lbl_title"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_title" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_select"
@@ -76,11 +74,11 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_left"
+                    style="@style/ToolsButton"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_40sdp"
                     android:background="@drawable/btn_fill_dialog"
                     android:text=""
-                    style="@style/ToolsButton"
                     android:textColor="@color/selector_toggle_text_color"
                     android:textSize="@dimen/_15sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -91,10 +89,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_right"
+                    style="@style/ToolsButton"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_40sdp"
                     android:background="@color/transparent"
-                    style="@style/ToolsButton"
                     android:text=""
                     android:textColor="@color/selector_toggle_text_color"
                     android:textSize="@dimen/_15sdp"
@@ -131,7 +129,7 @@
                         android:layout_marginEnd="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_unit1"
@@ -144,7 +142,7 @@
                         android:textSize="@dimen/_15sdp"
                         app:layout_constraintBottom_toBottomOf="@+id/picker1"
                         app:layout_constraintStart_toEndOf="@+id/picker1"
-                        app:layout_constraintTop_toTopOf="@+id/picker1"/>
+                        app:layout_constraintTop_toTopOf="@+id/picker1" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -179,7 +177,7 @@
                         android:textSize="@dimen/_15sdp"
                         app:layout_constraintBottom_toBottomOf="@+id/picker2"
                         app:layout_constraintStart_toEndOf="@+id/picker2"
-                        app:layout_constraintTop_toTopOf="@+id/picker2"/>
+                        app:layout_constraintTop_toTopOf="@+id/picker2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -188,7 +186,6 @@
             <com.caressa.common.view.ArcButton
                 android:id="@+id/btn_save"
                 style="@style/CustomButton"
-                app:isTemplate="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -196,6 +193,7 @@
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginBottom="@dimen/_16sdp"
                 android:text="@string/SAVE"
+                app:isTemplate="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/llt_picker_container"
                 app:layout_constraintStart_toStartOf="@+id/llt_picker_container"
@@ -217,8 +215,8 @@
         android:backgroundTint="@color/white"
         android:elevation="@dimen/_3sdp"
         android:padding="@dimen/_4sdp"
-        app:srcCompat="@drawable/ic_close"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

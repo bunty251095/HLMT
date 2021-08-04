@@ -1,7 +1,7 @@
 package com.caressa.remote
 
 import com.caressa.common.constants.Constants
-import com.caressa.model.*
+import com.caressa.model.ApiResponse
 import com.caressa.model.blogs.BlogModel
 import com.caressa.model.entity.TrackParameterMaster
 import com.caressa.model.entity.Users
@@ -19,17 +19,15 @@ import kotlinx.coroutines.Deferred
 import okhttp3.RequestBody
 import retrofit2.http.*
 import retrofit2.http.Body
-import retrofit2.http.GET
 
 
-
-interface ApiService{
+interface ApiService {
 
     /**
      * Security Module Api Calls
      */
     @POST(Constants.strProxyLoginUrl)
-    fun loginDocumentProxyAPI(@Query("Data") loginEncryptedQuery: String) : Deferred<ApiResponse<Users>>
+    fun loginDocumentProxyAPI(@Query("Data") loginEncryptedQuery: String): Deferred<ApiResponse<Users>>
 
     @POST(Constants.strProxyRegistrationUrl)
     fun registerDocumentProxyAPI(@Query("Data") registerEncryptedQuery: String): Deferred<ApiResponse<Users>>
@@ -99,6 +97,7 @@ interface ApiService{
 
     @POST(Constants.MEDICATION_GET_MEDICINE_IN_TAKE_API)
     fun fetchMedicationInTakeByScheduleID(@Body medicineDetails: MedicineInTakeModel): Deferred<BaseResponse<MedicineInTakeModel.MedicineDetailsResponse>>
+
     /**
      * Parameter Module Api Calls
      */
@@ -113,13 +112,13 @@ interface ApiService{
     fun getParameterPreferences(@Body request: ParameterPreferenceModel): Deferred<BaseResponse<ParameterPreferenceModel.Response>>
 
     @POST("phr/api/BMI/ListHistory")
-    fun getBMIHistory(@Body request: BMIHistoryModel):Deferred<BaseResponse<BMIHistoryModel.Response>>
+    fun getBMIHistory(@Body request: BMIHistoryModel): Deferred<BaseResponse<BMIHistoryModel.Response>>
 
     @POST("phr/api/WHR/ListHistory")
-    fun getWHRHistory(@Body request: WHRHistoryModel):Deferred<BaseResponse<WHRHistoryModel.Response>>
+    fun getWHRHistory(@Body request: WHRHistoryModel): Deferred<BaseResponse<WHRHistoryModel.Response>>
 
     @POST("phr/api/BloodPressure/ListHistory")
-    fun getBloodPressureHistory(@Body request: BloodPressureHistoryModel):Deferred<BaseResponse<BloodPressureHistoryModel.Response>>
+    fun getBloodPressureHistory(@Body request: BloodPressureHistoryModel): Deferred<BaseResponse<BloodPressureHistoryModel.Response>>
 
     @POST("PHR/api/LabRecord/SaveParameterTrackingPreference")
     fun saveParameterTrackingPreferences()
@@ -132,7 +131,6 @@ interface ApiService{
 
     @POST("phr/api/BMI/Synchronize")
     fun saveBmiRecord()
-
 
 
     /**
@@ -157,7 +155,7 @@ interface ApiService{
 
     //  ****************HRA Module Api Calls ****************
     @POST(Constants.HRA_START_API)
-    fun hraStartAPI(@Body hraStartModel : HraStartModel): Deferred<BaseResponse<HraStartModel.HraStartResponse>>
+    fun hraStartAPI(@Body hraStartModel: HraStartModel): Deferred<BaseResponse<HraStartModel.HraStartResponse>>
 
     @POST(Constants.BMI_EXIST_API)
     fun checkBMIExistAPI(@Body bmiExistModel: BMIExistModel): Deferred<BaseResponse<BMIExistModel.BMIExistResponse>>
@@ -209,9 +207,11 @@ interface ApiService{
 
     @Multipart
     @POST(Constants.SHR_OCR_EXTRACT_DOCUMENT)
-    fun ocrDigitizeDocument(@Part("FileBytes") fileBytes: RequestBody,
-                            @Part("PartnerCode") partnerCode: RequestBody,
-                            @Part("FileExtension") fileExtension: RequestBody): Deferred<BaseResponse<OcrResponce>>
+    fun ocrDigitizeDocument(
+        @Part("FileBytes") fileBytes: RequestBody,
+        @Part("PartnerCode") partnerCode: RequestBody,
+        @Part("FileExtension") fileExtension: RequestBody
+    ): Deferred<BaseResponse<OcrResponce>>
     //  ****************SHR Module Api Calls ****************
 
     //  ****************Tools Calculators Module Api Calls ****************
@@ -266,7 +266,8 @@ interface ApiService{
         @Part("FileName") fileName: RequestBody,
         @Part("DocumentTypeCode") documentTypeCode: RequestBody,
         @Part("ByteArray") byteArray: RequestBody,
-        @Part("AuthTicket") authTicket: RequestBody): Deferred<BaseResponse<UploadProfileImageResponce>>
+        @Part("AuthTicket") authTicket: RequestBody
+    ): Deferred<BaseResponse<UploadProfileImageResponce>>
 
     @POST(Constants.REMOVE_PROFILE_IMAGE_API)
     fun removeProfileImageApi(@Body request: RemoveProfileImageModel): Deferred<BaseResponse<RemoveProfileImageModel.RemoveProfileImageResponse>>
@@ -307,7 +308,7 @@ interface ApiService{
 /*    @GET
     fun downloadBlogs( @Url url: String): Deferred<BlogModel.BlogResponce>*/
     @GET
-    fun downloadBlogs( @Url url: String): Deferred<List<BlogModel.Blog>>
+    fun downloadBlogs(@Url url: String): Deferred<List<BlogModel.Blog>>
 /*    @GET
     fun downloadBlogs(@Url url: String): Call<ResponseBody>*/
     //  ****************Blogs Api Call ****************

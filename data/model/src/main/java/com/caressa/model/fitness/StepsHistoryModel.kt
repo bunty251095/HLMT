@@ -5,15 +5,18 @@ import com.caressa.model.entity.FitnessEntity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class StepsHistoryModel(@SerializedName("JSONData")
-                        @Expose
-                        private val jsonData: String,
-                        private val authToken: String): BaseRequest(Header(authTicket = authToken.toString())) {
+class StepsHistoryModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String,
+    private val authToken: String
+) : BaseRequest(Header(authTicket = authToken.toString())) {
 
-    data class JSONDataRequest(@SerializedName("Message")
-                               val message: String,
-                               @SerializedName("SearchCriteria")
-                               val searchCriteria: SearchCriteria
+    data class JSONDataRequest(
+        @SerializedName("Message")
+        val message: String,
+        @SerializedName("SearchCriteria")
+        val searchCriteria: SearchCriteria
     )
 
     data class SearchCriteria(

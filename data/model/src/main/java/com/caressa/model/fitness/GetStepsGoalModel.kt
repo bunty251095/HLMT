@@ -4,13 +4,16 @@ import com.caressa.model.BaseRequest
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class GetStepsGoalModel(@SerializedName("JSONData")
-                        @Expose
-                        private val jsonData: String,
-                        private val authToken: String): BaseRequest(Header(authTicket = authToken.toString())) {
+class GetStepsGoalModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String,
+    private val authToken: String
+) : BaseRequest(Header(authTicket = authToken.toString())) {
 
-    data class JSONDataRequest(@SerializedName("PersonID")
-                               val personID: String
+    data class JSONDataRequest(
+        @SerializedName("PersonID")
+        val personID: String
     )
 
     data class Response(

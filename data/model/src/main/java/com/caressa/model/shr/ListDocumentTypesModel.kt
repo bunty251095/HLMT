@@ -8,16 +8,17 @@ import com.google.gson.annotations.SerializedName
 class ListDocumentTypesModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(  Header(authTicket = authToken) ) {
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("from")
-        val from : String = "",
+        val from: String = "",
         @SerializedName("Message")
-        val message : String = ""
+        val message: String = ""
     )
 
-    data class  ListDocumentTypesResponse(
+    data class ListDocumentTypesResponse(
         @SerializedName("DocumentTypes")
         var documentTypes: List<DocumentType> = listOf()
     )

@@ -8,12 +8,13 @@ import com.google.gson.annotations.SerializedName
 class AddRelativeModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(Header(authTicket = authToken)) {
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     //************************Request************************
     data class JSONDataRequest(
         @SerializedName("PersonID")
-        val personID: String = "" ,
+        val personID: String = "",
 /*        @SerializedName("Message")
         val message: String = "",*/
         @SerializedName("Person")
@@ -22,13 +23,13 @@ class AddRelativeModel(
 
     data class Person(
         @SerializedName("RequestType")
-        val requestType: String = "POST" ,
+        val requestType: String = "POST",
         @SerializedName("FirstName")
         val firstName: String = "",
         @SerializedName("LastName")
         val lastName: String = "",
         @SerializedName("RelativeID")
-        val relativeID: String = "" ,
+        val relativeID: String = "",
         @SerializedName("DateOfBirth")
         val dateOfBirth: String = "",
         @SerializedName("Gender")
@@ -36,7 +37,7 @@ class AddRelativeModel(
         @SerializedName("isProfileImageChanges")
         val isProfileImageChanges: String = "",
         @SerializedName("Contact")
-        val contact: Contact = Contact() ,
+        val contact: Contact = Contact(),
         @SerializedName("ClusterAssociation")
         val clusterAssociation: List<ClusterAssociation> = listOf(ClusterAssociation()),
         @SerializedName("Relationships")
@@ -59,7 +60,7 @@ class AddRelativeModel(
 
     data class Relationship(
         @SerializedName("RelativeID")
-        val relativeID: String = "" ,
+        val relativeID: String = "",
         @SerializedName("RelationshipCode")
         val relationshipCode: String = ""
     )

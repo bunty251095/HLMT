@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
 import timber.log.Timber
-import java.lang.Exception
 import java.net.UnknownHostException
 import kotlin.coroutines.coroutineContext
 
@@ -22,15 +21,21 @@ abstract class NetworkDataBoundResource<ResultType, RequestType> {
         }
         CoroutineScope(coroutineContext).launch(supervisorJob) {
 
-                try {
-                    fetchFromNetwork()
-                }catch (e: UnknownHostException){
-                    Timber.e( "An error happened: $e")
-                    setValue(Resource.error(e,null,errorMessage = "Seems like you are offline. Please check your internet connection and try again."))
-                } catch (e: Exception) {
-                    Timber.e( "An error happened: $e")
-                    setValue(Resource.error(e, null,errorMessage = "Something went wrong."))
-                }
+            try {
+                fetchFromNetwork()
+            } catch (e: UnknownHostException) {
+                Timber.e("An error happened: $e")
+                setValue(
+                    Resource.error(
+                        e,
+                        null,
+                        errorMessage = "Seems like you are offline. Please check your internet connection and try again."
+                    )
+                )
+            } catch (e: Exception) {
+                Timber.e("An error happened: $e")
+                setValue(Resource.error(e, null, errorMessage = "Something went wrong."))
+            }
 
         }
         return this

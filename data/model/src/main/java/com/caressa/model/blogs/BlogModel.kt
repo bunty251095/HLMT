@@ -30,7 +30,7 @@ class BlogModel {
         @SerializedName("link")
         val link: String = "",
         @SerializedName("title")
-        val title: Title = Title() ,
+        val title: Title = Title(),
         @SerializedName("content")
         val content: Content = Content(),
         @SerializedName("excerpt")
@@ -54,7 +54,7 @@ class BlogModel {
         @SerializedName("categories")
         val categories: List<Int> = listOf(),
         @SerializedName("tags")
-        val tags: List<Any> = listOf() ,
+        val tags: List<Any> = listOf(),
         @SerializedName("_links")
         val links: Links = Links()
     )

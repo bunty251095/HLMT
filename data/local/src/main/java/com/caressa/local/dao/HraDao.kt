@@ -4,7 +4,10 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.caressa.model.entity.*
+import com.caressa.model.entity.HRALabDetails
+import com.caressa.model.entity.HRAQuestions
+import com.caressa.model.entity.HRASummary
+import com.caressa.model.entity.HRAVitalDetails
 
 @Dao
 interface HRADao {
@@ -14,19 +17,19 @@ interface HRADao {
     fun insertHraQuesResponse(hraQuestions: HRAQuestions)
 
     @Query("SELECT * FROM HRAQuesTable where QuestionCode = :questionCode")
-    fun getHRASaveDetailsWhereQuestionCode(questionCode: String) : List<HRAQuestions>
+    fun getHRASaveDetailsWhereQuestionCode(questionCode: String): List<HRAQuestions>
 
     @Query("SELECT * FROM HRAQuesTable where Code = :code")
-    fun getHRASaveDetailsWhereCode(code: String) : List<HRAQuestions>
+    fun getHRASaveDetailsWhereCode(code: String): List<HRAQuestions>
 
     @Query("SELECT * FROM HRAQuesTable Where TabName = :tabName ORDER BY Category DESC")
-    fun getHRASaveDetailsTabName( tabName : String) : List<HRAQuestions>
+    fun getHRASaveDetailsTabName(tabName: String): List<HRAQuestions>
 
     @Query("SELECT AnswerCode FROM HRAQuesTable where QuestionCode = :questionCode")
-    fun getHraSaveAnswerCode(questionCode: String) : String
+    fun getHraSaveAnswerCode(questionCode: String): String
 
     @Query("DELETE FROM HRAQuesTable WHERE QuestionCode=:questionCode")
-    fun deleteHRASaveWhereQuestionCode( questionCode: String )
+    fun deleteHRASaveWhereQuestionCode(questionCode: String)
 
     @Query("DELETE FROM HRAQuesTable")
     fun deleteHraQuesTable()
@@ -41,13 +44,13 @@ interface HRADao {
     fun getHraSaveVitalDetails(): List<HRAVitalDetails>
 
     @Query("DELETE FROM HRASaveVitalTable")
-    fun deleteHraVitalDetailsTable( )
+    fun deleteHraVitalDetailsTable()
 
     @Query("DELETE FROM HRASaveVitalTable WHERE VitalsKey =:vitalKey")
     fun deleteHraVitalDetailsWhereKey(vitalKey: String)
 
     @Query("DELETE  FROM HRASaveVitalTable WHERE VitalsKey IN ( :Height,:Weight,:BMI) ")
-    fun deleteHraVitalBmiDetails( Height : String , Weight : String , BMI : String )
+    fun deleteHraVitalBmiDetails(Height: String, Weight: String, BMI: String)
     // *****************************  HRASaveVitalTable  *****************************
 
 
@@ -59,10 +62,10 @@ interface HRADao {
     fun getHraSaveLabDetails(): List<HRALabDetails>
 
     @Query("SELECT LabValue  FROM HRASaveLabTable WHERE ParameterCode =:parameterCode")
-    fun getHRASaveLabValue( parameterCode : String ): String
+    fun getHRASaveLabValue(parameterCode: String): String
 
     @Query("DELETE FROM HRASaveLabTable WHERE ParameterCode =:parameterCode")
-    fun deleteHraLabDetailsWhereParameterCode( parameterCode : String )
+    fun deleteHraLabDetailsWhereParameterCode(parameterCode: String)
 
     @Query("DELETE FROM HRASaveLabTable")
     fun deleteHraLabDetailsTable()
@@ -74,10 +77,10 @@ interface HRADao {
     fun insertHRASummaryRecord(hraSummary: HRASummary)
 
     @Query("SELECT * FROM HRASummaryTable")
-    fun getHRASummary(  ): HRASummary
+    fun getHRASummary(): HRASummary
 
     @Query("SELECT * FROM HRASummaryTable WHERE PersonID = :personID")
-    fun getHRASummaryRecord( personID :String ): List<HRASummary>
+    fun getHRASummaryRecord(personID: String): List<HRASummary>
 
     @Query("DELETE FROM HRASummaryTable")
     fun deleteHRASummaryTable()

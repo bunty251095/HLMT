@@ -1,19 +1,18 @@
 package com.caressa.model.home
 
 import com.caressa.model.BaseRequest
-import com.caressa.model.shr.DownloadDocumentModel
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class ProfileImageModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(  Header(authTicket = authToken) )
-{
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("DocumentID")
-        val documentID : String = ""
+        val documentID: String = ""
     )
 
     data class ProfileImageResponse(

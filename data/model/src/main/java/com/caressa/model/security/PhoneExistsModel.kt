@@ -4,9 +4,11 @@ import com.caressa.model.BaseRequest
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class PhoneExistsModel(@SerializedName("JSONData")
-                                   @Expose
-                                   private val jsonData: String) : BaseRequest(
+data class PhoneExistsModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String
+) : BaseRequest(
     Header(
         authTicket = ""
     )

@@ -3,11 +3,10 @@ package com.caressa.model.shr
 import com.google.gson.annotations.SerializedName
 
 
-
-    data class OCR(
-        @SerializedName("jsonData")
-        val jsonData: String = ""
-    )
+data class OCR(
+    @SerializedName("jsonData")
+    val jsonData: String = ""
+)
 
 data class OcrResponce(
     @SerializedName("statusCode")

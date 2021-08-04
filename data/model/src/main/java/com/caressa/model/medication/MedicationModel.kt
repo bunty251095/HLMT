@@ -2,7 +2,7 @@ package com.caressa.model.medication
 
 import com.google.gson.annotations.SerializedName
 
- class MedicationModel {
+class MedicationModel {
 
     data class Medication(
         @SerializedName("ID")

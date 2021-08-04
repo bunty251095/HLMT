@@ -5,9 +5,11 @@ import com.caressa.model.tempconst.Configuration
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class LoginModel(@SerializedName("JSONData")
-                      @Expose
-                      private val jsonData: String) : BaseRequest(Header(authTicket = "")) {
+data class LoginModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String
+) : BaseRequest(Header(authTicket = "")) {
 
     data class JSONDataRequest(
         @SerializedName("Mode")
@@ -48,11 +50,11 @@ data class LoginModel(@SerializedName("JSONData")
         private val employeeID: String = "",
         @SerializedName("HLMTUserID ")
         @Expose
-        private val hlmtUserID : String = "",
+        private val hlmtUserID: String = "",
         @SerializedName("HLMTLoginStatus")
         @Expose
         private val hlmtLoginStatus: String = "",
-        )
+    )
 
 
     data class Response(
@@ -87,7 +89,7 @@ data class LoginModel(@SerializedName("JSONData")
         @SerializedName("LastName")
         var lastName: String = "",
         @SerializedName("IsActive")
-        var isActive: Boolean =false,
+        var isActive: Boolean = false,
         @SerializedName("Age")
         var age: Int = 0,
         @SerializedName("PartnerID")
@@ -109,7 +111,7 @@ data class LoginModel(@SerializedName("JSONData")
         @SerializedName("DialingCode")
         var dialingCode: String = "",
         @SerializedName("IsAuthenticated")
-        var isAuthenticated: Boolean =false,
+        var isAuthenticated: Boolean = false,
         @SerializedName("PATH")
         var pATH: String = "",
         @SerializedName("PROFILE_IMG_PATH")

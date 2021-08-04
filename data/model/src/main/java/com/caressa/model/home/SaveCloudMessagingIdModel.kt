@@ -5,10 +5,12 @@ import com.caressa.model.tempconst.Configuration
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class SaveCloudMessagingIdModel(@SerializedName("JSONData")
-                                @Expose
-                                private val jsonData: String,
-                                private val authToken: String) : BaseRequest(Header(authTicket = authToken)) {
+class SaveCloudMessagingIdModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String,
+    private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
 
     data class JSONDataRequest(

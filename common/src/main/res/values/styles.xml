@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="NewApi">
 
     <!-- Base core.application theme. -->
-<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+    <!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -128,7 +128,7 @@
         <item name="android:textSize">@dimen/_12sdp</item>
         <item name="android:fontFamily">@font/dax_font</item>
         <item name="backgroundTint">@color/selector_edit_text_color</item>
-<!--        <item name="colorControlHighlight">@color/vivant_green_blue_two</item>-->
+        <!--        <item name="colorControlHighlight">@color/vivant_green_blue_two</item>-->
         <item name="colorControlActivated">@color/vivant_green_blue_two</item>
         <item name="colorControlNormal">@color/vivant_pale_grey</item>
     </style>
@@ -137,7 +137,7 @@
         <item name="android:fontFamily">@font/dax_font</item>
         <item name="boxStrokeColor">@color/selector_edit_text_color</item>
         <item name="backgroundTint">@color/selector_edit_text_color</item>
-<!--        <item name="colorControlHighlight">@color/vivant_green_blue_two</item>-->
+        <!--        <item name="colorControlHighlight">@color/vivant_green_blue_two</item>-->
         <item name="colorControlActivated">@color/colorAccent</item>
         <item name="colorControlNormal">@color/vivant_pale_grey</item>
         <item name="errorTextAppearance">@style/errorTextAppearance</item>
@@ -203,7 +203,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/dax_font</item>
         <item name="backgroundTint">@color/vivant_pale_grey</item>
-<!--        <item name="android:textColor">@color/vivant_charcoal_grey</item>-->
+        <!--        <item name="android:textColor">@color/vivant_charcoal_grey</item>-->
     </style>
 
     <style name="VivantButtonRight">
@@ -242,11 +242,11 @@
     <!--NEW STYLES-->
 
     <style name="CustomEditTextInput">
-<!--        <item name="android:theme">@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox</item>-->
+        <!--        <item name="android:theme">@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox</item>-->
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-<!--        <item name="boxBackgroundColor">@color/selector_text_color</item>-->
-<!--        <item name="android:layout_marginTop">@dimen/_12sdp</item>-->
+        <!--        <item name="boxBackgroundColor">@color/selector_text_color</item>-->
+        <!--        <item name="android:layout_marginTop">@dimen/_12sdp</item>-->
         <item name="android:layout_marginStart">@dimen/_10sdp</item>
         <item name="android:layout_marginEnd">@dimen/_10sdp</item>
         <item name="boxCollapsedPaddingTop">0dp</item>
@@ -355,41 +355,41 @@
         <item name="android:layout_marginBottom">@dimen/_5sdp</item>
     </style>
 
-<!--    <style name="CustomButtonLeft">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingLeft">@dimen/_5sdp</item>
-        <item name="android:paddingRight">@dimen/_5sdp</item>
-        <item name="android:layout_marginLeft">@dimen/_5sdp</item>
-        <item name="android:layout_marginRight">@dimen/_5sdp</item>
-        <item name="android:layout_marginTop">@dimen/_5sdp</item>
-        <item name="android:layout_marginBottom">@dimen/_5sdp</item>
-        <item name="android:background">@drawable/selector_border_button</item>
-        <item name="android:textSize">@dimen/_16sdp</item>
-        <item name="android:textColor">@color/selector_text_color</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:fontFamily">@font/lato_font</item>
-    </style>
+    <!--    <style name="CustomButtonLeft">
+            <item name="android:layout_width">0dp</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:layout_weight">1</item>
+            <item name="android:gravity">center</item>
+            <item name="android:paddingLeft">@dimen/_5sdp</item>
+            <item name="android:paddingRight">@dimen/_5sdp</item>
+            <item name="android:layout_marginLeft">@dimen/_5sdp</item>
+            <item name="android:layout_marginRight">@dimen/_5sdp</item>
+            <item name="android:layout_marginTop">@dimen/_5sdp</item>
+            <item name="android:layout_marginBottom">@dimen/_5sdp</item>
+            <item name="android:background">@drawable/selector_border_button</item>
+            <item name="android:textSize">@dimen/_16sdp</item>
+            <item name="android:textColor">@color/selector_text_color</item>
+            <item name="android:textAllCaps">false</item>
+            <item name="android:fontFamily">@font/lato_font</item>
+        </style>
 
-    <style name="CustomButtonRight">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingLeft">@dimen/_5sdp</item>
-        <item name="android:paddingRight">@dimen/_5sdp</item>
-        <item name="android:layout_marginLeft">@dimen/_5sdp</item>
-        <item name="android:layout_marginRight">@dimen/_5sdp</item>
-        <item name="android:layout_marginTop">@dimen/_5sdp</item>
-        <item name="android:layout_marginBottom">@dimen/_5sdp</item>
-        <item name="android:background">@drawable/selector_border_button</item>
-        <item name="android:textSize">@dimen/_16sdp</item>
-        <item name="android:textColor">@color/selector_text_color</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:fontFamily">@font/lato_font</item>
-    </style>-->
+        <style name="CustomButtonRight">
+            <item name="android:layout_width">0dp</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:layout_weight">1</item>
+            <item name="android:gravity">center</item>
+            <item name="android:paddingLeft">@dimen/_5sdp</item>
+            <item name="android:paddingRight">@dimen/_5sdp</item>
+            <item name="android:layout_marginLeft">@dimen/_5sdp</item>
+            <item name="android:layout_marginRight">@dimen/_5sdp</item>
+            <item name="android:layout_marginTop">@dimen/_5sdp</item>
+            <item name="android:layout_marginBottom">@dimen/_5sdp</item>
+            <item name="android:background">@drawable/selector_border_button</item>
+            <item name="android:textSize">@dimen/_16sdp</item>
+            <item name="android:textColor">@color/selector_text_color</item>
+            <item name="android:textAllCaps">false</item>
+            <item name="android:fontFamily">@font/lato_font</item>
+        </style>-->
 
     <style name="CustomButtonGreenLeft">
         <item name="android:layout_width">0dp</item>
@@ -546,9 +546,9 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:padding">@dimen/_7sdp</item>
         <item name="android:fontFamily">@font/dax_font</item>
-<!--        <item name="android:drawableEnd">@drawable/ic_close</item>
-        <item name="android:drawablePadding">@dimen/_4sdp</item>
-        <item name="android:drawableTint">@color/vivant_greyish</item>-->
+        <!--        <item name="android:drawableEnd">@drawable/ic_close</item>
+                <item name="android:drawablePadding">@dimen/_4sdp</item>
+                <item name="android:drawableTint">@color/vivant_greyish</item>-->
     </style>
 
     <style name="TimePickerTheme" parent="Theme.AppCompat.Light.Dialog">
@@ -588,7 +588,7 @@
     </style>
 
     <style name="datePickerSpinner" parent="android:Widget.Material.Light.DatePicker">
-<!--        <item name="android:selectionDivider">@color/colorPrimary</item>-->
+        <!--        <item name="android:selectionDivider">@color/colorPrimary</item>-->
         <item name="android:divider">@color/colorPrimary</item>
     </style>
 

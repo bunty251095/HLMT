@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import com.caressa.common.constants.ApiConstants
-import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.DateHelper
-import com.caressa.common.utils.Utilities
 import com.caressa.local.dao.DataSyncMasterDao
 import com.caressa.local.dao.HRADao
 import com.caressa.local.dao.TrackParameterDao
@@ -22,43 +20,87 @@ import java.util.*
 
 interface HraRepository {
 
-    suspend fun startHra(forceRefresh: Boolean = false, data: HraStartModel,relativeId: String) : LiveData<Resource<HraStartModel.HraStartResponse>>
-    suspend fun isBMIExist(forceRefresh: Boolean = false, data: BMIExistModel) : LiveData<Resource<BMIExistModel.BMIExistResponse>>
-    suspend fun isBPExist(forceRefresh: Boolean = false, data: BPExistModel) : LiveData<Resource<BPExistModel.BPExistResponse>>
-    suspend fun getLabRecords(forceRefresh: Boolean = false, data: LabRecordsModel) : LiveData<Resource<LabRecordsModel.LabRecordsExistResponse>>
-    suspend fun saveAndSubmitHRA( forceRefresh: Boolean = false, data: SaveAndSubmitHraModel) : LiveData<Resource<SaveAndSubmitHraModel.SaveAndSubmitHraResponse>>
-    suspend fun getMedicalProfileSummary(forceRefresh: Boolean = false, data: HraMedicalProfileSummaryModel,personId:String) : LiveData<Resource<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse>>
-    suspend fun getAssessmentSummary(forceRefresh: Boolean = false, data: HraAssessmentSummaryModel) : LiveData<Resource<HraAssessmentSummaryModel.AssessmentSummaryResponce>>
-    suspend fun getListRecommendedTests(forceRefresh: Boolean = false, data: HraListRecommendedTestsModel) : LiveData<Resource<HraListRecommendedTestsModel.ListRecommendedTestsResponce>>
-    suspend fun getHRAHistory(data: HraHistoryModel) : LiveData<Resource<HraHistoryModel.HRAHistoryResponse>>
+    suspend fun startHra(
+        forceRefresh: Boolean = false,
+        data: HraStartModel,
+        relativeId: String
+    ): LiveData<Resource<HraStartModel.HraStartResponse>>
 
-    suspend fun saveResponse(response : ArrayList<HRAQuestions> )
-    suspend fun saveHRALabValue( hraLabValues : HRALabDetails )
-    suspend fun saveVitalDetailsToDb( hraVitalDetails : ArrayList<HRAVitalDetails>)
+    suspend fun isBMIExist(
+        forceRefresh: Boolean = false,
+        data: BMIExistModel
+    ): LiveData<Resource<BMIExistModel.BMIExistResponse>>
 
-    suspend fun getLabDetails() : List<HRALabDetails>
-    suspend fun getVitalDetails() : List<HRAVitalDetails>
-    suspend fun getSavedResponse( questionCode : String ) : String
-    suspend fun getHRASavedDetailsWithQuestionCode(code: String) : List<HRAQuestions>
-    suspend fun getHRASavedDetailsWithCode(code: String) : List<HRAQuestions>
-    suspend fun getSavedDetailsTabNameByCategory( tabName : String) : List<HRAQuestions>
-    suspend fun getHraSummaryDetails() : HRASummary
+    suspend fun isBPExist(
+        forceRefresh: Boolean = false,
+        data: BPExistModel
+    ): LiveData<Resource<BPExistModel.BPExistResponse>>
 
-    suspend fun getParameterDataByProfileCode(profileCode: String) : List<TrackParameterMaster.Parameter>
+    suspend fun getLabRecords(
+        forceRefresh: Boolean = false,
+        data: LabRecordsModel
+    ): LiveData<Resource<LabRecordsModel.LabRecordsExistResponse>>
 
-    suspend fun clearQuestionResponse(quesCode : String)
-    suspend fun clearHRALabValue( parameterCode : String )
+    suspend fun saveAndSubmitHRA(
+        forceRefresh: Boolean = false,
+        data: SaveAndSubmitHraModel
+    ): LiveData<Resource<SaveAndSubmitHraModel.SaveAndSubmitHraResponse>>
+
+    suspend fun getMedicalProfileSummary(
+        forceRefresh: Boolean = false,
+        data: HraMedicalProfileSummaryModel,
+        personId: String
+    ): LiveData<Resource<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse>>
+
+    suspend fun getAssessmentSummary(
+        forceRefresh: Boolean = false,
+        data: HraAssessmentSummaryModel
+    ): LiveData<Resource<HraAssessmentSummaryModel.AssessmentSummaryResponce>>
+
+    suspend fun getListRecommendedTests(
+        forceRefresh: Boolean = false,
+        data: HraListRecommendedTestsModel
+    ): LiveData<Resource<HraListRecommendedTestsModel.ListRecommendedTestsResponce>>
+
+    suspend fun getHRAHistory(data: HraHistoryModel): LiveData<Resource<HraHistoryModel.HRAHistoryResponse>>
+
+    suspend fun saveResponse(response: ArrayList<HRAQuestions>)
+    suspend fun saveHRALabValue(hraLabValues: HRALabDetails)
+    suspend fun saveVitalDetailsToDb(hraVitalDetails: ArrayList<HRAVitalDetails>)
+
+    suspend fun getLabDetails(): List<HRALabDetails>
+    suspend fun getVitalDetails(): List<HRAVitalDetails>
+    suspend fun getSavedResponse(questionCode: String): String
+    suspend fun getHRASavedDetailsWithQuestionCode(code: String): List<HRAQuestions>
+    suspend fun getHRASavedDetailsWithCode(code: String): List<HRAQuestions>
+    suspend fun getSavedDetailsTabNameByCategory(tabName: String): List<HRAQuestions>
+    suspend fun getHraSummaryDetails(): HRASummary
+
+    suspend fun getParameterDataByProfileCode(profileCode: String): List<TrackParameterMaster.Parameter>
+
+    suspend fun clearQuestionResponse(quesCode: String)
+    suspend fun clearHRALabValue(parameterCode: String)
     suspend fun clearHraQuestionsTable()
     suspend fun clearHraDataTables()
     suspend fun logoutUser()
 }
 
-class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDao : HRADao,private val paramDao : TrackParameterDao,
-                        private val dataSyncMasterDao: DataSyncMasterDao, sharedPref: SharedPreferences) : HraRepository {
+class HraRepositoryImpl(
+    private val dataSource: HraDatasource,
+    private val hraDao: HRADao,
+    private val paramDao: TrackParameterDao,
+    private val dataSyncMasterDao: DataSyncMasterDao,
+    sharedPref: SharedPreferences
+) : HraRepository {
 
-    override suspend fun startHra(forceRefresh: Boolean, data: HraStartModel,relativeId: String): LiveData<Resource<HraStartModel.HraStartResponse>> {
+    override suspend fun startHra(
+        forceRefresh: Boolean,
+        data: HraStartModel,
+        relativeId: String
+    ): LiveData<Resource<HraStartModel.HraStartResponse>> {
 
-        return object : NetworkBoundResource<HraStartModel.HraStartResponse,BaseResponse<HraStartModel.HraStartResponse>>() {
+        return object :
+            NetworkBoundResource<HraStartModel.HraStartResponse, BaseResponse<HraStartModel.HraStartResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -74,18 +116,22 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
                 return response.jSONData
             }
 
-            override suspend fun saveCallResults(items: HraStartModel.HraStartResponse) { }
+            override suspend fun saveCallResults(items: HraStartModel.HraStartResponse) {}
 
             override fun shouldFetch(data: HraStartModel.HraStartResponse?): Boolean {
-               return true
+                return true
             }
 
         }.build().asLiveData()
     }
 
-    override suspend fun isBMIExist(forceRefresh: Boolean, data: BMIExistModel): LiveData<Resource<BMIExistModel.BMIExistResponse>> {
+    override suspend fun isBMIExist(
+        forceRefresh: Boolean,
+        data: BMIExistModel
+    ): LiveData<Resource<BMIExistModel.BMIExistResponse>> {
 
-        return  object  : NetworkBoundResource<BMIExistModel.BMIExistResponse, BaseResponse<BMIExistModel.BMIExistResponse>>() {
+        return object :
+            NetworkBoundResource<BMIExistModel.BMIExistResponse, BaseResponse<BMIExistModel.BMIExistResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -101,7 +147,7 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
                 return response.jSONData
             }
 
-            override suspend fun saveCallResults(items: BMIExistModel.BMIExistResponse) { }
+            override suspend fun saveCallResults(items: BMIExistModel.BMIExistResponse) {}
 
             override fun shouldFetch(data: BMIExistModel.BMIExistResponse?): Boolean {
                 return true
@@ -110,25 +156,29 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
         }.build().asLiveData()
     }
 
-    override suspend fun isBPExist(forceRefresh: Boolean, data: BPExistModel): LiveData<Resource<BPExistModel.BPExistResponse>> {
+    override suspend fun isBPExist(
+        forceRefresh: Boolean,
+        data: BPExistModel
+    ): LiveData<Resource<BPExistModel.BPExistResponse>> {
 
-        return object :NetworkBoundResource<BPExistModel.BPExistResponse, BaseResponse<BPExistModel.BPExistResponse>>() {
+        return object :
+            NetworkBoundResource<BPExistModel.BPExistResponse, BaseResponse<BPExistModel.BPExistResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
             override suspend fun loadFromDb(): BPExistModel.BPExistResponse {
-                return  BPExistModel.BPExistResponse()
+                return BPExistModel.BPExistResponse()
             }
 
             override fun createCallAsync(): Deferred<BaseResponse<BPExistModel.BPExistResponse>> {
-                return   dataSource.getBPExistResponse(data)
+                return dataSource.getBPExistResponse(data)
             }
 
             override fun processResponse(response: BaseResponse<BPExistModel.BPExistResponse>): BPExistModel.BPExistResponse {
                 return response.jSONData
             }
 
-            override suspend fun saveCallResults(items: BPExistModel.BPExistResponse) { }
+            override suspend fun saveCallResults(items: BPExistModel.BPExistResponse) {}
 
             override fun shouldFetch(data: BPExistModel.BPExistResponse?): Boolean {
                 return true
@@ -137,9 +187,13 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
         }.build().asLiveData()
     }
 
-    override suspend fun getLabRecords(forceRefresh: Boolean, data: LabRecordsModel): LiveData<Resource<LabRecordsModel.LabRecordsExistResponse>> {
+    override suspend fun getLabRecords(
+        forceRefresh: Boolean,
+        data: LabRecordsModel
+    ): LiveData<Resource<LabRecordsModel.LabRecordsExistResponse>> {
 
-        return object : NetworkBoundResource<LabRecordsModel.LabRecordsExistResponse,BaseResponse<LabRecordsModel.LabRecordsExistResponse>>() {
+        return object :
+            NetworkBoundResource<LabRecordsModel.LabRecordsExistResponse, BaseResponse<LabRecordsModel.LabRecordsExistResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -147,7 +201,7 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
                 return LabRecordsModel.LabRecordsExistResponse()
             }
 
-            override suspend fun saveCallResults(items: LabRecordsModel.LabRecordsExistResponse) { }
+            override suspend fun saveCallResults(items: LabRecordsModel.LabRecordsExistResponse) {}
 
             override fun createCallAsync(): Deferred<BaseResponse<LabRecordsModel.LabRecordsExistResponse>> {
                 return dataSource.getLabRecordsResponse(data)
@@ -164,10 +218,11 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
         }.build().asLiveData()
     }
 
-    override suspend fun saveAndSubmitHRA(forceRefresh: Boolean, data: SaveAndSubmitHraModel) :
+    override suspend fun saveAndSubmitHRA(forceRefresh: Boolean, data: SaveAndSubmitHraModel):
             LiveData<Resource<SaveAndSubmitHraModel.SaveAndSubmitHraResponse>> {
 
-        return object  : NetworkBoundResource<SaveAndSubmitHraModel.SaveAndSubmitHraResponse , BaseResponse<SaveAndSubmitHraModel.SaveAndSubmitHraResponse>>() {
+        return object :
+            NetworkBoundResource<SaveAndSubmitHraModel.SaveAndSubmitHraResponse, BaseResponse<SaveAndSubmitHraModel.SaveAndSubmitHraResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -183,7 +238,7 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
                 return response.jSONData
             }
 
-            override suspend fun saveCallResults(items: SaveAndSubmitHraModel.SaveAndSubmitHraResponse) { }
+            override suspend fun saveCallResults(items: SaveAndSubmitHraModel.SaveAndSubmitHraResponse) {}
 
             override fun shouldFetch(data: SaveAndSubmitHraModel.SaveAndSubmitHraResponse?): Boolean {
                 return true
@@ -192,10 +247,15 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
         }.build().asLiveData()
     }
 
-    override suspend fun getMedicalProfileSummary(forceRefresh: Boolean, data: HraMedicalProfileSummaryModel,personId:String) :
+    override suspend fun getMedicalProfileSummary(
+        forceRefresh: Boolean,
+        data: HraMedicalProfileSummaryModel,
+        personId: String
+    ):
             LiveData<Resource<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse>> {
 
-        return object  : NetworkBoundResource<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse,BaseResponse<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse>>() {
+        return object :
+            NetworkBoundResource<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse, BaseResponse<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -210,13 +270,17 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
             override suspend fun loadFromDb(): HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse {
                 val dbData = HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse()
                 dbData.MedicalProfileSummary = hraDao.getHRASummary()
-                return  dbData
+                return dbData
             }
 
             override suspend fun saveCallResults(items: HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse) {
                 hraDao.deleteHRASummaryTable()
-                hraDao.insertHRASummaryRecord( items.MedicalProfileSummary!! )
-                val dataSyc = DataSyncMaster(apiName = ApiConstants.MEDICAL_PROFILE_SUMMERY, syncDate = DateHelper.currentDateAsStringyyyyMMdd, personId = personId)
+                hraDao.insertHRASummaryRecord(items.MedicalProfileSummary!!)
+                val dataSyc = DataSyncMaster(
+                    apiName = ApiConstants.MEDICAL_PROFILE_SUMMERY,
+                    syncDate = DateHelper.currentDateAsStringyyyyMMdd,
+                    personId = personId
+                )
 //                if(dataSyncMasterDao.getLastSyncDataList().find { it.apiName == ApiConstants.MEDICAL_PROFILE_SUMMERY } == null)
                 dataSyncMasterDao.insertApiSyncData(dataSyc)
 //                else
@@ -231,10 +295,14 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
 
     }
 
-    override suspend fun getAssessmentSummary(forceRefresh: Boolean, data: HraAssessmentSummaryModel) :
+    override suspend fun getAssessmentSummary(
+        forceRefresh: Boolean,
+        data: HraAssessmentSummaryModel
+    ):
             LiveData<Resource<HraAssessmentSummaryModel.AssessmentSummaryResponce>> {
 
-        return object : NetworkBoundResource<HraAssessmentSummaryModel.AssessmentSummaryResponce,BaseResponse<HraAssessmentSummaryModel.AssessmentSummaryResponce>>(){
+        return object :
+            NetworkBoundResource<HraAssessmentSummaryModel.AssessmentSummaryResponce, BaseResponse<HraAssessmentSummaryModel.AssessmentSummaryResponce>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -250,7 +318,7 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
                 return response.jSONData
             }
 
-            override suspend fun saveCallResults(items: HraAssessmentSummaryModel.AssessmentSummaryResponce) { }
+            override suspend fun saveCallResults(items: HraAssessmentSummaryModel.AssessmentSummaryResponce) {}
 
             override fun shouldFetch(data: HraAssessmentSummaryModel.AssessmentSummaryResponce?): Boolean {
                 return true
@@ -260,10 +328,14 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
 
     }
 
-    override suspend fun getListRecommendedTests(forceRefresh: Boolean, data: HraListRecommendedTestsModel) :
+    override suspend fun getListRecommendedTests(
+        forceRefresh: Boolean,
+        data: HraListRecommendedTestsModel
+    ):
             LiveData<Resource<HraListRecommendedTestsModel.ListRecommendedTestsResponce>> {
 
-        return object :NetworkBoundResource<HraListRecommendedTestsModel.ListRecommendedTestsResponce,BaseResponse<HraListRecommendedTestsModel.ListRecommendedTestsResponce>>() {
+        return object :
+            NetworkBoundResource<HraListRecommendedTestsModel.ListRecommendedTestsResponce, BaseResponse<HraListRecommendedTestsModel.ListRecommendedTestsResponce>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -279,7 +351,7 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
                 return response.jSONData
             }
 
-            override suspend fun saveCallResults(items: HraListRecommendedTestsModel.ListRecommendedTestsResponce) { }
+            override suspend fun saveCallResults(items: HraListRecommendedTestsModel.ListRecommendedTestsResponce) {}
 
             override fun shouldFetch(data: HraListRecommendedTestsModel.ListRecommendedTestsResponce?): Boolean {
                 return true
@@ -290,11 +362,12 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
     }
 
     override suspend fun getHRAHistory(data: HraHistoryModel): LiveData<Resource<HraHistoryModel.HRAHistoryResponse>> {
-        return object : NetworkBoundResource<HraHistoryModel.HRAHistoryResponse, BaseResponse<HraHistoryModel.HRAHistoryResponse>>(){
+        return object :
+            NetworkBoundResource<HraHistoryModel.HRAHistoryResponse, BaseResponse<HraHistoryModel.HRAHistoryResponse>>() {
 
             @SuppressLint("BinaryOperationInTimber")
             override fun processResponse(response: BaseResponse<HraHistoryModel.HRAHistoryResponse>): HraHistoryModel.HRAHistoryResponse {
-                Timber.i("Inside processResponse :: "+response.jSONData)
+                Timber.i("Inside processResponse :: " + response.jSONData)
                 return response.jSONData
             }
 
@@ -317,7 +390,7 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
 
     override suspend fun saveResponse(response: ArrayList<HRAQuestions>) {
         for (i in response) {
-            hraDao.insertHraQuesResponse( i )
+            hraDao.insertHraQuesResponse(i)
         }
     }
 
@@ -325,9 +398,9 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
         hraDao.insertHraLabDetails(hraLabValues)
     }
 
-    override suspend fun saveVitalDetailsToDb( hraVitalDetails : ArrayList<HRAVitalDetails> ) {
+    override suspend fun saveVitalDetailsToDb(hraVitalDetails: ArrayList<HRAVitalDetails>) {
         for (i in hraVitalDetails) {
-            hraDao.insertHraVitalDetails( i )
+            hraDao.insertHraVitalDetails(i)
         }
     }
 
@@ -335,24 +408,24 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
         return hraDao.getHraSaveLabDetails()
     }
 
-    override suspend  fun getVitalDetails(): List<HRAVitalDetails> {
+    override suspend fun getVitalDetails(): List<HRAVitalDetails> {
         return hraDao.getHraSaveVitalDetails()
     }
 
-    override suspend fun getSavedResponse(questionCode: String) : String {
-        return hraDao.getHraSaveAnswerCode( questionCode )
+    override suspend fun getSavedResponse(questionCode: String): String {
+        return hraDao.getHraSaveAnswerCode(questionCode)
     }
 
-    override suspend fun getHRASavedDetailsWithQuestionCode(code: String) : List<HRAQuestions>  {
+    override suspend fun getHRASavedDetailsWithQuestionCode(code: String): List<HRAQuestions> {
         return hraDao.getHRASaveDetailsWhereQuestionCode(code)
     }
 
-    override suspend fun getHRASavedDetailsWithCode(code: String) : List<HRAQuestions>  {
+    override suspend fun getHRASavedDetailsWithCode(code: String): List<HRAQuestions> {
         return hraDao.getHRASaveDetailsWhereCode(code)
     }
 
     override suspend fun getSavedDetailsTabNameByCategory(tabName: String): List<HRAQuestions> {
-        return hraDao.getHRASaveDetailsTabName( tabName )
+        return hraDao.getHRASaveDetailsTabName(tabName)
     }
 
     override suspend fun getHraSummaryDetails(): HRASummary {
@@ -377,13 +450,13 @@ class HraRepositoryImpl(private val dataSource: HraDatasource, private val hraDa
 
     override suspend fun clearHraDataTables() {
         hraDao.deleteHraQuesTable()
-        hraDao.deleteHraVitalDetailsTable( )
+        hraDao.deleteHraVitalDetailsTable()
         hraDao.deleteHraLabDetailsTable()
     }
 
     override suspend fun logoutUser() {
         hraDao.deleteHraQuesTable()
-        hraDao.deleteHraVitalDetailsTable( )
+        hraDao.deleteHraVitalDetailsTable()
         hraDao.deleteHraLabDetailsTable()
         hraDao.deleteHRASummaryTable()
     }

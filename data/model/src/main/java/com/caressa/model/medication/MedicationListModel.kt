@@ -5,11 +5,12 @@ import com.caressa.model.entity.MedicationEntity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class MedicationListModel(@SerializedName("JSONData")
-                               @Expose
-                               private val jsonData: String,
-                               private val authToken: String): BaseRequest(Header(authTicket = authToken))
-{
+data class MedicationListModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String,
+    private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
     data class JSONDataRequest(
         @SerializedName("PersonID")
         @Expose
@@ -26,9 +27,11 @@ data class MedicationListModel(@SerializedName("JSONData")
 
     )
 
-    data class Response(@SerializedName("Medications")
-                        @Expose
-                        var medication:List<MedicationEntity.Medication> = listOf())
+    data class Response(
+        @SerializedName("Medications")
+        @Expose
+        var medication: List<MedicationEntity.Medication> = listOf()
+    )
 
     data class Medication(
         @SerializedName("Comments")

@@ -25,7 +25,7 @@ class UserRepositoryTest {
 
     @Before
     fun setUp() {
-        userRepository = UserRepositoryImpl(userService,vuserDao)
+        userRepository = UserRepositoryImpl(userService, vuserDao)
     }
 
 }

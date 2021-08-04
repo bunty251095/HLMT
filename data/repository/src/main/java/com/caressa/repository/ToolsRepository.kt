@@ -6,7 +6,8 @@ interface ToolsRepository {
 
 }
 
-class ToolsRepositoryImpl(private val datasource: ToolsDatasource
-): ToolsRepository {
+class ToolsRepositoryImpl(
+    private val datasource: ToolsDatasource
+) : ToolsRepository {
 
 }

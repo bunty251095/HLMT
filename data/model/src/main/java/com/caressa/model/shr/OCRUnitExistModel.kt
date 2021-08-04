@@ -7,17 +7,18 @@ import com.google.gson.annotations.SerializedName
 class OCRUnitExistModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(  Header(authTicket = authToken)) {
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("ParameterCode")
-        val parameterCode : String = "" ,
+        val parameterCode: String = "",
         @SerializedName("Unit")
-        val unit : String = ""
+        val unit: String = ""
     )
 
     data class OCRUnitExistResponse(
         @SerializedName("IsExist")
-        val isExist : Boolean = true
+        val isExist: Boolean = true
     )
 }

@@ -5,10 +5,12 @@ import com.caressa.model.BaseRequest
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class BloodPressureHistoryModel(@SerializedName("JSONData")
-                                     @Expose
-                                     private val jsonData: String,
-                                     private val authToken: String): BaseRequest(Header(authTicket = authToken)) {
+data class BloodPressureHistoryModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String,
+    private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("PersonID")
@@ -21,9 +23,12 @@ data class BloodPressureHistoryModel(@SerializedName("JSONData")
         @Expose
         var numberOfReadings: String = "5"
     )
-    data class Response( @SerializedName("BloodPressureHistory")
-                         val bloodPressureHistory: List<BloodPressureHistory> = listOf()
+
+    data class Response(
+        @SerializedName("BloodPressureHistory")
+        val bloodPressureHistory: List<BloodPressureHistory> = listOf()
     )
+
     data class BloodPressureHistory(
         @SerializedName("Systolic")
         val systolic: Int = 0,

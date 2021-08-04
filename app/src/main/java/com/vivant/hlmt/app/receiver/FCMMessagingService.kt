@@ -6,10 +6,9 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.media.RingtoneManager
 import android.os.Build
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -31,7 +30,7 @@ import org.koin.standalone.get
 import timber.log.Timber
 import java.util.*
 
-class FCMMessagingService : FirebaseMessagingService(),LifecycleOwner,KoinComponent {
+class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComponent {
 
     private val TAG = "FCMMessagingService : "
     private val medNotification = ReminderNotification()
@@ -51,14 +50,18 @@ class FCMMessagingService : FirebaseMessagingService(),LifecycleOwner,KoinCompon
         try {
             val data = remoteMessage.data
             Timber.i("onMessageReceived(FCMMessagingService): data =$data")
-            if ( viewModel.isUserLoggedIn() ) {
-                if (!Utilities.isNullOrEmpty(data.get("Screen")) && data.get("Screen").equals("MEDICATION_REMINDER", ignoreCase = true)) {
+            if (viewModel.isUserLoggedIn()) {
+                if (!Utilities.isNullOrEmpty(data.get("Screen")) && data.get("Screen")
+                        .equals("MEDICATION_REMINDER", ignoreCase = true)
+                ) {
                     showMedicineReminderNotification(data)
-                } else if (!Utilities.isNullOrEmpty(data.get("Action")) && data.get("Action").equals("HEALTHTIPS", ignoreCase = true)) {
-                showHealthTipNotification(this,data)
+                } else if (!Utilities.isNullOrEmpty(data.get("Action")) && data.get("Action")
+                        .equals("HEALTHTIPS", ignoreCase = true)
+                ) {
+                    showHealthTipNotification(this, data)
                 }
             }
-        } catch ( e:Exception ) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
@@ -68,7 +71,7 @@ class FCMMessagingService : FirebaseMessagingService(),LifecycleOwner,KoinCompon
             val screen = data.get("Screen")
             if (!Utilities.isNullOrEmpty(screen)) {
                 Timber.e("Screen--->$screen")
-                if (screen.equals("MEDICATION_REMINDER",ignoreCase = true)) {
+                if (screen.equals("MEDICATION_REMINDER", ignoreCase = true)) {
                     val details = JSONObject(data.get("Body")!!)
                     medNotification.action = "MEDICATION"
                     medNotification.personID = details.getString("PersonID")
@@ -78,17 +81,18 @@ class FCMMessagingService : FirebaseMessagingService(),LifecycleOwner,KoinCompon
                     medNotification.scheduleTime = details.getString("ScheduleTime")
                     medNotification.medicationID = details.getString("MedicationID")
                     medNotification.scheduleID = details.getString("ScheduleID")
-                    medNotification.notificationDate = details.getString("NotificationDate").split("T").toTypedArray()[0]
+                    medNotification.notificationDate =
+                        details.getString("NotificationDate").split("T").toTypedArray()[0]
                     // For Self and Family Member also
-                    viewModel.checkRelativeExistAndShowNotification( this,medNotification )
+                    viewModel.checkRelativeExistAndShowNotification(this, medNotification)
                 }
             }
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    fun showHealthTipNotification( context:Context,data:Map<String,String> ) {
+    fun showHealthTipNotification(context: Context, data: Map<String, String>) {
         try {
             val action = data["Action"]
             val title = data["title"]
@@ -101,7 +105,8 @@ class FCMMessagingService : FirebaseMessagingService(),LifecycleOwner,KoinCompon
             val NOTIFICATION_ID = (Date().time / 1000L % Int.MAX_VALUE).toInt()
             val CHANNEL_ID = "fcm_medication_channel"
 
-            val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
             // Create the NotificationChannel, but only on API 26+ because
             // the NotificationChannel class is new and not in the support library
@@ -123,20 +128,30 @@ class FCMMessagingService : FirebaseMessagingService(),LifecycleOwner,KoinCompon
             OnClick.putExtra(Constants.NOTIFICATION_MESSAGE, message)
             OnClick.setComponent(ComponentName(NavigationConstants.APPID, NavigationConstants.HOME))
             OnClick.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            if ( !Utilities.isNullOrEmpty(imageURL) ) {
-                OnClick.putExtra(Constants.NOTIFICATION_URL,imageURL )
+            if (!Utilities.isNullOrEmpty(imageURL)) {
+                OnClick.putExtra(Constants.NOTIFICATION_URL, imageURL)
             }
-            val pendingOnClickIntent = PendingIntent.getBroadcast(context,NOTIFICATION_ID,OnClick, PendingIntent.FLAG_UPDATE_CURRENT)
+            val pendingOnClickIntent = PendingIntent.getBroadcast(
+                context,
+                NOTIFICATION_ID,
+                OnClick,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
 
             val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
             val builder = NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.img_hlmt_logo_notification)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
-                .setLargeIcon(BitmapFactory.decodeResource(resources,R.drawable.img_hlmt_logo_notification))
+                .setLargeIcon(
+                    BitmapFactory.decodeResource(
+                        resources,
+                        R.drawable.img_hlmt_logo_notification
+                    )
+                )
                 .setContentTitle(title)
                 .setContentText(message)
-                .setStyle( NotificationCompat.BigTextStyle().bigText(message))
+                .setStyle(NotificationCompat.BigTextStyle().bigText(message))
                 .setAutoCancel(true)
                 .setSound(alarmSound)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -147,18 +162,18 @@ class FCMMessagingService : FirebaseMessagingService(),LifecycleOwner,KoinCompon
             Timber.e("displaying Notification")
             with(NotificationManagerCompat.from(this)) {
                 // notificationId is a unique int for each notification that you must define
-                notify(NOTIFICATION_ID,builder)
+                notify(NOTIFICATION_ID, builder)
             }
 
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    private fun sendRegistrationToServer( fcmToken:String ) {
+    private fun sendRegistrationToServer(fcmToken: String) {
         //viewModel2.refreshFcmToken(fcmToken)
-        if ( viewModel.isUserLoggedIn() ) {
-            backgroundApiCallviewModel.callSaveCloudMessagingIdApi(fcmToken,true)
+        if (viewModel.isUserLoggedIn()) {
+            backgroundApiCallviewModel.callSaveCloudMessagingIdApi(fcmToken, true)
         }
     }
 

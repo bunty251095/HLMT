@@ -7,7 +7,8 @@ import com.google.gson.annotations.SerializedName
 class LabRecordsModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(
     Header(
         authTicket = authToken
     )
@@ -16,13 +17,14 @@ class LabRecordsModel(
     data class JSONDataRequest(
         @SerializedName("PersonID")
         @Expose
-         val PersonID: String = ""
+        val PersonID: String = ""
     )
 
     data class LabRecordsExistResponse(
-    @SerializedName("LabRecords")
-    @Expose
-     val LabRecords: List<LabRecordDetails>? = listOf())
+        @SerializedName("LabRecords")
+        @Expose
+        val LabRecords: List<LabRecordDetails>? = listOf()
+    )
 
 /*    data class LabRecordsExistResponse(
         @SerializedName("LabRecords")
@@ -108,25 +110,25 @@ class LabRecordsModel(
     data class WellnessScore(
         @SerializedName("ProfileAttributeCode")
         @Expose
-        var ProfileAttributeCode: String? = "" ,
+        var ProfileAttributeCode: String? = "",
         @SerializedName("ValueCode")
         @Expose
-        var ValueCode: String? = "" ,
+        var ValueCode: String? = "",
         @SerializedName("MinValue")
         @Expose
-        var MinValue: String? = "" ,
+        var MinValue: String? = "",
         @SerializedName("MaxValue")
         @Expose
-        var MaxValue: String? = "" ,
+        var MaxValue: String? = "",
         @SerializedName("BaseScore")
         @Expose
-        var BaseScore: String? = "" ,
+        var BaseScore: String? = "",
         @SerializedName("BaseMaxScore")
         @Expose
-        var BaseMaxScore: String? = "" ,
+        var BaseMaxScore: String? = "",
         @SerializedName("Observation")
         @Expose
-        var Observation: String? = "" ,
+        var Observation: String? = "",
         @SerializedName("Unit")
         @Expose
         var Unit: String? = ""

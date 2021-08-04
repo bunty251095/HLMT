@@ -16,14 +16,17 @@ import org.koin.standalone.inject
 import org.koin.test.KoinTest
 
 private const val DATABASE = "DATABASE"
-@RunWith(AndroidJUnit4::class)
-abstract class BaseTest: KoinTest {
 
-    @Rule @JvmField val instantExecutorRule = InstantTaskExecutorRule()
+@RunWith(AndroidJUnit4::class)
+abstract class BaseTest : KoinTest {
+
+    @Rule
+    @JvmField
+    val instantExecutorRule = InstantTaskExecutorRule()
     protected val database: ArchAppDatabase by inject()
 
     @Before
-    open fun setUp(){
+    open fun setUp() {
         this.configureDi()
     }
 
@@ -33,7 +36,7 @@ abstract class BaseTest: KoinTest {
     }
 
     // CONFIGURATION
-    private fun configureDi(){
+    private fun configureDi() {
         StandAloneContext.startKoin(listOf(configureLocalModuleTest(ApplicationProvider.getApplicationContext<Context>())))
     }
 
