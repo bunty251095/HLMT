@@ -552,6 +552,7 @@ class HraViewModel(
                 val denProbList = hraManagementUseCase.invokeGetHRASavedDetailsWithQuestionCode("DENPROB")
                 val eyeProbList = hraManagementUseCase.invokeGetHRASavedDetailsWithQuestionCode("EYEPROB")
                 val skinProbList = hraManagementUseCase.invokeGetHRASavedDetailsWithQuestionCode("SKINPRB")
+                val noneList = hraManagementUseCase.invokeGetHRASavedDetailsWithQuestionCode("EDS")
                 //Timber.e("denProbList---> $denProbList")
                 //Timber.e("eyeProbList---> $eyeProbList")
                 //Timber.e("skinProbList---> $skinProbList")
@@ -564,11 +565,15 @@ class HraViewModel(
                 if ( !skinProbList.isNullOrEmpty() ) {
                     list.addAll(skinProbList)
                 }
-                if ( list.isEmpty() ) {
+/*                if ( list.isEmpty() ) {
                     val noneList = hraManagementUseCase.invokeGetHRASavedDetailsWithQuestionCode("EDS")
                     if ( !noneList.isNullOrEmpty() ) {
                         list.addAll(noneList)
                     }
+                }*/
+                if ( !noneList.isNullOrEmpty() ) {
+                    list.clear()
+                    list.addAll(noneList)
                 }
                 Timber.e("$questionCode SelectedList---> $list")
                 selectedOptionList.postValue(list)
@@ -617,6 +622,107 @@ class HraViewModel(
                     hraManagementUseCase.invokeClearResponse(quesCode)
                 }
             }
+            hraManagementUseCase.invokeSaveQuesResponse(list)
+        }
+    }
+
+    fun saveResponseEDS(quesCode:String,tabName:String,category:String,selectedOptions:MutableList<Option>) = viewModelScope.launch(dispatchers.main) {
+
+        val list: ArrayList<HRAQuestions> = ArrayList()
+        withContext(dispatchers.io) {
+
+            hraManagementUseCase.invokeClearResponse(quesCode)
+            hraManagementUseCase.invokeClearResponse("DENPROB")
+            hraManagementUseCase.invokeClearResponse("EYEPROB")
+            hraManagementUseCase.invokeClearResponse("SKINPRB")
+
+            if (selectedOptions.any { it.description.equals(context.resources.getString(R.string.NONE), ignoreCase = true) }) {
+                list.add(HRAQuestions(
+                    QuestionCode = quesCode,
+                    AnswerCode = "NONE",
+                    AnsDescription = context.resources.getString(R.string.NONE),
+                    Category = category,
+                    TabName = tabName,
+                    OthersVal = ""))
+                list.add(HRAQuestions(
+                    QuestionCode = "DENPROB",
+                    AnswerCode = "63_NONE",
+                    AnsDescription = context.resources.getString(R.string.NONE),
+                    Category = "DENTAL",
+                    TabName = tabName,
+                    OthersVal = ""))
+                list.add(HRAQuestions(
+                    QuestionCode = "EYEPROB",
+                    AnswerCode = "64_NONE",
+                    AnsDescription = context.resources.getString(R.string.NONE),
+                    Category = "EYE",
+                    TabName = tabName,
+                    OthersVal = ""))
+                list.add(HRAQuestions(
+                    QuestionCode = "SKINPRB",
+                    AnswerCode = "65_SKNPRBNONE",
+                    AnsDescription = context.resources.getString(R.string.NONE),
+                    Category = "SKIN",
+                    TabName = tabName,
+                    OthersVal = ""))
+            } else {
+                var dental = true
+                var eye = true
+                var skin = true
+
+                for (option in selectedOptions) {
+                    val data = option.answerCode.split(",")
+                    list.add(HRAQuestions(
+                        QuestionCode = data[1],
+                        AnswerCode = data[2],
+                        AnsDescription = option.description,
+                        Category = data[0],
+                        TabName = tabName,
+                        OthersVal = ""))
+                    when {
+                        data[1].equals("DENPROB",ignoreCase = true) -> {
+                            dental = false
+                        }
+                        data[1].equals("EYEPROB",ignoreCase = true) -> {
+                            eye = false
+                        }
+                        data[1].equals("SKINPRB",ignoreCase = true) -> {
+                            skin = false
+                        }
+                    }
+                }
+
+                if ( dental ) {
+                    list.add(HRAQuestions(
+                        QuestionCode = "DENPROB",
+                        AnswerCode = "63_NONE",
+                        AnsDescription = context.resources.getString(R.string.NONE),
+                        Category = "DENTAL",
+                        TabName = tabName,
+                        OthersVal = ""))
+                }
+
+                if ( eye ) {
+                    list.add(HRAQuestions(
+                        QuestionCode = "EYEPROB",
+                        AnswerCode = "64_NONE",
+                        AnsDescription = context.resources.getString(R.string.NONE),
+                        Category = "EYE",
+                        TabName = tabName,
+                        OthersVal = ""))
+                }
+
+                if ( skin ) {
+                    list.add(HRAQuestions(
+                        QuestionCode = "SKINPRB",
+                        AnswerCode = "65_SKNPRBNONE",
+                        AnsDescription = context.resources.getString(R.string.NONE),
+                        Category = "SKIN",
+                        TabName = tabName,
+                        OthersVal = ""))
+                }
+            }
+            Timber.i("SaveResponse---> $list")
             hraManagementUseCase.invokeSaveQuesResponse(list)
         }
     }
@@ -1106,7 +1212,7 @@ class HraViewModel(
             }
 
             "EDS" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
+                optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "NONE"))
                 optionList.add(Option(description = context.resources.getString(R.string.CAVITIES), answerCode = "DENTAL,DENPROB,63_CAVITIES"))
                 optionList.add(Option(description = context.resources.getString(R.string.BAD_BREATH), answerCode = "DENTAL,DENPROB,63_BAD_BREATH"))
                 optionList.add(Option(description = context.resources.getString(R.string.STAINING), answerCode = "DENTAL,DENPROB,63_STAINING"))
