@@ -1,11 +1,10 @@
 package com.caressa.model.entity
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 //@Entity(tableName = "DataSyncMaster" , primaryKeys = ["apiName","personId"] )
-@Entity(tableName = "DataSyncMaster" , primaryKeys = ["apiName"] )
+@Entity(tableName = "DataSyncMaster", primaryKeys = ["apiName"])
 data class DataSyncMaster(
     @SerializedName("ApiName")
     val apiName: String = "",

@@ -22,25 +22,25 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromMedicationToJson(mSchedule: List<MedicationEntity.MedicationSchedule>): String{
+    fun fromMedicationToJson(mSchedule: List<MedicationEntity.MedicationSchedule>): String {
         return gson.toJson(mSchedule)
     }
 
     @TypeConverter
-    fun fromJsonToMedication(json: String) : List<MedicationEntity.MedicationSchedule>{
+    fun fromJsonToMedication(json: String): List<MedicationEntity.MedicationSchedule> {
         val type = object : TypeToken<List<MedicationEntity.MedicationSchedule>>() {}.type
-        return gson.fromJson(json,type)
+        return gson.fromJson(json, type)
     }
 
     @TypeConverter
-    fun fromDrugToJson(mSchedule: MedicationEntity.Drug): String{
+    fun fromDrugToJson(mSchedule: MedicationEntity.Drug): String {
         return gson.toJson(mSchedule)
     }
 
     @TypeConverter
-    fun fromJsonToDrug(json: String) : MedicationEntity.Drug{
+    fun fromJsonToDrug(json: String): MedicationEntity.Drug {
         val type = object : TypeToken<MedicationEntity.Drug>() {}.type
-        return gson.fromJson(json,type)
+        return gson.fromJson(json, type)
     }
 
     @TypeConverter
@@ -53,13 +53,12 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromJsonToNotification(json: String?) : MedicationEntity.Notification? {
+    fun fromJsonToNotification(json: String?): MedicationEntity.Notification? {
         return if (Utilities.isNullOrEmpty(json)) {
             MedicationEntity.Notification()
-        }
-        else {
+        } else {
             val type = object : TypeToken<MedicationEntity.Notification>() {}.type
-            gson.fromJson<MedicationEntity.Notification>(json,type)
+            gson.fromJson<MedicationEntity.Notification>(json, type)
         }
     }
 

@@ -4,9 +4,9 @@
     <item android:id="@android:id/secondaryProgress">
 
         <shape
-                android:innerRadiusRatio="3"
-                android:shape="ring"
-                android:thicknessRatio="14.0">
+            android:innerRadiusRatio="3"
+            android:shape="ring"
+            android:thicknessRatio="14.0">
 
             <solid android:color="@color/vivantLight" />
         </shape>
@@ -16,21 +16,21 @@
     <item android:id="@android:id/progress">
 
         <rotate
-                android:fromDegrees="270"
-                android:pivotX="50%"
-                android:pivotY="50%"
-                android:toDegrees="270">
+            android:fromDegrees="270"
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:toDegrees="270">
 
             <shape
-                    android:innerRadiusRatio="3"
-                    android:shape="ring"
-                    android:thicknessRatio="14.0">
+                android:innerRadiusRatio="3"
+                android:shape="ring"
+                android:thicknessRatio="14.0">
 
                 <rotate
-                        android:fromDegrees="0"
-                        android:pivotX="50%"
-                        android:pivotY="50%"
-                        android:toDegrees="360" />
+                    android:fromDegrees="0"
+                    android:pivotX="50%"
+                    android:pivotY="50%"
+                    android:toDegrees="360" />
 
                 <solid android:color="@color/colorPrimary" />
 

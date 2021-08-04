@@ -8,7 +8,8 @@ import com.google.gson.annotations.SerializedName
 class SaveDocumentModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(  Header(authTicket = authToken) ) {
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("PersonID")
@@ -35,9 +36,9 @@ class SaveDocumentModel(
         @SerializedName("FileName")
         val fileName: String = "",
         @SerializedName("Title")
-        val title: String = "" ,
+        val title: String = "",
         @SerializedName("relation")
-        val relation: String = "" ,
+        val relation: String = "",
         @SerializedName("FileBytes")
         val fileBytes: String = "",
         @SerializedName("PersonName")

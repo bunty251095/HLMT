@@ -32,7 +32,11 @@ class EncryptInterceptor : Interceptor {
                 var strNewBody: String? = strOldBody//toJson(strOldBody)
                 //Log.ic_pdf(TAG, "requestBody JSON BEFORE->\n" + strNewBody + "\n")
                 try {
-                    strNewBody = EncryptionUtility.encrypt(Configuration.SecurityKey, strOldBody, Configuration.SecurityKey)
+                    strNewBody = EncryptionUtility.encrypt(
+                        Configuration.SecurityKey,
+                        strOldBody,
+                        Configuration.SecurityKey
+                    )
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -40,11 +44,11 @@ class EncryptInterceptor : Interceptor {
                 val newBody = RequestBody.create(mediaType, strNewBody!!)
 
                 request = builder.url(urlStr)
-                        .header("Content-Type", oldBody.contentType()!!.toString())
-                        .header("Content-Length", strNewBody.length.toString())
-                        .header("Accept", "application/json")
-                        .post(newBody)
-                        .build()
+                    .header("Content-Type", oldBody.contentType()!!.toString())
+                    .header("Content-Length", strNewBody.length.toString())
+                    .header("Accept", "application/json")
+                    .post(newBody)
+                    .build()
 
             }
         }

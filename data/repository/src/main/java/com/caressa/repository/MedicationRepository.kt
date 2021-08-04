@@ -17,32 +17,58 @@ import core.model.BaseResponse
 import kotlinx.coroutines.Deferred
 import timber.log.Timber
 
-interface MedicationRepository{
-    suspend fun getDrugsListResponse(forceRefresh: Boolean = false, data: DrugsModel) : LiveData<Resource<DrugsModel.DrugsResponse>>
-    suspend fun fetchMedicationList(forceRefresh: Boolean = false, data: MedicationListModel, personId:String) : LiveData<Resource<MedicationListModel.Response>>
-    suspend fun getMedicationListByDay(data: MedicineListByDayModel) : LiveData<Resource<MedicineListByDayModel.MedicineListByDayResponse>>
-    suspend fun saveMedicine(data: AddMedicineModel) : LiveData<Resource<AddMedicineModel.AddMedicineResponse>>
-    suspend fun updateMedicine(data: UpdateMedicineModel) : LiveData<Resource<UpdateMedicineModel.UpdateMedicineResponse>>
-    suspend fun deleteMedicine(data: DeleteMedicineModel,medicationID:String) : LiveData<Resource<DeleteMedicineModel.DeleteMedicineResponse>>
-    suspend fun setAlert(data: SetAlertModel) : LiveData<Resource<SetAlertModel.SetAlertResponse>>
-    suspend fun getMedicine(data: GetMedicineModel) : LiveData<Resource<GetMedicineModel.GetMedicineResponse>>
-    suspend fun getMedicationInTakeByScheduleID(data: MedicineInTakeModel, scheduleId : Int) : LiveData<Resource<MedicineInTakeModel.MedicineDetailsResponse>>
-    suspend fun addMedicineIntake(data: AddInTakeModel) : LiveData<Resource<AddInTakeModel.AddInTakeResponse>>
+interface MedicationRepository {
+    suspend fun getDrugsListResponse(
+        forceRefresh: Boolean = false,
+        data: DrugsModel
+    ): LiveData<Resource<DrugsModel.DrugsResponse>>
 
-    suspend fun updateNotificationAlert(id : String, isAlert : Boolean)
-    suspend fun getOngoingMedicines( ) : List<Medication>
-    suspend fun getCompletedMedicines( ) : List<Medication>
-    suspend fun getAllMyMedicines( ) : List<Medication>
-    suspend fun getPastMedicines( ) : List<Medication>
-    suspend fun getMedicineDetailsByMedicationId(medicationId: Int) : Medication
+    suspend fun fetchMedicationList(
+        forceRefresh: Boolean = false,
+        data: MedicationListModel,
+        personId: String
+    ): LiveData<Resource<MedicationListModel.Response>>
+
+    suspend fun getMedicationListByDay(data: MedicineListByDayModel): LiveData<Resource<MedicineListByDayModel.MedicineListByDayResponse>>
+    suspend fun saveMedicine(data: AddMedicineModel): LiveData<Resource<AddMedicineModel.AddMedicineResponse>>
+    suspend fun updateMedicine(data: UpdateMedicineModel): LiveData<Resource<UpdateMedicineModel.UpdateMedicineResponse>>
+    suspend fun deleteMedicine(
+        data: DeleteMedicineModel,
+        medicationID: String
+    ): LiveData<Resource<DeleteMedicineModel.DeleteMedicineResponse>>
+
+    suspend fun setAlert(data: SetAlertModel): LiveData<Resource<SetAlertModel.SetAlertResponse>>
+    suspend fun getMedicine(data: GetMedicineModel): LiveData<Resource<GetMedicineModel.GetMedicineResponse>>
+    suspend fun getMedicationInTakeByScheduleID(
+        data: MedicineInTakeModel,
+        scheduleId: Int
+    ): LiveData<Resource<MedicineInTakeModel.MedicineDetailsResponse>>
+
+    suspend fun addMedicineIntake(data: AddInTakeModel): LiveData<Resource<AddInTakeModel.AddInTakeResponse>>
+
+    suspend fun updateNotificationAlert(id: String, isAlert: Boolean)
+    suspend fun getOngoingMedicines(): List<Medication>
+    suspend fun getCompletedMedicines(): List<Medication>
+    suspend fun getAllMyMedicines(): List<Medication>
+    suspend fun getPastMedicines(): List<Medication>
+    suspend fun getMedicineDetailsByMedicationId(medicationId: Int): Medication
     suspend fun logoutUser()
 }
 
-class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, private val medicationDao: MedicationDao , private val dataSyncMasterDao: DataSyncMasterDao): MedicationRepository{
+class MedicationRepositoryImpl(
+    private val dataSource: MedicationDatasource,
+    private val medicationDao: MedicationDao,
+    private val dataSyncMasterDao: DataSyncMasterDao
+) : MedicationRepository {
 
-    override suspend fun fetchMedicationList(forceRefresh: Boolean, data: MedicationListModel, personId: String): LiveData<Resource<MedicationListModel.Response>>{
+    override suspend fun fetchMedicationList(
+        forceRefresh: Boolean,
+        data: MedicationListModel,
+        personId: String
+    ): LiveData<Resource<MedicationListModel.Response>> {
 
-        return object : NetworkBoundResource<MedicationListModel.Response,BaseResponse<MedicationListModel.Response>>(){
+        return object :
+            NetworkBoundResource<MedicationListModel.Response, BaseResponse<MedicationListModel.Response>>() {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -55,31 +81,37 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
             override suspend fun saveCallResults(items: MedicationListModel.Response) {
                 try {
                     medicationDao.deleteMedicationTable()
-                    if ( items.medication.isNotEmpty() ) {
-                        for ( medicine in items.medication ) {
-                            if ( Utilities.isNullOrEmpty(medicine.DrugTypeCode) ) {
+                    if (items.medication.isNotEmpty()) {
+                        for (medicine in items.medication) {
+                            if (Utilities.isNullOrEmpty(medicine.DrugTypeCode)) {
                                 medicine.DrugTypeCode = ""
                             }
-                            if ( !Utilities.isNullOrEmpty(medicine.PrescribedDate) ) {
-                                medicine.PrescribedDate = medicine.PrescribedDate!!.split("T").toTypedArray()[0]
+                            if (!Utilities.isNullOrEmpty(medicine.PrescribedDate)) {
+                                medicine.PrescribedDate =
+                                    medicine.PrescribedDate!!.split("T").toTypedArray()[0]
                             }
-                            if ( !Utilities.isNullOrEmpty(medicine.EndDate) ) {
+                            if (!Utilities.isNullOrEmpty(medicine.EndDate)) {
                                 medicine.EndDate = medicine.EndDate!!.split("T").toTypedArray()[0]
                             }
-                            medicine.scheduleList = medicine.scheduleList.distinctBy{ it.scheduleID }
-                            if ( medicine.notification == null ) {
+                            medicine.scheduleList =
+                                medicine.scheduleList.distinctBy { it.scheduleID }
+                            if (medicine.notification == null) {
                                 medicine.notification = MedicationEntity.Notification()
                                 Timber.e("\nNotification is Null in MedicationId----->${medicine.medicationId}")
-                            } else if ( medicine.notification != null && medicine.notification!!.setAlert == null ) {
+                            } else if (medicine.notification != null && medicine.notification!!.setAlert == null) {
                                 medicine.notification = MedicationEntity.Notification()
                                 Timber.e("\nSetAlert is Null in MedicationId----->${medicine.medicationId}")
                             }
                         }
                         medicationDao.insertMedicineList(items.medication)
                     }
-                    val dataSyc = DataSyncMaster(apiName = ApiConstants.MEDICATION_LIST, syncDate = DateHelper.currentDateAsStringyyyyMMdd,personId = personId)
+                    val dataSyc = DataSyncMaster(
+                        apiName = ApiConstants.MEDICATION_LIST,
+                        syncDate = DateHelper.currentDateAsStringyyyyMMdd,
+                        personId = personId
+                    )
                     dataSyncMasterDao.insertApiSyncData(dataSyc)
-                } catch ( e : Exception ) {
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
@@ -97,9 +129,13 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
         }.build().asLiveData()
     }
 
-    override suspend fun getDrugsListResponse(forceRefresh: Boolean, data: DrugsModel): LiveData<Resource<DrugsModel.DrugsResponse>> {
+    override suspend fun getDrugsListResponse(
+        forceRefresh: Boolean,
+        data: DrugsModel
+    ): LiveData<Resource<DrugsModel.DrugsResponse>> {
 
-        return object : NetworkBoundResource<DrugsModel.DrugsResponse,BaseResponse<DrugsModel.DrugsResponse>>(){
+        return object :
+            NetworkBoundResource<DrugsModel.DrugsResponse, BaseResponse<DrugsModel.DrugsResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -124,7 +160,8 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
 
     override suspend fun getMedicine(data: GetMedicineModel): LiveData<Resource<GetMedicineModel.GetMedicineResponse>> {
 
-        return object : NetworkBoundResource<GetMedicineModel.GetMedicineResponse,BaseResponse<GetMedicineModel.GetMedicineResponse>>() {
+        return object :
+            NetworkBoundResource<GetMedicineModel.GetMedicineResponse, BaseResponse<GetMedicineModel.GetMedicineResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -150,9 +187,10 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
 
     override suspend fun getMedicationListByDay(data: MedicineListByDayModel): LiveData<Resource<MedicineListByDayModel.MedicineListByDayResponse>> {
 
-        return object : NetworkBoundResource<MedicineListByDayModel.MedicineListByDayResponse,BaseResponse<MedicineListByDayModel.MedicineListByDayResponse>>() {
+        return object :
+            NetworkBoundResource<MedicineListByDayModel.MedicineListByDayResponse, BaseResponse<MedicineListByDayModel.MedicineListByDayResponse>>() {
 
-            var medications:List<MedicineListByDayModel.Medication> = listOf()
+            var medications: List<MedicineListByDayModel.Medication> = listOf()
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -171,11 +209,11 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
             }
 
             override suspend fun saveCallResults(items: MedicineListByDayModel.MedicineListByDayResponse) {
-                for ( medicine in items.medications ) {
-                    if ( medicine.notification == null ) {
+                for (medicine in items.medications) {
+                    if (medicine.notification == null) {
                         medicine.notification = MedicineListByDayModel.Notification()
                         Timber.e("\nNotification is Null in MedicationId----->${medicine.medicationId}")
-                    } else if ( medicine.notification != null && medicine.notification!!.setAlert == null ) {
+                    } else if (medicine.notification != null && medicine.notification!!.setAlert == null) {
                         medicine.notification = MedicineListByDayModel.Notification()
                         Timber.e("\nSetAlert is Null in MedicationId----->${medicine.medicationId}")
                     }
@@ -219,7 +257,8 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
 
     override suspend fun setAlert(data: SetAlertModel): LiveData<Resource<SetAlertModel.SetAlertResponse>> {
 
-        return object : NetworkBoundResource<SetAlertModel.SetAlertResponse,BaseResponse<SetAlertModel.SetAlertResponse>>() {
+        return object :
+            NetworkBoundResource<SetAlertModel.SetAlertResponse, BaseResponse<SetAlertModel.SetAlertResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -246,7 +285,8 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
 
     override suspend fun saveMedicine(data: AddMedicineModel): LiveData<Resource<AddMedicineModel.AddMedicineResponse>> {
 
-        return object : NetworkBoundResource<AddMedicineModel.AddMedicineResponse,BaseResponse<AddMedicineModel.AddMedicineResponse>>() {
+        return object :
+            NetworkBoundResource<AddMedicineModel.AddMedicineResponse, BaseResponse<AddMedicineModel.AddMedicineResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -262,7 +302,7 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
                 return response.jSONData
             }
 
-            override suspend fun saveCallResults(items: AddMedicineModel.AddMedicineResponse) { }
+            override suspend fun saveCallResults(items: AddMedicineModel.AddMedicineResponse) {}
 
             override fun shouldFetch(data: AddMedicineModel.AddMedicineResponse?): Boolean {
                 return true
@@ -274,7 +314,8 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
 
     override suspend fun updateMedicine(data: UpdateMedicineModel): LiveData<Resource<UpdateMedicineModel.UpdateMedicineResponse>> {
 
-        return object : NetworkBoundResource<UpdateMedicineModel.UpdateMedicineResponse,BaseResponse<UpdateMedicineModel.UpdateMedicineResponse>>() {
+        return object :
+            NetworkBoundResource<UpdateMedicineModel.UpdateMedicineResponse, BaseResponse<UpdateMedicineModel.UpdateMedicineResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -302,7 +343,8 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
 
     override suspend fun addMedicineIntake(data: AddInTakeModel): LiveData<Resource<AddInTakeModel.AddInTakeResponse>> {
 
-        return object : NetworkBoundResource<AddInTakeModel.AddInTakeResponse,BaseResponse<AddInTakeModel.AddInTakeResponse>>() {
+        return object :
+            NetworkBoundResource<AddInTakeModel.AddInTakeResponse, BaseResponse<AddInTakeModel.AddInTakeResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -328,9 +370,13 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
 
     }
 
-    override suspend fun deleteMedicine(data: DeleteMedicineModel,medicationID:String): LiveData<Resource<DeleteMedicineModel.DeleteMedicineResponse>> {
+    override suspend fun deleteMedicine(
+        data: DeleteMedicineModel,
+        medicationID: String
+    ): LiveData<Resource<DeleteMedicineModel.DeleteMedicineResponse>> {
 
-        return object : NetworkBoundResource<DeleteMedicineModel.DeleteMedicineResponse,BaseResponse<DeleteMedicineModel.DeleteMedicineResponse>>() {
+        return object :
+            NetworkBoundResource<DeleteMedicineModel.DeleteMedicineResponse, BaseResponse<DeleteMedicineModel.DeleteMedicineResponse>>() {
 
             var isProcessed = false
             override fun shouldStoreInDb(): Boolean = true
@@ -343,11 +389,11 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
 
             override suspend fun saveCallResults(items: DeleteMedicineModel.DeleteMedicineResponse) {
                 isProcessed = items.isProcessed
-                Timber.i("isProcessed----->"+isProcessed)
-                if ( isProcessed ) {
+                Timber.i("isProcessed----->" + isProcessed)
+                if (isProcessed) {
                     medicationDao.deleteMedicineFromMedication(medicationID)
                     //medicationDao.deleteMedicineFromMedicineInTake(medicationID)
-                    Timber.i("Deleted MedicationId----->"+medicationID)
+                    Timber.i("Deleted MedicationId----->" + medicationID)
                 }
             }
 
@@ -366,9 +412,13 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
         }.build().asLiveData()
     }
 
-    override suspend fun getMedicationInTakeByScheduleID(data: MedicineInTakeModel, scheduleId : Int): LiveData<Resource<MedicineInTakeModel.MedicineDetailsResponse>> {
+    override suspend fun getMedicationInTakeByScheduleID(
+        data: MedicineInTakeModel,
+        scheduleId: Int
+    ): LiveData<Resource<MedicineInTakeModel.MedicineDetailsResponse>> {
 
-        return object : NetworkBoundResource<MedicineInTakeModel.MedicineDetailsResponse,BaseResponse<MedicineInTakeModel.MedicineDetailsResponse>>() {
+        return object :
+            NetworkBoundResource<MedicineInTakeModel.MedicineDetailsResponse, BaseResponse<MedicineInTakeModel.MedicineDetailsResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -384,7 +434,7 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
                 return response.jSONData
             }
 
-            override suspend fun saveCallResults(items: MedicineInTakeModel.MedicineDetailsResponse) { }
+            override suspend fun saveCallResults(items: MedicineInTakeModel.MedicineDetailsResponse) {}
 
             override fun shouldFetch(data: MedicineInTakeModel.MedicineDetailsResponse?): Boolean {
                 return true
@@ -393,14 +443,14 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
         }.build().asLiveData()
     }
 
-    override suspend fun getMedicineDetailsByMedicationId(medicationId: Int) : Medication {
+    override suspend fun getMedicineDetailsByMedicationId(medicationId: Int): Medication {
         return medicationDao.getMedicineDetailsByMedicationId(medicationId)
     }
 
     override suspend fun updateNotificationAlert(id: String, isAlert: Boolean) {
         val notification = MedicationEntity.Notification()
         notification.setAlert = isAlert
-        return medicationDao.updateNotificationAlert(id,notification)
+        return medicationDao.updateNotificationAlert(id, notification)
     }
 
     override suspend fun getOngoingMedicines(): List<Medication> {
@@ -440,7 +490,7 @@ class MedicationRepositoryImpl(private val dataSource: MedicationDatasource, pri
 
     fun containsModel(list: List<Medication>, name: String): Boolean {
         for (`object` in list) {
-            if (`object`.drug.name.equals(name,ignoreCase = true)) {
+            if (`object`.drug.name.equals(name, ignoreCase = true)) {
                 return true
             }
         }

@@ -14,10 +14,5 @@ dependencies {
     // KOIN
     implementation Libraries.koin
     implementation Libraries.koinViewModel
-    // TESTS
-    testImplementation TestLibraries.junit
-    testImplementation TestLibraries.mockk
-    testImplementation TestLibraries.archCoreTest
-    testImplementation TestLibraries.coroutine
-    testImplementation project(Modules.commonTest)
+
 }

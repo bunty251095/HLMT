@@ -9,12 +9,11 @@ import okhttp3.Interceptor
 import okhttp3.MediaType
 import okhttp3.Response
 import okhttp3.ResponseBody
-import org.json.JSONObject
 import timber.log.Timber
 import java.nio.charset.Charset
 
 
-class DecryptionInterceptor : Interceptor{
+class DecryptionInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.proceed(chain.request())
         if (response.isSuccessful && response.code() == 200) {
@@ -32,18 +31,19 @@ class DecryptionInterceptor : Interceptor{
                 jObj.put("JSONData",jObj.get("JObject"))
                 jObj.remove("JObject")*/
 
-                val baseHandlerResponse = Gson().fromJson(decrypted, BaseHandlerResponse::class.java)
-                Timber.i("baseHandlerResponse => "+decrypted)
-                if(baseHandlerResponse.jObject == null || baseHandlerResponse.jObject?.equals("")!!) {
+                val baseHandlerResponse =
+                    Gson().fromJson(decrypted, BaseHandlerResponse::class.java)
+                Timber.i("baseHandlerResponse => " + decrypted)
+                if (baseHandlerResponse.jObject == null || baseHandlerResponse.jObject?.equals("")!!) {
                     baseHandlerResponse.jObject = JsonObject()
-                    Timber.i("baseHandlerResponse => JSONData--> "+baseHandlerResponse.jsonData)
-                    if(baseHandlerResponse.jsonData!=null) {
+                    Timber.i("baseHandlerResponse => JSONData--> " + baseHandlerResponse.jsonData)
+                    if (baseHandlerResponse.jsonData != null) {
                         baseHandlerResponse.jObject = baseHandlerResponse.jsonData
                         baseHandlerResponse.errorNumber = "0"
                         baseHandlerResponse.statusCode = "200"
                     }
 
-                    if ( !Utilities.isNullOrEmptyOrZero(baseHandlerResponse.profileImageID) ) {
+                    if (!Utilities.isNullOrEmptyOrZero(baseHandlerResponse.profileImageID)) {
                         val jsonParser = JsonParser()
                         val gsonObject = jsonParser.parse(decrypted) as JsonObject
                         baseHandlerResponse.jsonData = JsonObject()
@@ -55,9 +55,16 @@ class DecryptionInterceptor : Interceptor{
                 }
                 decryptedResponse = Gson().toJson(baseHandlerResponse)
 
-            } catch (e: Exception) {e.printStackTrace() }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
 
-            newResponse.body(ResponseBody.create(MediaType.parse(contentType!!), decryptedResponse!!))
+            newResponse.body(
+                ResponseBody.create(
+                    MediaType.parse(contentType!!),
+                    decryptedResponse!!
+                )
+            )
             return newResponse.build()
         }
         return response

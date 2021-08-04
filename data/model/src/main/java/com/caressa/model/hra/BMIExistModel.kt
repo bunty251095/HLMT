@@ -5,11 +5,12 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class BMIExistModel(
-                         @SerializedName("JSONData")
-                         @Expose
-                         private val jsonData: String ,  private val authToken: String ) : BaseRequest(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(
     Header(authTicket = authToken)
-)  {
+) {
 
     data class JSONDataRequest(
         @SerializedName("PersonID")
@@ -17,7 +18,7 @@ data class BMIExistModel(
         private val PersonID: String = ""
     )
 
-    data class  BMIExistResponse(
+    data class BMIExistResponse(
         @SerializedName("BMI")
         @Expose
         var BMI: BMI = BMI()
@@ -41,27 +42,27 @@ data class BMIExistModel(
         var Percentile: String? = "",
         @SerializedName("RecordDate")
         @Expose
-        var RecordDate : String? = "",
+        var RecordDate: String? = "",
         @SerializedName("Comments")
         @Expose
-        var Comments : String? = "",
-       @SerializedName("OwnerCode")
-       @Expose
-        var OwnerCode : String? = "",
+        var Comments: String? = "",
+        @SerializedName("OwnerCode")
+        @Expose
+        var OwnerCode: String? = "",
         @SerializedName("PersonID")
         @Expose
-        var PersonID : String? = "",
+        var PersonID: String? = "",
         @SerializedName("WellnessScore")
         @Expose
-        var WellnessScore : String? = "",
+        var WellnessScore: String? = "",
         @SerializedName("CreatedBy")
         @Expose
-        var CreatedBy : String? = "",
+        var CreatedBy: String? = "",
         @SerializedName("ModifiedBy")
         @Expose
-        var ModifiedBy : String? = "",
+        var ModifiedBy: String? = "",
         @SerializedName("ModifiedDate")
         @Expose
-        var ModifiedDate : String? = ""
+        var ModifiedDate: String? = ""
     )
 }

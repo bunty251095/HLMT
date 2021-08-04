@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity( tableName = "HealthDocumentTable")
+@Entity(tableName = "HealthDocumentTable")
 data class HealthDocument(
     @PrimaryKey
     @SerializedName("ID")
@@ -16,7 +16,7 @@ data class HealthDocument(
     @SerializedName("DocumentTypeCode")
     var Code: String? = "",
     @field:SerializedName("Type")
-    var Type : String? = "",
+    var Type: String? = "",
     @SerializedName("Comments")
     var Comment: String? = "",
     @SerializedName("PersonID")
@@ -28,7 +28,7 @@ data class HealthDocument(
     @SerializedName("FilePath")
     var Path: String? = "",
     @field:SerializedName("Sync")
-    var Sync : String? = "N",
+    var Sync: String? = "N",
     @SerializedName("RecordDate")
     var RecordDate: String? = ""
 )

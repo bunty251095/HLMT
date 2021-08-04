@@ -8,13 +8,13 @@ import com.google.gson.annotations.SerializedName
 data class HRALabDetails(
     @PrimaryKey
     @field:SerializedName("ParameterCode")
-    val ParameterCode : String = "" ,
+    val ParameterCode: String = "",
     @field:SerializedName("RecordDate")
-    val RecordDate : String? = "" ,
+    val RecordDate: String? = "",
     @field:SerializedName("Value")
-    val LabValue : String? = "" ,
+    val LabValue: String? = "",
     @field:SerializedName("PersonID")
-    val PersonID : String? = "" ,
+    val PersonID: String? = "",
     @field:SerializedName("Unit")
-    val Unit : String? = ""
+    val Unit: String? = ""
 )

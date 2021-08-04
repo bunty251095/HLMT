@@ -9,8 +9,8 @@ import com.caressa.model.entity.AppCacheMaster
 @Dao
 interface AppCacheMasterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertApaCacheData( data : AppCacheMaster)
+    fun insertApaCacheData(data: AppCacheMaster)
 
     @Query("SELECT * FROM AppCacheMaster WHERE mapKey=:key")
-    fun getAppCacheData(key : String): AppCacheMaster
+    fun getAppCacheData(key: String): AppCacheMaster
 }

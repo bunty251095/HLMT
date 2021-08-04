@@ -1,6 +1,5 @@
 package com.caressa.repository.utils
 
-import android.util.Log
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
@@ -10,9 +9,6 @@ import com.google.gson.JsonSyntaxException
 import core.model.BaseResponse
 import kotlinx.coroutines.*
 import timber.log.Timber
-import java.lang.ClassCastException
-import java.lang.Exception
-import java.lang.IllegalStateException
 import java.net.UnknownHostException
 import kotlin.coroutines.coroutineContext
 
@@ -30,15 +26,34 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
             if (shouldFetch(dbResult)) {
                 try {
                     fetchFromNetwork(dbResult)
-                }catch (e: UnknownHostException){
-                    Timber.e( "An error happened: $e")
-                    setValue(Resource.error(e,loadFromDb(), errorMessage = "Seems like you are offline. Please check your internet connection and try again."))
+                } catch (e: UnknownHostException) {
+                    Timber.e("An error happened: $e")
+                    setValue(
+                        Resource.error(
+                            e,
+                            loadFromDb(),
+                            errorMessage = "Seems like you are offline. Please check your internet connection and try again."
+                        )
+                    )
                 } catch (e: JsonSyntaxException) {
-                    Timber.e( "An error happened: JsonSyntaxException $e")
-                    setValue(Resource.error(e, loadFromDb(), errorMessage = "Something went wrong.", errorNumber =  "111"))
+                    Timber.e("An error happened: JsonSyntaxException $e")
+                    setValue(
+                        Resource.error(
+                            e,
+                            loadFromDb(),
+                            errorMessage = "Something went wrong.",
+                            errorNumber = "111"
+                        )
+                    )
                 } catch (e: Exception) {
-                    Timber.e( "An error happened: $e")
-                    setValue(Resource.error(e, loadFromDb(), errorMessage = "Something went wrong."))
+                    Timber.e("An error happened: $e")
+                    setValue(
+                        Resource.error(
+                            e,
+                            loadFromDb(),
+                            errorMessage = "Something went wrong."
+                        )
+                    )
                 }
             } else {
                 Timber.d("Return data from local database")
@@ -54,14 +69,13 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     private suspend fun fetchFromNetwork(dbResult: ResultType) {
         Timber.e("Fetch data from network")
-        if(shouldStoreInDb())
+        if (shouldStoreInDb())
             setValue(Resource.loading(dbResult)) // Dispatch latest value quickly (UX purpose)
 
         val apiResponse = createCallAsync().await()
         Timber.e("Data fetched from network")
-        if (!hasError(apiResponse))
-        {
-            if(shouldStoreInDb()) {
+        if (!hasError(apiResponse)) {
+            if (shouldStoreInDb()) {
                 saveCallResults(processResponse(apiResponse))
                 setValue(Resource.success(loadFromDb()))
             }
@@ -82,34 +96,46 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
         try {
             val baseResponse = response as BaseResponse<ResultType>
-            if(baseResponse.header?.hasErrors!!)
-            {
-                if(baseResponse.header != null && baseResponse.header?.errors?.size != 0)
-                {
-                    if(baseResponse.header?.errors?.get(0)?.errorNumber == 1100014){
-                        setValue(Resource.error(Throwable(), null, "Your Session Expired, please try again.", baseResponse.header?.errors?.get(0)?.errorNumber.toString()))
-                    }else {
+            if (baseResponse.header?.hasErrors!!) {
+                if (baseResponse.header != null && baseResponse.header?.errors?.size != 0) {
+                    if (baseResponse.header?.errors?.get(0)?.errorNumber == 1100014) {
+                        setValue(
+                            Resource.error(
+                                Throwable(),
+                                null,
+                                "Your Session Expired, please try again.",
+                                baseResponse.header?.errors?.get(0)?.errorNumber.toString()
+                            )
+                        )
+                    } else {
                         //setValue(Resource.error(Throwable(), null, "Something Went wrong..", baseResponse.header?.errors?.get(0)?.errorNumber.toString()))
-                        setValue(Resource.error(Throwable(),null,baseResponse.header?.errors?.get(0)?.message.toString(),baseResponse.header?.errors?.get(0)?.errorNumber.toString()))
+                        setValue(
+                            Resource.error(
+                                Throwable(),
+                                null,
+                                baseResponse.header?.errors?.get(0)?.message.toString(),
+                                baseResponse.header?.errors?.get(0)?.errorNumber.toString()
+                            )
+                        )
                     }
                     return true
-                }else if (!shouldStoreInDb()){
+                } else if (!shouldStoreInDb()) {
                     setValue(Resource.success(baseResponse.jSONData))
                     return true
                 }
-            }else{
-                if (!shouldStoreInDb()){
+            } else {
+                if (!shouldStoreInDb()) {
                     setValue(Resource.success(baseResponse.jSONData))
                     return true
                 }
             }
-        }catch (e: ClassCastException){
+        } catch (e: ClassCastException) {
             val apiResponse = response as ApiResponse<RequestType>
-            if(!apiResponse.statusCode.equals("0")) {
+            if (!apiResponse.statusCode.equals("0")) {
                 if (!apiResponse.statusCode.equals("200")) {
                     setValue(Resource.error(Throwable(), null, apiResponse.message))
                     return true
-                }else if (!shouldStoreInDb()){
+                } else if (!shouldStoreInDb()) {
                     setValue(Resource.success(apiResponse.data as ResultType))
                 }
             }

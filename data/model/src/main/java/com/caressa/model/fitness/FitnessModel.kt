@@ -4,15 +4,18 @@ import com.caressa.model.BaseRequest
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class FitnessModel(@SerializedName("JSONData")
-                   @Expose
-                   private val jsonData: String,
-                   private val authToken: String): BaseRequest(Header(authTicket = authToken.toString())) {
+class FitnessModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String,
+    private val authToken: String
+) : BaseRequest(Header(authTicket = authToken.toString())) {
 
-    data class JSONDataRequest(@SerializedName("Message")
-                              val message: String,
-                              @SerializedName("SearchCriteria")
-                              val searchCriteria: SearchCriteria
+    data class JSONDataRequest(
+        @SerializedName("Message")
+        val message: String,
+        @SerializedName("SearchCriteria")
+        val searchCriteria: SearchCriteria
     )
 
     data class SearchCriteria(
@@ -24,7 +27,7 @@ class FitnessModel(@SerializedName("JSONData")
         val toDate: String
     )
 
-    class Response{
+    class Response {
 
     }
 

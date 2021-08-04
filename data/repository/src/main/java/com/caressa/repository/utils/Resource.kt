@@ -2,7 +2,13 @@ package com.caressa.repository.utils
 
 import timber.log.Timber
 
-data class Resource<out T>(val status: Status, val data: T?, val error: Throwable?, val errorMessage: String = "", val errorNumber: String = "0") {
+data class Resource<out T>(
+    val status: Status,
+    val data: T?,
+    val error: Throwable?,
+    val errorMessage: String = "",
+    val errorNumber: String = "0"
+) {
     companion object {
         fun <T> success(data: T?): Resource<T> {
             Timber.i("success=>> $data")
@@ -13,7 +19,12 @@ data class Resource<out T>(val status: Status, val data: T?, val error: Throwabl
             )
         }
 
-        fun <T> error(error: Throwable, data: T?, errorMessage: String = "", errorNumber:String = "0"): Resource<T> {
+        fun <T> error(
+            error: Throwable,
+            data: T?,
+            errorMessage: String = "",
+            errorNumber: String = "0"
+        ): Resource<T> {
             Timber.i("error=>> $errorMessage == $errorNumber")
 
             return Resource(
@@ -25,7 +36,7 @@ data class Resource<out T>(val status: Status, val data: T?, val error: Throwabl
             )
         }
 
-        fun <T> loading(data: T?): Resource<T>{
+        fun <T> loading(data: T?): Resource<T> {
             Timber.i("loading=>> $data")
 
             return Resource(

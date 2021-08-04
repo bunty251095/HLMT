@@ -21,26 +21,26 @@ interface VivantUserDao {
     fun getUser(): Users
 
     @Query("UPDATE  Users SET PhoneNumber=:phone")
-    fun updateUserMobileNumber( phone : String )
+    fun updateUserMobileNumber(phone: String)
 
     @Query("UPDATE  Users SET firstName=:name WHERE personId =:personId")
-    fun updateName( name : String ,personId : Int )
+    fun updateName(name: String, personId: Int)
 
     @Query("UPDATE  UserRelativesTable SET firstName=:name WHERE relativeID =:personId")
-    fun updateUserInUserRelativesDetails( name : String ,personId : String )
+    fun updateUserInUserRelativesDetails(name: String, personId: String)
 
     @Query("UPDATE  Users SET name=:name , path=:path")
-    fun updateUserProfileImgPath( name : String ,path : String )
+    fun updateUserProfileImgPath(name: String, path: String)
 
     @Query("DELETE FROM Users")
     fun deleteAllRecords()
 
     // *****************************  RelativesTable  *****************************
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUserRelative( userRelatives : UserRelatives)
+    fun insertUserRelative(userRelatives: UserRelatives)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUserRelative( userRelatives : List<UserRelatives>)
+    fun insertUserRelative(userRelatives: List<UserRelatives>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAppCacheData(cache: AppCacheMaster)
@@ -49,22 +49,22 @@ interface VivantUserDao {
     fun getAppCache(key: String): List<AppCacheMaster>
 
     @Query("SELECT * FROM UserRelativesTable")
-    fun geAllRelativeList() : List<UserRelatives>
+    fun geAllRelativeList(): List<UserRelatives>
 
     @Query("SELECT * FROM UserRelativesTable WHERE RelationshipCode != 'SELF'")
     fun getUserRelatives(): List<UserRelatives>
 
     @Query("SELECT * FROM UserRelativesTable WHERE RelationshipCode =:relationShipCode")
-    fun getUserRelativeSpecific( relationShipCode : String ): List<UserRelatives>
+    fun getUserRelativeSpecific(relationShipCode: String): List<UserRelatives>
 
     @Query("SELECT * FROM UserRelativesTable WHERE RelativeID =:relativeId")
-    fun getUserRelativeForRelativeId( relativeId : String ): List<UserRelatives>
+    fun getUserRelativeForRelativeId(relativeId: String): List<UserRelatives>
 
     @Query("SELECT * FROM UserRelativesTable WHERE RelativeID =:relativeId")
-    fun getUserRelativeDetailsByRelativeId( relativeId : String ): UserRelatives
+    fun getUserRelativeDetailsByRelativeId(relativeId: String): UserRelatives
 
     @Query("SELECT Relationship FROM UserRelativesTable WHERE RelativeID=:relativeId")
-    fun getRelationShip(relativeId: String) : String
+    fun getRelationShip(relativeId: String): String
 
     @Query("DELETE FROM UserRelativesTable")
     fun deleteUserRelativesTable()

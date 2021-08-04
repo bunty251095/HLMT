@@ -21,8 +21,5 @@ dependencies {
     // KOIN
     implementation Libraries.koin
     implementation Libraries.koinViewModel
-    // TEST
-    testImplementation TestLibraries.junit
-    testImplementation TestLibraries.koin
-    testImplementation TestLibraries.mockWebServer
+
 }

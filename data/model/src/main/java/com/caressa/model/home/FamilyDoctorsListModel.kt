@@ -7,13 +7,14 @@ import com.google.gson.annotations.SerializedName
 class FamilyDoctorsListModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(Header(authTicket = authToken))
-{
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("AccountID")
         @Expose
-        private val accountID: String = "")
+        private val accountID: String = ""
+    )
 
     data class FamilyDoctorsResponse(
         @SerializedName("ListFamilyDoctors")

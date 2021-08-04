@@ -7,10 +7,10 @@ import java.util.*
 
 
 @Dao
-abstract class FitnessDao : BaseDao<FitnessEntity.StepGoalHistory>(){
+abstract class FitnessDao : BaseDao<FitnessEntity.StepGoalHistory>() {
 
     @Query("SELECT * FROM StepGoalHistory")
-    abstract suspend fun getUserStepsData() : List<FitnessEntity.StepGoalHistory>
+    abstract suspend fun getUserStepsData(): List<FitnessEntity.StepGoalHistory>
 
     /**
      * Each time we save an user, we update its 'lastRefreshed' field

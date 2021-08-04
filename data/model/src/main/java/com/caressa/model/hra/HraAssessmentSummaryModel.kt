@@ -7,7 +7,8 @@ import com.google.gson.annotations.SerializedName
 class HraAssessmentSummaryModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(
     Header(
         authTicket = authToken
     )
@@ -25,7 +26,7 @@ class HraAssessmentSummaryModel(
     data class AssessmentSummaryResponce(
         @SerializedName("HRASummaryReport")
         @Expose
-        val hraSummaryReport : HRASummaryReport = HRASummaryReport()
+        val hraSummaryReport: HRASummaryReport = HRASummaryReport()
     )
 
     data class HRASummaryReport(

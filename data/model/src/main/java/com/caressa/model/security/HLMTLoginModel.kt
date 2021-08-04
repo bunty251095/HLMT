@@ -4,9 +4,11 @@ import com.caressa.model.BaseRequest
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class HLMTLoginModel(@SerializedName("JSONData")
-                     @Expose
-                     private val jsonData: String) : BaseRequest(Header(authTicket = "")) {
+class HLMTLoginModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String
+) : BaseRequest(Header(authTicket = "")) {
 
     data class JSONDataRequest(
         @SerializedName("Username")
@@ -24,7 +26,7 @@ class HLMTLoginModel(@SerializedName("JSONData")
         @SerializedName("Mode")
         @Expose
         private val mode: String = "",
-        )
+    )
 
     data class LoginResponse(
 
@@ -35,11 +37,11 @@ class HLMTLoginModel(@SerializedName("JSONData")
         @Expose
         var loginStatus: String? = "",
         @SerializedName("IsHLMTUser")
-    @Expose
-    var isHLMTUser: String? = "",
-    @SerializedName("HLMTUserName")
-    @Expose
-    var hlmtUserName: String? = "",
+        @Expose
+        var isHLMTUser: String? = "",
+        @SerializedName("HLMTUserName")
+        @Expose
+        var hlmtUserName: String? = "",
         @SerializedName("AccountLinkStatus")
         @Expose
         var accountLinkStatus: String? = ""

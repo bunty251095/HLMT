@@ -1,18 +1,13 @@
 package com.caressa.repository
 
 import androidx.lifecycle.LiveData
-import com.caressa.common.utils.DateHelper
 import com.caressa.local.dao.FitnessDao
-import com.caressa.local.dao.MedicationDao
 import com.caressa.model.entity.FitnessEntity
 import com.caressa.model.fitness.GetStepsGoalModel
 import com.caressa.model.fitness.SetGoalModel
 import com.caressa.model.fitness.StepsHistoryModel
 import com.caressa.model.fitness.StepsSaveListModel
-import com.caressa.model.medication.DrugsModel
-import com.caressa.model.medication.MedicationListModel
 import com.caressa.remote.FitnessDatasource
-import com.caressa.remote.MedicationDatasource
 import com.caressa.repository.utils.NetworkBoundResource
 import com.caressa.repository.utils.Resource
 import core.model.BaseResponse
@@ -21,19 +16,23 @@ import java.util.*
 
 interface FitnessRepository {
 
-    suspend fun fetchStepsListHistory(data: StepsHistoryModel) : LiveData<Resource<StepsHistoryModel.Response>>
-    suspend fun fetchLatestGoal(data: GetStepsGoalModel) : LiveData<Resource<GetStepsGoalModel.Response>>
-    suspend fun saveStepsGoal(data: SetGoalModel) : LiveData<Resource<SetGoalModel.Response>>
-    suspend fun saveStepsList(data: StepsSaveListModel) : LiveData<Resource<StepsSaveListModel.StepsSaveListResponse>>
+    suspend fun fetchStepsListHistory(data: StepsHistoryModel): LiveData<Resource<StepsHistoryModel.Response>>
+    suspend fun fetchLatestGoal(data: GetStepsGoalModel): LiveData<Resource<GetStepsGoalModel.Response>>
+    suspend fun saveStepsGoal(data: SetGoalModel): LiveData<Resource<SetGoalModel.Response>>
+    suspend fun saveStepsList(data: StepsSaveListModel): LiveData<Resource<StepsSaveListModel.StepsSaveListResponse>>
     suspend fun logoutUser()
 
 }
 
-class FitnessRepositoryImpl(private val dataSource: FitnessDatasource, private val fitnessDao: FitnessDao ) : FitnessRepository{
+class FitnessRepositoryImpl(
+    private val dataSource: FitnessDatasource,
+    private val fitnessDao: FitnessDao
+) : FitnessRepository {
 
     override suspend fun fetchStepsListHistory(data: StepsHistoryModel): LiveData<Resource<StepsHistoryModel.Response>> {
 
-        return object :NetworkBoundResource<StepsHistoryModel.Response,BaseResponse<StepsHistoryModel.Response>>() {
+        return object :
+            NetworkBoundResource<StepsHistoryModel.Response, BaseResponse<StepsHistoryModel.Response>>() {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -50,8 +49,8 @@ class FitnessRepositoryImpl(private val dataSource: FitnessDatasource, private v
             }
 
             override suspend fun saveCallResults(items: StepsHistoryModel.Response) {
-                val stepGoalHistory : MutableList<FitnessEntity.StepGoalHistory> = mutableListOf()
-                for ( i in items.stepGoalHistory ) {
+                val stepGoalHistory: MutableList<FitnessEntity.StepGoalHistory> = mutableListOf()
+                for (i in items.stepGoalHistory) {
                     val history = FitnessEntity.StepGoalHistory(
                         stepID = i.stepID,
                         goalID = i.goalID,
@@ -62,7 +61,8 @@ class FitnessRepositoryImpl(private val dataSource: FitnessDatasource, private v
                         calories = i.calories,
                         goalPercentile = i.goalPercentile,
                         activeTime = "",
-                        lastRefreshed = Date())
+                        lastRefreshed = Date()
+                    )
                     stepGoalHistory.add(history)
                 }
                 fitnessDao.save(stepGoalHistory)
@@ -75,7 +75,8 @@ class FitnessRepositoryImpl(private val dataSource: FitnessDatasource, private v
 
     override suspend fun fetchLatestGoal(data: GetStepsGoalModel): LiveData<Resource<GetStepsGoalModel.Response>> {
 
-        return object :NetworkBoundResource<GetStepsGoalModel.Response,BaseResponse<GetStepsGoalModel.Response>>() {
+        return object :
+            NetworkBoundResource<GetStepsGoalModel.Response, BaseResponse<GetStepsGoalModel.Response>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -100,7 +101,8 @@ class FitnessRepositoryImpl(private val dataSource: FitnessDatasource, private v
 
     override suspend fun saveStepsGoal(data: SetGoalModel): LiveData<Resource<SetGoalModel.Response>> {
 
-        return object :NetworkBoundResource<SetGoalModel.Response,BaseResponse<SetGoalModel.Response>>() {
+        return object :
+            NetworkBoundResource<SetGoalModel.Response, BaseResponse<SetGoalModel.Response>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -116,7 +118,7 @@ class FitnessRepositoryImpl(private val dataSource: FitnessDatasource, private v
                 return response.jSONData
             }
 
-            override suspend fun saveCallResults(items: SetGoalModel.Response) { }
+            override suspend fun saveCallResults(items: SetGoalModel.Response) {}
 
             override fun shouldFetch(data: SetGoalModel.Response?): Boolean = true
 
@@ -125,7 +127,8 @@ class FitnessRepositoryImpl(private val dataSource: FitnessDatasource, private v
 
     override suspend fun saveStepsList(data: StepsSaveListModel): LiveData<Resource<StepsSaveListModel.StepsSaveListResponse>> {
 
-        return object :NetworkBoundResource<StepsSaveListModel.StepsSaveListResponse,BaseResponse<StepsSaveListModel.StepsSaveListResponse>>() {
+        return object :
+            NetworkBoundResource<StepsSaveListModel.StepsSaveListResponse, BaseResponse<StepsSaveListModel.StepsSaveListResponse>>() {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -143,7 +146,8 @@ class FitnessRepositoryImpl(private val dataSource: FitnessDatasource, private v
 
             override suspend fun saveCallResults(items: StepsSaveListModel.StepsSaveListResponse) {}
 
-            override fun shouldFetch(data: StepsSaveListModel.StepsSaveListResponse?): Boolean = true
+            override fun shouldFetch(data: StepsSaveListModel.StepsSaveListResponse?): Boolean =
+                true
 
         }.build().asLiveData()
 

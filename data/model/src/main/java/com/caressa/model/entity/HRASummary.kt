@@ -1,9 +1,7 @@
 package com.caressa.model.entity
 
-import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.text.SimpleDateFormat
 import java.util.*
@@ -52,9 +50,10 @@ data class HRASummary(
     @SerializedName("Waist")
     val waist: Double = 0.0,
     @SerializedName("Weight")
-    val weight: Double = 0.0 ,
+    val weight: Double = 0.0,
     @field:SerializedName("LastUpdatedTime")
-    val LastUpdatedTime : String = currentUTCDatetimeInMillisecAsString)
+    val LastUpdatedTime: String = currentUTCDatetimeInMillisecAsString
+)
 
 /*data class HRASummary(
     @PrimaryKey
@@ -73,9 +72,7 @@ data class HRASummary(
     @field:SerializedName("Sync")
     val Sync : String ,
     @field:SerializedName("LastUpdatedTime")
-    val LastUpdatedTime : String = currentUTCDatetimeInMillisecAsString) */
-
-{
+    val LastUpdatedTime : String = currentUTCDatetimeInMillisecAsString) */ {
     companion object {
         val DATE_FORMAT_UTC = "yyyy-MM-dd'T'HH:mm:ss"
         val currentUTCDatetimeInMillisecAsString: String

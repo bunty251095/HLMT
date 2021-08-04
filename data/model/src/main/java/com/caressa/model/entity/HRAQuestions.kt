@@ -1,25 +1,24 @@
 package com.caressa.model.entity
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "HRAQuesTable",primaryKeys =["AnswerCode"])
+@Entity(tableName = "HRAQuesTable", primaryKeys = ["AnswerCode"])
 data class HRAQuestions(
     @field:SerializedName("QuestionCode")
-    val QuestionCode: String = "" ,
+    val QuestionCode: String = "",
     @field:SerializedName("AnswerCode")
-    val AnswerCode: String = "" ,
+    val AnswerCode: String = "",
     @field:SerializedName("AnsDescription")
-    val AnsDescription : String = "" ,
+    val AnsDescription: String = "",
     @field:SerializedName("Category")
-    val Category : String = "" ,
+    val Category: String = "",
     @field:SerializedName("TabName")
-    val TabName : String = "" ,
+    val TabName: String = "",
     @field:SerializedName("OthersVal")
-    val OthersVal  : String = "",
+    val OthersVal: String = "",
     @field:SerializedName("Code")
-    val Code  : String = "",
+    val Code: String = "",
     @field:SerializedName("IsSelected")
-    val IsSelected  : String = ""
+    val IsSelected: String = ""
 )

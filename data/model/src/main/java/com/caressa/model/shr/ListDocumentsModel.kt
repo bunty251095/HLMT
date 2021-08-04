@@ -8,13 +8,14 @@ import com.google.gson.annotations.SerializedName
 class ListDocumentsModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(  Header(authTicket = authToken) ) {
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("Message")
-        val message : String = "Synchronizing your profile",
+        val message: String = "Synchronizing your profile",
         @SerializedName("SearchCriteria")
-        val searchCriteria : SearchCriteria = SearchCriteria()
+        val searchCriteria: SearchCriteria = SearchCriteria()
     )
 
     data class SearchCriteria(
@@ -28,7 +29,7 @@ class ListDocumentsModel(
         val mode: String = "FM"
     )
 
-    data class  ListDocumentsResponse(
+    data class ListDocumentsResponse(
         @SerializedName("Documents")
         var documents: List<HealthDocument> = listOf()
     )

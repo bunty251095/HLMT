@@ -4,10 +4,12 @@ import com.caressa.model.BaseRequest
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class StepsSaveListModel(@SerializedName("JSONData")
-                         @Expose
-                         private val jsonData: String,
-                         private val authToken: String): BaseRequest(Header(authTicket = authToken.toString())) {
+class StepsSaveListModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String,
+    private val authToken: String
+) : BaseRequest(Header(authTicket = authToken.toString())) {
 
     data class JSONDataRequest(
         @SerializedName("StepsDetails")

@@ -1,11 +1,7 @@
 package com.caressa.model.entity
 
-import androidx.room.Embedded
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.caressa.model.parameter.LabRecordsListModel
-import com.caressa.model.parameter.ParameterListModel
 import com.google.gson.annotations.SerializedName
 import org.jetbrains.annotations.NotNull
 
@@ -15,11 +11,11 @@ class TrackParameterMaster {
     data class Parameter(
         @PrimaryKey
         @SerializedName("ID")
-        var iD: Int?=0,
+        var iD: Int? = 0,
         @SerializedName("Code")
         var code: String? = "",
         @SerializedName("Description")
-        var description: String? ="",
+        var description: String? = "",
         @SerializedName("Unit")
         var unit: String? = "",
         @SerializedName("ProfileCode")
@@ -38,7 +34,7 @@ class TrackParameterMaster {
         var mode: String? = "",
         var paramValue: String? = "",
         @SerializedName("Comments")
-        var comments: String? ="",
+        var comments: String? = "",
         @SerializedName("IsRecordExist")
         var isRecordExist: String? = "",
         @SerializedName("IsMandatory")
@@ -76,7 +72,7 @@ class TrackParameterMaster {
         val unit: String?
     )
 
-    @Entity(tableName = "TrackParameterHistory", primaryKeys = ["parameterCode","recordDate"])
+    @Entity(tableName = "TrackParameterHistory", primaryKeys = ["parameterCode", "recordDate"])
     data class History(
         @SerializedName("ParameterID")
         var parameterID: Int? = 0,
@@ -125,8 +121,9 @@ class TrackParameterMaster {
         var sync: Boolean? = false
     )
 
-    data class HistoryResponse(@SerializedName("History")
-                        val history: List<History> = listOf()
+    data class HistoryResponse(
+        @SerializedName("History")
+        val history: List<History> = listOf()
     )
 
 

@@ -7,7 +7,8 @@ import com.google.gson.annotations.SerializedName
 class BPExistModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(
     Header(
         authTicket = authToken
     )
@@ -19,7 +20,7 @@ class BPExistModel(
         private val PersonID: String = ""
     )
 
-    data class  BPExistResponse(
+    data class BPExistResponse(
         @SerializedName("BloodPressure")
         @Expose
         var bloodPressure: BloodPressure = BloodPressure()

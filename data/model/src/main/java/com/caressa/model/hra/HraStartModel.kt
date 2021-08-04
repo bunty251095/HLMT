@@ -7,7 +7,8 @@ import com.google.gson.annotations.SerializedName
 class HraStartModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String , private val authToken: String) : BaseRequest(
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(
     Header(
         authTicket = authToken
     )
@@ -16,8 +17,9 @@ class HraStartModel(
     data class JSONDataRequest(
         @SerializedName("PersonID")
         @Expose
-         val personID: String
+        val personID: String
     )
+
     data class HraStartResponse(
         @SerializedName("Template")
         @Expose
@@ -27,37 +29,37 @@ class HraStartModel(
     data class Template(
         @SerializedName("ID")
         @Expose
-         val ID: String? = "",
+        val ID: String? = "",
         @SerializedName("JobProfileCode")
         @Expose
-         val JobProfileCode: String? = "",
+        val JobProfileCode: String? = "",
         @SerializedName("Gender")
         @Expose
-         val gender: String? = "",
+        val gender: String? = "",
         @SerializedName("MinAge")
         @Expose
-         val minAge: String? = "",
+        val minAge: String? = "",
         @SerializedName("MaxAge")
         @Expose
-         val maxAge: String? = "",
+        val maxAge: String? = "",
         @SerializedName("MaxScore")
         @Expose
-         val maxScore: String? = "",
+        val maxScore: String? = "",
         @SerializedName("Sections")
         @Expose
-        var sections : List<Section>? = listOf(),
+        var sections: List<Section>? = listOf(),
         @SerializedName("HRAHistoryID")
         @Expose
-         val hraHistoryID: String? = ""
+        val hraHistoryID: String? = ""
     )
 
     data class Section(
         @SerializedName("tabID")
         @Expose
-         val tabID: String? = "",
+        val tabID: String? = "",
         @SerializedName("Section")
         @Expose
-         val section: String? = ""
+        val section: String? = ""
     )
 
     /*    data class Sections(

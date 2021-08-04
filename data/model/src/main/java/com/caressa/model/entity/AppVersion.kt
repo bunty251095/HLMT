@@ -30,13 +30,14 @@ data class AppVersion(
     @SerializedName("Features")
     val features: String? = "",
     @SerializedName("ReleasedDate")
-    val releasedDate: String? = "" ) {
+    val releasedDate: String? = ""
+) {
 
     companion object {
         val currentDateInYYYYMMDD: String
             get() {
                 val calendar = Calendar.getInstance()
-                val df = SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH)
+                val df = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                 return df.format(calendar.time)
             }
     }

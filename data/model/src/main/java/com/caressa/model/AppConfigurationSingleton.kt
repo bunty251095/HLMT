@@ -5,7 +5,7 @@ import com.caressa.model.hra.HraHistoryModel
 
 class AppConfigurationSingleton {
 
-    var hraHistory : HraHistoryModel.HRAHistory = HraHistoryModel.HRAHistory()
+    var hraHistory: HraHistoryModel.HRAHistory = HraHistoryModel.HRAHistory()
 
 
 }

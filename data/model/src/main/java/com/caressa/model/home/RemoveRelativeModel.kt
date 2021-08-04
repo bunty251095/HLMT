@@ -3,12 +3,13 @@ package com.caressa.model.home
 import com.caressa.model.BaseRequest
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import java.util.ArrayList
+import java.util.*
 
 class RemoveRelativeModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(Header(authTicket = authToken)) {
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(Header(authTicket = authToken)) {
 
     data class JSONDataRequest(
         @SerializedName("from")
@@ -16,7 +17,7 @@ class RemoveRelativeModel(
 /*    @SerializedName("Message")
         val message: String = "",*/
         @SerializedName("RequestType")
-        val requestType: String = "POST" ,
+        val requestType: String = "POST",
         @SerializedName("ID")
         val id: ArrayList<Int> = ArrayList()
     )

@@ -7,7 +7,8 @@ import com.google.gson.annotations.SerializedName
 class HraListRecommendedTestsModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(
     Header(
         authTicket = authToken
     )
@@ -16,13 +17,13 @@ class HraListRecommendedTestsModel(
     data class JSONDataRequest(
         @SerializedName("PersonID")
         @Expose
-         val PersonID: String = ""
+        val PersonID: String = ""
     )
 
-data class ListRecommendedTestsResponce(
-    @SerializedName("LabTests")
-    val labTests: List<LabTest> = listOf()
-)
+    data class ListRecommendedTestsResponce(
+        @SerializedName("LabTests")
+        val labTests: List<LabTest> = listOf()
+    )
 
     data class LabTest(
         @SerializedName("Key")

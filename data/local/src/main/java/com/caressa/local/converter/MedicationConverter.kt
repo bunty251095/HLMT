@@ -9,14 +9,14 @@ class MedicationConverter {
     var gson = Gson()
 
     @TypeConverter
-    fun fromMedicationToJson(mSchedule: List<MedicationEntity.MedicationSchedule>): String{
+    fun fromMedicationToJson(mSchedule: List<MedicationEntity.MedicationSchedule>): String {
         return gson.toJson(mSchedule)
     }
 
     @TypeConverter
-    fun fromJsonToMedication(json: String) : List<MedicationEntity.MedicationSchedule>{
+    fun fromJsonToMedication(json: String): List<MedicationEntity.MedicationSchedule> {
         val type = object : TypeToken<List<MedicationEntity.MedicationSchedule>>() {}.type
-        return gson.fromJson<List<MedicationEntity.MedicationSchedule>>(json,type)
+        return gson.fromJson<List<MedicationEntity.MedicationSchedule>>(json, type)
     }
 
 }

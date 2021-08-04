@@ -4,10 +4,11 @@ import com.caressa.model.BaseRequest
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class HraHistoryModel (
+class HraHistoryModel(
     @SerializedName("JSONData")
     @Expose
-    private val jsonData: String ,  private val authToken: String) : BaseRequest(
+    private val jsonData: String, private val authToken: String
+) : BaseRequest(
     Header(
         authTicket = authToken
     )
@@ -54,7 +55,8 @@ class HraHistoryModel (
         val templateID: Int = 0
     )
 
-    data class HRAHistoryResponse(@SerializedName("HRAHistory")
-                                  val hRAHistory: HRAHistory? = HRAHistory()
+    data class HRAHistoryResponse(
+        @SerializedName("HRAHistory")
+        val hRAHistory: HRAHistory? = HRAHistory()
     )
 }

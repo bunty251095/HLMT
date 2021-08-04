@@ -4,16 +4,18 @@ import com.caressa.model.BaseRequest
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class LoginNameExistsModel(@SerializedName("JSONData")
-                           @Expose
-                           private val jsonData: String) : BaseRequest(Header(authTicket = "")) {
+data class LoginNameExistsModel(
+    @SerializedName("JSONData")
+    @Expose
+    private val jsonData: String
+) : BaseRequest(Header(authTicket = "")) {
 
     data class JSONDataRequest(
         @SerializedName("LoginName")
         @Expose
         private val loginName: String = "",
 
-    )
+        )
 
     data class IsExistResponse(
 

@@ -14,13 +14,13 @@ data class Users(
     @field:SerializedName("LastName")
     val lastName: String = "",
     @field:SerializedName("DateOfBirth")
-    val dateOfBirth: String= "",
+    val dateOfBirth: String = "",
     @field:SerializedName("Gender")
     val gender: String = "",
     @field:SerializedName("Age")
     val age: Int = 0,
     @field:SerializedName("EmailAddress")
-    val emailAddress: String= "",
+    val emailAddress: String = "",
     @field:SerializedName("PhoneNumber")
     val phoneNumber: String = "",
     @field:SerializedName("PATH")
@@ -48,9 +48,9 @@ data class Users(
     @field:SerializedName("CountryName")
     val countryName: String = "",
     @field:SerializedName("CreatedDate")
-    val createdDate: String= "",
+    val createdDate: String = "",
     @field:SerializedName("DialingCode")
-    val dialingCode: String= "",
+    val dialingCode: String = "",
     @field:SerializedName("IsActive")
     val isActive: Boolean = false,
     @field:SerializedName("IsAuthenticated")

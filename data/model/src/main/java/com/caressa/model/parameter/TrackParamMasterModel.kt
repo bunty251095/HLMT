@@ -1,7 +1,6 @@
 package com.caressa.model.parameter
 
 import com.caressa.model.entity.TrackParameterMaster
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class DashboardData(
@@ -28,7 +27,7 @@ data class DashboardObservationData(
 data class TrackParamDashboardDataSet(
     val observationData: List<DashboardObservationData>?,
     val isStartTracking: Boolean = false,
-    val profileName:String?,
+    val profileName: String?,
     val profileCode: String?
 )
 
@@ -36,14 +35,14 @@ data class HistorytableModel(
     var parameterCode: String?,
     var parameterName: String?,
     var parameterUnit: String?,
-    var paramDateValueList : List<DateValue> = listOf()
+    var paramDateValueList: List<DateValue> = listOf()
 )
 
 data class HistorytableDataModel(
     var parameterCode: String?,
     var parameterName: String?,
     var parameterUnit: String?,
-    var paramDateValueList : List<String> = listOf()
+    var paramDateValueList: List<String> = listOf()
 )
 
 data class DateValue(
@@ -57,9 +56,9 @@ data class MonthYear(
 )
 
 data class ParameterProfile(
-    var profileCode : String = "",
-    var profileName : String = "",
-    var isSelection : Boolean = false
+    var profileCode: String = "",
+    var profileName: String = "",
+    var isSelection: Boolean = false
 )
 
 class ParentProfileModel {
@@ -74,7 +73,8 @@ data class DashboardParamGridModel(
     var colorId: Int = 0,
     var parameterName: String = "",
     var parameterValue: String = "",
-    var paramCode: String = "")
+    var paramCode: String = ""
+)
 
 data class FitnessData(
     @SerializedName("RecordDate")
