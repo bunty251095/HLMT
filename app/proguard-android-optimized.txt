@@ -132,41 +132,41 @@
 #Crashlytics
 #-keep class com.crashlytics.android.**
 -keep class com.crashlytics.** { *; }
--dontwarn com.crashlytics.**
+-dontwarn com.crashlytics.**ne
 
 -keep class sun.misc.Unsafe.** { *; }
 
 #Keep Vivant Modules
--keep class com.caressa.blogs.** { *; }
--keepclassmembers class com.caressa.blogs.** { *; }
--keep class com.caressa.common.** { *; }
--keepclassmembers class com.caressa.common.** { *; }
--keep class com.caressa.local.** { *; }
--keepclassmembers class com.caressa.local.** { *; }
--keep class com.caressa.model.** { *; }
--keepclassmembers class com.caressa.model.** { *; }
--keep class com.caressa.remote.** { *; }
--keepclassmembers class com.caressa.remote.** { *; }
--keep class com.caressa.repository.** { *; }
--keepclassmembers class com.caressa.repository.** { *; }
--keep class com.caressa.fitness_tracker.** { *; }
--keepclassmembers class com.caressa.fitness_tracker.** { *; }
--keep class com.caressa.home.** { *; }
--keepclassmembers class com.caressa.home.** { *; }
--keep class com.caressa.hra.** { *; }
--keepclassmembers class com.caressa.hra.** { *; }
--keep class com.caressa.medication_tracker.** { *; }
--keepclassmembers class com.caressa.medication_tracker.** { *; }
--keep class com.caressa.navigation.** { *; }
--keepclassmembers class com.caressa.navigation.** { *; }
--keep class com.caressa.records_tracker.** { *; }
--keepclassmembers class com.caressa.records_tracker.** { *; }
--keep class com.caressa.security.** { *; }
--keepclassmembers class com.caressa.security.** { *; }
--keep class com.caressa.tools_calculators.** { *; }
--keepclassmembers class com.caressa.tools_calculators.** { *; }
--keep class com.caressa.track_parameter.** { *; }
--keepclassmembers class com.caressa.track_parameter.** { *; }
+#-keep class com.caressa.blogs.** { *; }
+#-keepclassmembers class com.caressa.blogs.** { *; }
+#-keep class com.caressa.common.** { *; }
+#-keepclassmembers class com.caressa.common.** { *; }
+#-keep class com.caressa.local.** { *; }
+#-keepclassmembers class com.caressa.local.** { *; }
+#-keep class com.caressa.model.** { *; }
+#-keepclassmembers class com.caressa.model.** { *; }
+#-keep class com.caressa.remote.** { *; }
+#-keepclassmembers class com.caressa.remote.** { *; }
+#-keep class com.caressa.repository.** { *; }
+#-keepclassmembers class com.caressa.repository.** { *; }
+#-keep class com.caressa.fitness_tracker.** { *; }
+#-keepclassmembers class com.caressa.fitness_tracker.** { *; }
+#-keep class com.caressa.home.** { *; }
+#-keepclassmembers class com.caressa.home.** { *; }
+#-keep class com.caressa.hra.** { *; }
+#-keepclassmembers class com.caressa.hra.** { *; }
+#-keep class com.caressa.medication_tracker.** { *; }
+#-keepclassmembers class com.caressa.medication_tracker.** { *; }
+#-keep class com.caressa.navigation.** { *; }
+#-keepclassmembers class com.caressa.navigation.** { *; }
+#-keep class com.caressa.records_tracker.** { *; }
+#-keepclassmembers class com.caressa.records_tracker.** { *; }
+#-keep class com.caressa.security.** { *; }
+#-keepclassmembers class com.caressa.security.** { *; }
+#-keep class com.caressa.tools_calculators.** { *; }
+#-keepclassmembers class com.caressa.tools_calculators.** { *; }
+#-keep class com.caressa.track_parameter.** { *; }
+#-keepclassmembers class com.caressa.track_parameter.** { *; }
 
 
 

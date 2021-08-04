@@ -37,7 +37,7 @@ android {
         release {
             //for testing only
             debuggable true
-            minifyEnabled true
+            minifyEnabled false
             useProguard true
             shrinkResources false
             signingConfig signingConfigs.config
