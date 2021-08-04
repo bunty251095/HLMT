@@ -34,7 +34,7 @@ object MedicationBinding {
                 with(this.adapter as DrugsListAdapter) {
                     resource.drugs.let { updateData(it) }
                     //Utilities.hideKeyboard(view, context)
-                    KeyboardUtils.hideSoftInput(context as Activity)
+//                    KeyboardUtils.hideSoftInput(context as Activity)
                     showDropDown()
                 }
             }

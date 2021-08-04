@@ -180,6 +180,7 @@
                         android:layout_height="wrap_content"
                         style="@style/VivantEditTextStyle"
                         app:drugitems="@{viewModel.drugsList}"
+                        android:dropDownHeight="@dimen/_150sdp"
                         android:hint="Type your medicine name"
                         android:textSize="@dimen/_12sdp"
                         android:imeOptions="actionDone"
