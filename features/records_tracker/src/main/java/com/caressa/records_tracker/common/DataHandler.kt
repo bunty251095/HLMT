@@ -126,26 +126,33 @@ class DataHandler(val context: Context) {
         return position
     }
 
-    fun getCategorByCode(code: String): String? {
-        var Category = ""
-        if (code.equals("LAB", ignoreCase = true)) {
-            Category = "Pathology Report"
-        } else if (code.equals("HOS", ignoreCase = true)) {
-            Category = "Hospital Report"
-        } else if (code.equals("PRE", ignoreCase = true)) {
-            Category = "Doctor Prescription"
-        } else if (code.equals("DIET_PLAN", ignoreCase = true)) {
-            Category = "Diet Plan"
-        } else if (code.equals("FIT_PLAN", ignoreCase = true)) {
-            Category = "Fitness Plan"
-        } else if (code.equals("OTR", ignoreCase = true)) {
-            Category = "Other Document"
-        } else if (code.equals("HRAREPORT", ignoreCase = true)) {
-            Category = "HRA Report"
-        } else {
-            Category = "Other Document"
+    fun getCategoryByCode(code: String): String {
+        return when {
+            code.equals("LAB", ignoreCase = true) -> {
+                context.resources.getString(R.string.pathology_report)
+            }
+            code.equals("HOS", ignoreCase = true) -> {
+                context.resources.getString(R.string.hospital_report)
+            }
+            code.equals("PRE", ignoreCase = true) -> {
+                context.resources.getString(R.string.doctor_prescription)
+            }
+            code.equals("DIET_PLAN", ignoreCase = true) -> {
+                context.resources.getString(R.string.diet_plan)
+            }
+            code.equals("FIT_PLAN", ignoreCase = true) -> {
+                context.resources.getString(R.string.fitness_plan)
+            }
+            code.equals("OTR", ignoreCase = true) -> {
+                context.resources.getString(R.string.other_document)
+            }
+            code.equals("HRAREPORT", ignoreCase = true) -> {
+                context.resources.getString(R.string.hra_report)
+            }
+            else -> {
+                context.resources.getString(R.string.other_document)
+            }
         }
-        return Category
     }
 
     fun getCategoryList( context: Context ) : ArrayList<SpinnerModel> {
@@ -153,7 +160,7 @@ class DataHandler(val context: Context) {
         list.add(SpinnerModel(context.getResources().getString(R.string.all), "ALL", 0,false))
         list.add(SpinnerModel(context.getResources().getString(R.string.pathology_report), "LAB", 1,false))
         list.add(SpinnerModel(context.getResources().getString(R.string.hospital_report), "HOS", 2,false))
-        list.add(SpinnerModel(context.getResources().getString(R.string.prescription), "PRE", 3,false))
+        list.add(SpinnerModel(context.getResources().getString(R.string.doctor_prescription), "PRE", 3,false))
         list.add(SpinnerModel(context.getResources().getString(R.string.diet_plan), "DIET_PLAN", 4,false))
         list.add(SpinnerModel(context.getResources().getString(R.string.fitness_plan), "FIT_PLAN", 5,false))
         list.add(SpinnerModel(context.getResources().getString(R.string.other_document), "OTR", 6,false))

@@ -46,7 +46,7 @@ class OptionSettingsAdapter(val viewModel : DashboardViewModel, val context: Con
             }
             if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
                 holder.card_option.setBackgroundColor(ContextCompat.getColor(context,R.color.white))
-                ImageViewCompat.setImageTintList(holder.img_option, ColorStateList.valueOf(ContextCompat.getColor(context,R.color.vivant_edit_textcolor)))
+                ImageViewCompat.setImageTintList(holder.img_option, ColorStateList.valueOf(ContextCompat.getColor(context,R.color.colorPrimary)))
                 holder.txt_option.setTextColor(appColorHelper.textColor)
             }
             false

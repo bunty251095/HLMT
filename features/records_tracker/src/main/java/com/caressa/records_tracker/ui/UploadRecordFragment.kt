@@ -75,7 +75,7 @@ class UploadRecordFragment : BaseFragment()  {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initialise() {
-        binding.txtDocType.text = DataHandler(requireContext()).getCategorByCode(code)
+        binding.txtDocType.text = DataHandler(requireContext()).getCategoryByCode(code)
         uploadRecordAdapter = UploadRecordAdapter( this,requireContext(),viewModel)
         binding.rvUploadRecords.adapter = uploadRecordAdapter
 
