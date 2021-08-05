@@ -17,8 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.FirebaseConstants
-import com.caressa.common.utils.FirebaseHelper
-import com.caressa.common.utils.Utilities
+import com.caressa.common.utils.*
 import com.caressa.common.view.SpinnerAdapter
 import com.caressa.common.view.SpinnerModel
 import com.caressa.tools_calculators.R
@@ -27,11 +26,10 @@ import com.caressa.tools_calculators.common.DataHandler
 import com.caressa.tools_calculators.databinding.FragmentHypertensionInputBinding
 import com.caressa.tools_calculators.model.Answer
 import com.caressa.tools_calculators.model.CalculatorDataSingleton
-import com.caressa.common.utils.ParameterDataModel
 import com.caressa.model.toolscalculators.UserInfoModel
 import com.caressa.tools_calculators.ui.HealthConditionDialog
 import com.caressa.tools_calculators.viewmodel.ToolsCalculatorsViewModel
-import com.caressa.common.utils.HeightWeightDialog
+import com.caressa.common.utils.Utilities.isKeyboardOpen
 import com.caressa.tools_calculators.views.SystolicDiastolicDialogManager
 import kotlinx.android.synthetic.main.dialog_input_parameter.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -319,6 +317,9 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
         paramList = parameterAdapter!!.paramList
 
         dialogInput!!.btn_save_input.setOnClickListener {
+            if((requireActivity()).isKeyboardOpen()){
+                KeyboardUtils.toggleSoftInput(requireContext())
+            }
             if (!Utilities.isNullOrEmpty(dialogInput!!.inpLayout_input.text.toString())) {
                 val value: Double = dialogInput!!.inpLayout_input.text.toString().toDouble()
                 if (value >= param.minRange && value <= param.maxRange) {
@@ -352,7 +353,9 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
             paramList[3].finalValue = diastolic
         }
         parameterAdapter!!.notifyDataSetChanged()
-        //parameterAdapter!!.updateList(paramList)
+        if((requireActivity()).isKeyboardOpen()){
+            KeyboardUtils.toggleSoftInput(requireContext())
+        }
     }
 
     override fun onDialogValueListener(dialogType: String, height: String, weight: String, unit: String, visibleValue: String) {
