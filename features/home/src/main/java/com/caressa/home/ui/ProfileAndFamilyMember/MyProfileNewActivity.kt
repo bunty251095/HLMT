@@ -211,6 +211,8 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
             binding.layoutBtnProfile.visibility = View.GONE
             binding.layoutEditDetails.visibility = View.GONE
             binding.layoutShowDetails.visibility = View.VISIBLE
+            binding.edtUsername.setText(user.firstName)
+
         }
 
         binding.btnUpdateProfile.setOnClickListener {

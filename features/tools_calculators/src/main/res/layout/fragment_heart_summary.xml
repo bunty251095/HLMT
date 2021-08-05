@@ -489,6 +489,7 @@
                 app:isTemplate="true"
                 style="@style/CustomButton"
                 android:text="@string/RECALCULATE"
+                android:visibility="invisible"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:layout_marginEnd="@dimen/_16sdp"
