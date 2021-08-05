@@ -173,14 +173,7 @@ class HraQuestionsActivity : AppCompatActivity()  {
 
             "EDS" -> {
                 Timber.i("Inside--->"+ques.qCode)
-                if ( selectedOptions.any { it.description.equals(resources.getString(R.string.NONE),ignoreCase = true) } ) {
-                    viewModel.saveResponse(ques.qCode,"DONT","None", ques.category, ques.tabName, "")
-                } else {
-                    for ( option in selectedOptions ) {
-                        val data = option.answerCode.split(",")
-                        viewModel.saveResponse(data[1],data[2],option.description,data[0],ques.tabName,"")
-                    }
-                }
+                viewModel.saveResponseEDS(ques.qCode,ques.tabName,ques.category,selectedOptions)
                 setCurrentScreen(currentScreen - 1)
             }
 

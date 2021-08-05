@@ -167,16 +167,7 @@ class HraQuesMultipleSelectionFragment(val qCode: String) : BaseFragment() {
 
             "EDS" -> {
                 Timber.i("Inside---> $qCode")
-                if (selectedOptions.any { it.description.equals(resources.getString(R.string.NONE), ignoreCase = true) }) {
-                    viewModel.saveResponse(qCode, "DONT", "None",questionData.category,questionData.tabName,"")
-                } else {
-                    //viewModel.clearHraQuestionsResp(qCode)
-                    for (option in selectedOptions) {
-                        val data = option.answerCode.split(",")
-                        viewModel.saveResponse(data[1], data[2], option.description, data[0],questionData.tabName,"")
-                    }
-                    viewModel.clearHraQuestionsResp(qCode)
-                }
+                viewModel.saveResponseEDS(qCode,questionData.tabName,questionData.category,selectedOptions)
                 viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() + 1)
             }
 
@@ -233,14 +224,7 @@ class HraQuesMultipleSelectionFragment(val qCode: String) : BaseFragment() {
 
             "EDS" -> {
                 if ( selectedOptions.isNotEmpty() ) {
-                    if (selectedOptions.any { it.description.equals(resources.getString(R.string.NONE), ignoreCase = true) }) {
-                        viewModel.saveResponse(qCode,"DONT","None",questionData.category,questionData.tabName,"")
-                    } else {
-                        for (option in selectedOptions) {
-                            val data = option.answerCode.split(",")
-                            viewModel.saveResponse(data[1], data[2],option.description,data[0],questionData.tabName,"")
-                        }
-                    }
+                    viewModel.saveResponseEDS(qCode,questionData.tabName,questionData.category,selectedOptions)
                 }
                 viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() - 1)
             }
