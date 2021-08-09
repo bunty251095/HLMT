@@ -47,19 +47,19 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
 
     fun init() {
         try {
-            paramFt = Utilities.getVitalParameterData(context.resources.getString(R.string.ft), context)
-            paramCm = Utilities.getVitalParameterData(context.resources.getString(R.string.cm), context)
-            paramLbs = Utilities.getVitalParameterData(context.resources.getString(R.string.lbs), context)
-            paramKg = Utilities.getVitalParameterData(context.resources.getString(R.string.kg), context)
+            paramFt = Utilities.getVitalParameterData(context.resources.getString(R.string.FT), context)
+            paramCm = Utilities.getVitalParameterData(context.resources.getString(R.string.CM), context)
+            paramLbs = Utilities.getVitalParameterData(context.resources.getString(R.string.LBS), context)
+            paramKg = Utilities.getVitalParameterData(context.resources.getString(R.string.KG), context)
 
             if (dialogType.equals("Height", ignoreCase = true)) {
                 lbl_title.text = context.resources.getString(R.string.PICK_YOUR_HEIGHT)
                 txt_message.text = context.resources.getString(R.string.ENTER_HEIGHT)
-                btn_left.text = context.resources.getString(R.string.ft_in)
+                btn_left.text = context.resources.getString(R.string.FT_IN)
                 btn_left.isSelected = true
-                btn_right.text = context.resources.getString(R.string.cm)
+                btn_right.text = context.resources.getString(R.string.CM)
                 txt_unit1.text = paramFt!!.unit
-                txt_unit2.text = context.resources.getString(R.string.inch)
+                txt_unit2.text = context.resources.getString(R.string.INCH)
                 picker1.setOnLongPressUpdateInterval(pickerSpeed.toLong())
                 picker1.wrapSelectorWheel = false
                 picker1.minValue = paramFt!!.minRange
@@ -85,7 +85,7 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
                     btn_right.setTextColor(ContextCompat.getColor(context, R.color.textViewColor))
                     picker1.value = CalculateParameters.convertCmToFeet(parameterDataModel!!.finalValue)
                     picker2.value = CalculateParameters.convertCmToInch(parameterDataModel!!.finalValue)
-                } else if (parameterDataModel!!.unit.equals(context.resources.getString(R.string.cm), ignoreCase = true)) {
+                } else if (parameterDataModel!!.unit.equals(context.resources.getString(R.string.CM), ignoreCase = true)) {
                     layout_picker2.visibility = View.GONE
                     btn_left.background = ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
                     btn_right.background = ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
@@ -106,14 +106,14 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
             } else {
                 lbl_title.text = context.resources.getString(R.string.CURRENT_WEIGHT)
                 txt_message.text = context.resources.getString(R.string.ENTER_WEIGHT)
-                btn_left.text = context.resources.getString(R.string.lbs)
-                btn_right.text = context.resources.getString(R.string.kg)
+                btn_left.text = context.resources.getString(R.string.LBS)
+                btn_right.text = context.resources.getString(R.string.KG)
                 picker1.setOnLongPressUpdateInterval(pickerSpeed.toLong())
                 picker1.wrapSelectorWheel = false
                 picker2.setOnLongPressUpdateInterval(pickerSpeed.toLong())
                 picker2.wrapSelectorWheel = false
 
-                if (parameterDataModel!!.unit.equals(context.resources.getString(R.string.lbs), ignoreCase = true)) {
+                if (parameterDataModel!!.unit.equals(context.resources.getString(R.string.LBS), ignoreCase = true)) {
                     layout_picker2.visibility = View.GONE
                     btn_left.background = ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
                     btn_right.background = ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
@@ -129,7 +129,7 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
                     val wt = CalculateParameters.convertKgToLbs(parameterDataModel!!.finalValue).toDouble()
                     Timber.i("Converted_Wt=>$wt")
                     picker1.value = wt.toInt()
-                } else if (parameterDataModel!!.unit.equals(context.resources.getString(R.string.kg), ignoreCase = true)) {
+                } else if (parameterDataModel!!.unit.equals(context.resources.getString(R.string.KG), ignoreCase = true)) {
                     layout_picker2.visibility = View.VISIBLE
                     btn_left.background = ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
                     btn_right.background = ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
@@ -260,7 +260,7 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
                         onDialogValueListener!!.onDialogValueListener("Height", height.toString(), "0", "Cm", height.toString())
                     }
                 } else {
-                    if (txt_unit1.text.toString().contains(context.resources.getString(R.string.lbs))) {
+                    if (txt_unit1.text.toString().contains(context.resources.getString(R.string.LBS))) {
                         weight = picker1.value.toDouble()
                         val finalValue = CalculateParameters.convertLbsToKg(weight.toString())
                         onDialogValueListener!!.onDialogValueListener("Weight", "0", finalValue, paramLbs!!.unit, weight.toString())

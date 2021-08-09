@@ -93,12 +93,12 @@ class HraQuesBloodPressureFragment(val qCode: String) : BaseFragment() {
 
         binding.laySystolic.setHint("Systolic")
         binding.laySystolic.setImage(R.drawable.img_systolic)
-        binding.laySystolic.setUnit(resources.getString(R.string.mm_hg))
+        binding.laySystolic.setUnit(resources.getString(R.string.MM_HG))
         binding.laySystolic.editText!!.addTextChangedListener(textWatcher)
 
         binding.layDiastolic.setHint("Diastolic")
         binding.layDiastolic.setImage(R.drawable.img_systolic)
-        binding.layDiastolic.setUnit(resources.getString(R.string.mm_hg))
+        binding.layDiastolic.setUnit(resources.getString(R.string.MM_HG))
         binding.layDiastolic.editText!!.addTextChangedListener(textWatcher)
     }
 
@@ -253,10 +253,10 @@ class HraQuesBloodPressureFragment(val qCode: String) : BaseFragment() {
     private fun saveResponseForNextScreen( isFilled : Boolean ) {
         selectedOptionList = mutableListOf()
         if ( isFilled ) {
-            selectedOptionList.add(Option(resources.getString(R.string.SYSTOLIC) + " : $systolic " + resources.getString(R.string.mm_hg), Constants.SYSTOLIC,true))
-            selectedOptionList.add(Option(resources.getString(R.string.DIASTOLIC) + " : $diastolic "+ resources.getString(R.string.mm_hg), Constants.DIASTOLIC,true))
+            selectedOptionList.add(Option(resources.getString(R.string.SYSTOLIC) + " : $systolic " + resources.getString(R.string.MM_HG), Constants.SYSTOLIC,true))
+            selectedOptionList.add(Option(resources.getString(R.string.DIASTOLIC) + " : $diastolic "+ resources.getString(R.string.MM_HG), Constants.DIASTOLIC,true))
         } else {
-            selectedOptionList.add(Option(resources.getString(R.string.I_DONT_REM),"",true))
+            selectedOptionList.add(Option(resources.getString(R.string.I_DONT_REMEMBER),"",true))
 
         }
         hraDataSingleton.previousAnsList[viewPagerActivity!!.getCurrentScreen() ] = selectedOptionList

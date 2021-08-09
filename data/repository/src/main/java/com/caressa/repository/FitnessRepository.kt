@@ -1,5 +1,6 @@
 package com.caressa.repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.caressa.local.dao.FitnessDao
 import com.caressa.model.entity.FitnessEntity
@@ -26,13 +27,13 @@ interface FitnessRepository {
 
 class FitnessRepositoryImpl(
     private val dataSource: FitnessDatasource,
-    private val fitnessDao: FitnessDao
-) : FitnessRepository {
+    private val fitnessDao: FitnessDao,
+    private val context: Context) : FitnessRepository {
 
     override suspend fun fetchStepsListHistory(data: StepsHistoryModel): LiveData<Resource<StepsHistoryModel.Response>> {
 
         return object :
-            NetworkBoundResource<StepsHistoryModel.Response, BaseResponse<StepsHistoryModel.Response>>() {
+            NetworkBoundResource<StepsHistoryModel.Response, BaseResponse<StepsHistoryModel.Response>>(context) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -76,7 +77,7 @@ class FitnessRepositoryImpl(
     override suspend fun fetchLatestGoal(data: GetStepsGoalModel): LiveData<Resource<GetStepsGoalModel.Response>> {
 
         return object :
-            NetworkBoundResource<GetStepsGoalModel.Response, BaseResponse<GetStepsGoalModel.Response>>() {
+            NetworkBoundResource<GetStepsGoalModel.Response, BaseResponse<GetStepsGoalModel.Response>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -102,7 +103,7 @@ class FitnessRepositoryImpl(
     override suspend fun saveStepsGoal(data: SetGoalModel): LiveData<Resource<SetGoalModel.Response>> {
 
         return object :
-            NetworkBoundResource<SetGoalModel.Response, BaseResponse<SetGoalModel.Response>>() {
+            NetworkBoundResource<SetGoalModel.Response, BaseResponse<SetGoalModel.Response>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -128,7 +129,7 @@ class FitnessRepositoryImpl(
     override suspend fun saveStepsList(data: StepsSaveListModel): LiveData<Resource<StepsSaveListModel.StepsSaveListResponse>> {
 
         return object :
-            NetworkBoundResource<StepsSaveListModel.StepsSaveListResponse, BaseResponse<StepsSaveListModel.StepsSaveListResponse>>() {
+            NetworkBoundResource<StepsSaveListModel.StepsSaveListResponse, BaseResponse<StepsSaveListModel.StepsSaveListResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 

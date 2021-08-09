@@ -6,6 +6,6 @@
     android:drawableStart="@drawable/squre_bg"
     android:drawablePadding="@dimen/_10sdp"
     android:drawableTint="@color/colorPrimary"
-    android:text="This is a template"
+    android:text="--"
     android:layout_marginStart="@dimen/_10sdp"
     style="@style/ToolsQuestion" />

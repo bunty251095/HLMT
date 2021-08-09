@@ -82,9 +82,9 @@ object HomeBinding {
                     val age = DateHelper.calculatePersonAge(dob)
                     if (!Utilities.isNullOrEmpty(userRelatives.age) && userRelatives.age.toDouble().toInt() != 0) {
                         strAge += if (userRelatives.age.equals("1", ignoreCase = true)) {
-                            " Year"
+                            " ${context.resources.getString(R.string.YEAR)}"
                         } else {
-                            " Years"
+                            " ${context.resources.getString(R.string.YEARS)}"
                         }
                     } else {
                         strAge = age

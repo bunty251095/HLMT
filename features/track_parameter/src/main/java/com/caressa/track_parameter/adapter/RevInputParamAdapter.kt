@@ -1,5 +1,6 @@
 package com.caressa.track_parameter.adapter
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.Editable
@@ -24,18 +25,14 @@ import java.text.NumberFormat
 import java.util.*
 import java.util.regex.Pattern
 
-class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamViewModel): RecyclerView.Adapter<RevInputParamAdapter.InputParameterViewHolder>() {
+class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamViewModel,val context: Context): RecyclerView.Adapter<RevInputParamAdapter.InputParameterViewHolder>() {
 
     val dataList: MutableList<ParameterListModel.InputParameterModel> = mutableListOf()
     private var edtBMI: EditText? = null
     private var edtWHR: EditText? = null
     var validationMassage = ""
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = InputParameterViewHolder(
-        LayoutInflater.from(parent.context).inflate(
-            R.layout.item_input_parameters, parent, false
-        )
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = InputParameterViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_input_parameters, parent, false))
 
     override fun getItemCount(): Int = dataList.size
 
@@ -51,22 +48,28 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
 
     private fun filterList(items: List<ParameterListModel.InputParameterModel>): Collection<ParameterListModel.InputParameterModel> {
         var filterList: List<ParameterListModel.InputParameterModel> = mutableListOf()
-        if(items.get(0).profileCode.equals("BMI")){
-            filterList = updateBMISequence(items)
-        }else if(items.get(0).profileCode.equals("WHR")){
-            filterList = updateWHRSequence(items)
-        }else if (items.get(0).profileCode.equals("BLOODPRESSURE")) {
-            filterList = updateBPSequence(items)
-        }else if(items.get(0).profileCode.equals("DIABETIC")){
-            filterList = items.sortedBy { it.description }
-        }else{
-            filterList = items.filter { item -> !item.parameterCode.equals("WBC",true) && !item.parameterCode.equals("DLC",true) }
+        when {
+            items[0].profileCode.equals("BMI") -> {
+                filterList = updateBMISequence(items)
+            }
+            items[0].profileCode.equals("WHR") -> {
+                filterList = updateWHRSequence(items)
+            }
+            items[0].profileCode.equals("BLOODPRESSURE") -> {
+                filterList = updateBPSequence(items)
+            }
+            items[0].profileCode.equals("DIABETIC") -> {
+                filterList = items.sortedBy { it.description }
+            }
+            else -> {
+                filterList = items.filter { item -> !item.parameterCode.equals("WBC",true) && !item.parameterCode.equals("DLC",true) }
+            }
         }
         return filterList
     }
 
     private fun updateWHRSequence(items: List<ParameterListModel.InputParameterModel>): List<ParameterListModel.InputParameterModel> {
-        var whrList:MutableList<ParameterListModel.InputParameterModel> = mutableListOf()
+        val whrList:MutableList<ParameterListModel.InputParameterModel> = mutableListOf()
         var whr:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
         var waist:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
         var hip:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
@@ -88,7 +91,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
     }
 
     private fun updateBPSequence(items: List<ParameterListModel.InputParameterModel>): List<ParameterListModel.InputParameterModel> {
-        var bpList:MutableList<ParameterListModel.InputParameterModel> = mutableListOf()
+        val bpList:MutableList<ParameterListModel.InputParameterModel> = mutableListOf()
         var systolic:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
         var diastolic:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
 //        var pulse:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
@@ -110,7 +113,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
     }
 
     private fun updateBMISequence(items: List<ParameterListModel.InputParameterModel>): List<ParameterListModel.InputParameterModel> {
-        var bmiList:MutableList<ParameterListModel.InputParameterModel> = mutableListOf()
+        val bmiList:MutableList<ParameterListModel.InputParameterModel> = mutableListOf()
         var bmi:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
         var height:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
         var weight:ParameterListModel.InputParameterModel = ParameterListModel.InputParameterModel()
@@ -138,11 +141,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
             Timber.i("DataAdapter=> "+parameter.minPermissibleValue+" : "+parameter.maxPermissibleValue+" : "+parameter.parameterUnit)
             binding.view.setBackgroundColor(binding.view.resources.getColor(getRandomColor(position)))
             binding.txtParamName.setText(parameter.description)
-            binding.imgParam.setImageResource(
-                TrackParameterHelper.getProfileImageByProfileCode(
-                    profileCode
-                )
-            )
+            binding.imgParam.setImageResource(TrackParameterHelper.getProfileImageByProfileCode(profileCode))
 
             binding.edtInputValue.setHint(getHint(parameter))
 
@@ -156,9 +155,8 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                 binding.edtInputValue.inputType =
                     InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED
                 val decimalValueFilter = DecimalValueFilter(true)
-                if (parameter.parameterCode.equals("BP_SYS") || parameter.parameterCode
-                        .equals("BP_DIA") || parameter.parameterCode.equals("BP_PULSE")
-                ) {
+                if (parameter.parameterCode.equals("BP_SYS")
+                    || parameter.parameterCode.equals("BP_DIA") || parameter.parameterCode.equals("BP_PULSE")) {
                     decimalValueFilter.setDigits(0)
                     binding.edtInputValue.filters =
                         arrayOf<InputFilter>(decimalValueFilter, InputFilter.LengthFilter(4))
@@ -182,32 +180,24 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                 binding.edtInputValue.isFocusable = false
                 binding.edtInputValue.isFocusableInTouchMode = false
                 if (!parameter.parameterVal.isNullOrEmpty()) {
-                    val observation: String = TrackParameterHelper.getBMIObservation(parameter.parameterVal!!)
+                    val observation: String = TrackParameterHelper.getBMIObservation(parameter.parameterVal!!,context)
 //                    val observation: String = ""
                     if (!observation.isNullOrEmpty()) {
-                        binding.edtInputValue.setTextColor(
-                            binding.edtInputValue.resources.getColor(
-                                TrackParameterHelper.getObservationColor(observation, "BMI")
-                            )
-                        )
+                        binding.edtInputValue.setTextColor(binding.edtInputValue.resources.getColor(TrackParameterHelper.getObservationColor(observation, "BMI")))
                     }
                 }
             }else
-            if (dataList.get(position).parameterCode.equals("WHR",true)) {
+            if (dataList[position].parameterCode.equals("WHR",true)) {
                 edtWHR = binding.edtInputValue
                 //            binding.mainLayout.setAlpha(0.7f);
                 binding.edtInputValue.inputType = 0
                 binding.edtInputValue.isFocusable = false
                 binding.edtInputValue.isFocusableInTouchMode = false
                 if (!parameter.parameterVal.isNullOrEmpty()) {
-                    val observation: String = TrackParameterHelper.getWHRObservation(parameter.parameterVal!!,1)
+                    val observation: String = TrackParameterHelper.getWHRObservation(parameter.parameterVal!!,1,context)
 //                    val observation: String = ""
                     if (!observation.isNullOrEmpty()) {
-                        binding.edtInputValue.setTextColor(
-                            binding.edtInputValue.resources.getColor(
-                                TrackParameterHelper.getObservationColor(observation, "WHR")
-                            )
-                        )
+                        binding.edtInputValue.setTextColor(binding.edtInputValue.resources.getColor(TrackParameterHelper.getObservationColor(observation, "WHR")))
                     }
                 }
             }/*else{
@@ -240,24 +230,14 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
             }*/
 
             binding.edtInputValue.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    charSequence: CharSequence,
-                    i: Int,
-                    i1: Int,
-                    i2: Int
-                ) {
-                }
+
+                override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
 
                 override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
                 override fun afterTextChanged(editable: Editable) {
-                    if (!dataList.get(adapterPosition).parameterCode
-                            .equals("BMI",true) &&
-                        !dataList.get(adapterPosition).parameterCode
-                            .equals("WHR",true)
-                    ) {
-                        if (dataList.get(adapterPosition).parameterType
-                                .equals("value",true)
-                        ) {
+                    if (!dataList.get(adapterPosition).parameterCode.equals("BMI",true)
+                        && !dataList.get(adapterPosition).parameterCode.equals("WHR",true)) {
+                        if (dataList.get(adapterPosition).parameterType.equals("value",true)) {
                             dataList.get(adapterPosition).parameterVal = editable.toString()
                             if (profileCode.equals("BMI", ignoreCase = true)) {
                                 updateBMIParameter()
@@ -270,14 +250,14 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                     }
                 }
             })
-            if(parameter.parameterCode.equals("HEIGHT")){
+            if(parameter.parameterCode.equals(context.resources.getString(R.string.HEIGHT))){
                 binding.layoutInputNonBmi.visibility = View.GONE
                 binding.layoutHeightWeight.visibility = View.VISIBLE
                 binding.edtInputValueBmi.isFocusable = false
                 binding.edtInputValueBmi.isCursorVisible = false
                 binding.edtInputValueBmi.isFocusableInTouchMode = false
                 binding.edtInputValueBmi.setHint(binding.edtInputValue.hint)
-                if(viewModel.getPreference("HEIGHT").equals("cm")){
+                if(viewModel.getPreference(context.resources.getString(R.string.HEIGHT)).equals(context.resources.getString(R.string.CM),ignoreCase = true)){
                     var heightValue:String = ""
                     if(!binding.edtInputValue.text.toString().isNullOrEmpty() && binding.edtInputValue.text.toString().contains(".",true)){
                         heightValue = binding.edtInputValue.text.toString().toDouble().toInt().toString()
@@ -287,53 +267,41 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                     }
                     binding.txtParamUnitBmi.text = binding.txtParamUnit.text
                 }else{
-                    var text:String = binding.edtInputValue.text.toString()
+                    val text:String = binding.edtInputValue.text.toString()
                     if(!text.isNullOrEmpty()) {
-                        binding.edtInputValueBmi.setText(
-                            CalculateParameters.convertCmToFeetInch(
-                                text
-                            )
-                        )
+                        binding.edtInputValueBmi.setText(CalculateParameters.convertCmToFeetInch(text))
                         binding.txtParamUnitBmi.text = ""
                     }
                 }
                 binding.edtInputValueBmi.setOnClickListener {
                     val data = ParameterDataModel()
-                    data.title = "Height"
+                    data.title = context.resources.getString(R.string.HEIGHT)
                     data.value = " - - "
                     if (dataList.get(adapterPosition).parameterVal.isNullOrEmpty()) {
                         data.finalValue = "0"
                     }else{
                         data.finalValue = dataList.get(adapterPosition).parameterVal!!
                     }
-                    if(viewModel.getPreference("HEIGHT").equals("cm")) {
-                        data.unit = "cm"
+                    if(viewModel.getPreference(context.resources.getString(R.string.HEIGHT)).equals(context.resources.getString(R.string.CM),ignoreCase = true)) {
+                        data.unit = context.resources.getString(R.string.CM)
                     }else{
-                        data.unit = "Feet/inch"
+                        data.unit = context.resources.getString(R.string.FEET_INCH)
                     }
 //                        data.unit = "Feet/inch"
 //                        data.unit = "lbs"
 //                        data.unit = "Kg"
                     data.code = "HEIGHT"
                     val heightWeightDialog = HeightWeightDialog(binding.edtInputValue.context,object:HeightWeightDialog.OnDialogValueListener {
-                        override fun onDialogValueListener(
-                            dialogType: String,
-                            height: String,
-                            weight: String,
-                            unit: String,
-                            visibleValue: String
-                        ) {
+
+                        override fun onDialogValueListener(dialogType: String, height: String, weight: String, unit: String, visibleValue: String) {
                             viewModel.updateUserPreference(unit)
                             binding.edtInputValue.setText(height)
-                            if(unit.equals("cm",true)) {
+
+                            if(unit.equals(context.resources.getString(R.string.CM),true)) {
                                 binding.edtInputValueBmi.setText(height)
-                                binding.txtParamUnitBmi.setText("cm")
-                            }else{
-                                binding.edtInputValueBmi.setText(
-                                    CalculateParameters.convertCmToFeetInch(
-                                        height
-                                    )
-                                )
+                                binding.txtParamUnitBmi.text = context.resources.getString(R.string.CM)
+                            } else {
+                                binding.edtInputValueBmi.setText(CalculateParameters.convertCmToFeetInch(height))
                                 binding.txtParamUnitBmi.setText("")
                             }
                         }
@@ -350,23 +318,20 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                 binding.edtInputValueBmi.isCursorVisible = false
                 binding.edtInputValueBmi.isFocusableInTouchMode = false
                 binding.edtInputValueBmi.setHint(binding.edtInputValue.hint)
-                if(viewModel.getPreference("WEIGHT").equals("kg")){
+                if(viewModel.getPreference(context.resources.getString(R.string.WEIGHT)).equals(context.resources.getString(R.string.KG),ignoreCase = true)){
                     binding.edtInputValueBmi.text = binding.edtInputValue.text
                     binding.txtParamUnitBmi.text = binding.txtParamUnit.text
                 }else{
-                    var text:String = binding.edtInputValue.text.toString()
+                    val text:String = binding.edtInputValue.text.toString()
+
                     if(!text.isNullOrEmpty()) {
-                        binding.edtInputValueBmi.setText(
-                            CalculateParameters.convertKgToLbs(
-                                text
-                            )
-                        )
-                        binding.txtParamUnitBmi.text = "lbs"
+                        binding.edtInputValueBmi.setText(CalculateParameters.convertKgToLbs(text))
+                        binding.txtParamUnitBmi.text = context.resources.getString(R.string.LBS)
                     }
                 }
                 binding.edtInputValueBmi.setOnClickListener {
                     val data = ParameterDataModel()
-                    data.title = "Weight"
+                    data.title = context.resources.getString(R.string.WEIGHT)
                     data.value = " - - "
                     if (dataList.get(adapterPosition).parameterVal.isNullOrEmpty()) {
                         data.finalValue = "50"
@@ -374,37 +339,30 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                         data.finalValue = dataList.get(adapterPosition).parameterVal!!
 
                     }
-                    if(viewModel.getPreference("WEIGHT").equals("kg")) {
-                        data.unit = "kg"
+                    if(viewModel.getPreference(context.resources.getString(R.string.WEIGHT)).equals(context.resources.getString(R.string.KG),ignoreCase = true)) {
+                        data.unit = context.resources.getString(R.string.KG)
                     }else{
-                        data.unit = "lbs"
+                        data.unit = context.resources.getString(R.string.LBS)
                     }
 //                        data.unit = "Feet/inch"
 //                        data.unit = "lbs"
 //                        data.unit = "Kg"
                     data.code = "WEIGHT"
                     val heightWeightDialog = HeightWeightDialog(binding.edtInputValue.context,object:HeightWeightDialog.OnDialogValueListener {
-                        override fun onDialogValueListener(
-                            dialogType: String,
-                            height: String,
-                            weight: String,
-                            unit: String,
-                            visibleValue: String
-                        ) {
+
+                        override fun onDialogValueListener(dialogType: String, height: String, weight: String, unit: String, visibleValue: String) {
                             viewModel.updateUserPreference(unit)
                             binding.edtInputValue.setText(weight)
-                            if(unit.equals("kg",true)) {
+                            if(unit.equals(context.resources.getString(R.string.KG),true)) {
                                 binding.edtInputValueBmi.setText(weight)
-                                binding.txtParamUnitBmi.setText("kg")
-                            }else{
+                                binding.txtParamUnitBmi.text = context.resources.getString(R.string.KG)
+                            } else {
                                 var strWeight = ""
                                 if(!weight.isNullOrEmpty()){
-                                    strWeight = Utilities.roundOffPrecision(CalculateParameters.convertKgToLbs(
-                                        weight
-                                    ).toDouble(),0).toInt().toString()
+                                    strWeight = Utilities.roundOffPrecision(CalculateParameters.convertKgToLbs(weight).toDouble(),0).toInt().toString()
                                 }
                                 binding.edtInputValueBmi.setText(strWeight)
-                                binding.txtParamUnitBmi.setText("lbs")
+                                binding.txtParamUnitBmi.text = context.resources.getString(R.string.LBS)
                             }
                         }
                     },"Weight", data)
@@ -501,7 +459,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                 try {
                     val waistValue = waist.toFloat()
                     val hipValue = hip.toFloat()
-                    if (waistValue >= 63.5 && waistValue <= 165.1 && hipValue >= 63.5 && hipValue <= 165.1) {
+                    if (waistValue in 63.5..165.1 && hipValue >= 63.5 && hipValue <= 165.1) {
                         whr = waistValue / hipValue
                         val nm = NumberFormat.getNumberInstance()
                         //whrAsString=String.valueOf(whr);
@@ -523,11 +481,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
 
         var filter = InputFilter { source, start, end, dest, dstart, dend ->
             for (i in start until end) {
-                if (!Pattern.compile("[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 ]*")
-                        .matcher(
-                            source[i].toString()
-                        ).matches()
-                ) {
+                if (!Pattern.compile("[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 ]*").matcher(source[i].toString()).matches()) {
                     return@InputFilter ""
                 }
             }
@@ -545,8 +499,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
             R.color.vivant_bright_blue,
             R.color.vivant_soft_pink,
             R.color.vivant_nasty_green,
-            R.color.vivant_dusky_blue
-        )
+            R.color.vivant_dusky_blue)
 
     private fun updateBMIParameter() {
         try {
@@ -573,7 +526,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                 dataList.get(bmiPosition).parameterVal =bmi
                 if (edtBMI != null) {
                     edtBMI!!.setText(bmi)
-                    val observation: String = TrackParameterHelper.getBMIObservation(bmi)
+                    val observation: String = TrackParameterHelper.getBMIObservation(bmi,context)
                     if (!observation.isNullOrEmpty()) {
                         edtBMI!!.setTextColor(edtBMI!!.context.resources.getColor(TrackParameterHelper.getObservationColor(observation,"BMI")))
 
@@ -610,16 +563,9 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
             dataList.get(whrPosition).parameterVal = whr
             if (edtWHR != null) {
                 edtWHR!!.setText(whr)
-                val observation: String = TrackParameterHelper.getWHRObservation(whr, 1)
+                val observation: String = TrackParameterHelper.getWHRObservation(whr, 1,context)
                 if (!observation.isNullOrEmpty()) {
-                    edtWHR!!.setTextColor(
-                        edtWHR!!.context.resources.getColor(
-                            TrackParameterHelper.getObservationColor(
-                                observation,
-                                "WHR"
-                            )
-                        )
-                    )
+                    edtWHR!!.setTextColor(edtWHR!!.context.resources.getColor(TrackParameterHelper.getObservationColor(observation, "WHR")))
                 }else{}
             }else{}
         }else{}
@@ -641,8 +587,8 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
         var counter = 0
         try {
             for (param in list) {
-                if (!TrackParameterHelper.isNullOrEmptyOrZero(param.maxPermissibleValue) && !param.minPermissibleValue.isNullOrEmpty()
-                ) {
+                if (!TrackParameterHelper.isNullOrEmptyOrZero(param.maxPermissibleValue)
+                    && !param.minPermissibleValue.isNullOrEmpty()) {
                     if (!TrackParameterHelper.isNullOrEmptyOrZero(param.parameterVal)) {
                         try {
                             var minVal = 0.0
@@ -660,8 +606,9 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                             }
                             if (paramVal < minVal || paramVal > maxVal) {
                                 isValid = false
-                                validationMassage = param.description
-                                    .toString() + " value should be between " + param.minPermissibleValue + " to " + param.maxPermissibleValue
+                                validationMassage = param.description.toString() +
+                                        " ${context.resources.getString(R.string.VALUE_SHOULD_BE_BETWEEN)} " + param.minPermissibleValue +
+                                        " ${context.resources.getString(R.string.TO)} " + param.maxPermissibleValue
                                 break
                             } else {
                                 counter++
@@ -678,23 +625,23 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
             if (isValid && isBP) {
                 if (systolic < diastolic) {
                     isValid = false
-                    validationMassage = "diastolic value should be less than systolic value."
+                    validationMassage = context.resources.getString(R.string.DIASTOLIC_VALUE_SHOULD_BE_LESS_THAN_SYSTOLIC_VALUE)
                 } else if (systolic == 0.0) {
-                    validationMassage = "Please enter systolic value"
+                    validationMassage = context.resources.getString(R.string.PLEASE_INSERT_SYSTOLIC_BP_VALUE)
                     isValid = false
                 } else if (diastolic == 0.0) {
-                    validationMassage = "Please enter diastolic value"
+                    validationMassage = context.resources.getString(R.string.PLEASE_INSERT_DIASTOLIC_BP_VALUE)
                     isValid = false
                 }
             } else if (profileCode.equals("BMI", ignoreCase = true) && counter != 2 && isValid) {
-                validationMassage = "Please enter all BMI profile fields."
+                validationMassage = context.resources.getString(R.string.PLEASE_ENTER_ALL_BMI_PROFILE_FIELDS)
                 isValid = false
             } else if (profileCode.equals("WHR", ignoreCase = true) && counter != 2 && isValid) {
-                validationMassage = "Please enter all WHR profile fields."
+                validationMassage = context.resources.getString(R.string.PLEASE_ENTER_ALL_WHR_PROFILE_FIELDS)
                 isValid = false
             } else if (counter == 0 && validationMassage.equals("", ignoreCase = true)) {
 //                if (!profileCode.equalsIgnoreCase("BMI") && !profileCode.equalsIgnoreCase("WHR") && !profileCode.equalsIgnoreCase("BLOODPRESSURE")) {
-                validationMassage = "Please enter value."
+                validationMassage = context.resources.getString(R.string.PLEASE_ENTER_VALUE)
                 //                }else {
 //                    validationMassage = "";
 //                }

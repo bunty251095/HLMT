@@ -127,7 +127,7 @@ class HraQuesExposeCheckupFragment(val qCode: String) : BaseFragment() {
             if ( Validations.validateMultiSelectionOptions(binding.optionContainer) ) {
                 nextButtonClick()
             } else {
-                Utilities.toastMessageShort(context, "Please Select Option")
+                Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_SELECT_OPTION))
             }
         }
 

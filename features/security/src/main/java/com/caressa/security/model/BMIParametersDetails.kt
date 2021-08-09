@@ -7,20 +7,20 @@ class BMIParametersDetails( ) {
 
     fun getBMIParameterData(parameter : String,context: Context) : BMIParameter {
         val bmiParameter = BMIParameter()
-        if ( parameter == context.resources.getString(R.string.ft) ) {
-            bmiParameter.unit = context.resources.getString(R.string.ft)
+        if ( parameter == context.resources.getString(R.string.FT) ) {
+            bmiParameter.unit = context.resources.getString(R.string.FT)
             bmiParameter.minRange = 4
             bmiParameter.maxRange = 8
-        } else if ( parameter == context.resources.getString(R.string.cm) ) {
-            bmiParameter.unit = context.resources.getString(R.string.cm)
+        } else if ( parameter == context.resources.getString(R.string.CM) ) {
+            bmiParameter.unit = context.resources.getString(R.string.CM)
             bmiParameter.minRange = 120
             bmiParameter.maxRange = 240
-        } else if ( parameter == context.resources.getString(R.string.lbs) ) {
-            bmiParameter.unit = context.resources.getString(R.string.lbs)
+        } else if ( parameter == context.resources.getString(R.string.LBS) ) {
+            bmiParameter.unit = context.resources.getString(R.string.LBS)
             bmiParameter.minRange = 64
             bmiParameter.maxRange = 550
-        } else if ( parameter == context.resources.getString(R.string.kg) ) {
-            bmiParameter.unit = context.resources.getString(R.string.kg)
+        } else if ( parameter == context.resources.getString(R.string.KG) ) {
+            bmiParameter.unit = context.resources.getString(R.string.KG)
             bmiParameter.minRange = 30
             bmiParameter.maxRange = 250
         }

@@ -52,7 +52,7 @@ class RevUpdateParameterFragment : BaseFragment(){
         binding.rvSelectedParameters.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         binding.rvSelectedParameters.adapter = profileAdapter
 
-        var paramAdapter = RevInputParamAdapter(profileCode,viewModel)
+        var paramAdapter = RevInputParamAdapter(profileCode,viewModel,requireContext())
         binding.rvInputParameters.layoutManager = LinearLayoutManager(context,
             LinearLayoutManager.VERTICAL,false)
         binding.rvInputParameters.adapter = paramAdapter
@@ -62,7 +62,7 @@ class RevUpdateParameterFragment : BaseFragment(){
 
         profileAdapter.setOnItemClickListener {
             Timber.i("Position: "+it.iconPosition+" :: "+it.profileName)
-            paramAdapter = RevInputParamAdapter(it.profileCode, viewModel)
+            paramAdapter = RevInputParamAdapter(it.profileCode, viewModel,requireContext())
             binding.rvInputParameters.layoutManager = LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL,false)
             binding.rvInputParameters.adapter = paramAdapter
@@ -82,7 +82,7 @@ class RevUpdateParameterFragment : BaseFragment(){
         val day = c.get(Calendar.DAY_OF_MONTH)
 
 
-        dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+        dpd = DatePickerDialog(requireContext(), { view, year, monthOfYear, dayOfMonth ->
 
             // Display Selected date
             val selectedDate:String = dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + year.toString()
@@ -112,26 +112,38 @@ class RevUpdateParameterFragment : BaseFragment(){
             }
         })
 
-        binding.edtDate.setOnClickListener(View.OnClickListener { view: View? ->
+        binding.edtDate.setOnClickListener { view: View? ->
             if (fragmentManager != null) {
-                DialogHelper().showDatePickerDialog("Record Date",requireContext(), Calendar.getInstance(),null, Calendar.getInstance(), object :DialogHelper.DateListener{
-                    override fun onDateSet(date: String, year: String, month: String, dayOfMonth: String) {
-                        val selectedDate:String = dayOfMonth + "/" + month + "/" + year
-                        if (!selectedDate.isNullOrEmpty()) {
-                            serverDate = DateHelper.convertDateTimeValue(selectedDate,DateHelper.DISPLAY_DATE_DDMMYYYY,DateHelper.DISPLAY_DATE_DDMMMYYYY).toString()
-                            binding.edtDate.setText(serverDate)
-                            viewModel.getParameterByProfileCodeAndDate(profileCode,serverDate)
+                DialogHelper().showDatePickerDialog(
+                    "Record Date",
+                    requireContext(),
+                    Calendar.getInstance(),
+                    null,
+                    Calendar.getInstance(),
+
+                    object : DialogHelper.DateListener {
+
+                        override fun onDateSet(date: String, year: String, month: String, dayOfMonth: String) {
+                            val selectedDate: String = dayOfMonth + "/" + month + "/" + year
+                            if (!selectedDate.isNullOrEmpty()) {
+                                serverDate = DateHelper.convertDateTimeValue(
+                                    selectedDate,
+                                    DateHelper.DISPLAY_DATE_DDMMYYYY,
+                                    DateHelper.DISPLAY_DATE_DDMMMYYYY).toString()
+                                binding.edtDate.setText(serverDate)
+                                viewModel.getParameterByProfileCodeAndDate(profileCode, serverDate)
+                            }
                         }
-                    }
-                })
+                    })
             }
-        })
+        }
 
         // Observer
-        viewModel.saveParam.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        viewModel.saveParam.observe(viewLifecycleOwner, {
           Timber.i("Inside SAVE API Call Response: "+it)
         })
-        viewModel.selectedParameter.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+
+        viewModel.selectedParameter.observe(viewLifecycleOwner, {
             var counter: Int = 0
             if(it.isNotEmpty()){
                 if(isFirstTime) {
@@ -145,11 +157,8 @@ class RevUpdateParameterFragment : BaseFragment(){
                     profileAdapter.selectedPosition = counter
                     profileAdapter.updateData(it)
 
-                    paramAdapter = RevInputParamAdapter(profileCode, viewModel)
-                    binding.rvInputParameters.layoutManager = LinearLayoutManager(
-                        context,
-                        LinearLayoutManager.VERTICAL, false
-                    )
+                    paramAdapter = RevInputParamAdapter(profileCode, viewModel,requireContext())
+                    binding.rvInputParameters.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     binding.rvInputParameters.adapter = paramAdapter
                     viewModel.getParameterByProfileCodeAndDate(profileCode, serverDate)
                     paramAdapter.profileCode = profileCode
@@ -160,11 +169,11 @@ class RevUpdateParameterFragment : BaseFragment(){
             }
         })
 
-        binding.btnSaveUpdateParameters.setOnClickListener(View.OnClickListener { view: View? ->
+        binding.btnSaveUpdateParameters.setOnClickListener { view: View? ->
             try {
                 var IS_BMI = false
-                var IS_WHR:Boolean = false
-                var IS_BP:Boolean = false
+                var IS_WHR: Boolean = false
+                var IS_BP: Boolean = false
                 val updateDateTime: String = DateHelper.currentDateTime
                 var recordDateSync: String? = ""
 
@@ -175,10 +184,8 @@ class RevUpdateParameterFragment : BaseFragment(){
                     parameters = paramAdapter.getUpdatedParamList()
                     val recordDate = serverDate
                     var strUnit: String? = null
-                    if (!profileCode.isNullOrEmpty() && profileCode.equals(
-                            "LIPID",
-                            ignoreCase = true
-                        ) && strUnit.isNullOrEmpty()) {
+                    if (!profileCode.isNullOrEmpty() && profileCode.equals("LIPID", ignoreCase = true)
+                        && strUnit.isNullOrEmpty()) {
                         strUnit = "mg/dL"
                     }
                     if (profileCode.equals("WHR", ignoreCase = true)) {
@@ -187,16 +194,14 @@ class RevUpdateParameterFragment : BaseFragment(){
                     } else if (profileCode.equals("BMI", ignoreCase = true)) {
                         IS_BMI = true
                         recordDateSync = recordDate
-                    } else if (profileCode.equals(
-                            "BP",
-                            ignoreCase = true
-                        ) || profileCode.equals("BLOODPRESSURE", ignoreCase = true)) {
+                    } else if (profileCode.equals("BP", ignoreCase = true)
+                        || profileCode.equals("BLOODPRESSURE", ignoreCase = true)) {
                         IS_BP = true
                         recordDateSync = recordDate
                     }
                     val isParameterEmpty: Boolean = checkParameterEmpty(parameters)
                     if (!isParameterEmpty) {
-                        viewModel.saveParameter(paramAdapter.dataList!! as ArrayList<ParameterListModel.InputParameterModel>,recordDate)
+                        viewModel.saveParameter(paramAdapter.dataList!! as ArrayList<ParameterListModel.InputParameterModel>, recordDate)
                     } else {
                         isValidateSuccess = false
                         validationMessage = "Please enter at least one value for $profileCode"
@@ -227,13 +232,13 @@ class RevUpdateParameterFragment : BaseFragment(){
                             SyncManager.initiatePushDataSyncAsync("LABPARAMETER")
                         }*/
                     }
-                }else{
+                } else {
                     viewModel.showMessage(validationMessage)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-        })
+        }
 
         binding.layoutHistory.setOnClickListener {
             viewModel.navigateParam(RevUpdateParameterFragmentDirections.actionUpdateFragmentToHistoryFragment())

@@ -132,7 +132,7 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
         binding.edtStartDate.setText(DateHelper.getDateTimeAs_ddMMMyyyyNew(serverStartDate))
         calendarStart = setDayMonthYearToCalender(serverStartDate,calendarStart)
 
-        medFrequencyAdapter = MedFreuencyAdapter(requireContext(), resources.getStringArray(R.array.arr_med_frequency), this)
+        medFrequencyAdapter = MedFreuencyAdapter(requireContext(), medicationTrackerHelper.getFrequencyList(), this)
         binding.rvMedFrequency.layoutManager = GridLayoutManager(context, 2)
         binding.rvMedFrequency.adapter = medFrequencyAdapter
 
@@ -213,7 +213,7 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
                             medScheduleTimeAdapter!!.addMedTime(i,TimeModel(scheduleId,getDisplayTime(scheduleTime),scheduleTime,hours,minutes))
                         }
                     } else {
-                        Utilities.toastMessageLong(context, "Schedule Time not found,Please Select to Update Medicine Details")
+                        Utilities.toastMessageLong(context,resources.getString(R.string.ERROR_SCHEDULE_TIME_NOT_FOUND_PLEASE_SELECT_TO_UPDATE_MEDICINE_DETAILS))
                         binding.counterMedTime.setValue("1")
                         medScheduleTimeAdapter!!.addMedTime(0, TimeModel(0, "", "", 0, 0))
                     }
@@ -308,7 +308,7 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
                                 val date = DateHelper.getDateTimeAs_ddMMMyyyyNew(selectedDate)
                                 binding.edtStartDate.setText(date)
                             } else {
-                                Utilities.toastMessageShort(context, "Start Date must be less than or Equal to End Date")
+                                Utilities.toastMessageShort(context,resources.getString(R.string.ERROR_START_DATE_MUST_BE_LESS_THAN_OR_EQUAL_TO_END_DATE))
                             }
                         } else {
                             serverStartDate = selectedDate
@@ -380,8 +380,7 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
                         date: String,
                         year: String,
                         month: String,
-                        dayOfMonth: String
-                    ) {
+                        dayOfMonth: String) {
                         val selectedDate = DateHelper.convertDateSourceToDestination(date,DateHelper.DISPLAY_DATE_DDMMMYYYY,DateHelper.SERVER_DATE_YYYYMMDD)
                         Timber.e("SelectedEndDate--->$selectedDate")
                         if (!Utilities.isNullOrEmpty(selectedDate)) {
@@ -391,17 +390,9 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
                                 DateHelper.getDate(selectedDate, DateHelper.SERVER_DATE_YYYYMMDD)
                             if (endDate == startDate || endDate.after(startDate)) {
                                 serverEndDate = selectedDate
-                                binding.edtDuration.setText(
-                                    (DateHelper.getDateDifference(
-                                        serverStartDate,
-                                        selectedDate
-                                    ) + 1).toString()
-                                )
+                                binding.edtDuration.setText((DateHelper.getDateDifference(serverStartDate, selectedDate) + 1).toString())
                             } else {
-                                Utilities.toastMessageShort(
-                                    context,
-                                    "End Date must be Greater than or Equal to Start Date"
-                                )
+                                Utilities.toastMessageShort(context,resources.getString(R.string.ERROR_END_DATE_MUST_BE_GREATER_THAN_OR_EQUAL_TO_START_DATE))
                             }
                         }
                     }
@@ -450,7 +441,7 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
         try {
             if (isValidTimeList()) {
                 if (medFreqPos == 1 && Utilities.isNullOrEmptyOrZero(binding.edtDuration.text.toString())) {
-                    Utilities.toastMessageShort(context, "Please Enter Valid Number of Days")
+                    Utilities.toastMessageShort(context,resources.getString(R.string.ERROR_PLEASE_ENTER_VALID_NUMBER_OF_DAYS))
                 } else {
                     val medicine = MedicationModel.Medication()
                     medicine.drug.drugId = drugId
@@ -475,7 +466,7 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
                     viewModel.callAddOrUpdateMedicineApi(medicine,getScheduleTimeList(),removedScheduleList,medDoseCount)
                 }
             } else {
-                Utilities.toastMessageShort(context, "Please Select Valid Schedule Time")
+                Utilities.toastMessageShort(context,resources.getString(R.string.ERROR_PLEASE_SELECT_VALID_SCHEDULE_TIME))
             }
         } catch (e: java.lang.Exception) {
             e.printStackTrace()

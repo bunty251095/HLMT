@@ -83,13 +83,13 @@ class StressAndAnxietyInputFragment : BaseFragment() {
         dataHandler!!.clearSequenceList()
         stressAndAnxietyData = StressAndAnxietyData()
         currentQuestion = dataHandler!!.getStressNextQuestion(currentQuestion)
-        question = stressAndAnxietyData!!.getStressAssessmentData(currentQuestion)
+        question = stressAndAnxietyData!!.getStressAssessmentData(currentQuestion,requireContext())
 
         binding.indicatorSeekbar.setIndicatorTextFormat("  \${PROGRESS} / 21 ")
         binding.indicatorSeekbar.setUserSeekAble(false)
         binding.txtQuestion.text = question!!.question
 
-        viewModel.stressAndAnxietySaveResp.observe( viewLifecycleOwner , Observer {})
+        viewModel.stressAndAnxietySaveResp.observe( viewLifecycleOwner , {})
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -137,7 +137,7 @@ class StressAndAnxietyInputFragment : BaseFragment() {
                 binding.btnBack.visibility = View.INVISIBLE
                 //RoutingClass.routeToActivity(getApplicationContext(), GlobalConstants.TOOLS_AND_TRACKER, null, true)
             } else {
-                question = stressAndAnxietyData!!.getStressAssessmentData(currentQuestion)
+                question = stressAndAnxietyData!!.getStressAssessmentData(currentQuestion,requireContext())
                 loadPreviousData()
                 if (currentQuestion.equals("DASS-21_D_LIFEMEANINGLESS", ignoreCase = true)) {
                     binding.btnBack.visibility = View.INVISIBLE
@@ -158,7 +158,7 @@ class StressAndAnxietyInputFragment : BaseFragment() {
                     saveDetails()
                     currentQuestion = dataHandler!!.getStressNextQuestion(currentQuestion)
                     binding.indicatorSeekbar.setProgress(binding.indicatorSeekbar.progressFloat + 1)
-                    question = stressAndAnxietyData!!.getStressAssessmentData(currentQuestion)
+                    question = stressAndAnxietyData!!.getStressAssessmentData(currentQuestion,requireContext())
                     loadPreviousData()
                 }
                 if (question!!.isLast) {
@@ -182,7 +182,7 @@ class StressAndAnxietyInputFragment : BaseFragment() {
         if (binding.rgOptions.checkedRadioButtonId != -1) {
             return true
         } else {
-            Utilities.toastMessageShort(context,"Please fill details")
+            Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_FILL_DETAILS))
         }
         return isValid
     }

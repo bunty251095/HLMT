@@ -17,9 +17,6 @@ import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
 import com.caressa.security.R
 import com.caressa.security.domain.UserManagementUseCase
-import com.caressa.security.ui.ChangePasswordFragment
-import com.caressa.security.ui.ForgetPasswordFragmentDirections
-import com.caressa.security.ui.VerifyCodeFragmentDirections
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -89,7 +86,7 @@ class ForgetPasswordViewModel(private val userCase: UserManagementUseCase, priva
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if ( it.data!!.status.equals(Constants.SUCCESS,ignoreCase = true) ) {
                     if ( from.equals("ForgetPassword",ignoreCase = true) ) {
-                        navigate(ForgetPasswordFragmentDirections.actionForgotPasswordFragmentToVerifyCodeFragment(email))
+                        //navigate(ForgetPasswordFragmentDirections.actionForgotPasswordFragmentToVerifyCodeFragment(email))
                     } else if ( from.equals("VerifyCode",ignoreCase = true) ) {
                         toastMessage("Verification Code has been sent to your Registered Email Address")
                     }
@@ -125,7 +122,7 @@ class ForgetPasswordViewModel(private val userCase: UserManagementUseCase, priva
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if (it.data?.validity.equals(Constants.TRUE, true)) {
-                    navigate(VerifyCodeFragmentDirections.actionVerifyCodeFragmentToChangePasswordFragment(email))
+                    //navigate(VerifyCodeFragmentDirections.actionVerifyCodeFragmentToChangePasswordFragment(email))
                 } else if (it.data?.validity.equals(Constants.FALSE, true)) {
                     toastMessage("Please Enter Valid Verification Code sent to your Email Address.")
                 }
@@ -138,7 +135,7 @@ class ForgetPasswordViewModel(private val userCase: UserManagementUseCase, priva
         }
     }
 
-    fun callUpdatePassword( fragment: ChangePasswordFragment, email: String , newPassword : String )
+    fun callUpdatePassword( email: String , newPassword : String )
             = viewModelScope.launch(dispatchers.main) {
 
         val requestData = ChangePasswordModel(Gson().toJson(ChangePasswordModel.JSONDataRequest(
@@ -154,7 +151,7 @@ class ForgetPasswordViewModel(private val userCase: UserManagementUseCase, priva
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if (it.data!!.isPasswordUpdate.equals(Constants.TRUE,true)) {
-                    fragment.dialogPasswordUpdated!!.show()
+
                 } else {
                     toastMessage("Unable to Reset Password")
                 }

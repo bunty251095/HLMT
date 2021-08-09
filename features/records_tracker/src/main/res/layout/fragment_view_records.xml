@@ -129,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/VivantTitle"
-            android:text="No Records Uploaded"
+            android:text="@string/NO_RECORDS_FOUND"
             android:textSize="@dimen/_14sdp"
             android:gravity="center"
             android:layout_marginTop="@dimen/_13sdp"

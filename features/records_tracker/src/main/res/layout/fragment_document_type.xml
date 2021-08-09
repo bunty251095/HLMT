@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/VivantTitle"
-        android:text="Please select the type of document from the below listed options."
+        android:text="@string/PLEASE_SELECT_THE_TYPE_OF_DOCUMENT_FROM_THE_BELOW_LISTED_OPTIONS"
         android:layout_marginTop="@dimen/_25sdp"
         android:layout_marginStart="@dimen/_13sdp"
         android:layout_marginEnd="@dimen/_13sdp"

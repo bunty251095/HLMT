@@ -35,7 +35,7 @@ class FeedbackActivity : BaseActivity() {
             if ( !Utilities.isNullOrEmpty(feedback) ) {
                 viewModel.callSaveFeedbackApi(this,feedback)
             } else {
-                Utilities.toastMessageShort(this,"Please Enter Feedback to Submit")
+                Utilities.toastMessageShort(this,resources.getString(R.string.ERROR_PLEASE_ENTER_FEEDBACK_TO_SUBMIT))
             }
         }
 

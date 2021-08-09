@@ -49,12 +49,11 @@ class MyMedicationsAdapter(val viewModel : MedicineTrackerViewModel, val context
             if (!Utilities.isNullOrEmpty(medicine.DrugTypeCode)) {
                 holder.imgMedType.setImageResource(medicationTrackerHelper.getMedTypeImageByCode(medicine.DrugTypeCode!!))
                 if (medicine.DrugTypeCode.equals("MOUTHWASH", ignoreCase = true)) {
-                    holder.txtMedType.text = "Mouth\nwash"
+                    holder.txtMedType.text = context.resources.getString(R.string.MOUTH_WASH)
                 } else {
                     holder.txtMedType.text = context.resources.getString(medicationTrackerHelper.getMedTypeByCode(medicine.DrugTypeCode!!))
                 }
             }
-
             val medName = if ( !Utilities.isNullOrEmpty(medicine.drug.strength) ) {
                 medicine.drug.name + " - " +medicine.drug.strength
             } else {
@@ -63,18 +62,20 @@ class MyMedicationsAdapter(val viewModel : MedicineTrackerViewModel, val context
 
             holder.txtMedicineName.text = medName
             if (medicine.scheduleList.isNotEmpty()) {
-                holder.txtDose.text = medicine.scheduleList[0].dosage + " Dose"
+                holder.txtDose.text = medicine.scheduleList[0].dosage + " " + context.resources.getString(R.string.DOSE)
             }
             holder.txtMedTime.text = medicine.comments
 
             var medDateDuration: String = DateHelper.getDateTimeAs_ddMMMyyyyNew(medicine.PrescribedDate)
             medDateDuration = if (!Utilities.isNullOrEmpty(medicine.EndDate)) {
-                "From  $medDateDuration  to  " + DateHelper.getDateTimeAs_ddMMMyyyyNew(medicine.EndDate)
+                context.resources.getString(R.string.FROM) + " " + medDateDuration +
+                        " " + context.resources.getString(R.string.TO) + " "
+                DateHelper.getDateTimeAs_ddMMMyyyyNew(medicine.EndDate)
             } else {
                 if (DateHelper.getDateDifference(medicine.PrescribedDate!!, currentDate) < 0) {
-                    "Starting on  $medDateDuration"
+                    context.resources.getString(R.string.STARTING_ON) + "  $medDateDuration"
                 } else {
-                    "Started  $medDateDuration"
+                    context.resources.getString(R.string.STARTED) + "  $medDateDuration"
                 }
             }
 
@@ -95,12 +96,10 @@ class MyMedicationsAdapter(val viewModel : MedicineTrackerViewModel, val context
             if (currentDate.equals(medicine.PrescribedDate, ignoreCase = true)
                 && currentDate.equals(medicine.EndDate, ignoreCase = true)) {
                 //holder.lblStarted.setText("For ");
-                holder.txtStartDate.text = "For  Today  Only"
+                holder.txtStartDate.text = context.resources.getString(R.string.FOR_TODAY_ONLY)
             } else if (medicine.PrescribedDate.equals(medicine.EndDate, ignoreCase = true)) {
-                //holder.lblStarted.setText("For ");
-                holder.txtStartDate.text = "For  " + DateHelper.getDateTimeAs_ddMMMyyyyNew(medicine.PrescribedDate) + "  Only"
+                holder.txtStartDate.text = context.resources.getString(R.string.FOR) + "  " + DateHelper.getDateTimeAs_ddMMMyyyyNew(medicine.PrescribedDate) + "  " + context.resources.getString(R.string.ONLY)
             } else {
-                //holder.lblStarted.setText("Started ");
                 holder.txtStartDate.text = medDateDuration
             }
 

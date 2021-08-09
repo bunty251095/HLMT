@@ -1,15 +1,17 @@
 package com.caressa.repository.utils
 
+import android.content.Context
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.caressa.repository.R
 import kotlinx.coroutines.*
 import timber.log.Timber
 import java.net.UnknownHostException
 import kotlin.coroutines.coroutineContext
 
-abstract class NetworkDataBoundResource<ResultType, RequestType> {
+abstract class NetworkDataBoundResource<ResultType, RequestType>(val context: Context) {
     private val result = MutableLiveData<Resource<ResultType>>()
     private val supervisorJob = SupervisorJob()
 
@@ -25,16 +27,10 @@ abstract class NetworkDataBoundResource<ResultType, RequestType> {
                 fetchFromNetwork()
             } catch (e: UnknownHostException) {
                 Timber.e("An error happened: $e")
-                setValue(
-                    Resource.error(
-                        e,
-                        null,
-                        errorMessage = "Seems like you are offline. Please check your internet connection and try again."
-                    )
-                )
+                setValue(Resource.error(e, null, errorMessage = context.resources.getString(R.string.ERROR_INTERNET_UNAVAILABLE)))
             } catch (e: Exception) {
                 Timber.e("An error happened: $e")
-                setValue(Resource.error(e, null, errorMessage = "Something went wrong."))
+                setValue(Resource.error(e, null, errorMessage = context.resources.getString(R.string.SOMETHING_WENT_WRONG)))
             }
 
         }
@@ -42,7 +38,6 @@ abstract class NetworkDataBoundResource<ResultType, RequestType> {
     }
 
     private suspend fun fetchFromNetwork() {
-
         val apiResponse = createCallAsync().await()
         Timber.e("Data fetched from network")
         setValue(Resource.success(processResponse(apiResponse)))

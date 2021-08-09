@@ -10,7 +10,6 @@ import com.caressa.common.base.BaseViewModel
 import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.security.R
 import com.caressa.security.databinding.FragmentHlmtStepOneBinding
-import com.caressa.security.databinding.FragmentLoginBinding
 import com.caressa.security.viewmodel.HlmtLoginViewModel
 import com.caressa.security.viewmodel.LoginViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn

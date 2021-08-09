@@ -41,7 +41,7 @@ class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComp
     override fun getLifecycle(): Lifecycle = lifeCycleRegistry
 
     override fun onNewToken(token: String) {
-        Timber.e(TAG + "Refreshed token--->" + token)
+        Timber.e("$TAG Refreshed token--->$token")
         sendRegistrationToServer(token)
     }
 
@@ -51,13 +51,11 @@ class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComp
             val data = remoteMessage.data
             Timber.i("onMessageReceived(FCMMessagingService): data =$data")
             if (viewModel.isUserLoggedIn()) {
-                if (!Utilities.isNullOrEmpty(data.get("Screen")) && data.get("Screen")
-                        .equals("MEDICATION_REMINDER", ignoreCase = true)
-                ) {
+                if (!Utilities.isNullOrEmpty(data["Screen"])
+                    && data["Screen"].equals("MEDICATION_REMINDER", ignoreCase = true)) {
                     showMedicineReminderNotification(data)
-                } else if (!Utilities.isNullOrEmpty(data.get("Action")) && data.get("Action")
-                        .equals("HEALTHTIPS", ignoreCase = true)
-                ) {
+                } else if (!Utilities.isNullOrEmpty(data["Action"])
+                    && data["Action"].equals("HEALTHTIPS", ignoreCase = true)) {
                     showHealthTipNotification(this, data)
                 }
             }
@@ -81,8 +79,7 @@ class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComp
                     medNotification.scheduleTime = details.getString("ScheduleTime")
                     medNotification.medicationID = details.getString("MedicationID")
                     medNotification.scheduleID = details.getString("ScheduleID")
-                    medNotification.notificationDate =
-                        details.getString("NotificationDate").split("T").toTypedArray()[0]
+                    medNotification.notificationDate = details.getString("NotificationDate").split("T").toTypedArray()[0]
                     // For Self and Family Member also
                     viewModel.checkRelativeExistAndShowNotification(this, medNotification)
                 }
@@ -92,7 +89,7 @@ class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComp
         }
     }
 
-    fun showHealthTipNotification(context: Context, data: Map<String, String>) {
+    private fun showHealthTipNotification(context: Context, data: Map<String, String>) {
         try {
             val action = data["Action"]
             val title = data["title"]
@@ -126,7 +123,7 @@ class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComp
             OnClick.putExtra(Constants.NOTIFICATION_ACTION, action)
             OnClick.putExtra(Constants.NOTIFICATION_TITLE, title)
             OnClick.putExtra(Constants.NOTIFICATION_MESSAGE, message)
-            OnClick.setComponent(ComponentName(NavigationConstants.APPID, NavigationConstants.HOME))
+            OnClick.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HOME)
             OnClick.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             if (!Utilities.isNullOrEmpty(imageURL)) {
                 OnClick.putExtra(Constants.NOTIFICATION_URL, imageURL)
@@ -135,20 +132,14 @@ class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComp
                 context,
                 NOTIFICATION_ID,
                 OnClick,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
+                PendingIntent.FLAG_UPDATE_CURRENT)
 
             val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
             val builder = NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.img_hlmt_logo_notification)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
-                .setLargeIcon(
-                    BitmapFactory.decodeResource(
-                        resources,
-                        R.drawable.img_hlmt_logo_notification
-                    )
-                )
+                .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.img_hlmt_logo_notification))
                 .setContentTitle(title)
                 .setContentText(message)
                 .setStyle(NotificationCompat.BigTextStyle().bigText(message))

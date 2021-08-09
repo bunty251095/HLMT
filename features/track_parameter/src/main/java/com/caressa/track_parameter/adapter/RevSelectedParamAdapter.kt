@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.caressa.common.base.ClientConfiguration
+import com.caressa.common.utils.AppColorHelper
 import com.caressa.model.parameter.ParameterListModel
 import com.caressa.track_parameter.R
 import com.caressa.track_parameter.databinding.ItemSelectedParameterProfileBinding
@@ -19,12 +20,9 @@ class RevSelectedParamAdapter(private val showUrineProfile: Boolean) : RecyclerV
 
     private val dataList: MutableList<ParameterListModel.SelectedParameter> = mutableListOf()
     var selectedPosition: Int = 0
+    private val appColorHelper = AppColorHelper.instance!!
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SelectParameterViewHolder(
-        LayoutInflater.from(parent.context).inflate(
-            R.layout.item_selected_parameter_profile, parent, false
-        )
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SelectParameterViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_selected_parameter_profile, parent, false))
 
     override fun getItemCount(): Int = dataList.size
 
@@ -51,33 +49,16 @@ class RevSelectedParamAdapter(private val showUrineProfile: Boolean) : RecyclerV
 
         fun bindTo(item: ParameterListModel.SelectedParameter) {
             binding.txtSelectedProfile.text = binding.txtSelectedProfile.context.getString(TrackParameterHelper.getProfileNameByProfileCode(item.profileCode))
-            binding.imgSelectedProfile.setImageDrawable(
-                binding.imgSelectedProfile.resources.getDrawable(
-                    getIconDrawable(item.profileCode.toUpperCase())
-                )
-            )
+            binding.imgSelectedProfile.setImageDrawable(binding.imgSelectedProfile.resources.getDrawable(getIconDrawable(item.profileCode.toUpperCase())))
             try {
-                val templateJSON = JSONObject(ClientConfiguration.getAppTemplateConfig())
-                val primaryColor = Color.parseColor(templateJSON.getString("primaryColor"))
-
                 if (selectedPosition == adapterPosition) {
-                    ImageViewCompat.setImageTintList(
-                        binding.imgSelectedProfile,
-                        ColorStateList.valueOf(primaryColor)
-                    )
-                    binding.txtSelectedProfile.setTextColor(primaryColor)
-                    binding.viewSelectedParam.setVisibility(View.VISIBLE)
+                    ImageViewCompat.setImageTintList(binding.imgSelectedProfile, ColorStateList.valueOf(appColorHelper.primaryColor()))
+                    binding.txtSelectedProfile.setTextColor(appColorHelper.primaryColor())
+                    binding.viewSelectedParam.visibility = View.VISIBLE
                 } else {
-                    ImageViewCompat.setImageTintList(
-                        binding.imgSelectedProfile,
-                        ColorStateList.valueOf(
-                            binding.imgSelectedProfile.getResources().getColor(R.color.hlmt_warm_grey)
-                        )
-                    )
-                    binding.txtSelectedProfile.setTextColor(
-                        binding.imgSelectedProfile.getResources().getColor(R.color.textViewColor)
-                    )
-                    binding.viewSelectedParam.setVisibility(View.GONE)
+                    ImageViewCompat.setImageTintList(binding.imgSelectedProfile, ColorStateList.valueOf(binding.imgSelectedProfile.getResources().getColor(R.color.hlmt_warm_grey)))
+                    binding.txtSelectedProfile.setTextColor(binding.imgSelectedProfile.getResources().getColor(R.color.textViewColor))
+                    binding.viewSelectedParam.visibility = View.GONE
                 }
             }catch (e: Exception){e.printStackTrace()}
 

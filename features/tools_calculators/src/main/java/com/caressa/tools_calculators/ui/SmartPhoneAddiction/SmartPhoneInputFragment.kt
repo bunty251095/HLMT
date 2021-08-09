@@ -82,7 +82,7 @@ class SmartPhoneInputFragment : BaseFragment() {
         dataHandler = DataHandler(requireContext())
         smartPhoneAddictionData = SmartPhoneAddictionData()
         currentQuestion = dataHandler!!.getSmartPhoneAddictionNextQuestion(currentQuestion)
-        question = smartPhoneAddictionData!!.getSmartPhoneAddictionData(currentQuestion)
+        question = smartPhoneAddictionData!!.getSmartPhoneAddictionData(currentQuestion,requireContext())
 
         binding.indicatorSeekbar.setIndicatorTextFormat("  \${PROGRESS} / 11 ")
         binding.indicatorSeekbar.setUserSeekAble(false)
@@ -93,7 +93,7 @@ class SmartPhoneInputFragment : BaseFragment() {
             binding.btnBack.visibility = View.VISIBLE
             loadPreviousData()
         }
-        viewModel.smartPhoneSaveResp.observe( viewLifecycleOwner , Observer {})
+        viewModel.smartPhoneSaveResp.observe( viewLifecycleOwner , {})
     }
 
     private fun setClickable() {
@@ -128,7 +128,7 @@ class SmartPhoneInputFragment : BaseFragment() {
             } else {
                 binding.btnBack.text = resources.getString(R.string.PREVIOUS)
                 binding.btnBack.visibility = View.VISIBLE
-                question = smartPhoneAddictionData!!.getSmartPhoneAddictionData(currentQuestion)
+                question = smartPhoneAddictionData!!.getSmartPhoneAddictionData(currentQuestion,requireContext())
                 loadPreviousData()
             }
         }
@@ -144,7 +144,7 @@ class SmartPhoneInputFragment : BaseFragment() {
                     val value = calculateScore()
                     viewModel.callSmartPhoneSaveResponseApi(value,participationID,quizID)
                 } else {
-                    question = smartPhoneAddictionData!!.getSmartPhoneAddictionData(currentQuestion)
+                    question = smartPhoneAddictionData!!.getSmartPhoneAddictionData(currentQuestion,requireContext())
                     loadPreviousData()
                 }
                 if (currentQuestion.equals("ADDIC11", ignoreCase = true)) {

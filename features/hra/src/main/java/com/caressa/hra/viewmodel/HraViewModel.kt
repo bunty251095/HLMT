@@ -86,11 +86,13 @@ class HraViewModel(
         withContext(dispatchers.io) {
             if ( adminPersonId != personId ) {
                 val list = hraManagementUseCase.invokeGetUserRelatives().filter { it.relativeID == personId }
+                Utilities.printData("",list,true)
                 userRelativesList.postValue(list)
             } else {
                 val list = hraManagementUseCase.invokeGetUserRelatives().filter {
                     DateHelper.isDateAbove18Years(it.dateOfBirth)
                 }.toMutableList()
+                Utilities.printData("",list,true)
                 userRelativesList.postValue(list)
             }
         }
@@ -157,7 +159,7 @@ class HraViewModel(
                 BMIExistModel.JSONDataRequest(PersonID = personId),
                 BMIExistModel.JSONDataRequest::class.java), authToken)
 
-            _progressBar.value = Event(context.resources.getString(R.string.fetching_bmi_details))
+            _progressBar.value = Event(context.resources.getString(R.string.FETCHING_BMI_DETAILS))
             _bmiDetails.removeSource(checkBmiSource)
             withContext(dispatchers.io) {
                 checkBmiSource = hraManagementUseCase.invokeBMIExist(isForceRefresh = forceRefresh, data = requestData)
@@ -189,7 +191,7 @@ class HraViewModel(
                 BPExistModel.JSONDataRequest(PersonID = personId),
                 BPExistModel.JSONDataRequest::class.java), authToken)
 
-            _progressBar.value = Event(context.resources.getString(R.string.fetching_bp_details))
+            _progressBar.value = Event(context.resources.getString(R.string.FETCHING_BP_DETAILS))
             _bpDetails.removeSource(checkBPSource)
             withContext(dispatchers.io) {
                 checkBPSource = hraManagementUseCase.invokeBPExist(isForceRefresh = forceRefresh, data = requestData)
@@ -221,7 +223,7 @@ class HraViewModel(
                 LabRecordsModel.JSONDataRequest(PersonID = personId),
                 LabRecordsModel.JSONDataRequest::class.java), authToken)
 
-            _progressBar.value = Event(context.resources.getString(R.string.fetching_lab_details))
+            _progressBar.value = Event(context.resources.getString(R.string.FETCHING_LAB_DETAILS))
             _labRecordsBs.removeSource(labRecordBsSource)
             withContext(dispatchers.io) {
                 labRecordBsSource = hraManagementUseCase.invokeLabRecords(isForceRefresh = forceRefresh, data = requestData)
@@ -253,7 +255,7 @@ class HraViewModel(
                 LabRecordsModel.JSONDataRequest(PersonID = personId),
                 LabRecordsModel.JSONDataRequest::class.java), authToken)
 
-            _progressBar.value = Event(context.resources.getString(R.string.fetching_lab_details))
+            _progressBar.value = Event(context.resources.getString(R.string.SUBMITTING_HRA_DETAILS))
             _labRecordsChol.removeSource(labRecordCholSource)
             withContext(dispatchers.io) {
                 labRecordCholSource = hraManagementUseCase.invokeLabRecords(isForceRefresh = forceRefresh, data = requestData)
@@ -388,7 +390,7 @@ class HraViewModel(
             }
         }
 
-        _progressBar.value = Event(context.resources.getString(R.string.submitting_hra_details))
+        _progressBar.value = Event(context.resources.getString(R.string.SUBMITTING_HRA_DETAILS))
         _submitHra.removeSource(submitHraSource)
         withContext(dispatchers.io) {
             submitHraSource = hraManagementUseCase.invokeSaveAndSubmitHra(true, data = requestData!!)
@@ -941,7 +943,7 @@ class HraViewModel(
                 optionList.add(Option(description = context.resources.getString(R.string.VLDL), answerCode = "CHOL_VLDL"))*/
                 question = Question(
                     qCode = qCode,
-                    question = R.string.QUESTION_CHOLESTEROL_NEW,
+                    question = R.string.QUESTION_CHOLESTEROL,
                     questionType = QuestionType.MultiSelection,
                     optionList = optionList,
                     bgImage = R.drawable.img_deaseas,
@@ -962,7 +964,7 @@ class HraViewModel(
 
             "HHILL" -> {
                 optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "15_NONE"))
-                optionList.add(Option(description = context.resources.getString(R.string.HIGH_BP), answerCode = "15_HBP"))
+                optionList.add(Option(description = context.resources.getString(R.string.HIGH_BLOOD_PRESSURE), answerCode = "15_HBP"))
                 optionList.add(Option(description = context.resources.getString(R.string.THYROID_IMBALANCE), answerCode = "15_THYRIOD"))
                 optionList.add(Option(description = context.resources.getString(R.string.HIGH_CHOLESTEROL), answerCode = "15_INC_CHOL"))
                 optionList.add(Option(description = context.resources.getString(R.string.DIABETES), answerCode = "15_DIAB"))
@@ -999,7 +1001,7 @@ class HraViewModel(
             "FHIST" -> {
                 optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "1_NONE"))
                 optionList.add(Option(description = context.resources.getString(R.string.DIABETES), answerCode = "1_DIABETIC"))
-                optionList.add(Option(description = context.resources.getString(R.string.HIGH_BP), answerCode = "1_HIGHBP"))
+                optionList.add(Option(description = context.resources.getString(R.string.HIGH_BLOOD_PRESSURE), answerCode = "1_HIGHBP"))
                 optionList.add(Option(description = context.resources.getString(R.string.OBESITY), answerCode = "1_OBESE"))
                 optionList.add(Option(description = context.resources.getString(R.string.ASTHMA), answerCode = "1_ASTAMA"))
                 optionList.add(Option(description = context.resources.getString(R.string.ARTHRITIS), answerCode = "1_ARTHRITIS"))
@@ -1060,7 +1062,7 @@ class HraViewModel(
             }
 
             "PHYSLEEP" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.LESSTHAN_6Hours), answerCode = "6_PHYSLPMSTNGT"))
+                optionList.add(Option(description = context.resources.getString(R.string.LESS_THAN_6HOURS), answerCode = "6_PHYSLPMSTNGT"))
                 optionList.add(Option(description = context.resources.getString(R.string.SIXTO_EIGHT_HOURS), answerCode = "6_PHYSLPMOST"))
                 optionList.add(Option(description = context.resources.getString(R.string.MORE_THAN_8HOURS), answerCode = "6_PHYSLPALL"))
                 question = Question(
@@ -1079,7 +1081,7 @@ class HraViewModel(
                 optionList.add(Option(description = context.resources.getString(R.string.RB_MORETHAN_4CIGAR), answerCode = "SMKCNTGT4"))
                 question = Question(
                     qCode = qCode,
-                    question = R.string.QUESTION_SMOKE2,
+                    question = R.string.QUESTION_SMOKE,
                     questionType = QuestionType.SingleSelection,
                     optionList = optionList,
                     bgImage = R.drawable.img_cigar,
@@ -1185,7 +1187,7 @@ class HraViewModel(
                 optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "6_PHYSTRNO"))
                 question = Question(
                     qCode = qCode,
-                    question = R.string.QUESTION_STREES,
+                    question = R.string.QUESTION_STRESS,
                     questionType = QuestionType.SingleSelection,
                     optionList = optionList,
                     bgImage = R.drawable.img_stressed,
@@ -1236,7 +1238,7 @@ class HraViewModel(
                 optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
                 optionList.add(Option(description = context.resources.getString(R.string.BRIGHT_LIGHT), answerCode = "OCCHWELD,OCCHWELDYES,OCCHWELDNO"))
                 optionList.add(Option(description = context.resources.getString(R.string.LOUD_NOISE), answerCode = "OCCNOISE,OCCNOISYES,OCCNOISNO"))
-                optionList.add(Option(description = context.resources.getString(R.string.POISONOUS_GASES), answerCode = "OCCHAZGAS,OCCHGASYES,OCCHGASNO"))
+                optionList.add(Option(description = context.resources.getString(R.string.HAZARDOUS_GASES), answerCode = "OCCHAZGAS,OCCHGASYES,OCCHGASNO"))
                 optionList.add(Option(description = context.resources.getString(R.string.TALKING_LONG), answerCode = "OCCTALKLOT,OCCTALKLOTYES,OCCTALKLOTNO"))
                 question = Question(
                     qCode = qCode,
@@ -1251,13 +1253,13 @@ class HraViewModel(
                 optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
                 optionList.add(Option(description = context.resources.getString(R.string.CHOL_TEST), answerCode = "LIPIDSCRN,13_LIPLT1YR,13_LIPNEVER"))
                 if ( gender.equals("2",ignoreCase = true)  ) {
-                    optionList.add(Option(description = context.resources.getString(R.string.PAP_SEAMER_TEST), answerCode = "WOMPAPSMR,11_WMNPAPLSTYR,11_WMNPAPNOPAP"))
+                    optionList.add(Option(description = context.resources.getString(R.string.PAP_TEST), answerCode = "WOMPAPSMR,11_WMNPAPLSTYR,11_WMNPAPNOPAP"))
                 }
-                optionList.add(Option(description = context.resources.getString(R.string.TSH_TEST), answerCode = "TSHSCREEN,TSHL1Y,TSHNVR"))
-                optionList.add(Option(description = context.resources.getString(R.string.BASIC_HEALTH_TEST), answerCode = "GENSCRN,13_GENLT1YR,13_GENNEVER"))
-                optionList.add(Option(description = context.resources.getString(R.string.SUGAR_TEST), answerCode = "DIABSCRN,13_DIBLT1YR,13_DIBNEVER"))
+                optionList.add(Option(description = context.resources.getString(R.string.THYROID_TEST), answerCode = "TSHSCREEN,TSHL1Y,TSHNVR"))
+                optionList.add(Option(description = context.resources.getString(R.string.BASIC_HEALTH_CHECKUP), answerCode = "GENSCRN,13_GENLT1YR,13_GENNEVER"))
+                optionList.add(Option(description = context.resources.getString(R.string.SUGAR_PROFILE_TEST), answerCode = "DIABSCRN,13_DIBLT1YR,13_DIBNEVER"))
                 if ( gender.equals("2",ignoreCase = true)  ) {
-                    optionList.add(Option(description = context.resources.getString(R.string.MAMMOGRAM_TEST), answerCode = "WOMMAMO,11_WMNMAMLSTYR,11_WMNMAMANO"))
+                    optionList.add(Option(description = context.resources.getString(R.string.MAMMOGRAM), answerCode = "WOMMAMO,11_WMNMAMLSTYR,11_WMNMAMANO"))
                 }
                 question = Question(
                     qCode = qCode,

@@ -23,14 +23,14 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iconBackgroundTolate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_marginTop="5dp" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iconParameter"
                         android:layout_width="@dimen/_60sdp"
                         android:layout_height="@dimen/_60sdp"
@@ -42,8 +42,7 @@
 
             </RelativeLayout>
 
-
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/nameParameter"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
@@ -58,11 +57,10 @@
                     android:paddingBottom="3dp"
                     android:paddingTop="3dp"
                     android:textAllCaps="false"
-                    android:text="sfklsjfsklflks"
+                    android:text=""
                     android:textColor="@color/selector_text_color"
                     android:textSize="@dimen/_9sdp"
                     android:textStyle="bold" />
-
 
         </RelativeLayout>
 

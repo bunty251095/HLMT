@@ -121,7 +121,7 @@ class AddMedicineFragment : BaseFragment(),MedicineTypeAdapter.OnMedTypeListener
             binding.imgMedicine.setImageResource(medicationTrackerHelper.getMedTypeImageByCode(drugTypeCode))
             binding.edtMedicineName.setText(medicineName)
             if (drugTypeCode.equals("MOUTHWASH",ignoreCase = true)) {
-                binding.txtMedicine.text = "Mouth\nwash"
+                binding.txtMedicine.text = resources.getString(R.string.MOUTH_WASH)
             } else {
                 binding.txtMedicine.setText(medicationTrackerHelper.getMedTypeByCode(drugTypeCode))
             }
@@ -182,7 +182,7 @@ class AddMedicineFragment : BaseFragment(),MedicineTypeAdapter.OnMedTypeListener
                 bundle.putString(Constants.DRUG_TYPE_CODE,drugTypeCode)
                 viewModel.routeToScheduleDetails(it,bundle)
             } else {
-                Utilities.toastMessageShort(context, "Please Enter Medicine Name")
+                Utilities.toastMessageShort(context, resources.getString(R.string.ERROR_ENTER_MEDICINE_NAME))
             }
         }
 
@@ -252,7 +252,7 @@ class AddMedicineFragment : BaseFragment(),MedicineTypeAdapter.OnMedTypeListener
             }
 
             if (drugTypeCode.equals("MOUTHWASH",ignoreCase = true)) {
-                binding.txtMedicine.text = "Mouth\nwash"
+                binding.txtMedicine.text = resources.getString(R.string.MOUTH_WASH)
             } else {
                 binding.txtMedicine.text = resources.getString(medicationTrackerHelper.getMedTypeByCode(drugTypeCode))
             }
@@ -281,7 +281,7 @@ class AddMedicineFragment : BaseFragment(),MedicineTypeAdapter.OnMedTypeListener
 
     override fun onMedTypeSelection(position: Int, medType: MedTypeModel) {
         if (medType.medTypeCode.equals("MOUTHWASH",ignoreCase = true)) {
-            binding.txtMedicine.text = "Mouth\nwash"
+            binding.txtMedicine.text = resources.getString(R.string.MOUTH_WASH)
         } else {
             binding.txtMedicine.text = medType.medTypeTitle
         }

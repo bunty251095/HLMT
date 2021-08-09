@@ -554,7 +554,7 @@ class MedicineTrackerViewModel(
                 launchIntent.putExtra(Constants.DATE,intent.getStringExtra(Constants.DATE))
                 context.startActivity(launchIntent)
             } else {
-                Utilities.toastMessageLong( context,"You have Already Deleted Family Member Related to this Notification" )
+                Utilities.toastMessageLong( context,context.resources.getString(R.string.ALREADY_DELETED_MEMBER_RELATED_TO_NOTIFICATION))
                 Timber.e("Relative Details not Exist for PersonID--->$relativeId")
             }
         }
@@ -579,7 +579,7 @@ class MedicineTrackerViewModel(
             }
         }
         if (isAdded) {
-            Utilities.toastMessageShort(context, "You are already taking " + bundle.get(Constants.MEDICINE_NAME))
+            Utilities.toastMessageShort(context, context.resources.getString(R.string.YOU_ARE_ALREADY_TAKING) +" " + bundle.get(Constants.MEDICINE_NAME))
         } else {
             view.findNavController().navigate(R.id.action_addMedicineFragment_to_scheduleMedicineFragment, bundle)
         }
@@ -677,13 +677,13 @@ class MedicineTrackerViewModel(
                     } else {
                         closeNotificationDrawer(context)
                         cancelNotification(notificationManager, notificationID)
-                        Utilities.toastMessageShort(context, "You have Removed or Rescheduled Time $time for $medName")
+                        Utilities.toastMessageShort(context,context.resources.getString(R.string.YOU_HAVE_REMOVED_OR_RESCHEDULED_TIME) + " $time" + " " + context.resources.getString(R.string.FOR) + " " + medName)
                     }
 
                 } else {
                     closeNotificationDrawer(context)
                     cancelNotification(notificationManager, notificationID)
-                    Utilities.toastMessageShort(context, "You have Already Deleted $medName")
+                    Utilities.toastMessageShort(context, context.resources.getString(R.string.YOU_HAVE_REMOVED_OR_RESCHEDULED_TIME) +" $medName")
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

@@ -1,13 +1,16 @@
 package com.caressa.repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.caressa.common.utils.DateHelper
+import com.caressa.common.utils.Utilities
 import com.caressa.local.dao.*
 import com.caressa.model.entity.AppVersion
 import com.caressa.model.entity.DataSyncMaster
 import com.caressa.model.entity.UserRelatives
 import com.caressa.model.entity.Users
 import com.caressa.model.home.*
+import com.caressa.model.medication.MedicineListByDayModel
 import com.caressa.model.security.HLMTLoginModel
 import com.caressa.model.shr.ListRelativesModel
 import com.caressa.model.singleton.ToolsTrackerSingleton
@@ -22,100 +25,43 @@ import timber.log.Timber
 
 interface HomeRepository {
 
-    suspend fun saveCloudMessagingId(
-        forceRefresh: Boolean = false,
-        data: SaveCloudMessagingIdModel
-    ): LiveData<Resource<SaveCloudMessagingIdModel.SaveCloudMessagingIdResponse>>
+    suspend fun saveCloudMessagingId(forceRefresh: Boolean = false, data: SaveCloudMessagingIdModel): LiveData<Resource<SaveCloudMessagingIdModel.SaveCloudMessagingIdResponse>>
 
-    suspend fun contactUs(
-        forceRefresh: Boolean = false,
-        data: ContactUsModel
-    ): LiveData<Resource<ContactUsModel.ContactUsResponse>>
+    suspend fun contactUs(forceRefresh: Boolean = false, data: ContactUsModel): LiveData<Resource<ContactUsModel.ContactUsResponse>>
 
-    suspend fun saveFeedback(
-        forceRefresh: Boolean = false,
-        data: SaveFeedbackModel
-    ): LiveData<Resource<SaveFeedbackModel.SaveFeedbackResponse>>
+    suspend fun saveFeedback(forceRefresh: Boolean = false, data: SaveFeedbackModel): LiveData<Resource<SaveFeedbackModel.SaveFeedbackResponse>>
 
-    suspend fun passwordChange(
-        forceRefresh: Boolean = false,
-        data: PasswordChangeModel
-    ): LiveData<Resource<PasswordChangeModel.ChangePasswordResponse>>
+    suspend fun passwordChange(forceRefresh: Boolean = false, data: PasswordChangeModel): LiveData<Resource<PasswordChangeModel.ChangePasswordResponse>>
 
-    suspend fun checkAppUpdate(
-        forceRefresh: Boolean = false,
-        data: CheckAppUpdateModel
-    ): LiveData<Resource<CheckAppUpdateModel.CheckAppUpdateResponse>>
+    suspend fun checkAppUpdate(forceRefresh: Boolean = false, data: CheckAppUpdateModel): LiveData<Resource<CheckAppUpdateModel.CheckAppUpdateResponse>>
 
-    suspend fun getUserDetails(
-        forceRefresh: Boolean = false,
-        data: UserDetailsModel
-    ): LiveData<Resource<UserDetailsModel.UserDetailsResponse>>
+    suspend fun getUserDetails(forceRefresh: Boolean = false, data: UserDetailsModel): LiveData<Resource<UserDetailsModel.UserDetailsResponse>>
 
-    suspend fun updateUserDetails(
-        forceRefresh: Boolean = false,
-        data: UpdateUserDetailsModel
-    ): LiveData<Resource<UpdateUserDetailsModel.UpdateUserDetailsResponse>>
+    suspend fun updateUserDetails(forceRefresh: Boolean = false, data: UpdateUserDetailsModel): LiveData<Resource<UpdateUserDetailsModel.UpdateUserDetailsResponse>>
 
-    suspend fun getProfileImage(
-        forceRefresh: Boolean = false,
-        data: ProfileImageModel
-    ): LiveData<Resource<ProfileImageModel.ProfileImageResponse>>
+    suspend fun getProfileImage(forceRefresh: Boolean = false, data: ProfileImageModel): LiveData<Resource<ProfileImageModel.ProfileImageResponse>>
 
-    suspend fun uploadProfileImage(
-        personID: RequestBody, fileName: RequestBody, documentTypeCode: RequestBody,
-        byteArray: RequestBody, authTicket: RequestBody
-    ): LiveData<Resource<UploadProfileImageResponce>>
+    suspend fun uploadProfileImage(personID: RequestBody, fileName: RequestBody, documentTypeCode: RequestBody, byteArray: RequestBody, authTicket: RequestBody): LiveData<Resource<UploadProfileImageResponce>>
 
-    suspend fun removeProfileImage(
-        forceRefresh: Boolean = false,
-        data: RemoveProfileImageModel
-    ): LiveData<Resource<RemoveProfileImageModel.RemoveProfileImageResponse>>
+    suspend fun removeProfileImage(forceRefresh: Boolean = false, data: RemoveProfileImageModel): LiveData<Resource<RemoveProfileImageModel.RemoveProfileImageResponse>>
 
-    suspend fun fetchRelativesList(
-        forceRefresh: Boolean = false,
-        data: ListRelativesModel
-    ): LiveData<Resource<ListRelativesModel.ListRelativesResponse>>
+    suspend fun fetchRelativesList(forceRefresh: Boolean = false, data: ListRelativesModel): LiveData<Resource<ListRelativesModel.ListRelativesResponse>>
 
-    suspend fun addNewRelative(
-        forceRefresh: Boolean = false,
-        data: AddRelativeModel
-    ): LiveData<Resource<AddRelativeModel.AddRelativeResponse>>
+    suspend fun addNewRelative(forceRefresh: Boolean = false, data: AddRelativeModel): LiveData<Resource<AddRelativeModel.AddRelativeResponse>>
 
-    suspend fun updateRelative(
-        forceRefresh: Boolean = false,
-        data: UpdateRelativeModel
-    ): LiveData<Resource<UpdateRelativeModel.UpdateRelativeResponse>>
+    suspend fun updateRelative(forceRefresh: Boolean = false, data: UpdateRelativeModel): LiveData<Resource<UpdateRelativeModel.UpdateRelativeResponse>>
 
-    suspend fun removeRelative(
-        forceRefresh: Boolean = false,
-        data: RemoveRelativeModel
-    ): LiveData<Resource<RemoveRelativeModel.RemoveRelativeResponse>>
+    suspend fun removeRelative(forceRefresh: Boolean = false, data: RemoveRelativeModel): LiveData<Resource<RemoveRelativeModel.RemoveRelativeResponse>>
 
-    suspend fun fetchDoctorsList(
-        forceRefresh: Boolean = false,
-        data: FamilyDoctorsListModel
-    ): LiveData<Resource<FamilyDoctorsListModel.FamilyDoctorsResponse>>
+    suspend fun fetchDoctorsList(forceRefresh: Boolean = false, data: FamilyDoctorsListModel): LiveData<Resource<FamilyDoctorsListModel.FamilyDoctorsResponse>>
 
-    suspend fun fetchSpecialityList(
-        forceRefresh: Boolean = false,
-        data: ListDoctorSpecialityModel
-    ): LiveData<Resource<ListDoctorSpecialityModel.ListDoctorSpecialityResponse>>
+    suspend fun fetchSpecialityList(forceRefresh: Boolean = false, data: ListDoctorSpecialityModel): LiveData<Resource<ListDoctorSpecialityModel.ListDoctorSpecialityResponse>>
 
-    suspend fun addDoctor(
-        forceRefresh: Boolean = false,
-        data: FamilyDoctorAddModel
-    ): LiveData<Resource<FamilyDoctorAddModel.FamilyDoctorAddResponse>>
+    suspend fun addDoctor(forceRefresh: Boolean = false, data: FamilyDoctorAddModel): LiveData<Resource<FamilyDoctorAddModel.FamilyDoctorAddResponse>>
 
-    suspend fun updateDoctor(
-        forceRefresh: Boolean = false,
-        data: FamilyDoctorUpdateModel
-    ): LiveData<Resource<FamilyDoctorUpdateModel.FamilyDoctorUpdateResponse>>
+    suspend fun updateDoctor(forceRefresh: Boolean = false, data: FamilyDoctorUpdateModel): LiveData<Resource<FamilyDoctorUpdateModel.FamilyDoctorUpdateResponse>>
 
-    suspend fun removeDoctor(
-        forceRefresh: Boolean = false,
-        data: RemoveDoctorModel
-    ): LiveData<Resource<RemoveDoctorModel.RemoveDoctorResponse>>
+    suspend fun removeDoctor(forceRefresh: Boolean = false, data: RemoveDoctorModel): LiveData<Resource<RemoveDoctorModel.RemoveDoctorResponse>>
 
     suspend fun getLoggedInPersonDetails(): Users
     suspend fun getAppVersionDetails(): AppVersion
@@ -130,11 +76,7 @@ interface HomeRepository {
     suspend fun saveSyncDetails(data: DataSyncMaster)
     suspend fun clearTablesForSwitchProfile()
     suspend fun logoutUser()
-    suspend fun hlmt360LoginResponse(
-        forceRefresh: Boolean = false,
-        data: HLMTLoginModel
-    ): LiveData<Resource<HLMTLoginModel.LoginResponse>>
-
+    suspend fun hlmt360LoginResponse(forceRefresh: Boolean = false, data: HLMTLoginModel): LiveData<Resource<HLMTLoginModel.LoginResponse>>
 
 }
 
@@ -142,16 +84,12 @@ class HomeRepositoryImpl(
     private val datasource: HomeDatasource, private val dataSyncDao: DataSyncMasterDao,
     private val homeDao: VivantUserDao, private val medicationDao: MedicationDao,
     private val shrDao: StoreRecordsDao, private val hraDao: HRADao,
-    private val trackParamDao: TrackParameterDao
-) : HomeRepository {
+    private val trackParamDao: TrackParameterDao,private val context: Context) : HomeRepository {
 
-    override suspend fun saveCloudMessagingId(
-        forceRefresh: Boolean,
-        data: SaveCloudMessagingIdModel
-    ): LiveData<Resource<SaveCloudMessagingIdModel.SaveCloudMessagingIdResponse>> {
+    override suspend fun saveCloudMessagingId(forceRefresh: Boolean, data: SaveCloudMessagingIdModel): LiveData<Resource<SaveCloudMessagingIdModel.SaveCloudMessagingIdResponse>> {
 
         return object :
-            NetworkBoundResource<SaveCloudMessagingIdModel.SaveCloudMessagingIdResponse, BaseResponse<SaveCloudMessagingIdModel.SaveCloudMessagingIdResponse>>() {
+            NetworkBoundResource<SaveCloudMessagingIdModel.SaveCloudMessagingIdResponse, BaseResponse<SaveCloudMessagingIdModel.SaveCloudMessagingIdResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -179,13 +117,10 @@ class HomeRepositoryImpl(
 
     }
 
-    override suspend fun contactUs(
-        forceRefresh: Boolean,
-        data: ContactUsModel
-    ): LiveData<Resource<ContactUsModel.ContactUsResponse>> {
+    override suspend fun contactUs(forceRefresh: Boolean, data: ContactUsModel): LiveData<Resource<ContactUsModel.ContactUsResponse>> {
 
         return object :
-            NetworkBoundResource<ContactUsModel.ContactUsResponse, BaseResponse<ContactUsModel.ContactUsResponse>>() {
+            NetworkBoundResource<ContactUsModel.ContactUsResponse, BaseResponse<ContactUsModel.ContactUsResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -212,11 +147,10 @@ class HomeRepositoryImpl(
     }
 
 
-    override suspend fun saveFeedback(forceRefresh: Boolean, data: SaveFeedbackModel):
-            LiveData<Resource<SaveFeedbackModel.SaveFeedbackResponse>> {
+    override suspend fun saveFeedback(forceRefresh: Boolean, data: SaveFeedbackModel): LiveData<Resource<SaveFeedbackModel.SaveFeedbackResponse>> {
 
         return object :
-            NetworkBoundResource<SaveFeedbackModel.SaveFeedbackResponse, BaseResponse<SaveFeedbackModel.SaveFeedbackResponse>>() {
+            NetworkBoundResource<SaveFeedbackModel.SaveFeedbackResponse, BaseResponse<SaveFeedbackModel.SaveFeedbackResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -241,13 +175,10 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun passwordChange(
-        forceRefresh: Boolean,
-        data: PasswordChangeModel
-    ): LiveData<Resource<PasswordChangeModel.ChangePasswordResponse>> {
+    override suspend fun passwordChange(forceRefresh: Boolean, data: PasswordChangeModel): LiveData<Resource<PasswordChangeModel.ChangePasswordResponse>> {
 
         return object :
-            NetworkBoundResource<PasswordChangeModel.ChangePasswordResponse, BaseResponse<PasswordChangeModel.ChangePasswordResponse>>() {
+            NetworkBoundResource<PasswordChangeModel.ChangePasswordResponse, BaseResponse<PasswordChangeModel.ChangePasswordResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -277,7 +208,7 @@ class HomeRepositoryImpl(
             LiveData<Resource<CheckAppUpdateModel.CheckAppUpdateResponse>> {
 
         return object :
-            NetworkBoundResource<CheckAppUpdateModel.CheckAppUpdateResponse, BaseResponse<CheckAppUpdateModel.CheckAppUpdateResponse>>() {
+            NetworkBoundResource<CheckAppUpdateModel.CheckAppUpdateResponse, BaseResponse<CheckAppUpdateModel.CheckAppUpdateResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -317,7 +248,7 @@ class HomeRepositoryImpl(
             LiveData<Resource<UserDetailsModel.UserDetailsResponse>> {
 
         return object :
-            NetworkBoundResource<UserDetailsModel.UserDetailsResponse, BaseResponse<UserDetailsModel.UserDetailsResponse>>() {
+            NetworkBoundResource<UserDetailsModel.UserDetailsResponse, BaseResponse<UserDetailsModel.UserDetailsResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -344,11 +275,10 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun updateUserDetails(forceRefresh: Boolean, data: UpdateUserDetailsModel):
-            LiveData<Resource<UpdateUserDetailsModel.UpdateUserDetailsResponse>> {
+    override suspend fun updateUserDetails(forceRefresh: Boolean, data: UpdateUserDetailsModel): LiveData<Resource<UpdateUserDetailsModel.UpdateUserDetailsResponse>> {
 
         return object :
-            NetworkBoundResource<UpdateUserDetailsModel.UpdateUserDetailsResponse, BaseResponse<UpdateUserDetailsModel.UpdateUserDetailsResponse>>() {
+            NetworkBoundResource<UpdateUserDetailsModel.UpdateUserDetailsResponse, BaseResponse<UpdateUserDetailsModel.UpdateUserDetailsResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -375,11 +305,10 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun getProfileImage(forceRefresh: Boolean, data: ProfileImageModel):
-            LiveData<Resource<ProfileImageModel.ProfileImageResponse>> {
+    override suspend fun getProfileImage(forceRefresh: Boolean, data: ProfileImageModel): LiveData<Resource<ProfileImageModel.ProfileImageResponse>> {
 
         return object :
-            NetworkBoundResource<ProfileImageModel.ProfileImageResponse, BaseResponse<ProfileImageModel.ProfileImageResponse>>() {
+            NetworkBoundResource<ProfileImageModel.ProfileImageResponse, BaseResponse<ProfileImageModel.ProfileImageResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -406,16 +335,10 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun uploadProfileImage(
-        personID: RequestBody,
-        fileName: RequestBody,
-        documentTypeCode: RequestBody,
-        byteArray: RequestBody,
-        authTicket: RequestBody
-    ): LiveData<Resource<UploadProfileImageResponce>> {
+    override suspend fun uploadProfileImage(personID: RequestBody, fileName: RequestBody, documentTypeCode: RequestBody, byteArray: RequestBody, authTicket: RequestBody): LiveData<Resource<UploadProfileImageResponce>> {
 
         return object :
-            NetworkDataBoundResource<UploadProfileImageResponce, BaseResponse<UploadProfileImageResponce>>() {
+            NetworkDataBoundResource<UploadProfileImageResponce, BaseResponse<UploadProfileImageResponce>>(context) {
 
             override fun processResponse(response: BaseResponse<UploadProfileImageResponce>): UploadProfileImageResponce {
                 return response.jSONData
@@ -434,11 +357,10 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun removeProfileImage(forceRefresh: Boolean, data: RemoveProfileImageModel):
-            LiveData<Resource<RemoveProfileImageModel.RemoveProfileImageResponse>> {
+    override suspend fun removeProfileImage(forceRefresh: Boolean, data: RemoveProfileImageModel): LiveData<Resource<RemoveProfileImageModel.RemoveProfileImageResponse>> {
 
         return object :
-            NetworkBoundResource<RemoveProfileImageModel.RemoveProfileImageResponse, BaseResponse<RemoveProfileImageModel.RemoveProfileImageResponse>>() {
+            NetworkBoundResource<RemoveProfileImageModel.RemoveProfileImageResponse, BaseResponse<RemoveProfileImageModel.RemoveProfileImageResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -463,18 +385,18 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun addNewRelative(
-        forceRefresh: Boolean,
-        data: AddRelativeModel
-    ): LiveData<Resource<AddRelativeModel.AddRelativeResponse>> {
+    override suspend fun addNewRelative(forceRefresh: Boolean, data: AddRelativeModel): LiveData<Resource<AddRelativeModel.AddRelativeResponse>> {
 
-        return object :
-            NetworkBoundResource<AddRelativeModel.AddRelativeResponse, BaseResponse<AddRelativeModel.AddRelativeResponse>>() {
+        return object : NetworkBoundResource<AddRelativeModel.AddRelativeResponse, BaseResponse<AddRelativeModel.AddRelativeResponse>>(context) {
 
-            override fun shouldStoreInDb(): Boolean = false
+            var person = AddRelativeModel.PersonResp()
+
+            override fun shouldStoreInDb(): Boolean = true
 
             override suspend fun loadFromDb(): AddRelativeModel.AddRelativeResponse {
-                return AddRelativeModel.AddRelativeResponse()
+                val resp = AddRelativeModel.AddRelativeResponse()
+                resp.person = person
+                return resp
             }
 
             override fun createCallAsync(): Deferred<BaseResponse<AddRelativeModel.AddRelativeResponse>> {
@@ -486,6 +408,26 @@ class HomeRepositoryImpl(
             }
 
             override suspend fun saveCallResults(items: AddRelativeModel.AddRelativeResponse) {
+                person = items.person
+                var relationshipId = ""
+                var relationshipCode = ""
+                if (items.person.relationships.isNotEmpty()) {
+                    relationshipCode = items.person.relationships[0].relationshipCode
+                    relationshipId = items.person.relationships[0].id.toString()
+                }
+                val userRelative = UserRelatives(
+                    relativeID = items.person.id.toString(),
+                    firstName = items.person.firstName,
+                    lastName = items.person.lastName,
+                    dateOfBirth = DateHelper.getDateTimeAs_ddMMMyyyy(items.person.dateOfBirth),
+                    age = items.person.age.toString(),
+                    gender = items.person.gender.toString(),
+                    contactNo = items.person.contact.primaryContactNo,
+                    emailAddress = items.person.contact.emailAddress,
+                    relationshipCode = relationshipCode,
+                    relationship = Utilities.getRelationshipByRelationshipCode(relationshipCode,context),
+                    relationShipID = relationshipId)
+                homeDao.insertUserRelative(userRelative)
             }
 
             override fun shouldFetch(data: AddRelativeModel.AddRelativeResponse?): Boolean {
@@ -495,13 +437,10 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun fetchRelativesList(
-        forceRefresh: Boolean,
-        data: ListRelativesModel
-    ): LiveData<Resource<ListRelativesModel.ListRelativesResponse>> {
+    override suspend fun fetchRelativesList(forceRefresh: Boolean, data: ListRelativesModel): LiveData<Resource<ListRelativesModel.ListRelativesResponse>> {
 
         return object :
-            NetworkBoundResource<ListRelativesModel.ListRelativesResponse, BaseResponse<ListRelativesModel.ListRelativesResponse>>() {
+            NetworkBoundResource<ListRelativesModel.ListRelativesResponse, BaseResponse<ListRelativesModel.ListRelativesResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -526,11 +465,10 @@ class HomeRepositoryImpl(
                     contactNo = userDetails.phoneNumber,
                     emailAddress = userDetails.emailAddress,
                     relationshipCode = "SELF",
-                    relationship = "SELF"
-                )
+                    relationship = "SELF")
                 relativeInfoList.add(user)
                 for (item in relativeList) {
-                    if (item.relationships.size > 0) {
+                    if (item.relationships.isNotEmpty()) {
                         relationshipId = item.relationships[0].id.toString()
                     }
                     val userRelative = UserRelatives(
@@ -567,11 +505,10 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun removeRelative(forceRefresh: Boolean, data: RemoveRelativeModel):
-            LiveData<Resource<RemoveRelativeModel.RemoveRelativeResponse>> {
+    override suspend fun removeRelative(forceRefresh: Boolean, data: RemoveRelativeModel): LiveData<Resource<RemoveRelativeModel.RemoveRelativeResponse>> {
 
         return object :
-            NetworkBoundResource<RemoveRelativeModel.RemoveRelativeResponse, BaseResponse<RemoveRelativeModel.RemoveRelativeResponse>>() {
+            NetworkBoundResource<RemoveRelativeModel.RemoveRelativeResponse, BaseResponse<RemoveRelativeModel.RemoveRelativeResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -597,13 +534,10 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun updateRelative(
-        forceRefresh: Boolean,
-        data: UpdateRelativeModel
-    ): LiveData<Resource<UpdateRelativeModel.UpdateRelativeResponse>> {
+    override suspend fun updateRelative(forceRefresh: Boolean, data: UpdateRelativeModel): LiveData<Resource<UpdateRelativeModel.UpdateRelativeResponse>> {
 
         return object :
-            NetworkBoundResource<UpdateRelativeModel.UpdateRelativeResponse, BaseResponse<UpdateRelativeModel.UpdateRelativeResponse>>() {
+            NetworkBoundResource<UpdateRelativeModel.UpdateRelativeResponse, BaseResponse<UpdateRelativeModel.UpdateRelativeResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -628,11 +562,10 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun fetchDoctorsList(forceRefresh: Boolean, data: FamilyDoctorsListModel):
-            LiveData<Resource<FamilyDoctorsListModel.FamilyDoctorsResponse>> {
+    override suspend fun fetchDoctorsList(forceRefresh: Boolean, data: FamilyDoctorsListModel): LiveData<Resource<FamilyDoctorsListModel.FamilyDoctorsResponse>> {
 
         return object :
-            NetworkBoundResource<FamilyDoctorsListModel.FamilyDoctorsResponse, BaseResponse<FamilyDoctorsListModel.FamilyDoctorsResponse>>() {
+            NetworkBoundResource<FamilyDoctorsListModel.FamilyDoctorsResponse, BaseResponse<FamilyDoctorsListModel.FamilyDoctorsResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -658,14 +591,9 @@ class HomeRepositoryImpl(
 
     }
 
-    override suspend fun fetchSpecialityList(
-        forceRefresh: Boolean,
-        data: ListDoctorSpecialityModel
-    ):
-            LiveData<Resource<ListDoctorSpecialityModel.ListDoctorSpecialityResponse>> {
+    override suspend fun fetchSpecialityList(forceRefresh: Boolean, data: ListDoctorSpecialityModel): LiveData<Resource<ListDoctorSpecialityModel.ListDoctorSpecialityResponse>> {
 
-        return object :
-            NetworkBoundResource<ListDoctorSpecialityModel.ListDoctorSpecialityResponse, BaseResponse<ListDoctorSpecialityModel.ListDoctorSpecialityResponse>>() {
+        return object : NetworkBoundResource<ListDoctorSpecialityModel.ListDoctorSpecialityResponse, BaseResponse<ListDoctorSpecialityModel.ListDoctorSpecialityResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -690,11 +618,10 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun addDoctor(forceRefresh: Boolean, data: FamilyDoctorAddModel):
-            LiveData<Resource<FamilyDoctorAddModel.FamilyDoctorAddResponse>> {
+    override suspend fun addDoctor(forceRefresh: Boolean, data: FamilyDoctorAddModel): LiveData<Resource<FamilyDoctorAddModel.FamilyDoctorAddResponse>> {
 
         return object :
-            NetworkBoundResource<FamilyDoctorAddModel.FamilyDoctorAddResponse, BaseResponse<FamilyDoctorAddModel.FamilyDoctorAddResponse>>() {
+            NetworkBoundResource<FamilyDoctorAddModel.FamilyDoctorAddResponse, BaseResponse<FamilyDoctorAddModel.FamilyDoctorAddResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -719,11 +646,10 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun updateDoctor(forceRefresh: Boolean, data: FamilyDoctorUpdateModel):
-            LiveData<Resource<FamilyDoctorUpdateModel.FamilyDoctorUpdateResponse>> {
+    override suspend fun updateDoctor(forceRefresh: Boolean, data: FamilyDoctorUpdateModel): LiveData<Resource<FamilyDoctorUpdateModel.FamilyDoctorUpdateResponse>> {
 
         return object :
-            NetworkBoundResource<FamilyDoctorUpdateModel.FamilyDoctorUpdateResponse, BaseResponse<FamilyDoctorUpdateModel.FamilyDoctorUpdateResponse>>() {
+            NetworkBoundResource<FamilyDoctorUpdateModel.FamilyDoctorUpdateResponse, BaseResponse<FamilyDoctorUpdateModel.FamilyDoctorUpdateResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -748,11 +674,10 @@ class HomeRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun removeDoctor(forceRefresh: Boolean, data: RemoveDoctorModel):
-            LiveData<Resource<RemoveDoctorModel.RemoveDoctorResponse>> {
+    override suspend fun removeDoctor(forceRefresh: Boolean, data: RemoveDoctorModel): LiveData<Resource<RemoveDoctorModel.RemoveDoctorResponse>> {
 
         return object :
-            NetworkBoundResource<RemoveDoctorModel.RemoveDoctorResponse, BaseResponse<RemoveDoctorModel.RemoveDoctorResponse>>() {
+            NetworkBoundResource<RemoveDoctorModel.RemoveDoctorResponse, BaseResponse<RemoveDoctorModel.RemoveDoctorResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -844,12 +769,9 @@ class HomeRepositoryImpl(
         homeDao.deleteUserRelativesTable()
     }
 
-    override suspend fun hlmt360LoginResponse(
-        forceRefresh: Boolean,
-        data: HLMTLoginModel
-    ): LiveData<Resource<HLMTLoginModel.LoginResponse>> {
+    override suspend fun hlmt360LoginResponse(forceRefresh: Boolean, data: HLMTLoginModel): LiveData<Resource<HLMTLoginModel.LoginResponse>> {
         return object :
-            NetworkBoundResource<HLMTLoginModel.LoginResponse, BaseResponse<HLMTLoginModel.LoginResponse>>() {
+            NetworkBoundResource<HLMTLoginModel.LoginResponse, BaseResponse<HLMTLoginModel.LoginResponse>>(context) {
             override fun processResponse(response: BaseResponse<HLMTLoginModel.LoginResponse>): HLMTLoginModel.LoginResponse {
                 return response.jSONData
             }

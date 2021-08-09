@@ -95,7 +95,15 @@ class StepsDetailFragment : BaseFragment(), KoinComponent {
     private fun initView() {
         try {
             fitnessDataManager = FitnessDataManager(context)
-            getFitnessData()
+            //getFitnessData()
+            if (fitnessDataManager!!.oAuthPermissionsApproved()) {
+                Timber.e("oAuthPermissionsApproved---> true")
+                getFitnessData()
+            } else {
+                Timber.e("oAuthPermissionsApproved---> false")
+                binding.layoutFitnessData.visibility = View.GONE
+                binding.lblNoData.visibility = View.VISIBLE
+            }
 
             binding.layoutStepsGoals.setDataTitle(resources.getString(R.string.STEP_GOAL))
             binding.layoutStepsGoals.setDataImage(R.drawable.img_step)
@@ -108,7 +116,7 @@ class StepsDetailFragment : BaseFragment(), KoinComponent {
 
             binding.layoutActiveTime.setDataTitle(resources.getString(R.string.ACTIVE_TIME))
             binding.layoutActiveTime.setDataImage(R.drawable.img_active_time)
-        } catch (e: java.lang.Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }

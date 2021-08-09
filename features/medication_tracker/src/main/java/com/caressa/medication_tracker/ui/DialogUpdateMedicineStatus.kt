@@ -48,7 +48,7 @@ class DialogUpdateMedicineStatus(@NonNull context: Context?, medicineDetails: Me
 
             println("DialogSelectedDate=>" + medicineDetails.selectedDate)
             txt_medicine_name.text = medicineDetails.medName
-            txt_dose.text = medicineDetails.medDose + " Dose"
+            txt_dose.text = medicineDetails.medDose + " " + context.resources.getString(R.string.DOSE)
             txt_med_time.text = medicineDetails.medInstruction
             if (medicineDetails.setAlert.equals(Constants.TRUE, ignoreCase = true)) {
                 img_alert.setImageResource(R.drawable.img_alert_on)
@@ -103,10 +103,10 @@ class DialogUpdateMedicineStatus(@NonNull context: Context?, medicineDetails: Me
                         viewModel.callAddMedicineIntakeApi(medicationInTakeList,fragment)
                     }
                     medTimeStatusAdapter!!.medTimeStatusList.size == futureTimeCount -> {
-                        Utilities.toastMessageShort(context, "Status for Future Schedule Times can't be Updated")
+                        Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_STATUS_FOR_FUTURE_SCHEDULE_TIMES_CAN_NOT_BE_UPDATED))
                     }
                     else -> {
-                        Utilities.toastMessageShort(context, "Please Select Medicine Status")
+                        Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_SELECT_MEDICINE_STATUS))
                     }
                 }
             }

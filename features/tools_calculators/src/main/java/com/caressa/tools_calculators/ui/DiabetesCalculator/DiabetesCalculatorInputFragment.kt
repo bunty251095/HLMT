@@ -115,7 +115,7 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
         binding.rgFruits.tag = "FRUITHABITS"
         binding.rgExercise.tag = "PHYSICALEXERCISE"
 
-        viewModel.diabetesSaveResp.observe( viewLifecycleOwner , Observer {})
+        viewModel.diabetesSaveResp.observe( viewLifecycleOwner , {})
     }
 
     private fun loadUserData() {
@@ -212,7 +212,8 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
             e.printStackTrace()
         }
         if (!isValid) {
-            Utilities.toastMessageShort(context, "Please enter waist size between " + paramList[0].minRange + " to " + paramList[0].maxRange)
+            Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_ENTER_WAIST_SIZE_BETWEEN)
+                    + paramList[0].minRange + " " + resources.getString(R.string.TO) + " " + paramList[0].maxRange)
         }
         return isValid
     }
@@ -232,49 +233,49 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
 
             var selectedId: Int = binding.rgOrigin.checkedRadioButtonId
             var radioButton = binding.rgOrigin.findViewById(selectedId) as RadioButton
-            var position = if (radioButton.text.toString().equals("Yes", ignoreCase = true)) 0 else 1
+            var position = if (radioButton.text.toString().equals(resources.getString(R.string.YES), ignoreCase = true)) 0 else 1
             option = dibData.getDiabetesCodeData(binding.rgOrigin.tag.toString())[position]
             answer = Answer(binding.rgOrigin.tag.toString(), option.code, option.score)
             answerArrayMap[answer.questionCode] = answer
 
             selectedId = binding.rgDiabetes.checkedRadioButtonId
             radioButton = binding.rgDiabetes.findViewById(selectedId) as RadioButton
-            position = if (radioButton.text.toString().equals("Yes", ignoreCase = true)) 0 else 1
+            position = if (radioButton.text.toString().equals(resources.getString(R.string.YES), ignoreCase = true)) 0 else 1
             option = dibData.getDiabetesCodeData(binding.rgDiabetes.tag.toString())[position]
             answer = Answer(binding.rgDiabetes.tag.toString(), option.code, option.score)
             answerArrayMap[answer.questionCode] = answer
 
             selectedId = binding.rgBloodSugar.checkedRadioButtonId
             radioButton = binding.rgBloodSugar.findViewById(selectedId) as RadioButton
-            position = if (radioButton.text.toString().equals("Yes", ignoreCase = true)) 0 else 1
+            position = if (radioButton.text.toString().equals(resources.getString(R.string.YES), ignoreCase = true)) 0 else 1
             option = dibData.getDiabetesCodeData(binding.rgBloodSugar.tag.toString())[position]
             answer = Answer(binding.rgBloodSugar.tag.toString(), option.code, option.score)
             answerArrayMap[answer.questionCode] = answer
 
             selectedId = binding.rgBpMedication.checkedRadioButtonId
             radioButton = binding.rgBpMedication.findViewById(selectedId) as RadioButton
-            position = if (radioButton.text.toString().equals("Yes", ignoreCase = true)) 0 else 1
+            position = if (radioButton.text.toString().equals(resources.getString(R.string.YES), ignoreCase = true)) 0 else 1
             option = dibData.getDiabetesCodeData(binding.rgBpMedication.tag.toString())[position]
             answer = Answer(binding.rgBpMedication.tag.toString(), option.code, option.score)
             answerArrayMap[answer.questionCode] = answer
 
             selectedId = binding.rgSmoke.checkedRadioButtonId
             radioButton = binding.rgSmoke.findViewById(selectedId) as RadioButton
-            position = if (radioButton.text.toString().equals("Yes", ignoreCase = true)) 0 else 1
+            position = if (radioButton.text.toString().equals(resources.getString(R.string.YES), ignoreCase = true)) 0 else 1
             option = dibData.getDiabetesCodeData(binding.rgSmoke.tag.toString())[position]
             answer = Answer(binding.rgSmoke.tag.toString(), option.code, option.score)
             answerArrayMap[answer.questionCode] = answer
 
             selectedId = binding.rgFruits.checkedRadioButtonId
             radioButton = binding.rgFruits.findViewById(selectedId) as RadioButton
-            position = if (radioButton.text.toString().equals("Yes", ignoreCase = true)) 0 else 1
+            position = if (radioButton.text.toString().equals(resources.getString(R.string.YES), ignoreCase = true)) 0 else 1
             option = dibData.getDiabetesCodeData(binding.rgFruits.tag.toString())[position]
             answer = Answer(binding.rgFruits.tag.toString(), option.code, option.score)
             answerArrayMap[answer.questionCode] = answer
 
             selectedId = binding.rgExercise.checkedRadioButtonId
             radioButton = binding.rgExercise.findViewById(selectedId) as RadioButton
-            position = if (radioButton.text.toString().equals("Yes", ignoreCase = true)) 0 else 1
+            position = if (radioButton.text.toString().equals(resources.getString(R.string.YES), ignoreCase = true)) 0 else 1
             option = dibData.getDiabetesCodeData(binding.rgExercise.tag.toString())[position]
             answer = Answer(binding.rgExercise.tag.toString(), option.code, option.score)
             answerArrayMap[answer.questionCode] = answer
@@ -289,7 +290,7 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
 
     private fun calculateWaistScore(waist: Double): Int {
         val `val` = waist * 2.54
-        if (answerArrayMap["GENDER"]!!.answerCode.equals("Male", ignoreCase = true)) {
+        if (answerArrayMap["GENDER"]!!.answerCode.equals(resources.getString(R.string.MALE), ignoreCase = true)) {
             if (answerArrayMap["ORIGIN"]!!.answerCode.equals("rdbAsianOriginYes", ignoreCase = true)) {
                 if (`val` in 90.0..100.0) {
                     return 4
@@ -303,7 +304,7 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
                     return 7
                 }
             }
-        } else if (answerArrayMap["GENDER"]!!.answerCode.equals("Female", ignoreCase = true)) {
+        } else if (answerArrayMap["GENDER"]!!.answerCode.equals(resources.getString(R.string.FEMALE), ignoreCase = true)) {
             if (answerArrayMap["ORIGIN"]!!.answerCode.equals("rdbAsianOriginYes", ignoreCase = true)) {
                 if (`val` in 80.0..90.0) {
                     return 4

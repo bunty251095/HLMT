@@ -10,7 +10,6 @@ import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.utils.Utilities
-import com.caressa.model.entity.RecordInSession
 import com.caressa.model.entity.UserRelatives
 import com.caressa.records_tracker.R
 import com.caressa.records_tracker.databinding.ItemRelationshipRecordBinding
@@ -62,12 +61,12 @@ class SelectRelationshipAdapter( val  fragment : SelectRelationFragment ,val vie
     fun updateRelativesList(items: List<UserRelatives>) {
         relativesList.clear()
         relativesList.addAll(items)
-        automaticallySelectedSlef()
+        automaticallySelectedSelf()
         this.notifyDataSetChanged()
         //fragment.stopShimmer()
     }
 
-    private fun automaticallySelectedSlef() {
+    private fun automaticallySelectedSelf() {
         if( relativesList.size > 0 ) {
             val personDetail  = relativesList[0]
             val personID = personDetail.relativeID

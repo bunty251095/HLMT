@@ -20,7 +20,6 @@ import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
 import com.caressa.security.R
 import com.caressa.security.domain.UserManagementUseCase
-import com.caressa.security.ui.SignUpFragmentDirections
 import com.caressa.security.ui.UserInfoFragmentDirections
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
@@ -82,16 +81,16 @@ class SignUpViewModel(private val userManagementUseCase: UserManagementUseCase, 
                     }
                 } else if (it.data?.isExist.equals("false", true)) {
                     if (socialLogin) {
-                        val action = SignUpFragmentDirections.actionNextUserInfo(name = name,mobileNo = phoneNumber, passCode = "123456", email = emailStr)
-                        navigate(action)
+                        //val action = SignUpFragmentDirections.actionNextUserInfo(name = name,mobileNo = phoneNumber, passCode = "123456", email = emailStr)
+                        //navigate(action)
                         //callRegisterAPI(name = name, emailStr = emailStr, passwordStr = passwordStr, phoneNumber = phoneNumber, dateOfBirthCal = dateOfBirthCal, socialLogin = socialLogin)
                     } else {
                         //allCheckPhoneExistAPI(name = name, emailStr = emailStr, passwordStr = passwordStr, phoneNumber = phoneNumber, dateOfBirthCal = dateOfBirthCal, socialLogin = socialLogin)
                             if ( !Utilities.isNullOrEmpty(phoneNumber) ) {
                                 callCheckPhoneExistAPI(name = name, emailStr = emailStr, passwordStr = passwordStr, phoneNumber = phoneNumber, dateOfBirthCal = dateOfBirthCal, socialLogin = socialLogin)
                             } else {
-                                val action = SignUpFragmentDirections.actionNextUserInfo(name = name,mobileNo = phoneNumber, passCode = passwordStr, email = emailStr)
-                                navigate(action)
+                                //val action = SignUpFragmentDirections.actionNextUserInfo(name = name,mobileNo = phoneNumber, passCode = passwordStr, email = emailStr)
+                                //navigate(action)
                             }
                     }
                 }
@@ -127,8 +126,8 @@ class SignUpViewModel(private val userManagementUseCase: UserManagementUseCase, 
                     regDetail.emailID = emailStr
                     regDetail.mobileNo = phoneNumber
                     regDetail.passcode = passwordStr
-                    val action = SignUpFragmentDirections.actionNextUserInfo(name = name,mobileNo = phoneNumber, passCode = passwordStr, email = emailStr)
-                    navigate(action)
+                    //val action = SignUpFragmentDirections.actionNextUserInfo(name = name,mobileNo = phoneNumber, passCode = passwordStr, email = emailStr)
+                    //navigate(action)
                 } else if ( it.data?.isExist.equals(Constants.TRUE, true) ) {
                     regDetail.name = name
                     regDetail.emailID = emailStr
@@ -190,7 +189,7 @@ class SignUpViewModel(private val userManagementUseCase: UserManagementUseCase, 
                 if(!dob.equals("")){
                     navigate(UserInfoFragmentDirections.actionUserInfoFragmentToMainActivity())
                 }else {
-                    navigate(SignUpFragmentDirections.actionSignUpFragmentToMainActivity())
+                    //navigate(SignUpFragmentDirections.actionSignUpFragmentToMainActivity())
                 }
             }
 
@@ -227,7 +226,7 @@ class SignUpViewModel(private val userManagementUseCase: UserManagementUseCase, 
                 sharedPref.edit().putString(PreferenceConstants.PERSONID, pid.toString()).apply()
                 sharedPref.edit().putString(PreferenceConstants.ADMIN_PERSON_ID, pid.toString()).apply()
                 sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE, Constants.SELF_RELATIONSHIP_CODE).apply()
-                navigate(SignUpFragmentDirections.actionSignUpFragmentToMainActivity())
+                //navigate(SignUpFragmentDirections.actionSignUpFragmentToMainActivity())
             }
 
             if (it.status == Resource.Status.ERROR) {

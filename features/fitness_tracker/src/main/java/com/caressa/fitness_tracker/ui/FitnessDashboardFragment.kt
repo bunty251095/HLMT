@@ -240,7 +240,7 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
             }
         }
         if ( isFailure ) {
-            updateViewFromApi()
+            //updateViewFromApi()
         }
         if ( isFromLatestGoal ) {
             displayFitnessData()
@@ -336,10 +336,10 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
                         viewModel.saveStepsGoal(this,value)
                         dialog.dismiss()
                     } else {
-                        Utilities.toastMessageLong(context, resources.getString(R.string.err_enter_value_in_30_50000))
+                        Utilities.toastMessageLong(context, resources.getString(R.string.ERROR_ENTER_VALUE_IN_30_50000))
                     }
                 } else {
-                    Utilities.toastMessageLong(context, resources.getString(R.string.err_enter_steps))
+                    Utilities.toastMessageLong(context, resources.getString(R.string.ERROR_ENTER_STEPS))
                 }
             }
         } catch (e: Exception) {

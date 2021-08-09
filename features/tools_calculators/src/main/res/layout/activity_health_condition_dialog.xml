@@ -109,7 +109,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_3sdp"
                         android:tag="DIAB"
-                        android:text="Diabetes" />
+                        android:text="@string/DIABETES" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/btn_kidney"
@@ -118,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_3sdp"
                         android:tag="KIDNY"
-                        android:text="Kidney disease" />
+                        android:text="@string/KIDNEY_DISEASE"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/btn_stroke"
@@ -126,18 +126,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_3sdp"
-                        android:text="Stroke"
                         android:tag="STROCK" />
+                        android:text="@string/STROKE"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/btn_coronary"
+                        style="@style/ToolsBtnDeselection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_3sdp"
-                        style="@style/ToolsBtnDeselection"
                         android:tag="CRART"
-                        android:text=" Coronary artery"
-                        android:drawableTint="@color/vivant_charcoal_grey" />
+                        android:drawableTint="@color/vivant_charcoal_grey"
+                        android:text="@string/CORONARY_ARTERY"
+                        />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/btn_cholestrol"
@@ -146,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_3sdp"
                         android:tag="INC_CHOL"
-                        android:text="High cholesterol"/>
+                        android:text="@string/HIGH_CHOLESTEROL"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/btn_family"
@@ -155,16 +156,16 @@
                         android:layout_height="wrap_content"
                         android:tag="FH_HRT"
                         android:layout_marginStart="@dimen/_3sdp"
-                        android:text="Family history of heart disease"/>
+                        android:text="@string/FAMILY_HISTORY_OF_HEART_DISEASE"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/btn_heart"
+                        style="@style/ToolsBtnDeselection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_3sdp"
-                        android:text="Heart disease"
                         android:tag="HRTPROB"
-                        style="@style/ToolsBtnDeselection"/>
+                        android:text="@string/HEART_DISEASE" />
 
                 </com.caressa.common.view.FlowLayout>
 

@@ -23,7 +23,7 @@
             android:layout_marginTop="@dimen/_40sdp"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:text="@string/LABLE_MENSTRUAL_PERIOD_LMP"
+            android:text="@string/LABEL_MENSTRUAL_PERIOD_LMP"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

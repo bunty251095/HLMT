@@ -17,8 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/txt_param_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_heart_risk" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.caressa.common.view.ArcTextView
         android:id="@+id/txt_param_title"
@@ -26,7 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
-        android:text="Cardiovascular Risk"
+        android:text=""
         android:textSize="@dimen/_12sdp"
         app:layout_constraintBottom_toTopOf="@+id/txt_param_desc"
         app:layout_constraintEnd_toStartOf="@+id/layout_value"
@@ -40,7 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_2sdp"
-        android:text="BMI Based"
+        android:text=""
         android:textSize="@dimen/_11sdp"
         app:layout_constraintBottom_toBottomOf="@+id/txt_param_title"
         app:layout_constraintEnd_toEndOf="@+id/txt_param_title"
@@ -61,7 +60,7 @@
             style="@style/VivantTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="60"
+            android:text=""
             android:textColor="@color/textViewColor"
             android:textSize="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +72,7 @@
             style="@style/VivantTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Heart Age"
+            android:text=""
             android:textSize="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="@+id/txt_param_value"
             app:layout_constraintStart_toStartOf="@+id/txt_param_value"

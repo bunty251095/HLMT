@@ -94,7 +94,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
     val _phoneExist = MediatorLiveData<PhoneExistsModel.IsExistResponse>()
     val phoneExist: LiveData<PhoneExistsModel.IsExistResponse> get() = _phoneExist
 
-    fun callAddNewRelativeApi(forceRefresh: Boolean , userRelative : UserRelatives) = viewModelScope.launch(dispatchers.main) {
+    fun callAddNewRelativeApi(forceRefresh: Boolean,userRelative:UserRelatives,from:String,fragment:AddFamilyMemberFragment) = viewModelScope.launch(dispatchers.main) {
 
         val contact = AddRelativeModel.Contact( userRelative.emailAddress , userRelative.contactNo )
         val relationships: ArrayList<Relationship> = ArrayList()
@@ -125,9 +125,15 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if ( it != null ) {
                     val newRelative = it.data!!.person
-                    if ( !Utilities.isNullOrEmpty( newRelative.id.toString() ) )
-                    toastMessage(context.resources.getString(R.string.MEMBER_ADDED))
-                    navigate(AddFamilyMemberFragmentDirections.actionAddFamilyMemberFragmentToFamilyMembersListFragment())
+                    if ( !Utilities.isNullOrEmpty( newRelative.id.toString() ) ) {
+                        toastMessage(context.resources.getString(R.string.MEMBER_ADDED))
+                        Timber.e("from----->$from")
+                        if ( from.equals(Constants.HRA,ignoreCase = true) ) {
+                            fragment.navigateToHRA()
+                        } else {
+                            navigate(AddFamilyMemberFragmentDirections.actionAddFamilyMemberFragmentToFamilyMembersListFragment())
+                        }
+                    }
                 }
                 FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_MEMBER_ADD_EVENT)
             }

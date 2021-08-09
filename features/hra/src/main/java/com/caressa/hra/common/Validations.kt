@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.CheckBox
 import com.caressa.common.utils.Utilities
 import com.caressa.common.view.FlowLayout
+import com.caressa.hra.R
 import timber.log.Timber
 
 object Validations {
@@ -27,12 +28,12 @@ object Validations {
              }
 
              (height < 120 || height > 240) -> {
-                 Utilities.toastMessageLong(context, "Please Select valid height between " + 120 + "-" + 240)
+                 Utilities.toastMessageLong(context, context.resources.getString(R.string.PLEASE_SELECT_VALID_HEIGHT_BETWEEN) +" " + 120 + "-" + 240)
                  isValid = false
              }
 
              (weight < 30 || weight > 150) -> {
-                 Utilities.toastMessageLong(context, "Please Select valid weight between " + 30 + "-" + 150)
+                 Utilities.toastMessageLong(context, context.resources.getString(R.string.PLEASE_SELECT_VALID_WEIGHT_BETWEEN) + " " + 30 + "-" + 150)
                  isValid = false
              }
 
@@ -50,17 +51,17 @@ object Validations {
              }
 
              systolic in 30..300 && diastolic in 10..150 && (systolic < diastolic) -> {
-                 Utilities.toastMessageLong(context, "Systolic BP should not less than diastolic BP")
+                 Utilities.toastMessageLong(context,context.resources.getString(R.string.SYSTOLIC_BP_SHOULD_NOT_LESS_THAN_DIASTOLIC_BP))
                  isValid = false
              }
 
              (systolic < 30) || (systolic > 300)  -> {
-                 Utilities.toastMessageLong(context, "Please Enter valid Systolic value between 30-300")
+                 Utilities.toastMessageLong(context,context.resources.getString(R.string.PLEASE_INSERT_SYSTOLIC_BP_VALUE_BETWEEN_30_TO_300))
                  isValid = false
              }
 
              (diastolic < 10) || (diastolic > 150)  -> {
-                 Utilities.toastMessageLong(context, "Please Enter valid Diastolic value between 10-150")
+                 Utilities.toastMessageLong(context,context.resources.getString(R.string.PLEASE_INSERT_DIASTOLIC_BP_VALUE_BETWEEN_10_TO_150))
                  isValid = false
              }
 

@@ -106,12 +106,12 @@ class DocumentTypeFragment : BaseFragment() {
 
     private fun getDocumentTypeList(): ArrayList<DocumentType> {
         val list: ArrayList<DocumentType> = ArrayList()
-        list.add(DocumentType(resources.getString(R.string.type_pathology_lab_report), "LAB", R.drawable.img_pathology))
-        list.add(DocumentType(resources.getString(R.string.type_hospital_report), "HOS", R.drawable.img_hospital_report))
-        list.add(DocumentType(resources.getString(R.string.type_prescription), "PRE", R.drawable.img_prescription))
-        list.add(DocumentType(resources.getString(R.string.type_diet_plan), "DIET_PLAN", R.drawable.img_diet_plan))
-        list.add(DocumentType(resources.getString(R.string.type_fitness_plan), "FIT_PLAN", R.drawable.img_fitness_plan))
-        list.add(DocumentType(resources.getString(R.string.type_other_document), "OTR", R.drawable.img_other))
+        list.add(DocumentType(resources.getString(R.string.TYPE_PATHOLOGY_LAB_REPORT), "LAB", R.drawable.img_pathology))
+        list.add(DocumentType(resources.getString(R.string.TYPE_HOSPITAL_REPORT), "HOS", R.drawable.img_hospital_report))
+        list.add(DocumentType(resources.getString(R.string.TYPE_DOCTOR_PRESCRIPTION), "PRE", R.drawable.img_prescription))
+        list.add(DocumentType(resources.getString(R.string.TYPE_DIET_PLAN), "DIET_PLAN", R.drawable.img_diet_plan))
+        list.add(DocumentType(resources.getString(R.string.TYPE_FITNESS_PLAN), "FIT_PLAN", R.drawable.img_fitness_plan))
+        list.add(DocumentType(resources.getString(R.string.TYPE_OTHER_DOCUMENT), "OTR", R.drawable.img_other))
         return list
     }
 

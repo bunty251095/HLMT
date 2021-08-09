@@ -33,8 +33,8 @@ class BlogsActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController)
         navController.addOnDestinationChangedListener{ controller, destination, _ ->
             toolbar_title.text = when (destination.id) {
-                R.id.blogsDashboardFragment -> "Health Library"
-                R.id.blogDetailFragment -> "Blog Details"
+                R.id.blogsDashboardFragment -> resources.getString(R.string.HEALTH_LIBRARY)
+                R.id.blogDetailFragment -> resources.getString(R.string.BLOG_DETAILS)
                 else -> ""
             }
             if(destination.id == controller.graph.startDestination) {

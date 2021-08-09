@@ -131,7 +131,7 @@ class FamilyDoctorAddOrUpdateActivity : BaseActivity() {
 
     private fun registerObservers() {
 
-        viewModel.listSpecialities.observe( this , Observer {
+        viewModel.listSpecialities.observe( this , {
             if ( it != null ) {
                 val list = it.speciality
                 specialityList.clear()
@@ -149,8 +149,8 @@ class FamilyDoctorAddOrUpdateActivity : BaseActivity() {
             }
         })
 
-        viewModel.addDoctor.observe( this , Observer {})
-        viewModel.updateDoctor.observe( this , Observer {})
+        viewModel.addDoctor.observe( this , {})
+        viewModel.updateDoctor.observe( this , {})
     }
 
     private fun setClickable() {
@@ -209,19 +209,19 @@ class FamilyDoctorAddOrUpdateActivity : BaseActivity() {
 
         if (Utilities.isNullOrEmpty(name) || !Validation.isValidName(name)) {
             binding.tilDoctorName.isErrorEnabled = true
-            binding.tilDoctorName.error = "Please Enter Valid Name."
+            binding.tilDoctorName.error = resources.getString(R.string.VALIDATE_NAME)
         }
         if (Utilities.isNullOrEmpty(specialization)) {
             binding.tilSpecialization.isErrorEnabled = true
-            binding.tilSpecialization.error = "Please Enter Valid Specialization."
+            binding.tilSpecialization.error = resources.getString(R.string.VALIDATE_SPECIALIZATION)
         }
         if (Utilities.isNullOrEmpty(contact) || !Validation.isValidPhoneNumber(contact)) {
             binding.tilDoctorContact.isErrorEnabled = true
-            binding.tilDoctorContact.error = "Please Enter Valid Mobile Number"
+            binding.tilDoctorContact.error = resources.getString(R.string.VALIDATE_PHONE)
         }
         if (Utilities.isNullOrEmpty(email) || !Validation.isValidEmail(email)) {
             binding.tilDoctorEmail.isErrorEnabled = true
-            binding.tilDoctorEmail.error = "Please Enter Valid Email"
+            binding.tilDoctorEmail.error = resources.getString(R.string.VALIDATE_EMAIL)
         }
         if (!binding.tilDoctorName.isErrorEnabled && !binding.tilSpecialization.isErrorEnabled &&
             !binding.tilDoctorContact.isErrorEnabled && !binding.tilDoctorEmail.isErrorEnabled ) {

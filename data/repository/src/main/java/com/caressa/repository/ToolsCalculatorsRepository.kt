@@ -1,5 +1,6 @@
 package com.caressa.repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.caressa.model.toolscalculators.*
 import com.caressa.remote.ToolsCalculatorsDatasource
@@ -10,50 +11,26 @@ import kotlinx.coroutines.Deferred
 
 interface ToolsCalculatorsRepository {
 
-    suspend fun startQuiz(forceRefresh: Boolean = false, data: StartQuizModel):
-            LiveData<Resource<StartQuizModel.StartQuizResponse>>
+    suspend fun startQuiz(forceRefresh: Boolean = false, data: StartQuizModel): LiveData<Resource<StartQuizModel.StartQuizResponse>>
 
-    suspend fun heartAgeSaveResponce(
-        forceRefresh: Boolean = false,
-        data: HeartAgeSaveResponceModel
-    ):
-            LiveData<Resource<HeartAgeSaveResponceModel.HeartAgeSaveResponce>>
+    suspend fun heartAgeSaveResponce(forceRefresh: Boolean = false, data: HeartAgeSaveResponceModel): LiveData<Resource<HeartAgeSaveResponceModel.HeartAgeSaveResponce>>
 
-    suspend fun diabetesSaveResponce(
-        forceRefresh: Boolean = false,
-        data: DiabetesSaveResponceModel
-    ):
-            LiveData<Resource<DiabetesSaveResponceModel.DiabetesSaveResponce>>
+    suspend fun diabetesSaveResponce(forceRefresh: Boolean = false, data: DiabetesSaveResponceModel): LiveData<Resource<DiabetesSaveResponceModel.DiabetesSaveResponce>>
 
-    suspend fun hypertensionSaveResponce(
-        forceRefresh: Boolean = false,
-        data: HypertensionSaveResponceModel
-    ):
-            LiveData<Resource<HypertensionSaveResponceModel.HypertensionSaveResponce>>
+    suspend fun hypertensionSaveResponce(forceRefresh: Boolean = false, data: HypertensionSaveResponceModel): LiveData<Resource<HypertensionSaveResponceModel.HypertensionSaveResponce>>
 
-    suspend fun stressAndAnxietySaveResponce(
-        forceRefresh: Boolean = false,
-        data: StressAndAnxietySaveResponceModel
-    ):
-            LiveData<Resource<StressAndAnxietySaveResponceModel.StressAndAnxietySaveResponse>>
+    suspend fun stressAndAnxietySaveResponce(forceRefresh: Boolean = false, data: StressAndAnxietySaveResponceModel): LiveData<Resource<StressAndAnxietySaveResponceModel.StressAndAnxietySaveResponse>>
 
-    suspend fun smartPhoneSaveResponce(
-        forceRefresh: Boolean = false,
-        data: SmartPhoneSaveResponceModel
-    ):
-            LiveData<Resource<SmartPhoneSaveResponceModel.SmartPhoneSaveResponce>>
+    suspend fun smartPhoneSaveResponce(forceRefresh: Boolean = false, data: SmartPhoneSaveResponceModel): LiveData<Resource<SmartPhoneSaveResponceModel.SmartPhoneSaveResponce>>
 }
 
-class ToolsCalculatorsRepositoryImpl(private val datasource: ToolsCalculatorsDatasource) :
+class ToolsCalculatorsRepositoryImpl(private val datasource: ToolsCalculatorsDatasource,private val context: Context) :
+
     ToolsCalculatorsRepository {
 
-    override suspend fun startQuiz(
-        forceRefresh: Boolean,
-        data: StartQuizModel
-    ): LiveData<Resource<StartQuizModel.StartQuizResponse>> {
+    override suspend fun startQuiz(forceRefresh: Boolean, data: StartQuizModel): LiveData<Resource<StartQuizModel.StartQuizResponse>> {
 
-        return object :
-            NetworkBoundResource<StartQuizModel.StartQuizResponse, BaseResponse<StartQuizModel.StartQuizResponse>>() {
+        return object : NetworkBoundResource<StartQuizModel.StartQuizResponse, BaseResponse<StartQuizModel.StartQuizResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -78,14 +55,9 @@ class ToolsCalculatorsRepositoryImpl(private val datasource: ToolsCalculatorsDat
         }.build().asLiveData()
     }
 
-    override suspend fun heartAgeSaveResponce(
-        forceRefresh: Boolean,
-        data: HeartAgeSaveResponceModel
-    )
-            : LiveData<Resource<HeartAgeSaveResponceModel.HeartAgeSaveResponce>> {
+    override suspend fun heartAgeSaveResponce(forceRefresh: Boolean, data: HeartAgeSaveResponceModel): LiveData<Resource<HeartAgeSaveResponceModel.HeartAgeSaveResponce>> {
 
-        return object :
-            NetworkBoundResource<HeartAgeSaveResponceModel.HeartAgeSaveResponce, BaseResponse<HeartAgeSaveResponceModel.HeartAgeSaveResponce>>() {
+        return object : NetworkBoundResource<HeartAgeSaveResponceModel.HeartAgeSaveResponce, BaseResponse<HeartAgeSaveResponceModel.HeartAgeSaveResponce>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -110,14 +82,9 @@ class ToolsCalculatorsRepositoryImpl(private val datasource: ToolsCalculatorsDat
         }.build().asLiveData()
     }
 
-    override suspend fun diabetesSaveResponce(
-        forceRefresh: Boolean,
-        data: DiabetesSaveResponceModel
-    )
-            : LiveData<Resource<DiabetesSaveResponceModel.DiabetesSaveResponce>> {
+    override suspend fun diabetesSaveResponce(forceRefresh: Boolean, data: DiabetesSaveResponceModel): LiveData<Resource<DiabetesSaveResponceModel.DiabetesSaveResponce>> {
 
-        return object :
-            NetworkBoundResource<DiabetesSaveResponceModel.DiabetesSaveResponce, BaseResponse<DiabetesSaveResponceModel.DiabetesSaveResponce>>() {
+        return object : NetworkBoundResource<DiabetesSaveResponceModel.DiabetesSaveResponce, BaseResponse<DiabetesSaveResponceModel.DiabetesSaveResponce>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -142,14 +109,9 @@ class ToolsCalculatorsRepositoryImpl(private val datasource: ToolsCalculatorsDat
         }.build().asLiveData()
     }
 
-    override suspend fun hypertensionSaveResponce(
-        forceRefresh: Boolean,
-        data: HypertensionSaveResponceModel
-    )
-            : LiveData<Resource<HypertensionSaveResponceModel.HypertensionSaveResponce>> {
+    override suspend fun hypertensionSaveResponce(forceRefresh: Boolean, data: HypertensionSaveResponceModel): LiveData<Resource<HypertensionSaveResponceModel.HypertensionSaveResponce>> {
 
-        return object :
-            NetworkBoundResource<HypertensionSaveResponceModel.HypertensionSaveResponce, BaseResponse<HypertensionSaveResponceModel.HypertensionSaveResponce>>() {
+        return object : NetworkBoundResource<HypertensionSaveResponceModel.HypertensionSaveResponce, BaseResponse<HypertensionSaveResponceModel.HypertensionSaveResponce>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -174,14 +136,9 @@ class ToolsCalculatorsRepositoryImpl(private val datasource: ToolsCalculatorsDat
         }.build().asLiveData()
     }
 
-    override suspend fun stressAndAnxietySaveResponce(
-        forceRefresh: Boolean,
-        data: StressAndAnxietySaveResponceModel
-    ):
-            LiveData<Resource<StressAndAnxietySaveResponceModel.StressAndAnxietySaveResponse>> {
+    override suspend fun stressAndAnxietySaveResponce(forceRefresh: Boolean, data: StressAndAnxietySaveResponceModel): LiveData<Resource<StressAndAnxietySaveResponceModel.StressAndAnxietySaveResponse>> {
 
-        return object :
-            NetworkBoundResource<StressAndAnxietySaveResponceModel.StressAndAnxietySaveResponse, BaseResponse<StressAndAnxietySaveResponceModel.StressAndAnxietySaveResponse>>() {
+        return object : NetworkBoundResource<StressAndAnxietySaveResponceModel.StressAndAnxietySaveResponse, BaseResponse<StressAndAnxietySaveResponceModel.StressAndAnxietySaveResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -207,14 +164,9 @@ class ToolsCalculatorsRepositoryImpl(private val datasource: ToolsCalculatorsDat
 
     }
 
-    override suspend fun smartPhoneSaveResponce(
-        forceRefresh: Boolean,
-        data: SmartPhoneSaveResponceModel
-    ):
-            LiveData<Resource<SmartPhoneSaveResponceModel.SmartPhoneSaveResponce>> {
+    override suspend fun smartPhoneSaveResponce(forceRefresh: Boolean, data: SmartPhoneSaveResponceModel): LiveData<Resource<SmartPhoneSaveResponceModel.SmartPhoneSaveResponce>> {
 
-        return object :
-            NetworkBoundResource<SmartPhoneSaveResponceModel.SmartPhoneSaveResponce, BaseResponse<SmartPhoneSaveResponceModel.SmartPhoneSaveResponce>>() {
+        return object : NetworkBoundResource<SmartPhoneSaveResponceModel.SmartPhoneSaveResponce, BaseResponse<SmartPhoneSaveResponceModel.SmartPhoneSaveResponce>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 

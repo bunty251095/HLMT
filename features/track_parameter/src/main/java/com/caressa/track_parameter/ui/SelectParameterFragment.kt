@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.utils.Utilities
+import com.caressa.track_parameter.R
 import com.caressa.track_parameter.adapter.SelectParameterAdapter
 import com.caressa.track_parameter.databinding.SelectParameterFragmentBinding
 import com.caressa.track_parameter.viewmodel.DashboardViewModel
@@ -45,9 +46,9 @@ class SelectParameterFragment : BaseFragment(){
                 viewModel.saveSelectedParameter( selectParameterAdapter!!.dataList )
                 Timber.i("Datalist=> "+selectParameterAdapter!!.dataList)
                 viewModel.navigateParam(SelectParameterFragmentDirections.actionSelectParamFragmentToUpdateParameterFragment(
-                    selectParameterAdapter!!.getSelectedParameterList().get(0).profileCode,"false"))
+                    selectParameterAdapter!!.getSelectedParameterList()[0].profileCode,"false"))
             } else {
-                Utilities.toastMessageShort(requireContext(),"Please Select a Profile to Proceed")
+                Utilities.toastMessageShort(requireContext(),resources.getString(R.string.MSG_SELECT_PROFILE_TO_PROCEED))
             }
         }
 

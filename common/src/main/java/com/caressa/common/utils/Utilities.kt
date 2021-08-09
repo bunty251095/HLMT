@@ -62,23 +62,20 @@ object Utilities {
 
     fun getHashKey(context: Context): String {
         try {
-            val info = context.packageManager.getPackageInfo(
-                context.packageName,
-                PackageManager.GET_SIGNATURES
-            )
+            val info = context.packageManager.getPackageInfo(context.packageName,PackageManager.GET_SIGNATURES)
             for (signature in info.signatures) {
                 val md = MessageDigest.getInstance("SHA")
                 md.update(signature.toByteArray())
                 val hashKey = String(Base64.encode(md.digest(), Base64.DEFAULT))
-                Log.e("FACEBOOK KEYHASH", hashKey)
+                Timber.e("FACEBOOK KEYHASH--->$hashKey")
                 return hashKey
             }
         } catch (e: NoSuchAlgorithmException) {
             e.printStackTrace()
-            Log.e("FACEBOOK KEYHASH", "UNABLE TO GENERATE")
+            Timber.e("FACEBOOK KEYHASH : UNABLE TO GENERATE")
         } catch (e: Exception) {
             e.printStackTrace()
-            Log.e("FACEBOOK KEYHASH", "UNABLE TO GENERATE")
+            Timber.e("FACEBOOK KEYHASH : UNABLE TO GENERATE")
         }
         return ""
     }
@@ -86,10 +83,10 @@ object Utilities {
     fun isNullOrEmpty(data: String?): Boolean {
         var result = false
         try {
-            result = data == null || data == "" || data.equals(
-                "null",
-                ignoreCase = true
-            ) || data == "." || data.trim { it <= ' ' }.length == 0
+            result = data == null || data == ""
+                    || data.equals("null", ignoreCase = true)
+                    || data == "."
+                    || data.trim { it <= ' ' }.length == 0
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -100,14 +97,15 @@ object Utilities {
     fun isNullOrEmptyOrZero(data: String?): Boolean {
         var result = false
         try {
-            result = data == null || data == "" || data.equals(
-                "null",
-                ignoreCase = true
-            ) || data == "." || data == "0" || data == "0.0"
+            result = data == null
+                    || data == ""
+                    || data.equals("null", ignoreCase = true)
+                    || data == "."
+                    || data == "0"
+                    || data == "0.0"
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
         return result
     }
 
@@ -149,8 +147,7 @@ object Utilities {
                 val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.BOTTOM, 0, 100)
                 val view = toast.view
-                view?.background?.colorFilter =
-                    PorterDuffColorFilter(appColorHelper.secondaryColor(), PorterDuff.Mode.SRC_IN)
+                view?.background?.colorFilter = PorterDuffColorFilter(appColorHelper.secondaryColor(), PorterDuff.Mode.SRC_IN)
                 val text = view?.findViewById<TextView>(android.R.id.message)
                 text?.setTextColor(ContextCompat.getColor(context, R.color.white))
                 toast.show()
@@ -167,8 +164,7 @@ object Utilities {
                 val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
                 toast.setGravity(Gravity.BOTTOM, 0,  100)
                 val view = toast.view
-                view!!.background.colorFilter =
-                    PorterDuffColorFilter(appColorHelper.secondaryColor(), PorterDuff.Mode.SRC_IN)
+                view!!.background.colorFilter = PorterDuffColorFilter(appColorHelper.secondaryColor(), PorterDuff.Mode.SRC_IN)
                 val text = view.findViewById<TextView>(android.R.id.message)
                 text.setTextColor(ContextCompat.getColor(context, R.color.white))
                 toast.show()
@@ -187,22 +183,13 @@ object Utilities {
         if (extension.equals("JPEG", ignoreCase = true) ||
             extension.equals("jpg", ignoreCase = true) ||
             extension.equals("PNG", ignoreCase = true) ||
-            extension.equals("png", ignoreCase = true)
-        ) {
+            extension.equals("png", ignoreCase = true)) {
             documentType = "IMAGE"
-        } else if (extension.equals("PDF", ignoreCase = true) || extension.equals(
-                "pdf",
-                ignoreCase = true
-            )
-        ) {
+        } else if (extension.equals("PDF", ignoreCase = true) || extension.equals("pdf", ignoreCase = true)) {
             documentType = "PDF"
         } else if (extension.equals("DOC", ignoreCase = true) ||
             extension.equals("doc", ignoreCase = true) ||
-            extension.equals("docx", ignoreCase = true) || extension.equals(
-                "DOCX",
-                ignoreCase = true
-            )
-        ) {
+            extension.equals("docx", ignoreCase = true) || extension.equals("DOCX", ignoreCase = true)) {
             documentType = "DOC"
         }
         return documentType
@@ -223,32 +210,71 @@ object Utilities {
         }
     }
 
+    fun getRelationshipByRelationshipCode(relationshipCode: String,context: Context): String {
+        var relationship = ""
+
+        when(relationshipCode) {
+            Constants.FATHER_RELATIONSHIP_CODE -> {
+                relationship = context.resources.getString(R.string.BROTHER)
+            }
+            Constants.MOTHER_RELATIONSHIP_CODE -> {
+                relationship = context.resources.getString(R.string.MOTHER)
+            }
+            Constants.SON_RELATIONSHIP_CODE -> {
+                relationship = context.resources.getString(R.string.SON)
+            }
+            Constants.DAUGHTER_RELATIONSHIP_CODE -> {
+                relationship = context.resources.getString(R.string.DAUGHTER)
+            }
+            Constants.GRANDFATHER_RELATIONSHIP_CODE -> {
+                relationship = context.resources.getString(R.string.GRAND_FATHER)
+            }
+            Constants.GRANDMOTHER_RELATIONSHIP_CODE -> {
+                relationship = context.resources.getString(R.string.GRAND_MOTHER)
+            }
+            Constants.HUSBAND_RELATIONSHIP_CODE -> {
+                relationship = context.resources.getString(R.string.HUSBAND)
+            }
+            Constants.WIFE_RELATIONSHIP_CODE -> {
+                relationship = context.resources.getString(R.string.WIFE)
+            }
+            Constants.BROTHER_RELATIONSHIP_CODE -> {
+                relationship = context.resources.getString(R.string.BROTHER)
+            }
+            Constants.SISTER_RELATIONSHIP_CODE -> {
+                relationship = context.resources.getString(R.string.SISTER)
+            }
+        }
+
+        return relationship
+    }
+
     fun getRelationImgIdWithGender(relationshipCode: String, gender: String): Int {
         var relationImgTobeAdded: Int = R.drawable.icon_husband
 
-        if (relationshipCode == "SELF" && gender == "1") {
+        if (relationshipCode == Constants.SELF_RELATIONSHIP_CODE && gender == "1") {
             relationImgTobeAdded = R.drawable.icon_husband
-        } else if (relationshipCode == "SELF" && gender == "2") {
+        } else if (relationshipCode == Constants.SELF_RELATIONSHIP_CODE && gender == "2") {
             relationImgTobeAdded = R.drawable.icon_wife
-        } else if (relationshipCode == "FAT") {
+        } else if (relationshipCode == Constants.FATHER_RELATIONSHIP_CODE) {
             relationImgTobeAdded = R.drawable.icon_father
-        } else if (relationshipCode == "MOT") {
+        } else if (relationshipCode == Constants.MOTHER_RELATIONSHIP_CODE) {
             relationImgTobeAdded = R.drawable.icon_mother
-        } else if (relationshipCode == "SON") {
+        } else if (relationshipCode == Constants.SON_RELATIONSHIP_CODE) {
             relationImgTobeAdded = R.drawable.icon_son
-        } else if (relationshipCode == "DAU") {
+        } else if (relationshipCode == Constants.DAUGHTER_RELATIONSHIP_CODE) {
             relationImgTobeAdded = R.drawable.icon_daughter
-        } else if (relationshipCode == "GRF") {
+        } else if (relationshipCode == Constants.GRANDFATHER_RELATIONSHIP_CODE) {
             relationImgTobeAdded = R.drawable.icon_gf
-        } else if (relationshipCode == "GRM") {
+        } else if (relationshipCode == Constants.GRANDMOTHER_RELATIONSHIP_CODE) {
             relationImgTobeAdded = R.drawable.icon_gm
-        } else if (relationshipCode == "HUS") {
+        } else if (relationshipCode == Constants.HUSBAND_RELATIONSHIP_CODE) {
             relationImgTobeAdded = R.drawable.icon_husband
-        } else if (relationshipCode == "WIF") {
+        } else if (relationshipCode == Constants.WIFE_RELATIONSHIP_CODE) {
             relationImgTobeAdded = R.drawable.icon_wife
-        } else if (relationshipCode == "BRO") {
+        } else if (relationshipCode == Constants.BROTHER_RELATIONSHIP_CODE) {
             relationImgTobeAdded = R.drawable.icon_brother
-        } else if (relationshipCode == "SIS") {
+        } else if (relationshipCode == Constants.SISTER_RELATIONSHIP_CODE) {
             relationImgTobeAdded = R.drawable.icon_sister
         }
         return relationImgTobeAdded
@@ -258,8 +284,7 @@ object Utilities {
         //return email.contains("@")
         val pattern: Pattern
         val matcher: Matcher
-        val EMAIL_PATTERN =
-            "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+        val EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
         pattern = Pattern.compile(EMAIL_PATTERN)
         matcher = pattern.matcher(email)
         return matcher.matches()
@@ -282,8 +307,7 @@ object Utilities {
     }
 
     fun isPhoneValid(phoneNumber: String): Boolean {
-        val pattern =
-            Pattern.compile("\\ic_pdf{10}|(?:\\ic_pdf{3}-){2}\\ic_pdf{4}|\\(\\ic_pdf{3}\\)\\ic_pdf{3}-?\\ic_pdf{4}")
+        val pattern = Pattern.compile("\\ic_pdf{10}|(?:\\ic_pdf{3}-){2}\\ic_pdf{4}|\\(\\ic_pdf{3}\\)\\ic_pdf{3}-?\\ic_pdf{4}")
         return phoneNumber.matches(pattern.toRegex())
     }
 
@@ -362,26 +386,26 @@ object Utilities {
 
         when (parameter) {
 
-            context.resources.getString(R.string.ft) -> {
-                vitalParameter.unit = context.resources.getString(R.string.ft)
+            context.resources.getString(R.string.FT) -> {
+                vitalParameter.unit = context.resources.getString(R.string.FT)
                 vitalParameter.minRange = 4
                 vitalParameter.maxRange = 7
             }
 
-            context.resources.getString(R.string.cm) -> {
-                vitalParameter.unit = context.resources.getString(R.string.cm)
+            context.resources.getString(R.string.CM) -> {
+                vitalParameter.unit = context.resources.getString(R.string.CM)
                 vitalParameter.minRange = 120
                 vitalParameter.maxRange = 240
             }
 
-            context.resources.getString(R.string.lbs) -> {
-                vitalParameter.unit = context.resources.getString(R.string.lbs)
+            context.resources.getString(R.string.LBS) -> {
+                vitalParameter.unit = context.resources.getString(R.string.LBS)
                 vitalParameter.minRange = 64
                 vitalParameter.maxRange = 550
             }
 
-            context.resources.getString(R.string.kg) -> {
-                vitalParameter.unit = context.resources.getString(R.string.kg)
+            context.resources.getString(R.string.KG) -> {
+                vitalParameter.unit = context.resources.getString(R.string.KG)
                 vitalParameter.minRange = 30
                 vitalParameter.maxRange = 250
             }
@@ -419,8 +443,7 @@ object Utilities {
     fun clearStepsData(context: Context) {
         val intent = Intent()
         intent.action = Constants.CLEAR_FITNESS_DATA
-        intent.component =
-            ComponentName(NavigationConstants.APPID, NavigationConstants.FITNESS_BROADCAST_RECEIVER)
+        intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.FITNESS_BROADCAST_RECEIVER)
         //intent.putExtra(GlobalConstants.EVENT, event)
         context.sendBroadcast(intent)
     }
@@ -439,11 +462,7 @@ object Utilities {
         return findViewById<View>(android.R.id.content)
     }
     fun Context.convertDpToPx(dp: Float): Float {
-        return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp,
-            this.resources.displayMetrics
-        )
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, this.resources.displayMetrics)
     }
     fun Activity.isKeyboardOpen(): Boolean {
         val visibleBounds = Rect()

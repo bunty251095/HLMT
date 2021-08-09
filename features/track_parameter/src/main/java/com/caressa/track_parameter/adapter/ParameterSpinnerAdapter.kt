@@ -8,6 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.caressa.model.entity.TrackParameterMaster
+import com.caressa.track_parameter.R
 
 class ParameterSpinnerAdapter(var context: Context) : BaseAdapter() {
 
@@ -62,7 +63,7 @@ class ParameterSpinnerAdapter(var context: Context) : BaseAdapter() {
             if (item.parameterCode.equals("BP_SYS",true)){
                 filterList.clear()
                 val bpItem = item
-                bpItem.description = "Blood Pressure"
+                bpItem.description = context.resources.getString(R.string.BLOOD_PRESSURE)
                 filterList.add(bpItem)
             }
             if (item.parameterCode.equals("BP_PULSE",true)){

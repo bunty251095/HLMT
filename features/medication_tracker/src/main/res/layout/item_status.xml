@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         style="@style/VivantTitle"
         android:gravity="center"
-        android:text="Taken"
+        android:text="@string/TAKEN"
         android:textColor="@color/vivant_heather"
         android:textSize="@dimen/_11sdp"
         android:layout_marginEnd="@dimen/_4sdp"
