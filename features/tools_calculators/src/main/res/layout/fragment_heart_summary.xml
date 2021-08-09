@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_3sdp"
                     android:icon="@drawable/img_heart_age"
-                    android:text="Heart Age" />
+                    android:text="@string/HEART_AGE" />
 
                 <com.google.android.material.tabs.TabItem
                     android:id="@+id/tab_heart_risk"
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_3sdp"
                     android:icon="@drawable/img_heart_risk"
-                    android:text="Heart Risk" />
+                    android:text="@string/HEART_RISK" />
 
             </com.google.android.material.tabs.TabLayout>
 
@@ -166,7 +166,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 style="@style/VivantTitle"
-                                android:text="18"
+                                android:text="--"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_24sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -179,7 +179,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 style="@style/VivantTitle"
-                                android:text=" yrs"
+                                android:text="@string/YRS"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_15sdp"
                                 android:textStyle="bold"
@@ -245,7 +245,7 @@
                                     android:id="@+id/lbl_yrs1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="yrs"
+                                    android:text="@string/YRS"
                                     style="@style/ToolsQuestion"
                                     android:textColor="@color/textViewColor"
                                     android:textSize="@dimen/_11sdp"
@@ -258,7 +258,7 @@
                                     android:id="@+id/lbl_your_age"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Your Age"
+                                    android:text="@string/YOUR_AGE"
                                     style="@style/ToolsQuestion"
                                     android:textSize="@dimen/_11sdp"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -314,7 +314,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/_1sdp"
-                                    android:text="yrs"
+                                    android:text="@string/YRS"
                                     style="@style/ToolsQuestion"
                                     android:textSize="@dimen/_11sdp"
                                     app:layout_constraintBottom_toBottomOf="@+id/txt_heart_age"
@@ -325,7 +325,7 @@
                                     android:id="@+id/lbl_heart_age"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Heart Age"
+                                    android:text="@string/HEART_AGE"
                                     style="@style/ToolsQuestion"
                                     android:textSize="@dimen/_11sdp"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -443,7 +443,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/VivantDescription"
-                            android:text="Low Risk"
+                            android:text="@string/LOW_RISK"
                             android:textColor="@color/textViewColor"
                             android:textSize="@dimen/_12sdp"
                             app:layout_constraintEnd_toStartOf="@+id/txt_edit_mobile_number"
@@ -455,7 +455,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/VivantDescription"
-                            android:text="High Risk"
+                            android:text="@string/HEART_RISK"
                             android:textColor="@color/textViewColor"
                             android:textSize="@dimen/_12sdp"
                             app:layout_constraintEnd_toEndOf="parent"

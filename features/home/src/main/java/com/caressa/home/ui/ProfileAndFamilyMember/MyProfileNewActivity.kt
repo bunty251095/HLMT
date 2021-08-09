@@ -236,23 +236,23 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
 
         if ( !Validation.isValidName(username) ) {
             binding.tilEdtUsername.isErrorEnabled = true
-            binding.tilEdtUsername.error = "Please Enter Valid Username"
+            binding.tilEdtUsername.error = resources.getString(R.string.VALIDATE_NAME)
         }
         if (!Utilities.isNullOrEmpty(newAlternateEmail) && !Validation.isValidEmail(newAlternateEmail)) {
             binding.tilEdtAlternateEmail.isErrorEnabled = true
-            binding.tilEdtAlternateEmail.error = "Please Enter Valid Email Address"
+            binding.tilEdtAlternateEmail.error = resources.getString(R.string.VALIDATE_EMAIL)
         }
         if (!Utilities.isNullOrEmpty(newAlternateNumber) && !Validation.isValidPhoneNumber(newAlternateNumber)) {
             binding.tilEdtAlternateNumber.isErrorEnabled = true
-            binding.tilEdtAlternateNumber.error = "Please Enter valid Phone Number"
+            binding.tilEdtAlternateNumber.error = resources.getString(R.string.VALIDATE_PHONE)
         }
         if (newAlternateEmail.equals(newEmail, ignoreCase = true)) {
             binding.tilEdtAlternateEmail.isErrorEnabled = true
-            binding.tilEdtAlternateEmail.error = "Please Enter Different Email Address"
+            binding.tilEdtAlternateEmail.error = resources.getString(R.string.VALIDATE_DIFFERENT_EMAIL)
         }
         if (newAlternateNumber.equals(newNumber, ignoreCase = true)) {
             binding.tilEdtAlternateNumber.isErrorEnabled = true
-            binding.tilEdtAlternateNumber.error = "Please Enter Different Phone Number"
+            binding.tilEdtAlternateNumber.error = resources.getString(R.string.VALIDATE_DIFFERENT_PHONE)
         }
 
         if (!binding.tilEdtUsername.isErrorEnabled && !binding.tilEdtAlternateEmail.isErrorEnabled
@@ -346,13 +346,13 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                     try {
                         startActivity(intent)
                     } catch (e: ActivityNotFoundException) {
-                        Utilities.toastMessageShort(this, "No Application Available to View PDF")
+                        Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_NO_APPLICATION_TO_VIEW_PDF))
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        Utilities.toastMessageShort(this, "Unable to open file.")
+                        Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_UNABLE_TO_OPEN_FILE))
                     }
                 } else {
-                    Utilities.toastMessageShort(this, "File doesn't exist")
+                    Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_FILE_NOT_EXIST))
                 }
             }
         } catch (e: Exception) {
@@ -388,11 +388,11 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         val removeProfPic = Intent()
         val intentArray = arrayOf(galleryIntent)
         val chooser = Intent(Intent.ACTION_CHOOSER)
-        chooser.putExtra(Intent.EXTRA_TITLE, "Select records")
+        chooser.putExtra(Intent.EXTRA_TITLE, resources.getString(R.string.SELECT_RECORDS))
         chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray)
         chooser.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
         chooser.putExtra(Intent.EXTRA_INTENT, removeProfPic)
-        startActivityForResult(Intent.createChooser(galleryIntent, "Select a File to Upload"), From)
+        startActivityForResult(Intent.createChooser(galleryIntent,resources.getString(R.string.SELECT_A_FILE_TO_UPLOAD)), From)
     }
 
     private fun showUcrop(sourceUri: Uri, destinationUri: Uri) {
@@ -596,15 +596,15 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                                     viewModel.callUploadProfileImageApi(this,fileName, mainDirectoryPath, flePath1)
                                 }
                             } else {
-                                Utilities.deleteFileFromLocalSystem(pathTemp)
-                                Utilities.toastMessageShort(this, "$extension1 files are not accepted.")
+                                    Utilities.deleteFileFromLocalSystem(pathTemp)
+                                    Utilities.toastMessageShort(this, extension1 + " " + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
                             }
                         } else {
                             Utilities.deleteFileFromLocalSystem(pathTemp)
-                            Utilities.toastMessageShort(this, "File size must be less than 5MB")
+                                Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
                         }
                     } catch (e: java.lang.Exception) {
-                            Utilities.toastMessageShort(this, "Unable to read file, please try again")
+                            Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_UNABLE_TO_READ_FILE))
                         e.printStackTrace()
                     }
 

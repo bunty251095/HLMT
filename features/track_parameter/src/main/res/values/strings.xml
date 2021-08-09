@@ -1,47 +1,52 @@
 <resources>
-    <string name="app_name">track_parameter</string>
 
-    <string-array name="arr_units">
-        <item>Metric</item>
-        <item>Imperial</item>
-    </string-array>
-    <string name="sp_prompt_unit">Choose Default Unit</string>
-    <string name="history">History</string>
+    <string name="TITLE_TRACK_HEALTH_PARAMETERS">Track Health Parameters</string>
+    <string name="TITLE_SELECT_PARAMETERS">Select Parameters</string>
+    <string name="TITLE_UPDATE_PARAMETERS">Update Parameters</string>
+    <string name="TITLE_PARAMETER_HISTORY">Parameter History</string>
+    <string name="TITLE_COMPLETE_HISTORY">Complete History</string>
 
-    <!--Track Health Parameters-->
-    <string name="title_select_parameters">Select Parameters</string>
-    <string name="msg_select_param_to_track">Please Select at least one Parameter to Track</string>
+    <string name="SELECT_PARAMETERS">Select Parameters</string>
+    <string name="UPDATE_PARAMETER">Update Parameter</string>
 
-    <string name="blood_presure">Blood\nPressure</string>
-    <string name="blood_sugar">Blood\nSugar</string>
-    <string name="hemogram_profile">Hemogram\nProfile</string>
-    <string name="kidney_profile">Kidney\nProfile</string>
-    <string name="lipid_profile">Lipid\nProfile</string>
-    <string name="liver_profile">Liver\nProfile</string>
-    <string name="thyroid_profile">Thyroid\nProfile</string>
-    <string name="urine_profile">Urine\nProfile</string>
+    <string name="SELECT_PARAMETERS_DESC">Select key health parameters to track</string>
+    <string name="UPDATE_PARAMETER_DESC">Update parameters to see the trend</string>
+    <string name="DASHBOARD_DESC">Quick View of Your Health Data</string>
+    <string name="HISTORY_DESC">Check your existing data</string>
 
-    <string name="weight">Weight</string>
-    <string name="waist">Waist</string>
-    <string name="bmi">BMI</string>
-    <string name="whr">WHR</string>
-    <string name="bp">BP</string>
-    <string name="bs">Blood Sugar</string>
-    <string name="cholesterol">Cholesterol</string>
-    <string name="hemoglobin">Hemoglobin</string>
-    <string name="hemogram">Hemogram</string>
-    <string name="kidney">Kidney</string>
-    <string name="lipid">Lipid</string>
-    <string name="liver">Liver</string>
-    <string name="thyroid">Thyroid</string>
-    <string name="urine">Urine</string>
-    <string name="pulse">Pulse</string>
-    <string name="steps">Steps</string>
-    <string name="calories">Calories</string>
-    <string name="add_more">Add More</string>
+    <string name="BLOOD_PRESSURE">Blood Pressure</string>
+    <string name="BLOOD_SUGAR_PROFILE">Blood Sugar Profile</string>
+    <string name="HEMOGRAM_PRESSURE">Hemogram Profile</string>
+    <string name="KIDNEY_PRESSURE">Kidney Profile</string>
+    <string name="LIPID_PRESSURE">Lipid Profile</string>
+    <string name="LIVER_PRESSURE">Liver Profile</string>
+    <string name="THYROID_PRESSURE">Thyroid Profile</string>
+    <string name="URINE_PRESSURE">Urine Profile</string>
 
-    <string name="save">Save</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!--Track Health Parameters-->
+    <string name="WEIGHT">Weight</string>
+    <string name="WAIST">Waist</string>
+    <string name="BMI">BMI</string>
+    <string name="WHR">WHR</string>
+    <string name="BP">BP</string>
+    <string name="BLOOD_SUGAR">Blood Sugar</string>
+    <string name="CHOLESTEROL">Cholesterol</string>
+    <string name="HEMOGLOBIN">Hemoglobin</string>
+    <string name="HEMOGRAM">Hemogram</string>
+    <string name="KIDNEY">Kidney</string>
+    <string name="LIPID">Lipid</string>
+    <string name="LIVER">Liver</string>
+    <string name="THYROID">Thyroid</string>
+    <string name="URINE">Urine</string>
+    <string name="PULSE">Pulse</string>
+
+    <string name="ADD_EDIT">Add/Edit</string>
+    <string name="LAST_CHECKED_ON">Last checked on</string>
+    <string name="SYSTOLIC_DIASTOLIC">Systolic/Diastolic</string>
+
+    <string name="MSG_SELECT_PARAM_TO_TRACK">Please Select at least one Parameter to Track</string>
+    <string name="MSG_SELECT_PROFILE_TO_PROCEED">Please Select a Profile to Proceed</string>
+    <string name="MSG_PARAMETER_IS_UPDATED">Parameter is Updated Successfully</string>
+    <string name="PLEASE_ENTER_ALL_BMI_PROFILE_FIELDS">Please enter all BMI profile fields</string>
+    <string name="PLEASE_ENTER_ALL_WHR_PROFILE_FIELDS">Please enter all WHR profile fields</string>
+
 </resources>

@@ -77,7 +77,7 @@ class SelectRelationshipFragment : BaseFragment() {
                     val msg = resources.getString(R.string.MSG_ALREADY_ADDED)+" " + relation
                     Utilities.toastMessageShort(context,msg)
                 } else {
-                    navigateToAddRelativeWithBundle(it)
+                    navigateToAddRelativeWithBundle(it,from)
                 }
             } else {
                 Utilities.toastMessageShort(context,resources.getString(R.string.ERROR_SELECT_RELATION_FIRST))
@@ -110,11 +110,12 @@ class SelectRelationshipFragment : BaseFragment() {
         return isExist
     }
 
-    private fun navigateToAddRelativeWithBundle(view: View ) {
+    private fun navigateToAddRelativeWithBundle(view: View,from:String) {
         val bundle = Bundle()
         bundle.putString(Constants.RELATION_CODE,relationShipCode)
         bundle.putString(Constants.RELATION,relation)
         bundle.putString(Constants.GENDER,gender)
+        bundle.putString(Constants.FROM,from)
         relationShipCode = ""
         relation = ""
         gender = ""

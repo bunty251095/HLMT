@@ -57,9 +57,9 @@ class DiabetesSummaryFragment : BaseFragment(),KoinComponent {
     @SuppressLint("ClickableViewAccessibility", "SetTextI18n")
     private fun initialise() {
 
-        binding.txtDibProbability.text = ("Based on your Score you have "
+        binding.txtDibProbability.text = ( resources.getString(R.string.BASED_ON_YOUR_SCORE_YOU_HAVE) + " "
                 + calculatorDataSingleton!!.diabetesSummeryModel.probabilityPercentage
-                + "% Probability of getting diabetes.")
+                + " " + resources.getString(R.string.BASED_ON_YOUR_SCORE_YOU_HAVE))
         binding.indicatorDiabetesRisk.setOnTouchListener { _: View?, _: MotionEvent? -> true }
 
         setDiabetesRiskDetails(calculatorDataSingleton!!.diabetesSummeryModel.totalScore.toDouble(),

@@ -46,9 +46,9 @@ class FamilyMembersAdapter( val  fragment : FamilyMembersListFragment , val view
                     if (!Utilities.isNullOrEmpty(familyMembersList[position].age)
                         && familyMembersList[position].age.toDouble().toInt() != 0) {
                         if (familyMembersList[position].age.equals("1", ignoreCase = true)) {
-                            strAge = strAge + " Year"
+                            strAge = strAge + " ${context.resources.getString(R.string.YEAR)}"
                         } else {
-                            strAge = strAge + " Years"
+                            strAge = strAge + " ${context.resources.getString(R.string.YEARS)}"
                         }
                     } else {
                         strAge = age

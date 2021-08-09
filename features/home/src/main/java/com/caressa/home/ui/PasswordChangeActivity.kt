@@ -87,7 +87,7 @@ class PasswordChangeActivity : BaseActivity() {
             }
         })
 
-        viewModel.passwordChange.observe(this, Observer {})
+        viewModel.passwordChange.observe(this, {})
     }
 
     private fun setClickable() {
@@ -111,15 +111,15 @@ class PasswordChangeActivity : BaseActivity() {
 
         if (Utilities.isNullOrEmpty(oldPassword)) {
             binding.tilEdtOldPassword.isErrorEnabled = true
-            binding.tilEdtOldPassword.error = "Please Enter Valid Password"
+            binding.tilEdtOldPassword.error = resources.getString(R.string.VALIDATE_PASSWORD)
         }
         if (Utilities.isNullOrEmpty(newPassword)) {
             binding.tilEdtNewPassword.isErrorEnabled = true
-            binding.tilEdtNewPassword.error = "Please Enter Valid Password"
+            binding.tilEdtNewPassword.error = resources.getString(R.string.VALIDATE_PASSWORD)
         }
         if (Utilities.isNullOrEmpty(confirmPassword)) {
             binding.tilEdtConfirmPassword.isErrorEnabled = true
-            binding.tilEdtConfirmPassword.error = "Please Enter Valid Password"
+            binding.tilEdtConfirmPassword.error = resources.getString(R.string.VALIDATE_PASSWORD)
         }
 
         if (!Utilities.isNullOrEmpty(oldPassword)
@@ -127,19 +127,19 @@ class PasswordChangeActivity : BaseActivity() {
             && !Utilities.isNullOrEmpty(confirmPassword)) {
             if (!Validation.isValidPassword(newPassword)) {
                 binding.tilEdtNewPassword.isErrorEnabled = true
-                binding.tilEdtNewPassword.error = "Password Should be minimum 6 Characters"
+                binding.tilEdtNewPassword.error = resources.getString(R.string.ERROR_PASSWORD_SHOULD_BE_MINIMUM_6_CHARACTERS)
             } else if (!Validation.isValidPassword(confirmPassword)) {
                 binding.tilEdtConfirmPassword.isErrorEnabled = true
-                binding.tilEdtConfirmPassword.error = "Password Should be minimum 6 Characters"
+                binding.tilEdtConfirmPassword.error = resources.getString(R.string.ERROR_PASSWORD_SHOULD_BE_MINIMUM_6_CHARACTERS)
             } else if (oldPassword.equals(newPassword, ignoreCase = true)) {
                 binding.tilEdtNewPassword.isErrorEnabled = true
-                binding.tilEdtNewPassword.error = "New password must be different from old password"
+                binding.tilEdtNewPassword.error = resources.getString(R.string.ERROR_NEW_PASSWORD_MUST_BE_DIFFERENT_FROM_OLD_PASSWORD)
             } else if (oldPassword.equals(confirmPassword, ignoreCase = true)) {
                 binding.tilEdtConfirmPassword.isErrorEnabled = true
-                binding.tilEdtConfirmPassword.error = "New password must be different from old password"
+                binding.tilEdtConfirmPassword.error = resources.getString(R.string.ERROR_NEW_PASSWORD_MUST_BE_DIFFERENT_FROM_OLD_PASSWORD)
             } else if (!newPassword.equals(confirmPassword, ignoreCase = true)) {
                 binding.tilEdtConfirmPassword.isErrorEnabled = true
-                binding.tilEdtConfirmPassword.error = "Passwords doesn't match"
+                binding.tilEdtConfirmPassword.error = resources.getString(R.string.ERROR_PASSWORD_DOES_NOT_MATCH)
             }
         }
 

@@ -63,13 +63,13 @@ class WaistDialogManager(context: Context, listener: OnDialogValueListener,
                 binding.pickerWeist2.value = cmValue
             }
 
-            if (parameterDataModel!!.unit.equals("Inch", ignoreCase = true)) {
+            if (parameterDataModel!!.unit.equals(context.resources.getString(R.string.INCH), ignoreCase = true)) {
                 //Timber.e("ValueInch=>$finalValue")
                 Objects.requireNonNull(binding.layoutTab.getTabAt(0))!!.select()
                 binding.pickerWeist1.visibility = View.VISIBLE
                 binding.pickerWeist2.visibility = View.GONE
                 binding.txtUnit.text = context.resources.getString(R.string.INCH)
-            } else if (parameterDataModel!!.unit.equals("Cm", ignoreCase = true)) {
+            } else if (parameterDataModel!!.unit.equals(context.resources.getString(R.string.CM), ignoreCase = true)) {
                 //Timber.e("ValueCm=>$cmValue")
                 Objects.requireNonNull(binding.layoutTab.getTabAt(1))!!.select()
                 binding.pickerWeist1.visibility = View.GONE

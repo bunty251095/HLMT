@@ -34,13 +34,13 @@ object HraHelper {
 
     fun showHeightDialog( height :Int,layHeight: CustomEditTextHra ,listener : HraQuesBmiFragment,context: Context ) {
         val data = ParameterDataModel()
-        data.title = "Height"
+        data.title = context.resources.getString(R.string.HEIGHT)
         data.value = " - - "
         data.finalValue = height.toString()
-        if (layHeight.getUnit().toLowerCase(Locale.ROOT).contains("cm")) {
-            data.unit = "cm"
+        if (layHeight.getUnit().toLowerCase(Locale.ROOT).contains(context.resources.getString(R.string.CM))) {
+            data.unit = context.resources.getString(R.string.CM)
         } else {
-            data.unit = "Feet/inch"
+            data.unit = context.resources.getString(R.string.FEET_INCH)
         }
         data.code = "HEIGHT"
         val heightWeightDialog = HeightWeightDialog(context,listener,"Height", data)
@@ -50,14 +50,14 @@ object HraHelper {
 
     fun showWeightDialog( weight :Double,layWeight: CustomEditTextHra ,listener : HraQuesBmiFragment,context: Context ) {
         val data = ParameterDataModel()
-        data.title = "Weight"
+        data.title = context.resources.getString(R.string.WEIGHT)
         data.value = " - - "
         data.finalValue = weight.toString()
 
-        if (layWeight.getUnit().toLowerCase(Locale.ROOT).contains("lbs")) {
-            data.unit = "lbs"
+        if (layWeight.getUnit().toLowerCase(Locale.ROOT).contains(context.resources.getString(R.string.LBS))) {
+            data.unit = context.resources.getString(R.string.LBS)
         } else {
-            data.unit = "Kg"
+            data.unit = context.resources.getString(R.string.KG)
         }
         data.code = "WEIGHT"
         val heightWeightDialog = HeightWeightDialog(context,listener,"Weight", data)
@@ -278,10 +278,10 @@ object HraHelper {
             context.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
-            Utilities.toastMessageShort(context, context.resources.getString(R.string.no_application_available))
+            Utilities.toastMessageShort(context, context.resources.getString(R.string.ERROR_NO_APPLICATION_TO_VIEW_PDF))
         } catch (e: Exception) {
             e.printStackTrace()
-            Utilities.toastMessageShort(context, context.resources.getString(R.string.unable_to_open_file))
+            Utilities.toastMessageShort(context, context.resources.getString(R.string.ERROR_UNABLE_TO_OPEN_FILE))
         }
     }
 

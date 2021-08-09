@@ -48,7 +48,7 @@
                 android:layout_marginTop="@dimen/_4sdp"
                 android:layout_centerHorizontal="true"
                 style="@style/VivantTitle"
-                android:text="Click on the below options to start uploading"
+                android:text="@string/CLICK_ON_THE_BELOW_OPTIONS_TO_START_UPLOADING"
                 android:textSize="@dimen/_13sdp"/>
 
             <RelativeLayout
@@ -149,7 +149,7 @@
                             style="@style/VivantDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Photo"
+                            android:text="@string/PHOTO"
                             android:layout_marginTop="@dimen/_6sdp"
                             android:textColor="@color/vivant_charcoal_grey"
                             app:layout_constraintEnd_toEndOf="@+id/img_camera"
@@ -192,7 +192,7 @@
                             style="@style/VivantDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="File"
+                            android:text="@string/FILE"
                             android:layout_marginTop="@dimen/_6sdp"
                             android:textColor="@color/vivant_charcoal_grey"
                             app:layout_constraintEnd_toEndOf="@+id/img_file"
@@ -235,7 +235,7 @@
                             style="@style/VivantDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Gallery"
+                            android:text="@string/GALLERY"
                             android:layout_marginTop="@dimen/_6sdp"
                             android:textColor="@color/vivant_charcoal_grey"
                             app:layout_constraintEnd_toEndOf="@+id/img_gallery"

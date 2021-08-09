@@ -49,22 +49,22 @@ class FamilyDoctorsAdapter(val  activity:FamilyDoctorListActivity, val viewModel
 
         if (!Utilities.isNullOrEmpty(doctorDetail.emailAddress)) {
             val emailText = "<u><a>" + doctorDetail.emailAddress + "</a></u>"
-            holder.txt_email.setClickable(true)
-            holder.txt_email.setText(Html.fromHtml(emailText))
+            holder.txt_email.isClickable = true
+            holder.txt_email.text = Html.fromHtml(emailText)
         } else {
-            holder.txt_email.setVisibility(View.GONE)
+            holder.txt_email.visibility = View.GONE
         }
 
         if (!Utilities.isNullOrEmpty(doctorDetail.primaryContactNo)) {
-            holder.txt_contact.setText(doctorDetail.primaryContactNo)
+            holder.txt_contact.text = doctorDetail.primaryContactNo
         } else {
-            holder.txt_contact.setVisibility(View.GONE)
+            holder.txt_contact.visibility = View.GONE
         }
 
         if (!Utilities.isNullOrEmpty(doctorDetail.affiliatedTo)) {
-            holder.txt_affiliated_to.setText("Affiliated To : " + doctorDetail.affiliatedTo)
+            holder.txt_affiliated_to.text = "${context.resources.getString(R.string.AFFILIATED_TO)} " + doctorDetail.affiliatedTo
         } else {
-            holder.txt_affiliated_to.setVisibility(View.GONE)
+            holder.txt_affiliated_to.visibility = View.GONE
         }
 
         holder.txt_email.setOnClickListener {
@@ -85,7 +85,7 @@ class FamilyDoctorsAdapter(val  activity:FamilyDoctorListActivity, val viewModel
             HomeSingleton.getInstance()!!.setDoctorsDetails(doctorDetail)
             val intent = Intent()
             intent.putExtra("from","Update")
-            intent.setComponent(ComponentName(NavigationConstants.APPID, NavigationConstants.FAMILY_DOCTOR_ADD_UPDATE))
+            intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.FAMILY_DOCTOR_ADD_UPDATE)
             context.startActivity(intent)
         }
 
@@ -104,7 +104,7 @@ class FamilyDoctorsAdapter(val  activity:FamilyDoctorListActivity, val viewModel
                         }
                     }
                 }, dialogData)
-            defaultNotificationDialog.getWindow()!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            defaultNotificationDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             defaultNotificationDialog.show()
         }
 

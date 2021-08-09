@@ -9,6 +9,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.Constants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.Event
 import com.caressa.common.utils.Utilities
@@ -120,27 +121,27 @@ class ToolsCalculatorsViewModel(
                         calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
                         calculatorDataSingleton.participantID = participantID
                         when {
-                            quizCode.equals(context.resources.getString(R.string.QUIZ_CODE_HEART_AGE), ignoreCase = true)
+                            quizCode.equals(Constants.QUIZ_CODE_HEART_AGE, ignoreCase = true)
                             -> {
                                 calculatorDataSingleton.quizId = "5"
                                 navigate(ToolsCalculatorsDashboardFragmentDirections.actionToolsCalculatorsDashboardFragmentToHeartAgeFragment())
                             }
-                            quizCode.equals(context.resources.getString(R.string.QUIZ_CODE_DIABETES), ignoreCase = true)
+                            quizCode.equals(Constants.QUIZ_CODE_DIABETES, ignoreCase = true)
                             -> {
                                 calculatorDataSingleton.quizId = "8"
                                 navigate(ToolsCalculatorsDashboardFragmentDirections.actionToolsCalculatorsDashboardFragmentToDiabetesCalculatorFragment())
                             }
-                            quizCode.equals(context.resources.getString(R.string.QUIZ_CODE_HYPERTENSION), ignoreCase = true)
+                            quizCode.equals(Constants.QUIZ_CODE_HYPERTENSION, ignoreCase = true)
                             -> {
                                 calculatorDataSingleton.quizId = "9"
                                 navigate(ToolsCalculatorsDashboardFragmentDirections.actionToolsCalculatorsDashboardFragmentToHypertensionInputFragment())
                             }
-                            quizCode.equals(context.resources.getString(R.string.QUIZ_CODE_STRESS_ANXIETY), ignoreCase = true)
+                            quizCode.equals(Constants.QUIZ_CODE_STRESS_ANXIETY, ignoreCase = true)
                             -> {
                                 calculatorDataSingleton.quizId = "7"
                                 navigate(ToolsCalculatorsDashboardFragmentDirections.actionToolsCalculatorsDashboardFragmentToStressAndAnxietyInputFragment())
                             }
-                            quizCode.equals(context.resources.getString(R.string.QUIZ_CODE_SMART_PHONE), ignoreCase = true)
+                            quizCode.equals(Constants.QUIZ_CODE_SMART_PHONE, ignoreCase = true)
                             -> {
                                 calculatorDataSingleton.quizId = "4"
                                 navigate(ToolsCalculatorsDashboardFragmentDirections.actionToolsCalculatorsDashboardFragmentToSmartPhoneInputFragment())

@@ -29,7 +29,6 @@
             android:id="@+id/modelSpinner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp"
-            android:entries="@array/model_arrays"
             android:background="@color/vivantGreen"
             android:spinnerMode="dropdown"
             android:dropDownSelector="@color/vivant_pale_grey"
@@ -91,7 +90,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Profile Parameters"
+                android:text="@string/PROFILE_PARAMETERS"
                 android:textStyle="bold"
                 style="@style/VivantTitle"
                 android:textSize="@dimen/_12sdp"
@@ -114,7 +113,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="7"
                     style="@style/ToolsQuestion"
-                    android:text="Age in years" />
+                    android:text="@string/AGE_IN_YEARS" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edtAge"
@@ -199,7 +198,6 @@
                         android:layout_height="@dimen/_3sdp"
                         android:dropDownWidth="match_parent"
                         android:dropDownSelector="@color/vivant_pale_grey"
-                        android:entries="@array/gender_array"
                         android:gravity="end"
                         android:spinnerMode="dropdown"
                         android:tag="GENDER"
@@ -230,7 +228,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="7"
                     style="@style/ToolsQuestion"
-                    android:text="Are you under Medication for High Blood Pressure?" />
+                    android:text="@string/ARE_YOU_UNDER_MEDICATION_FOR_HIGH_BLOOD_PRESSURE"/>
 
                 <RadioGroup
                     android:id="@+id/rg_bp_medication"
@@ -274,7 +272,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="7"
                     style="@style/ToolsQuestion"
-                    android:text="Have you ever smoked?" />
+                    android:text="@string/HAVE_YOU_EVER_SMOKED" />
 
                 <RadioGroup
                     android:id="@+id/rg_smoke"
@@ -317,7 +315,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="7"
                     style="@style/ToolsQuestion"
-                    android:text="Are you Diabetic?" />
+                    android:text="@string/ARE_YOU_DIABETIC" />
 
                 <RadioGroup
                     android:id="@+id/rg_diabetic"
@@ -370,7 +368,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="@string/health_condition_question" />
+                        android:text="@string/HEALTH_CONDITION_QUESTION" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/ToolsText"
@@ -378,7 +376,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:alpha="0.55"
-                        android:text="@string/health_condition_content" />
+                        android:text="@string/HEALTH_CONDITION_CONTENT" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtSelection"
@@ -386,7 +384,7 @@
                         android:layout_height="wrap_content"
                         style="@style/VivantDescription"
                         android:textStyle="bold"
-                        android:text="( You have selected 0 items )"
+                        android:text=""
                         android:layout_marginTop="@dimen/_3sdp"/>
 
                 </LinearLayout>
@@ -414,7 +412,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Measurement Parameter"
+                android:text="@string/MEASUREMENT_PARAMETERS"
                 android:textStyle="bold"
                 style="@style/VivantTitle"
                 android:textSize="@dimen/_12sdp"

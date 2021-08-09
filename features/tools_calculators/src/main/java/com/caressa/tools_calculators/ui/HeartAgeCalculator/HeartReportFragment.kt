@@ -180,9 +180,9 @@ class HeartReportFragment : BaseFragment() {
         xAxis.setDrawGridLines(false)
         xAxis.valueFormatter =
             IAxisValueFormatter { value, _ ->
-                var name = "Your age"
+                var name = resources.getString(R.string.YOUR_AGE)
                 if (value > 0) {
-                    name = "Heart age " + value.toInt()
+                    name = "${resources.getString(R.string.HEART_AGE)} " + value.toInt()
                 }
                 name
             }
@@ -221,7 +221,7 @@ class HeartReportFragment : BaseFragment() {
         xAxis.granularity = 1f
         xAxis.setDrawGridLines(false)
         xAxis.valueFormatter = IAxisValueFormatter { value, _ ->
-            "Heart Risk " + (value.toInt() + 1)
+            "${resources.getString(R.string.HEART_RISK)} " + (value.toInt() + 1)
         }
         binding.barChartHeartRisk.invalidate() // refresh
     }

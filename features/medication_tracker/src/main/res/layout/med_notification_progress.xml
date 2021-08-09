@@ -25,7 +25,7 @@
                 style="@style/TextAppearance.Compat.Notification.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:text=""
                 android:textSize="@dimen/_12sdp"/>
 
             <TextView
@@ -33,7 +33,7 @@
                 style="@style/TextAppearance.Compat.Notification.Info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Subtitle"
+                android:text=""
                 android:textColor="@color/vivant_charcoal_grey_55"
                 android:textSize="@dimen/_12sdp"/>
 
@@ -50,7 +50,7 @@
                 style="@style/TextAppearance.Compat.Notification.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="11:00 PM"
+                android:text=""
                 android:gravity="end"
                 android:textSize="@dimen/_12sdp"/>
 
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:text="Medicine Reminder"
+                android:text="@string/MEDICINE_REMINDER"
                 android:textSize="@dimen/_11sdp"/>
 
         </LinearLayout>

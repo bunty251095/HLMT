@@ -588,7 +588,7 @@
                         android:layout_height="wrap_content"
                         style="@style/VivantDescription"
                         android:tag="bold"
-                        android:text="@string/Max_50_Characters"
+                        android:text="@string/MAX_50_CHARACTERS"
                         android:textSize="@dimen/_11sdp"
                         android:layout_marginBottom="@dimen/_15sdp"
                         android:layout_marginStart="@dimen/_10sdp"

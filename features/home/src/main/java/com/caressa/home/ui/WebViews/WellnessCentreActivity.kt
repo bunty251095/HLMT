@@ -82,7 +82,7 @@ class WellnessCentreActivity : AppCompatActivity() {
 
     @SuppressLint("BinaryOperationInTimber")
     fun launchMedLifeWebView( ) {
-        viewModel.userDetails.observe( this , Observer {
+        viewModel.userDetails.observe( this , {
             if ( it != null ) {
                 val userDetail = it
                 try {

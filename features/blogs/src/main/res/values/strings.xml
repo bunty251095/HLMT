@@ -3,4 +3,7 @@
 
     <string name="blog_link">https://blogs.vivant.vivant.me/</string>
     <string name="CONTINUE_READING">Continue Reading.....</string>
+    <string name="HEALTH_LIBRARY">Health Library</string>
+    <string name="BLOG_DETAILS">Blog Details</string>
+
 </resources>

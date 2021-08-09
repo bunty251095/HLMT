@@ -45,7 +45,7 @@
                     android:paddingStart="@dimen/_10sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:text="Welcome to HL Pace,\nplease provide your basic information to build your health profile."
+                    android:text="@string/MSG_SIGN_UP_WELCOME"
                     android:textColor="@color/hlmt_dark_grey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

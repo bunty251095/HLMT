@@ -49,7 +49,7 @@
                 android:id="@+id/title_input"
                 style="@style/VivantTitle"
                 android:layout_margin="@dimen/_15sdp"
-                android:text="Pick your Waist"
+                android:text="@string/PICK_YOUR_WAIST"
                 android:textSize="@dimen/_16sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
                 android:id="@+id/description_input"
                 style="@style/ToolsQuestion"
                 android:layout_margin="@dimen/_5sdp"
-                android:text="Enter your waist size"
+                android:text="@string/ENTER_YOUR_WAIST_SIZE"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,13 +91,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_3sdp"
-                    android:text="Inch" />
+                    android:text="@string/INCH"  />
 
                 <com.google.android.material.tabs.TabItem
                     android:id="@+id/tab_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Centimeter" />
+                    android:text="@string/CENTIMETER"  />
 
             </com.caressa.common.view.ArcTabLayout>
 
@@ -151,7 +151,7 @@
                     android:textColor="@color/textViewColor"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:text="Inch"/>
+                    android:text="@string/INCH"/>
 
             </LinearLayout>
 

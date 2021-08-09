@@ -21,7 +21,6 @@ import com.caressa.repository.utils.Resource
 import com.caressa.security.R
 import com.caressa.security.viewmodel.LoginViewModel.LoginEncryption.getEncryptedData
 import com.caressa.security.domain.UserManagementUseCase
-import com.caressa.security.ui.LoginFragmentDirections
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -77,7 +76,7 @@ class LoginViewModel(private val userManagementUseCase: UserManagementUseCase, p
                 sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE, Constants.SELF_RELATIONSHIP_CODE).apply()
                 // Added by Rohit
                 //RealPathUtil.creatingLocalDirctories()
-                navigate(LoginFragmentDirections.actionLoginFragmentToMainActivity())
+                //navigate(LoginFragmentDirections.actionLoginFragmentToMainActivity())
             }
 
             if (it.status == Resource.Status.ERROR) {
@@ -112,10 +111,6 @@ class LoginViewModel(private val userManagementUseCase: UserManagementUseCase, p
                 toastMessage(it.errorMessage)
             }
         }
-    }
-
-    fun getTermsScreen() {
-        navigate(LoginFragmentDirections.actionLoginTerms())
     }
 
     object LoginEncryption {
@@ -164,7 +159,7 @@ class LoginViewModel(private val userManagementUseCase: UserManagementUseCase, p
                 sharedPref.edit().putString(PreferenceConstants.PERSONID, it.data?.personId.toString()).apply()
                 sharedPref.edit().putString(PreferenceConstants.ADMIN_PERSON_ID, it.data?.personId.toString()).apply()
                 sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE, Constants.SELF_RELATIONSHIP_CODE).apply()
-                navigate(LoginFragmentDirections.actionLoginFragmentToMainActivity())
+                //navigate(LoginFragmentDirections.actionLoginFragmentToMainActivity())
             }
         }
 

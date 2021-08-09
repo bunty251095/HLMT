@@ -60,7 +60,7 @@ class FamilyMembersListFragment : BaseFragment() {
         viewModel.callListRelativesApi(true,this)
         familyMembersAdapter = FamilyMembersAdapter( this , viewModel , requireContext() )
         binding.rvFamilyMembers.adapter = familyMembersAdapter
-        viewModel.listRelatives.observe(viewLifecycleOwner, Observer {  })
+        viewModel.listRelatives.observe(viewLifecycleOwner, {  })
     }
 
     private fun setClickable() {

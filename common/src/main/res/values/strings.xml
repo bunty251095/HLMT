@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">HLMT</string>
 
-    <!--Button Strings-->
     <string name="SAVE">Save</string>
     <string name="SUBMIT">Submit</string>
     <string name="RESTART">Restart</string>
@@ -11,50 +10,68 @@
     <string name="NEXT">Next</string>
     <string name="PREVIOUS">Previous</string>
     <string name="OK">OK</string>
-    <string name="OR">OR</string>
+    <string name="OR">Or</string>
     <string name="CONFIRM">Confirm</string>
     <string name="PROCEED">Proceed</string>
     <string name="SELECT">Select</string>
     <string name="CLOSE">Close</string>
     <string name="CANCEL">Cancel</string>
     <string name="BACK">Back</string>
+    <string name="START">Start</string>
     <string name="CONTINUE">Continue</string>
+    <string name="CALCULATE">Calculate</string>
+    <string name="RECALCULATE">Recalculate</string>
     <string name="DELETE">Delete</string>
     <string name="UPDATE">Update</string>
-    <string name="DEAR_USER">Dear User</string>
     <string name="DOWNLOAD">Download</string>
     <string name="SHARE">Share</string>
     <string name="VIEW">View</string>
     <string name="ADD">Add</string>
+    <string name="ADD_MORE">Add More</string>
     <string name="LOGOUT">Logout</string>
-    <string name="ALERT">Alert</string>
-    <string name="VIEW_MORE">View More</string>
-    <string name="TAKEN">Taken</string>
-    <string name="SKIP">Skip</string>
-    <string name="REFRESH">Refresh</string>
+    <string name="LOGOUT_APPLICATION">Logout Application</string>
     <string name="LOGIN">Login</string>
     <string name="PASSWORD">Password</string>
-    <string name="RESEND_OTP">Resend TAC</string>
+
+    <string name="ALERT">Alert</string>
+    <string name="VIEW_MORE">View More</string>
+    <string name="REPORT">Report</string>
+    <string name="DESCRIPTION">Description</string>
+    <string name="RECOMMENDATIONS">Recommendations</string>
+    <string name="TAKEN">Taken</string>
+    <string name="SKIP">Skip</string>
+    <string name="SKIPPED">Skipped</string>
+    <string name="VALUE">Value</string>
+    <string name="OBSERVATION">Observation</string>
+    <string name="REFRESH">Refresh</string>
+    <string name="CATEGORY">Category</string>
+    <string name="DOSE">Dose</string>
+    <string name="TIME">Time</string>
+    <string name="NORMAL">Normal</string>
+    <string name="ABNORMAL">Abnormal</string>
+    <string name="RESEND_OTP">Resend OTP</string>
     <string name="NO_THANKS">No thanks</string>
+    <string name="DEAR_USER">Dear User</string>
     <string name="UPLOAD_REPORT">Upload Report</string>
     <string name="UPLOAD_PRESCRIPTION">Upload Prescription</string>
     <string name="ORDER_MEDICINE">Order Medicine</string>
     <string name="ADD_MEDICATION">Add Medication</string>
-
-    <string name="OPEN_GALLERY">Open Gallery</string>
-    <string name="TAKE_PHOTO">Take Photo</string>
-    <string name="REMOVE_PHOTO">Remove Photo</string>
-
-    <string name="GALLERY">Gallery</string>
-    <string name="PHOTO">Photo</string>
-    <string name="REMOVE">Remove</string>
-    <!--Button Strings-->
-
+    <string name="MEDICINE_REMINDER">Medicine Reminder</string>
+    <string name="ALL">All</string>
+    <string name="IS">is</string>
+    <string name="TITLE">Title</string>
+    <string name="DASHBOARD">Dashboard</string>
+    <string name="HISTORY">History</string>
+    <string name="DIGITIZE">Digitize</string>
     <string name="YES">Yes</string>
     <string name="NO">No</string>
+    <string name="NONE">None</string>
     <string name="MALE">Male</string>
     <string name="FEMALE">Female</string>
     <string name="NAME">Name</string>
+    <string name="CONTACT">Contact</string>
+    <string name="SPECIALIZATION">Specialization</string>
+    <string name="AFFILIATED_TO">Affiliated To</string>
     <string name="GENDER">Gender</string>
     <string name="PHONE">Phone</string>
     <string name="PHONE_NUMBER">Phone Number</string>
@@ -67,15 +84,37 @@
     <string name="AGE">Age</string>
     <string name="DATE_OF_BIRTH">Date Of Birth</string>
     <string name="MOBILE_NUMBER">Mobile Number</string>
-    <string name="REG_MOBILE_NUMBER">Registered Mobile Number</string>
     <string name="AND">and</string>
     <string name="DATE">Date</string>
     <string name="DAY">Day</string>
+    <string name="WEEK">Week</string>
     <string name="MONTH">Month</string>
     <string name="YEAR">Year</string>
     <string name="YEARS">Years</string>
+    <string name="FOR">For</string>
+    <string name="FROM">From</string>
+    <string name="TO">to</string>
+    <string name="ONLY">Only</string>
+    <string name="STEPS">Steps</string>
+    <string name="CALORIES">Calories</string>
     <string name="SEC">Sec</string>
     <string name="TODAY">Today</string>
+    <string name="WEEKLY">Weekly</string>
+    <string name="MONTHLY">Monthly</string>
+
+    <string name="JANUARY">January</string>
+    <string name="FEBRUARY">February</string>
+    <string name="MARCH">March</string>
+    <string name="APRIL">April</string>
+    <string name="MAY">May</string>
+    <string name="JUNE">June</string>
+    <string name="JULY">July</string>
+    <string name="AUGUST">August</string>
+    <string name="SEPTEMBER">September</string>
+    <string name="OCTOBER">October</string>
+    <string name="NOVEMBER">November</string>
+    <string name="DECEMBER">December</string>
+
     <string name="SESSION">Session</string>
     <string name="MYSELF">Myself</string>
     <string name="MEMBER">Member</string>
@@ -93,7 +132,66 @@
     <string name="GRAND_FATHER">Grand Father</string>
     <string name="GRAND_MOTHER">Grand Mother</string>
 
+    <string name="HEIGHT">Height</string>
+    <string name="WEIGHT">Weight</string>
+    <string name="WAIST">Waist</string>
+    <string name="CHOLESTEROL">Cholesterol</string>
+    <string name="HDL">HDL</string>
+    <string name="SYSTOLIC">Systolic</string>
+    <string name="DIASTOLIC">Diastolic</string>
+    <string name="FEET_INCH">Feet/inch</string>
+    <string name="FT_IN">ft,in</string>
+    <string name="FT">ft</string>
+    <string name="INCH">in</string>
+    <string name="CM">cm</string>
+    <string name="CENTIMETER">Centimeter</string>
+    <string name="LBS">lbs</string>
+    <string name="KG">kg</string>
+    <string name="MM_HG">mm Hg</string>
+    <string name="MMOL_L">mm Hg</string>
+    <string name="MG_DL">mg/dL</string>
+    <string name="KCAL">Kcal</string>
+    <string name="MIN">min</string>
+    <string name="KM">km</string>
+    <string name="MTR">mtr</string>
+
+    <string name="LOW">Low</string>
+    <string name="HIGH">High</string>
+    <string name="HIGH_NORMAL">High normal</string>
+    <string name="MODERATE">Moderate</string>
+
+    <string name="OPEN_GALLERY">Open Gallery</string>
+    <string name="TAKE_PHOTO">Take Photo</string>
+    <string name="REMOVE_PHOTO">Remove Photo</string>
+
+    <string name="GALLERY">Gallery</string>
+    <string name="PHOTO">Photo</string>
+    <string name="REMOVE">Remove</string>
+
+    <string name="PRE_HYPERTENSION">PreHypertension</string>
+    <string name="HYPERTENSION_STAGE_1">Hypertension- Stage 1</string>
+    <string name="HYPERTENSION_STAGE_2">Hypertension- Stage 2</string>
+    <string name="HYPERTENSION_CRITICAL">Hypertension- Critical</string>
+
+    <string name="UNDERWEIGHT">Underweight</string>
+    <string name="OVERWEIGHT">Overweight</string>
+    <string name="PRE_OBESE">Pre-Obese</string>
+    <string name="OBESE_LEVEL_1">Obese Level 1</string>
+    <string name="OBESE_LEVEL_2">Obese Level 2</string>
+    <string name="OBESE_LEVEL_3">Obese Level 3</string>
+
+    <string name="SWITCH_PROFILE">Switch Profile</string>
+    <string name="PICK_YOUR_HEIGHT">Pick Your Height</string>
+    <string name="PICK_YOUR_WEIGHT">Pick Your Weight</string>
+    <string name="PICK_YOUR_WAIST">Pick your Waist</string>
+    <string name="CURRENT_WEIGHT">Pick Your Weight</string>
+    <string name="ENTER_WEIGHT">Enter your weight</string>
+    <string name="ENTER_HEIGHT">Enter your height</string>
+    <string name="ENTER_YOUR_WAIST_SIZE">Enter your waist size</string>
+    <string name="YOUR_BMI_IS">Your BMI is : </string>
+
     <!--HRA-->
+    <string name="TAKE_ASSESSMENT">Take Assessment</string>
     <string name="TAKE_YOUR_HRA">Take your HRA</string>
     <string name="COMPLETE_YOUR_HRA">Complete your HRA</string>
     <string name="HIGH_RISK">High Risk</string>
@@ -103,12 +201,11 @@
     <!--HRA-->
 
     <string name="POWERED_BY">Powered by</string>
-    <string name="LINK_HLMT_360_ACCOUNT">Link HLMT 360 Account</string>
-    <string name="LINK_MY_HLMT_360_ACCOUNT">Link my HLMT 360 Account</string>
-    <string name="TO_LINK_HLMT_360_ACCOUNT_CLICK_ON_BUTTON">To Link your HLMTakaful360 account with HL Pace Wellness Profile , Login to your Account and click on button Link my HLMTakaful360 account</string>
     <string name="PERMISSION_REQUIRED">Permission Required</string>
-    <string name="NEED_STORAGE_PERMISSION">For storing and reading files, we need storage permission.</string>
-    <string name="NEED_CAMERA_PERMISSION">For clicking snap to upload we need camera permission.</string>
+    <string name="SELECT_RECORDS">Select records</string>
+    <string name="SELECT_A_FILE_TO_UPLOAD">Select a File to Upload</string>
+    <string name="NEED_STORAGE_PERMISSION">For storing and reading files, we need storage permission</string>
+    <string name="NEED_CAMERA_PERMISSION">For clicking snap to upload we need camera permission</string>
     <string name="ERROR_STORAGE_PERMISSION">Storage Permission is Required to Proceed further</string>
     <string name="ERROR_CAMERA_PERMISSION">camera Permission is Required to Proceed further</string>
 
@@ -120,68 +217,75 @@
     <string name="API_RETRY_ERROR">Please retry!</string>
     <string name="MSG_API_DEFAULT_ERROR">Something wrong happened!</string>
     <string name="SOME_ERROR">Some Error Occurred!</string>
-    <string name="MSG_NO_INTERNET_CONNECTION">No Internet Connection</string>
+    <string name="NO_INTERNET_CONNECTION">No Internet Connection</string>
 
-    <string name="SYNCHRONIZING">Synchronizing…</string>
+    <string name="NO_DATA">No Data</string>
+    <string name="NO_DATA_AVAILABLE">No data available</string>
+    <string name="NO_HISTORY_AVAILABLE">No History Available</string>
+    <string name="SYNCHRONIZING">Synchronizing</string>
     <string name="PASSWORD_CHANGED">Password Changed</string>
     <string name="PASSWORD_CHANGED_SUCCESS">Your Password has been changed \nSuccessfuly</string>
     <string name="GO_TO_APP">Go Back To My App</string>
-    <string name="PLEASE_WAIT">Please wait…</string>
-    <string name="LOADING">Loading…</string>
+    <string name="PLEASE_WAIT">Please wait</string>
+    <string name="LOADING">Loading</string>
     <string name="ERROR_GENERAL">Unable to connect, please try again</string>
     <string name="AWW_SNAP">Aww! Snap!</string>
     <string name="PRESS_AGAIN_TO_EXIT">Press again to exit</string>
+    <string name="SOMETHING_WENT_WRONG">Something went wrong</string>
     <string name="NO_INTERNET_AVAILABLE">No Internet Available</string>
+    <string name="MSG_NO_INTERNET_CONNECTION">No Internet Connection</string>
     <string name="MSG_SESSION_EXPIRED">Seems your session is expired, please login again.</string>
-    <string name="ERROR_INTERNET_UNAVAILABLE">Seems like you are offline. Please check your internet connection and try again.</string>
-    <string name="MSG_OTP">TAC has been sent to your registered mobile number, please wait while we are retrieving</string>
+    <string name="ERROR_INTERNET_UNAVAILABLE">Seems like you are offline. Please check your internet connection and try again</string>
+    <string name="MSG_OTP">OTP has been sent to your registered mobile number, please wait while we are retrieving</string>
 
     <!--Error Msg-->
-    <string name="VALIDATE_OTP">Please Enter a Valid TAC</string>
+    <string name="VALIDATE_OTP">Please Enter a Valid OTP</string>
+    <string name="VALIDATE_PASSWORD">Please Enter Valid Password</string>
+    <string name="ERROR_PASSWORD_SHOULD_BE_MINIMUM_6_CHARACTERS">Password Should be minimum 6 Characters</string>
+    <string name="ERROR_NEW_PASSWORD_MUST_BE_DIFFERENT_FROM_OLD_PASSWORD">New password must be different from old password</string>
+    <string name="ERROR_PASSWORD_DOES_NOT_MATCH">Passwords does not match</string>
+    <string name="ERROR_PASSWORD_DOES_NOT_MATCH_REQUIREMENTS">Password does not match the Requirements</string>
+    <string name="ERROR_PASSWORD_CONFIRM_DOES_NOT_MATCH">Password and confirm password does not match</string>
+    <string name="VALUE_SHOULD_BE_BETWEEN">value should be between</string>
+    <string name="PLEASE_ENTER_VALUE">Please enter value</string>
+    <string name="PLEASE_INSERT_SYSTOLIC_BP_VALUE">Please insert Systolic BP value</string>
+    <string name="PLEASE_INSERT_DIASTOLIC_BP_VALUE">Please insert Diastolic BP value</string>
+    <string name="DIASTOLIC_VALUE_SHOULD_BE_LESS_THAN_SYSTOLIC_VALUE">Diastolic value should be less than systolic value</string>
+    <string name="SYSTOLIC_BP_SHOULD_NOT_LESS_THAN_DIASTOLIC_BP">Systolic BP should not less than diastolic BP</string>
+    <string name="PLEASE_INSERT_SYSTOLIC_BP_VALUE_BETWEEN_30_TO_300">Please insert Systolic BP value between 30 to 300</string>
+    <string name="PLEASE_INSERT_DIASTOLIC_BP_VALUE_BETWEEN_10_TO_150">Please insert Diastolic BP value between 10 to 150</string>
+    <string name="PLEASE_INSERT_SYSTOLIC_BP_VALUE_BETWEEN_0_01_TO_500">Please insert Systolic BP value between 0.01 to 500</string>
+    <string name="PLEASE_INSERT_DIASTOLIC_BP_VALUE_BETWEEN_10_TO_500">Please insert Systolic BP value between 10 to 500</string>
+
+    <string name="PLEASE_FILL_DETAILS">Please fill details</string>
+    <string name="VALIDATE_AGE">Age must be more than 18 years</string>
+    <string name="VALIDATE_DATE_OF_BIRTH">Please Enter valid Date of Birth</string>
     <string name="VALIDATE_EMAIL">Please Enter Valid Email</string>
     <string name="VALIDATE_EMAIL_MUST_INCLUDE">Email must include @</string>
-    <string name="VALIDATE_PHONE">Please Enter Valid Mobile Number</string>
+    <string name="VALIDATE_PHONE">Please Enter Valid Phone Number</string>
+    <string name="VALIDATE_DIFFERENT_PHONE">Please Enter Different Phone Number</string>
+    <string name="VALIDATE_DIFFERENT_EMAIL">Please Enter Different Email Address</string>
     <string name="VALIDATE_MESSAGE">Please Write Something in Message</string>
-    <string name="VALIDATE_EMAIL_PHONE">Please Enter valid Email/pHONE</string>
+    <string name="VALIDATE_VERIFICATION_CODE">Please Enter valid Verification Code</string>
+    <string name="VALIDATE_EMAIL_PHONE">Please Enter valid Email/phone</string>
     <string name="VALIDATE_SAME_PHONE">Please Enter a New Number</string>
-    <string name="ERROR_MOBILE_ALREADY_REGISTERED">This Numbert is already Registered with us</string>
+    <string name="ERROR_MOBILE_ALREADY_REGISTERED">This Number is already Registered with us</string>
     <string name="VALIDATE_NAME">Please Enter valid Name</string>
-    <string name="VALIDATE_DATE_OF_BIRTH">Please Enter valid Date of Birth</string>
-    <string name="ERROR_UNABLE_VERIFY_OTP">Unable to verify TAC provided, please try again</string>
+    <string name="VALIDATE_SPECIALIZATION">Please Enter valid Specialization</string>
+    <string name="ERROR_UNABLE_VERIFY_OTP">Unable to verify OTP provided, please try again</string>
     <string name="ERROR_CONTACT_US_QUERY">Query Should be between 5–1000 letter\'s</string>
+    <string name="ERROR_FILE_NOT_EXIST">File does not exist in the system</string>
+    <string name="ERROR_NO_APPLICATION_TO_VIEW_PDF">No Application Available to View PDF</string>
+    <string name="ERROR_FILE_SIZE_LESS_THEN_5MB">File size must be less than 5MB</string>
+    <string name="ERROR_UNABLE_TO_READ_FILE">Unable to read file, please try again</string>
+    <string name="ERROR_FILES_NOT_ACCEPTED">files are not accepted</string>
+    <string name="ERROR_UNABLE_TO_OPEN_FILE">Unable to open file</string>
+    <string name="ERROR_NOT_ABLE_TO_READ_FILE">Unable to Read file</string>
     <!--Error Msg-->
 
     <string name="digits_alpha">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="digits_alpha_numeric">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890</string>
     <string name="numeric">1234567890</string>
     <string name="numeric_fraction">1234567890.</string>
-
-    <string name="title">Title</string>
-    <string name="DASHBOARD">Dashboard</string>
-    <string name="enter_bmi_details">Enter your vital health parameters</string>
-    <string name="pick_your_height">Pick Your Height</string>
-    <string name="current_weight">Current Weight</string>
-    <string name="YOUR_BMI_IS">Your BMI is : </string>
-    <string name="height">Height  : </string>
-    <string name="weight">Weight  : </string>
-    <string name="select_height">Select Height</string>
-    <string name="select_weight">Select Weight</string>
-    <string name="ft_in">ft,in</string>
-    <string name="ft">ft</string>
-    <string name="inch">in</string>
-    <string name="cm">cm</string>
-    <string name="lbs">lbs</string>
-    <string name="kg">kg</string>
-    <string name="mm_hg">mm Hg</string>
-    <string name="MG_DL">mg/dL</string>
-    <string name="KCAL">Kcal</string>
-    <string name="MIN">min</string>
-    <string name="KM">km</string>
-    <string name="MTR">mtr</string>
-
-    <string name="PICK_YOUR_HEIGHT">Pick Your Height</string>
-    <string name="CURRENT_WEIGHT">Pick Your Weight</string>
-    <string name="ENTER_WEIGHT">Enter your weight</string>
-    <string name="ENTER_HEIGHT">Enter your height</string>
 
 </resources>

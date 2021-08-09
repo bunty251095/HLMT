@@ -23,8 +23,8 @@
     <string name="SIGN_UP_USING_FB">Sign up using Facebook</string>
     <string name="SIGNUP_USING_GOOGLE">Sign up using Google</string>
     <string name="OR_SIGN_UP_USING_EMAIL">OR Signup Using Email</string>
-    <string name="MSG_USER_LESS_THAN_18_TO_ACCESS_HRA">Do we have your correct date of birth? if not, please update.Please note that to access Health Risk Assessment, you must be at least 18 years old.
-    </string>
+    <string name="MSG_USER_LESS_THAN_18_TO_ACCESS_HRA">Do we have your correct date of birth? if not, please update.Please note that to access Health Risk Assessment, you must be at least 18 years old.</string>
+    <string name="MSG_SIGN_UP_WELCOME">Welcome to HL Pace,\nplease provide your basic information to build your health profile.</string>
     <string name="EMAIL_OR_PHONE">Email Or Phone</string>
     <string name="CONFIRM_PASSWORD">Confirm Password</string>
     <string name="OTP">OTP</string>
@@ -43,6 +43,7 @@
     <string name="PHONE_OPTIONAL">Phone Number(Optional)</string>
 
     <string name="VERIFY">Verify</string>
+    <string name="VERIFY_AND_LOGIN">Verify &amp; Login</string>
     <string name="RESEND_MAIL">Resend Mail</string>
     <string name="RESEND_CODE">Resend TAC</string>
     <string name="NEW_PASSWORD">New Password</string>
@@ -89,8 +90,6 @@
     <string name="ERROR_FIELD_REQUIRED">This field is required</string>
     <string name="ERROR_STORAGE_PERMISSION_REQUIRED">Storage Permission is required</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="CHANGE_MOBILE_NUMBER">Change Mobile Number?</string>
     <string name="HLMT_USER_ID">HLMT User ID</string>
 </resources>

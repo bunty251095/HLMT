@@ -1,5 +1,6 @@
 package com.caressa.repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.caressa.common.constants.ApiConstants
 import com.caressa.common.utils.DateHelper
@@ -20,115 +21,48 @@ import timber.log.Timber
 
 interface ParameterRepository {
 
-    suspend fun fetchBMIHistory(
-        data: BMIHistoryModel,
-        personId: String
-    ): LiveData<Resource<BMIHistoryModel.Response>>
-
-    suspend fun fetchWHRHistory(
-        data: WHRHistoryModel,
-        personId: String
-    ): LiveData<Resource<WHRHistoryModel.Response>>
-
-    suspend fun fetchBloodPressureHistory(
-        data: BloodPressureHistoryModel,
-        personId: String
-    ): LiveData<Resource<BloodPressureHistoryModel.Response>>
-
-    suspend fun fetchLabRecordsList(
-        data: LabRecordsListModel,
-        personId: String
-    ): LiveData<Resource<TrackParameterMaster.HistoryResponse>>
-
-    suspend fun fetchParamList(
-        forceRefresh: Boolean = true,
-        data: ParameterListModel
-    ): LiveData<Resource<ParameterListModel.Response>>
-
+    suspend fun fetchBMIHistory(data: BMIHistoryModel, personId: String): LiveData<Resource<BMIHistoryModel.Response>>
+    suspend fun fetchWHRHistory(data: WHRHistoryModel, personId: String): LiveData<Resource<WHRHistoryModel.Response>>
+    suspend fun fetchBloodPressureHistory(data: BloodPressureHistoryModel, personId: String): LiveData<Resource<BloodPressureHistoryModel.Response>>
+    suspend fun fetchLabRecordsList(data: LabRecordsListModel, personId: String): LiveData<Resource<TrackParameterMaster.HistoryResponse>>
+    suspend fun fetchParamList(forceRefresh: Boolean = true, data: ParameterListModel): LiveData<Resource<ParameterListModel.Response>>
     suspend fun fetchParameterPreferences(data: ParameterPreferenceModel): LiveData<Resource<ParameterPreferenceModel.Response>>
     suspend fun saveLabParameter(data: SaveParameterModel): LiveData<Resource<SaveParameterModel.Response>>
 
     suspend fun getAllProfileCodes(): List<ParameterProfile>
     suspend fun getAllProfilesWithRecentSelectionList(personId: String): List<ParameterProfile>
-    suspend fun listHistoryByProfileCodeAndMonthYear(
-        personId: String,
-        profileCode: String,
-        month: String,
-        year: String
-    ): List<TrackParameterMaster.History>
+    suspend fun listHistoryByProfileCodeAndMonthYear(personId: String, profileCode: String, month: String, year: String): List<TrackParameterMaster.History>
 
-    suspend fun listHistoryWithLatestRecord(
-        personId: String,
-        profileCode: String,
-        parameterCode: String
-    ): List<TrackParameterMaster.History>
-
-    suspend fun getHistoryTableDataList(
-        profileCode: String,
-        personId: String
-    ): List<HistorytableModel>
-
-    suspend fun getHistoryTableListData(
-        profileCode: String,
-        personId: String
-    ): List<HistorytableDataModel>
+    suspend fun listHistoryWithLatestRecord(personId: String, profileCode: String, parameterCode: String): List<TrackParameterMaster.History>
+    suspend fun getHistoryTableDataList(profileCode: String, personId: String): List<HistorytableModel>
+    suspend fun getHistoryTableListData(profileCode: String, personId: String): List<HistorytableDataModel>
 
     suspend fun getRecentDateList(profileCode: String, personId: String): List<String>
     suspend fun getParametersFromDB(): List<TrackParameterMaster.Parameter>
     suspend fun getTrackParametersList(): List<TrackParameters>
-    suspend fun getSelectParameterList(
-        selectedParam: String,
-        showAllProfile: String
-    ): List<ParameterListModel.SelectedParameter>
+    suspend fun getSelectParameterList(selectedParam: String, showAllProfile: String): List<ParameterListModel.SelectedParameter>
 
     suspend fun insertSelectedParameter(trackParameter: TrackParameters)
     suspend fun fetchDashboardDataFromDB(): List<DashboardObservationData>
     suspend fun fetchParamListBaseOnCode(pCode: String): List<TrackParameterMaster.Parameter>
-    suspend fun fetchParamHisBaseOnCode(
-        pCode: String,
-        personId: String
-    ): List<TrackParameterMaster.History>
+    suspend fun fetchParamHisBaseOnCode(pCode: String, personId: String): List<TrackParameterMaster.History>
 
-    suspend fun getLatestParameterBasedOnProfileCode(
-        pCode: String,
-        personId: String
-    ): List<TrackParameterMaster.History>
-
-    suspend fun getLatestParameterBasedOnProfileCodes(
-        pCode: String,
-        pCodeTwo: String,
-        personId: String
-    ): List<TrackParameterMaster.History>
-
-    suspend fun getLatestRecordBasedOnParamCode(
-        paramCode: String,
-        personId: String
-    ): List<TrackParameterMaster.History>
+    suspend fun getLatestParameterBasedOnProfileCode(pCode: String, personId: String): List<TrackParameterMaster.History>
+    suspend fun getLatestParameterBasedOnProfileCodes(pCode: String, pCodeTwo: String, personId: String): List<TrackParameterMaster.History>
+    suspend fun getLatestRecordBasedOnParamCode(paramCode: String, personId: String): List<TrackParameterMaster.History>
 
     suspend fun deleteSelectedParameters(profileCode: String)
     suspend fun deleteHistoryWithOtherPersonId(personId: String)
+    suspend fun getParameterObservationList(pCode: String, personId: String): List<TrackParameterMaster.TrackParameterRanges>
+    suspend fun getLatestParameterData(profileCode: String, personId: String): List<ParameterListModel.InputParameterModel>
+    suspend fun getParameterDataBasedOnRecordDate(profileCode: String, personId: String, recordDate: String): List<ParameterListModel.InputParameterModel>
     suspend fun logoutUser()
-    suspend fun getParameterObservationList(
-        pCode: String,
-        personId: String
-    ): List<TrackParameterMaster.TrackParameterRanges>
-
-    suspend fun getLatestParameterData(
-        profileCode: String,
-        personId: String
-    ): List<ParameterListModel.InputParameterModel>
-
-    suspend fun getParameterDataBasedOnRecordDate(
-        profileCode: String,
-        personId: String,
-        recordDate: String
-    ): List<ParameterListModel.InputParameterModel>
 }
 
-class ParameterRepositoryImpl(
-    private val dataSource: ParameterDatasource, private val paramDao: TrackParameterDao,
-    private val dataSyncMasterDao: DataSyncMasterDao
-) : ParameterRepository {
+class ParameterRepositoryImpl(private val dataSource: ParameterDatasource,
+                              private val paramDao: TrackParameterDao,
+                              private val dataSyncMasterDao: DataSyncMasterDao,
+                              private val context: Context) : ParameterRepository {
 
     override suspend fun getRecentDateList(profileCode: String, personId: String): List<String> {
         val recentDatesList: MutableList<String> = mutableListOf()
@@ -147,10 +81,7 @@ class ParameterRepositoryImpl(
         return recentDatesList.reversed()
     }
 
-    override suspend fun getHistoryTableListData(
-        profileCode: String,
-        personId: String
-    ): List<HistorytableDataModel> {
+    override suspend fun getHistoryTableListData(profileCode: String, personId: String): List<HistorytableDataModel> {
         val recent3DatesList: MutableList<String> = mutableListOf()
         var recentDate = ""
         val allList = paramDao.getParameterHisBaseOnProfileCode(profileCode, personId)
@@ -201,10 +132,7 @@ class ParameterRepositoryImpl(
         return historyList
     }
 
-    override suspend fun getHistoryTableDataList(
-        profileCode: String,
-        personId: String
-    ): List<HistorytableModel> {
+    override suspend fun getHistoryTableDataList(profileCode: String, personId: String): List<HistorytableModel> {
 
         val paramList = paramDao.getParameterListBaseOnCode(profileCode)
         val historyList: MutableList<HistorytableModel> = mutableListOf()
@@ -229,13 +157,10 @@ class ParameterRepositoryImpl(
         return historyList
     }
 
-    override suspend fun fetchBMIHistory(
-        data: BMIHistoryModel,
-        personId: String
-    ): LiveData<Resource<BMIHistoryModel.Response>> {
+    override suspend fun fetchBMIHistory(data: BMIHistoryModel, personId: String): LiveData<Resource<BMIHistoryModel.Response>> {
 
         return object :
-            StoreNetworkDataBoundResource<BMIHistoryModel.Response, BaseResponse<BMIHistoryModel.Response>>() {
+            StoreNetworkDataBoundResource<BMIHistoryModel.Response, BaseResponse<BMIHistoryModel.Response>>(context) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -274,13 +199,10 @@ class ParameterRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun fetchWHRHistory(
-        data: WHRHistoryModel,
-        personId: String
-    ): LiveData<Resource<WHRHistoryModel.Response>> {
+    override suspend fun fetchWHRHistory(data: WHRHistoryModel, personId: String): LiveData<Resource<WHRHistoryModel.Response>> {
 
         return object :
-            StoreNetworkDataBoundResource<WHRHistoryModel.Response, BaseResponse<WHRHistoryModel.Response>>() {
+            StoreNetworkDataBoundResource<WHRHistoryModel.Response, BaseResponse<WHRHistoryModel.Response>>(context) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -318,13 +240,9 @@ class ParameterRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun fetchBloodPressureHistory(
-        data: BloodPressureHistoryModel,
-        personId: String
-    ): LiveData<Resource<BloodPressureHistoryModel.Response>> {
+    override suspend fun fetchBloodPressureHistory(data: BloodPressureHistoryModel, personId: String): LiveData<Resource<BloodPressureHistoryModel.Response>> {
 
-        return object :
-            StoreNetworkDataBoundResource<BloodPressureHistoryModel.Response, BaseResponse<BloodPressureHistoryModel.Response>>() {
+        return object : StoreNetworkDataBoundResource<BloodPressureHistoryModel.Response, BaseResponse<BloodPressureHistoryModel.Response>>(context) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -344,8 +262,7 @@ class ParameterRepositoryImpl(
                 val dataSyc = DataSyncMaster(
                     apiName = ApiConstants.BLOOD_PRESSURE_HISTORY,
                     syncDate = DateHelper.currentDateAsStringyyyyMMdd,
-                    personId = personId
-                )
+                    personId = personId)
                 dataSyncMasterDao.insertApiSyncData(dataSyc)
             }
 
@@ -362,13 +279,10 @@ class ParameterRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun fetchLabRecordsList(
-        data: LabRecordsListModel,
-        personId: String
-    ): LiveData<Resource<TrackParameterMaster.HistoryResponse>> {
+    override suspend fun fetchLabRecordsList(data: LabRecordsListModel, personId: String): LiveData<Resource<TrackParameterMaster.HistoryResponse>> {
 //        paramDao.deleteHistory()
         return object :
-            NetworkBoundResource<TrackParameterMaster.HistoryResponse, BaseResponse<TrackParameterMaster.HistoryResponse>>() {
+            NetworkBoundResource<TrackParameterMaster.HistoryResponse, BaseResponse<TrackParameterMaster.HistoryResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -414,10 +328,7 @@ class ParameterRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun fetchParamList(
-        forceRefresh: Boolean,
-        data: ParameterListModel
-    ): LiveData<Resource<ParameterListModel.Response>> {
+    override suspend fun fetchParamList(forceRefresh: Boolean, data: ParameterListModel): LiveData<Resource<ParameterListModel.Response>> {
         /*return object : NetworkBoundResource<ParameterListModel.Response,BaseResponse<ParameterListModel.Response>>(){
 
             override fun processResponse(response: BaseResponse<ParameterListModel.Response>): ParameterListModel.Response {
@@ -440,8 +351,7 @@ class ParameterRepositoryImpl(
 
         }.build().asLiveData()*/
 
-        return object :
-            StoreNetworkDataBoundResource<ParameterListModel.Response, BaseResponse<ParameterListModel.Response>>() {
+        return object : StoreNetworkDataBoundResource<ParameterListModel.Response, BaseResponse<ParameterListModel.Response>>(context) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -479,7 +389,7 @@ class ParameterRepositoryImpl(
     override suspend fun fetchParameterPreferences(data: ParameterPreferenceModel): LiveData<Resource<ParameterPreferenceModel.Response>> {
 
         return object :
-            NetworkBoundResource<ParameterPreferenceModel.Response, BaseResponse<ParameterPreferenceModel.Response>>() {
+            NetworkBoundResource<ParameterPreferenceModel.Response, BaseResponse<ParameterPreferenceModel.Response>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -504,8 +414,7 @@ class ParameterRepositoryImpl(
 
     override suspend fun saveLabParameter(data: SaveParameterModel): LiveData<Resource<SaveParameterModel.Response>> {
 
-        return object :
-            NetworkBoundResource<SaveParameterModel.Response, BaseResponse<SaveParameterModel.Response>>() {
+        return object : NetworkBoundResource<SaveParameterModel.Response, BaseResponse<SaveParameterModel.Response>>(context) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -531,16 +440,10 @@ class ParameterRepositoryImpl(
                                 createdDate = item.createdDate,
                                 modifiedBy = item.modifiedBy,
                                 modifiedDate = item.modifiedDate,
-                                recordDateMillisec = DateHelper.getDateTimeAs_ddMMMyyyy_ToMilliSec(
-                                    recordDate
-                                ),
-                                description = paramMaster.get(0).description,
-                                observation = if (item.observation.equals(
-                                        "NA",
-                                        true
-                                    )
-                                ) "" else item.observation,
-                                profileName = paramMaster.get(0).profileName,
+                                recordDateMillisec = DateHelper.getDateTimeAs_ddMMMyyyy_ToMilliSec(recordDate),
+                                description = paramMaster[0].description,
+                                observation = if (item.observation.equals("NA", true)) "" else item.observation,
+                                profileName = paramMaster[0].profileName,
                                 textValue = item.textValue
                             )
                             listHistory.add(historyItem)
@@ -556,9 +459,7 @@ class ParameterRepositoryImpl(
                                 createdDate = item.createdDate,
                                 modifiedBy = item.modifiedBy,
                                 modifiedDate = item.modifiedDate,
-                                recordDateMillisec = DateHelper.getDateTimeAs_ddMMMyyyy_ToMilliSec(
-                                    recordDate
-                                ),
+                                recordDateMillisec = DateHelper.getDateTimeAs_ddMMMyyyy_ToMilliSec(recordDate),
                                 description = item.parameterCode,
                                 observation = item.observation,
                                 profileName = item.profileCode
@@ -583,24 +484,24 @@ class ParameterRepositoryImpl(
         }.build().asLiveData()
     }
 
-    private fun getDescription(parameterCode: String): String? {
-        if (parameterCode.equals("HEIGHT")) {
-            return "HEIGHT"
-        } else if (parameterCode.equals("WEIGHT")) {
-            return "WEIGHT"
-        } else if (parameterCode.equals("BMI")) {
-            return "BMI"
-        } else {
-            return parameterCode
+    private fun getDescription(parameterCode: String): String {
+        when {
+            parameterCode.equals("HEIGHT") -> {
+                return "HEIGHT"
+            }
+            parameterCode.equals("WEIGHT") -> {
+                return "WEIGHT"
+            }
+            parameterCode.equals("BMI") -> {
+                return "BMI"
+            }
+            else -> {
+                return parameterCode
+            }
         }
     }
 
-    override suspend fun listHistoryByProfileCodeAndMonthYear(
-        personId: String,
-        profileCode: String,
-        month: String,
-        year: String
-    ): List<TrackParameterMaster.History> {
+    override suspend fun listHistoryByProfileCodeAndMonthYear(personId: String, profileCode: String, month: String, year: String): List<TrackParameterMaster.History> {
 
         return if (profileCode.equals("URINE", ignoreCase = true)) {
             paramDao.listHistoryByProfileCodeAndMonthYearForUrineProfile(
@@ -615,11 +516,7 @@ class ParameterRepositoryImpl(
 
     }
 
-    override suspend fun listHistoryWithLatestRecord(
-        personId: String,
-        profileCode: String,
-        parameterCode: String
-    ): List<TrackParameterMaster.History> {
+    override suspend fun listHistoryWithLatestRecord(personId: String, profileCode: String, parameterCode: String): List<TrackParameterMaster.History> {
         val list: ArrayList<TrackParameterMaster.History> = arrayListOf()
         if (parameterCode.isNotEmpty()) {
             list.addAll(paramDao.listHistoryWithLatestRecord(personId, profileCode, parameterCode))
@@ -714,32 +611,19 @@ class ParameterRepositoryImpl(
         return paramDao.getTrackParametersList()
     }
 
-    override suspend fun fetchParamHisBaseOnCode(
-        pCode: String,
-        personId: String
-    ): List<TrackParameterMaster.History> {
+    override suspend fun fetchParamHisBaseOnCode(pCode: String, personId: String): List<TrackParameterMaster.History> {
         return paramDao.getParameterCodeHistory(pCode, personId)
     }
 
-    override suspend fun getLatestParameterBasedOnProfileCode(
-        pCode: String,
-        personId: String
-    ): List<TrackParameterMaster.History> {
+    override suspend fun getLatestParameterBasedOnProfileCode(pCode: String, personId: String): List<TrackParameterMaster.History> {
         return paramDao.getLatestParametersBaseOnHisProfileCode(pCode, personId)
     }
 
-    override suspend fun getLatestParameterBasedOnProfileCodes(
-        pCode: String,
-        pCodeTwo: String,
-        personId: String
-    ): List<TrackParameterMaster.History> {
+    override suspend fun getLatestParameterBasedOnProfileCodes(pCode: String, pCodeTwo: String, personId: String): List<TrackParameterMaster.History> {
         return paramDao.getLatestParametersBaseOnHisProfileCodes(pCode, pCodeTwo, personId)
     }
 
-    override suspend fun getLatestRecordBasedOnParamCode(
-        paramCode: String,
-        personId: String
-    ): List<TrackParameterMaster.History> {
+    override suspend fun getLatestRecordBasedOnParamCode(paramCode: String, personId: String): List<TrackParameterMaster.History> {
         return paramDao.getLatestParameterBaseOnHisParameterCode(paramCode, personId)
     }
 
@@ -763,10 +647,7 @@ class ParameterRepositoryImpl(
         paramDao.deleteHistoryWithOtherPersonId(personId)
     }
 
-    override suspend fun getSelectParameterList(
-        selectedParam: String,
-        showAllProfile: String
-    ): List<ParameterListModel.SelectedParameter> {
+    override suspend fun getSelectParameterList(selectedParam: String, showAllProfile: String): List<ParameterListModel.SelectedParameter> {
         val databaseList = paramDao.getSelectParameterList()
         var item: ParameterListModel.SelectedParameter
         val list: ArrayList<ParameterListModel.SelectedParameter> = arrayListOf()
@@ -795,34 +676,19 @@ class ParameterRepositoryImpl(
         paramDao.deletTrackParametersTable()
     }
 
-    override suspend fun getParameterObservationList(
-        pCode: String,
-        personId: String
-    ): List<TrackParameterMaster.TrackParameterRanges> {
-        var person = paramDao.getRelativeInformation(personId)
+    override suspend fun getParameterObservationList(pCode: String, personId: String): List<TrackParameterMaster.TrackParameterRanges> {
+        val person = paramDao.getRelativeInformation(personId)
         if (person.isNotEmpty())
-            return paramDao.getParameterObservationBasedOnParameterCode(
-                pCode,
-                person.get(0).age.toInt(),
-                person.get(0).gender.toInt()
-            )
+            return paramDao.getParameterObservationBasedOnParameterCode(pCode, person[0].age.toInt(), person[0].gender.toInt())
         else
             return paramDao.getParameterObservationBasedOnParameterCode(pCode, 31, 1)
-
     }
 
-    override suspend fun getLatestParameterData(
-        profileCode: String,
-        personId: String
-    ): List<ParameterListModel.InputParameterModel> {
+    override suspend fun getLatestParameterData(profileCode: String, personId: String): List<ParameterListModel.InputParameterModel> {
         return paramDao.getLatestDataOfParameter(profileCode, personId)
     }
 
-    override suspend fun getParameterDataBasedOnRecordDate(
-        profileCode: String,
-        personId: String,
-        recordDate: String
-    ): List<ParameterListModel.InputParameterModel> {
+    override suspend fun getParameterDataBasedOnRecordDate(profileCode: String, personId: String, recordDate: String): List<ParameterListModel.InputParameterModel> {
         return paramDao.getParameterDataByRecordDate(profileCode, recordDate, personId)
 //        return listOf()
     }

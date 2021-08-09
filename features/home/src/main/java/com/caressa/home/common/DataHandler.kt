@@ -67,7 +67,7 @@ class DataHandler( val context: Context) {
                     imageId = R.drawable.dash_hra,
                     title = context.resources.getString(R.string.HRA),
                     color = ContextCompat.getColor(context, R.color.colorAccent),
-                    data = "Take Assessment",
+                    data = context.resources.getString(R.string.TAKE_ASSESSMENT),
                     code = "HRA"
                 )
             )
@@ -77,7 +77,7 @@ class DataHandler( val context: Context) {
                 if (hraSummary!!.hraCutOff.equals("1")) {
                     hraObservation = "${hraSummary!!.scorePercentile.toInt()}"
                 }else{
-                    hraObservation = "Take Assessment"
+                    hraObservation = context.resources.getString(R.string.TAKE_ASSESSMENT)
                 }
                 var color = ContextCompat.getColor(context, R.color.colorAccent)
 
@@ -179,7 +179,7 @@ class DataHandler( val context: Context) {
                     imageId = R.drawable.dash_hra,
                     title = context.resources.getString(R.string.HRA),
                     color = ContextCompat.getColor(context, R.color.colorAccent),
-                    data = "Take Assessment",
+                    data = context.resources.getString(R.string.TAKE_ASSESSMENT),
                     code = "HRA"
                 )
             )
@@ -189,7 +189,7 @@ class DataHandler( val context: Context) {
                 if (hraSummary!!.hraCutOff.equals("1")) {
                     hraObservation = "${hraSummary!!.scorePercentile.toInt()}"
                 }else{
-                    hraObservation = "Take Assessment"
+                    hraObservation = context.resources.getString(R.string.TAKE_ASSESSMENT)
                 }
                 var color = ContextCompat.getColor(context, R.color.colorAccent)
 
@@ -319,7 +319,7 @@ class DataHandler( val context: Context) {
     fun getWellnessCentreList() : List<WellnessCentreDetails> {
         val list:ArrayList<WellnessCentreDetails> = ArrayList()
         list.add(WellnessCentreDetails(context.resources.getString(R.string.TITLE_TOOLS_AND_TRACKER), "VIVANT" , context.resources.getString(R.string.DESC_TOOLS_TRACKER) , R.drawable.img_tools_and_cals,ContextCompat.getColor(context,R.color.vivant_watermelon)))
-        list.add(WellnessCentreDetails(context.resources.getString(R.string.TITLE_MEDICINES_HEALTHCARE), "MedLife" , context.resources.getString(R.string.DESC_MEDLIFE) , R.drawable.img_medicines_healthcare,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
+        list.add(WellnessCentreDetails(context.resources.getString(R.string.TITLE_MEDICINES_HEALTHCARE), "MedLife" , context.resources.getString(R.string.DESC_MED_LIFE) , R.drawable.img_medicines_healthcare,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
         list.add(WellnessCentreDetails(context.resources.getString(R.string.TITLE_SEARCH_HEALTH_PACKAGE), "VIVANT" , context.resources.getString(R.string.DESC_HEALTH_PACKAGE) , R.drawable.img_health_package,ContextCompat.getColor(context,R.color.vivant_orange_yellow)))
         return list
     }

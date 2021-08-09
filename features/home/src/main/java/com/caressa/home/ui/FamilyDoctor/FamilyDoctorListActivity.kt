@@ -64,7 +64,7 @@ class FamilyDoctorListActivity : BaseActivity() {
 
     private fun registerObservers() {
 
-        viewModel.familyDoctorsList.observe( this , Observer {
+        viewModel.familyDoctorsList.observe( this , {
             if ( it != null ) {
                 val familyDoctorsList = it
                 if (familyDoctorsList.isNotEmpty()) {
@@ -81,8 +81,8 @@ class FamilyDoctorListActivity : BaseActivity() {
                 stopShimmer()
             }
         })
-        viewModel.listDoctors.observe( this , Observer {})
-        viewModel.removeDoctor.observe( this , Observer {})
+        viewModel.listDoctors.observe( this , {})
+        viewModel.removeDoctor.observe( this , {})
     }
 
     private fun setClickable() {

@@ -21,7 +21,7 @@ class DataHandler(val context: Context) {
 
     fun getTrackersList(): ArrayList<TrackerDashboardModel> {
         val list: ArrayList<TrackerDashboardModel> = ArrayList()
-        list.add(TrackerDashboardModel(context.resources.getString(R.string.TRACKER_HEART_AGE), context.resources.getString(R.string.TRACKER_DESC__HEART_AGE), R.drawable.img_heart_age, ContextCompat.getColor(context, R.color.vivantNavy), "HAC"))
+        list.add(TrackerDashboardModel(context.resources.getString(R.string.TRACKER_HEART_AGE), context.resources.getString(R.string.TRACKER_DESC_HEART_AGE), R.drawable.img_heart_age, ContextCompat.getColor(context, R.color.vivantNavy), "HAC"))
         list.add(TrackerDashboardModel(context.resources.getString(R.string.TRACKER_DIABETES), context.resources.getString(R.string.TRACKER_DESC_DIABETES), R.drawable.img_diabetes, ContextCompat.getColor(context, R.color.vivantGreen), "DC"))
         list.add(TrackerDashboardModel(context.resources.getString(R.string.TRACKER_HYPERTENSION), context.resources.getString(R.string.TRACKER_DESC_HYPERTENSION), R.drawable.img_hypertension, ContextCompat.getColor(context, R.color.vivant_nasty_green), "HC"))
         list.add(TrackerDashboardModel(context.resources.getString(R.string.TRACKER_STRESS_ANXIETY), context.resources.getString(R.string.TRACKER_DESC_STRESS_ANXIETY), R.drawable.img_stress_anxiety, ContextCompat.getColor(context, R.color.vivantOrange), "SAC"))
@@ -47,41 +47,41 @@ class DataHandler(val context: Context) {
 
     fun getAgeGroupList(): ArrayList<SpinnerModel> {
         val list: ArrayList<SpinnerModel> = ArrayList()
-        list.add(SpinnerModel("Under 35 Years", "", 0, true))
-        list.add(SpinnerModel("35 - 44", "", 1, false))
-        list.add(SpinnerModel("45 - 54", "", 2, false))
-        list.add(SpinnerModel("55 - 64", "", 3, false))
-        list.add(SpinnerModel("65 yrs or Over", "", 4, false))
+        list.add(SpinnerModel(context.resources.getString(R.string.UNDER_35_YEARS), "", 0, true))
+        list.add(SpinnerModel(context.resources.getString(R.string.AGE_35_TO_44), "", 1, false))
+        list.add(SpinnerModel(context.resources.getString(R.string.AGE_45_TO_54), "", 2, false))
+        list.add(SpinnerModel(context.resources.getString(R.string.AGE_55_TO_64), "", 3, false))
+        list.add(SpinnerModel(context.resources.getString(R.string.AGE_65_YRS_OR_OVER), "", 4, false))
         return list
     }
 
     fun getDepressionList(): List<String> {
         val list = ArrayList<String>()
-        list.add("Dysphoria")
-        list.add("Lack of interest / involvement")
-        list.add("Hopelessness")
-        list.add("Anhedonia")
-        list.add("Devaluation of life")
-        list.add("Inertia")
-        list.add("Self-deprecation")
+        list.add(context.resources.getString(R.string.DYSPHORIA))
+        list.add(context.resources.getString(R.string.LACK_OF_INTEREST_INVOLVEMENT))
+        list.add(context.resources.getString(R.string.HOPELESSNESS))
+        list.add(context.resources.getString(R.string.ANHEDONIA))
+        list.add(context.resources.getString(R.string.DEVALUATION_OF_LIFE))
+        list.add(context.resources.getString(R.string.INERTIA))
+        list.add(context.resources.getString(R.string.SELF_DEPRECATION))
         return list
     }
 
     fun getAnxietyList(): List<String> {
         val list = ArrayList<String>()
-        list.add("Autonomic arousal")
-        list.add("Self-deprecation")
-        list.add("Skeletal muscle effects")
-        list.add("Subjective experience of anxious affect.")
-        list.add("Situational anxiety")
+        list.add(context.resources.getString(R.string.AUTONOMIC_AROUSAL))
+        list.add(context.resources.getString(R.string.SELF_DEPRECATION))
+        list.add(context.resources.getString(R.string.SKELETAL_MUSCLE_EFFECTS))
+        list.add(context.resources.getString(R.string.SUBJECTIVE_EXPERIENCE_OF_ANXIOUS_AFFECT))
+        list.add(context.resources.getString(R.string.SITUATIONAL_ANXIETY))
         return list
     }
 
     fun getStressList(): List<String> {
         val list = ArrayList<String>()
-        list.add("Difficulty relaxing")
-        list.add("Nervous arousal")
-        list.add("Being easily upset/agitated, irritable/over-reactive and impatient.")
+        list.add(context.resources.getString(R.string.DIFFICULTY_RELAXING))
+        list.add(context.resources.getString(R.string.NERVOUS_AROUSAL))
+        list.add(context.resources.getString(R.string.BEING_EASILY_UPSET_AGITATED_IRRITABLE_OVER_REACTIVE_AND_IMPATIENT))
         return list
     }
 
@@ -90,26 +90,26 @@ class DataHandler(val context: Context) {
 
         when(parameter) {
 
-            context.resources.getString(R.string.ft) -> {
-                vitalParameter.unit = context.resources.getString(R.string.ft)
+            context.resources.getString(R.string.FT) -> {
+                vitalParameter.unit = context.resources.getString(R.string.FT)
                 vitalParameter.minRange = 4
                 vitalParameter.maxRange = 7
             }
 
-            context.resources.getString(R.string.cm) -> {
-                vitalParameter.unit = context.resources.getString(R.string.cm)
+            context.resources.getString(R.string.CM) -> {
+                vitalParameter.unit = context.resources.getString(R.string.CM)
                 vitalParameter.minRange = 120
                 vitalParameter.maxRange = 240
             }
 
-            context.resources.getString(R.string.lbs) -> {
-                vitalParameter.unit = context.resources.getString(R.string.lbs)
+            context.resources.getString(R.string.LBS) -> {
+                vitalParameter.unit = context.resources.getString(R.string.LBS)
                 vitalParameter.minRange = 64
                 vitalParameter.maxRange = 550
             }
 
-            context.resources.getString(R.string.kg) -> {
-                vitalParameter.unit = context.resources.getString(R.string.kg)
+            context.resources.getString(R.string.KG) -> {
+                vitalParameter.unit = context.resources.getString(R.string.KG)
                 vitalParameter.minRange = 30
                 vitalParameter.maxRange = 250
             }
@@ -127,7 +127,7 @@ class DataHandler(val context: Context) {
         }
         var data = ParameterDataModel()
         if (model.equals("BMI", ignoreCase = true)) {
-            data.title = "Height"
+            data.title = context.resources.getString(R.string.HEIGHT)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel!!.getHeight()) ) {
                 val `val`: String = CalculateParameters.convertCmToFeet(userInfoModel.getHeight())
                     .toString() + "'" + CalculateParameters.convertCmToInch(
@@ -138,14 +138,14 @@ class DataHandler(val context: Context) {
                 data.value = "- -"
                 data.finalValue = "0"
             }
-            data.unit = "Feet/inch"
+            data.unit = context.resources.getString(R.string.FEET_INCH)
             data.code = "HEIGHT"
             data.color = R.color.vivant_nasty_green
             data.img = R.drawable.height
-            data.description = "Today via mobile entry"
+            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             paramList.add(data)
             data = ParameterDataModel()
-            data.title = "Systolic BP"
+            data.title = context.resources.getString(R.string.SYSTOLIC_BP)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel.getSystolicBp()) ) {
                 val `val` = "" + userInfoModel.getSystolicBp().toDouble().toInt()
                 data.value = `val`
@@ -153,16 +153,16 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = "mm Hg"
+            data.unit = context.resources.getString(R.string.MM_HG)
             data.code = "SYSTOLIC_BP"
             data.color = R.color.vivant_bright_sky_blue
             data.img = R.drawable.systolic
-            data.description = "Today via mobile entry"
+            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             data.minRange = 0.01
             data.maxRange = 500.0
             paramList.add(data)
             data = ParameterDataModel()
-            data.title = "Weight"
+            data.title = context.resources.getString(R.string.WEIGHT)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel.getWeight()) ) {
                 val `val` = "" + userInfoModel.getWeight().toDouble().toInt()
                 data.value = `val`
@@ -171,14 +171,14 @@ class DataHandler(val context: Context) {
                 data.value = "- -"
                 data.finalValue = "50"
             }
-            data.unit = "Kg"
+            data.unit = context.resources.getString(R.string.KG)
             data.code = "WEIGHT"
             data.color = R.color.vivant_marigold
             data.img = R.drawable.weight
-            data.description = "Today via mobile entry"
+            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             paramList.add(data)
             data = ParameterDataModel()
-            data.title = "Diastolic BP"
+            data.title = context.resources.getString(R.string.DIASTOLIC_BP)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel.getDiastolicBp()) ) {
                 val `val` = "" + userInfoModel.getDiastolicBp().toDouble().toInt()
                 data.value = `val`
@@ -186,16 +186,16 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = "mm Hg"
+            data.unit = context.resources.getString(R.string.MM_HG)
             data.code = "DIASTOLIC_BP"
             data.color = R.color.vivant_watermelon
             data.img = R.drawable.systolic
-            data.description = "Today via mobile entry"
+            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             data.minRange = 10.0
             data.maxRange = 500.0
             paramList.add(data)
         } else if (model.equals("LIPID", ignoreCase = true)) {
-            data.title = "Cholesterol"
+            data.title = context.resources.getString(R.string.CHOLESTEROL)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel!!.getCholesterol()) ) {
                 val `val` = "" + userInfoModel.getCholesterol().toDouble().toInt()
                 data.value = `val`
@@ -203,8 +203,8 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.description = "Today via mobile entry"
-            data.unit = "mmol/L"
+            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
+            data.unit = context.resources.getString(R.string.MMOL_L)
             data.code = "TOTAL_CHOL"
             data.color = R.color.vivant_nasty_green
             data.img = R.drawable.cholesteroal
@@ -212,7 +212,7 @@ class DataHandler(val context: Context) {
             data.maxRange = 100.0
             paramList.add(data)
             data = ParameterDataModel()
-            data.title = "Systolic BP"
+            data.title = context.resources.getString(R.string.SYSTOLIC_BP)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel.getSystolicBp()) ) {
                 val `val` = "" + userInfoModel.getSystolicBp().toDouble().toInt()
                 data.value = `val`
@@ -220,16 +220,16 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = "mm Hg"
+            data.unit = context.resources.getString(R.string.MM_HG)
             data.code = "SYSTOLIC_BP"
             data.color = R.color.vivantCyan
             data.img = R.drawable.systolic
-            data.description = "Today via mobile entry"
+            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             data.minRange = 0.01
             data.maxRange = 500.0
             paramList.add(data)
             data = ParameterDataModel()
-            data.title = "HDL"
+            data.title = context.resources.getString(R.string.HDL)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel.getHdl()) ) {
                 val `val` = "" + userInfoModel.getHdl().toDouble().toInt()
                 data.value = `val`
@@ -237,16 +237,16 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = "mmol/L"
+            data.unit = context.resources.getString(R.string.MMOL_L)
             data.code = "HDL"
             data.color = R.color.vivant_marigold
             data.img = R.drawable.hdl
-            data.description = "Today via mobile entry"
+            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             data.minRange = 0.01
             data.maxRange = 100.0
             paramList.add(data)
             data = ParameterDataModel()
-            data.title = "Diastolic BP"
+            data.title = context.resources.getString(R.string.DIASTOLIC_BP)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel.getDiastolicBp()) ) {
                 val `val` = "" + userInfoModel.getDiastolicBp().toDouble().toInt()
                 data.value = `val`
@@ -254,11 +254,11 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = "mm Hg"
+            data.unit = context.resources.getString(R.string.MM_HG)
             data.code = "DIASTOLIC_BP"
             data.color = R.color.vivant_watermelon
             data.img = R.drawable.systolic
-            data.description = "Today via mobile entry"
+            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             data.minRange = 10.0
             data.maxRange = 500.0
             paramList.add(data)
@@ -270,7 +270,7 @@ class DataHandler(val context: Context) {
             val waistSize = UserInfoModel.getInstance()!!.getWaistSize()
             val paramList = ArrayList<ParameterDataModel>()
             val data = ParameterDataModel()
-            data.title = "Waist"
+            data.title = context.resources.getString(R.string.WAIST)
             Timber.e("Waist:: $waistSize")
             if ( !Utilities.isNullOrEmptyOrZero(waistSize) ) {
                 try {
@@ -284,13 +284,13 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = "Inch"
+            data.unit = context.resources.getString(R.string.INCH)
             data.code = "WAISTMEASUREMENT"
             data.color = R.color.vivantCyan
             data.img = R.drawable.waist
             data.minRange = 25.0
             data.maxRange = 65.0
-            data.description = "Today via mobile entry"
+            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             paramList.add(data)
             return paramList
         }

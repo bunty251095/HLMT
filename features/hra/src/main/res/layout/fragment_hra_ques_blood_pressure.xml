@@ -109,7 +109,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:text="@string/I_DONT_REM"
+            android:text="@string/I_DONT_REMEMBER"
             android:background="@drawable/btn_round_disabled_hra"
             android:textColor="@color/vivant_charcoal_grey_55"
             app:layout_constraintBottom_toTopOf="@+id/btn_next"

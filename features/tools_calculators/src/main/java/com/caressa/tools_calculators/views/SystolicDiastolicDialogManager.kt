@@ -112,16 +112,16 @@ class SystolicDiastolicDialogManager(context: Context, listener: OnDialogValueLi
             }
 
             if (!isSystolic && !isDiastolic) {
-                Utilities.toastMessageShort(context, "Please insert Systolic BP value between 0.01 to 500.")
+                Utilities.toastMessageShort(context,context.resources.getString(R.string.PLEASE_INSERT_SYSTOLIC_BP_VALUE_BETWEEN_0_01_TO_500))
             } else if (!isSystolic) {
-                Utilities.toastMessageShort(context, "Please insert Systolic BP value between 0.01 to 500.")
+                Utilities.toastMessageShort(context,context.resources.getString(R.string.PLEASE_INSERT_SYSTOLIC_BP_VALUE_BETWEEN_0_01_TO_500))
             } else if (!isDiastolic) {
-                Utilities.toastMessageShort(context, "Please insert Diastolic BP value between 10 to 500.")
+                Utilities.toastMessageShort(context,context.resources.getString(R.string.PLEASE_INSERT_DIASTOLIC_BP_VALUE_BETWEEN_10_TO_500))
             }
 
             if (isSystolic && isDiastolic) {
                 if (sys != 0.0 && dia != 0.0 && dia >= sys) {
-                    Utilities.toastMessageShort(context, "Diastolic value should be less than systolic value.")
+                    Utilities.toastMessageShort(context,context.resources.getString(R.string.DIASTOLIC_VALUE_SHOULD_BE_LESS_THAN_SYSTOLIC_VALUE))
                     isDiastolic = false
                 }
             }

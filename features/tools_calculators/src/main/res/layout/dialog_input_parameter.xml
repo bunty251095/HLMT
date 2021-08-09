@@ -42,7 +42,7 @@
                 android:id="@+id/title_input"
                 style="@style/VivantTitle"
                 android:layout_margin="@dimen/_15sdp"
-                android:text="Enter Value"
+                android:text=""
                 android:textSize="@dimen/_14sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

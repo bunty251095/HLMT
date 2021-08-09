@@ -110,7 +110,7 @@ class HypertensionSummeryFragment : BaseFragment() {
         xAxis.valueFormatter =
             IAxisValueFormatter { value, _ ->
                 Timber.i("Position ==> $value")
-                if (value == 0f) return@IAxisValueFormatter "Year 1" else if (value == 1f) return@IAxisValueFormatter "Year 2  " else if (value == 2f) return@IAxisValueFormatter "Year 4  "
+                if (value == 0f) return@IAxisValueFormatter resources.getString(R.string.YEAR_1) else if (value == 1f) return@IAxisValueFormatter "${resources.getString(R.string.YEAR_2)}  " else if (value == 2f) return@IAxisValueFormatter "${resources.getString(R.string.YEAR_4)}  "
                 ""
             }
 
@@ -129,11 +129,11 @@ class HypertensionSummeryFragment : BaseFragment() {
             }
         }
 
-        val setOptRisk = BarDataSet(entries1, "Optimum Risk")
+        val setOptRisk = BarDataSet(entries1,resources.getString(R.string.OPTIMUM_RISK))
         setOptRisk.color = ContextCompat.getColor(requireContext(), R.color.vivant_bright_sky_blue)
         setOptRisk.valueTextColor = ContextCompat.getColor(requireContext(), R.color.textViewColor)
 
-        val setRisk1 = BarDataSet(entries2, "Risk 1")
+        val setRisk1 = BarDataSet(entries2,resources.getString(R.string.RISK_1))
         setRisk1.color = ContextCompat.getColor(requireContext(), R.color.vivant_marigold)
         setRisk1.valueTextColor = ContextCompat.getColor(requireContext(), R.color.textViewColor)
 
@@ -143,7 +143,7 @@ class HypertensionSummeryFragment : BaseFragment() {
 
         var data = BarData(setOptRisk, setRisk1)
         if (hypertensionRiskList.containsKey("RISK2")) {
-            val setRisk2 = BarDataSet(entries3, "Risk 2")
+            val setRisk2 = BarDataSet(entries3, resources.getString(R.string.RISK_2))
             setRisk2.color = ContextCompat.getColor(requireContext(), R.color.vivant_watermelon)
             setRisk2.valueTextColor = ContextCompat.getColor(requireContext(), R.color.textViewColor)
             data = BarData(setOptRisk, setRisk1, setRisk2)

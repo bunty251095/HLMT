@@ -26,6 +26,13 @@ import java.util.*
 
 class MedicationTrackerHelper( val context: Context) {
 
+    fun getFrequencyList(): ArrayList<String> {
+        val frequencyList: ArrayList<String> = ArrayList()
+        frequencyList.add(context.resources.getString(R.string.EVERY_DAY))
+        frequencyList.add(context.resources.getString(R.string.FOR_X_DAYS))
+        return frequencyList
+    }
+
     fun getMedTypeList(): ArrayList<MedTypeModel> {
         val medTypeList: ArrayList<MedTypeModel> = ArrayList()
         medTypeList.add(MedTypeModel(context.resources.getString(R.string.TABLET), "TAB", R.drawable.img_pill))
@@ -150,10 +157,10 @@ class MedicationTrackerHelper( val context: Context) {
 
     fun displayMedicineReminderNotification(context:Context,data:ReminderNotification,relative: UserRelatives) {
         try {
-            val strMessage: String = data.dosage + " Dose" + " , " + data.instruction
+            val strMessage: String = data.dosage + " " + context.resources.getString(R.string.DOSE) + " , " + data.instruction
             val timeToDisplay: String = DateHelper.getTimeIn12HrFormatAmOrPm(data.scheduleTime)
             val firstName: String = relative.firstName.split(" ")[0]
-            val personName = "For $firstName"
+            val personName = context.resources.getString(R.string.FOR) + " $firstName"
 
             //In Android "O" or higher version, it's Mandatory to use a channel with your Notification Builder
             //int NOTIFICATION_ID = (int) System.currentTimeMillis();

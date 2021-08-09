@@ -9,11 +9,11 @@ import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.FirebaseHelper
+import com.caressa.security.R
 import com.caressa.security.databinding.FragmentLoginWithOtpBinding
 import com.caressa.security.viewmodel.LoginWithOtpViewModel
 import kotlinx.android.synthetic.main.fragment_login_with_otp.*
 import org.koin.android.viewmodel.ext.android.viewModel
-
 
 class LoginWithOtpFragment : BaseFragment() {
 
@@ -37,9 +37,9 @@ class LoginWithOtpFragment : BaseFragment() {
         viewModel.isLoginName.observe(viewLifecycleOwner, Observer {
             if (it!=null) {
                 if (it.isExist.equals("TRUE", true)) {
-                    binding.btnVerify.text = "Verify & Login"
+                    binding.btnVerify.text = resources.getString(R.string.VERIFY_AND_LOGIN)
                 } else {
-                    binding.btnVerify.text = "Verify"
+                    binding.btnVerify.text = resources.getString(R.string.VERIFY)
                 }
             }
         })

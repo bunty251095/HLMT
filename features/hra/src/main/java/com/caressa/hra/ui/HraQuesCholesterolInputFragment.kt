@@ -299,11 +299,11 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
 
         if ( binding.totalChol.visibility == View.VISIBLE  ) {
             if ( Utilities.isNullOrEmpty(totalChol) ) {
-                Utilities.toastMessageShort(context, "Please Enter Valid Total Cholesterol value")
+                Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_ENTER_VALID_TOTAL_CHOLESTEROL_VALUE))
                 return false
             }  else {
                 if ( totalChol.toDouble() < cholTotal.minPermissibleValue!!.toDouble() || totalChol.toDouble() > cholTotal.maxPermissibleValue!!.toDouble() ) {
-                    Utilities.toastMessageShort(context, "Total Cholesterol value must be between "
+                    Utilities.toastMessageShort(context, "${resources.getString(R.string.TOTAL_CHOLESTEROL_VALUE_MUST_BE_BETWEEN)} "
                             + cholTotal.minPermissibleValue + "-" + cholTotal.maxPermissibleValue )
                     return false
                 } else {
@@ -318,11 +318,11 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
 
         if ( binding.hdl.visibility == View.VISIBLE  ) {
             if ( Utilities.isNullOrEmpty(hdlChol) ) {
-                Utilities.toastMessageShort(context, "Please Enter Valid HDL value")
+                Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_ENTER_VALID_HDL_VALUE))
                 return false
             }  else {
                 if ( hdlChol.toDouble() < hdl.minPermissibleValue!!.toDouble() || hdlChol.toDouble() > hdl.maxPermissibleValue!!.toDouble() ) {
-                    Utilities.toastMessageShort(context, "HDL value must be between "
+                    Utilities.toastMessageShort(context, "${resources.getString(R.string.HDL_VALUE_MUST_BE_BETWEEN)} "
                             + hdl.minPermissibleValue + "-" + hdl.maxPermissibleValue )
                     return false
                 } else {
@@ -337,11 +337,11 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
 
         if ( binding.ldl.visibility == View.VISIBLE  ) {
             if ( Utilities.isNullOrEmpty(ldlChol) ) {
-                Utilities.toastMessageShort(context, "Please Enter Valid LDL value")
+                Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_ENTER_VALID_LDL_VALUE))
                 return false
             }  else {
                 if ( ldlChol.toDouble() < ldl.minPermissibleValue!!.toDouble() || ldlChol.toDouble() > ldl.maxPermissibleValue!!.toDouble() ) {
-                    Utilities.toastMessageShort(context, "LDL value must be between "
+                    Utilities.toastMessageShort(context, "${resources.getString(R.string.LDL_VALUE_MUST_BE_BETWEEN)} "
                             + ldl.minPermissibleValue + "-" + ldl.maxPermissibleValue )
                     return false
                 } else {
@@ -356,11 +356,11 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
 
         if ( binding.triglycerides.visibility == View.VISIBLE  ) {
             if ( Utilities.isNullOrEmpty(triglycerideChol) ) {
-                Utilities.toastMessageShort(context, "Please Enter Valid Triglycerides value")
+                Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_ENTER_VALID_TRIGLYCERIDES_VALUE))
                 return false
             }  else {
                 if ( triglycerideChol.toDouble() < triglyceride.minPermissibleValue!!.toDouble() || triglycerideChol.toDouble() > triglyceride.maxPermissibleValue!!.toDouble() ) {
-                    Utilities.toastMessageShort(context, "Triglycerides value must be between "
+                    Utilities.toastMessageShort(context, "${resources.getString(R.string.TRIGLYCERIDES_VALUE_MUST_BE_BETWEEN)} "
                             + triglyceride.minPermissibleValue + "-" + triglyceride.maxPermissibleValue )
                     return false
                 } else {
@@ -375,11 +375,11 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
 
         if ( binding.vldl.visibility == View.VISIBLE  ) {
             if ( Utilities.isNullOrEmpty(vldlChol) ) {
-                Utilities.toastMessageShort(context, "Please Enter Valid VLDL value")
+                Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_ENTER_VALID_VLDL_VALUE))
                 return false
             }  else {
                 if ( vldlChol.toDouble() < vldl.minPermissibleValue!!.toDouble() || vldlChol.toDouble() > vldl.maxPermissibleValue!!.toDouble() ) {
-                    Utilities.toastMessageShort(context, "VLDL value must be between "
+                    Utilities.toastMessageShort(context, "${resources.getString(R.string.VLDL_VALUE_MUST_BE_BETWEEN)} "
                             + vldl.minPermissibleValue + "-" + vldl.maxPermissibleValue )
                     return false
                 } else {

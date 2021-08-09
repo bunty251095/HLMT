@@ -7,43 +7,23 @@ data class Resource<out T>(
     val data: T?,
     val error: Throwable?,
     val errorMessage: String = "",
-    val errorNumber: String = "0"
-) {
+    val errorNumber: String = "0") {
+
     companion object {
+
         fun <T> success(data: T?): Resource<T> {
             Timber.i("success=>> $data")
-            return Resource(
-                Status.SUCCESS,
-                data,
-                null
-            )
+            return Resource(Status.SUCCESS, data, null)
         }
 
-        fun <T> error(
-            error: Throwable,
-            data: T?,
-            errorMessage: String = "",
-            errorNumber: String = "0"
-        ): Resource<T> {
+        fun <T> error(error: Throwable, data: T?, errorMessage: String = "", errorNumber: String = "0"): Resource<T> {
             Timber.i("error=>> $errorMessage == $errorNumber")
-
-            return Resource(
-                Status.ERROR,
-                data,
-                error,
-                errorMessage,
-                errorNumber
-            )
+            return Resource(Status.ERROR, data, error, errorMessage, errorNumber)
         }
 
         fun <T> loading(data: T?): Resource<T> {
             Timber.i("loading=>> $data")
-
-            return Resource(
-                Status.LOADING,
-                data,
-                null
-            )
+            return Resource(Status.LOADING, data, null)
         }
     }
 

@@ -13,7 +13,7 @@
         style="@style/VivantTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Test/Check-ups Sugested By Doctor"
+        android:text="@string/TEST_CHECK_UPS_SUGGESTED_BY_DOCTOR"
         android:textSize="@dimen/_12sdp"
         android:textColor="@color/white"
         android:layout_marginStart="@dimen/_8sdp"

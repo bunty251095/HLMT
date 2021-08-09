@@ -58,7 +58,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="7"
                     style="@style/ToolsQuestion"
-                    android:text="Age in years" />
+                    android:text="@string/AGE_IN_YEARS" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edtAge"
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="7"
-                    android:text="Gender"
+                    android:text="@string/GENDER"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/constraintLayout2"
                     app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +119,7 @@
                         android:drawableTint="@color/black"
                         android:drawablePadding="@dimen/_10sdp"
                         android:paddingTop="@dimen/_3sdp"
-                        android:text="Male"
+                        android:text="@string/MALE"
                         android:textSize="@dimen/_11sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +142,6 @@
                         android:layout_height="@dimen/_3sdp"
                         android:dropDownWidth="match_parent"
                         android:dropDownSelector="@color/vivant_pale_grey"
-                        android:entries="@array/gender_array"
                         android:gravity="end"
                         android:layout_marginStart="@dimen/_32sdp"
                         android:spinnerMode="dropdown"
@@ -172,7 +171,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="7"
                     style="@style/ToolsQuestion"
-                    android:text="Are you under Medication for High Blood Pressure?" />
+                    android:text="@string/ARE_YOU_UNDER_MEDICATION_FOR_HIGH_BLOOD_PRESSURE" />
 
                 <RadioGroup
                     android:id="@+id/rg_bp_medication"
@@ -216,7 +215,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="7"
                     style="@style/ToolsQuestion"
-                    android:text="Have you ever smoked?" />
+                    android:text="@string/HAVE_YOU_EVER_SMOKED" />
 
                 <RadioGroup
                     android:id="@+id/rg_smoke"
@@ -268,9 +267,9 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/ToolsQuestion"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="37dp"
                         android:layout_gravity="center_vertical"
-                        android:text="@string/health_condition_question" />
+                        android:text="@string/HEALTH_CONDITION_QUESTION" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/ToolsText"
@@ -278,14 +277,14 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:alpha="0.55"
-                        android:text="@string/health_condition_content" />
+                        android:text="@string/HEALTH_CONDITION_CONTENT" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtSelection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/ToolsText"
-                        android:text="( You have selected 0 items )" />
+                        android:text="" />
                 </LinearLayout>
 
                 <com.caressa.common.view.ArcBorderButton
@@ -311,7 +310,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Measurement Parameter"
+                android:text="@string/MEASUREMENT_PARAMETERS"
                 android:textStyle="bold"
                 style="@style/VivantTitle"
                 android:textSize="@dimen/_12sdp"

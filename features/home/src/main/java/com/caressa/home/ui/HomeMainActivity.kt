@@ -76,7 +76,7 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
         configureNavController()
         callDashboardAPIs()
         drawerLayout = findViewById(R.id.drawer_layout)
-        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.NAVIGATION_DRAWER_OPEN, R.string.NAVIGATION_DRAWER_CLOSE)
         toggle.drawerArrowDrawable.color = appColorHelper.primaryColor()
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()

@@ -291,11 +291,11 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
 
         if ( binding.randomBs.visibility == View.VISIBLE  ) {
             if ( Utilities.isNullOrEmpty(rbs) ) {
-                Utilities.toastMessageShort(context, "Please Enter Valid Random Sugar value")
+                Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_ENTER_VALID_RANDOM_SUGAR_VALUE))
                 return false
             }  else {
                 if ( rbs.toDouble() < rs.minPermissibleValue!!.toDouble() || rbs.toDouble() > rs.maxPermissibleValue!!.toDouble() ) {
-                    Utilities.toastMessageShort(context, "Random Sugar value must be between "
+                    Utilities.toastMessageShort(context, "${resources.getString(R.string.RANDOM_SUGAR_VALUE_MUST_BE_BETWEEN)} "
                             + rs.minPermissibleValue + "-" + rs.maxPermissibleValue )
                     return false
                 } else {
@@ -310,11 +310,11 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
 
         if ( binding.fastingBs.visibility == View.VISIBLE  ) {
             if ( Utilities.isNullOrEmpty(fbs) ) {
-                Utilities.toastMessageShort(context, "Please Enter Valid Fasting Sugar value")
+                Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_ENTER_VALID_FASTING_SUGAR_VALUE))
                 return false
             }  else {
                 if ( fbs.toDouble() < fs.minPermissibleValue!!.toDouble() || fbs.toDouble() > fs.maxPermissibleValue!!.toDouble() ) {
-                    Utilities.toastMessageShort(context, "Fasting Sugar value must be between "
+                    Utilities.toastMessageShort(context, "${resources.getString(R.string.FASTING_SUGAR_VALUE_MUST_BE_BETWEEN)} "
                             + fs.minPermissibleValue + "-" + fs.maxPermissibleValue )
                     return false
                 } else {
@@ -329,11 +329,11 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
 
         if ( binding.postMealBs.visibility == View.VISIBLE  ) {
             if ( Utilities.isNullOrEmpty(pbs) ) {
-                Utilities.toastMessageShort(context, "Please Enter Valid Post Meal Blood Sugar value")
+                Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_ENTER_VALID_POST_MEAL_BLOOD_SUGAR_VALUE))
                 return false
             }  else {
                 if ( pbs.toDouble() < ps.minPermissibleValue!!.toDouble() || pbs.toDouble() > ps.maxPermissibleValue!!.toDouble() ) {
-                    Utilities.toastMessageShort(context, "Post Meal Blood Sugar value must be between "
+                    Utilities.toastMessageShort(context, "${resources.getString(R.string.POST_MEAL_BLOOD_SUGAR_VALUE_MUST_BE_BETWEEN)} "
                             + ps.minPermissibleValue + "-" + ps.maxPermissibleValue )
                     return false
                 } else {
@@ -348,12 +348,13 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
 
         if ( binding.hab1cBs.visibility == View.VISIBLE  ) {
             if ( Utilities.isNullOrEmpty(hab1cbs) ) {
-                Utilities.toastMessageShort(context, "Please Enter Valid HbA1c value")
+                Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_ENTER_VALID_HBA1C_SUGAR_VALUE))
                 return false
             }  else {
                 if ( hab1cbs.toDouble() < hb.minPermissibleValue!!.toDouble() || hab1cbs.toDouble() > hb.maxPermissibleValue!!.toDouble() ) {
-                    Utilities.toastMessageShort(context, "HbA1c value must be between "
+                    Utilities.toastMessageShort(context, "${resources.getString(R.string.HBA1C_VALUE_MUST_BE_BETWEEN)} "
                             + hb.minPermissibleValue + "-" + hb.maxPermissibleValue )
+
                     return false
                 } else {
                     isHba1c = true

@@ -2,7 +2,6 @@
 <!--<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,7 +17,6 @@
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -33,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/VivantTitle"
-            android:text="Physical Effects of Addiction"/>
+            android:text="@string/PHYSICAL_EFFECTS_OF_ADDICTION"/>
 
         <View
             android:layout_width="match_parent"
@@ -44,7 +42,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Over use of your cell phone or smartphone can result in a number of different physical problems that may cause permanent damage or be difficult to treat, including:"
+            android:text="@string/PHYSICAL_EFFECTS_OF_ADDICTION_DESC"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:lineSpacingExtra="@dimen/_2sdp"
@@ -68,7 +66,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Digital eye strain"
+            android:text="@string/DIGITAL_EYE_STRAIN"
             android:textColor="@color/white"
             style="@style/VivantTitle"
             android:layout_gravity="start|center_vertical"
@@ -86,7 +84,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Eyes begin to burn and itch."
+            android:text="@string/SUB_1_DIGITAL_EYE_STRAIN"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:lineSpacingExtra="@dimen/_2sdp"
@@ -98,7 +96,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Blurred vision."
+            android:text="@string/SUB_2_DIGITAL_EYE_STRAIN"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:lineSpacingExtra="@dimen/_2sdp"
@@ -110,7 +108,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Eye fatigue."
+            android:text="@string/SUB_3_DIGITAL_EYE_STRAIN"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:lineSpacingExtra="@dimen/_2sdp"
@@ -122,7 +120,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Digital Eye Strain can cause headaches."
+            android:text="@string/SUB_4_DIGITAL_EYE_STRAIN"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:lineSpacingExtra="@dimen/_2sdp"
@@ -151,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:lineSpacingExtra="@dimen/_2sdp"
-                android:text="The pain and discomfort associated with viewing a digital screen for over 2 hours." />
+                android:text="@string/SUB_5_DIGITAL_EYE_STRAIN" />
 
         </LinearLayout>
 
@@ -173,7 +171,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Neck problems"
+            android:text="@string/NECK_PROBLEMS"
             style="@style/VivantTitle"
             android:textColor="@color/white"
             android:layout_gravity="start|center_vertical"
@@ -191,7 +189,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Also known as &quot;text neck,&quot; which refers to neck pain resulting from looking down at cell phone or tablet for too long."
+            android:text="@string/SUB_1_NECK_PROBLEMS"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:lineSpacingExtra="@dimen/_2sdp"
@@ -217,7 +215,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Increased illnesses due to germs"
+            android:text="@string/INCREASED_ILLNESSES_DUE_TO_GERMS"
             android:textColor="@color/white"
             style="@style/VivantTitle"
             android:layout_gravity="start|center_vertical"
@@ -235,7 +233,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1 in 6 cell phones has fecal matter on it."
+            android:text="@string/SUB_1_INCREASED_ILLNESSES_DUE_TO_GERMS"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:drawableStart="@drawable/squre_bg"
@@ -261,7 +259,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_6sdp"
                 android:lineSpacingExtra="@dimen/_2sdp"
-                android:text="E. coli bacteria, which can cause fever, vomiting, and diarrhea, is found on many phones." />
+                android:text="@string/SUB_2_INCREASED_ILLNESSES_DUE_TO_GERMS" />
 
         </LinearLayout>
 
@@ -283,14 +281,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:lineSpacingExtra="@dimen/_2sdp"
-                android:text="Phones have been found to be contaminated with MRSA." />
+                android:text="@string/SUB_3_INCREASED_ILLNESSES_DUE_TO_GERMS" />
 
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Causes painful abscesses."
+            android:text="@string/SUB_31_INCREASED_ILLNESSES_DUE_TO_GERMS"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:drawableStart="@drawable/squre_bg"
@@ -318,14 +316,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:lineSpacingExtra="@dimen/_2sdp"
-                android:text="Life-threatening infections in bones, joints, surgical wounds, bloodstream, heart valves, and lungs." />
+                android:text="@string/SUB_32_INCREASED_ILLNESSES_DUE_TO_GERMS" />
 
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Car accidents."
+            android:text="@string/SUB_4_INCREASED_ILLNESSES_DUE_TO_GERMS"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:drawableStart="@drawable/squre_bg"
@@ -352,7 +350,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:lineSpacingExtra="@dimen/_2sdp"
-                android:text="Many people believe that they can multitask and use their phones while driving, but this causes significant impairment and puts the driver and others on the road in danger." />
+                android:text="@string/SUB_41_INCREASED_ILLNESSES_DUE_TO_GERMS" />
 
         </LinearLayout>
 
@@ -375,14 +373,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:lineSpacingExtra="@dimen/_2sdp"
-                android:text="Research has revealed that texting and driving can be just as dangerous as drinking and driving." />
+                android:text="@string/SUB_42_INCREASED_ILLNESSES_DUE_TO_GERMS" />
 
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Male infertility."
+            android:text="@string/SUB_5_INCREASED_ILLNESSES_DUE_TO_GERMS"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:drawableStart="@drawable/squre_bg"
@@ -409,7 +407,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:lineSpacingExtra="@dimen/_2sdp"
-                android:text="Preliminary studies have revealed that cell phone radiation may decrease sperm count, sperm motility and viability." />
+                android:text="@string/SUB_51_INCREASED_ILLNESSES_DUE_TO_GERMS" />
 
         </LinearLayout>
 
@@ -425,7 +423,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/VivantTitle"
-            android:text="Psychological Effects of Cell Phone Addiction"/>
+            android:text="@string/PSYCHOLOGICAL_EFFECTS_OF_CELL_PHONE_ADDICTION"/>
 
         <View
             android:layout_width="match_parent"
@@ -452,7 +450,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sleep disturbances"
+            android:text="@string/SLEEP_DISTURBANCES"
             style="@style/VivantTitle"
             android:textColor="@color/white"
             android:layout_gravity="start|center_vertical"
@@ -485,7 +483,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:lineSpacingExtra="@dimen/_2sdp"
-                android:text="Cell phone addiction has been linked to an increase in sleep disorders and fatigue in users." />
+                android:text="@string/SUB_1_SLEEP_DISTURBANCES" />
 
         </LinearLayout>
 
@@ -507,14 +505,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:lineSpacingExtra="@dimen/_2sdp"
-                android:text="Using your cell phone before bed increases the likelihood of insomnia." />
+                android:text="@string/SUB_2_SLEEP_DISTURBANCES" />
 
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bright light may decrease sleep quality."
+            android:text="@string/SUB_21_SLEEP_DISTURBANCES"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:drawableStart="@drawable/squre_bg"
@@ -542,7 +540,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:lineSpacingExtra="@dimen/_2sdp"
-                android:text="Smartphone use could increase amount of time it takes to fall asleep." />
+                android:text="@string/SUB_22_SLEEP_DISTURBANCES" />
 
         </LinearLayout>
 
@@ -565,7 +563,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:lineSpacingExtra="@dimen/_2sdp"
-                android:text="Light emitted from the cell phone may activate the brain." />
+                android:text="@string/SUB_23_SLEEP_DISTURBANCES" />
 
         </LinearLayout>
 
@@ -588,7 +586,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Depression"
+            android:text="@string/DEPRESSION"
             style="@style/VivantTitle"
             android:textColor="@color/white"
             android:layout_gravity="start|center_vertical"
@@ -613,7 +611,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Obsessive Compulsive Disorder"
+            android:text="@string/OBSESSIVE_COMPULSIVE_DISORDER"
             android:textColor="@color/white"
             style="@style/VivantTitle"
             android:layout_gravity="start|center_vertical"
@@ -638,7 +636,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Relationship problems"
+            android:text="@string/RELATIONSHIP_PROBLEMS"
             android:textColor="@color/white"
             style="@style/VivantTitle"
             android:layout_gravity="start|center_vertical"
@@ -655,7 +653,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Offline relationships may suffer as a result of neglect in favor of excessive cell phone and social media use."
+            android:text="@string/SUB_1_RELATIONSHIP_PROBLEMS"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:lineSpacingExtra="@dimen/_2sdp"
@@ -681,7 +679,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Anxiety"
+            android:text="@string/ANXIETY"
             style="@style/VivantTitle"
             android:textColor="@color/white"
             android:layout_gravity="start|center_vertical"
@@ -698,7 +696,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Research has found that college students who use their cell phones the most are more likely to feel anxious during downtime."
+            android:text="@string/SUB_1_ANXIETY"
             android:gravity="start|center_vertical"
             style="@style/ToolsQuestion"
             android:lineSpacingExtra="@dimen/_2sdp"
@@ -709,6 +707,6 @@
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 
-<!--    </androidx.core.widget.NestedScrollView>
+    <!--    </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>-->

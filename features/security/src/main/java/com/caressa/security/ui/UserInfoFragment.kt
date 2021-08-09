@@ -55,9 +55,6 @@ class UserInfoFragment: BaseFragment() {
         binding.txtYear.text = mCalendar?.get(Calendar.YEAR).toString()
         binding.txtSelectYear.text = mCalendar?.get(Calendar.YEAR).toString()
 
-        binding.btnBack.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.back_signup) )
-
         binding.txtSelectMonth.setOnClickListener {
             showPopupMenuForMonth(binding.txtSelectMonth)
         }

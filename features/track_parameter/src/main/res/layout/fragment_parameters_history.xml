@@ -64,7 +64,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:gravity="center"
-                            android:text="@string/history"
+                            android:text="@string/HISTORY"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_10sdp"
                             app:layout_constraintEnd_toEndOf="@+id/img_profile"

@@ -54,7 +54,7 @@ object Observations {
         try {
             val strObservations = getBPObservation(systolic!!, diastolic!!, context)
             if (!Utilities.isNullOrEmpty(strObservations) && systolic >= 30 && systolic <= 300 && diastolic >= 10 && diastolic <= 150) {
-                val strResult = context.resources.getString(R.string.YOUR_BP_IS)+ " <b><big>$systolic/$diastolic</b></big> mm Hg ($strObservations)"
+                val strResult = context.resources.getString(R.string.YOUR_BP_IS)+ " <b><big>$systolic/$diastolic</b></big> ${context.resources.getString(R.string.MM_HG)} ($strObservations)"
                 result_bp.text = HtmlCompat.fromHtml(strResult,HtmlCompat.FROM_HTML_MODE_LEGACY)
 
                 when {

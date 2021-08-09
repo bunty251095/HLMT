@@ -162,6 +162,12 @@ object Constants {
     const val HUSBAND_RELATIONSHIP_CODE = "HUS"
     const val OTHER_RELATIONSHIP_CODE = "OTH"
 
+    const val QUIZ_CODE_HEART_AGE = "HRTAGECAL"
+    const val QUIZ_CODE_DIABETES = "DIAB_RISK_ASMT"
+    const val QUIZ_CODE_HYPERTENSION = "HYPERTENSIONCAL"
+    const val QUIZ_CODE_STRESS_ANXIETY = "DASS-21"
+    const val QUIZ_CODE_SMART_PHONE = "SMARTPH"
+
     //Medication Constants
     const val MEDICINE_ID = "MedicineID"
     const val MEDICATION_ID = "MedicationID"

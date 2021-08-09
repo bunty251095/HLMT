@@ -36,7 +36,7 @@
             android:layout_marginTop="@dimen/_4sdp"
             android:gravity="center"
             android:minLines="2"
-            android:text="@string/thyroid_profile"
+            android:text=""
             android:textSize="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="@+id/img_selected_profile"
             app:layout_constraintStart_toStartOf="@+id/img_selected_profile"

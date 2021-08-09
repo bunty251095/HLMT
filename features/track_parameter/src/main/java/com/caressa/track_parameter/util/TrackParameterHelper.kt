@@ -33,27 +33,27 @@ object TrackParameterHelper {
     }
 
     fun getProfileNameByProfileCode(code: String): Int {
-        var profileName: Int = R.string.bmi
+        var profileName: Int = R.string.BMI
         if (code.equals("BMI", ignoreCase = true)) {
-            profileName = R.string.bmi
+            profileName = R.string.BMI
         } else if (code.equals("BLOODPRESSURE", ignoreCase = true)) {
-            profileName = R.string.bp
+            profileName = R.string.BP
         } else if (code.equals("DIABETIC", ignoreCase = true)) {
-            profileName = R.string.bs
+            profileName = R.string.BLOOD_SUGAR
         } else if (code.equals("HEMOGRAM", ignoreCase = true)) {
-            profileName = R.string.hemogram
+            profileName = R.string.HEMOGRAM
         } else if (code.equals("KIDNEY", ignoreCase = true)) {
-            profileName = R.string.kidney
+            profileName = R.string.KIDNEY
         } else if (code.equals("LIPID", ignoreCase = true)) {
-            profileName = R.string.lipid
+            profileName = R.string.LIPID
         } else if (code.equals("LIVER", ignoreCase = true)) {
-            profileName = R.string.liver
+            profileName = R.string.LIVER
         } else if (code.equals("THYROID", ignoreCase = true)) {
-            profileName = R.string.thyroid
+            profileName = R.string.THYROID
         } else if (code.equals("URINE", ignoreCase = true)) {
-            profileName = R.string.urine
+            profileName = R.string.URINE
         } else if (code.equals("WHR", ignoreCase = true)) {
-            profileName = R.string.whr
+            profileName = R.string.WHR
         }
         return profileName
     }
@@ -91,34 +91,34 @@ object TrackParameterHelper {
         return color
     }
 
-    fun getPulseObservation(pulseStr: String): String {
+    fun getPulseObservation(pulseStr: String,context: Context): String {
         var observation = ""
         if (!pulseStr.isNullOrEmpty()) {
             val pulse = pulseStr.toDouble().toInt()
-            if (pulse > 0 && pulse < 60) {
-                observation = "Low"
-            } else if (pulse >= 60 && pulse <= 100) {
-                observation = "Normal"
-            } else if (pulse > 100 && pulse < 1000) {
-                observation = "High"
+            if (pulse in 1..59) {
+                observation = context.resources.getString(R.string.LOW)
+            } else if (pulse in 60..100) {
+                observation = context.resources.getString(R.string.NORMAL)
+            } else if (pulse in 101..999) {
+                observation = context.resources.getString(R.string.HIGH)
             }
         }
         return observation
     }
 
-    fun getBPObservation(systolic: Int, diastolic: Int): String {
+    fun getBPObservation(systolic: Int, diastolic: Int,context: Context): String {
         var strObservation = ""
         if (systolic < 90 || diastolic < 60) {
-            strObservation = "Low"
+            strObservation = context.resources.getString(R.string.LOW)
         }
         if (systolic in 90..120 && diastolic in 60..80) {
-            strObservation = "Normal"
+            strObservation = context.resources.getString(R.string.NORMAL)
         }
         if (systolic in 121..139 || diastolic in 81..89) {
-            strObservation =  "High normal"
+            strObservation =  context.resources.getString(R.string.HIGH_NORMAL)
         }
         if (systolic >= 140 || diastolic >= 90) {
-            strObservation =  "Abnormal"
+            strObservation =  context.resources.getString(R.string.ABNORMAL)
         }
         return strObservation
     }
@@ -185,52 +185,52 @@ object TrackParameterHelper {
         return strConvertedValue
     }
 
-    fun getBMIObservation(parameterVal: String): String {
+    fun getBMIObservation(parameterVal: String,context: Context): String {
         var observation = ""
         try {
             if (!parameterVal.isEmpty()){
                 var bmi:Double = parameterVal.toDouble()
 
                 if (bmi<=18.49){
-                    observation = "Underweight"
+                    observation = context.resources.getString(R.string.UNDERWEIGHT)
                 }else if (bmi>18.49 && bmi<=22.99){
-                    observation = "Normal"
+                    observation = context.resources.getString(R.string.NORMAL)
                 }else if (bmi>22.99 && bmi<=24.99){
-                    observation = "Overweight"
+                    observation = context.resources.getString(R.string.OVERWEIGHT)
                 }else if (bmi>24.99 && bmi<=29.99){
-                    observation = "Pre-Obese"
+                    observation = context.resources.getString(R.string.PRE_OBESE)
                 }else if (bmi>29.99 && bmi<=34.99){
-                    observation = "Obese Level 1"
+                    observation = context.resources.getString(R.string.OBESE_LEVEL_1)
                 }else if (bmi>34.99 && bmi<=39.99){
-                    observation = "Obese Level 2"
+                    observation = context.resources.getString(R.string.OBESE_LEVEL_2)
                 }else {
-                    observation = "Obese Level 3"
+                    observation = context.resources.getString(R.string.OBESE_LEVEL_3)
                 }
             }
         }catch (e:Exception){e.printStackTrace()}
         return observation
     }
 
-    fun getWHRObservation(parameterVal: String,gender: Int): String {
+    fun getWHRObservation(parameterVal: String,gender: Int,context: Context): String {
         var observation = ""
         try {
-            if (!parameterVal.isEmpty()){
+            if (parameterVal.isNotEmpty()){
                 var whr:Double = parameterVal.toDouble()
                 if (gender ==1){
                     if (whr<=0.95){
-                        observation = "Normal"
+                        observation = context.resources.getString(R.string.NORMAL)
                     }else if (whr>0.95 && whr<=1){
-                        observation = "Moderate"
+                        observation = context.resources.getString(R.string.MODERATE)
                     }else if (whr>1){
-                        observation = "High"
+                        observation = context.resources.getString(R.string.HIGH)
                     }
                 }else{
                     if (whr<=0.80){
-                        observation = "Normal"
+                        observation = context.resources.getString(R.string.NORMAL)
                     }else if (whr>0.80 && whr<=0.85){
-                        observation = "Moderate"
+                        observation = context.resources.getString(R.string.MODERATE)
                     }else if (whr>0.85){
-                        observation = "High"
+                        observation = context.resources.getString(R.string.HIGH)
                     }
                 }
             }
@@ -241,14 +241,14 @@ object TrackParameterHelper {
     fun isNullOrEmptyOrZero(maxPermissibleValue: String?): Boolean {
         var result = false
         try {
-            result = if (maxPermissibleValue == null || maxPermissibleValue == "" || maxPermissibleValue.equals(
-                    "null",
-                    ignoreCase = true
-                ) || maxPermissibleValue.equals(
-                    "NULL",
-                    ignoreCase = true
-                ) || maxPermissibleValue == "." || maxPermissibleValue == "0" || maxPermissibleValue == "0.0" || maxPermissibleValue == "0.00"
-            ) {
+            result = if (maxPermissibleValue == null
+                || maxPermissibleValue == ""
+                || maxPermissibleValue.equals("null", ignoreCase = true)
+                || maxPermissibleValue.equals("NULL", ignoreCase = true)
+                || maxPermissibleValue == "."
+                || maxPermissibleValue == "0"
+                || maxPermissibleValue == "0.0"
+                || maxPermissibleValue == "0.00") {
                 true
             } else {
                 false

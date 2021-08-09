@@ -22,7 +22,6 @@ import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
 import com.caressa.security.domain.UserManagementUseCase
 import com.caressa.security.ui.HlmtLoginFragmentDirections
-import com.caressa.security.ui.LoginFragmentDirections
 import com.caressa.security.ui.UserDetailsFragmentDirections
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
@@ -428,10 +427,6 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
         withContext(dispatchers.io) {
             userManagementUseCase.invokeAddUserInfo(user)
         }
-    }
-
-    fun getTermsScreen() {
-        navigate(LoginFragmentDirections.actionLoginTerms())
     }
 
     object LoginEncryption {

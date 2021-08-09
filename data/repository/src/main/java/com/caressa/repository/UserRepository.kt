@@ -1,5 +1,6 @@
 package com.caressa.repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.caressa.local.dao.VivantUserDao
 import com.caressa.model.ApiResponse
@@ -13,71 +14,42 @@ import kotlinx.coroutines.Deferred
 import timber.log.Timber
 
 interface UserRepository {
-    suspend fun getLoginResponse(
-        forceRefresh: Boolean = false,
-        encryptedData: String
-    ): LiveData<Resource<Users>>
+
+    suspend fun getLoginResponse(forceRefresh: Boolean = false, encryptedData: String): LiveData<Resource<Users>>
 
     suspend fun fetchRegistrationResponse(encryptedData: String): LiveData<Resource<Users>>
-    suspend fun isEmailExist(
-        forceRefresh: Boolean = false,
-        data: EmailExistsModel
-    ): LiveData<Resource<EmailExistsModel.IsExistResponse>>
 
-    suspend fun isPhoneExist(
-        forceRefresh: Boolean = false,
-        data: PhoneExistsModel
-    ): LiveData<Resource<PhoneExistsModel.IsExistResponse>>
+    suspend fun isEmailExist(forceRefresh: Boolean = false, data: EmailExistsModel): LiveData<Resource<EmailExistsModel.IsExistResponse>>
+
+    suspend fun isPhoneExist(forceRefresh: Boolean = false, data: PhoneExistsModel): LiveData<Resource<PhoneExistsModel.IsExistResponse>>
 
     //    suspend fun fetchFacebookLogin(forceRefresh: Boolean = false, data: EmailExistsModel) :LiveData<Resource<EmailOrPhoneExistResponse>>
 //    suspend fun fetchGoogleLogin(forceRefresh: Boolean = false, data: EmailExistsModel) :LiveData<Resource<EmailOrPhoneExistResponse>>
-    suspend fun getTermsConditionsResponse(
-        forceRefresh: Boolean = false,
-        encryptedData: TermsConditionsModel
-    ): LiveData<Resource<TermsConditionsModel.TermsConditionsResponse>>
+    suspend fun getTermsConditionsResponse(forceRefresh: Boolean = false, encryptedData: TermsConditionsModel): LiveData<Resource<TermsConditionsModel.TermsConditionsResponse>>
 
-    suspend fun getGenerateOTPResponse(
-        forceRefresh: Boolean = false,
-        data: GenerateOtpModel
-    ): LiveData<Resource<GenerateOtpModel.GenerateOTPResponse>>
+    suspend fun getGenerateOTPResponse(forceRefresh: Boolean = false, data: GenerateOtpModel): LiveData<Resource<GenerateOtpModel.GenerateOTPResponse>>
 
-    suspend fun getValidateOTPResponse(
-        forceRefresh: Boolean = false,
-        data: GenerateOtpModel
-    ): LiveData<Resource<GenerateOtpModel.GenerateOTPResponse>>
+    suspend fun getValidateOTPResponse(forceRefresh: Boolean = false, data: GenerateOtpModel): LiveData<Resource<GenerateOtpModel.GenerateOTPResponse>>
 
-    suspend fun updatePassword(
-        forceRefresh: Boolean = false,
-        data: ChangePasswordModel
-    ): LiveData<Resource<ChangePasswordModel.ChangePasswordResponse>>
+    suspend fun updatePassword(forceRefresh: Boolean = false, data: ChangePasswordModel): LiveData<Resource<ChangePasswordModel.ChangePasswordResponse>>
 
-    suspend fun isLoginNameExist(
-        forceRefresh: Boolean = false,
-        data: LoginNameExistsModel
-    ): LiveData<Resource<LoginNameExistsModel.IsExistResponse>>
+    suspend fun isLoginNameExist(forceRefresh: Boolean = false, data: LoginNameExistsModel): LiveData<Resource<LoginNameExistsModel.IsExistResponse>>
 
-    suspend fun hlmtLoginResponse(
-        forceRefresh: Boolean = false,
-        data: LoginModel
-    ): LiveData<Resource<LoginModel.Response>>
+    suspend fun hlmtLoginResponse(forceRefresh: Boolean = false, data: LoginModel): LiveData<Resource<LoginModel.Response>>
 
-    suspend fun hlmt360LoginResponse(
-        forceRefresh: Boolean = false,
-        data: HLMTLoginModel
-    ): LiveData<Resource<HLMTLoginModel.LoginResponse>>
+    suspend fun hlmt360LoginResponse(forceRefresh: Boolean = false, data: HLMTLoginModel): LiveData<Resource<HLMTLoginModel.LoginResponse>>
 
     suspend fun saveUserInfo(data: Users)
 
 }
 
-class UserRepositoryImpl(
-    private val datasource: SecurityDatasource,
-    private val vudao: VivantUserDao
-) : UserRepository {
+class UserRepositoryImpl(private val datasource: SecurityDatasource,
+                         private val vudao: VivantUserDao,
+                         private val context: Context) : UserRepository {
 
     override suspend fun fetchRegistrationResponse(encryptedData: String): LiveData<Resource<Users>> {
         Timber.i("Inside => fetchRegistrationResponse UserRepository")
-        return object : NetworkBoundResource<Users, ApiResponse<Users>>() {
+        return object : NetworkBoundResource<Users, ApiResponse<Users>>(context) {
             override fun shouldStoreInDb(): Boolean = true
 
             override suspend fun loadFromDb(): Users {
@@ -108,13 +80,10 @@ class UserRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun isPhoneExist(
-        forceRefresh: Boolean,
-        data: PhoneExistsModel
-    ): LiveData<Resource<PhoneExistsModel.IsExistResponse>> {
+    override suspend fun isPhoneExist(forceRefresh: Boolean, data: PhoneExistsModel): LiveData<Resource<PhoneExistsModel.IsExistResponse>> {
 
         return object :
-            NetworkBoundResource<PhoneExistsModel.IsExistResponse, BaseResponse<PhoneExistsModel.IsExistResponse>>() {
+            NetworkBoundResource<PhoneExistsModel.IsExistResponse, BaseResponse<PhoneExistsModel.IsExistResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -141,13 +110,10 @@ class UserRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun isEmailExist(
-        forceRefresh: Boolean,
-        data: EmailExistsModel
-    ): LiveData<Resource<EmailExistsModel.IsExistResponse>> {
+    override suspend fun isEmailExist(forceRefresh: Boolean, data: EmailExistsModel): LiveData<Resource<EmailExistsModel.IsExistResponse>> {
 
         return object :
-            NetworkBoundResource<EmailExistsModel.IsExistResponse, BaseResponse<EmailExistsModel.IsExistResponse>>() {
+            NetworkBoundResource<EmailExistsModel.IsExistResponse, BaseResponse<EmailExistsModel.IsExistResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -175,13 +141,10 @@ class UserRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun isLoginNameExist(
-        forceRefresh: Boolean,
-        data: LoginNameExistsModel
-    ): LiveData<Resource<LoginNameExistsModel.IsExistResponse>> {
+    override suspend fun isLoginNameExist(forceRefresh: Boolean, data: LoginNameExistsModel): LiveData<Resource<LoginNameExistsModel.IsExistResponse>> {
 
         return object :
-            NetworkBoundResource<LoginNameExistsModel.IsExistResponse, BaseResponse<LoginNameExistsModel.IsExistResponse>>() {
+            NetworkBoundResource<LoginNameExistsModel.IsExistResponse, BaseResponse<LoginNameExistsModel.IsExistResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -209,14 +172,11 @@ class UserRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun hlmtLoginResponse(
-        forceRefresh: Boolean,
-        data: LoginModel
-    ): LiveData<Resource<LoginModel.Response>> {
+    override suspend fun hlmtLoginResponse(forceRefresh: Boolean, data: LoginModel): LiveData<Resource<LoginModel.Response>> {
         return object :
-            NetworkBoundResource<LoginModel.Response, BaseResponse<LoginModel.Response>>() {
+            NetworkBoundResource<LoginModel.Response, BaseResponse<LoginModel.Response>>(context) {
             override fun processResponse(response: BaseResponse<LoginModel.Response>): LoginModel.Response {
-                Timber.i("processResponse=> " + response.jSONData)
+                Timber.i("processResponse=> ${response.jSONData}")
                 return response.jSONData
             }
 
@@ -243,12 +203,9 @@ class UserRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun hlmt360LoginResponse(
-        forceRefresh: Boolean,
-        data: HLMTLoginModel
-    ): LiveData<Resource<HLMTLoginModel.LoginResponse>> {
+    override suspend fun hlmt360LoginResponse(forceRefresh: Boolean, data: HLMTLoginModel): LiveData<Resource<HLMTLoginModel.LoginResponse>> {
         return object :
-            NetworkBoundResource<HLMTLoginModel.LoginResponse, BaseResponse<HLMTLoginModel.LoginResponse>>() {
+            NetworkBoundResource<HLMTLoginModel.LoginResponse, BaseResponse<HLMTLoginModel.LoginResponse>>(context) {
             override fun processResponse(response: BaseResponse<HLMTLoginModel.LoginResponse>): HLMTLoginModel.LoginResponse {
                 return response.jSONData
             }
@@ -281,11 +238,10 @@ class UserRepositoryImpl(
         vudao.insert(data)
     }
 
-    override suspend fun updatePassword(forceRefresh: Boolean, data: ChangePasswordModel)
-            : LiveData<Resource<ChangePasswordModel.ChangePasswordResponse>> {
+    override suspend fun updatePassword(forceRefresh: Boolean, data: ChangePasswordModel): LiveData<Resource<ChangePasswordModel.ChangePasswordResponse>> {
 
         return object :
-            NetworkBoundResource<ChangePasswordModel.ChangePasswordResponse, BaseResponse<ChangePasswordModel.ChangePasswordResponse>>() {
+            NetworkBoundResource<ChangePasswordModel.ChangePasswordResponse, BaseResponse<ChangePasswordModel.ChangePasswordResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -310,13 +266,10 @@ class UserRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun getGenerateOTPResponse(
-        forceRefresh: Boolean,
-        data: GenerateOtpModel
-    ): LiveData<Resource<GenerateOtpModel.GenerateOTPResponse>> {
+    override suspend fun getGenerateOTPResponse(forceRefresh: Boolean, data: GenerateOtpModel): LiveData<Resource<GenerateOtpModel.GenerateOTPResponse>> {
 
         return object :
-            NetworkBoundResource<GenerateOtpModel.GenerateOTPResponse, BaseResponse<GenerateOtpModel.GenerateOTPResponse>>() {
+            NetworkBoundResource<GenerateOtpModel.GenerateOTPResponse, BaseResponse<GenerateOtpModel.GenerateOTPResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -342,13 +295,10 @@ class UserRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun getValidateOTPResponse(
-        forceRefresh: Boolean,
-        data: GenerateOtpModel
-    ): LiveData<Resource<GenerateOtpModel.GenerateOTPResponse>> {
+    override suspend fun getValidateOTPResponse(forceRefresh: Boolean, data: GenerateOtpModel): LiveData<Resource<GenerateOtpModel.GenerateOTPResponse>> {
 
         return object :
-            NetworkBoundResource<GenerateOtpModel.GenerateOTPResponse, BaseResponse<GenerateOtpModel.GenerateOTPResponse>>() {
+            NetworkBoundResource<GenerateOtpModel.GenerateOTPResponse, BaseResponse<GenerateOtpModel.GenerateOTPResponse>>(context) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -374,13 +324,10 @@ class UserRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun getTermsConditionsResponse(
-        forceRefresh: Boolean,
-        encryptedData: TermsConditionsModel
-    ): LiveData<Resource<TermsConditionsModel.TermsConditionsResponse>> {
+    override suspend fun getTermsConditionsResponse(forceRefresh: Boolean, encryptedData: TermsConditionsModel): LiveData<Resource<TermsConditionsModel.TermsConditionsResponse>> {
 
         return object :
-            NetworkBoundResource<TermsConditionsModel.TermsConditionsResponse, BaseResponse<TermsConditionsModel.TermsConditionsResponse>>() {
+            NetworkBoundResource<TermsConditionsModel.TermsConditionsResponse, BaseResponse<TermsConditionsModel.TermsConditionsResponse>>(context) {
 
             override fun processResponse(response: BaseResponse<TermsConditionsModel.TermsConditionsResponse>): TermsConditionsModel.TermsConditionsResponse {
                 return response.jSONData
@@ -408,12 +355,9 @@ class UserRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun getLoginResponse(
-        forceRefresh: Boolean,
-        encryptedData: String
-    ): LiveData<Resource<Users>> {
+    override suspend fun getLoginResponse(forceRefresh: Boolean, encryptedData: String): LiveData<Resource<Users>> {
 
-        return object : NetworkBoundResource<Users, ApiResponse<Users>>() {
+        return object : NetworkBoundResource<Users, ApiResponse<Users>>(context) {
             override fun shouldStoreInDb(): Boolean = true
 
             override suspend fun loadFromDb(): Users {

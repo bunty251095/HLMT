@@ -170,32 +170,32 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
 
                 if ( !Validation.isValidName(username) ) {
                     binding.tilEdtMemberName.isErrorEnabled = true
-                    binding.tilEdtMemberName.error = "Please Enter Valid Name"
+                    binding.tilEdtMemberName.error = resources.getString(R.string.VALIDATE_NAME)
                 }
 
                 if (Utilities.isNullOrEmpty(dob)) {
                     binding.tilEdtMemberDob.isErrorEnabled = true
-                    binding.tilEdtMemberDob.error = "Please Enter Valid Date of Birth"
+                    binding.tilEdtMemberDob.error = resources.getString(R.string.VALIDATE_DATE_OF_BIRTH)
                 }
 
                 if (Utilities.isNullOrEmpty(mobile) || !Utilities.isValidPhoneNumber( mobile )) {
                     binding.tilEdtMemberMobile.isErrorEnabled = true
-                    binding.tilEdtMemberMobile.error = "Please Enter Valid Mobile Number"
+                    binding.tilEdtMemberMobile.error = resources.getString(R.string.VALIDATE_PHONE)
                 }
 
                 if (!Utilities.isNullOrEmpty(email) && email.length > 3) {
                     if (!email.contains("@")) {
                         binding.tilEdtMemberEmail.isErrorEnabled = true
-                        binding.tilEdtMemberEmail.error = "Email address must include @"
+                        binding.tilEdtMemberEmail.error = resources.getString(R.string.VALIDATE_EMAIL_MUST_INCLUDE)
                     } else {
                         if (!Validation.isValidEmail(email)) {
                             binding.tilEdtMemberEmail.isErrorEnabled = true
-                            binding.tilEdtMemberEmail.error = "Please Enter valid Email"
+                            binding.tilEdtMemberEmail.error = resources.getString(R.string.VALIDATE_EMAIL)
                         }
                     }
                 } else {
                     binding.tilEdtMemberEmail.isErrorEnabled = true
-                    binding.tilEdtMemberEmail.error = "Please Enter Valid Email"
+                    binding.tilEdtMemberEmail.error = resources.getString(R.string.VALIDATE_EMAIL)
                 }
 
 //                if ( !DateHelper.isDateAbove18Years(DateHelper.getDateTimeAs_ddMMMyyyy(relativeDob)) ) {

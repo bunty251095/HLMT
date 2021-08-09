@@ -88,12 +88,12 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
         binding.layHeight.setNonEditable()
         binding.layHeight.setImage(R.drawable.img_height)
         binding.layHeight.setHint("Height")
-        binding.layHeight.setUnit(resources.getString(R.string.cm))
+        binding.layHeight.setUnit(resources.getString(R.string.CM))
 
         binding.layWeight.setNonEditable()
         binding.layWeight.setImage(R.drawable.img_weight)
         binding.layWeight.setHint("Weight")
-        binding.layWeight.setUnit(resources.getString(R.string.kg))
+        binding.layWeight.setUnit(resources.getString(R.string.KG))
     }
 
     private fun setPreviousAnsData() {
@@ -146,14 +146,14 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
                         height = vital.VitalsValue.toDouble()
                         toShow = false
                         binding.layHeight.setValue(height.toInt().toString())
-                        binding.layHeight.setUnit(resources.getString(R.string.cm))
+                        binding.layHeight.setUnit(resources.getString(R.string.CM))
                         isHeight = false
                     }
                     if (vital.VitalsKey.equals(HRAConstants.VitalKey_Weight, ignoreCase = true)
                         && !Utilities.isNullOrEmpty(vital.VitalsValue) ) {
                         weight = vital.VitalsValue.toDouble()
                         binding.layWeight.setValue(weight.toString())
-                        binding.layWeight.setUnit(resources.getString(R.string.kg))
+                        binding.layWeight.setUnit(resources.getString(R.string.KG))
                         isWeight = false
                     }
                     if (vital.VitalsKey.equals(HRAConstants.VitalKey_BMI, ignoreCase = true)
@@ -185,10 +185,10 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
                         weight = bmiDetails.BMI.Weight!!.toDouble()
 
                         binding.layHeight.setValue(height.toInt().toString())
-                        binding.layHeight.setUnit(resources.getString(R.string.cm))
+                        binding.layHeight.setUnit(resources.getString(R.string.CM))
 
                         binding.layWeight.setValue(weight.toString())
-                        binding.layWeight.setUnit(resources.getString(R.string.kg))
+                        binding.layWeight.setUnit(resources.getString(R.string.KG))
 
                         Observations.setBMIResult(bmiDetails.BMI.Value!!,binding.txtObservation,requireContext())
                         enableNextBtn()
@@ -273,8 +273,8 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
 
     private fun saveResponseForNextScreen() {
         selectedOptionList = mutableListOf()
-        selectedOptionList.add(Option(resources.getString(R.string.HEIGHT) + " : ${height.toInt()} " + resources.getString(R.string.cm),Constants.HEIGHT,true))
-        selectedOptionList.add(Option(resources.getString(R.string.WEIGHT) + " : $weight " + resources.getString(R.string.kg),Constants.WEIGHT,true))
+        selectedOptionList.add(Option(resources.getString(R.string.HEIGHT) + " : ${height.toInt()} " + resources.getString(R.string.CM),Constants.HEIGHT,true))
+        selectedOptionList.add(Option(resources.getString(R.string.WEIGHT) + " : $weight " + resources.getString(R.string.KG),Constants.WEIGHT,true))
         hraDataSingleton.previousAnsList[viewPagerActivity!!.getCurrentScreen()] = selectedOptionList
     }
 

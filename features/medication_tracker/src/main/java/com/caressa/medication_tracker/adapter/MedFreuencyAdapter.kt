@@ -11,8 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.medication_tracker.R
 import com.caressa.medication_tracker.databinding.ItemMedFrequencyBinding
+import java.util.ArrayList
 
-class MedFreuencyAdapter(val context: Context, private var medFreuencyList : Array<String>,
+class MedFreuencyAdapter(val context: Context, private var medFreuencyList : ArrayList<String>,
                          val listener: OnMedFrequencyListener) :
     RecyclerView.Adapter<MedFreuencyAdapter.MedFreuencyViewHolder>() {
 

@@ -16,20 +16,13 @@ import com.caressa.home.ui.ProfileAndFamilyMember.EditProfileImageBottomsheetFra
 import com.caressa.home.viewmodel.DashboardViewModel
 import timber.log.Timber
 
-class DashboardFeaturesGridAdapter(
-    requireContext: Context,
-    listener: OnItemSelectionListener,
-    viewModel: DashboardViewModel
-) : RecyclerView.Adapter<DashboardFeaturesGridAdapter.ObservationViewHolder>() {
+class DashboardFeaturesGridAdapter(requireContext: Context, listener: OnItemSelectionListener,
+    viewModel: DashboardViewModel) : RecyclerView.Adapter<DashboardFeaturesGridAdapter.ObservationViewHolder>() {
 
     private var selectionListener:OnItemSelectionListener = listener
     private val dataList: MutableList<DataHandler.DashboardFeatureGrid> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ObservationViewHolder(
-        LayoutInflater.from(parent.context).inflate(
-            R.layout.item_dashboard_features, parent, false
-        )
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ObservationViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_dashboard_features, parent, false))
 
     override fun getItemCount(): Int = dataList.size
 

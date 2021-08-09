@@ -226,7 +226,7 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
     private fun validateParameter(): Boolean {
         var isValid = false
         if (binding.edtAge.text.toString().equals("", ignoreCase = true)) {
-            Utilities.toastMessageShort(context, "Please provide age")
+            Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_PROVIDE_AGE))
             isValid = false
         } else if (!binding.edtAge.text.toString().equals("", ignoreCase = true)) {
             try {
@@ -236,7 +236,7 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
                     userPreferenceModel.setAge("" + age.toInt())
                 } else {
                     isValid = false
-                    Utilities.toastMessageShort(context, "Enter Age between 18 and 74  years")
+                    Utilities.toastMessageShort(context,resources.getString(R.string.ENTER_AGE_BETWEEN_18_AND_74_YEARS))
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -250,7 +250,7 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
                         saveUserPreference(paramList[i])
                     } else {
                         isValid = false
-                        Utilities.toastMessageShort(context, "Please fill height details.")
+                        Utilities.toastMessageShort(context, "${resources.getString(R.string.PLEASE_FILL_HEIGHT_DETAILS)}.")
                         break
                     }
                 } else if (paramList[i].title.equals("Weight", ignoreCase = true)) {
@@ -259,7 +259,7 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
                         saveUserPreference(paramList[i])
                     } else {
                         isValid = false
-                        Utilities.toastMessageShort(context, "Please fill weight details.")
+                        Utilities.toastMessageShort(context, "${resources.getString(R.string.PLEASE_FILL_WEIGHT_DETAILS)}.")
                         break
                     }
                 } else if (!paramList[i].title.equals("Height", ignoreCase = true)
@@ -272,13 +272,13 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
                             saveUserPreference(paramList[i])
                         } else {
                             isValid = false
-                            Utilities.toastMessageShort(context, paramList[i].title + " should be between "
-                                    + paramList[i].minRange + " to " + paramList[i].maxRange)
+                            Utilities.toastMessageShort(context, paramList[i].title + " ${resources.getString(R.string.SHOULD_BE_BETWEEN)} "
+                                    + paramList[i].minRange + " ${resources.getString(R.string.TO)} " + paramList[i].maxRange)
                             break
                         }
                     } else {
                         isValid = false
-                        Utilities.toastMessageShort(context, "Please fill " + paramList[i].title)
+                        Utilities.toastMessageShort(context, "${resources.getString(R.string.PLEASE_FILL)} " + paramList[i].title)
                         break
                     }
                 }
@@ -310,7 +310,7 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
     @SuppressLint("SetTextI18n")
     private fun showInputDialog(param: ParameterDataModel, position: Int) {
         dialogInput!!.title_input.text = param.title
-        dialogInput!!.txtMessage.text = "Enter your " + param.title.toLowerCase(Locale.ROOT) + " parameter value."
+        dialogInput!!.txtMessage.text = "${resources.getString(R.string.ENTER_YOUR)} " + param.title.toLowerCase(Locale.ROOT) + " ${resources.getString(R.string.PARAMETER_VALUE)}."
 
         dialogInput!!.inpLayout_input.hint = param.minRange.toString() + " - " + param.maxRange
         dialogInput!!.inpLayout_input.setText(param.finalValue)
@@ -329,7 +329,7 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
                     //parameterAdapter!!.updateList(paramList)
                     dialogInput!!.dismiss()
                 } else {
-                    Utilities.toastMessageShort(context, "Please input value between " + param.minRange + " to " + param.maxRange)
+                    Utilities.toastMessageShort(context, "${resources.getString(R.string.PLEASE_INPUT_VALUE_BETWEEN)} " + param.minRange + " ${resources.getString(R.string.TO)} " + param.maxRange)
                 }
             } else {
                 dialogInput!!.dismiss()
@@ -377,7 +377,7 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
     @SuppressLint("SetTextI18n")
     override fun onHealthConditionValueListener() {
         Timber.e("Selected :: ${calculatorDataSingleton!!.healthConditionSelection.size}")
-        binding.txtSelection.text = "( You have selected ${calculatorDataSingleton!!.healthConditionSelection.size} health condition )"
+        binding.txtSelection.text = "( ${resources.getString(R.string.HEALTH_CONDITION_RESULT)} ${calculatorDataSingleton!!.healthConditionSelection.size} ${resources.getString(R.string.HEALTH_CONDITION)} )"
     }
 
 }

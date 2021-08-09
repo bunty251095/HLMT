@@ -69,7 +69,7 @@ class AddRelativeModel(
 
     data class AddRelativeResponse(
         @SerializedName("Person")
-        val person: PersonResp = PersonResp()
+        var person: PersonResp = PersonResp()
     )
 
     data class PersonResp(
@@ -215,7 +215,7 @@ class AddRelativeModel(
         @SerializedName("CreatedDate")
         val createdDate: Any? = Any(),
         @SerializedName("ID")
-        val iD: Int = 0,
+        val id: Int = 0,
         @SerializedName("ModifiedBy")
         val modifiedBy: Int = 0,
         @SerializedName("ModifiedDate")

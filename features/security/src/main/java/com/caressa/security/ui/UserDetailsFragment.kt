@@ -226,11 +226,11 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
         val removeProfPic = Intent()
         val intentArray = arrayOf(galleryIntent)
         val chooser = Intent(Intent.ACTION_CHOOSER)
-        chooser.putExtra(Intent.EXTRA_TITLE, "Select records")
+        chooser.putExtra(Intent.EXTRA_TITLE, resources.getString(R.string.SELECT_RECORDS))
         chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray)
         chooser.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
         chooser.putExtra(Intent.EXTRA_INTENT, removeProfPic)
-        startActivityForResult(Intent.createChooser(galleryIntent, "Select a File to Upload"), From)
+        startActivityForResult(Intent.createChooser(galleryIntent, resources.getString(R.string.SELECT_A_FILE_TO_UPLOAD)), From)
     }
 
     private fun proceedWithCameraPermission() {
@@ -282,13 +282,13 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
                     try {
                         startActivity(intent)
                     } catch (e: ActivityNotFoundException) {
-                        Utilities.toastMessageShort(requireContext(), "No Application Available to View PDF")
+                        Utilities.toastMessageShort(requireContext(), resources.getString(R.string.ERROR_NO_APPLICATION_TO_VIEW_PDF))
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        Utilities.toastMessageShort(requireContext(), "Unable to open file.")
+                        Utilities.toastMessageShort(requireContext(), resources.getString(R.string.ERROR_UNABLE_TO_OPEN_FILE))
                     }
                 } else {
-                    Utilities.toastMessageShort(requireContext(), "File doesn't exist")
+                    Utilities.toastMessageShort(requireContext(), resources.getString(R.string.ERROR_FILE_NOT_EXIST))
                 }
             }
         } catch (e: Exception) {
@@ -420,14 +420,14 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
                                     }
                                 } else {
                                     Utilities.deleteFileFromLocalSystem(pathTemp)
-                                    Utilities.toastMessageShort(requireContext(), "$extension1 files are not accepted.")
+                                    Utilities.toastMessageShort(requireContext(), "$extension1 ${resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED)}")
                                 }
                             } else {
                                 Utilities.deleteFileFromLocalSystem(pathTemp)
-                                Utilities.toastMessageShort(requireContext(), "File size must be less than 5MB")
+                                Utilities.toastMessageShort(requireContext(), resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
                             }
                         } catch (e: java.lang.Exception) {
-                            Utilities.toastMessageShort(requireContext(), "Unable to read file, please try again")
+                            Utilities.toastMessageShort(requireContext(), resources.getString(R.string.ERROR_UNABLE_TO_READ_FILE))
                             e.printStackTrace()
                         }
 

@@ -9,7 +9,6 @@ import android.view.View
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.FirebaseConstants
@@ -44,13 +43,13 @@ class LinkHlmtAccountActivity : BaseActivity() {
 
     private fun initialise() {
 
-        viewModel.hlmt360LoginResponse.observe(this, Observer {
+        viewModel.hlmt360LoginResponse.observe(this, {
             if(it!=null){
                 if ( it.accountLinkStatus.equals("true",true) ) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        binding.lblAccountLink.setText(Html.fromHtml("Your HLMTakaful360 account <b>${binding.edtUsername.text.toString()} </b> has been linked Successfully with your HL Pace profile.", Html.FROM_HTML_MODE_COMPACT));
+                        binding.lblAccountLink.text = Html.fromHtml(resources.getString(R.string.YOUR_HLMT_360_ACCOUNT) + " <b>${binding.edtUsername.text.toString()} </b> " + resources.getString(R.string.HAS_BEEN_LINKED_TO_PROFILE), Html.FROM_HTML_MODE_COMPACT);
                     } else {
-                        binding.lblAccountLink.setText(Html.fromHtml("Your HLMTakaful360 account <b>${binding.edtUsername.text.toString()} </b> has been linked Successfully with your HL Pace profile."));
+                        binding.lblAccountLink.text = Html.fromHtml(resources.getString(R.string.YOUR_HLMT_360_ACCOUNT) + " <b>${binding.edtUsername.text.toString()} </b> " + resources.getString(R.string.HAS_BEEN_LINKED_TO_PROFILE))
                     }
                     binding.layoutAccLinked.visibility = View.VISIBLE
                     binding.layoutAccNotLinked.visibility = View.GONE
@@ -65,11 +64,11 @@ class LinkHlmtAccountActivity : BaseActivity() {
         isAccountLinked = viewModel.getPreference(PreferenceConstants.ACCOUNT_LINK_STATUS).equals("true",true)
         if ( isAccountLinked ) {
             FirebaseHelper.logScreenEvent(FirebaseConstants.LINK_ACCOUNT_STATUS_SCREEN)
-            var lblText:String = "Your HLMTakaful360 account <b> "+viewModel.getPreference(PreferenceConstants.HLMT_USERNAME)+" </b> is already link with your HL Pace wellness profile."
+            val lblText:String = resources.getString(R.string.YOUR_HLMT_360_ACCOUNT) + " <b> "+viewModel.getPreference(PreferenceConstants.HLMT_USERNAME)+" </b> " + resources.getString(R.string.ACCOUNT_ALREADY_LINKED)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                binding.lblAccountLink.setText(Html.fromHtml(lblText, Html.FROM_HTML_MODE_COMPACT));
+                binding.lblAccountLink.text = Html.fromHtml(lblText, Html.FROM_HTML_MODE_COMPACT);
             } else {
-                binding.lblAccountLink.setText(Html.fromHtml(lblText));
+                binding.lblAccountLink.text = Html.fromHtml(lblText);
             }
             binding.layoutAccLinked.visibility = View.VISIBLE
             binding.layoutAccNotLinked.visibility = View.GONE

@@ -207,15 +207,15 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/lbl_range_low_risk"
+                            style="@style/VivantTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0 - 6"
-                            style="@style/VivantTitle"
-                            android:textSize="@dimen/_11sdp"
                             android:layout_marginTop="@dimen/_4sdp"
-                            app:layout_constraintTop_toBottomOf="@+id/lbl_low_risk"
+                            android:text="@string/SPA_RANGE_LOW_RISK"
+                            android:textSize="@dimen/_11sdp"
                             app:layout_constraintEnd_toEndOf="@+id/lbl_low_risk"
-                            app:layout_constraintStart_toStartOf="@+id/lbl_low_risk" />
+                            app:layout_constraintStart_toStartOf="@+id/lbl_low_risk"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_low_risk" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -252,15 +252,15 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/lbl_range_mild_risk"
+                            style="@style/VivantTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="7 - 23"
-                            style="@style/VivantTitle"
-                            android:textSize="@dimen/_11sdp"
                             android:layout_marginTop="@dimen/_4sdp"
-                            app:layout_constraintTop_toBottomOf="@+id/lbl_mild_risk"
+                            android:text="@string/SPA_RANGE_MILD_RISK"
+                            android:textSize="@dimen/_11sdp"
                             app:layout_constraintEnd_toEndOf="@+id/lbl_mild_risk"
-                            app:layout_constraintStart_toStartOf="@+id/lbl_mild_risk" />
+                            app:layout_constraintStart_toStartOf="@+id/lbl_mild_risk"
+                            app:layout_constraintTop_toBottomOf="@+id/lbl_mild_risk" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -299,7 +299,7 @@
                             android:id="@+id/lbl_range_moderate_risk"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="24 - 39"
+                            android:text="@string/SPA_RANGE_MODERATE_RISK"
                             style="@style/VivantTitle"
                             android:layout_marginTop="@dimen/_4sdp"
                             android:textSize="@dimen/_11sdp"
@@ -344,7 +344,7 @@
                             android:id="@+id/lbl_range_high_risk"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="40 - 55"
+                            android:text="@string/SPA_RANGE_SEVERE_RISK"
                             style="@style/VivantTitle"
                             android:layout_marginTop="@dimen/_4sdp"
                             android:textSize="@dimen/_11sdp"

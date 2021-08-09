@@ -1,30 +1,116 @@
 <resources>
 
-    <string name="QUIZ_CODE_HEART_AGE">HRTAGECAL</string>
-    <string name="QUIZ_CODE_DIABETES">DIAB_RISK_ASMT</string>
-    <string name="QUIZ_CODE_HYPERTENSION">HYPERTENSIONCAL</string>
-    <string name="QUIZ_CODE_STRESS_ANXIETY">DASS-21</string>
-    <string name="QUIZ_CODE_SMART_PHONE">SMARTPH</string>
+    <string name="TITLE_TOOLS_CALCULATORS">Tools and Calculators</string>
+    <string name="HEART_AGE_CALCULATOR">Heart Age Calculator</string>
+    <string name="DIABETES_CALCULATOR">Diabetes Calculator</string>
+    <string name="HYPERTENSION_CALCULATOR">Hypertension Calculator</string>
+    <string name="STRESS_ANXIETY_CALCULATOR">Stress And Anxiety Calculator</string>
+    <string name="SMART_PHONE_CALCULATOR">Smart Phone Addiction</string>
+    <string name="DUE_DATE_CALCULATOR">Due Date Calculator</string>
 
-    <string name="CALCULATE">Calculate</string>
-    <string name="RECALCULATE">Recalculate</string>
-    <string name="VIEW_DETAILED_REPORT">View Detailed Report</string>
-    <string name="RESTART_ASSESSMENT">Restart Assessment</string>
+    <string name="TRACKER_HEART_AGE">Heart Age \n Calculator</string>
+    <string name="TRACKER_DIABETES">Diabetes \n Calculator</string>
+    <string name="TRACKER_HYPERTENSION">Hypertension \n Calculator</string>
+    <string name="TRACKER_STRESS_ANXIETY">Stress &amp; Anxiety\nCalculator</string>
+    <string name="TRACKER_SMART_PHONE">Smart Phone \n Addiction</string>
+    <string name="TRACKER_DUE_DATE">Due Date \n Calculator</string>
+    <string name="TRACKER_VACCINATION">Vaccination \n Calculator</string>
 
-    <string name="BMI">BMI</string>
-    <string name="LIPID">LIPID</string>
+    <string name="TRACKER_DESC_HEART_AGE">Is your Heart is as young as you are?</string>
+    <string name="TRACKER_DESC_DIABETES">Know your diabetes risk\n</string>
+    <string name="TRACKER_DESC_HYPERTENSION">Know your blood pressure\n</string>
+    <string name="TRACKER_DESC_STRESS_ANXIETY">Are you feeling  stressed?\n</string>
+    <string name="TRACKER_DESC_SMART_PHONE">Addicted to smartphone?\n</string>
+    <string name="TRACKER_DESC_DUE_DATE">Know your due date\n</string>
+    <string name="TRACKER_DESC_VACCINATION">Track your vaccination\n</string>
 
-    <string name="INCH">Inch</string>
-    <string name="CM">Cm</string>
+    <string name="PROFILE_PARAMETERS">Profile Parameters</string>
+    <string name="MEASUREMENT_PARAMETERS">Measurement Parameters</string>
+    <string name="LIFESTYLE_CHANGES">Lifestyle Changes</string>
+    <string name="AGE_IN_YEARS">Age in years</string>
+    <string name="TODAY_VIA_MOBILE_ENTRY">Today via mobile entry</string>
 
-    <string name="range_low_risk">0–5</string>
-    <string name="range_mild_risk">6–11</string>
-    <string name="range_moderate_risk">12–19</string>
-    <string name="range_high_risk">20–47</string>
+    <string name="LOW_RISK_1">Low Risk</string>
+    <string name="HIGH_RISK_1">High Risk</string>
+
+    <string name="SELECT_ALL_THAT_APPLIES_TO_YOU">Select all that applies to you</string>
+    <string name="HEALTH_CONDITION">Health Condition</string>
+    <string name="DIABETES">Diabetes</string>
+    <string name="KIDNEY_DISEASE">Kidney disease</string>
+    <string name="STROKE">Stroke</string>
+    <string name="CORONARY_ARTERY">Coronary artery</string>
+    <string name="HIGH_CHOLESTEROL">High cholesterol</string>
+    <string name="FAMILY_HISTORY_OF_HEART_DISEASE">Family history of heart disease</string>
+    <string name="HEART_DISEASE">Heart disease</string>
+
+    <string name="UNDER_35_YEARS">Under 35 Years</string>
+    <string name="AGE_35_TO_44">35 – 44</string>
+    <string name="AGE_45_TO_54">45 – 54</string>
+    <string name="AGE_55_TO_64">55 – 64</string>
+    <string name="AGE_65_YRS_OR_OVER">65 yrs or Over</string>
+
+    <string name="RANGE_0_TO_4">0 – 4</string>
+    <string name="UPPER_LIMIT">Upper Limit</string>
+    <string name="LOWER_LIMIT">Lower Limit</string>
 
     <string name="DEPRESSION">Depression</string>
     <string name="ANXIETY">Anxiety</string>
     <string name="STRESS">Stress</string>
+
+    <string name="DYSPHORIA">Dysphoria</string>
+    <string name="LACK_OF_INTEREST_INVOLVEMENT">Lack of interest / involvement</string>
+    <string name="HOPELESSNESS">Hopelessness</string>
+    <string name="ANHEDONIA">Anhedonia</string>
+    <string name="DEVALUATION_OF_LIFE">Devaluation of life</string>
+    <string name="INERTIA">Inertia</string>
+
+    <string name="AUTONOMIC_AROUSAL">Autonomic arousal</string>
+    <string name="SELF_DEPRECATION">Self-deprecation</string>
+    <string name="SKELETAL_MUSCLE_EFFECTS">Stress</string>
+    <string name="SUBJECTIVE_EXPERIENCE_OF_ANXIOUS_AFFECT">Subjective experience of anxious affect</string>
+    <string name="SITUATIONAL_ANXIETY">Situational anxiety</string>
+
+    <string name="DIFFICULTY_RELAXING">Difficulty relaxing</string>
+    <string name="NERVOUS_AROUSAL">Nervous arousal</string>
+    <string name="BEING_EASILY_UPSET_AGITATED_IRRITABLE_OVER_REACTIVE_AND_IMPATIENT">Being easily upset/agitated, irritable/over-reactive and impatient</string>
+
+    <string name="BASED_ON_YOUR_SCORE_YOU_HAVE">Based on your Score you have</string>
+    <string name="PROBABILITY_OF_GETTING_DIABETES">% Probability of getting diabetes</string>
+
+    <string name="YRS">yrs</string>
+    <string name="HEART_AGE">Heart Age</string>
+    <string name="HEART_RISK">Heart Risk</string>
+    <string name="YOUR_AGE">Your Age</string>
+    <string name="YOU_ARE_UNDER">You are under</string>
+    <string name="HYPERTENSION_SUMMARY">Hypertension Summary</string>
+    <string name="OPTIMUM_RISK">Optimum Risk</string>
+    <string name="RISK_1">Risk 1</string>
+    <string name="RISK_2">Risk 2</string>
+    <string name="YEAR_1">Year 1</string>
+    <string name="YEAR_2">Year 2</string>
+    <string name="YEAR_4">Year 4</string>
+
+    <string name="VIEW_DETAILED_REPORT">View Detailed Report</string>
+    <string name="RESTART_ASSESSMENT">Restart Assessment</string>
+
+    <string name="SYSTOLIC_BP">Systolic BP</string>
+    <string name="DIASTOLIC_BP">Diastolic BP</string>
+    <string name="SYSTOLIC_DIALOG_TITLE">Systolic &amp; Diastolic BP</string>
+    <string name="SYSTOLIC_DIALOG_MESSAGE">Enter your blood pressure details</string>
+
+    <string name="BMI">BMI</string>
+    <string name="LIPID">LIPID</string>
+    <string name="INCH">inch</string>
+
+    <string name="DIABETES_RANGE_LOW_RISK">0–5</string>
+    <string name="DIABETES_RANGE_MILD_RISK">6–11</string>
+    <string name="DIABETES_RANGE_MODERATE_RISK">12–19</string>
+    <string name="DIABETES_RANGE_HIGH_RISK">20–47</string>
+
+    <string name="SPA_RANGE_LOW_RISK">0 – 6</string>
+    <string name="SPA_RANGE_MILD_RISK">7 – 23</string>
+    <string name="SPA_RANGE_MODERATE_RISK">24 – 39</string>
+    <string name="SPA_RANGE_SEVERE_RISK">40 – 55</string>
 
     <string name="NEVER">Never</string>
     <string name="SOMETIMES">Sometimes</string>
@@ -36,75 +122,57 @@
     <string name="MILD">Mild</string>
     <string name="MODERATE">Moderate</string>
     <string name="SEVERE">Severe</string>
-    <string name="EXTREMELY_SEVERE">Extremely\nSevere</string>
+    <string name="EXTREMELY_SEVERE">Extremely \n Severe</string>
 
-    <string name="LOW_RISK">Low\nRisk</string>
-    <string name="MILD_RISK">Mild\nRisk</string>
-    <string name="MODERATE_RISK">Moderate\nRisk</string>
-    <string name="SEVER_RISK">Severe\nRisk</string>
-    <string name="HIGH_RISK">High\nRisk</string>
-    <string name="NORMAL_RISK">Normal\nRisk</string>
-    <string name="EXTREMELY_SEVER_RISK">Extremely\nSevere Risk</string>
+    <string name="LOW_RISK">Low \n Risk</string>
+    <string name="MILD_RISK">Mild \n Risk</string>
+    <string name="MODERATE_RISK">Moderate \n Risk</string>
+    <string name="SEVERE_RISK">Severe \n Risk</string>
+    <string name="HIGH_RISK">High \n Risk</string>
+    <string name="NORMAL_RISK">Normal \n Risk</string>
+    <string name="EXTREMELY_SEVER_RISK">Extremely \n Severe Risk</string>
 
-    <string name="LOW_RISK_1">Low Risk</string>
-    <string name="HIGH_RISK_1">High Risk</string>
-
-    <string name="TITLE_TOOLS_CALCULATORS">Tools and Calculators</string>
-    <string name="HEART_AGE_CALCULATOR">Heart Age Calculator</string>
-    <string name="DIABETES_CALCULATOR">Diabetes Calculator</string>
-    <string name="HYPERTENSION_CALCULATOR">Hypertension Calculator</string>
-    <string name="STRESS_ANXIETY_CALCULATOR">Stress And Anxiety Calculator</string>
-    <string name="SMART_PHONE_CALCULATOR">Smart Phone Addiction</string>
-    <string name="DUE_DATE_CALCULATOR">Due Date Calculator</string>
-
-    <string name="TRACKER_DUE_DATE">Due Date\nCalculator</string>
-    <string name="TRACKER_DIABETES">Diabetes\nCalculator</string>
-    <string name="TRACKER_STRESS_ANXIETY">Stress &amp; Anxiety\nCalculator</string>
-    <string name="TRACKER_SMART_PHONE">Smart Phone\nAddiction</string>
-    <string name="TRACKER_HYPERTENSION">Hypertension\nCalculator</string>
-    <string name="TRACKER_HEART_AGE">Heart Age\nCalculator</string>
-    <string name="TRACKER_VACCINATION">Vaccination\nCalculator</string>
-
-    <string name="TRACKER_DESC_DUE_DATE">Know your due date\n</string>
-    <string name="TRACKER_DESC_DIABETES">Know your diabetes risk\n</string>
-    <string name="TRACKER_DESC_STRESS_ANXIETY">Are you feeling  stressed?\n</string>
-    <string name="TRACKER_DESC_SMART_PHONE">Addicted to smartphone?\n</string>
-    <string name="TRACKER_DESC_HYPERTENSION">Know your blood pressure\n</string>
-    <string name="TRACKER_DESC__HEART_AGE">Is your Heart is as young as you are?</string>
-    <string name="TRACKER_DESC__VACCINATION">Track your vaccination\n</string>
-
-    <string name="SYSTOLIC_DIALOG_TITLE"><![CDATA[Systolic & Diastolic BP]]></string>
-    <string name="SYSTOLIC_DIALOG_MESSAGE">Enter your blood pressure details</string>
-    <string name="SYSTOLIC_BP">Systolic BP</string>
-    <string name="DIASTOLIC_BP">Diastolic BP</string>
-
+    <string name="LAST_MENSTRUAL_PERIOD">Last Menstrual Period (LMP)</string>
+    <string name="YOUR_BABY_IS_DUE_ON_OR_AROUND">Your baby is due on or around</string>
     <string name="DUE_DATE_OBSERVATION">* This is an estimated date of when your baby is due. Babies rarely keep to an exact timetable, so your full-term pregnancy can be anywhere between <h2><b>37 and 42 weeks.</b></h2> </string>
-    <string name="LABLE_MENSTRUAL_PERIOD_LMP">Enter the date of the first day of your last menstrual period (LMP) :</string>
+    <string name="LABEL_MENSTRUAL_PERIOD_LMP">Enter the date of the first day of your last menstrual period (LMP) :</string>
     <string name="THE_DEPRESSION_SCALE_ASSESSES">The Depression scale assesses</string>
     <string name="THE_ANXIETY_SCALE_ASSESSES">The Anxiety scale assesses</string>
     <string name="THE_STRESS_SCALE_ASSESSES">The Stress scale assesses</string>
     <string name="YOU_HAVE_FOLLOWING_NON_MODERATE_RISK">You have following Non Moderate Risk</string>
     <string name="TO_MANAGE_YOUR_EMOTIONAL_HEALTH">To manage your emotional health</string>
-    <string name="health_condition_content">if you have any of these risk factors ,your risk may be higher than what is shown in the tool.</string>
-    <string name="health_condition_question">Do you have any of these health conditions ?</string>
+    <string name="HEALTH_CONDITION_CONTENT">if you have any of these risk factors ,your risk may be higher than what is shown in the tool</string>
+    <string name="HEALTH_CONDITION_QUESTION">Do you have any of these health conditions ?</string>
+    <string name="HEALTH_CONDITION_RESULT">You have selected</string>
     <string name="STRESS_SUMMERY_OBSERVATION1">The DASS-21 should not be used to replace a face to face clinical interview. If you are experiencing significant emotional difficulties you should contact your doctor.</string>
     <string name="STRESS_SUMMERY_OBSERVATION">The Depression, Anxiety and Stress Scale - 21 Items (DASS-21) is a set of three self-report scales designed to measure the emotional states of depression, anxiety and stress. Each of the three DASS-21 scales contains 7 items, divided into subscales with similar content.</string>
-    <string name="hypertension_summary_text">The Hypertension calculator gives you an overall idea of the health and a general indication of how lifestyle-related factors may affect your Blood Pressure. The risk has been calculated based on the parameters for your age group, gender.</string>
+    <string name="HYPERTENSION_SUMMARY_TEXT">The Hypertension calculator gives you an overall idea of the health and a general indication of how lifestyle-related factors may affect your Blood Pressure. The risk has been calculated based on the parameters for your age group, gender.</string>
     <string name="HEART_AGE_SUMMARY_TEXT">The Heart Age and Risk gives you a overall idea of the health of your heart and general indication of how lifestyle related factors may affect your heart health.</string>
 
-    <string name="you_are_doing_good_in">You are doing good in</string>
-    <string name="you_need_to_improve_on">You need to improve on</string>
-    <string name="you_have_following_on_modifiable_risk">You have following Non Modifiable Risk</string>
+    <string name="ITS_TIME_TO_MAKE_SOME_CHANGES">Its time to make some changes !</string>
+    <string name="PLEASE_INPUT_VALUE_BETWEEN">Please input value between</string>
+    <string name="PLEASE_FILL">Please fill</string>
+    <string name="PLEASE_FILL_HEIGHT_DETAILS">Please fill height details</string>
+    <string name="PLEASE_FILL_WEIGHT_DETAILS">Please fill weight details</string>
+    <string name="ENTER_YOUR">Enter your</string>
+    <string name="PARAMETER_VALUE">parameter value</string>
+    <string name="SHOULD_BE_BETWEEN">should be between</string>
+    <string name="PLEASE_PROVIDE_AGE">Please provide age</string>
+    <string name="ENTER_AGE_BETWEEN_18_AND_74_YEARS">Enter Age between 18 and 74 years</string>
 
-    <string name="NO_NOMOPHOBIC">No\nNomophobic</string>
-    <string name="MILD_NOMOPHOBIC">Mild\nNomophobic</string>
-    <string name="MODERATE_NOMOPHOBIC">Moderate\nNomophobic</string>
-    <string name="SEVERE_NOMOPHOBIC">Severe\nNomophobic</string>
+    <string name="YOU_ARE_DOING_GOOD_IN">You are doing good in</string>
+    <string name="YOU_NEED_TO_IMPROVE_ON">You need to improve on</string>
+    <string name="YOU_HAVE_FOLLOWING_ON_MODIFIABLE_RISK">You have following Non Modifiable Risk</string>
 
-    <string name="NOT_AT_ALL_NOMOPHOBIC">Not at all\nNomophobic</string>
-    <string name="MILD_NOMOPHOBIA">Mild\nNomophobic</string>
-    <string name="MODERATE_NOMOPHOBIA">Moderate\nNomophobic</string>
-    <string name="SEVERE_NOMOPHOBIA">Severe\nNomophobic</string>
+    <string name="NO_NOMOPHOBIC">No \n Nomophobic</string>
+    <string name="MILD_NOMOPHOBIC">Mild \n Nomophobic</string>
+    <string name="MODERATE_NOMOPHOBIC">Moderate \n Nomophobic</string>
+    <string name="SEVERE_NOMOPHOBIC">Severe \n Nomophobic</string>
+
+    <string name="NOT_AT_ALL_NOMOPHOBIC">Not at all \n Nomophobic</string>
+    <string name="MILD_NOMOPHOBIA">Mild \n Nomophobic</string>
+    <string name="MODERATE_NOMOPHOBIA">Moderate \n Nomophobic</string>
+    <string name="SEVERE_NOMOPHOBIA">Severe \n Nomophobic</string>
 
     <string name="HAVE_NO_NOMOPHOBIA">You have No Nomophobia</string>
     <string name="HAVE_MILD_NOMOPHOBIA">You have Mild Nomophobia</string>
@@ -115,37 +183,102 @@
     <string name="DESC_MODERATE_NOMOPHOBIC">You have moderate nomophobia. You\'re pretty attached to your device. You often check for updates while you\'re walking down the street or talking to a friend, and you often feel anxious when you\'re disconnected. You are just on the edge of becoming addicted. However, it is good that you do not let your Smartphone come in the way. Sometimes, you avoid your phone and feel bad for it, but the rest part of being with family, children, etc, makes you happy. So, you just need to beware!.</string>
     <string name="DESC_SEVERE_NOMOPHOBIC">You have severe nomophobia. You can barely go for 60 seconds without checking your phone. It\'s the first thing you check in the morning and the last at night, and dominates most of your activities in-between. You are definitely suffering from Nomophobia, and God help others if you forget your phone at home or lose it! You are so addicted to your phone that you sometimes wonder what if you could stick your phone to the hand!.</string>
 
+    <string name="SELECT_YOUR_AGE_GROUP">Select Your Age Group</string>
+    <string name="PLEASE_ENTER_WAIST_SIZE_BETWEEN">Please enter waist size between</string>
+
+    <!--Hypertension Questions-->
+    <string name="ARE_YOU_UNDER_MEDICATION_FOR_HIGH_BLOOD_PRESSURE">Are you under Medication for High Blood Pressure?</string>
+    <string name="MEDICATION_FOR_BP">Medication for BP</string>
+    <string name="HAVE_YOU_EVER_SMOKED">Have you ever smoked?</string>
+    <string name="ARE_YOU_DIABETIC">Are you Diabetic?</string>
+    <!--Hypertension Questions-->
+
     <!--Diabetes Questions-->
     <string name="QUES_DIABETES_1">Are you of Asian Origin?</string>
     <string name="QUES_DIABETES_2">Have either of your parents or any of your siblings been diagnosed with Diabetes?</string>
-    <string name="QUES_DIABETES_3">Have you ever been found to have High Blood Sugar(during health checkup/an illness/pregnancy)?</string>
+    <string name="QUES_DIABETES_3">Have you ever been found to have High Blood Sugar(during health checkup/an illness/pregnency)?</string>
     <string name="QUES_DIABETES_4">Are you currently taking medication for high Blood Pressure?</string>
     <string name="QUES_DIABETES_5">Do you currently smoke cigarettes or any other tobacco products on a daily basis?</string>
     <string name="QUES_DIABETES_6">Do you eat fruits and vegetables 2 to 3 times a day?</string>
     <string name="QUES_DIABETES_7">On an average,do you exercise for more than 3 hours a week?</string>
     <!--Diabetes Questions-->
 
-    <string-array name="model_arrays">
-        <item>BMI</item>
-        <item>LIPID</item>
-    </string-array>
+    <!--Stress & Anxiety Questions-->
+    <string name="QUES_STRESS_ANXIETY_1">I felt that life was meaningless.</string>
+    <string name="QUES_STRESS_ANXIETY_2">I felt I wasn’t worth much as a person.</string>
+    <string name="QUES_STRESS_ANXIETY_3">I was unable to become enthusiastic about anything.</string>
+    <string name="QUES_STRESS_ANXIETY_4">I felt down-hearted and blue.</string>
+    <string name="QUES_STRESS_ANXIETY_5">I felt that I had nothing to look forward to</string>
+    <string name="QUES_STRESS_ANXIETY_6">I found it difficult to work up the initiative to do things</string>
+    <string name="QUES_STRESS_ANXIETY_7">I couldn’t seem to experience any positive feeling at all</string>
+    <string name="QUES_STRESS_ANXIETY_8">I felt scared without any good reason</string>
+    <string name="QUES_STRESS_ANXIETY_9">I was aware of the action of my heart in the absence of physical exertion\n" (e.g. Sense of a heart rate increase, heart missing a beat)</string>
+    <string name="QUES_STRESS_ANXIETY_10">I felt I was close to panic</string>
+    <string name="QUES_STRESS_ANXIETY_11">I was worried about situations in which I might panic and make a fool of myself</string>
+    <string name="QUES_STRESS_ANXIETY_12">I experienced trembling in the hands</string>
+    <string name="QUES_STRESS_ANXIETY_13">I experienced breathing difficulty\n" (eg, excessively rapid breathing, breathlessness in the absence of physical exertion)</string>
+    <string name="QUES_STRESS_ANXIETY_14">I was aware of dryness of my mouth</string>
+    <string name="QUES_STRESS_ANXIETY_15">I felt that I was rather touchy</string>
+    <string name="QUES_STRESS_ANXIETY_16">I was intolerant of anything that kept me from getting on with what I was doing</string>
+    <string name="QUES_STRESS_ANXIETY_17">I found it difficult to relax</string>
+    <string name="QUES_STRESS_ANXIETY_18">I found myself getting agitated</string>
+    <string name="QUES_STRESS_ANXIETY_19">I felt that I was using a lot of nervous energy</string>
+    <string name="QUES_STRESS_ANXIETY_20">I tended to over-react to situations</string>
+    <string name="QUES_STRESS_ANXIETY_21">I found it hard to wind down</string>
+    <!--Stress & Anxiety Questions-->
 
-    <string-array name="gender_array">
-        <item>Male</item>
-        <item>Female</item>
-    </string-array>
+    <!--Smart Phone Addiction Questions-->
+    <string name="QUES_SMART_PHONE_ADDICTION_1">Do you often think that your smartphone is ringing/ vibrating when it is not?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_2">When your phone rings buzzes , do you feel an intense urge to check ?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_3">Do you look at your phone after you get up in the morning or before going to bed ?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_4">Do you sleep with your smartphone on or under your pillow or next to your bed ?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_5">Do you text, e-mail / surfed the web while waiting at the traffic signal?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_6">Do you constantly check your phone if you did not have a data signal or Wi-Fi?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_7">Do you feel a great deal of anxiety if your phone not working/you accidentally left it ?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_8">Do you find yourself Always passing time in searching on google/ E-commerce sites ?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_9">Do you spend more time texting, tweeting/emailing then talking to real-time people?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_10">Do you spend more time texting, tweeting/emailing then talking to real-time people?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_11">Do you feel lonely if your smartphone doesn\'t ring for several hours?</string>
+    <!--Smart Phone Addiction Questions-->
 
-    <string-array name="age_group_array">
-        <item>Under 35 Years</item>
-        <item>35 – 44</item>
-        <item>45 – 54</item>
-        <item>55 – 64</item>
-        <item>65 yrs or Over</item>
-    </string-array>
+    <string name="PHYSICAL_EFFECTS_OF_ADDICTION">Physical Effects of Addiction</string>
+    <string name="PHYSICAL_EFFECTS_OF_ADDICTION_DESC">Over use of your cell phone or smartphone can result in a number of different physical problems that may cause permanent damage or be difficult to treat, including:</string>
+    <string name="PSYCHOLOGICAL_EFFECTS_OF_CELL_PHONE_ADDICTION">Psychological Effects of Cell Phone Addiction</string>
 
-    <string-array name="gender_disease">
-        <item>Male</item>
-        <item>Female</item>
-    </string-array>
+    <string name="DIGITAL_EYE_STRAIN">Digital eye strain</string>
+    <string name="NECK_PROBLEMS">Neck problems</string>
+    <string name="INCREASED_ILLNESSES_DUE_TO_GERMS">Increased illnesses due to germs</string>
+    <string name="SLEEP_DISTURBANCES">Sleep disturbances</string>
+    <string name="OBSESSIVE_COMPULSIVE_DISORDER">Obsessive Compulsive Disorder</string>
+    <string name="RELATIONSHIP_PROBLEMS">Relationship problems</string>
+
+    <string name="SUB_1_DIGITAL_EYE_STRAIN">Eyes begin to burn and itch.</string>
+    <string name="SUB_2_DIGITAL_EYE_STRAIN">Blurred vision.</string>
+    <string name="SUB_3_DIGITAL_EYE_STRAIN">Eye fatigue.</string>
+    <string name="SUB_4_DIGITAL_EYE_STRAIN">Digital Eye Strain can cause headaches.</string>
+    <string name="SUB_5_DIGITAL_EYE_STRAIN">The pain and discomfort associated with viewing a digital screen for over 2 hours.</string>
+
+    <string name="SUB_1_NECK_PROBLEMS">Also known as &quot;text neck,&quot; which refers to neck pain resulting from looking down at cell phone or tablet for too long.</string>
+
+    <string name="SUB_1_INCREASED_ILLNESSES_DUE_TO_GERMS">1 in 6 cell phones has fecal matter on it.</string>
+    <string name="SUB_2_INCREASED_ILLNESSES_DUE_TO_GERMS">E. coli bacteria, which can cause fever, vomiting, and diarrhea, is found on many phones.</string>
+    <string name="SUB_3_INCREASED_ILLNESSES_DUE_TO_GERMS">Phones have been found to be contaminated with MRSA.</string>
+    <string name="SUB_31_INCREASED_ILLNESSES_DUE_TO_GERMS">Causes painful abscesses.</string>
+    <string name="SUB_32_INCREASED_ILLNESSES_DUE_TO_GERMS">Life-threatening infections in bones, joints, surgical wounds, bloodstream, heart valves, and lungs.</string>
+    <string name="SUB_4_INCREASED_ILLNESSES_DUE_TO_GERMS">Car accidents.</string>
+    <string name="SUB_41_INCREASED_ILLNESSES_DUE_TO_GERMS">Many people believe that they can multitask and use their phones while driving, but this causes significant impairment and puts the driver and others on the road in danger.</string>
+    <string name="SUB_42_INCREASED_ILLNESSES_DUE_TO_GERMS">Research has revealed that texting and driving can be just as dangerous as drinking and driving.</string>
+    <string name="SUB_5_INCREASED_ILLNESSES_DUE_TO_GERMS">Male infertility.</string>
+    <string name="SUB_51_INCREASED_ILLNESSES_DUE_TO_GERMS">Preliminary studies have revealed that cell phone radiation may decrease sperm count, sperm motility and viability.</string>
+
+    <string name="SUB_1_SLEEP_DISTURBANCES">Cell phone addiction has been linked to an increase in sleep disorders and fatigue in users.</string>
+    <string name="SUB_2_SLEEP_DISTURBANCES">Using your cell phone before bed increases the likelihood of insomnia.</string>
+    <string name="SUB_21_SLEEP_DISTURBANCES">Bright light may decrease sleep quality.</string>
+    <string name="SUB_22_SLEEP_DISTURBANCES">Smartphone use could increase amount of time it takes to fall asleep.</string>
+    <string name="SUB_23_SLEEP_DISTURBANCES">Light emitted from the cell phone may activate the brain.</string>
+
+    <string name="SUB_1_RELATIONSHIP_PROBLEMS">Offline relationships may suffer as a result of neglect in favor of excessive cell phone and social media use.</string>
+
+    <string name="SUB_1_ANXIETY">Research has found that college students who use their cell phones the most are more likely to feel anxious during downtime.</string>
 
 </resources>

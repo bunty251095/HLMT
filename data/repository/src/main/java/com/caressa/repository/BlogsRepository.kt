@@ -1,5 +1,6 @@
 package com.caressa.repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.caressa.model.blogs.BlogModel
 import com.caressa.remote.BlogsDatasource
@@ -9,21 +10,15 @@ import kotlinx.coroutines.Deferred
 
 interface BlogsRepository {
 
-    suspend fun downloadBlogs(
-        forceRefresh: Boolean = false,
-        data: String
-    ): LiveData<Resource<List<BlogModel.Blog>>>
+    suspend fun downloadBlogs(forceRefresh: Boolean = false, data: String): LiveData<Resource<List<BlogModel.Blog>>>
 
 }
 
-class BlogsRepositoryImpl(private val datasource: BlogsDatasource) : BlogsRepository {
+class BlogsRepositoryImpl(private val datasource: BlogsDatasource,private val context: Context) : BlogsRepository {
 
-    override suspend fun downloadBlogs(
-        forceRefresh: Boolean,
-        data: String
-    ): LiveData<Resource<List<BlogModel.Blog>>> {
+    override suspend fun downloadBlogs(forceRefresh: Boolean, data: String): LiveData<Resource<List<BlogModel.Blog>>> {
 
-        return object : NetworkDataBoundResource<List<BlogModel.Blog>, List<BlogModel.Blog>>() {
+        return object : NetworkDataBoundResource<List<BlogModel.Blog>, List<BlogModel.Blog>>(context) {
             override fun processResponse(response: List<BlogModel.Blog>): List<BlogModel.Blog> {
                 return response
             }

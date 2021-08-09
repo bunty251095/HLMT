@@ -153,15 +153,15 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
                             binding.txtBmiValue.text = "${item.value} ${item.unit}"
                         }
                         if (item.parameterCode.equals("HEIGHT",true)){
-                            if(viewModel.getPreference("HEIGHT").equals("cm")){
-                                binding.txtHeightValue.text = "${item.value.toString().toDouble().toInt()} cm"
+                            if(viewModel.getPreference("HEIGHT").equals(resources.getString(R.string.CM),ignoreCase = true)){
+                                binding.txtHeightValue.text = "${item.value.toString().toDouble().toInt()} ${resources.getString(R.string.CM)}"
                             }else{
                                 binding.txtHeightValue.text = CalculateParameters.convertCmToFeetInch(item.value.toString())
                             }
                         }
                         if (item.parameterCode.equals("WEIGHT",true)){
-                            if(viewModel.getPreference("WEIGHT").equals("kg")){
-                                binding.txtWeightValue.text = "${item.value} kg"
+                            if(viewModel.getPreference("WEIGHT").equals(resources.getString(R.string.KG),ignoreCase = true)){
+                                binding.txtWeightValue.text = "${item.value} ${resources.getString(R.string.KG)}"
                             }else{
                                 binding.txtWeightValue.text = Utilities.roundOffPrecision(CalculateParameters.convertKgToLbs(item.value.toString()).toDouble(),0).toInt().toString()+" lbs"
                             }
@@ -174,7 +174,7 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
                         }
                     }
                     if(systolic!=0 && diastolic!=0) {
-                        binding.txtBpValue.text = "$systolic/$diastolic mm Hg"
+                        binding.txtBpValue.text = "$systolic/$diastolic ${resources.getString(R.string.MM_HG)}"
                     }
 
                 }catch (e: Exception){e.printStackTrace()}
@@ -193,7 +193,7 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
                     data.calories = todayData.getString(Constants.CALORIES)
                     data.distance = todayData.get(Constants.DISTANCE).toString().toDouble()
                     data.activeTime = todayData.getString(Constants.ACTIVE_TIME).toString().toInt()
-                    viewModel.stepsData = "${data.stepsCount} steps of ${stepGoal}"
+                    viewModel.stepsData = "${data.stepsCount} ${resources.getString(R.string.STEPS_OF)} ${stepGoal}"
                     viewModel.refreshDashboardFeatureList()
                     viewModel.hideProgressBar()
                 } else {

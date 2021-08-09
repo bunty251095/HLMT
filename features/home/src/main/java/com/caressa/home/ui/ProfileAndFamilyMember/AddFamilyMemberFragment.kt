@@ -27,6 +27,7 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
 
     private val appColorHelper = AppColorHelper.instance!!
 
+    private var from = ""
     private var relationCode = ""
     private var relation = ""
     private var gender = ""
@@ -41,9 +42,11 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
         binding = FragmentAddFamilyMemberBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        from = requireArguments().getString(Constants.FROM,"")!!
         relationCode = requireArguments().getString(Constants.RELATION_CODE)!!
         relation = requireArguments().getString(Constants.RELATION)!!
         gender = requireArguments().getString(Constants.GENDER)!!
+        Timber.e("from----->$from")
         Timber.i("Relation , RelationCode , GENDER----->$relation , $relationCode , $gender")
         initialise()
         setClickable()
@@ -130,32 +133,32 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
 
             if ( !Validation.isValidName(name) ) {
                 binding.tilEdtMemberName.isErrorEnabled = true
-                binding.tilEdtMemberName.error = "Please Enter Valid Name"
+                binding.tilEdtMemberName.error = resources.getString(R.string.VALIDATE_NAME)
             }
 
             if (Utilities.isNullOrEmpty(dob)) {
                 binding.tilEdtMemberDob.isErrorEnabled = true
-                binding.tilEdtMemberDob.error = "Please Enter Valid Date of Birth"
+                binding.tilEdtMemberDob.error = resources.getString(R.string.VALIDATE_DATE_OF_BIRTH)
             }
 
             if (Utilities.isNullOrEmpty(mobile) || !Utilities.isValidPhoneNumber( mobile )) {
                 binding.tilEdtMemberMobile.isErrorEnabled = true
-                binding.tilEdtMemberMobile.error = "Please Enter Valid Mobile Number"
+                binding.tilEdtMemberMobile.error = resources.getString(R.string.VALIDATE_PHONE)
             }
 
             if (!Utilities.isNullOrEmpty(email) && email.length > 3) {
                 if (!email.contains("@")) {
                     binding.tilEdtMemberEmail.isErrorEnabled = true
-                    binding.tilEdtMemberEmail.error = "Email address must include @"
+                    binding.tilEdtMemberEmail.error = resources.getString(R.string.VALIDATE_EMAIL_MUST_INCLUDE)
                 } else {
                     if (!Validation.isValidEmail(email)) {
                         binding.tilEdtMemberEmail.isErrorEnabled = true
-                        binding.tilEdtMemberEmail.error = "Please Enter valid Email"
+                        binding.tilEdtMemberEmail.error = resources.getString(R.string.VALIDATE_EMAIL)
                     }
                 }
             } else {
                 binding.tilEdtMemberEmail.isErrorEnabled = true
-                binding.tilEdtMemberEmail.error = "Please Enter Valid Email"
+                binding.tilEdtMemberEmail.error = resources.getString(R.string.VALIDATE_EMAIL)
             }
 
           /*  if ( !DateHelper.isDateAbove18Years(DateHelper.getDateTimeAs_ddMMMyyyy(dob)) ) {
@@ -274,7 +277,7 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                                 emailAddress = email,
                                 relationshipCode = relationCode,
                                 relationship = relation )
-                            viewModel.callAddNewRelativeApi( true , newRelative )
+                            viewModel.callAddNewRelativeApi( true,newRelative,from,this)
                         }
                     }
                 })
@@ -282,6 +285,10 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                 //***********************
             }
         }
+    }
+
+    fun navigateToHRA() {
+        requireActivity().finish()
     }
 
     private fun showDatePicker() {

@@ -1,5 +1,6 @@
 package com.caressa.track_parameter.adapter
 
+import android.content.Context
 import android.graphics.PorterDuff
 import android.os.Build
 import android.view.LayoutInflater
@@ -15,16 +16,12 @@ import com.caressa.track_parameter.databinding.ItemParamResultBinding
 import com.caressa.track_parameter.util.TrackParameterHelper
 import timber.log.Timber
 
-public class RevSavedParamAdapter(): RecyclerView.Adapter<RevSavedParamAdapter.SavedParamViewHolder>() {
+public class RevSavedParamAdapter(val context: Context): RecyclerView.Adapter<RevSavedParamAdapter.SavedParamViewHolder>() {
 
     private val dataList: MutableList<TrackParameterMaster.History> = mutableListOf()
     var selectedPosition: Int = 0
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SavedParamViewHolder(
-        LayoutInflater.from(parent.context).inflate(
-            R.layout.item_param_result, parent, false
-        )
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SavedParamViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_param_result, parent, false))
 
     override fun getItemCount(): Int = dataList.size
 
@@ -70,7 +67,7 @@ public class RevSavedParamAdapter(): RecyclerView.Adapter<RevSavedParamAdapter.S
             if (bpList.size>2)
                 list.add(pulse)
         }
-        val observation = TrackParameterHelper.getBPObservation(systolic,diastolic)
+        val observation = TrackParameterHelper.getBPObservation(systolic,diastolic,context)
         for(item in list){
             if(!item.parameterCode.equals("BP_PULSE")) {
                 item.observation = observation
