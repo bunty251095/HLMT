@@ -193,6 +193,19 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
                 }
             }
         }
+
+        var answerCodes:String = "NONE"
+        if(calculatorDataSingleton?.healthConditionSelection.isNullOrEmpty()){
+            answer = Answer("HHILL", answerCodes, "")
+            answerArrayMap["HHILL"] = answer
+        }else{
+            answerCodes = ""
+            for (item in calculatorDataSingleton!!.healthConditionSelection){
+                answerCodes = answerCodes+item+","
+            }
+            answer = Answer("HHILL", answerCodes, "")
+            answerArrayMap["HHILL"] = answer
+        }
         val selectedId1: Int = binding.rgBpMedication.checkedRadioButtonId
         val selectedId2: Int = binding.rgSmoke.checkedRadioButtonId
 
@@ -378,6 +391,12 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
     override fun onHealthConditionValueListener() {
         Timber.e("Selected :: ${calculatorDataSingleton!!.healthConditionSelection.size}")
         binding.txtSelection.text = "( You have selected ${calculatorDataSingleton!!.healthConditionSelection.size} health condition )"
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.txtSelection.text =
+            "( You have selected ${calculatorDataSingleton!!.healthConditionSelection.size} health condition )"
     }
 
 }
