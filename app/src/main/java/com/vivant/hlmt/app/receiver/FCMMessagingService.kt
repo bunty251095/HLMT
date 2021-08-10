@@ -128,18 +128,14 @@ class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComp
             if (!Utilities.isNullOrEmpty(imageURL)) {
                 OnClick.putExtra(Constants.NOTIFICATION_URL, imageURL)
             }
-            val pendingOnClickIntent = PendingIntent.getBroadcast(
-                context,
-                NOTIFICATION_ID,
-                OnClick,
-                PendingIntent.FLAG_UPDATE_CURRENT)
+            val pendingOnClickIntent = PendingIntent.getBroadcast(context,NOTIFICATION_ID, OnClick,PendingIntent.FLAG_UPDATE_CURRENT)
 
             val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
             val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.img_hlmt_logo_notification)
+                .setSmallIcon(R.drawable.hl_pace_logo)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
-                .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.img_hlmt_logo_notification))
+                .setLargeIcon(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher_round))
                 .setContentTitle(title)
                 .setContentText(message)
                 .setStyle(NotificationCompat.BigTextStyle().bigText(message))
