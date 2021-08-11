@@ -7,10 +7,10 @@ android {
 
     signingConfigs {
         config {
-            keyAlias 'HealthPrio'
-            keyPassword 'R@$m1h8@lth'
-            storeFile file('key/aihmobileappkey2.jks')
-            storePassword 'R@$m1h8@lth'
+            keyAlias 'hlpace'
+            keyPassword 'hlpace'
+            storeFile file('key/hlmt_release.jks')
+            storePassword 'hlpace'
             enableV3Signing = true
             enableV4Signing = true
         }

@@ -1,6 +1,6 @@
 
 object ApplicationId {
-    val id = "com.vivant.hlmt.app.uat"
+    val id = "com.hlmt.hlpace"
 }
 
 object Modules {
@@ -35,9 +35,9 @@ object Versions {
     val multidex = "1.0.3"
     val kotlin = "1.4.32"
     val gradle = "4.2.1"
-    val compileSdk = 29
-    val minSdk = 19
-    val targetSdk = 29
+    const val compileSdk = 29
+    const val minSdk = 19
+    const val targetSdk = 29
     val appDesign = "28.0.0"
     val appCompat = "1.2.0"
     val appLegacySupport = "1.0.0"
