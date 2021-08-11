@@ -17,12 +17,11 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     implementation project(Modules.common)
 
     api Libraries.otpView
     api Libraries.circleImageview
     api Libraries.ucrop
+    api Libraries.filePicker
     implementation Libraries.firebaseMessaging
 }

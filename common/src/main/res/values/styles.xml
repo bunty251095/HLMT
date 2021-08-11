@@ -22,6 +22,36 @@
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
     </style>
 
+    <style name="FilePickerTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:colorBackground">@android:color/background_light</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="toolbarStyle">@style/FilePickerToolbarTheme</item>
+        <item name="tabStyle">@style/FilePickerPickerTabLayout</item>
+    </style>
+
+    <style name="FilePickerToolbarTheme" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleTextColor">@color/white</item>
+    </style>
+
+    <style name="FilePickerPickerTabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabTextAppearance">@style/TabLayout</item>
+        <item name="tabBackground">@color/colorPrimary</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextColor">@color/textViewColor</item>
+        <item name="tabIndicatorColor">@color/colorPrimary</item>
+        <item name="tabGravity">center</item>
+        <item name="tabMaxWidth">0dp</item>
+    </style>
+
+    <style name="TabLayout">
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/dax_bold</item>
+    </style>
+
     <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@color/colorPrimary</item>

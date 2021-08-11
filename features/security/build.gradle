@@ -20,4 +20,5 @@ dependencies {
     implementation 'org.conscrypt:conscrypt-android:2.5.1'
     api Libraries.circleImageview
     api Libraries.ucrop
+    api Libraries.filePicker
 }

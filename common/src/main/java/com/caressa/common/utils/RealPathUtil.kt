@@ -340,6 +340,41 @@ object RealPathUtil {
         return calString
     }
 
+    fun calculateFileSize(filepath: String,type:String): Double {
+        Timber.e("File Path---> $filepath")
+        var calculatedSize = 0.0
+        val file = File(filepath)
+
+        val bytes = if (!file.exists()) 0.0 else file.length().toDouble()
+
+        // Convert the bytes to Kilobytes (1 KB = 1024 Bytes)
+        val kilobytes = bytes / 1024
+
+        // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
+        val megabytes = kilobytes / 1024
+
+        val gigabytes = megabytes / 1024
+        val terabytes = gigabytes / 1024
+
+        when {
+            type.equals("KB",ignoreCase = true) -> {
+                calculatedSize = kilobytes
+            }
+            type.equals("MB",ignoreCase = true) -> {
+                calculatedSize = megabytes
+            }
+            type.equals("GB",ignoreCase = true) -> {
+                calculatedSize = gigabytes
+            }
+            type.equals("TB",ignoreCase = true) -> {
+                calculatedSize = terabytes
+            }
+        }
+        val finalSize = Utilities.roundOffPrecision(calculatedSize,2)
+        Timber.e("File Size : $finalSize ${type.toUpperCase()}")
+        return finalSize
+    }
+
 /*     fun copyFile(inputPath: String, outputPath: String, FileName: String): Boolean {
         var save = false
         var `in`: InputStream? = null

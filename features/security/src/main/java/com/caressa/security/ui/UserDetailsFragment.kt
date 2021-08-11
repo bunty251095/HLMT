@@ -27,6 +27,9 @@ import com.caressa.model.home.UpdateUserDetailsModel
 import com.caressa.security.databinding.FragmentUserDetailsBinding
 import com.caressa.security.viewmodel.HlmtLoginViewModel
 import com.yalantis.ucrop.UCrop
+import droidninja.filepicker.FilePickerBuilder
+import droidninja.filepicker.FilePickerConst
+import droidninja.filepicker.utils.ContentUriUtils
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.io.File
@@ -51,7 +54,8 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
         override fun isPermissionGranted(isGranted: Boolean) {
             Timber.e("$isGranted")
             if ( isGranted ) {
-                showFileChooser(gallerySelectCode)
+                //showFileChooser(gallerySelectCode)
+                showPhotoPicker()
             }
         }
     }
@@ -219,6 +223,16 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
         }
     }
 
+    private fun showPhotoPicker() {
+        FilePickerBuilder.instance
+            .setMaxCount(1)
+            .setActivityTitle("Select Profile Photo")
+            //.setSelectedFiles(filePaths) //optional
+            .setActivityTheme(R.style.LibAppTheme)
+            .enableCameraSupport(false)
+            .pickPhoto(this, FilePickerConst.REQUEST_CODE_PHOTO)
+    }
+
     private fun showFileChooser(From: Int) {
         val galleryIntent = Intent(Intent.ACTION_GET_CONTENT, null)
         galleryIntent.type = "image/*"
@@ -253,16 +267,26 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
                 Timber.e("$isGranted")
                 if ( isGranted ) {
                     when(from) {
-                        gallerySelectCode -> showFileChooser(gallerySelectCode)
-                        cameraSelectCode -> dispatchTakePictureIntent()
+                        gallerySelectCode -> {
+                            //showFileChooser(gallerySelectCode)
+                            showPhotoPicker()
+                        }
+                        cameraSelectCode -> {
+                            dispatchTakePictureIntent()
+                        }
                     }
                 }
             }
         },requireContext(),this)
         if (permissionResult) {
             when(from) {
-                gallerySelectCode -> showFileChooser(gallerySelectCode)
-                cameraSelectCode -> dispatchTakePictureIntent()
+                gallerySelectCode -> {
+                    //showFileChooser(gallerySelectCode)
+                    showPhotoPicker()
+                }
+                cameraSelectCode -> {
+                    dispatchTakePictureIntent()
+                }
             }
         }
     }
@@ -347,6 +371,21 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
                 var documentType = ""
                 when (requestCode) {
 
+                    FilePickerConst.REQUEST_CODE_PHOTO -> {
+                        val photoUriList = data.getParcelableArrayListExtra<Uri>(FilePickerConst.KEY_SELECTED_MEDIA)!!.toMutableList()
+                        val photoUri = photoUriList[0]
+                        //Timber.e("photoUri---> $photoUri")
+                        val photoPath = ContentUriUtils.getFilePath(requireContext(), photoUri)!!
+                        val origFileName = photoPath.substring(photoPath.lastIndexOf("/") + 1)
+                        val fileSize = RealPathUtil.calculateFileSize(photoPath,"MB")
+                        if (fileSize <= 5.0) {
+                            val destinationUriGallery = Uri.fromFile(File(Environment.getExternalStorageDirectory().toString(), origFileName))
+                            showUcrop(photoUri, destinationUriGallery)
+                        } else {
+                            Utilities.toastMessageShort(requireContext(), resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
+                        }
+                    }
+
                     cameraSelectCode -> {
                         val photo = data.extras!!["data"] as Bitmap?
                         val sourceUriCamera: Uri = realPathUtil.getImageUri(requireContext(), photo)
@@ -371,10 +410,8 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
                         try {
                             val resultUri = UCrop.getOutput(data)
                             val flePath1: String = realPathUtil.getPath(requireContext(), resultUri!!)!!
-                            val fileSize: Float = realPathUtil.calculateFileSize(flePath1)
-                            println("File Size : $fileSize")
-                            //System.out.println("File Size : " + Helper.calculateFileSize(flePath1));
-                            if (fileSize < 5) {
+                            val fileSize = realPathUtil.calculateFileSize(flePath1,"MB")
+                            if (fileSize < 5.0) {
                                 var save1 = false
                                 val extension1: String = realPathUtil.getFileExt(flePath1)
                                 println("Extension : $extension1")
@@ -395,7 +432,7 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
                                 if (!documentType.equals("", ignoreCase = true)) {
                                     val fileName: String = realPathUtil.generateUniqueFileName(
                                         Configuration.strAppIdentifier + "_REC", flePath1)
-                                    println("File Path : $flePath1")
+                                    Timber.e("File Path---> $flePath1")
                                     save1 = realPathUtil.saveFileToExternalCard(flePath1,fileName,Constants.RECORD)
                                     val mainDirectoryPath: String = realPathUtil.getRecordFolderLocation()
                                     if (save1) {
@@ -426,7 +463,7 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
                                 Utilities.deleteFileFromLocalSystem(pathTemp)
                                 Utilities.toastMessageShort(requireContext(), resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
                             }
-                        } catch (e: java.lang.Exception) {
+                        } catch (e: Exception) {
                             Utilities.toastMessageShort(requireContext(), resources.getString(R.string.ERROR_UNABLE_TO_READ_FILE))
                             e.printStackTrace()
                         }
