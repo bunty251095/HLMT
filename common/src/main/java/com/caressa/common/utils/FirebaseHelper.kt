@@ -12,19 +12,20 @@ object FirebaseHelper {
     init {
         firebaseAnalytics = Firebase.analytics
     }
-    public fun getInstance(){
+
+    public fun getInstance() {
 
     }
 
-    fun logCustomFirebaseEvent(eventName: String){
+    fun logCustomFirebaseEvent(eventName: String) {
 //        if(addPrefix) {
-            firebaseAnalytics.logEvent(eventName, Bundle())
+        firebaseAnalytics.logEvent(eventName, Bundle())
 //        }else{
 //            firebaseAnalytics.logEvent(eventName, Bundle())
 //        }
     }
 
-    fun logScreenEvent(eventName: String){
+    fun logScreenEvent(eventName: String) {
         logCustomFirebaseEvent(eventName)
     }
 }

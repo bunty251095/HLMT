@@ -7,7 +7,18 @@ import org.koin.dsl.module.module
 val repositoryModule = module {
     factory { AppDispatchers(Dispatchers.Main, Dispatchers.IO) }
     factory { UserRepositoryImpl(get(), get(), get()) as UserRepository }
-    factory { HomeRepositoryImpl(get(), get(), get(), get(), get(), get(), get(), get()) as HomeRepository }
+    factory {
+        HomeRepositoryImpl(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        ) as HomeRepository
+    }
     factory { MedicationRepositoryImpl(get(), get(), get(), get()) as MedicationRepository }
     factory { FitnessRepositoryImpl(get(), get(), get()) as FitnessRepository }
     factory { HraRepositoryImpl(get(), get(), get(), get(), get(), get()) as HraRepository }

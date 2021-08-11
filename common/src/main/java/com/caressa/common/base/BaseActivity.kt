@@ -33,17 +33,21 @@ abstract class BaseActivity : AppCompatActivity() {
         dialogData.message = resources.getString(R.string.MSG_SESSION_EXPIRED)
         dialogData.showLeftButton = false
         dialogData.showDismiss = false
-        DefaultNotificationDialog(this,
+        DefaultNotificationDialog(
+            this,
             object : DefaultNotificationDialog.OnDialogValueListener {
                 override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
                     if (isButtonRight) {
                         val intent = Intent()
-                        intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.LOGIN)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        intent.component =
+                            ComponentName(NavigationConstants.APPID, NavigationConstants.LOGIN)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
                 }
-            }, dialogData)
+            }, dialogData
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,10 +82,14 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     private fun showToast(data: String) {
-        Utilities.toastMessageShort(this,data)
+        Utilities.toastMessageShort(this, data)
     }
 
-    private fun setUpProgressBar(lifecycleOwner: LifecycleOwner, progressBar: LiveData<Event<String>>, message: String = "Loading...") {
+    private fun setUpProgressBar(
+        lifecycleOwner: LifecycleOwner,
+        progressBar: LiveData<Event<String>>,
+        message: String = "Loading..."
+    ) {
         progressBar.observe(lifecycleOwner, { event ->
             event.getContentIfNotHandled()?.let {
                 //                if(it.equals(Event.HIDE_PROGRESS,true))

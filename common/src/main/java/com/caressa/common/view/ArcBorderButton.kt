@@ -11,14 +11,17 @@ import com.caressa.common.R
 import com.caressa.common.base.ClientConfiguration.getAppTemplateConfig
 import com.caressa.common.constants.Constants
 import org.json.JSONObject
-import timber.log.Timber
 
 class ArcBorderButton : AppCompatButton {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         styleButton(context, attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         styleButton(context, attrs)
     }
 
@@ -29,7 +32,8 @@ class ArcBorderButton : AppCompatButton {
         if (isTemplate) {
             try {
                 val templateJSON = JSONObject(getAppTemplateConfig())
-                val selectionColor = Color.parseColor(templateJSON.getString(Constants.SELECTION_COLOR))
+                val selectionColor =
+                    Color.parseColor(templateJSON.getString(Constants.SELECTION_COLOR))
 
                 val textColorStateList = ColorStateList(
                     arrayOf(
@@ -37,13 +41,16 @@ class ArcBorderButton : AppCompatButton {
                         intArrayOf(android.R.attr.state_pressed),
                         intArrayOf(android.R.attr.state_checked),
                         intArrayOf(android.R.attr.state_enabled),
-                        intArrayOf(-android.R.attr.state_enabled)),
+                        intArrayOf(-android.R.attr.state_enabled)
+                    ),
                     intArrayOf(
                         Color.WHITE,
                         Color.WHITE,
                         Color.WHITE,
                         selectionColor,
-                        selectionColor))
+                        selectionColor
+                    )
+                )
                 setTextColor(textColorStateList)
 
                 val disableDrawable = GradientDrawable()
@@ -65,7 +72,10 @@ class ArcBorderButton : AppCompatButton {
                 }
 
                 val stateListDrawable = StateListDrawable()
-                stateListDrawable.addState(intArrayOf(android.R.attr.state_selected), enableDrawable)
+                stateListDrawable.addState(
+                    intArrayOf(android.R.attr.state_selected),
+                    enableDrawable
+                )
                 stateListDrawable.addState(intArrayOf(android.R.attr.state_pressed), enableDrawable)
                 stateListDrawable.addState(intArrayOf(android.R.attr.state_checked), enableDrawable)
                 stateListDrawable.addState(intArrayOf(), disableDrawable)

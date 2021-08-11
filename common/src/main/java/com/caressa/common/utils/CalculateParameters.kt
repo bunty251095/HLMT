@@ -26,8 +26,10 @@ object CalculateParameters {
                 try {
                     //validationBMI = Math.round(Float.parseFloat(String.valueOf(weight)) / Math.pow(Float.parseFloat(String.valueOf(height)) / 100, 2));
 
-                    bmi = java.lang.Float.parseFloat(weight.toString()) / (java.lang.Float.parseFloat(
-                        height.toString()) / 100).toDouble().pow(2.0)
+                    bmi =
+                        java.lang.Float.parseFloat(weight.toString()) / (java.lang.Float.parseFloat(
+                            height.toString()
+                        ) / 100).toDouble().pow(2.0)
                 } catch (e: NumberFormatException) {
                     e.printStackTrace()
                 }
@@ -130,14 +132,17 @@ object CalculateParameters {
         try {
             val strConvertedValue: String
             var feet = floor(java.lang.Double.parseDouble(strValue) / 30.48).toInt()
-            var inch = (java.lang.Double.parseDouble(strValue) / 2.54 - feet * 12).roundToLong().toInt()
+            var inch =
+                (java.lang.Double.parseDouble(strValue) / 2.54 - feet * 12).roundToLong().toInt()
             if (inch >= 12) {
                 feet += 1
                 inch = 0
             }
             strConvertedValue = "$feet ft, $inch in"
             return strConvertedValue
-        }catch (e:Exception){e.printStackTrace()}
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         return "0"
     }
 
@@ -203,7 +208,9 @@ object CalculateParameters {
         try {
             val strConvertedValue: Double = (strValue.toDouble() * 2.20462)
             return roundOffPrecision(strConvertedValue, 1).toString()
-        }catch (e:Exception){e.printStackTrace()}
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         return "0"
     }
 
@@ -216,12 +223,12 @@ object CalculateParameters {
         var dist = ""
         try {
             var convertedValue = strValue.toDouble()
-            if ( convertedValue >= 1000) {
+            if (convertedValue >= 1000) {
                 convertedValue = (convertedValue * 0.001)
-                dist = Utilities.roundOffPrecision(convertedValue, 2) .toString() + " km"
+                dist = Utilities.roundOffPrecision(convertedValue, 2).toString() + " km"
             } else {
                 val abc = Utilities.roundOffPrecision(convertedValue, 2)
-                dist = if ( abc == 0.0 ) {
+                dist = if (abc == 0.0) {
                     "0 mtr"
                 } else {
                     "$abc mtr"
@@ -251,11 +258,12 @@ object CalculateParameters {
 
     fun convertFeetInchToCm(strFeetValue: String, strInchValue: String): Double {
         //var strConvertedValue = ""
-        var strConvertedValue  = 0.0
+        var strConvertedValue = 0.0
         if (!Utilities.isNullOrEmpty(strFeetValue) && !Utilities.isNullOrEmpty(strInchValue)) {
             val cm =
                 java.lang.Double.parseDouble(strFeetValue) * 30.48 + java.lang.Double.parseDouble(
-                    strInchValue) * 2.54
+                    strInchValue
+                ) * 2.54
             //strConvertedValue = cm.toString() + ""
             strConvertedValue = cm
         }

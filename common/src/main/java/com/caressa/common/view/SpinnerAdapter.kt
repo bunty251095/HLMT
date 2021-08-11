@@ -1,15 +1,13 @@
 package com.caressa.common.view
 
 import android.content.Context
-import com.caressa.common.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import java.util.*
-import kotlin.collections.ArrayList
+import com.caressa.common.R
 
 class SpinnerAdapter(var context: Context, list: ArrayList<SpinnerModel>) : BaseAdapter() {
 
@@ -33,7 +31,8 @@ class SpinnerAdapter(var context: Context, list: ArrayList<SpinnerModel>) : Base
         var view = v
         try {
             view = inflter!!.inflate(R.layout.custom_spinner_item, null)
-            val constraintLayout = view!!.findViewById<View>(R.id.spinner_container) as ConstraintLayout?
+            val constraintLayout =
+                view!!.findViewById<View>(R.id.spinner_container) as ConstraintLayout?
             val names = view.findViewById<View>(R.id.txt_spinner_name) as TextView?
             val view1 = view.findViewById(R.id.view1) as View?
             names!!.setText(dataList[i].name)
@@ -44,7 +43,7 @@ class SpinnerAdapter(var context: Context, list: ArrayList<SpinnerModel>) : Base
                 view1!!.visibility = View.INVISIBLE
                 constraintLayout!!.setBackgroundColor(context.resources.getColor(R.color.white))
             }
-        } catch ( e:Exception ) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         return view!!

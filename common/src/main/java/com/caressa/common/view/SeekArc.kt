@@ -143,7 +143,11 @@ class SeekArc : View {
         init(context, attrs, R.attr.seekArcStyle)
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         init(context, attrs, defStyle)
     }
 
@@ -161,7 +165,7 @@ class SeekArc : View {
 
         mThumb = ContextCompat.getDrawable(context, R.drawable.seek_arc_control_selector)
         val thumb = DrawableCompat.wrap(mThumb!!)
-        DrawableCompat.setTint(thumb,appColorHelper.primaryColor())
+        DrawableCompat.setTint(thumb, appColorHelper.primaryColor())
         // Convert progress width to pixels for current density
         mProgressWidth = (mProgressWidth * density).toInt()
         if (attrs != null) {
@@ -329,7 +333,8 @@ class SeekArc : View {
         // convert to arc Angle
         var angle = Math.toDegrees(
             atan2(y.toDouble(), x.toDouble()) + Math.PI / 2
-                    - Math.toRadians(mRotation.toDouble()))
+                    - Math.toRadians(mRotation.toDouble())
+        )
         if (angle < 0) {
             angle += 360
         }

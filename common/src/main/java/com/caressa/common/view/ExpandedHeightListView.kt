@@ -9,15 +9,19 @@ class ExpandedHeightListView : RecyclerView {
     private var mContext: Context? = null
     internal var expanded = false
 
-    constructor(context: Context) : super(context)  {
+    constructor(context: Context) : super(context) {
         this.mContext = context
     }
 
-    constructor(context: Context, attrs: AttributeSet) :  super(context, attrs) {
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         this.mContext = context
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle)  {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         this.mContext = context
     }
 

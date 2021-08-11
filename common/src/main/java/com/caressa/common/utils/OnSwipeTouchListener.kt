@@ -48,7 +48,7 @@ open class OnSwipeTouchListener(var ctx: Context) : View.OnTouchListener {
             velocityX: Float,
             velocityY: Float
         ): Boolean {
-            var result:Boolean = false
+            var result: Boolean = false
             try {
                 val diffY = e2.y - e1.y
                 val diffX = e2.x - e1.x

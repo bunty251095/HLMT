@@ -7,6 +7,7 @@ interface ToolsRepository {
 
 }
 
-class ToolsRepositoryImpl(private val datasource: ToolsDatasource, private val context: Context) : ToolsRepository {
+class ToolsRepositoryImpl(private val datasource: ToolsDatasource, private val context: Context) :
+    ToolsRepository {
 
 }

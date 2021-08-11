@@ -9,13 +9,15 @@ import android.view.Window
 import com.caressa.common.R
 import kotlinx.android.synthetic.main.default_dialog.*
 
-class DefaultNotificationDialog(context: Context?, private val onDialogValueListener: OnDialogValueListener,
-     data: DialogData) : Dialog(context!!), View.OnClickListener {
+class DefaultNotificationDialog(
+    context: Context?, private val onDialogValueListener: OnDialogValueListener,
+    data: DialogData
+) : Dialog(context!!), View.OnClickListener {
 
     private var dialogData: DialogData? = null
 
     init {
-        Utilities.printData("dialogData",data)
+        Utilities.printData("dialogData", data)
         this.dialogData = data
     }
 
@@ -59,15 +61,24 @@ class DefaultNotificationDialog(context: Context?, private val onDialogValueList
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_left_side -> {
-                onDialogValueListener.onDialogClickListener(isButtonLeft = true, isButtonRight = false)
+                onDialogValueListener.onDialogClickListener(
+                    isButtonLeft = true,
+                    isButtonRight = false
+                )
                 dismiss()
             }
             R.id.btn_right_side -> {
-                onDialogValueListener.onDialogClickListener(isButtonLeft = false, isButtonRight = true)
+                onDialogValueListener.onDialogClickListener(
+                    isButtonLeft = false,
+                    isButtonRight = true
+                )
                 dismiss()
             }
             R.id.img_close_input -> {
-                onDialogValueListener.onDialogClickListener(isButtonLeft = false, isButtonRight = false)
+                onDialogValueListener.onDialogClickListener(
+                    isButtonLeft = false,
+                    isButtonRight = false
+                )
                 dismiss()
             }
         }

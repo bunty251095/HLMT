@@ -36,17 +36,21 @@ abstract class BaseFragment : Fragment() {
         dialogData.message = resources.getString(R.string.MSG_SESSION_EXPIRED)
         dialogData.showLeftButton = false
         dialogData.showDismiss = false
-        DefaultNotificationDialog(requireContext(),
+        DefaultNotificationDialog(
+            requireContext(),
             object : DefaultNotificationDialog.OnDialogValueListener {
                 override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
                     if (isButtonRight) {
                         val intent = Intent()
-                        intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.LOGIN)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        intent.component =
+                            ComponentName(NavigationConstants.APPID, NavigationConstants.LOGIN)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
                 }
-            }, dialogData)
+            }, dialogData
+        )
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -78,7 +82,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     private fun showToast(data: String) {
-        Utilities.toastMessageShort(requireContext(),data)
+        Utilities.toastMessageShort(requireContext(), data)
     }
 
     private fun observeSession(viewModel: BaseViewModel) {

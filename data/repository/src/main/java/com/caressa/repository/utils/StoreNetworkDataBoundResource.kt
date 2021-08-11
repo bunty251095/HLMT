@@ -29,13 +29,32 @@ abstract class StoreNetworkDataBoundResource<ResultType, RequestType>(val contex
                     fetchFromNetwork(dbResult)
                 } catch (e: Throwable) {
                     Timber.e("An error happened: $e")
-                    setValue(Resource.error(e,loadFromDb(), errorMessage = context.resources.getString(R.string.ERROR_INTERNET_UNAVAILABLE)))
+                    setValue(
+                        Resource.error(
+                            e,
+                            loadFromDb(),
+                            errorMessage = context.resources.getString(R.string.ERROR_INTERNET_UNAVAILABLE)
+                        )
+                    )
                 } catch (e: IllegalStateException) {
                     Timber.e("An error happened: $e")
-                    setValue(Resource.error(e, loadFromDb(), errorMessage = context.resources.getString(R.string.SOMETHING_WENT_WRONG), errorNumber =  "111"))
+                    setValue(
+                        Resource.error(
+                            e,
+                            loadFromDb(),
+                            errorMessage = context.resources.getString(R.string.SOMETHING_WENT_WRONG),
+                            errorNumber = "111"
+                        )
+                    )
                 } catch (e: Exception) {
                     Timber.e("An error happened: $e")
-                    setValue(Resource.error(e, loadFromDb(), errorMessage = context.resources.getString(R.string.SOMETHING_WENT_WRONG)))
+                    setValue(
+                        Resource.error(
+                            e,
+                            loadFromDb(),
+                            errorMessage = context.resources.getString(R.string.SOMETHING_WENT_WRONG)
+                        )
+                    )
                 }
             } else {
                 Timber.d("Return data from local database")
@@ -81,7 +100,14 @@ abstract class StoreNetworkDataBoundResource<ResultType, RequestType>(val contex
             if (baseResponse.header?.hasErrors!!) {
                 if (baseResponse.header != null && baseResponse.header?.errors?.size != 0) {
                     //setValue(Resource.error(Throwable(),null,"Something Went wrong..",baseResponse.header?.errors?.get(0)?.errorNumber.toString()))
-                    setValue(Resource.error(Throwable(), null, baseResponse.header?.errors?.get(0)?.message.toString(), baseResponse.header?.errors?.get(0)?.errorNumber.toString()))
+                    setValue(
+                        Resource.error(
+                            Throwable(),
+                            null,
+                            baseResponse.header?.errors?.get(0)?.message.toString(),
+                            baseResponse.header?.errors?.get(0)?.errorNumber.toString()
+                        )
+                    )
                     return true
                 } else if (!shouldStoreInDb()) {
                     setValue(Resource.success(baseResponse.jSONData))

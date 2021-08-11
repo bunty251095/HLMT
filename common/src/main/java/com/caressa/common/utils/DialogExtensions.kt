@@ -22,7 +22,8 @@ inline fun Activity.alert(
     layoutResource: Int = 0,
     title: CharSequence? = null,
     message: CharSequence? = null,
-    func: AlertDialogHelper.() -> Unit): AlertDialog {
+    func: AlertDialogHelper.() -> Unit
+): AlertDialog {
     return AlertDialogHelper(this, title, message).apply {
         func()
     }.create()
@@ -32,7 +33,8 @@ inline fun Activity.alert(
     layoutResource: Int = 0,
     titleResource: Int = 0,
     messageResource: Int = 0,
-    func: AlertDialogHelper.() -> Unit): AlertDialog {
+    func: AlertDialogHelper.() -> Unit
+): AlertDialog {
     val title = if (titleResource == 0) null else getString(titleResource)
     val message = if (messageResource == 0) null else getString(messageResource)
     return AlertDialogHelper(this, title, message).apply {
@@ -40,9 +42,15 @@ inline fun Activity.alert(
     }.create()
 }
 
- fun Activity.showDialog( listener : DefaultNotificationDialog.OnDialogValueListener,
-                          title: String = "", message: String = "",
-                          leftText: String = "Cancel",rightText: String = "Ok", showLeftBtn : Boolean = true,showDismiss : Boolean = true ) {
+fun Activity.showDialog(
+    listener: DefaultNotificationDialog.OnDialogValueListener,
+    title: String = "",
+    message: String = "",
+    leftText: String = "Cancel",
+    rightText: String = "Ok",
+    showLeftBtn: Boolean = true,
+    showDismiss: Boolean = true
+) {
 
     val dialogData = DefaultNotificationDialog.DialogData()
     dialogData.title = title
@@ -51,30 +59,39 @@ inline fun Activity.alert(
     dialogData.btnRightName = rightText
     dialogData.showLeftButton = showLeftBtn
     val defaultNotificationDialog = DefaultNotificationDialog(this, listener, dialogData)
-    Objects.requireNonNull(defaultNotificationDialog.window)!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    Objects.requireNonNull(defaultNotificationDialog.window)!!
+        .setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     defaultNotificationDialog.show()
 }
 
- fun Fragment.showDialog(listener : DefaultNotificationDialog.OnDialogValueListener,
-                         title: String = "", message: String = "",
-                         leftText: String = "Cancel",rightText: String = "Ok", showLeftBtn : Boolean = true,showDismiss : Boolean = true ) {
+fun Fragment.showDialog(
+    listener: DefaultNotificationDialog.OnDialogValueListener,
+    title: String = "",
+    message: String = "",
+    leftText: String = "Cancel",
+    rightText: String = "Ok",
+    showLeftBtn: Boolean = true,
+    showDismiss: Boolean = true
+) {
 
-     val dialogData = DefaultNotificationDialog.DialogData()
-     dialogData.title = title
-     dialogData.message = message
-     dialogData.btnLeftName = leftText
-     dialogData.btnRightName = rightText
-     dialogData.showLeftButton = showLeftBtn
-     val defaultNotificationDialog = DefaultNotificationDialog(context, listener, dialogData)
-     Objects.requireNonNull(defaultNotificationDialog.window)!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-     defaultNotificationDialog.show()
+    val dialogData = DefaultNotificationDialog.DialogData()
+    dialogData.title = title
+    dialogData.message = message
+    dialogData.btnLeftName = leftText
+    dialogData.btnRightName = rightText
+    dialogData.showLeftButton = showLeftBtn
+    val defaultNotificationDialog = DefaultNotificationDialog(context, listener, dialogData)
+    Objects.requireNonNull(defaultNotificationDialog.window)!!
+        .setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    defaultNotificationDialog.show()
 }
 
 inline fun Fragment.alert(
     layoutResource: Int = 0,
     title: CharSequence? = null,
     message: CharSequence? = null,
-    func: AlertDialogHelper.() -> Unit): AlertDialog {
+    func: AlertDialogHelper.() -> Unit
+): AlertDialog {
     return AlertDialogHelper(requireContext(), title, message).apply {
         func()
     }.create()
@@ -83,7 +100,8 @@ inline fun Fragment.alert(
 inline fun Fragment.alert(
     layoutResource: Int = 0,
     title: CharSequence? = null,
-    message: CharSequence? = null): AlertDialog {
+    message: CharSequence? = null
+): AlertDialog {
     return AlertDialogHelper(requireContext(), title, message).create()
 }
 
