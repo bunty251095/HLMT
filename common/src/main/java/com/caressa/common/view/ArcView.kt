@@ -15,7 +15,11 @@ class ArcView : View {
         styleImage(context, attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         styleImage(context, attrs)
     }
 

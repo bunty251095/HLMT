@@ -39,8 +39,8 @@ object Validation {
      */
     fun isValidName(name: String): Boolean {
         var isValidName = false
-        val namePattern : Regex = "^[a-zA-Z\\s]*\$".toRegex()
-        if ( !Utilities.isNullOrEmpty(name) && name.length > 3 && name.matches(namePattern)) {
+        val namePattern: Regex = "^[a-zA-Z\\s]*\$".toRegex()
+        if (!Utilities.isNullOrEmpty(name) && name.length > 3 && name.matches(namePattern)) {
             isValidName = true
         }
         return isValidName

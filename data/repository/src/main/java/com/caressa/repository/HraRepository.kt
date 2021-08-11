@@ -21,21 +21,47 @@ import java.util.*
 
 interface HraRepository {
 
-    suspend fun startHra(forceRefresh: Boolean = false, data: HraStartModel, relativeId: String): LiveData<Resource<HraStartModel.HraStartResponse>>
+    suspend fun startHra(
+        forceRefresh: Boolean = false,
+        data: HraStartModel,
+        relativeId: String
+    ): LiveData<Resource<HraStartModel.HraStartResponse>>
 
-    suspend fun isBMIExist(forceRefresh: Boolean = false, data: BMIExistModel): LiveData<Resource<BMIExistModel.BMIExistResponse>>
+    suspend fun isBMIExist(
+        forceRefresh: Boolean = false,
+        data: BMIExistModel
+    ): LiveData<Resource<BMIExistModel.BMIExistResponse>>
 
-    suspend fun isBPExist(forceRefresh: Boolean = false, data: BPExistModel): LiveData<Resource<BPExistModel.BPExistResponse>>
+    suspend fun isBPExist(
+        forceRefresh: Boolean = false,
+        data: BPExistModel
+    ): LiveData<Resource<BPExistModel.BPExistResponse>>
 
-    suspend fun getLabRecords(forceRefresh: Boolean = false, data: LabRecordsModel): LiveData<Resource<LabRecordsModel.LabRecordsExistResponse>>
+    suspend fun getLabRecords(
+        forceRefresh: Boolean = false,
+        data: LabRecordsModel
+    ): LiveData<Resource<LabRecordsModel.LabRecordsExistResponse>>
 
-    suspend fun saveAndSubmitHRA(forceRefresh: Boolean = false, data: SaveAndSubmitHraModel): LiveData<Resource<SaveAndSubmitHraModel.SaveAndSubmitHraResponse>>
+    suspend fun saveAndSubmitHRA(
+        forceRefresh: Boolean = false,
+        data: SaveAndSubmitHraModel
+    ): LiveData<Resource<SaveAndSubmitHraModel.SaveAndSubmitHraResponse>>
 
-    suspend fun getMedicalProfileSummary(forceRefresh: Boolean = false, data: HraMedicalProfileSummaryModel, personId: String): LiveData<Resource<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse>>
+    suspend fun getMedicalProfileSummary(
+        forceRefresh: Boolean = false,
+        data: HraMedicalProfileSummaryModel,
+        personId: String
+    ): LiveData<Resource<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse>>
 
-    suspend fun getAssessmentSummary(forceRefresh: Boolean = false, data: HraAssessmentSummaryModel): LiveData<Resource<HraAssessmentSummaryModel.AssessmentSummaryResponce>>
+    suspend fun getAssessmentSummary(
+        forceRefresh: Boolean = false,
+        data: HraAssessmentSummaryModel
+    ): LiveData<Resource<HraAssessmentSummaryModel.AssessmentSummaryResponce>>
 
-    suspend fun getListRecommendedTests(forceRefresh: Boolean = false, data: HraListRecommendedTestsModel): LiveData<Resource<HraListRecommendedTestsModel.ListRecommendedTestsResponce>>
+    suspend fun getListRecommendedTests(
+        forceRefresh: Boolean = false,
+        data: HraListRecommendedTestsModel
+    ): LiveData<Resource<HraListRecommendedTestsModel.ListRecommendedTestsResponce>>
 
     suspend fun getHRAHistory(data: HraHistoryModel): LiveData<Resource<HraHistoryModel.HRAHistoryResponse>>
 
@@ -66,12 +92,19 @@ class HraRepositoryImpl(
     private val paramDao: TrackParameterDao,
     private val dataSyncMasterDao: DataSyncMasterDao,
     sharedPref: SharedPreferences,
-    private val context: Context) : HraRepository {
+    private val context: Context
+) : HraRepository {
 
-    override suspend fun startHra(forceRefresh: Boolean, data: HraStartModel, relativeId: String): LiveData<Resource<HraStartModel.HraStartResponse>> {
+    override suspend fun startHra(
+        forceRefresh: Boolean,
+        data: HraStartModel,
+        relativeId: String
+    ): LiveData<Resource<HraStartModel.HraStartResponse>> {
 
         return object :
-            NetworkBoundResource<HraStartModel.HraStartResponse, BaseResponse<HraStartModel.HraStartResponse>>(context) {
+            NetworkBoundResource<HraStartModel.HraStartResponse, BaseResponse<HraStartModel.HraStartResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -96,10 +129,15 @@ class HraRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun isBMIExist(forceRefresh: Boolean, data: BMIExistModel): LiveData<Resource<BMIExistModel.BMIExistResponse>> {
+    override suspend fun isBMIExist(
+        forceRefresh: Boolean,
+        data: BMIExistModel
+    ): LiveData<Resource<BMIExistModel.BMIExistResponse>> {
 
         return object :
-            NetworkBoundResource<BMIExistModel.BMIExistResponse, BaseResponse<BMIExistModel.BMIExistResponse>>(context) {
+            NetworkBoundResource<BMIExistModel.BMIExistResponse, BaseResponse<BMIExistModel.BMIExistResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -124,10 +162,15 @@ class HraRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun isBPExist(forceRefresh: Boolean, data: BPExistModel): LiveData<Resource<BPExistModel.BPExistResponse>> {
+    override suspend fun isBPExist(
+        forceRefresh: Boolean,
+        data: BPExistModel
+    ): LiveData<Resource<BPExistModel.BPExistResponse>> {
 
         return object :
-            NetworkBoundResource<BPExistModel.BPExistResponse, BaseResponse<BPExistModel.BPExistResponse>>(context) {
+            NetworkBoundResource<BPExistModel.BPExistResponse, BaseResponse<BPExistModel.BPExistResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -152,10 +195,15 @@ class HraRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun getLabRecords(forceRefresh: Boolean, data: LabRecordsModel): LiveData<Resource<LabRecordsModel.LabRecordsExistResponse>> {
+    override suspend fun getLabRecords(
+        forceRefresh: Boolean,
+        data: LabRecordsModel
+    ): LiveData<Resource<LabRecordsModel.LabRecordsExistResponse>> {
 
         return object :
-            NetworkBoundResource<LabRecordsModel.LabRecordsExistResponse, BaseResponse<LabRecordsModel.LabRecordsExistResponse>>(context) {
+            NetworkBoundResource<LabRecordsModel.LabRecordsExistResponse, BaseResponse<LabRecordsModel.LabRecordsExistResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -184,7 +232,9 @@ class HraRepositoryImpl(
             LiveData<Resource<SaveAndSubmitHraModel.SaveAndSubmitHraResponse>> {
 
         return object :
-            NetworkBoundResource<SaveAndSubmitHraModel.SaveAndSubmitHraResponse, BaseResponse<SaveAndSubmitHraModel.SaveAndSubmitHraResponse>>(context) {
+            NetworkBoundResource<SaveAndSubmitHraModel.SaveAndSubmitHraResponse, BaseResponse<SaveAndSubmitHraModel.SaveAndSubmitHraResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -209,11 +259,17 @@ class HraRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun getMedicalProfileSummary(forceRefresh: Boolean, data: HraMedicalProfileSummaryModel, personId: String):
+    override suspend fun getMedicalProfileSummary(
+        forceRefresh: Boolean,
+        data: HraMedicalProfileSummaryModel,
+        personId: String
+    ):
             LiveData<Resource<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse>> {
 
         return object :
-            NetworkBoundResource<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse, BaseResponse<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse>>(context) {
+            NetworkBoundResource<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse, BaseResponse<HraMedicalProfileSummaryModel.MedicalProfileSummaryResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -253,10 +309,15 @@ class HraRepositoryImpl(
 
     }
 
-    override suspend fun getAssessmentSummary(forceRefresh: Boolean, data: HraAssessmentSummaryModel): LiveData<Resource<HraAssessmentSummaryModel.AssessmentSummaryResponce>> {
+    override suspend fun getAssessmentSummary(
+        forceRefresh: Boolean,
+        data: HraAssessmentSummaryModel
+    ): LiveData<Resource<HraAssessmentSummaryModel.AssessmentSummaryResponce>> {
 
         return object :
-            NetworkBoundResource<HraAssessmentSummaryModel.AssessmentSummaryResponce, BaseResponse<HraAssessmentSummaryModel.AssessmentSummaryResponce>>(context) {
+            NetworkBoundResource<HraAssessmentSummaryModel.AssessmentSummaryResponce, BaseResponse<HraAssessmentSummaryModel.AssessmentSummaryResponce>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -282,10 +343,15 @@ class HraRepositoryImpl(
 
     }
 
-    override suspend fun getListRecommendedTests(forceRefresh: Boolean, data: HraListRecommendedTestsModel): LiveData<Resource<HraListRecommendedTestsModel.ListRecommendedTestsResponce>> {
+    override suspend fun getListRecommendedTests(
+        forceRefresh: Boolean,
+        data: HraListRecommendedTestsModel
+    ): LiveData<Resource<HraListRecommendedTestsModel.ListRecommendedTestsResponce>> {
 
         return object :
-            NetworkBoundResource<HraListRecommendedTestsModel.ListRecommendedTestsResponce, BaseResponse<HraListRecommendedTestsModel.ListRecommendedTestsResponce>>(context) {
+            NetworkBoundResource<HraListRecommendedTestsModel.ListRecommendedTestsResponce, BaseResponse<HraListRecommendedTestsModel.ListRecommendedTestsResponce>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -313,7 +379,10 @@ class HraRepositoryImpl(
 
     override suspend fun getHRAHistory(data: HraHistoryModel): LiveData<Resource<HraHistoryModel.HRAHistoryResponse>> {
 
-       return object : NetworkBoundResource<HraHistoryModel.HRAHistoryResponse, BaseResponse<HraHistoryModel.HRAHistoryResponse>>(context) {
+        return object :
+            NetworkBoundResource<HraHistoryModel.HRAHistoryResponse, BaseResponse<HraHistoryModel.HRAHistoryResponse>>(
+                context
+            ) {
 
             @SuppressLint("BinaryOperationInTimber")
             override fun processResponse(response: BaseResponse<HraHistoryModel.HRAHistoryResponse>): HraHistoryModel.HRAHistoryResponse {

@@ -20,18 +20,31 @@ import timber.log.Timber
 
 interface MedicationRepository {
 
-    suspend fun getDrugsListResponse(forceRefresh: Boolean = false, data: DrugsModel): LiveData<Resource<DrugsModel.DrugsResponse>>
+    suspend fun getDrugsListResponse(
+        forceRefresh: Boolean = false,
+        data: DrugsModel
+    ): LiveData<Resource<DrugsModel.DrugsResponse>>
 
-    suspend fun fetchMedicationList(forceRefresh: Boolean = false, data: MedicationListModel, personId: String): LiveData<Resource<MedicationListModel.Response>>
+    suspend fun fetchMedicationList(
+        forceRefresh: Boolean = false,
+        data: MedicationListModel,
+        personId: String
+    ): LiveData<Resource<MedicationListModel.Response>>
 
     suspend fun getMedicationListByDay(data: MedicineListByDayModel): LiveData<Resource<MedicineListByDayModel.MedicineListByDayResponse>>
     suspend fun saveMedicine(data: AddMedicineModel): LiveData<Resource<AddMedicineModel.AddMedicineResponse>>
     suspend fun updateMedicine(data: UpdateMedicineModel): LiveData<Resource<UpdateMedicineModel.UpdateMedicineResponse>>
-    suspend fun deleteMedicine(data: DeleteMedicineModel, medicationID: String): LiveData<Resource<DeleteMedicineModel.DeleteMedicineResponse>>
+    suspend fun deleteMedicine(
+        data: DeleteMedicineModel,
+        medicationID: String
+    ): LiveData<Resource<DeleteMedicineModel.DeleteMedicineResponse>>
 
     suspend fun setAlert(data: SetAlertModel): LiveData<Resource<SetAlertModel.SetAlertResponse>>
     suspend fun getMedicine(data: GetMedicineModel): LiveData<Resource<GetMedicineModel.GetMedicineResponse>>
-    suspend fun getMedicationInTakeByScheduleID(data: MedicineInTakeModel, scheduleId: Int): LiveData<Resource<MedicineInTakeModel.MedicineDetailsResponse>>
+    suspend fun getMedicationInTakeByScheduleID(
+        data: MedicineInTakeModel,
+        scheduleId: Int
+    ): LiveData<Resource<MedicineInTakeModel.MedicineDetailsResponse>>
 
     suspend fun addMedicineIntake(data: AddInTakeModel): LiveData<Resource<AddInTakeModel.AddInTakeResponse>>
 
@@ -48,11 +61,19 @@ class MedicationRepositoryImpl(
     private val dataSource: MedicationDatasource,
     private val medicationDao: MedicationDao,
     private val dataSyncMasterDao: DataSyncMasterDao,
-    private val context: Context) : MedicationRepository {
+    private val context: Context
+) : MedicationRepository {
 
-    override suspend fun fetchMedicationList(forceRefresh: Boolean, data: MedicationListModel, personId: String): LiveData<Resource<MedicationListModel.Response>> {
+    override suspend fun fetchMedicationList(
+        forceRefresh: Boolean,
+        data: MedicationListModel,
+        personId: String
+    ): LiveData<Resource<MedicationListModel.Response>> {
 
-        return object : NetworkBoundResource<MedicationListModel.Response, BaseResponse<MedicationListModel.Response>>(context) {
+        return object :
+            NetworkBoundResource<MedicationListModel.Response, BaseResponse<MedicationListModel.Response>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -113,10 +134,15 @@ class MedicationRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun getDrugsListResponse(forceRefresh: Boolean, data: DrugsModel): LiveData<Resource<DrugsModel.DrugsResponse>> {
+    override suspend fun getDrugsListResponse(
+        forceRefresh: Boolean,
+        data: DrugsModel
+    ): LiveData<Resource<DrugsModel.DrugsResponse>> {
 
         return object :
-            NetworkBoundResource<DrugsModel.DrugsResponse, BaseResponse<DrugsModel.DrugsResponse>>(context) {
+            NetworkBoundResource<DrugsModel.DrugsResponse, BaseResponse<DrugsModel.DrugsResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -142,7 +168,9 @@ class MedicationRepositoryImpl(
     override suspend fun getMedicine(data: GetMedicineModel): LiveData<Resource<GetMedicineModel.GetMedicineResponse>> {
 
         return object :
-            NetworkBoundResource<GetMedicineModel.GetMedicineResponse, BaseResponse<GetMedicineModel.GetMedicineResponse>>(context) {
+            NetworkBoundResource<GetMedicineModel.GetMedicineResponse, BaseResponse<GetMedicineModel.GetMedicineResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -168,7 +196,10 @@ class MedicationRepositoryImpl(
 
     override suspend fun getMedicationListByDay(data: MedicineListByDayModel): LiveData<Resource<MedicineListByDayModel.MedicineListByDayResponse>> {
 
-        return object : NetworkBoundResource<MedicineListByDayModel.MedicineListByDayResponse, BaseResponse<MedicineListByDayModel.MedicineListByDayResponse>>(context) {
+        return object :
+            NetworkBoundResource<MedicineListByDayModel.MedicineListByDayResponse, BaseResponse<MedicineListByDayModel.MedicineListByDayResponse>>(
+                context
+            ) {
 
             var medications: List<MedicineListByDayModel.Medication> = listOf()
 
@@ -238,7 +269,9 @@ class MedicationRepositoryImpl(
     override suspend fun setAlert(data: SetAlertModel): LiveData<Resource<SetAlertModel.SetAlertResponse>> {
 
         return object :
-            NetworkBoundResource<SetAlertModel.SetAlertResponse, BaseResponse<SetAlertModel.SetAlertResponse>>(context) {
+            NetworkBoundResource<SetAlertModel.SetAlertResponse, BaseResponse<SetAlertModel.SetAlertResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -266,7 +299,9 @@ class MedicationRepositoryImpl(
     override suspend fun saveMedicine(data: AddMedicineModel): LiveData<Resource<AddMedicineModel.AddMedicineResponse>> {
 
         return object :
-            NetworkBoundResource<AddMedicineModel.AddMedicineResponse, BaseResponse<AddMedicineModel.AddMedicineResponse>>(context) {
+            NetworkBoundResource<AddMedicineModel.AddMedicineResponse, BaseResponse<AddMedicineModel.AddMedicineResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -295,7 +330,9 @@ class MedicationRepositoryImpl(
     override suspend fun updateMedicine(data: UpdateMedicineModel): LiveData<Resource<UpdateMedicineModel.UpdateMedicineResponse>> {
 
         return object :
-            NetworkBoundResource<UpdateMedicineModel.UpdateMedicineResponse, BaseResponse<UpdateMedicineModel.UpdateMedicineResponse>>(context) {
+            NetworkBoundResource<UpdateMedicineModel.UpdateMedicineResponse, BaseResponse<UpdateMedicineModel.UpdateMedicineResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -324,7 +361,9 @@ class MedicationRepositoryImpl(
     override suspend fun addMedicineIntake(data: AddInTakeModel): LiveData<Resource<AddInTakeModel.AddInTakeResponse>> {
 
         return object :
-            NetworkBoundResource<AddInTakeModel.AddInTakeResponse, BaseResponse<AddInTakeModel.AddInTakeResponse>>(context) {
+            NetworkBoundResource<AddInTakeModel.AddInTakeResponse, BaseResponse<AddInTakeModel.AddInTakeResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -350,10 +389,15 @@ class MedicationRepositoryImpl(
 
     }
 
-    override suspend fun deleteMedicine(data: DeleteMedicineModel, medicationID: String): LiveData<Resource<DeleteMedicineModel.DeleteMedicineResponse>> {
+    override suspend fun deleteMedicine(
+        data: DeleteMedicineModel,
+        medicationID: String
+    ): LiveData<Resource<DeleteMedicineModel.DeleteMedicineResponse>> {
 
         return object :
-            NetworkBoundResource<DeleteMedicineModel.DeleteMedicineResponse, BaseResponse<DeleteMedicineModel.DeleteMedicineResponse>>(context) {
+            NetworkBoundResource<DeleteMedicineModel.DeleteMedicineResponse, BaseResponse<DeleteMedicineModel.DeleteMedicineResponse>>(
+                context
+            ) {
 
             var isProcessed = false
             override fun shouldStoreInDb(): Boolean = true
@@ -389,10 +433,15 @@ class MedicationRepositoryImpl(
         }.build().asLiveData()
     }
 
-    override suspend fun getMedicationInTakeByScheduleID(data: MedicineInTakeModel, scheduleId: Int): LiveData<Resource<MedicineInTakeModel.MedicineDetailsResponse>> {
+    override suspend fun getMedicationInTakeByScheduleID(
+        data: MedicineInTakeModel,
+        scheduleId: Int
+    ): LiveData<Resource<MedicineInTakeModel.MedicineDetailsResponse>> {
 
         return object :
-            NetworkBoundResource<MedicineInTakeModel.MedicineDetailsResponse, BaseResponse<MedicineInTakeModel.MedicineDetailsResponse>>(context) {
+            NetworkBoundResource<MedicineInTakeModel.MedicineDetailsResponse, BaseResponse<MedicineInTakeModel.MedicineDetailsResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 

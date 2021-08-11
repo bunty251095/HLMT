@@ -13,7 +13,12 @@ class CustomImageView : AppCompatImageView {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {}
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
+    }
 
     override fun onDraw(canvas: Canvas) {
         //float radius = 36.0f;

@@ -8,8 +8,11 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.caressa.common.R
 
-class AutocompleteTextViewAdapter(private val mContext: Context, private var dataList: List<AutocompleteTextViewModel>?) :
-    ArrayAdapter<Any>(mContext, 0, dataList!!){
+class AutocompleteTextViewAdapter(
+    private val mContext: Context,
+    private var dataList: List<AutocompleteTextViewModel>?
+) :
+    ArrayAdapter<Any>(mContext, 0, dataList!!) {
 
     override fun getCount(): Int {
         return dataList?.size!!
@@ -23,7 +26,8 @@ class AutocompleteTextViewAdapter(private val mContext: Context, private var dat
         var view = convertView
 
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.auto_complete_textview_layout, parent, false)
+            view = LayoutInflater.from(context)
+                .inflate(R.layout.auto_complete_textview_layout, parent, false)
         }
         val item = getItem(position)
 
@@ -32,7 +36,7 @@ class AutocompleteTextViewAdapter(private val mContext: Context, private var dat
         return view
     }
 
-    fun updateData(list: List<AutocompleteTextViewModel>){
+    fun updateData(list: List<AutocompleteTextViewModel>) {
         dataList = list
         notifyDataSetChanged()
     }

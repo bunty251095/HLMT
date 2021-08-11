@@ -3,8 +3,6 @@ package com.caressa.common.view
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
@@ -12,7 +10,6 @@ import com.caressa.common.R
 import com.caressa.common.base.ClientConfiguration
 import com.caressa.common.constants.Constants
 import org.json.JSONObject
-import timber.log.Timber
 
 class ArcButton : AppCompatButton {
 
@@ -20,7 +17,11 @@ class ArcButton : AppCompatButton {
         styleButton(context, attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         styleButton(context, attrs)
     }
 
@@ -37,13 +38,21 @@ class ArcButton : AppCompatButton {
                         setTextColor(Color.parseColor(templateJSON.getString(Constants.LEFT_BUTTON_TEXT_COLOR)))
                         //background.setColorFilter(Color.parseColor(templateJSON.getString(Constants.LEFT_BUTTON_COLOR)),PorterDuff.Mode.MULTIPLY)
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            backgroundTintList = ColorStateList.valueOf(Color.parseColor(templateJSON.getString(Constants.LEFT_BUTTON_COLOR)))
+                            backgroundTintList = ColorStateList.valueOf(
+                                Color.parseColor(
+                                    templateJSON.getString(Constants.LEFT_BUTTON_COLOR)
+                                )
+                            )
                         }
                     } else {
                         setTextColor(Color.parseColor(templateJSON.getString(Constants.RIGHT_BUTTON_TEXT_COLOR)))
                         //background.setColorFilter(Color.parseColor(templateJSON.getString(Constants.RIGHT_BUTTON_COLOR)),PorterDuff.Mode.MULTIPLY)
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            backgroundTintList = ColorStateList.valueOf(Color.parseColor(templateJSON.getString(Constants.RIGHT_BUTTON_COLOR)))
+                            backgroundTintList = ColorStateList.valueOf(
+                                Color.parseColor(
+                                    templateJSON.getString(Constants.RIGHT_BUTTON_COLOR)
+                                )
+                            )
                         }
                     }
                 }

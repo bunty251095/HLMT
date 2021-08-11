@@ -10,22 +10,24 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import org.koin.standalone.KoinComponent
 import com.caressa.common.R
 import kotlinx.android.synthetic.main.dialog_vital_parameter.*
+import org.koin.standalone.KoinComponent
 import timber.log.Timber
 
-class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dialogType: String,
-                         parameterDataModel: ParameterDataModel) : Dialog(context), KoinComponent {
+class HeightWeightDialog(
+    context: Context, listener: OnDialogValueListener, dialogType: String,
+    parameterDataModel: ParameterDataModel
+) : Dialog(context), KoinComponent {
 
     private val appColorHelper = AppColorHelper.instance!!
     private var onDialogValueListener: OnDialogValueListener? = null
     private var dialogType = "Height"
     private var parameterDataModel: ParameterDataModel? = null
-    private var paramFt : VitalParameter? = null
-    private var paramCm : VitalParameter? = null
-    private var paramLbs : VitalParameter? = null
-    private var paramKg : VitalParameter? = null
+    private var paramFt: VitalParameter? = null
+    private var paramCm: VitalParameter? = null
+    private var paramLbs: VitalParameter? = null
+    private var paramKg: VitalParameter? = null
     private var pickerSpeed = 8000
     private var height = 0
     private var heightInch = 0
@@ -47,10 +49,14 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
 
     fun init() {
         try {
-            paramFt = Utilities.getVitalParameterData(context.resources.getString(R.string.FT), context)
-            paramCm = Utilities.getVitalParameterData(context.resources.getString(R.string.CM), context)
-            paramLbs = Utilities.getVitalParameterData(context.resources.getString(R.string.LBS), context)
-            paramKg = Utilities.getVitalParameterData(context.resources.getString(R.string.KG), context)
+            paramFt =
+                Utilities.getVitalParameterData(context.resources.getString(R.string.FT), context)
+            paramCm =
+                Utilities.getVitalParameterData(context.resources.getString(R.string.CM), context)
+            paramLbs =
+                Utilities.getVitalParameterData(context.resources.getString(R.string.LBS), context)
+            paramKg =
+                Utilities.getVitalParameterData(context.resources.getString(R.string.KG), context)
 
             if (dialogType.equals("Height", ignoreCase = true)) {
                 lbl_title.text = context.resources.getString(R.string.PICK_YOUR_HEIGHT)
@@ -71,27 +77,49 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
 
                 if (parameterDataModel!!.unit.equals("Feet/inch", ignoreCase = true)) {
                     layout_picker2.visibility = View.VISIBLE
-                    btn_left.background = ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
-                    btn_right.background = ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
+                    btn_left.background = ResourcesCompat.getDrawable(
+                        context.resources,
+                        R.drawable.btn_fill_dialog,
+                        null
+                    )
+                    btn_right.background =
+                        ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        btn_left.backgroundTintList = ColorStateList.valueOf( appColorHelper.selectionColor )
-                        btn_right.backgroundTintList = ColorStateList.valueOf( appColorHelper.deselectionColor )
+                        btn_left.backgroundTintList =
+                            ColorStateList.valueOf(appColorHelper.selectionColor)
+                        btn_right.backgroundTintList =
+                            ColorStateList.valueOf(appColorHelper.deselectionColor)
                     }
-                    picker1.value = CalculateParameters.convertCmToFeet(parameterDataModel!!.finalValue)
-                    picker2.value = CalculateParameters.convertCmToInch(parameterDataModel!!.finalValue)
+                    picker1.value =
+                        CalculateParameters.convertCmToFeet(parameterDataModel!!.finalValue)
+                    picker2.value =
+                        CalculateParameters.convertCmToInch(parameterDataModel!!.finalValue)
                     btn_left.isSelected = true
                     btn_right.isSelected = false
                     btn_left.setTextColor(ContextCompat.getColor(context, R.color.white))
                     btn_right.setTextColor(ContextCompat.getColor(context, R.color.textViewColor))
-                    picker1.value = CalculateParameters.convertCmToFeet(parameterDataModel!!.finalValue)
-                    picker2.value = CalculateParameters.convertCmToInch(parameterDataModel!!.finalValue)
-                } else if (parameterDataModel!!.unit.equals(context.resources.getString(R.string.CM), ignoreCase = true)) {
+                    picker1.value =
+                        CalculateParameters.convertCmToFeet(parameterDataModel!!.finalValue)
+                    picker2.value =
+                        CalculateParameters.convertCmToInch(parameterDataModel!!.finalValue)
+                } else if (parameterDataModel!!.unit.equals(
+                        context.resources.getString(R.string.CM),
+                        ignoreCase = true
+                    )
+                ) {
                     layout_picker2.visibility = View.GONE
-                    btn_left.background = ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
-                    btn_right.background = ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
+                    btn_left.background =
+                        ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
+                    btn_right.background = ResourcesCompat.getDrawable(
+                        context.resources,
+                        R.drawable.btn_fill_dialog,
+                        null
+                    )
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        btn_left.backgroundTintList = ColorStateList.valueOf( appColorHelper.deselectionColor )
-                        btn_right.backgroundTintList = ColorStateList.valueOf( appColorHelper.selectionColor )
+                        btn_left.backgroundTintList =
+                            ColorStateList.valueOf(appColorHelper.deselectionColor)
+                        btn_right.backgroundTintList =
+                            ColorStateList.valueOf(appColorHelper.selectionColor)
                     }
                     btn_left.isSelected = false
                     btn_right.isSelected = true
@@ -113,29 +141,52 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
                 picker2.setOnLongPressUpdateInterval(pickerSpeed.toLong())
                 picker2.wrapSelectorWheel = false
 
-                if (parameterDataModel!!.unit.equals(context.resources.getString(R.string.LBS), ignoreCase = true)) {
+                if (parameterDataModel!!.unit.equals(
+                        context.resources.getString(R.string.LBS),
+                        ignoreCase = true
+                    )
+                ) {
                     layout_picker2.visibility = View.GONE
-                    btn_left.background = ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
-                    btn_right.background = ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
+                    btn_left.background = ResourcesCompat.getDrawable(
+                        context.resources,
+                        R.drawable.btn_fill_dialog,
+                        null
+                    )
+                    btn_right.background =
+                        ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        btn_left.backgroundTintList = ColorStateList.valueOf( appColorHelper.selectionColor )
-                        btn_right.backgroundTintList = ColorStateList.valueOf( appColorHelper.deselectionColor )
+                        btn_left.backgroundTintList =
+                            ColorStateList.valueOf(appColorHelper.selectionColor)
+                        btn_right.backgroundTintList =
+                            ColorStateList.valueOf(appColorHelper.deselectionColor)
                     }
                     btn_left.isSelected = true
                     btn_right.isSelected = false
                     txt_unit1.text = paramLbs!!.unit
                     picker1.minValue = paramLbs!!.minRange
                     picker1.maxValue = paramLbs!!.maxRange
-                    val wt = CalculateParameters.convertKgToLbs(parameterDataModel!!.finalValue).toDouble()
+                    val wt = CalculateParameters.convertKgToLbs(parameterDataModel!!.finalValue)
+                        .toDouble()
                     Timber.i("Converted_Wt=>$wt")
                     picker1.value = wt.toInt()
-                } else if (parameterDataModel!!.unit.equals(context.resources.getString(R.string.KG), ignoreCase = true)) {
+                } else if (parameterDataModel!!.unit.equals(
+                        context.resources.getString(R.string.KG),
+                        ignoreCase = true
+                    )
+                ) {
                     layout_picker2.visibility = View.VISIBLE
-                    btn_left.background = ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
-                    btn_right.background = ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
+                    btn_left.background =
+                        ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
+                    btn_right.background = ResourcesCompat.getDrawable(
+                        context.resources,
+                        R.drawable.btn_fill_dialog,
+                        null
+                    )
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        btn_left.backgroundTintList = ColorStateList.valueOf( appColorHelper.deselectionColor )
-                        btn_right.backgroundTintList = ColorStateList.valueOf( appColorHelper.selectionColor )
+                        btn_left.backgroundTintList =
+                            ColorStateList.valueOf(appColorHelper.deselectionColor)
+                        btn_right.backgroundTintList =
+                            ColorStateList.valueOf(appColorHelper.selectionColor)
                     }
                     btn_left.isSelected = false
                     btn_right.isSelected = true
@@ -163,11 +214,15 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
 
             if (dialogType.equals("Height", ignoreCase = true)) {
                 picker1.displayedValues = null
-                btn_left.background = ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
-                btn_right.background = ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
+                btn_left.background =
+                    ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
+                btn_right.background =
+                    ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    btn_left.backgroundTintList = ColorStateList.valueOf( appColorHelper.selectionColor )
-                    btn_right.backgroundTintList = ColorStateList.valueOf( appColorHelper.deselectionColor )
+                    btn_left.backgroundTintList =
+                        ColorStateList.valueOf(appColorHelper.selectionColor)
+                    btn_right.backgroundTintList =
+                        ColorStateList.valueOf(appColorHelper.deselectionColor)
                 }
                 btn_left.setTextColor(ContextCompat.getColor(context, R.color.white))
                 btn_right.setTextColor(ContextCompat.getColor(context, R.color.textViewColor))
@@ -182,11 +237,15 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
                 height = picker1.value
             } else {
                 layout_picker2.visibility = View.GONE
-                btn_left.background = ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
-                btn_right.background = ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
+                btn_left.background =
+                    ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
+                btn_right.background =
+                    ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    btn_left.backgroundTintList = ColorStateList.valueOf( appColorHelper.selectionColor )
-                    btn_right.backgroundTintList = ColorStateList.valueOf( appColorHelper.deselectionColor )
+                    btn_left.backgroundTintList =
+                        ColorStateList.valueOf(appColorHelper.selectionColor)
+                    btn_right.backgroundTintList =
+                        ColorStateList.valueOf(appColorHelper.deselectionColor)
                 }
                 btn_left.setTextColor(ContextCompat.getColor(context, R.color.white))
                 btn_right.setTextColor(ContextCompat.getColor(context, R.color.textViewColor))
@@ -195,7 +254,9 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
                 picker1.maxValue = paramLbs!!.maxRange
                 btn_left.isSelected = true
                 btn_right.isSelected = false
-                val wt = CalculateParameters.convertKgToLbs(parameterDataModel!!.finalValue).toDouble().toInt()
+                val wt =
+                    CalculateParameters.convertKgToLbs(parameterDataModel!!.finalValue).toDouble()
+                        .toInt()
                 picker1.value = wt
                 weight = (picker1.value.toString() + "." + picker2.value).toDouble()
             }
@@ -204,11 +265,15 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
         btn_right.setOnClickListener {
 
             if (dialogType.equals("Height", ignoreCase = true)) {
-                btn_left.background = ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
-                btn_right.background = ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
+                btn_left.background =
+                    ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
+                btn_right.background =
+                    ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    btn_left.backgroundTintList = ColorStateList.valueOf( appColorHelper.deselectionColor )
-                    btn_right.backgroundTintList = ColorStateList.valueOf( appColorHelper.selectionColor )
+                    btn_left.backgroundTintList =
+                        ColorStateList.valueOf(appColorHelper.deselectionColor)
+                    btn_right.backgroundTintList =
+                        ColorStateList.valueOf(appColorHelper.selectionColor)
                 }
                 btn_left.setTextColor(ContextCompat.getColor(context, R.color.textViewColor))
                 btn_right.setTextColor(ContextCompat.getColor(context, R.color.white))
@@ -224,11 +289,15 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
             } else {
                 picker1.displayedValues = null
                 layout_picker2.visibility = View.VISIBLE
-                btn_left.background = ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
-                btn_right.background = ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
+                btn_left.background =
+                    ResourcesCompat.getDrawable(context.resources, R.color.transparent, null)
+                btn_right.background =
+                    ResourcesCompat.getDrawable(context.resources, R.drawable.btn_fill_dialog, null)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    btn_left.backgroundTintList = ColorStateList.valueOf( appColorHelper.deselectionColor )
-                    btn_right.backgroundTintList = ColorStateList.valueOf( appColorHelper.selectionColor )
+                    btn_left.backgroundTintList =
+                        ColorStateList.valueOf(appColorHelper.deselectionColor)
+                    btn_right.backgroundTintList =
+                        ColorStateList.valueOf(appColorHelper.selectionColor)
                 }
                 btn_left.setTextColor(ContextCompat.getColor(context, R.color.textViewColor))
                 btn_right.setTextColor(ContextCompat.getColor(context, R.color.white))
@@ -255,18 +324,47 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
                     height = picker1.value
                     heightInch = picker2.value
                     if (height in 4..8) {
-                        onDialogValueListener!!.onDialogValueListener("Height", CalculateParameters.convertFeetInchToCm(height.toString(), heightInch.toString()).toString(), "0", "Feet/inch", "$height'$heightInch''")
+                        onDialogValueListener!!.onDialogValueListener(
+                            "Height",
+                            CalculateParameters.convertFeetInchToCm(
+                                height.toString(),
+                                heightInch.toString()
+                            ).toString(),
+                            "0",
+                            "Feet/inch",
+                            "$height'$heightInch''"
+                        )
                     } else {
-                        onDialogValueListener!!.onDialogValueListener("Height", height.toString(), "0", "Cm", height.toString())
+                        onDialogValueListener!!.onDialogValueListener(
+                            "Height",
+                            height.toString(),
+                            "0",
+                            "Cm",
+                            height.toString()
+                        )
                     }
                 } else {
-                    if (txt_unit1.text.toString().contains(context.resources.getString(R.string.LBS))) {
+                    if (txt_unit1.text.toString()
+                            .contains(context.resources.getString(R.string.LBS))
+                    ) {
                         weight = picker1.value.toDouble()
                         val finalValue = CalculateParameters.convertLbsToKg(weight.toString())
-                        onDialogValueListener!!.onDialogValueListener("Weight", "0", finalValue, paramLbs!!.unit, weight.toString())
+                        onDialogValueListener!!.onDialogValueListener(
+                            "Weight",
+                            "0",
+                            finalValue,
+                            paramLbs!!.unit,
+                            weight.toString()
+                        )
                     } else {
                         weight = (picker1.value.toString() + "." + picker2.value).toDouble()
-                        onDialogValueListener!!.onDialogValueListener("Weight", "0", weight.toString(), paramKg!!.unit, weight.toString())
+                        onDialogValueListener!!.onDialogValueListener(
+                            "Weight",
+                            "0",
+                            weight.toString(),
+                            paramKg!!.unit,
+                            weight.toString()
+                        )
                     }
                 }
             } catch (e: Exception) {
@@ -282,7 +380,13 @@ class HeightWeightDialog(context: Context, listener: OnDialogValueListener, dial
     }
 
     interface OnDialogValueListener {
-        fun onDialogValueListener(dialogType: String, height: String, weight: String, unit: String, visibleValue: String)
+        fun onDialogValueListener(
+            dialogType: String,
+            height: String,
+            weight: String,
+            unit: String,
+            visibleValue: String
+        )
     }
 
 }

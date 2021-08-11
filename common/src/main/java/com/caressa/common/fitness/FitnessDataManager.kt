@@ -40,7 +40,8 @@ class FitnessDataManager(private val mContext: Context?) {
                     (mContext as Activity?)!!,
                     requestCode.value,
                     googleAccount,
-                    fitnessOptions)
+                    fitnessOptions
+                )
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -65,7 +66,7 @@ class FitnessDataManager(private val mContext: Context?) {
      * return `null` if there has been no sign in before.
      */
     private val googleAccount: GoogleSignInAccount
-    get() = GoogleSignIn.getAccountForExtension(mContext!!, fitnessOptions)
+        get() = GoogleSignIn.getAccountForExtension(mContext!!, fitnessOptions)
 
     val googleAccountInfo: Task<GoogleSignInAccount>
         get() {
@@ -171,7 +172,10 @@ class FitnessDataManager(private val mContext: Context?) {
         // If the DataReadRequest object specified aggregated data, dataReadResult will be returned
         // as buckets containing DataSets, instead of just DataSets.
         if (!dataReadResult.buckets.isEmpty()) {
-            Logger.i(TAG, "Number of returned buckets of DataSets is: " + dataReadResult.buckets.size)
+            Logger.i(
+                TAG,
+                "Number of returned buckets of DataSets is: " + dataReadResult.buckets.size
+            )
             for (bucket in dataReadResult.buckets) {
                 for (dataSet in bucket.dataSets) {
                     processDataSet(dataSet)
@@ -197,7 +201,10 @@ class FitnessDataManager(private val mContext: Context?) {
             Logger.i(TAG, "\tEnd: " + dp.getEndTime(TimeUnit.MICROSECONDS))
             for (data in dp.dataType.fields) {
                 Logger.i(TAG, "\tField: " + data.name + " Value: " + dp.getValue(data))
-                Logger.i(TAG, "\tCalculated Fitness Data -> " + getCalculatedFitnessDataFromSteps(dataSet))
+                Logger.i(
+                    TAG,
+                    "\tCalculated Fitness Data -> " + getCalculatedFitnessDataFromSteps(dataSet)
+                )
             }
         }
     }
@@ -251,7 +258,9 @@ class FitnessDataManager(private val mContext: Context?) {
                         val activityTimeFactor = 100 //avg 100 steps per minute
                         calorieBurnedFactor = 138.462 //weightValue * (strideLengthInCms / 100);
                         totalDistanceInMtr =
-                            (stepsCount * (CalculateParameters.convertInchToCm(strideAsPerGenderInches.toString()).toDouble() / 100)).toFloat()
+                            (stepsCount * (CalculateParameters.convertInchToCm(
+                                strideAsPerGenderInches.toString()
+                            ).toDouble() / 100)).toFloat()
                         stepsActiveTime = stepsCount / activityTimeFactor
                         if (stepsActiveTime <= 0) stepsActiveTime = 1
 

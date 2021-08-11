@@ -207,7 +207,7 @@ class CustomCounter : LinearLayout, View.OnClickListener, TextView.OnEditorActio
                     binding.etCountervalue?.setSelection(binding.etCountervalue!!.text!!.length)
                 }
             }
-        } catch ( e :Exception ) {
+        } catch (e: Exception) {
 
         }
     }
@@ -230,11 +230,16 @@ class CustomCounter : LinearLayout, View.OnClickListener, TextView.OnEditorActio
                     binding.etCountervalue?.setSelection(binding.etCountervalue!!.text!!.length)
                 } else {
                     binding.etCountervalue?.setText(
-                        ((CalculateParameters.roundOffPrecision(java.lang.Double.valueOf(counterValue), 1) - 1).toInt()).toString())
+                        ((CalculateParameters.roundOffPrecision(
+                            java.lang.Double.valueOf(
+                                counterValue
+                            ), 1
+                        ) - 1).toInt()).toString()
+                    )
                     binding.etCountervalue?.setSelection(binding.etCountervalue!!.text!!.length)
                 }
             }
-        } catch ( e :Exception ) {
+        } catch (e: Exception) {
 
         }
     }
@@ -248,18 +253,22 @@ class CustomCounter : LinearLayout, View.OnClickListener, TextView.OnEditorActio
                 if (mIsNonDecimal) {
                     // binding.etCountervalue?.setText( round(java.lang.Double.valueOf(strValue), 1) as Int  + "")
                     binding.etCountervalue?.setText(
-                        CalculateParameters.round(java.lang.Double.valueOf(strValue!!), 1).toInt().toString())
+                        CalculateParameters.round(java.lang.Double.valueOf(strValue!!), 1).toInt()
+                            .toString()
+                    )
                     binding.etCountervalue?.setSelection(binding.etCountervalue!!.text!!.length)
                 } else {
                     //binding.etCountervalue?.setText(Utilities.round(java.lang.Double.valueOf(strValue), 1) as Int  + "")
                     binding.etCountervalue!!.setText(
-                        CalculateParameters.round(java.lang.Double.valueOf(strValue!!), 1).toInt().toString())
+                        CalculateParameters.round(java.lang.Double.valueOf(strValue!!), 1).toInt()
+                            .toString()
+                    )
                     binding.etCountervalue!!.setSelection(binding.etCountervalue!!.text!!.length)
                 }
             } else {
                 binding.etCountervalue?.setText("")
             }
-        } catch ( e : Exception ) {
+        } catch (e: Exception) {
 
         }
     }
