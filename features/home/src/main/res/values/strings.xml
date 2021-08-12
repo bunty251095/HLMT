@@ -27,6 +27,7 @@
     <string name="MENU_FAMILY_DOCTORS">Family Doctors</string>
     <string name="MENU_CONTACT_US">Contact Us</string>
     <string name="MENU_SPREAD_THE_WORD">Spread the Word</string>
+    <string name="REFER_AND_EARN">Refer &amp; Earn</string>
     <string name="MENU_SETTINGS">Settings</string>
     <string name="MENU_LOGOUT">Logout</string>
 
@@ -53,7 +54,7 @@
     <string name="DASH_ORDER_YOUR_MEDICINES">Order Your Medicines</string>
     <string name="DASH_TRACK_PARAMETER">Track Health \n Parameters</string>
     <string name="DASH_MEDICINE_TRACKER">Medicine \n Tracker</string>
-    <string name="DASH_ACTIVITY_TRACKER">Activity \n Tracker</string>
+    <string name="DASH_ACTIVITY_TRACKER">Activity Tracker</string>
     <string name="DASH_STORE_HEALTH_RECORD">Store \n Health Records</string>
     <string name="DASH_WELLNESS_CENTRE">Wellness \n Centre</string>
     <string name="DASH_TOOLS_TRACKER">Tools \n Tracker</string>

@@ -82,8 +82,6 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
         toggle.syncState()
         configureDrawerRecyclerView()
 
-
-
         Timber.i("HOME onCreate")
 
         backGroundCallViewModel.saveCloudMessagingId.observe(this, {})
@@ -220,6 +218,7 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
             DataHandler.NavDrawer.CONTACT_US -> viewModel.navigateToContactUsActivity()
             DataHandler.NavDrawer.SPREAD_THE_WORD -> viewModel.spreadTheWord()
             DataHandler.NavDrawer.SETTINGS -> viewModel.navigateToSettingsActivity()
+            DataHandler.NavDrawer.REFER_AND_EARN -> viewModel.navigateToReferrerActivity()
             //DataHandler.NavDrawer.HOME -> drawerLayout.closeDrawers()
         }
     }

@@ -373,7 +373,7 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
 
     private fun showEndDatePicker() {
         try {
-            DialogHelper().showDatePickerDialog("Start Date",requireContext(), Calendar.getInstance(),
+            DialogHelper().showDatePickerDialog("End Date",requireContext(), Calendar.getInstance(),
                 Calendar.getInstance(), null, object :
                     DialogHelper.DateListener {
                     override fun onDateSet(
