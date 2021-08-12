@@ -118,7 +118,7 @@ class HealthConditionDialog(context: Context,listener: OnHealthConditionValueLis
 
     private fun validate(): Boolean {
         var isValid = false
-        if (binding.laySelection.childCount > 0) {
+        if (binding.laySelection.childCount >= 0) {
             isValid = true
             selectionList.clear()
             for (i in 0 until binding.laySelection.childCount) {
@@ -155,7 +155,7 @@ class HealthConditionDialog(context: Context,listener: OnHealthConditionValueLis
             view.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_close, 0)
             setTextViewDrawableColor(view, appColorHelper.selectionColor)
             view.setTextColor(appColorHelper.selectionColor)
-            view.tag = view.text
+            view.tag = view.tag
 
             val drawable = GradientDrawable()
             drawable.shape = GradientDrawable.RECTANGLE

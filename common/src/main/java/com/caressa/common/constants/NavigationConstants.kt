@@ -17,6 +17,7 @@ object NavigationConstants {
         "com.caressa.home.ui.FamilyDoctor.FamilyDoctorAddOrUpdateActivity"
     const val CONTACT_US = "com.caressa.home.ui.ContactUsActivity"
     const val SETTINGS = "com.caressa.home.ui.SettingsActivity"
+    const val REFERRAR = "com.caressa.home.ui.ReferAndEarnActivity"
     const val PASSWORD_CHANGE = "com.caressa.home.ui.PasswordChangeActivity"
     const val FEEDBACK = "com.caressa.home.ui.FeedbackActivity"
     const val MEDICINE_TRACKER = "com.caressa.medication_tracker.MedicationHomeActivity"

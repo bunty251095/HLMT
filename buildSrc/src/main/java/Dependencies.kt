@@ -134,10 +134,9 @@ object Libraries {
     val firebaseAuth = "com.google.firebase:firebase-auth:${Versions.firebaseAuth}"
     val firebaseCore = "com.google.firebase:firebase-core:${Versions.firebase}"
     val firebaseMessaging = "com.google.firebase:firebase-messaging:${Versions.firebaseMessaging}"
-    val fabricsCathartics = "com.crashlytics.sdk.android:crashlytics:${Versions.fabricCrashlytics}"
     val firebaseAnalytics = "com.google.firebase:firebase-analytics:${Versions.firebaseAnalytics}"
-    val firebaseCrashlytics =
-        "com.crashlytics.sdk.android:crashlytics:${Versions.firebaseCrashlytics}"
+    val firebaseCrashlytics = "com.crashlytics.sdk.android:crashlytics:${Versions.firebaseCrashlytics}"
+    val firebaseDynamicLink = "com.google.firebase:firebase-dynamic-links-ktx"
 
     val gsmAuth = "com.google.android.gms:play-services-auth:${Versions.gmsAuth}"
     val gsmFitness = "com.google.android.gms:play-services-fitness:${Versions.gmsFitness}"

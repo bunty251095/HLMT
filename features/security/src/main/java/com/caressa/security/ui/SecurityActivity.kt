@@ -1,5 +1,6 @@
 package com.caressa.security.ui
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,10 @@ import androidx.navigation.ui.NavigationUI
 import com.caressa.common.utils.AppColorHelper
 import kotlinx.android.synthetic.main.toolbar_layout_security.*
 import com.caressa.security.R
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.ktx.Firebase
+import timber.log.Timber
+import java.util.*
 
 
 class SecurityActivity : AppCompatActivity() {
@@ -74,6 +79,7 @@ class SecurityActivity : AppCompatActivity() {
                     appColorHelper.primaryColor(), BlendModeCompat.SRC_ATOP)
             }
         }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

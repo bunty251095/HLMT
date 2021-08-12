@@ -398,6 +398,13 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         context.startActivity(intent)
     }
 
+    fun navigateToReferrerActivity() {
+        val intent = Intent()
+        intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.REFERRAR)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+    }
+
     fun spreadTheWord() {
         try {
             var himOrHer = ""
@@ -434,6 +441,36 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                             " -- </a> " + "</br></br>") +
                     Html.fromHtml("<br><br>" + " Android : " +
                             " -- " + "</br></br>")+
+                    Html.fromHtml("<br><br>" + "Keep pace with us!</br></br>")
+
+            val sendIntent = Intent()
+            sendIntent.action = Intent.ACTION_SEND
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, title)
+            sendIntent.putExtra(Intent.EXTRA_TEXT, text)
+            sendIntent.type = "text/plain"
+            sendIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(sendIntent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun inviteUser(link:String = "--") {
+        try {
+            var himOrHer = ""
+            val userName = firstName
+            val appName = "HL Pace"
+
+            when(gender) {
+                "1" -> himOrHer = " him "
+                "2" -> himOrHer = " her "
+            }
+
+            val title: String = userName + " has invited you to join "+appName+" !"
+
+            val text = "Hello," + "\n\n" +  title + "\n\n" + "This Health & Wellness App that helps you to Store, Track and Manage your Health Data." +
+                    "\n\n" + "Join" + himOrHer + "on "+
+                    Html.fromHtml("<br><br>" + "App Link : " +link+ "</br></br>")+
                     Html.fromHtml("<br><br>" + "Keep pace with us!</br></br>")
 
             val sendIntent = Intent()
