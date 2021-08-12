@@ -21,7 +21,11 @@ class ArcRadioButton : AppCompatRadioButton {
         style(context, attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         style(context, attrs)
     }
 
@@ -32,8 +36,10 @@ class ArcRadioButton : AppCompatRadioButton {
         if (isTemplate) {
             try {
                 val templateJSON = JSONObject(getAppTemplateConfig())
-                val selectionColor = Color.parseColor(templateJSON.getString(Constants.SELECTION_COLOR))
-                val deselectionColor = Color.parseColor(templateJSON.getString(Constants.DESELECTION_COLOR))
+                val selectionColor =
+                    Color.parseColor(templateJSON.getString(Constants.SELECTION_COLOR))
+                val deselectionColor =
+                    Color.parseColor(templateJSON.getString(Constants.DESELECTION_COLOR))
                 val textColor = Color.parseColor(templateJSON.getString(Constants.TEXT_COLOR))
                 if (!isCalculator) {
                     val colorStateList = ColorStateList(
@@ -41,23 +47,29 @@ class ArcRadioButton : AppCompatRadioButton {
                             intArrayOf(android.R.attr.state_checked),
                             intArrayOf(-android.R.attr.state_checked),
                             intArrayOf(android.R.attr.state_enabled),
-                            intArrayOf(-android.R.attr.state_enabled)),
+                            intArrayOf(-android.R.attr.state_enabled)
+                        ),
                         intArrayOf(
                             selectionColor,
                             deselectionColor,
                             selectionColor,
-                            deselectionColor))
+                            deselectionColor
+                        )
+                    )
                     val textColorStateList = ColorStateList(
                         arrayOf(
                             intArrayOf(android.R.attr.state_checked),
                             intArrayOf(-android.R.attr.state_checked),
                             intArrayOf(android.R.attr.state_enabled),
-                            intArrayOf(-android.R.attr.state_enabled)),
+                            intArrayOf(-android.R.attr.state_enabled)
+                        ),
                         intArrayOf(
                             Color.WHITE,
                             deselectionColor,
                             Color.WHITE,
-                            deselectionColor))
+                            deselectionColor
+                        )
+                    )
 
                     setTextColor(textColorStateList)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -88,9 +100,18 @@ class ArcRadioButton : AppCompatRadioButton {
                     enableDrawable.setStroke(3, selectionColor)
                     enableDrawable.setColor(selectionColor)
                     val stateListDrawable = StateListDrawable()
-                    stateListDrawable.addState(intArrayOf(android.R.attr.state_selected), enableDrawable)
-                    stateListDrawable.addState(intArrayOf(android.R.attr.state_pressed), enableDrawable)
-                    stateListDrawable.addState(intArrayOf(android.R.attr.state_checked), enableDrawable)
+                    stateListDrawable.addState(
+                        intArrayOf(android.R.attr.state_selected),
+                        enableDrawable
+                    )
+                    stateListDrawable.addState(
+                        intArrayOf(android.R.attr.state_pressed),
+                        enableDrawable
+                    )
+                    stateListDrawable.addState(
+                        intArrayOf(android.R.attr.state_checked),
+                        enableDrawable
+                    )
                     stateListDrawable.addState(intArrayOf(), disableDrawable)
                     background = stateListDrawable
                     val textColorStateList = ColorStateList(
@@ -99,13 +120,16 @@ class ArcRadioButton : AppCompatRadioButton {
                             intArrayOf(android.R.attr.state_pressed),
                             intArrayOf(android.R.attr.state_checked),
                             intArrayOf(android.R.attr.state_enabled),
-                            intArrayOf(-android.R.attr.state_enabled)),
+                            intArrayOf(-android.R.attr.state_enabled)
+                        ),
                         intArrayOf(
                             Color.WHITE,
                             Color.WHITE,
                             Color.WHITE,
                             textColor,
-                            textColor))
+                            textColor
+                        )
+                    )
                     setTextColor(textColorStateList)
                 }
             } catch (e: Exception) {

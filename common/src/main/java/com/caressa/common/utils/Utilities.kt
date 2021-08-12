@@ -12,7 +12,6 @@ import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.net.ConnectivityManager
 import android.util.Base64
-import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -62,7 +61,10 @@ object Utilities {
 
     fun getHashKey(context: Context): String {
         try {
-            val info = context.packageManager.getPackageInfo(context.packageName,PackageManager.GET_SIGNATURES)
+            val info = context.packageManager.getPackageInfo(
+                context.packageName,
+                PackageManager.GET_SIGNATURES
+            )
             for (signature in info.signatures) {
                 val md = MessageDigest.getInstance("SHA")
                 md.update(signature.toByteArray())
@@ -147,7 +149,8 @@ object Utilities {
                 val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.BOTTOM, 0, 100)
                 val view = toast.view
-                view?.background?.colorFilter = PorterDuffColorFilter(appColorHelper.secondaryColor(), PorterDuff.Mode.SRC_IN)
+                view?.background?.colorFilter =
+                    PorterDuffColorFilter(appColorHelper.secondaryColor(), PorterDuff.Mode.SRC_IN)
                 val text = view?.findViewById<TextView>(android.R.id.message)
                 text?.setTextColor(ContextCompat.getColor(context, R.color.white))
                 toast.show()
@@ -162,9 +165,10 @@ object Utilities {
         try {
             if (context != null && !isNullOrEmpty(message)) {
                 val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.BOTTOM, 0,  100)
+                toast.setGravity(Gravity.BOTTOM, 0, 100)
                 val view = toast.view
-                view!!.background.colorFilter = PorterDuffColorFilter(appColorHelper.secondaryColor(), PorterDuff.Mode.SRC_IN)
+                view!!.background.colorFilter =
+                    PorterDuffColorFilter(appColorHelper.secondaryColor(), PorterDuff.Mode.SRC_IN)
                 val text = view.findViewById<TextView>(android.R.id.message)
                 text.setTextColor(ContextCompat.getColor(context, R.color.white))
                 toast.show()
@@ -183,13 +187,22 @@ object Utilities {
         if (extension.equals("JPEG", ignoreCase = true) ||
             extension.equals("jpg", ignoreCase = true) ||
             extension.equals("PNG", ignoreCase = true) ||
-            extension.equals("png", ignoreCase = true)) {
+            extension.equals("png", ignoreCase = true)
+        ) {
             documentType = "IMAGE"
-        } else if (extension.equals("PDF", ignoreCase = true) || extension.equals("pdf", ignoreCase = true)) {
+        } else if (extension.equals("PDF", ignoreCase = true) || extension.equals(
+                "pdf",
+                ignoreCase = true
+            )
+        ) {
             documentType = "PDF"
         } else if (extension.equals("DOC", ignoreCase = true) ||
             extension.equals("doc", ignoreCase = true) ||
-            extension.equals("docx", ignoreCase = true) || extension.equals("DOCX", ignoreCase = true)) {
+            extension.equals("docx", ignoreCase = true) || extension.equals(
+                "DOCX",
+                ignoreCase = true
+            )
+        ) {
             documentType = "DOC"
         }
         return documentType
@@ -210,10 +223,10 @@ object Utilities {
         }
     }
 
-    fun getRelationshipByRelationshipCode(relationshipCode: String,context: Context): String {
+    fun getRelationshipByRelationshipCode(relationshipCode: String, context: Context): String {
         var relationship = ""
 
-        when(relationshipCode) {
+        when (relationshipCode) {
             Constants.FATHER_RELATIONSHIP_CODE -> {
                 relationship = context.resources.getString(R.string.BROTHER)
             }
@@ -284,7 +297,8 @@ object Utilities {
         //return email.contains("@")
         val pattern: Pattern
         val matcher: Matcher
-        val EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+        val EMAIL_PATTERN =
+            "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
         pattern = Pattern.compile(EMAIL_PATTERN)
         matcher = pattern.matcher(email)
         return matcher.matches()
@@ -307,7 +321,8 @@ object Utilities {
     }
 
     fun isPhoneValid(phoneNumber: String): Boolean {
-        val pattern = Pattern.compile("\\ic_pdf{10}|(?:\\ic_pdf{3}-){2}\\ic_pdf{4}|\\(\\ic_pdf{3}\\)\\ic_pdf{3}-?\\ic_pdf{4}")
+        val pattern =
+            Pattern.compile("\\ic_pdf{10}|(?:\\ic_pdf{3}-){2}\\ic_pdf{4}|\\(\\ic_pdf{3}\\)\\ic_pdf{3}-?\\ic_pdf{4}")
         return phoneNumber.matches(pattern.toRegex())
     }
 
@@ -443,7 +458,8 @@ object Utilities {
     fun clearStepsData(context: Context) {
         val intent = Intent()
         intent.action = Constants.CLEAR_FITNESS_DATA
-        intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.FITNESS_BROADCAST_RECEIVER)
+        intent.component =
+            ComponentName(NavigationConstants.APPID, NavigationConstants.FITNESS_BROADCAST_RECEIVER)
         //intent.putExtra(GlobalConstants.EVENT, event)
         context.sendBroadcast(intent)
     }
@@ -461,9 +477,15 @@ object Utilities {
     fun Activity.getRootView(): View {
         return findViewById<View>(android.R.id.content)
     }
+
     fun Context.convertDpToPx(dp: Float): Float {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, this.resources.displayMetrics)
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp,
+            this.resources.displayMetrics
+        )
     }
+
     fun Activity.isKeyboardOpen(): Boolean {
         val visibleBounds = Rect()
         this.getRootView().getWindowVisibleDisplayFrame(visibleBounds)

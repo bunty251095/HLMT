@@ -146,12 +146,21 @@ object RealPathUtil {
         return filename
     }
 
-    fun saveOtherAsFileToExternalCard( arraybyte: ByteArray?,NewfileName: String,from: String,folderID: String ): Boolean {
+    fun saveOtherAsFileToExternalCard(
+        arraybyte: ByteArray?,
+        NewfileName: String,
+        from: String,
+        folderID: String
+    ): Boolean {
         var save = false
         var folderName = ""
         if (from.equals(Constants.PROFILE, ignoreCase = true)) {
             folderName = getProfileFolderLocation()
-        } else if( from.equals(Constants.RECORD, ignoreCase = true) && folderID.equals("", ignoreCase = true) ) {
+        } else if (from.equals(Constants.RECORD, ignoreCase = true) && folderID.equals(
+                "",
+                ignoreCase = true
+            )
+        ) {
             folderName = getRecordFolderLocation()
         } else {
             folderName = getRecordFolderLocation() + "/" + folderID
@@ -165,7 +174,7 @@ object RealPathUtil {
             }
             val absolutePathDic = myDirectory.absolutePath + "/" + NewfileName
             println("Chekc_Absolute_PAth----->$absolutePathDic")
-            if (arraybyte != null ) {
+            if (arraybyte != null) {
                 val out = FileOutputStream(absolutePathDic)
                 out.write(arraybyte)
                 out.close()
@@ -214,7 +223,7 @@ object RealPathUtil {
 
     }
 
-    fun createDirectory(folderName: String)  {
+    fun createDirectory(folderName: String) {
         if (isExternalStorageAvailable && isExternalStorageWritable) {
             val myDirectory = File(folderName)
             if (!myDirectory.exists()) {
@@ -224,7 +233,7 @@ object RealPathUtil {
     }
 
     @Throws(IOException::class)
-    fun copy(src: File, dst: File) : Boolean {
+    fun copy(src: File, dst: File): Boolean {
         var save = false
         try {
             FileInputStream(src).use { `in` ->
@@ -246,12 +255,21 @@ object RealPathUtil {
         return save
     }
 
-    fun saveBitampAsFileToExternalCard(bitmap: Bitmap?, NewfileName: String, from: String, folderID: String): Boolean {
+    fun saveBitampAsFileToExternalCard(
+        bitmap: Bitmap?,
+        NewfileName: String,
+        from: String,
+        folderID: String
+    ): Boolean {
         var save = false
         var folderName = ""
         if (from.equals(Constants.PROFILE, ignoreCase = true)) {
             folderName = getProfileFolderLocation()
-        } else if (from.equals(Constants.RECORD, ignoreCase = true) && folderID.equals("", ignoreCase = true)) {
+        } else if (from.equals(Constants.RECORD, ignoreCase = true) && folderID.equals(
+                "",
+                ignoreCase = true
+            )
+        ) {
             folderName = getRecordFolderLocation() + "/"
         } else {
             folderName = getRecordFolderLocation() + "/" + folderID
@@ -274,10 +292,11 @@ object RealPathUtil {
                 // Compress the bitmap with JPEG format and quality 50%
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
                 //						Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(stream.toByteArray()));
-                var byteArray: ByteArray? = stream.toByteArray() // convert camera photo to byte array
+                var byteArray: ByteArray? =
+                    stream.toByteArray() // convert camera photo to byte array
                 val compressedBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray!!.size)
                 // save it in your external storage.
-                val fo = FileOutputStream(File(absolutePathDic , NewfileName))
+                val fo = FileOutputStream(File(absolutePathDic, NewfileName))
                 fo.write(byteArray)
                 fo.flush()
                 fo.close()
@@ -321,6 +340,41 @@ object RealPathUtil {
         return calString
     }
 
+    fun calculateFileSize(filepath: String,type:String): Double {
+        Timber.e("File Path---> $filepath")
+        var calculatedSize = 0.0
+        val file = File(filepath)
+
+        val bytes = if (!file.exists()) 0.0 else file.length().toDouble()
+
+        // Convert the bytes to Kilobytes (1 KB = 1024 Bytes)
+        val kilobytes = bytes / 1024
+
+        // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
+        val megabytes = kilobytes / 1024
+
+        val gigabytes = megabytes / 1024
+        val terabytes = gigabytes / 1024
+
+        when {
+            type.equals("KB",ignoreCase = true) -> {
+                calculatedSize = kilobytes
+            }
+            type.equals("MB",ignoreCase = true) -> {
+                calculatedSize = megabytes
+            }
+            type.equals("GB",ignoreCase = true) -> {
+                calculatedSize = gigabytes
+            }
+            type.equals("TB",ignoreCase = true) -> {
+                calculatedSize = terabytes
+            }
+        }
+        val finalSize = Utilities.roundOffPrecision(calculatedSize,2)
+        Timber.e("File Size : $finalSize ${type.toUpperCase()}")
+        return finalSize
+    }
+
 /*     fun copyFile(inputPath: String, outputPath: String, FileName: String): Boolean {
         var save = false
         var `in`: InputStream? = null
@@ -358,10 +412,10 @@ object RealPathUtil {
     }*/
 
 
-    fun writeRecordToDisk(inputPath: String, outputPath: String, fileName : String): Boolean {
+    fun writeRecordToDisk(inputPath: String, outputPath: String, fileName: String): Boolean {
         try {
             val path = Environment.getExternalStorageDirectory()
-            val file = File( outputPath ,  fileName )
+            val file = File(outputPath, fileName)
             Timber.i("downloadDocPath: ----->" + file)
 
             var inputStream: InputStream? = null
@@ -386,28 +440,28 @@ object RealPathUtil {
                 outputStream!!.flush()
                 return true
             } catch (e: Exception) {
-                Timber.i("Error..."+e.printStackTrace())
+                Timber.i("Error..." + e.printStackTrace())
                 return false
             } finally {
                 inputStream?.close()
                 outputStream?.close()
             }
         } catch (e: Exception) {
-            Timber.i("Error!!!"+e.printStackTrace())
+            Timber.i("Error!!!" + e.printStackTrace())
             return false
         }
     }
 
     fun getFileExt(fileName: String): String {
-        if(!Utilities.isNullOrEmpty(fileName)) {
-        val index = fileName.lastIndexOf(".")
-        if (index == -1) {
-            return ""
-        }
-        val strFileEXT = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length)
-        return strFileEXT.trim { it <= ' ' }
+        if (!Utilities.isNullOrEmpty(fileName)) {
+            val index = fileName.lastIndexOf(".")
+            if (index == -1) {
+                return ""
+            }
+            val strFileEXT = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length)
+            return strFileEXT.trim { it <= ' ' }
 
-        }else{
+        } else {
             return ""
         }
     }
@@ -425,38 +479,40 @@ object RealPathUtil {
         try {
             for (fileName in activity.assets.list(assetsFolder)!!) {
                 //fileName = assetsFolder+fileName;
-                if( fileName == "ApolloStoreListwithPincodes.xlsx" ) {
-                Timber.i("REAL_PATH_UTIL---->"+assetsFolder + fileName)
+                if (fileName == "ApolloStoreListwithPincodes.xlsx") {
+                    Timber.i("REAL_PATH_UTIL---->" + assetsFolder + fileName)
 
-                Timber.i("REAL_PATH_UTIL : Trying to open---->"
-                        + assetsFolder + (if (assetsFolder.endsWith(File.pathSeparator)) "" else File.pathSeparator) + fileName)
-               // outputStream = BufferedOutputStream(FileOutputStream(File(destinationFolder, fileName)))
-                try {
-                    val fileReader = ByteArray(4096)
+                    Timber.i(
+                        "REAL_PATH_UTIL : Trying to open---->"
+                                + assetsFolder + (if (assetsFolder.endsWith(File.pathSeparator)) "" else File.pathSeparator) + fileName
+                    )
+                    // outputStream = BufferedOutputStream(FileOutputStream(File(destinationFolder, fileName)))
+                    try {
+                        val fileReader = ByteArray(4096)
 
-                    var fileSizeDownloaded: Long = 0
+                        var fileSizeDownloaded: Long = 0
 
-                    inputStream = activity.assets.open("$assetsFolder/$fileName")
-                    val file = File(destinationFolder, fileName)
-                    outputStream = FileOutputStream(File(destinationFolder, fileName))
+                        inputStream = activity.assets.open("$assetsFolder/$fileName")
+                        val file = File(destinationFolder, fileName)
+                        outputStream = FileOutputStream(File(destinationFolder, fileName))
 
-                    while (true) {
-                        val read = inputStream!!.read(fileReader)
-                        if (read == -1) {
-                            break
+                        while (true) {
+                            val read = inputStream!!.read(fileReader)
+                            if (read == -1) {
+                                break
+                            }
+                            outputStream!!.write(fileReader, 0, read)
+                            fileSizeDownloaded += read.toLong()
+                            //Timber.i("file download: $fileSizeDownloaded of $fileSize")
                         }
-                        outputStream!!.write(fileReader, 0, read)
-                        fileSizeDownloaded += read.toLong()
-                          //Timber.i("file download: $fileSizeDownloaded of $fileSize")
+                        outputStream!!.flush()
+                        // openDownloadedFile(file)
+                    } catch (e: Exception) {
+                        Timber.i("Error..." + e.printStackTrace())
+                    } finally {
+                        inputStream?.close()
+                        outputStream?.close()
                     }
-                    outputStream!!.flush()
-                   // openDownloadedFile(file)
-                } catch (e: Exception) {
-                    Timber.i("Error..."+e.printStackTrace())
-                } finally {
-                    inputStream?.close()
-                    outputStream?.close()
-                }
                 }
             }
         } catch (/*any*/e: Exception) {
@@ -468,15 +524,23 @@ object RealPathUtil {
         //ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         //inImage.compress(Bitmap.CompressFormat.PNG, 100, bytes);
         val OutImage = Bitmap.createScaledBitmap(inImage!!, 1000, 1000, true)
-        val path = MediaStore.Images.Media.insertImage(inContext.contentResolver, OutImage, "img_" + System.currentTimeMillis(), null)
+        val path = MediaStore.Images.Media.insertImage(
+            inContext.contentResolver,
+            OutImage,
+            "img_" + System.currentTimeMillis(),
+            null
+        )
         return Uri.parse(path)
     }
 
     fun convertBase64ToBitmap(base64Input: String?): Bitmap {
         var base64Input = base64Input
         var bmp: Bitmap? = null
-        if (base64Input != null && !base64Input.equals("",
-                ignoreCase = true) && !base64Input.equals("null", ignoreCase = true)) {
+        if (base64Input != null && !base64Input.equals(
+                "",
+                ignoreCase = true
+            ) && !base64Input.equals("null", ignoreCase = true)
+        ) {
             run {
                 var decodedString = Base64.decode(base64Input, Base64.DEFAULT)
                 base64Input = null
@@ -559,7 +623,8 @@ object RealPathUtil {
                 }
 
                 if ("home".equals(type, ignoreCase = true)) {
-                    return Environment.getExternalStorageDirectory().toString() + "/Documents/" + split[1]
+                    return Environment.getExternalStorageDirectory()
+                        .toString() + "/Documents/" + split[1]
                 }
 
 /*                if (uri.toString().startsWith("content://com.android.externalstorage.documents/document/home%3A")) {
@@ -575,7 +640,8 @@ object RealPathUtil {
 
                 val fileName: String = getFilePath(context, uri)!!
                 if (fileName != null) {
-                    return Environment.getExternalStorageDirectory().toString() + "/Download/" + fileName
+                    return Environment.getExternalStorageDirectory()
+                        .toString() + "/Download/" + fileName
                 }
                 var id = DocumentsContract.getDocumentId(uri)
                 if (id.startsWith("raw:")) {
@@ -583,7 +649,10 @@ object RealPathUtil {
                     val file = File(id)
                     if (file.exists()) return id
                 }
-                val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id))
+                val contentUri = ContentUris.withAppendedId(
+                    Uri.parse("content://downloads/public_downloads"),
+                    java.lang.Long.valueOf(id)
+                )
                 return getDataColumn(context, contentUri, null, null)
 
             }
@@ -607,7 +676,7 @@ object RealPathUtil {
                 return getDataColumn(context, contentUri, selection, selectionArgs)
             }
             //GoogleDriveProvider
-            else if ( isGoogleDriveUri(uri) ) {
+            else if (isGoogleDriveUri(uri)) {
                 return getGoogleDriveFilePath(uri, context)
             }
         }
@@ -705,7 +774,12 @@ object RealPathUtil {
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
-    fun getDataColumn(context: Context, uri: Uri?, selection: String?, selectionArgs: Array<String>?): String? {
+    fun getDataColumn(
+        context: Context,
+        uri: Uri?,
+        selection: String?,
+        selectionArgs: Array<String>?
+    ): String? {
         var cursor: Cursor? = null
         val column = "_data"
         val projection = arrayOf(column)
@@ -862,7 +936,7 @@ object RealPathUtil {
         }
     }
 
-    fun exportDatabase(databaseName: String,context: Context) {
+    fun exportDatabase(databaseName: String, context: Context) {
         try {
             val sd = File(Environment.getExternalStorageDirectory(), Configuration.strAppIdentifier)
             val data = Environment.getDataDirectory()
@@ -890,8 +964,12 @@ object RealPathUtil {
                 }
             }
             if (sd.canWrite()) {
-                val currentDBPath = "//data//" + context.getPackageName().toString() + "//databases//" + databaseName + ""
-                val backupDBPath = "$databaseName " + SimpleDateFormat(DateHelper.DATETIMEFORMAT, Locale.ENGLISH).format(Calendar.getInstance().time) + "_temp.db"
+                val currentDBPath = "//data//" + context.getPackageName()
+                    .toString() + "//databases//" + databaseName + ""
+                val backupDBPath = "$databaseName " + SimpleDateFormat(
+                    DateHelper.DATETIMEFORMAT,
+                    Locale.ENGLISH
+                ).format(Calendar.getInstance().time) + "_temp.db"
                 val currentDB = File(data, currentDBPath)
                 val backupDB = File(dbFolder, backupDBPath)
                 val src = FileInputStream(currentDB).channel

@@ -5,7 +5,6 @@ import android.content.Context
 import android.view.Gravity
 import android.view.animation.AnimationUtils
 import com.caressa.common.R
-import com.caressa.common.utils.AppColorHelper
 import kotlinx.android.synthetic.main.custum_progress_bar.*
 
 class CustomProgressBar(context: Context) : Dialog(context, R.style.TransparentProgressDialog) {

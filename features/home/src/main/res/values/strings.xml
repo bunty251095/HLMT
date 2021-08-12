@@ -53,11 +53,12 @@
     <string name="DASH_CHAT_WITH_DOCTOR">Chat With Doctor</string>
     <string name="DASH_ORDER_YOUR_MEDICINES">Order Your Medicines</string>
     <string name="DASH_TRACK_PARAMETER">Track Health \n Parameters</string>
-    <string name="DASH_MEDICINE_TRACKER">Medicine \n Tracker</string>
+
+    <string name="DASH_MEDICINE_TRACKER">Medicine Tracker</string>
     <string name="DASH_ACTIVITY_TRACKER">Activity Tracker</string>
     <string name="DASH_STORE_HEALTH_RECORD">Store \n Health Records</string>
     <string name="DASH_WELLNESS_CENTRE">Wellness \n Centre</string>
-    <string name="DASH_TOOLS_TRACKER">Tools \n Tracker</string>
+    <string name="DASH_TOOLS_TRACKER">Tools Tracker</string>
     <string name="DASH_HOSPITAL_NEAR_ME">Hospitals \n Near Me</string>
     <string name="DASH_HEALTH_LIBRARY">Health \n Library</string>
     <string name="DASH_CHAT_DIETITIAN">Chat with Dietitian/Counsellor</string>

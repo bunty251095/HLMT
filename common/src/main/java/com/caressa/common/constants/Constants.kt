@@ -39,6 +39,7 @@ object Constants {
     const val strProxyRegistrationUrl: String = "DocumentProxy/Registration/Registration?"
     const val strProxyLoginUrl: String = "PHR/api/Person/RegistrationAndLogin"
     const val strProxyValidationUrl: String = "DocumentProxy/Registration/Validation?"
+
     //const val strBlogsURL = "https://blogs.vivant.me/wp-json/wp/v2/posts?per_page="
     const val strBlogsBaseURL = "https://blogs.vivant.me/"
     const val strBlogsProxyURL = "wp-json/wp/v2/posts?per_page="
@@ -52,8 +53,10 @@ object Constants {
     const val CONTACT_US_API = "messaging/api/message/ContactUs"
 
     //Dashboard
-    const val strWebChatDoctorURL: String = "https://tawk.to/chat/5c4181c951410568a1073185/default/?\$_tawk_popout=true"
-    const val sirWebChatDietitianURL = "https://tawk.to/chat/5c418189ab5284048d0d7c0b/1d4mv5the/?\$_tawk_popout=true"
+    const val strWebChatDoctorURL: String =
+        "https://tawk.to/chat/5c4181c951410568a1073185/default/?\$_tawk_popout=true"
+    const val sirWebChatDietitianURL =
+        "https://tawk.to/chat/5c418189ab5284048d0d7c0b/1d4mv5the/?\$_tawk_popout=true"
     //const val CHAT_URL: String = "https://tawk.to/chat/5b49c72b6d961556373dbb8b/default/?\$_tawk_popout=true"
 
     const val MAIN_DATABASE_NAME = Configuration.strAppIdentifier + ".db"
@@ -66,6 +69,7 @@ object Constants {
     //User APIs
     const val GET_USER_DETAIL_API = "PHR/api/Person/Get"
     const val UPDATE_PERSONAL_DETAIL_API = "PHR/api/Person/Update"
+
     //const val SAVE_PROFILE_IMAGE_API = "PHR/api/Person/SaveProfileImage"
     const val UPLOAD_PROFILE_IMAGE_API = "Proxy/Document/UploadProfileImage"
     const val REMOVE_PROFILE_IMAGE_API = "PHR/api/Person/DeleteProfileImage"
@@ -122,7 +126,8 @@ object Constants {
     const val MEDICATION_SET_ALERT_API = "PHR/api/Medication/SetAlert"
     const val MEDICATION_ADD_IN_TAKE_API = "PHR/api/Medication/AddInTake"
     const val MEDICATION_DELETE_TAKE_API = "PHR/api/Medication/Delete/"
-    const val MEDICATION_GET_MEDICINE_IN_TAKE_API = "PHR/api/Medication/ListMedicationInTakeByScheduleID/"
+    const val MEDICATION_GET_MEDICINE_IN_TAKE_API =
+        "PHR/api/Medication/ListMedicationInTakeByScheduleID/"
 
     //ToolsTrackers APIs
     const val TOOLS_START_QUIZ_API = "Quiz/api/Quiz/StartQuiz"
@@ -183,6 +188,7 @@ object Constants {
     const val DOSAGE = "Dosage"
     const val INSTRUCTION = "Instruction"
     const val DOSAGE_REMAINING = "DosageRemaining"
+
     //const val MEDICINE_IN_TAKE_ID = "IdMedicineInTake"
     const val MEDICINE_IN_TAKE_ID = "MedicationInTakeID"
     const val TAKEN = "Taken"
@@ -325,7 +331,7 @@ object Constants {
 
 }
 
-object ApiConstants{
+object ApiConstants {
     const val TRACK_PARAM_LIST_MASTER = "trackParamListMaster"
     const val DOC_TYPE_MASTER = "docTypeMaster"
     const val PARAMETER_HISTORY = "paramHistory"
@@ -340,7 +346,7 @@ object ApiConstants{
     const val MEDICATION_LIST = "medicationList"
 }
 
-object FirebaseConstants{
+object FirebaseConstants {
     const val PARTNER_IDENTIFIER = "hlmt_"
 
     const val IS_HLMT_USER_YES_EVENT = "is_hlmt_user_yes"
@@ -394,39 +400,38 @@ object FirebaseConstants{
     const val DUE_DATE_CALCULATOR_SCREEN = "due_date_calculator_screen"
     const val SMART_PHONE_CALCULATOR_SCREEN = "smart_phone_calculator_screen"
     const val LINK_ACCOUNT_SCREEN = "link_account_screen"
-    const val LINK_ACCOUNT_STATUS_SCREEN  = "link_account_status_screen"
+    const val LINK_ACCOUNT_STATUS_SCREEN = "link_account_status_screen"
 
-    const val SETTINGS_SCREEN  = "settings_screen"
-    const val FEEDBACK_SCREEN  = "feedback_screen"
+    const val SETTINGS_SCREEN = "settings_screen"
+    const val FEEDBACK_SCREEN = "feedback_screen"
 
     // New Events
-    const val ACCOUNT_SELECTION  = "hlmt_account_selection_screen"
-    const val REGISTRATION_USER_INFO_SCREEN  = "registration_user_information_screen"
-    const val MY_PROFILE_SCREEN  = "my_profile_screen"
-    const val EDIT_PROFILE_SCREEN  = "edit_profile_screen"
-    const val FAMILY_MEMBER_LIST_SCREEN  = "family_member_list_screen"
-    const val FAMILY_MEMBER_SELECTION_SCREEN  = "family_member_selection_screen"
-    const val ADD_FAMILY_MEMBER_SCREEN  = "add_family_member_screen"
-    const val EDIT_FAMILY_MEMBER_SCREEN  = "edit_family_member_screen"
-    const val FAMILY_DOCTOR_LIST_SCREEN  = "family_doctor_list_screen"
-    const val ADD_FAMILY_DOCTOR_SCREEN  = "add_family_doctor_screen"
-    const val START_HRA_SCREEN  = "start_hra_screen"
-    const val HRA_SUMMERY_SCREEN  = "hra_summery_screen"
-    const val PARAM_PROFILE_SELECTION_SCREEN  = "parameter_profile_selection_screen"
-    const val UPDATE_PARAMETER_sCREEN  = "update_parameter_screen"
-    const val GRAPHICAL_HISTORY_SCREEN  = "graphical_history_screen"
-    const val MONTHLY_HISTORY_SCREEN  = "monthly_history_screen"
-    const val PARAMETER_DASHBOARD_SCREEN  = "parameter_dashboard_screen"
-    const val RECORD_TYPE_SELECTION_SCREEN  = "record_type_selection_screen"
-    const val FILE_TYPE_SELECTION_SCREEN  = "file_type_selection_screen"
-    const val UPLOAD_RECORD_TO_FAMILY_MEMEBER_SCREEN  = "upload_record_to_family_member_screen"
-    const val VIEW_AND_SHARE_RECORDS_SCREEN  = "view_and_share_record_screen"
-    const val MEDICATION_DASHBOARD_SCREEN  = "medication_dashboard_screen"
-    const val MEDICATION_SEARCH_SCREEN  = "medication_search_screen"
-    const val ADD_MEDICATION_SCREEN  = "add_medication_screen"
-    const val MY_MEDICATION_SCREEN  = "my_medication_screen"
-    const val ACC  = ""
-
+    const val ACCOUNT_SELECTION = "hlmt_account_selection_screen"
+    const val REGISTRATION_USER_INFO_SCREEN = "registration_user_information_screen"
+    const val MY_PROFILE_SCREEN = "my_profile_screen"
+    const val EDIT_PROFILE_SCREEN = "edit_profile_screen"
+    const val FAMILY_MEMBER_LIST_SCREEN = "family_member_list_screen"
+    const val FAMILY_MEMBER_SELECTION_SCREEN = "family_member_selection_screen"
+    const val ADD_FAMILY_MEMBER_SCREEN = "add_family_member_screen"
+    const val EDIT_FAMILY_MEMBER_SCREEN = "edit_family_member_screen"
+    const val FAMILY_DOCTOR_LIST_SCREEN = "family_doctor_list_screen"
+    const val ADD_FAMILY_DOCTOR_SCREEN = "add_family_doctor_screen"
+    const val START_HRA_SCREEN = "start_hra_screen"
+    const val HRA_SUMMERY_SCREEN = "hra_summery_screen"
+    const val PARAM_PROFILE_SELECTION_SCREEN = "parameter_profile_selection_screen"
+    const val UPDATE_PARAMETER_sCREEN = "update_parameter_screen"
+    const val GRAPHICAL_HISTORY_SCREEN = "graphical_history_screen"
+    const val MONTHLY_HISTORY_SCREEN = "monthly_history_screen"
+    const val PARAMETER_DASHBOARD_SCREEN = "parameter_dashboard_screen"
+    const val RECORD_TYPE_SELECTION_SCREEN = "record_type_selection_screen"
+    const val FILE_TYPE_SELECTION_SCREEN = "file_type_selection_screen"
+    const val UPLOAD_RECORD_TO_FAMILY_MEMEBER_SCREEN = "upload_record_to_family_member_screen"
+    const val VIEW_AND_SHARE_RECORDS_SCREEN = "view_and_share_record_screen"
+    const val MEDICATION_DASHBOARD_SCREEN = "medication_dashboard_screen"
+    const val MEDICATION_SEARCH_SCREEN = "medication_search_screen"
+    const val ADD_MEDICATION_SCREEN = "add_medication_screen"
+    const val MY_MEDICATION_SCREEN = "my_medication_screen"
+    const val ACC = ""
 
 
 }

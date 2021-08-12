@@ -14,7 +14,7 @@ class DecimalDigitsInputFilter
  *
  * @param decimalDigits maximum decimal digits
  */
-    (private val decimalDigits: Int,private val numberLength: Int) : InputFilter {
+    (private val decimalDigits: Int, private val numberLength: Int) : InputFilter {
 
     override fun filter(
         source: CharSequence,

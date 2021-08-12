@@ -28,6 +28,9 @@ import com.caressa.model.home.Person
 import com.caressa.model.home.UpdateUserDetailsModel
 import com.karumi.dexter.Dexter
 import com.yalantis.ucrop.UCrop
+import droidninja.filepicker.FilePickerBuilder
+import droidninja.filepicker.FilePickerConst
+import droidninja.filepicker.utils.ContentUriUtils
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.io.File
@@ -305,7 +308,8 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
             viewProfilePhoto()
         }
         if (code == DataHandler.ProfileImgOption.Gallery) {
-            showFileChooser(gallerySelectCode)
+            //showFileChooser(gallerySelectCode)
+            showPhotoPicker()
         }
         if (code == DataHandler.ProfileImgOption.Photo) {
             proceedWithCameraPermission()
@@ -379,6 +383,16 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         if (takePictureIntent.resolveActivity(Objects.requireNonNull(this).packageManager) != null) {
             startActivityForResult(takePictureIntent, cameraSelectCode)
         }
+    }
+
+    private fun showPhotoPicker() {
+        FilePickerBuilder.instance
+            .setMaxCount(1)
+            .setActivityTitle(resources.getString(R.string.SELECT_PROFILE_PHOTO))
+            //.setSelectedFiles(filePaths) //optional
+            .setActivityTheme(R.style.FilePickerTheme)
+            .enableCameraSupport(false)
+            .pickPhoto(this, FilePickerConst.REQUEST_CODE_PHOTO)
     }
 
     private fun showFileChooser(From: Int) {
@@ -533,13 +547,26 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         super.onActivityResult(requestCode, resultCode, data)
         println("requestCode,resultCode,data----->$requestCode,$resultCode,$data")
         val realPathUtil = RealPathUtil
-        //float fileSize = 0;
-        //String flePath1 = "";
         var pathTemp = ""
         try {
             if (resultCode == Activity.RESULT_OK && data != null) {
                 var documentType = ""
                 when (requestCode) {
+
+                    FilePickerConst.REQUEST_CODE_PHOTO -> {
+                        val photoUriList = data.getParcelableArrayListExtra<Uri>(FilePickerConst.KEY_SELECTED_MEDIA)!!.toMutableList()
+                        val photoUri = photoUriList[0]
+                        //Timber.e("photoUri---> $photoUri")
+                        val photoPath = ContentUriUtils.getFilePath(this, photoUri)!!
+                        val origFileName = photoPath.substring(photoPath.lastIndexOf("/") + 1)
+                        val fileSize = RealPathUtil.calculateFileSize(photoPath,"MB")
+                        if (fileSize <= 5.0) {
+                            val destinationUriGallery = Uri.fromFile(File(Environment.getExternalStorageDirectory().toString(), origFileName))
+                            showUcrop(photoUri, destinationUriGallery)
+                        } else {
+                            Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
+                        }
+                    }
 
                     cameraSelectCode -> {
                         val photo = data.extras!!["data"] as Bitmap?
@@ -547,8 +574,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                         val newFlePath1: String = realPathUtil.getPath(this, sourceUriCamera)!!
                         val origFileName1 = newFlePath1.substring(newFlePath1.lastIndexOf("/") + 1)
                         pathTemp = realPathUtil.getPath(this, sourceUriCamera)!!
-                        val newFile1 = File(Environment.getExternalStorageDirectory().toString(), origFileName1)
-                        val destinationUriCamera = Uri.fromFile(newFile1)
+                        val destinationUriCamera = Uri.fromFile(File(Environment.getExternalStorageDirectory().toString(), origFileName1))
                         showUcrop(sourceUriCamera, destinationUriCamera)
                     }
 
@@ -565,48 +591,46 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                         try {
                             val resultUri = UCrop.getOutput(data)
                             val flePath1: String = realPathUtil.getPath(this, resultUri!!)!!
-                            val fileSize: Float = realPathUtil.calculateFileSize(flePath1)
-                            println("File Size : $fileSize")
-                            //System.out.println("File Size : " + Helper.calculateFileSize(flePath1));
-                            if (fileSize < 5) {
+                            val fileSize = realPathUtil.calculateFileSize(flePath1,"MB")
+                            if (fileSize <= 5.0) {
                                 var save1 = false
                                 val extension1: String = realPathUtil.getFileExt(flePath1)
-                                println("Extension : $extension1")
+                                Timber.e("Extension : $extension1")
                                 // before uploading verifing it's extension
                                 if (extension1.equals("JPEG", ignoreCase = true) ||
-                                extension1.equals("jpg", ignoreCase = true) ||
-                                extension1.equals("PNG", ignoreCase = true) ||
-                                extension1.equals("png", ignoreCase = true)) {
-                                documentType = "IMAGE"
+                                    extension1.equals("jpg", ignoreCase = true) ||
+                                    extension1.equals("PNG", ignoreCase = true) ||
+                                    extension1.equals("png", ignoreCase = true)) {
+                                    documentType = "IMAGE"
                                 } else if (extension1.equals("PDF", ignoreCase = true) ||
-                                extension1.equals("pdf", ignoreCase = true)) {
-                                documentType = "PDF"
+                                    extension1.equals("pdf", ignoreCase = true)) {
+                                    documentType = "PDF"
                                 } else if (extension1.equals("txt", ignoreCase = true) ||
-                                extension1.equals("doc", ignoreCase = true) ||
-                                extension1.equals("docx", ignoreCase = true)) {
-                                documentType = "DOC"
+                                    extension1.equals("doc", ignoreCase = true) ||
+                                    extension1.equals("docx", ignoreCase = true)) {
+                                    documentType = "DOC"
                                 }
                                 if (!documentType.equals("", ignoreCase = true)) {
-                                val fileName: String = realPathUtil.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", flePath1)
-                                println("File Path : $flePath1")
-                                save1 = realPathUtil.saveFileToExternalCard(flePath1,fileName,Constants.RECORD)
-                                val mainDirectoryPath: String = realPathUtil.getRecordFolderLocation()
-                                if (save1) {
-                                    Utilities.deleteFileFromLocalSystem(pathTemp)
-                                    viewModel.callUploadProfileImageApi(this,fileName, mainDirectoryPath, flePath1)
-                                }
-                            } else {
+                                    val fileName: String = realPathUtil.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", flePath1)
+                                    Timber.e("File Path---> $flePath1")
+                                    save1 = realPathUtil.saveFileToExternalCard(flePath1,fileName,Constants.RECORD)
+                                    val mainDirectoryPath: String = realPathUtil.getRecordFolderLocation()
+                                    if (save1) {
+                                        Utilities.deleteFileFromLocalSystem(pathTemp)
+                                        viewModel.callUploadProfileImageApi(this,fileName, mainDirectoryPath, flePath1)
+                                    }
+                                } else {
                                     Utilities.deleteFileFromLocalSystem(pathTemp)
                                     Utilities.toastMessageShort(this, extension1 + " " + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
-                            }
-                        } else {
-                            Utilities.deleteFileFromLocalSystem(pathTemp)
+                                }
+                            } else {
+                                Utilities.deleteFileFromLocalSystem(pathTemp)
                                 Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
-                        }
-                    } catch (e: java.lang.Exception) {
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
                             Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_UNABLE_TO_READ_FILE))
-                        e.printStackTrace()
-                    }
+                        }
 
                     UCrop.RESULT_ERROR -> {
                         val  cropError: Throwable?= UCrop.getError(data)

@@ -52,10 +52,12 @@ class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComp
             Timber.i("onMessageReceived(FCMMessagingService): data =$data")
             if (viewModel.isUserLoggedIn()) {
                 if (!Utilities.isNullOrEmpty(data["Screen"])
-                    && data["Screen"].equals("MEDICATION_REMINDER", ignoreCase = true)) {
+                    && data["Screen"].equals("MEDICATION_REMINDER", ignoreCase = true)
+                ) {
                     showMedicineReminderNotification(data)
                 } else if (!Utilities.isNullOrEmpty(data["Action"])
-                    && data["Action"].equals("HEALTHTIPS", ignoreCase = true)) {
+                    && data["Action"].equals("HEALTHTIPS", ignoreCase = true)
+                ) {
                     showHealthTipNotification(this, data)
                 }
             }
@@ -79,7 +81,8 @@ class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComp
                     medNotification.scheduleTime = details.getString("ScheduleTime")
                     medNotification.medicationID = details.getString("MedicationID")
                     medNotification.scheduleID = details.getString("ScheduleID")
-                    medNotification.notificationDate = details.getString("NotificationDate").split("T").toTypedArray()[0]
+                    medNotification.notificationDate =
+                        details.getString("NotificationDate").split("T").toTypedArray()[0]
                     // For Self and Family Member also
                     viewModel.checkRelativeExistAndShowNotification(this, medNotification)
                 }
@@ -100,7 +103,7 @@ class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComp
             //In Android "O" or higher version, it's Mandatory to use a channel with your Notification Builder
             //int NOTIFICATION_ID = (int) System.currentTimeMillis();
             val NOTIFICATION_ID = (Date().time / 1000L % Int.MAX_VALUE).toInt()
-            val CHANNEL_ID = "fcm_medication_channel"
+            val CHANNEL_ID = "fcm_healthtip_channel"
 
             val notificationManager: NotificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -108,8 +111,8 @@ class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComp
             // Create the NotificationChannel, but only on API 26+ because
             // the NotificationChannel class is new and not in the support library
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val name = "Vivant Health Tips"
-                val descriptionText = "Medicine Reminder Notification"
+                val name = "Health Tips"
+                val descriptionText = "Daily Health Tips notification"
                 val importance = NotificationManager.IMPORTANCE_DEFAULT
                 val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                     description = descriptionText
@@ -132,14 +135,15 @@ class FCMMessagingService : FirebaseMessagingService(), LifecycleOwner, KoinComp
                 context,
                 NOTIFICATION_ID,
                 OnClick,
-                PendingIntent.FLAG_UPDATE_CURRENT)
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
 
             val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
             val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.img_hlmt_logo_notification)
+                .setSmallIcon(R.drawable.hl_pace_logo)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
-                .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.img_hlmt_logo_notification))
+                .setLargeIcon(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher_round))
                 .setContentTitle(title)
                 .setContentText(message)
                 .setStyle(NotificationCompat.BigTextStyle().bigText(message))

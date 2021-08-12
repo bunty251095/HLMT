@@ -26,19 +26,66 @@ import java.io.FileInputStream
 
 interface StoreRecordRepository {
 
-    suspend fun fetchDocumentType(forceRefresh: Boolean = false, data: ListDocumentTypesModel): LiveData<Resource<ListDocumentTypesModel.ListDocumentTypesResponse>>
-    suspend fun fetchDocumentList(forceRefresh: Boolean = false, data: ListDocumentsModel): LiveData<Resource<ListDocumentsModel.ListDocumentsResponse>>
-    suspend fun fetchRelativesList(forceRefresh: Boolean = false, data: ListRelativesModel): LiveData<Resource<ListRelativesModel.ListRelativesResponse>>
-    suspend fun saveRecordToServer(forceRefresh: Boolean = false, data: SaveDocumentModel, personName: String, personRel: String, healthDocumentsList: List<SaveDocumentModel.HealthDoc>): LiveData<Resource<SaveDocumentModel.SaveDocumentsResponse>>
-    suspend fun deleteRecordFromServer(forceRefresh: Boolean = false, data: DeleteDocumentModel, deleteRecordIds: List<String>): LiveData<Resource<DeleteDocumentModel.DeleteDocumentResponse>>
-    suspend fun downloadDocumentFromServer(forceRefresh: Boolean = false, data: DownloadDocumentModel): LiveData<Resource<DownloadDocumentModel.DownloadDocumentResponse>>
-    suspend fun checkUnitExist(forceRefresh: Boolean = false, data: OCRUnitExistModel): LiveData<Resource<OCRUnitExistModel.OCRUnitExistResponse>>
-    suspend fun ocrSaveDocument(forceRefresh: Boolean = false, data: OCRSaveModel): LiveData<Resource<OCRSaveModel.OCRSaveResponse>>
-    suspend fun ocrDigitizeDocument(fileBytes: RequestBody, partnerCode: RequestBody, fileExtension: RequestBody): LiveData<Resource<OcrResponce>>
+    suspend fun fetchDocumentType(
+        forceRefresh: Boolean = false,
+        data: ListDocumentTypesModel
+    ): LiveData<Resource<ListDocumentTypesModel.ListDocumentTypesResponse>>
+
+    suspend fun fetchDocumentList(
+        forceRefresh: Boolean = false,
+        data: ListDocumentsModel
+    ): LiveData<Resource<ListDocumentsModel.ListDocumentsResponse>>
+
+    suspend fun fetchRelativesList(
+        forceRefresh: Boolean = false,
+        data: ListRelativesModel
+    ): LiveData<Resource<ListRelativesModel.ListRelativesResponse>>
+
+    suspend fun saveRecordToServer(
+        forceRefresh: Boolean = false,
+        data: SaveDocumentModel,
+        personName: String,
+        personRel: String,
+        healthDocumentsList: List<SaveDocumentModel.HealthDoc>
+    ): LiveData<Resource<SaveDocumentModel.SaveDocumentsResponse>>
+
+    suspend fun deleteRecordFromServer(
+        forceRefresh: Boolean = false,
+        data: DeleteDocumentModel,
+        deleteRecordIds: List<String>
+    ): LiveData<Resource<DeleteDocumentModel.DeleteDocumentResponse>>
+
+    suspend fun downloadDocumentFromServer(
+        forceRefresh: Boolean = false,
+        data: DownloadDocumentModel
+    ): LiveData<Resource<DownloadDocumentModel.DownloadDocumentResponse>>
+
+    suspend fun checkUnitExist(
+        forceRefresh: Boolean = false,
+        data: OCRUnitExistModel
+    ): LiveData<Resource<OCRUnitExistModel.OCRUnitExistResponse>>
+
+    suspend fun ocrSaveDocument(
+        forceRefresh: Boolean = false,
+        data: OCRSaveModel
+    ): LiveData<Resource<OCRSaveModel.OCRSaveResponse>>
+
+    suspend fun ocrDigitizeDocument(
+        fileBytes: RequestBody,
+        partnerCode: RequestBody,
+        fileExtension: RequestBody
+    ): LiveData<Resource<OcrResponce>>
 
     suspend fun saveRecordsInSession(recordsInSession: RecordInSession)
     suspend fun updateHealthRecordPathSync(id: String, path: String, sync: String)
-    suspend fun createUploadList(code: String, comment: String, personID: String, relativeId: String, relation: String, personName: String): MutableList<SaveDocumentModel.HealthDoc>
+    suspend fun createUploadList(
+        code: String,
+        comment: String,
+        personID: String,
+        relativeId: String,
+        relation: String,
+        personName: String
+    ): MutableList<SaveDocumentModel.HealthDoc>
 
     suspend fun getRecordsInSession(): List<RecordInSession>
     suspend fun getDocumentTypes(): List<DocumentType>
@@ -52,16 +99,23 @@ interface StoreRecordRepository {
     suspend fun logoutUser()
 }
 
-class ShrRepositoryImpl(private val datasource: ShrDatasource,
-                        private val shrDao: StoreRecordsDao,
-                        private val userDao: VivantUserDao,
-                        private val dataSyncMasterDao: DataSyncMasterDao,
-                        private val context: Context) : StoreRecordRepository {
+class ShrRepositoryImpl(
+    private val datasource: ShrDatasource,
+    private val shrDao: StoreRecordsDao,
+    private val userDao: VivantUserDao,
+    private val dataSyncMasterDao: DataSyncMasterDao,
+    private val context: Context
+) : StoreRecordRepository {
 
-    override suspend fun fetchDocumentType(forceRefresh: Boolean, data: ListDocumentTypesModel): LiveData<Resource<ListDocumentTypesModel.ListDocumentTypesResponse>> {
+    override suspend fun fetchDocumentType(
+        forceRefresh: Boolean,
+        data: ListDocumentTypesModel
+    ): LiveData<Resource<ListDocumentTypesModel.ListDocumentTypesResponse>> {
 
         return object :
-            NetworkBoundResource<ListDocumentTypesModel.ListDocumentTypesResponse, BaseResponse<ListDocumentTypesModel.ListDocumentTypesResponse>>(context) {
+            NetworkBoundResource<ListDocumentTypesModel.ListDocumentTypesResponse, BaseResponse<ListDocumentTypesModel.ListDocumentTypesResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -103,10 +157,15 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
         }.build().asLiveData()
     }
 
-    override suspend fun fetchRelativesList(forceRefresh: Boolean, data: ListRelativesModel): LiveData<Resource<ListRelativesModel.ListRelativesResponse>> {
+    override suspend fun fetchRelativesList(
+        forceRefresh: Boolean,
+        data: ListRelativesModel
+    ): LiveData<Resource<ListRelativesModel.ListRelativesResponse>> {
 
         return object :
-            NetworkBoundResource<ListRelativesModel.ListRelativesResponse, BaseResponse<ListRelativesModel.ListRelativesResponse>>(context) {
+            NetworkBoundResource<ListRelativesModel.ListRelativesResponse, BaseResponse<ListRelativesModel.ListRelativesResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -132,10 +191,15 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
         }.build().asLiveData()
     }
 
-    override suspend fun fetchDocumentList(forceRefresh: Boolean, data: ListDocumentsModel): LiveData<Resource<ListDocumentsModel.ListDocumentsResponse>> {
+    override suspend fun fetchDocumentList(
+        forceRefresh: Boolean,
+        data: ListDocumentsModel
+    ): LiveData<Resource<ListDocumentsModel.ListDocumentsResponse>> {
 
         return object :
-            NetworkBoundResource<ListDocumentsModel.ListDocumentsResponse, BaseResponse<ListDocumentsModel.ListDocumentsResponse>>(context) {
+            NetworkBoundResource<ListDocumentsModel.ListDocumentsResponse, BaseResponse<ListDocumentsModel.ListDocumentsResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -192,9 +256,16 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
         }.build().asLiveData()
     }
 
-    override suspend fun deleteRecordFromServer(forceRefresh: Boolean, data: DeleteDocumentModel, deleteRecordIds: List<String>): LiveData<Resource<DeleteDocumentModel.DeleteDocumentResponse>> {
+    override suspend fun deleteRecordFromServer(
+        forceRefresh: Boolean,
+        data: DeleteDocumentModel,
+        deleteRecordIds: List<String>
+    ): LiveData<Resource<DeleteDocumentModel.DeleteDocumentResponse>> {
 
-        return object : NetworkBoundResource<DeleteDocumentModel.DeleteDocumentResponse, BaseResponse<DeleteDocumentModel.DeleteDocumentResponse>>(context) {
+        return object :
+            NetworkBoundResource<DeleteDocumentModel.DeleteDocumentResponse, BaseResponse<DeleteDocumentModel.DeleteDocumentResponse>>(
+                context
+            ) {
 
             var isProcessed = ""
 
@@ -233,10 +304,15 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
         }.build().asLiveData()
     }
 
-    override suspend fun downloadDocumentFromServer(forceRefresh: Boolean, data: DownloadDocumentModel): LiveData<Resource<DownloadDocumentModel.DownloadDocumentResponse>> {
+    override suspend fun downloadDocumentFromServer(
+        forceRefresh: Boolean,
+        data: DownloadDocumentModel
+    ): LiveData<Resource<DownloadDocumentModel.DownloadDocumentResponse>> {
 
         return object :
-            NetworkBoundResource<DownloadDocumentModel.DownloadDocumentResponse, BaseResponse<DownloadDocumentModel.DownloadDocumentResponse>>(context) {
+            NetworkBoundResource<DownloadDocumentModel.DownloadDocumentResponse, BaseResponse<DownloadDocumentModel.DownloadDocumentResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -264,10 +340,18 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
 
     }
 
-    override suspend fun saveRecordToServer(forceRefresh: Boolean, data: SaveDocumentModel, personName: String, personRel: String, healthDocumentsList: List<SaveDocumentModel.HealthDoc>): LiveData<Resource<SaveDocumentModel.SaveDocumentsResponse>> {
+    override suspend fun saveRecordToServer(
+        forceRefresh: Boolean,
+        data: SaveDocumentModel,
+        personName: String,
+        personRel: String,
+        healthDocumentsList: List<SaveDocumentModel.HealthDoc>
+    ): LiveData<Resource<SaveDocumentModel.SaveDocumentsResponse>> {
 
         return object :
-            NetworkBoundResource<SaveDocumentModel.SaveDocumentsResponse, BaseResponse<SaveDocumentModel.SaveDocumentsResponse>>(context) {
+            NetworkBoundResource<SaveDocumentModel.SaveDocumentsResponse, BaseResponse<SaveDocumentModel.SaveDocumentsResponse>>(
+                context
+            ) {
 
             var resp = SaveDocumentModel.SaveDocumentsResponse()
 
@@ -313,7 +397,11 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
         }.build().asLiveData()
     }
 
-    override suspend fun ocrDigitizeDocument(fileBytes: RequestBody, partnerCode: RequestBody, fileExtension: RequestBody)
+    override suspend fun ocrDigitizeDocument(
+        fileBytes: RequestBody,
+        partnerCode: RequestBody,
+        fileExtension: RequestBody
+    )
             : LiveData<Resource<OcrResponce>> {
 
         return object : NetworkDataBoundResource<OcrResponce, BaseResponse<OcrResponce>>(context) {
@@ -332,7 +420,9 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
             LiveData<Resource<OCRUnitExistModel.OCRUnitExistResponse>> {
 
         return object :
-            NetworkBoundResource<OCRUnitExistModel.OCRUnitExistResponse, BaseResponse<OCRUnitExistModel.OCRUnitExistResponse>>(context) {
+            NetworkBoundResource<OCRUnitExistModel.OCRUnitExistResponse, BaseResponse<OCRUnitExistModel.OCRUnitExistResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -357,9 +447,15 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
         }.build().asLiveData()
     }
 
-    override suspend fun ocrSaveDocument(forceRefresh: Boolean, data: OCRSaveModel): LiveData<Resource<OCRSaveModel.OCRSaveResponse>> {
+    override suspend fun ocrSaveDocument(
+        forceRefresh: Boolean,
+        data: OCRSaveModel
+    ): LiveData<Resource<OCRSaveModel.OCRSaveResponse>> {
 
-        return object : NetworkBoundResource<OCRSaveModel.OCRSaveResponse, BaseResponse<OCRSaveModel.OCRSaveResponse>>(context) {
+        return object :
+            NetworkBoundResource<OCRSaveModel.OCRSaveResponse, BaseResponse<OCRSaveModel.OCRSaveResponse>>(
+                context
+            ) {
 
             override fun shouldStoreInDb(): Boolean = false
 
@@ -390,7 +486,8 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
         personID: String,
         relativeId: String,
         relation: String,
-        personName: String):
+        personName: String
+    ):
             MutableList<SaveDocumentModel.HealthDoc> {
         val recordToUploadRequestList: MutableList<SaveDocumentModel.HealthDoc> = mutableListOf()
         try {
@@ -454,7 +551,7 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
                     e.printStackTrace()
                 }
             } else {
-                Timber.i( "${newRecord.Name} : File not found")
+                Timber.i("${newRecord.Name} : File not found")
             }
         } else {
             Timber.i("${newRecord.Name} : File path is blank")
@@ -475,7 +572,8 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
             fileBytes = encodedFile,
             personName = newRecord.PersonName!!,
             type = newRecord.Type!!,
-            Path = newRecord.Path!!)
+            Path = newRecord.Path!!
+        )
         return healthDoc
     }
 

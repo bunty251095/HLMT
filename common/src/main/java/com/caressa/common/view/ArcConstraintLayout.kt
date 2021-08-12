@@ -16,7 +16,11 @@ class ArcConstraintLayout : ConstraintLayout {
         styleLayout(context, attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         styleLayout(context, attrs)
     }
 
@@ -28,8 +32,11 @@ class ArcConstraintLayout : ConstraintLayout {
                 val templateJSON = JSONObject(getAppTemplateConfig())
                 if (templateJSON.has(Constants.PRIMARY_COLOR)) {
                     //setBackgroundColor(Color.parseColor(templateJSON.getString(Constants.PRIMARY_COLOR)))
-                    background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-                        Color.parseColor(templateJSON.getString(Constants.PRIMARY_COLOR)), BlendModeCompat.SRC_ATOP)
+                    background.colorFilter =
+                        BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                            Color.parseColor(templateJSON.getString(Constants.PRIMARY_COLOR)),
+                            BlendModeCompat.SRC_ATOP
+                        )
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

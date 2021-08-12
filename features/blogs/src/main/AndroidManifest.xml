@@ -3,7 +3,7 @@
         package="com.caressa.blogs">
 
     <application>
-        <activity android:name="com.caressa.blogs.BlogsActivity"></activity>
+        <activity android:name="com.caressa.blogs.BlogsActivity"/>
     </application>
 
 </manifest>

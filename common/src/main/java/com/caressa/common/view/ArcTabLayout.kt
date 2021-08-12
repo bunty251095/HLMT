@@ -16,7 +16,11 @@ class ArcTabLayout : TabLayout {
         styleTab(context, attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         styleTab(context, attrs)
     }
 
@@ -27,8 +31,10 @@ class ArcTabLayout : TabLayout {
             try {
                 val templateJSON = JSONObject(ClientConfiguration.getAppTemplateConfig())
                 if (templateJSON.has(Constants.SELECTION_COLOR)) {
-                    val selectionColor = Color.parseColor(templateJSON.getString(Constants.SELECTION_COLOR))
-                    val deselectionColor = Color.parseColor(templateJSON.getString(Constants.DESELECTION_COLOR))
+                    val selectionColor =
+                        Color.parseColor(templateJSON.getString(Constants.SELECTION_COLOR))
+                    val deselectionColor =
+                        Color.parseColor(templateJSON.getString(Constants.DESELECTION_COLOR))
 
 /*                    val stateListDrawable = StateListDrawable()
                     stateListDrawable.addState(intArrayOf(android.R.attr.state_selected),ColorDrawable(selectionColor))

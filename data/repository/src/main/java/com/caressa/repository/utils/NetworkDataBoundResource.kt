@@ -27,10 +27,22 @@ abstract class NetworkDataBoundResource<ResultType, RequestType>(val context: Co
                 fetchFromNetwork()
             } catch (e: UnknownHostException) {
                 Timber.e("An error happened: $e")
-                setValue(Resource.error(e, null, errorMessage = context.resources.getString(R.string.ERROR_INTERNET_UNAVAILABLE)))
+                setValue(
+                    Resource.error(
+                        e,
+                        null,
+                        errorMessage = context.resources.getString(R.string.ERROR_INTERNET_UNAVAILABLE)
+                    )
+                )
             } catch (e: Exception) {
                 Timber.e("An error happened: $e")
-                setValue(Resource.error(e, null, errorMessage = context.resources.getString(R.string.SOMETHING_WENT_WRONG)))
+                setValue(
+                    Resource.error(
+                        e,
+                        null,
+                        errorMessage = context.resources.getString(R.string.SOMETHING_WENT_WRONG)
+                    )
+                )
             }
 
         }

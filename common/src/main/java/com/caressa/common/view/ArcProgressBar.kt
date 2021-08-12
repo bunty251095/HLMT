@@ -16,7 +16,11 @@ class ArcProgressBar : ProgressBar {
         styleImage(context, attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         styleImage(context, attrs)
     }
 
@@ -28,7 +32,10 @@ class ArcProgressBar : ProgressBar {
                 val templateJSON = JSONObject(getAppTemplateConfig())
                 if (templateJSON.has(Constants.PRIMARY_COLOR)) {
                     //setBackgroundColor(Color.parseColor(templateJSON.getString(Constants.PRIMARY_COLOR)));
-                    progressDrawable.setColorFilter(Color.parseColor(Constants.PRIMARY_COLOR),PorterDuff.Mode.SRC_IN)
+                    progressDrawable.setColorFilter(
+                        Color.parseColor(Constants.PRIMARY_COLOR),
+                        PorterDuff.Mode.SRC_IN
+                    )
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

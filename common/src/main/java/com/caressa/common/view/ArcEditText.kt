@@ -7,7 +7,6 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import android.widget.TextView
@@ -27,7 +26,11 @@ class ArcEditText : TextInputEditText {
         styleEditText(context, attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         styleEditText(context, attrs)
     }
 
@@ -38,7 +41,8 @@ class ArcEditText : TextInputEditText {
             try {
                 val templateJSON = JSONObject(getAppTemplateConfig())
                 if (templateJSON.has(Constants.SELECTION_COLOR)) {
-                    val selectionColor = Color.parseColor(templateJSON.getString(Constants.SELECTION_COLOR))
+                    val selectionColor =
+                        Color.parseColor(templateJSON.getString(Constants.SELECTION_COLOR))
                     val deselectionColor =
                         Color.parseColor(templateJSON.getString(Constants.DESELECTION_COLOR))
                     //                    DrawableCompat.setTint(getBackground(), deselectionColor);
@@ -75,7 +79,8 @@ class ArcEditText : TextInputEditText {
                 intArrayOf(android.R.attr.state_pressed),
                 intArrayOf(android.R.attr.state_hovered),
                 intArrayOf(android.R.attr.state_selected),
-                intArrayOf(android.R.attr.state_focused))
+                intArrayOf(android.R.attr.state_focused)
+            )
 
             val colors = intArrayOf(
                 deselectionColor,
@@ -84,7 +89,8 @@ class ArcEditText : TextInputEditText {
                 selectionColor,
                 selectionColor,
                 selectionColor,
-                selectionColor)
+                selectionColor
+            )
 
             val myList = ColorStateList(states, colors)
             DrawableCompat.setTintList(background, myList)

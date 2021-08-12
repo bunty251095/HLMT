@@ -1,6 +1,5 @@
 package com.caressa.common.utils
 
-import com.caressa.common.R
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
@@ -9,6 +8,7 @@ import android.graphics.drawable.StateListDrawable
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import com.caressa.common.R
 
 
 object ViewUtils {
@@ -73,7 +73,7 @@ object ViewUtils {
         }
     }
 
-    fun getArcRbSelectorBgHra( isPrimary : Boolean ) : StateListDrawable {
+    fun getArcRbSelectorBgHra(isPrimary: Boolean): StateListDrawable {
         var color = appColorHelper.selectionColor
         if (!isPrimary) {
             color = Color.parseColor("#b4b4b4")
@@ -81,13 +81,13 @@ object ViewUtils {
         val disableDrawable = GradientDrawable()
         disableDrawable.shape = GradientDrawable.RECTANGLE
         disableDrawable.cornerRadius = R.dimen._1sdp.toFloat()
-        disableDrawable.setStroke(4,color)
+        disableDrawable.setStroke(4, color)
         disableDrawable.setColor(Color.WHITE)
 
         val enableDrawable = GradientDrawable()
         enableDrawable.shape = GradientDrawable.RECTANGLE
         enableDrawable.cornerRadius = R.dimen._1sdp.toFloat()
-        enableDrawable.setStroke(4,color)
+        enableDrawable.setStroke(4, color)
         enableDrawable.setColor(color)
 
         val stateListDrawable = StateListDrawable()
@@ -98,7 +98,7 @@ object ViewUtils {
         return stateListDrawable
     }
 
-    fun getArcRbSelectorTxtColorHra( isPrimary : Boolean ) : ColorStateList {
+    fun getArcRbSelectorTxtColorHra(isPrimary: Boolean): ColorStateList {
         var color = appColorHelper.selectionColor
         if (!isPrimary) {
             color = Color.parseColor("#b4b4b4")
@@ -109,8 +109,10 @@ object ViewUtils {
                 intArrayOf(android.R.attr.state_pressed),
                 intArrayOf(android.R.attr.state_checked),
                 intArrayOf(android.R.attr.state_enabled),
-                intArrayOf(-android.R.attr.state_enabled)),
-            intArrayOf(Color.WHITE, Color.WHITE, Color.WHITE, color, color))
+                intArrayOf(-android.R.attr.state_enabled)
+            ),
+            intArrayOf(Color.WHITE, Color.WHITE, Color.WHITE, color, color)
+        )
     }
 
     fun pxToDp(px: Float): Float {

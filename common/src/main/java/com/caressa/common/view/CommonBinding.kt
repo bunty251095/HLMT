@@ -4,12 +4,12 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
 import com.caressa.common.utils.Utilities
-import java.lang.Exception
 
 object CommonBinding {
 
     @BindingAdapter("android:loadImage")
-    @JvmStatic fun setImageView(imageView: AppCompatImageView, resource: Int?) {
+    @JvmStatic
+    fun setImageView(imageView: AppCompatImageView, resource: Int?) {
         try {
             imageView.setImageResource(resource!!)
         } catch (e: Exception) {
@@ -18,9 +18,10 @@ object CommonBinding {
     }
 
     @BindingAdapter("android:NotNullEmptyText")
-    @JvmStatic fun setNotNullEmptyText(textView: AppCompatTextView, text: String?) {
+    @JvmStatic
+    fun setNotNullEmptyText(textView: AppCompatTextView, text: String?) {
         try {
-            if ( !Utilities.isNullOrEmpty(text) ) {
+            if (!Utilities.isNullOrEmpty(text)) {
                 textView.text = text
             }
         } catch (e: Exception) {
@@ -29,9 +30,10 @@ object CommonBinding {
     }
 
     @BindingAdapter("android:NotNullEmptyZeroText")
-    @JvmStatic fun setNotNullEmptyZeroText(textView: AppCompatTextView, text: String?) {
+    @JvmStatic
+    fun setNotNullEmptyZeroText(textView: AppCompatTextView, text: String?) {
         try {
-            if ( !Utilities.isNullOrEmptyOrZero(text) ) {
+            if (!Utilities.isNullOrEmptyOrZero(text)) {
                 textView.text = text
             }
         } catch (e: Exception) {

@@ -1,6 +1,5 @@
-
 object ApplicationId {
-    val id = "com.vivant.hlmt.app.uat"
+    val id = "com.hlmt.hlpace"
 }
 
 object Modules {
@@ -35,9 +34,9 @@ object Versions {
     val multidex = "1.0.3"
     val kotlin = "1.4.32"
     val gradle = "4.2.1"
-    val compileSdk = 29
-    val minSdk = 19
-    val targetSdk = 29
+    const val compileSdk = 29
+    const val minSdk = 19
+    const val targetSdk = 29
     val appDesign = "28.0.0"
     val appCompat = "1.2.0"
     val appLegacySupport = "1.0.0"
@@ -57,7 +56,8 @@ object Versions {
     val lifecycle = "2.1.0-alpha04"
     val nav = "2.3.5"
     val googleMaterialDesign = "1.2.0"
-//    val room = "2.1.0-alpha06"
+
+    //    val room = "2.1.0-alpha06"
     val room = "2.2.4"
     val recyclerview = "1.0.0"
     val safeArgs = "2.3.5"
@@ -94,6 +94,7 @@ object Versions {
     val pdfViewer = "2.0.3"
     val circleImageview = "2.2.0"
     val ucrop = "2.2.6"
+    val filePicker = "2.2.5"
     val indicatorseekbar = "2.1.2"
     val gms = "4.3.8"
 }
@@ -101,27 +102,34 @@ object Versions {
 object Libraries {
     //Multidex
     val multidex = "com.android.support:multidex:${Versions.multidex}"
+
     // KOIN
     val koin = "org.koin:koin-android:${Versions.koin}"
     val koinViewModel = "org.koin:koin-android-viewmodel:${Versions.koin}"
+
     // ROOM
     val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
     val roomRunTime = "androidx.room:room-runtime:${Versions.room}"
     val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+
     // RETROFIT
-    val retrofitCoroutineAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofitCoroutines}"
+    val retrofitCoroutineAdapter =
+        "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofitCoroutines}"
     val gson = "com.google.code.gson:gson:${Versions.gson}"
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofitGson}"
     val httpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
     val scalarsConverter = "com.squareup.retrofit2:converter-scalars:${Versions.retrofit}"
+
     // Dexter : To check Permissions at Runtime
     val dexter = "com.karumi:dexter:${Versions.dexter}"
+
     // GLIDE
     val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
     val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     val facebook = "com.facebook.android:facebook-android-sdk:${Versions.facebooksdk}"
+
     // FIREBASE
     val firebaseAuth = "com.google.firebase:firebase-auth:${Versions.firebaseAuth}"
     val firebaseCore = "com.google.firebase:firebase-core:${Versions.firebase}"
@@ -134,22 +142,27 @@ object Libraries {
     val gsmFitness = "com.google.android.gms:play-services-fitness:${Versions.gmsFitness}"
 
     //CUSTOME VIEW
-    val circularProgress = "com.github.jakob-grabner:Circle-Progress-View:${Versions.circalProgressView}"
+    val circularProgress =
+        "com.github.jakob-grabner:Circle-Progress-View:${Versions.circalProgressView}"
     val chartLib = "com.github.PhilJay:MPAndroidChart:${Versions.mpaChart}"
     val otpView = "com.github.aabhasr1:OtpView:${Versions.otpView}"
     val colorSeekBar = "com.github.rtugeek:ColorSeekBar:${Versions.colorSeekBar}"
     val materialDesignLib = "com.github.vajro:MaterialDesignLibrary:${Versions.materialDesignLib}"
+
     //facebook Shimmer
     val shimmer = "com.facebook.shimmer:shimmer:${Versions.facebookShimmer}"
     val stepbar = "com.github.imaNNeoFighT:StepBarView:${Versions.stepBarView}"
     val datePickerDialogue = "com.wdullaer:materialdatetimepicker:${Versions.datePicker}"
+
     // JSoup to parse HTML
     val jSoup = "org.jsoup:jsoup:${Versions.jSoup}"
+
     // evernote for Notification
     val evernote = "com.evernote:android-job:${Versions.evernote}"
 
     val circleImageview = "de.hdodenhof:circleimageview:${Versions.circleImageview}"
     val ucrop = "com.github.yalantis:ucrop:${Versions.ucrop}"
+    val filePicker = "com.droidninja:filepicker:${Versions.filePicker}"
     val datetimepicker = "com.wdullaer:materialdatetimepicker:${Versions.datetimepicker}"
     val pdfViewer = "com.github.barteksc:android-pdf-viewer:${Versions.pdfViewer}"
     val indicatorseekbar = "com.github.warkiz.widget:indicatorseekbar:${Versions.indicatorseekbar}"
@@ -167,7 +180,9 @@ object KotlinLibraries {
 
 object AndroidLibraries {
     // KOTLIN
-    val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    val kotlinCoroutineAndroid =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+
     // ANDROID
     val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     val appDesign = "com.android.support:design:${Versions.appDesign}"
@@ -179,7 +194,8 @@ object AndroidLibraries {
     val navigation = "androidx.navigation:navigation-ui-ktx:${Versions.nav}"
     val navigationFrag = "androidx.navigation:navigation-fragment-ktx:${Versions.nav}"
     val androidxLegacySupport = "androidx.legacy:legacy-support-v4:${Versions.appLegacySupport}"
-    val googleMaterialDesign = "com.google.android.material:material:${Versions.googleMaterialDesign}"
+    val googleMaterialDesign =
+        "com.google.android.material:material:${Versions.googleMaterialDesign}"
 }
 
 object TestLibraries {
@@ -190,15 +206,20 @@ object TestLibraries {
     val archCoreTest = "androidx.arch.core:core-testing:${Versions.archCoreTest}"
     val junit = "androidx.test.ext:junit:${Versions.androidJunit}"
     val fragmentNav = "androidx.fragment:fragment-testing:${Versions.fragmentTest}"
+
     // KOIN
     val koin = "org.koin:koin-test:${Versions.koin}"
+
     // MOCK WEBSERVER
     val mockWebServer = "com.squareup.okhttp:mockwebserver:${Versions.mockwebserver}"
+
     // MOCK
     val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
     val mockk = "io.mockk:mockk:${Versions.mockk}"
+
     // COROUTINE
     val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
+
     // DATA BINDING
     val databinding = "androidx.databinding:databinding-compiler:${Versions.databinding}"
 }

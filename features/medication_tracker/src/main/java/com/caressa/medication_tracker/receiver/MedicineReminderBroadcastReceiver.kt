@@ -76,7 +76,7 @@ class MedicineReminderBroadcastReceiver : BroadcastReceiver(),LifecycleOwner,Koi
         remoteView.setTextViewText(R.id.med_schedule_time, intent.getStringExtra(Constants.TIME))
 
         val customNotification = NotificationCompat.Builder(context, "fcm_medication_channel")
-            .setSmallIcon(R.drawable.img_hlmt_logo_notification)
+            .setSmallIcon(R.drawable.hl_pace_logo)
             .setColor(ContextCompat.getColor(context,R.color.colorPrimary))
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
             .setAutoCancel(true)

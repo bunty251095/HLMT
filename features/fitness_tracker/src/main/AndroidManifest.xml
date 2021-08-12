@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:dist="http://schemas.android.com/apk/distribution"
-          package="com.caressa.fitness_tracker">
+    package="com.caressa.fitness_tracker">
 
     <application>
 
         <activity
             android:name=".FitnessHomeActivity"
-            android:windowSoftInputMode="stateAlwaysHidden">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <receiver
             android:name="com.caressa.fitness_tracker.receiver.FitnessBroadcastReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="ClearFitnessData"/>
+                <action android:name="ClearFitnessData" />
             </intent-filter>
         </receiver>
 
