@@ -11,12 +11,11 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
-import com.caressa.security.viewmodel.TermsAndConditionViewModel
 import com.caressa.security.databinding.FragmentTermsAndConditionBinding
+import com.caressa.security.viewmodel.TermsAndConditionViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
-class TermsAndConditionFragment : BaseFragment() {
+class PrivacyPolicyFragment : BaseFragment() {
 
     private val viewModel : TermsAndConditionViewModel by viewModel()
     private lateinit var binding: FragmentTermsAndConditionBinding
@@ -36,19 +35,7 @@ class TermsAndConditionFragment : BaseFragment() {
         binding.webViewTerms.webViewClient = CustomWebViewClient()
         val webSettings = binding.webViewTerms.settings
         webSettings.javaScriptEnabled = true
-        binding.webViewTerms.loadUrl("https://hlmtcoreuat.vivant.me/HL%20Pace%20App%20Terms%20&%20Conditions.html")
-
-//        viewModel.getTermsAndConditionsData(true)
-
-//        viewModel.termsConditions.observe(viewLifecycleOwner, {
-//            if( it != null ) {
-//                Timber.i("TermsConditionResponce ------>${it.termsConditions?.description}")
-//                binding.webViewTerms.loadUrl("https://hlmtcoreuat.vivant.me/HL%20Pace%20App%20Terms%20&%20Conditions.html")
-//            binding.webViewTerms.loadData(it.termsConditions?.description?: "https://portal.vivant.me/terms-and-conditions",
-//                "text/html", "UTF-8")
-//                binding.webViewTerms.loadDataWithBaseURL("https://hlmtcoreuat.vivant.me/HL", it.termsConditions?.description!!, "text/html", "UTF-8", null)
-//            }
-//        })
+        binding.webViewTerms.loadUrl("https://hlmtcoreuat.vivant.me/privacy%20policy.html")
     }
 
     inner class CustomWebViewClient : WebViewClient() {

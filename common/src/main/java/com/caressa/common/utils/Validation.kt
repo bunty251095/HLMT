@@ -20,14 +20,21 @@ object Validation {
     }
 
     fun isValidEmail(email: String?): Boolean {
-        val pattern: Pattern
+        /*val pattern: Pattern
         val matcher: Matcher
         val EMAIL_PATTERN =
             "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
         pattern = Pattern.compile(EMAIL_PATTERN)
         matcher = pattern.matcher(email)
         val isValid = matcher.matches()
-        Timber.d("isValidEmail--->$isValid")
+        Timber.d("isValidEmail--->$isValid")*/
+
+        var isValid = false
+        if (!email.isNullOrEmpty() && email.contains('@',true) && email.length > 3)
+        {
+            isValid = true
+        }
+
         return isValid
     }
 

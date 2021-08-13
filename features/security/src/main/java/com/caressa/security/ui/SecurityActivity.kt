@@ -48,6 +48,7 @@ class SecurityActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener{ controller, destination, _ ->
             toolbar_title.text = when (destination.id) {
                 R.id.termsAndConditionFragment -> resources.getString(R.string.TERMS_CONDITIONS)
+                R.id.privacyPolicyFragment -> resources.getString(R.string.PRIVACY_POLICY)
                 R.id.userInfoFragment -> resources.getString(R.string.ADDITIONAL_DETAILS)
                 R.id.hlmtLoginFragment -> ""
                 R.id.loginViaOTPFragment -> ""

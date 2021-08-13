@@ -43,7 +43,7 @@ class DataHandler( val context: Context) {
 //        list.add(NavDrawerOption(R.drawable.img_doctor,context.resources.getString(R.string.MENU_FAMILY_DOCTORS),NavDrawer.FAMILY_DOCTOR,ContextCompat.getColor(context,R.color.vivant_green_blue_two)))
         list.add(NavDrawerOption(R.drawable.img_drawer_contact_us,context.resources.getString(R.string.MENU_CONTACT_US),NavDrawer.CONTACT_US,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
         list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.MENU_SPREAD_THE_WORD),NavDrawer.SPREAD_THE_WORD,ContextCompat.getColor(context,R.color.vivant_bright_sky_blue)))
-        list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.REFER_AND_EARN),NavDrawer.REFER_AND_EARN,ContextCompat.getColor(context,R.color.vivant_bright_blue)))
+//        list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.REFER_AND_EARN),NavDrawer.REFER_AND_EARN,ContextCompat.getColor(context,R.color.vivant_bright_blue)))
         list.add(NavDrawerOption(R.drawable.ic_settings,context.resources.getString(R.string.MENU_SETTINGS),NavDrawer.SETTINGS,ContextCompat.getColor(context,R.color.vivant_watermelon)))
         return list
     }
@@ -54,7 +54,7 @@ class DataHandler( val context: Context) {
 //        list.add(NavDrawerOption(R.drawable.img_doctor,context.resources.getString(R.string.MENU_FAMILY_DOCTORS),NavDrawer.FAMILY_DOCTOR,ContextCompat.getColor(context,R.color.vivant_green_blue_two)))
         list.add(NavDrawerOption(R.drawable.img_drawer_contact_us,context.resources.getString(R.string.MENU_CONTACT_US),NavDrawer.CONTACT_US,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
         list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.MENU_SPREAD_THE_WORD),NavDrawer.SPREAD_THE_WORD,ContextCompat.getColor(context,R.color.vivant_bright_sky_blue)))
-        list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.REFER_AND_EARN),NavDrawer.REFER_AND_EARN,ContextCompat.getColor(context,R.color.vivant_bright_blue)))
+//        list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.REFER_AND_EARN),NavDrawer.REFER_AND_EARN,ContextCompat.getColor(context,R.color.vivant_bright_blue)))
         list.add(NavDrawerOption(R.drawable.ic_settings,context.resources.getString(R.string.MENU_SETTINGS),NavDrawer.SETTINGS,ContextCompat.getColor(context,R.color.vivant_watermelon)))
         return list
     }

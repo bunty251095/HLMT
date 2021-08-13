@@ -401,6 +401,7 @@
                                 android:imeOptions="actionDone"
                                 android:inputType="textEmailAddress"
                                 android:lines="1"
+                                android:maxLength="60"
                                 android:paddingTop="@dimen/_10sdp"
                                 android:text="@{viewModel.alreadyExistRelatives[0].emailAddress}"
                                 android:textSize="@dimen/_13sdp" />

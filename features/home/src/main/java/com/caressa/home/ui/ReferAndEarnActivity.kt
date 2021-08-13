@@ -68,14 +68,14 @@ class ReferAndEarnActivity : BaseActivity() {
         val uid = 123456
         val invitationLink = "https://hlpace.com/?invitedby=$uid"
 
-        var mInvitationUrl: Uri? = Uri.parse("https://hlpace.page.link")
+        var mInvitationUrl: Uri? = Uri.parse("https://hlmt.page.link")
         Firebase.dynamicLinks.shortLinkAsync {
             link = Uri.parse(invitationLink)
-            domainUriPrefix = "https://hlpace.page.link"
+            domainUriPrefix = "https://hlmt.page.link"
             androidParameters(NavigationConstants.APPID) {
                 minimumVersion = 1
             }
-            iosParameters("com.vivant.hlmt.app.uat") {
+            iosParameters(NavigationConstants.APPID) {
             }
         }.addOnSuccessListener { shortDynamicLink ->
             mInvitationUrl = shortDynamicLink.shortLink

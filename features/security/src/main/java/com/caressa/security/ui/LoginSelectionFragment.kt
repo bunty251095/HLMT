@@ -1,12 +1,14 @@
 package com.caressa.security.ui
 
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.fitness.FitnessDataManager
+import com.caressa.security.R
 import com.caressa.security.databinding.FragmentAccountSelectionBinding
 import com.caressa.security.viewmodel.HlmtLoginViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -24,9 +26,26 @@ class LoginSelectionFragment: BaseFragment() {
         binding = FragmentAccountSelectionBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        init()
         setClickable()
         googlePlusInit()
         return binding.root
+    }
+
+    private fun init() {
+        val strTermsOfServices =
+            "<u><a><B><font color='#0273ff'>" + resources.getString(R.string.VIVANT_TERMS_CONDITIONS) + "</font></B></a></u>"
+
+        val strPrivacyPolicy =
+            "<u><a><B><font color='#0273ff'>" + resources.getString(R.string.PRIVACY_POLICY) + "</font></B></a></u>"
+
+        binding.txtLoginTermsofservice.text = Html.fromHtml(
+            resources.getString(R.string.TERMS_OF_SERVICE_LOGIN) + "<br/>"
+                    + strTermsOfServices +" "+ resources.getString(R.string.AND)
+        )
+        binding.txtLoginPrivacyPolicy.text = Html.fromHtml(
+             strPrivacyPolicy + " " + resources.getString(R.string.YOU_HAVE_READ_THEM)
+        )
     }
 
     private fun setClickable() {
@@ -36,6 +55,12 @@ class LoginSelectionFragment: BaseFragment() {
         }
         binding.btnSignIn.setOnClickListener {
             viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelctionToStepOneFragment())
+        }
+        binding.txtLoginTermsofservice.setOnClickListener {
+            viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelectionToTermsAndCondition())
+        }
+        binding.txtLoginPrivacyPolicy.setOnClickListener {
+            viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelectionToPrivacyPolicyFragment())
         }
     }
 
