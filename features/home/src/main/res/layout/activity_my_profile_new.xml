@@ -690,7 +690,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="textEmailAddress"
                             android:maxLines="1"
-                            android:maxLength="50"
+                            android:maxLength="60"
                             android:paddingTop="@dimen/_10sdp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -741,7 +741,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="textEmailAddress"
                             android:maxLines="1"
-                            android:maxLength="50"
+                            android:maxLength="60"
                             android:paddingTop="@dimen/_10sdp" />
 
                     </com.google.android.material.textfield.TextInputLayout>

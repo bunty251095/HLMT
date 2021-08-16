@@ -2,6 +2,7 @@ package com.caressa.security.ui
 
 import android.content.ComponentName
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -16,6 +17,8 @@ import com.caressa.model.AppConfigurationSingleton
 import com.caressa.repository.utils.Resource
 import com.caressa.security.R
 import com.caressa.security.viewmodel.HraViewModel
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import kotlinx.android.synthetic.main.hlpace_logo_layout.view.*
 import org.koin.android.ext.android.inject
@@ -61,6 +64,35 @@ class SplashScreenActivity : AppCompatActivity(), DefaultNotificationDialog.OnDi
 
         registerObserver()
         proceedInApp()
+        handleDynamicLink()
+
+    }
+
+    private fun handleDynamicLink() {
+        Firebase.dynamicLinks
+            .getDynamicLink(intent)
+            .addOnSuccessListener(this) { pendingDynamicLinkData ->
+                // Get deep link from result (may be null if no link is found)
+                var deepLink: Uri? = null
+                if (pendingDynamicLinkData != null) {
+                    deepLink = pendingDynamicLinkData.link
+                }
+                //
+                // If the user isn't signed in and the pending Dynamic Link is
+                // an invitation, sign in the user anonymously, and record the
+                // referrer's UID.
+                //
+                if (
+                    deepLink != null &&
+                    deepLink.getBooleanQueryParameter("invitedby", false)) {
+                    val referrerUid = deepLink.getQueryParameter("invitedby")
+                    Timber.i("Referrer ID=> "+referrerUid)
+                    viewModel.toastMessage("Referrer Code: "+referrerUid)
+                    viewModel.snackMessage("Referrer Code: "+referrerUid)
+                }
+            }
+            .addOnFailureListener(this) {
+                    e -> Timber.e( "getDynamicLink:onFailure "+e.stackTrace) }
     }
 
     private fun registerObserver() {

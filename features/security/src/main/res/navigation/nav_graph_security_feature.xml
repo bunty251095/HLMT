@@ -41,6 +41,14 @@
             android:id="@+id/action_loginSelctionToStepOneFragment"
             app:destination="@id/stepOneFragment"/>
 
+        <action
+            android:id="@+id/action_loginSelectionToTermsAndCondition"
+            app:destination="@+id/termsAndConditionFragment"/>
+
+        <action
+            android:id="@+id/action_loginSelectionToPrivacyPolicyFragment"
+            app:destination="@+id/privacyPolicyFragment"/>
+
     </fragment>
 
     <fragment
@@ -143,6 +151,13 @@
         android:id="@+id/termsAndConditionFragment"
         android:name="com.caressa.security.ui.TermsAndConditionFragment"
         android:label="TermsAndConditionFragment"
+        tools:layout="@layout/fragment_terms_and_condition">
+    </fragment>
+
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.caressa.security.ui.PrivacyPolicyFragment"
+        android:label="@string/PRIVACY_POLICY"
         tools:layout="@layout/fragment_terms_and_condition">
     </fragment>
 

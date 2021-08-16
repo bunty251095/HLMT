@@ -26,17 +26,17 @@ object Modules {
 }
 
 object Releases {
-    const val versionCode = 5
-    const val versionName = "1.0.4"
+    const val versionCode = 10
+    const val versionName = "1.0.6"
 }
 
 object Versions {
     val multidex = "1.0.3"
     val kotlin = "1.4.32"
     val gradle = "4.2.1"
-    const val compileSdk = 29
+    const val compileSdk = 30
     const val minSdk = 19
-    const val targetSdk = 29
+    const val targetSdk = 30
     val appDesign = "28.0.0"
     val appCompat = "1.2.0"
     val appLegacySupport = "1.0.0"
@@ -134,10 +134,9 @@ object Libraries {
     val firebaseAuth = "com.google.firebase:firebase-auth:${Versions.firebaseAuth}"
     val firebaseCore = "com.google.firebase:firebase-core:${Versions.firebase}"
     val firebaseMessaging = "com.google.firebase:firebase-messaging:${Versions.firebaseMessaging}"
-    val fabricsCathartics = "com.crashlytics.sdk.android:crashlytics:${Versions.fabricCrashlytics}"
     val firebaseAnalytics = "com.google.firebase:firebase-analytics:${Versions.firebaseAnalytics}"
-    val firebaseCrashlytics =
-        "com.crashlytics.sdk.android:crashlytics:${Versions.firebaseCrashlytics}"
+    val firebaseCrashlytics = "com.crashlytics.sdk.android:crashlytics:${Versions.firebaseCrashlytics}"
+    val firebaseDynamicLink = "com.google.firebase:firebase-dynamic-links-ktx"
 
     val gsmAuth = "com.google.android.gms:play-services-auth:${Versions.gmsAuth}"
     val gsmFitness = "com.google.android.gms:play-services-fitness:${Versions.gmsFitness}"

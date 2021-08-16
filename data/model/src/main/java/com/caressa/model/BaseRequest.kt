@@ -20,7 +20,7 @@ open class BaseRequest(
         private val requestID: String = Configuration.RequestID,
         @SerializedName("DateTime")
         @Expose
-        private val dateTime: String = currentDateAsStringddMMMyyyy,
+        private val dateTime: String = currentDateAsString_yyyy_MM_dd,
         @SerializedName("ApplicationCode")
         @Expose
         private val applicationCode: String = Configuration.ApplicationCode,
@@ -49,10 +49,10 @@ open class BaseRequest(
             return strVal.replace("\\u003d", "=")
         }
 
-        /* Current Date : */ val currentDateAsStringddMMMyyyy: String
+        /* Current Date : */ val currentDateAsString_yyyy_MM_dd: String
             get() {
                 val calendar = Calendar.getInstance()
-                val df = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
+                val df = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                 return df.format(calendar.time)
             }
     }

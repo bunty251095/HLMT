@@ -36,7 +36,7 @@ android {
         }
         release {
             //for testing only
-            debuggable true
+            //debuggable true
             minifyEnabled false
             useProguard true
             shrinkResources false

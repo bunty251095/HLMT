@@ -133,6 +133,7 @@
                     android:layout_height="@dimen/_20sdp"
                     app:srcCompat="@drawable/ic_menu_share"
                     android:tint="@color/colorPrimary"
+                    android:visibility="invisible"
                     android:onClick="@{(view) -> viewModel.shareBlog(blog)}"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"

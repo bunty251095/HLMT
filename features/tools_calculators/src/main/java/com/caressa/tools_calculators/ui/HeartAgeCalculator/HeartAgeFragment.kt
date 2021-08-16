@@ -256,6 +256,18 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
                 }
             }
         }
+        var answerCodes:String = "NONE"
+        if(calculatorDataSingleton?.healthConditionSelection.isNullOrEmpty()){
+            answer = Answer("HHILL", answerCodes, "")
+            answerArrayMap["HHILL"] = answer
+        }else{
+            answerCodes = ""
+            for (item in calculatorDataSingleton!!.healthConditionSelection){
+                answerCodes = answerCodes+item+","
+            }
+            answer = Answer("HHILL", answerCodes, "")
+            answerArrayMap["HHILL"] = answer
+        }
         val selectedId1: Int = binding.rgBpMedication.checkedRadioButtonId
         val selectedId2: Int = binding.rgSmoke.checkedRadioButtonId
         val selectedId3: Int = binding.rgDiabetic.checkedRadioButtonId
@@ -445,6 +457,12 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
     override fun onHealthConditionValueListener() {
         Timber.e("Selected :: ${calculatorDataSingleton!!.healthConditionSelection.size}")
         binding.txtSelection.text = "( ${resources.getString(R.string.HEALTH_CONDITION_RESULT)} ${calculatorDataSingleton!!.healthConditionSelection.size} ${resources.getString(R.string.HEALTH_CONDITION)} )"
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.txtSelection.text =
+            "( You have selected ${calculatorDataSingleton!!.healthConditionSelection.size} health condition )"
     }
 
 }

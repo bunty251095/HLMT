@@ -399,6 +399,7 @@
                                 android:lines="1"
                                 android:imeOptions="actionDone"
                                 android:text=""
+                                android:maxLength="60"
                                 android:ellipsize="end"
                                 android:textSize="@dimen/_13sdp"
                                 android:paddingTop="@dimen/_10sdp"/>

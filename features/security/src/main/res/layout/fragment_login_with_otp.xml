@@ -123,7 +123,7 @@
                             android:background="@null"
                             android:fontFamily="@font/dax_regular"
                             android:hint="@string/MOBILE_NUMBER"
-                            android:imeOptions="actionNext"
+                            android:imeOptions="actionDone"
                             android:inputType="number"
                             android:maxLength="10"
                             android:paddingStart="@dimen/_5sdp"

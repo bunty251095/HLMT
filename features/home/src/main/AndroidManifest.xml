@@ -9,8 +9,14 @@
         android:largeHeap="true"
         android:screenOrientation="portrait">
         <activity
+            android:name=".ui.ReferAndEarnActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity
             android:name=".ui.LinkHlmtAccountActivity"
             android:screenOrientation="portrait"
+
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".ui.PasswordChangeActivity"

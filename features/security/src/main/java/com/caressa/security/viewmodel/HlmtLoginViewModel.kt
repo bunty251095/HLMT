@@ -389,7 +389,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
             toastMessage("Please Enter Valid Name.")
         }else if((phoneNumber.isNullOrEmpty() || !Validation.isValidPhoneNumber(phoneNumber)) && hlmtEmpId.isEmpty()){
             toastMessage("Invalid Phone Number")
-        }else if(emailStr.isNullOrEmpty() || !emailStr.matches(emailPattern)){
+        }else if(!Validation.isValidEmail(emailStr)){
             toastMessage("Invalid email Address")
         }else if (dob.isNullOrEmpty()){
             toastMessage("Invalid Date of Birth")
