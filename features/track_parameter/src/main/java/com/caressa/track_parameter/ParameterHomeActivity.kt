@@ -58,14 +58,13 @@ class ParameterHomeActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener{ controller, destination, _ ->
 
             toolbar_title.text = when (destination.id) {
-                R.id.homeFragment -> "Track Health Parameters"
-                R.id.selectParameterFragment -> "Select Parameters"
+                R.id.homeFragment -> resources.getString(R.string.TITLE_TRACK_HEALTH_PARAMETERS)
+                R.id.selectParameterFragment -> resources.getString(R.string.TITLE_SELECT_PARAMETERS)
+                R.id.updateParameterFrag -> resources.getString(R.string.TITLE_UPDATE_PARAMETERS)
+                R.id.historyFragment -> resources.getString(R.string.TITLE_PARAMETER_HISTORY)
+                R.id.detailHistoryFragment -> resources.getString(R.string.TITLE_COMPLETE_HISTORY)
 
-                R.id.selectParameterFragment -> "Select Parameters"
-                R.id.updateParameterFrag -> "Update Parameters"
-                R.id.historyFragment -> "Parameter History"
-                R.id.detailHistoryFragment -> "Complete History"
-                else -> "Track Health Parameters"
+                else -> resources.getString(R.string.TITLE_TRACK_HEALTH_PARAMETERS)
             }
 
             if ( destination.id == R.id.homeFragment ) {
@@ -94,7 +93,6 @@ class ParameterHomeActivity : AppCompatActivity() {
             intentToPass.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intentToPass)
         }
-        FirebaseHelper.logScreenEvent(FirebaseConstants.HEALTH_PARAMETERS_TRACKER_SCREEN)
     }
 
 

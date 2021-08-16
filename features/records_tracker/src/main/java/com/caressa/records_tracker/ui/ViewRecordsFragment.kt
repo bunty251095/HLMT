@@ -16,7 +16,9 @@ import androidx.navigation.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.AppColorHelper
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.common.view.SpinnerAdapter
 import com.caressa.common.view.SpinnerModel
@@ -56,6 +58,7 @@ class ViewRecordsFragment : BaseFragment()  {
         binding = FragmentViewRecordsBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HEALTH_RECORDS_VIEW_SCREEN)
         arguments?.let {
             from = it.getString(Constants.FROM)!!
             code = it.getString(Constants.CODE)!!

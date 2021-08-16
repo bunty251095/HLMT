@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.fitness.FitRequestCode
 import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.common.utils.*
@@ -101,6 +102,7 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
         binding = FitnessDashboardFragmentBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.ACTIVITY_TRACKER_DASHBOARD_SCREEN)
         try {
             initView()
             registerObservers()
@@ -582,6 +584,7 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
             if (fitnessDataManager!!.oAuthPermissionsApproved()) {
                 fitnessDataManager!!.signOutGoogleAccount()
                 fitnessDataManager!!.fitSignIn(FitRequestCode.READ_DATA)
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.STEPS_FORCE_SYNC)
             } else {
                 fitnessDataManager!!.fitSignIn(FitRequestCode.READ_DATA)
             }

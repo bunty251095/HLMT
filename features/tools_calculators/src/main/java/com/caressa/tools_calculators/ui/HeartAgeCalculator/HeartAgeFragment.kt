@@ -79,6 +79,7 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
         binding = FragmentHeartAgeBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HEART_AGE_CALCULATE_SCREEN)
         try {
             calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
             quizID = calculatorDataSingleton!!.quizId
@@ -87,7 +88,6 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
             initialise()
             setClickable()
             loadUserData()
-            FirebaseHelper.logScreenEvent(FirebaseConstants.HEART_AGE_BMI_CALCULATOR_SCREEN)
         } catch ( e : Exception ) {
             e.printStackTrace()
         }

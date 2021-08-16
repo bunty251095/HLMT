@@ -12,6 +12,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.common.utils.Validation
 import com.caressa.home.R
@@ -36,6 +38,7 @@ class PasswordChangeActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_password_change)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        FirebaseHelper.logScreenEvent(FirebaseConstants.PASSWORD_CHANGE_SCREEN)
         initialise()
         setClickable()
     }

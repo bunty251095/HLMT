@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.adapter.StressDetailReportAdapter
 import com.caressa.tools_calculators.adapter.SummarySuggestionsAdapter
@@ -60,6 +62,7 @@ class StressAndAnxietySummeryFragment : BaseFragment() {
         binding = FragmentStressAndAnxietySummeryBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.STRESS_ANXIETY_CALCULATOR_SUMMARY_SCREEN)
         calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         setClickable()

@@ -18,6 +18,8 @@ import com.caressa.tools_calculators.R
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.tools_calculators.databinding.FragmentSmartPhoneAddictionSummaryBinding
 import com.caressa.tools_calculators.model.CalculatorDataSingleton
 import com.caressa.tools_calculators.viewmodel.ToolsCalculatorsViewModel
@@ -55,6 +57,7 @@ class SmartPhoneAddictionSummaryFragment : BaseFragment() {
         binding = FragmentSmartPhoneAddictionSummaryBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.SMART_PHONE_CALCULATOR_SUMMARY_SCREEN)
         calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         setClickable()

@@ -16,6 +16,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.common.view.SpinnerAdapter
 import com.caressa.common.view.SpinnerModel
@@ -61,6 +63,7 @@ class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterA
         binding = FragmentHypertensionRecalculateBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HYPERTENSION_RECALCULATE_SCREEN)
         calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         quizID = calculatorDataSingleton!!.quizId
         participationID = calculatorDataSingleton!!.participantID

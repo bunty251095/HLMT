@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.*
 import com.caressa.home.R
 import com.caressa.home.databinding.FragmentAddFamilyMemberBinding
@@ -42,6 +43,7 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
         binding = FragmentAddFamilyMemberBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.FAMILY_MEMBER_ADD_SCREEN)
         from = requireArguments().getString(Constants.FROM,"")!!
         relationCode = requireArguments().getString(Constants.RELATION_CODE)!!
         relation = requireArguments().getString(Constants.RELATION)!!

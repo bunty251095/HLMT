@@ -10,7 +10,9 @@ import androidx.navigation.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.AppColorHelper
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 
 import com.caressa.home.R
@@ -56,6 +58,7 @@ class SelectRelationshipFragment : BaseFragment() {
         binding = FragmentSelectRelationshipBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.FAMILY_MEMBER_SELECT_SCREEN)
         initialise()
         setClickable()
         return binding.root

@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.KeyboardUtils
 import com.caressa.common.utils.Utilities
 import com.caressa.common.utils.ViewUtils
@@ -82,6 +84,7 @@ class AddMedicineFragment : BaseFragment(),MedicineTypeAdapter.OnMedTypeListener
         binding = FragmentAddMedicineBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.MEDICINE_TRACKER_ADD_SCREEN)
         try {
             initialise()
             registerObservers()

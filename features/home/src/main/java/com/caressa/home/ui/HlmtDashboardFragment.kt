@@ -29,7 +29,9 @@ import timber.log.Timber
 import java.util.*
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.fitness.FitRequestCode
+import com.caressa.common.utils.FirebaseHelper
 
 class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGridAdapter.OnItemSelectionListener,
     HomeMainActivity.OnGoogleAccountSelectListener {
@@ -63,6 +65,7 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
         binding.viewModel = viewModel
         binding.backViewModel = backgroundCallViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HOME_DASHBOARD)
         initialise()
         setClickable()
         setObserver()

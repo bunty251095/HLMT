@@ -367,71 +367,165 @@ object FirebaseConstants {
     const val LINK_ACCOUNT_SUCCESSFUL = "link_account_successful"
     const val LINK_ACCOUNT_FAIL = "link_account_fail"
 
+    const val STEPS_GOAL_UPDATE = "steps_goal_update"
+    const val STEPS_FORCE_SYNC = "steps_force_sync"
+
     const val HRA_INITIATED_EVENT = "hra_initiated"
     const val HRA_COMPLETED_EVENT = "hra_completed"
-    const val FAMILY_MEMBER_ADD_EVENT = "family_member_add"
-    const val HEALTH_RECORDS_UPLOAD_EVENT = "health_records_uploaded"
-    const val MEDICINE_UPLOAD_EVENT = "medicine_uploaded"
-    const val HEALTH_PARAM_UPLOAD_EVENT = "health_parameter_uploaded"
+    const val HRA_DOWNLOAD_REPORT = "hra_download_report"
+    const val HRA_RESTART_CLICK = "hra_restart_click"
+    const val HRA_VIEW_REPORT_CLICK = "hra_view_report_click"
 
-    const val SPREAD_THE_WORD_CLICK = "spread_the_word_click"
+    const val PROFILE_SCREEN_CLICK = "profile_screen_click"
+    const val PROFILE_EDIT_CLICK = "profile_edit_click"
+    const val PROFILE_EDIT_CANCELLED = "profile_edit_cancelled"
+    const val PROFILE_PIC_EDIT_CLICK = "profile_pic_edit_click"
+    const val PROFILE_UPDATE_SUCCESS = "profile_update_success"
+    const val PROFILE_UPDATE_FAILED = "profile_update_failed"
+    const val PROFILE_SWITCH_CLICK = "profile_switch_click"
+
+    const val FAMILY_MEMBER_ADD_EVENT = "family_member_add"
+    const val FAMILY_MEMBER_SCREEN_CLICK = "family_member_screen_click"
+    const val FAMILY_MEMBER_ADD_SUCCESS = "family_member_add_success"
+    const val FAMILY_MEMBER_ADD_FAILED = "family_member_add_failed"
+
+    const val FAMILY_DOCTOR_ADD_SUCCESS = "family_doctor_add_success"
+    const val FAMILY_DOCTOR_ADD_FAILED = "family_doctor_add_failed"
+
+    const val CONTACT_US_SUBMIT = "contact_us_submit"
+    const val CONTACT_US_SUBMIT_SUCCESS = "contact_us_submit_success"
+    const val CONTACT_US_SUBMIT_FAILED = "contact_us_submit_failed"
+
+    const val HEALTH_RECORDS_UPLOADED = "health_records_uploaded"
+    const val HEALTH_RECORD_DOWNLOAD = "health_record_download"
+    const val HEALTH_RECORD_SHARED = "health_record_shared"
+    const val HEALTH_RECORD_DELETED = "health_record_deleted"
+
+    const val MEDICATION_ADDED = "medication_added"
+    const val PAST_MEDICATION_CLICK = "past_medication_click"
+    const val MEDICATION_NOTIFICATION_ENABLED = "medication_notification_enabled"
+    const val MEDICATION_NOTIFICATION_DISABLED = "medication_notification_disabled"
+    const val MEDICATION_EDIT = "medication_edit"
+    const val MEDICATION_DELETED = "medication_deleted"
+
+    const val TRACK_PARAMETER_SAVED = "track_parameter_saved"
+    const val TRACK_PARAMETER_GRAPH_VIEW_CLICK = "track_parameter_graph_view_click"
+
+    const val MENU_LINK_ACCOUNT_CLICK = "menu_link_account_click"
+    const val MENU_MY_PROFILE_CLICK = "menu_my_profile_click"
+    const val MENU_FAMILY_MEMBERS_CLICK = "menu_family_members_click"
+    const val MENU_FAMILY_DOCTORS_CLICK = "menu_family_doctors_click"
+    const val MENU_CONTACT_US_MNU_CLICK = "menu_contact_us_mnu_click"
+    const val MENU_SPREAD_THE_WORD_CLICK = "menu_spread_the_word_click"
+    const val MENU_SETTINGS_CLICK = "menu_settings_click"
     const val RATE_US_CLICK = "rate_us_click"
+    const val FEEDBACK_SUBMIT = "feedback_submit"
     const val LOGOUT_CLICK = "logout_click"
 
     // Screen event
-    const val ACTIVITY_TRACKER_SCREEN = "activity_tracker_screen"
-    const val ACTIVITY_TRACKER_MONTHLY_DETAIL_SCREEN = "activity_monthly_detail_screen"
-    const val MEDICINE_TRACKER_SCREEN = "medicine_tracker_screen"
-    const val HEALTH_PARAMETERS_TRACKER_SCREEN = "health_parameters_tracker_screen"
-    const val HEALTH_RECORDS_SCREEN = "health_records_screen"
-    const val TOOLS_CALCULATORS_SCREEN = "tools_calculators_screen"
-    const val HEART_AGE_BMI_CALCULATOR_SCREEN = "heart_age_bmi_calculator_screen"
-    const val HEART_AGE_LIPID_CALCULATOR_SCREEN = "heart_age_lipid_calculator_screen"
-    const val HEART_AGE_SUMMERY_SCREEN = "heart_age_summery_screen"
-    const val HEART_AGE_DETAIL_SUMMERY_SCREEN = "heart_age_detail_summery_screen"
-    const val HEART_AGE_RECALCULATE_SCREEN = "heart_age_recalculate_screen"
-    const val DIABETES_CALCULATOR_SCREEN = "diabetes_calculator_screen"
-    const val HYPERTENSION_CALCULATOR_SCREEN = "hypertension_calculator_screen"
-    const val STRESS_CALCULATOR_SCREEN = "stress_anxiety_calculator_screen"
-    const val BLOGS_SCREEN = "blogs_screen"
+    //**********************Home**********************
+    const val HOME_DASHBOARD = "home_dashboard"
     const val CONTACT_US_SCREEN = "contact_us_screen"
-    const val NON_HLMT_LOGIN_SCREEN = "non_hlmt_user_login_screen"
-    const val HLMT_USER_LOGIN_SCREEN = "hlmt_user_login_screen"
-    const val DUE_DATE_CALCULATOR_SCREEN = "due_date_calculator_screen"
-    const val SMART_PHONE_CALCULATOR_SCREEN = "smart_phone_calculator_screen"
-    const val LINK_ACCOUNT_SCREEN = "link_account_screen"
-    const val LINK_ACCOUNT_STATUS_SCREEN = "link_account_status_screen"
-
     const val SETTINGS_SCREEN = "settings_screen"
     const val FEEDBACK_SCREEN = "feedback_screen"
+    const val LINK_ACCOUNT_SCREEN = "link_account_screen"
+    const val PASSWORD_CHANGE_SCREEN = "password_change_screen"
+
+    const val MY_PROFILE_SCREEN = "my_profile_screen"
+    const val FAMILY_MEMBER_LIST_SCREEN = "family_member_list_screen"
+    const val FAMILY_MEMBER_ADD_SCREEN = "family_member_add_screen"
+    const val FAMILY_MEMBER_UPDATE_SCREEN = "family_member_update_screen"
+    const val FAMILY_MEMBER_SELECT_SCREEN = "family_member_select_screen"
+
+    const val FAMILY_DOCTOR_LIST_SCREEN = "family_doctor_list_screen"
+    const val FAMILY_DOCTOR_ADD_OR_UPDATE_SCREEN = "family_doctor_add_or_update_screen"
+    //**********************Home**********************
+
+    //**********************Health Library**********************
+    const val BLOGS_DASHBOARD_SCREEN = "blogs_dashboard_screen"
+    const val BLOGS_DETAILS_SCREEN = "blogs_details_screen"
+    //**********************Health Library**********************
+
+    //**********************Activity Tracker**********************
+    const val ACTIVITY_TRACKER_DASHBOARD_SCREEN = "activity_tracker_dashboard_screen"
+    const val ACTIVITY_TRACKER_MONTHLY_DETAIL_SCREEN = "activity_monthly_detail_screen"
+    //**********************Activity Tracker**********************
+
+    //**********************HRA**********************
+    const val HRA_START_SCREEN = "hra_start_screen"
+    const val HRA_FAMILY_MEMBER_SELECTION_SCREEN = "hra_family_member_selection_screen"
+    const val HRA_SUMMERY_SCREEN = "hra_summery_screen"
+    //**********************HRA**********************
+
+    //**********************Store Health Records**********************
+    const val HEALTH_RECORDS_HOME_SCREEN = "health_records_home_screen"
+    const val HEALTH_RECORDS_VIEW_SCREEN = "health_records_view_screen"
+    const val HEALTH_RECORDS_UPLOAD_SCREEN = "health_records_upload_screen"
+    const val HEALTH_RECORDS_SELECT_RELATION_SCREEN = "health_records_select_relation_screen"
+    const val HEALTH_RECORDS_DOCUMENT_TYPE_SCREEN = "health_records_document_type_screen"
+    const val HEALTH_RECORDS_DIGITIZE_SCREEN = "health_records_digitize_screen"
+    const val HEALTH_RECORDS_DIGITIZE_LIST_SCREEN = "health_records_digitize_list_screen"
+    //**********************Store Health Records**********************
+
+    //**********************Medicine Tracker**********************
+    const val MEDICINE_TRACKER_HOME_SCREEN = "medicine_tracker_home_screen"
+    const val MEDICINE_TRACKER_DASHBOARD_SCREEN = "medicine_tracker_dashboard_screen"
+    const val MEDICINE_TRACKER_ADD_SCREEN = "medicine_tracker_add_screen"
+    const val MEDICINE_TRACKER_SCHEDULE_SCREEN = "medicine_tracker_schedule_screen"
+    const val MEDICINE_TRACKER_MY_MEDICATIONS_SCREEN = "medicine_tracker_my_medications_screen"
+    //**********************Medicine Tracker**********************
+
+    //**********************Tools Calculators**********************
+    const val TOOLS_CALCULATORS_HOME_SCREEN = "tools_calculators_home_screen"
+
+    const val HEART_AGE_CALCULATE_SCREEN = "heart_age_calculate_screen"
+    const val HEART_AGE_RECALCULATE_SCREEN = "heart_age_recalculate_screen"
+    const val HEART_AGE_SUMMARY_SCREEN = "heart_age_summary_screen"
+    const val HEART_AGE_REPORT_SCREEN = "heart_age_report_screen"
+
+    const val DIABETES_CALCULATOR_INPUT_SCREEN = "diabetes_calculator_input_screen"
+    const val DIABETES_SUMMARY_SCREEN = "diabetes_summary_screen"
+    const val DIABETES_REPORT_SCREEN = "diabetes_report_screen"
+
+    const val HYPERTENSION_CALCULATOR_INPUT_SCREEN = "hypertension_input_screen"
+    const val HYPERTENSION_RECALCULATE_SCREEN = "hypertension_recalculate_screen"
+    const val HYPERTENSION_SUMMARY_SCREEN = "hypertension_summary_screen"
+    const val HYPERTENSION_REPORT_SCREEN = "hypertension_report_screen"
+
+    const val STRESS_ANXIETY_CALCULATOR_INPUT_SCREEN = "stress_anxiety_calculator_input_screen"
+    const val STRESS_ANXIETY_CALCULATOR_SUMMARY_SCREEN = "stress_anxiety_calculator_summary_screen"
+
+    const val SMART_PHONE_CALCULATOR_INPUT_SCREEN = "smart_phone_calculator_input_screen"
+    const val SMART_PHONE_CALCULATOR_SUMMARY_SCREEN = "smart_phone_calculator_summary_screen"
+
+    const val DUE_DATE_CALCULATOR_INPUT_SCREEN = "due_date_calculator_input_screen"
+    const val DUE_DATE_CALCULATOR_REPORT_SCREEN = "due_date_calculator_report_screen"
+    //**********************Tools Calculators**********************
+
+    //**********************Track Parameters**********************
+    const val TRACK_PARAMETERS_HOME_SCREEN = "track_parameters_home_screen"
+    const val TRACK_PARAMETERS_SELECT_SCREEN = "track_parameters_select_screen"
+    const val TRACK_PARAMETERS_UPDATE_SCREEN = "track_parameters_update_screen"
+    const val TRACK_PARAMETERS_DASHBOARD_SCREEN = "track_parameters_dashboard_screen"
+    const val TRACK_PARAMETERS_HISTORY_SCREEN = "track_parameters_history_screen"
+    const val TRACK_PARAMETERS_COMPLETE_HISTORY_SCREEN = "track_parameters_complete_history_screen"
+    //**********************Track Parameters**********************
+
+    //**********************Security**********************
+    const val NON_HLMT_LOGIN_SCREEN = "non_hlmt_user_login_screen"
+    const val HLMT_USER_LOGIN_SCREEN = "hlmt_user_login_screen"
+    const val LINK_ACCOUNT_STATUS_SCREEN = "link_account_status_screen"
+    //**********************Security**********************
+    // Screen event
 
     // New Events
     const val ACCOUNT_SELECTION = "hlmt_account_selection_screen"
     const val REGISTRATION_USER_INFO_SCREEN = "registration_user_information_screen"
-    const val MY_PROFILE_SCREEN = "my_profile_screen"
-    const val EDIT_PROFILE_SCREEN = "edit_profile_screen"
-    const val FAMILY_MEMBER_LIST_SCREEN = "family_member_list_screen"
-    const val FAMILY_MEMBER_SELECTION_SCREEN = "family_member_selection_screen"
-    const val ADD_FAMILY_MEMBER_SCREEN = "add_family_member_screen"
-    const val EDIT_FAMILY_MEMBER_SCREEN = "edit_family_member_screen"
-    const val FAMILY_DOCTOR_LIST_SCREEN = "family_doctor_list_screen"
-    const val ADD_FAMILY_DOCTOR_SCREEN = "add_family_doctor_screen"
-    const val START_HRA_SCREEN = "start_hra_screen"
-    const val HRA_SUMMERY_SCREEN = "hra_summery_screen"
     const val PARAM_PROFILE_SELECTION_SCREEN = "parameter_profile_selection_screen"
     const val UPDATE_PARAMETER_sCREEN = "update_parameter_screen"
     const val GRAPHICAL_HISTORY_SCREEN = "graphical_history_screen"
     const val MONTHLY_HISTORY_SCREEN = "monthly_history_screen"
     const val PARAMETER_DASHBOARD_SCREEN = "parameter_dashboard_screen"
-    const val RECORD_TYPE_SELECTION_SCREEN = "record_type_selection_screen"
-    const val FILE_TYPE_SELECTION_SCREEN = "file_type_selection_screen"
-    const val UPLOAD_RECORD_TO_FAMILY_MEMEBER_SCREEN = "upload_record_to_family_member_screen"
-    const val VIEW_AND_SHARE_RECORDS_SCREEN = "view_and_share_record_screen"
-    const val MEDICATION_DASHBOARD_SCREEN = "medication_dashboard_screen"
-    const val MEDICATION_SEARCH_SCREEN = "medication_search_screen"
-    const val ADD_MEDICATION_SCREEN = "add_medication_screen"
-    const val MY_MEDICATION_SCREEN = "my_medication_screen"
     const val ACC = ""
-
 
 }

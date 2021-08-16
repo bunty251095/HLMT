@@ -20,10 +20,8 @@ import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Configuration
 import com.caressa.common.constants.Constants
-import com.caressa.common.utils.AppColorHelper
-import com.caressa.common.utils.PermissionUtil
-import com.caressa.common.utils.RealPathUtil
-import com.caressa.common.utils.Utilities
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.*
 import com.caressa.model.entity.RecordInSession
 import com.caressa.records_tracker.R
 import com.caressa.records_tracker.adapter.UploadRecordAdapter
@@ -68,6 +66,7 @@ class UploadRecordFragment : BaseFragment()  {
         binding.viewmodel = viewModel
         binding.fragment = this
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HEALTH_RECORDS_UPLOAD_SCREEN)
         requireArguments().let {
             code = it.getString(Constants.CODE,"")!!
             Timber.e("code----->$code")

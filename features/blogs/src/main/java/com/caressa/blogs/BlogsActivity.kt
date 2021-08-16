@@ -58,7 +58,6 @@ class BlogsActivity : AppCompatActivity() {
             intentToPass.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intentToPass)
         }
-        FirebaseHelper.logScreenEvent(FirebaseConstants.BLOGS_SCREEN)
     }
 
     override fun onSupportNavigateUp(): Boolean {

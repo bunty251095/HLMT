@@ -2,7 +2,6 @@ package com.caressa.blogs.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,11 @@ import com.caressa.blogs.viewmodel.BlogViewModel
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import org.koin.android.viewmodel.ext.android.viewModel
-
+import timber.log.Timber
 
 class BlogDetailFragment : BaseFragment() {
 
@@ -26,14 +27,11 @@ class BlogDetailFragment : BaseFragment() {
 
     override fun getViewModel(): BaseViewModel = viewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentBlogDetailBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.BLOGS_DETAILS_SCREEN)
         initialise()
         return binding.root
     }
@@ -59,10 +57,8 @@ class BlogDetailFragment : BaseFragment() {
                 .replace("dir=", "")
                 //.replace(Regex("height=\"[0-9]+\""), "")
                 //.replace(Regex("<img(.*?)src=\"([^\"]+)\"(.*?)>"), "<img src=\"$2\">")
-                .replace(
-                    Regex("<img(.*?)src=\"([^\"]+)\"(.*?)>"),
-                    "<img src=\"$2\" style=\"width:100%\">"
-                )
+                .replace(Regex("<img(.*?)src=\"([^\"]+)\"(.*?)>"),
+                    "<img src=\"$2\" style=\"width:100%\">")
                 .replace("Loading Custom Ratings...", "")
             //.replace("width=", "width=\"100%;\"")
             val myHtmlString = str + content + html2
@@ -71,11 +67,10 @@ class BlogDetailFragment : BaseFragment() {
                 html4 + myHtmlString,
                 "text/html",
                 "UTF-8",
-                null
-            )
+                null)
             //binding.webViewBlogs.loadDataWithBaseURL(null, body, "text/html", "UTF-8", null)
             //binding.webViewBlogs.loadUrl(requireArguments().getString("LINK")!!)
-            Log.d("BLOG_DETAIL", "-----------\n" + (html4 + myHtmlString));
+            Timber.i("BLOG_DETAIL-----------\n${(html4 + myHtmlString)}")
         }
     }
 
