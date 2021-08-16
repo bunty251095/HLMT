@@ -64,7 +64,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
         binding = DataBindingUtil.setContentView(this, R.layout.activity_hra_summary)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_SUMMERY_SCREEN)
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HRA_SUMMERY_SCREEN)
         try {
             val i = intent
             if ( i.hasExtra(Constants.PERSON_ID) ) {

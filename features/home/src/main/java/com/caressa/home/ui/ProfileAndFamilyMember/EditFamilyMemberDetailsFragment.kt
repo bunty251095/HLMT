@@ -305,6 +305,7 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
                                         relationship = relation ,
                                         relationShipID = relationShipID )
                                     viewModel.callUpdateRelativesApi(true, newRelative,Constants.RELATIVE)
+                                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_MEMBER_UPDATE)
                                 }
                             } else {
                                 Utilities.toastMessageLong( context , resources.getString(R.string.ERROR_DOB_UNAVAILABLE))

@@ -367,63 +367,8 @@ object FirebaseConstants {
     const val LINK_ACCOUNT_SUCCESSFUL = "link_account_successful"
     const val LINK_ACCOUNT_FAIL = "link_account_fail"
 
-    const val STEPS_GOAL_UPDATE = "steps_goal_update"
-    const val STEPS_FORCE_SYNC = "steps_force_sync"
-
-    const val HRA_INITIATED_EVENT = "hra_initiated"
-    const val HRA_COMPLETED_EVENT = "hra_completed"
-    const val HRA_DOWNLOAD_REPORT = "hra_download_report"
-    const val HRA_RESTART_CLICK = "hra_restart_click"
-    const val HRA_VIEW_REPORT_CLICK = "hra_view_report_click"
-
-    const val PROFILE_SCREEN_CLICK = "profile_screen_click"
-    const val PROFILE_EDIT_CLICK = "profile_edit_click"
-    const val PROFILE_EDIT_CANCELLED = "profile_edit_cancelled"
-    const val PROFILE_PIC_EDIT_CLICK = "profile_pic_edit_click"
-    const val PROFILE_UPDATE_SUCCESS = "profile_update_success"
-    const val PROFILE_UPDATE_FAILED = "profile_update_failed"
-    const val PROFILE_SWITCH_CLICK = "profile_switch_click"
-
-    const val FAMILY_MEMBER_ADD_EVENT = "family_member_add"
-    const val FAMILY_MEMBER_SCREEN_CLICK = "family_member_screen_click"
-    const val FAMILY_MEMBER_ADD_SUCCESS = "family_member_add_success"
-    const val FAMILY_MEMBER_ADD_FAILED = "family_member_add_failed"
-
-    const val FAMILY_DOCTOR_ADD_SUCCESS = "family_doctor_add_success"
-    const val FAMILY_DOCTOR_ADD_FAILED = "family_doctor_add_failed"
-
-    const val CONTACT_US_SUBMIT = "contact_us_submit"
-    const val CONTACT_US_SUBMIT_SUCCESS = "contact_us_submit_success"
-    const val CONTACT_US_SUBMIT_FAILED = "contact_us_submit_failed"
-
-    const val HEALTH_RECORDS_UPLOADED = "health_records_uploaded"
-    const val HEALTH_RECORD_DOWNLOAD = "health_record_download"
-    const val HEALTH_RECORD_SHARED = "health_record_shared"
-    const val HEALTH_RECORD_DELETED = "health_record_deleted"
-
-    const val MEDICATION_ADDED = "medication_added"
-    const val PAST_MEDICATION_CLICK = "past_medication_click"
-    const val MEDICATION_NOTIFICATION_ENABLED = "medication_notification_enabled"
-    const val MEDICATION_NOTIFICATION_DISABLED = "medication_notification_disabled"
-    const val MEDICATION_EDIT = "medication_edit"
-    const val MEDICATION_DELETED = "medication_deleted"
-
-    const val TRACK_PARAMETER_SAVED = "track_parameter_saved"
-    const val TRACK_PARAMETER_GRAPH_VIEW_CLICK = "track_parameter_graph_view_click"
-
-    const val MENU_LINK_ACCOUNT_CLICK = "menu_link_account_click"
-    const val MENU_MY_PROFILE_CLICK = "menu_my_profile_click"
-    const val MENU_FAMILY_MEMBERS_CLICK = "menu_family_members_click"
-    const val MENU_FAMILY_DOCTORS_CLICK = "menu_family_doctors_click"
-    const val MENU_CONTACT_US_MNU_CLICK = "menu_contact_us_mnu_click"
-    const val MENU_SPREAD_THE_WORD_CLICK = "menu_spread_the_word_click"
-    const val MENU_SETTINGS_CLICK = "menu_settings_click"
-    const val RATE_US_CLICK = "rate_us_click"
-    const val FEEDBACK_SUBMIT = "feedback_submit"
-    const val LOGOUT_CLICK = "logout_click"
-
-    // Screen event
     //**********************Home**********************
+    // Screen event
     const val HOME_DASHBOARD = "home_dashboard"
     const val CONTACT_US_SCREEN = "contact_us_screen"
     const val SETTINGS_SCREEN = "settings_screen"
@@ -438,26 +383,78 @@ object FirebaseConstants {
     const val FAMILY_MEMBER_SELECT_SCREEN = "family_member_select_screen"
 
     const val FAMILY_DOCTOR_LIST_SCREEN = "family_doctor_list_screen"
-    const val FAMILY_DOCTOR_ADD_OR_UPDATE_SCREEN = "family_doctor_add_or_update_screen"
+    const val FAMILY_DOCTOR_ADD_SCREEN = "family_doctor_add_screen"
+    const val FAMILY_DOCTOR_UPDATE_SCREEN = "family_doctor_update_screen"
+
+    // Button & Api Events
+    const val MENU_LINK_ACCOUNT_CLICK = "menu_link_account_click"
+    const val MENU_MY_PROFILE_CLICK = "menu_my_profile_click"
+    const val MENU_FAMILY_MEMBERS_CLICK = "menu_family_members_click"
+    const val MENU_FAMILY_DOCTORS_CLICK = "menu_family_doctors_click"
+    const val MENU_CONTACT_US_MNU_CLICK = "menu_contact_us_mnu_click"
+    const val MENU_SPREAD_THE_WORD_CLICK = "menu_spread_the_word_click"
+    const val MENU_SETTINGS_CLICK = "menu_settings_click"
+    const val RATE_US_CLICK = "rate_us_click"
+    const val FEEDBACK_SUBMIT = "feedback_submit"
+    const val LOGOUT_CLICK = "logout_click"
+
+    const val PROFILE_EDIT_CLICK = "profile_edit_click"
+    const val PROFILE_EDIT_CANCELLED = "profile_edit_cancelled"
+    const val PROFILE_PIC_EDIT_CLICK = "profile_pic_edit_click"
+    const val PROFILE_SWITCH_CLICK = "profile_switch_click"
+    const val PROFILE_UPDATE_SUCCESS = "profile_update_success"
+    const val PROFILE_UPDATE_FAILED = "profile_update_failed"
+
+    const val FAMILY_MEMBER_ADD = "family_member_add"
+    const val FAMILY_MEMBER_UPDATE = "family_member_update"
+    const val FAMILY_MEMBER_ADD_SUCCESS = "family_member_add_success"
+    const val FAMILY_MEMBER_ADD_FAILED = "family_member_add_failed"
+
+    const val FAMILY_DOCTOR_ADD = "family_doctor_add"
+    const val FAMILY_DOCTOR_UPDATE = "family_doctor_update"
+    const val FAMILY_DOCTOR_ADD_SUCCESS = "family_doctor_add_success"
+    const val FAMILY_DOCTOR_ADD_FAILED = "family_doctor_add_failed"
+
+    const val CONTACT_US_SUBMIT = "contact_us_submit"
+    const val CONTACT_US_SUBMIT_SUCCESS = "contact_us_submit_success"
+    const val CONTACT_US_SUBMIT_FAILED = "contact_us_submit_failed"
     //**********************Home**********************
 
     //**********************Health Library**********************
+    // Screen event
     const val BLOGS_DASHBOARD_SCREEN = "blogs_dashboard_screen"
     const val BLOGS_DETAILS_SCREEN = "blogs_details_screen"
+
+    // Button & Api Events
+    const val BLOGS_SHARE_CLICK = "blogs_share_click"
     //**********************Health Library**********************
 
     //**********************Activity Tracker**********************
+    // Screen event
     const val ACTIVITY_TRACKER_DASHBOARD_SCREEN = "activity_tracker_dashboard_screen"
     const val ACTIVITY_TRACKER_MONTHLY_DETAIL_SCREEN = "activity_monthly_detail_screen"
+
+    // Button & Api Events
+    const val STEPS_GOAL_UPDATE = "steps_goal_update"
+    const val STEPS_FORCE_SYNC = "steps_force_sync"
     //**********************Activity Tracker**********************
 
     //**********************HRA**********************
+    // Screen event
     const val HRA_START_SCREEN = "hra_start_screen"
+    const val HRA_COMPLETED_SCREEN  = "hra_completed_screen"
     const val HRA_FAMILY_MEMBER_SELECTION_SCREEN = "hra_family_member_selection_screen"
     const val HRA_SUMMERY_SCREEN = "hra_summery_screen"
+
+    // Button & Api Events
+    const val HRA_INITIATED = "hra_initiated"
+    const val HRA_DOWNLOAD_REPORT = "hra_download_report"
+    const val HRA_RESTART_CLICK = "hra_restart_click"
+    const val HRA_VIEW_REPORT_CLICK = "hra_view_report_click"
     //**********************HRA**********************
 
     //**********************Store Health Records**********************
+    // Screen event
     const val HEALTH_RECORDS_HOME_SCREEN = "health_records_home_screen"
     const val HEALTH_RECORDS_VIEW_SCREEN = "health_records_view_screen"
     const val HEALTH_RECORDS_UPLOAD_SCREEN = "health_records_upload_screen"
@@ -465,17 +462,33 @@ object FirebaseConstants {
     const val HEALTH_RECORDS_DOCUMENT_TYPE_SCREEN = "health_records_document_type_screen"
     const val HEALTH_RECORDS_DIGITIZE_SCREEN = "health_records_digitize_screen"
     const val HEALTH_RECORDS_DIGITIZE_LIST_SCREEN = "health_records_digitize_list_screen"
+
+    // Button & Api Events
+    const val HEALTH_RECORDS_UPLOADED = "health_records_uploaded"
+    const val HEALTH_RECORD_DOWNLOAD = "health_record_download"
+    const val HEALTH_RECORD_SHARED = "health_record_shared"
+    const val HEALTH_RECORD_DELETED = "health_record_deleted"
     //**********************Store Health Records**********************
 
     //**********************Medicine Tracker**********************
+    // Screen event
     const val MEDICINE_TRACKER_HOME_SCREEN = "medicine_tracker_home_screen"
     const val MEDICINE_TRACKER_DASHBOARD_SCREEN = "medicine_tracker_dashboard_screen"
     const val MEDICINE_TRACKER_ADD_SCREEN = "medicine_tracker_add_screen"
     const val MEDICINE_TRACKER_SCHEDULE_SCREEN = "medicine_tracker_schedule_screen"
     const val MEDICINE_TRACKER_MY_MEDICATIONS_SCREEN = "medicine_tracker_my_medications_screen"
+
+    // Button & Api Events
+    const val MEDICATION_ADDED = "medication_added"
+    const val MEDICATION_NOTIFICATION_ENABLED = "medication_notification_enabled"
+    const val MEDICATION_NOTIFICATION_DISABLED = "medication_notification_disabled"
+    const val MEDICATION_EDIT = "medication_edit"
+    const val MEDICATION_DELETED = "medication_deleted"
+    const val MEDICINE_TRACKER_UPLOAD_PRESCRIPTION = "medicine_tracker_upload_prescription"
     //**********************Medicine Tracker**********************
 
     //**********************Tools Calculators**********************
+    // Screen event
     const val TOOLS_CALCULATORS_HOME_SCREEN = "tools_calculators_home_screen"
 
     const val HEART_AGE_CALCULATE_SCREEN = "heart_age_calculate_screen"
@@ -500,32 +513,63 @@ object FirebaseConstants {
 
     const val DUE_DATE_CALCULATOR_INPUT_SCREEN = "due_date_calculator_input_screen"
     const val DUE_DATE_CALCULATOR_REPORT_SCREEN = "due_date_calculator_report_screen"
+
+    // Button & Api Events
+    const val HEART_AGE_CALCULATE_CLICK = "heart_age_calculate_click"
+    const val HEART_AGE_RECALCULATE_CLICK = "heart_age_recalculate_click"
+    const val HEART_AGE_VIEW_DETAILED_REPORT_CLICK = "heart_age_view_detailed_report_click"
+    const val HEART_AGE_TAB_CLICKED = "heart_age_tab_clicked"
+    const val HEART_RISK_TAB_CLICKED = "heart_risk_tab_clicked"
+
+    const val DIABETES_CALCULATE_CLICK = "diabetes_calculate_click"
+    const val DIABETES_VIEW_DETAILED_REPORT_CLICK = "diabetes_view_detailed_report_click"
+
+    const val HYPERTENSION_CALCULATE_CLICK = "hypertension_calculate_click"
+    const val HYPERTENSION_VIEW_DETAILED_REPORT_CLICK = "hypertension_view_detailed_report_click"
+
+    const val DAS_CALCULATE_CLICK = "das_calculate_click"
+    const val DEPRESSION_TAB_CLICKED = "depression_tab_clicked"
+    const val ANXIETY_TAB_CLICKED = "anxiety_tab_clicked"
+    const val STRESS_TAB_CLICKED = "stress_tab_clicked"
+
+    const val SPA_CALCULATE_CLICK = "spa_calculate_click"
+
+    const val DUE_DATE_CALCULATE_CLICK = "due_date_calculate_click"
+    const val DUE_DATE_RECALCULATE_CLICK = "due_date_recalculate_click"
     //**********************Tools Calculators**********************
 
     //**********************Track Parameters**********************
+    // Screen event
     const val TRACK_PARAMETERS_HOME_SCREEN = "track_parameters_home_screen"
     const val TRACK_PARAMETERS_SELECT_SCREEN = "track_parameters_select_screen"
     const val TRACK_PARAMETERS_UPDATE_SCREEN = "track_parameters_update_screen"
     const val TRACK_PARAMETERS_DASHBOARD_SCREEN = "track_parameters_dashboard_screen"
     const val TRACK_PARAMETERS_HISTORY_SCREEN = "track_parameters_history_screen"
     const val TRACK_PARAMETERS_COMPLETE_HISTORY_SCREEN = "track_parameters_complete_history_screen"
+
+    // Button & Api Events
+    const val TRACK_PARAMETER_SAVED = "track_parameter_saved"
+    const val TRACK_PARAMETER_DETAIL_VIEW_CLICK = "track_parameter_detail_view_click"
+    const val TRACK_PARAMETER_GRAPH_VIEW_CLICK = "track_parameter_graph_view_click"
+    const val TRACK_PARAMETER_COMPLETE_HISTORY = "track_parameter_complete_history"
+    const val TRACK_PARAMETER_UPLOAD_REPORT = "track_parameter_upload_report"
+    const val TRACK_PARAMETER_ADD_MEDICATION = "track_parameter_add_medication"
     //**********************Track Parameters**********************
 
     //**********************Security**********************
+    // Screen event
     const val NON_HLMT_LOGIN_SCREEN = "non_hlmt_user_login_screen"
     const val HLMT_USER_LOGIN_SCREEN = "hlmt_user_login_screen"
     const val LINK_ACCOUNT_STATUS_SCREEN = "link_account_status_screen"
+
+    // Button & Api Events
+
     //**********************Security**********************
     // Screen event
 
     // New Events
     const val ACCOUNT_SELECTION = "hlmt_account_selection_screen"
     const val REGISTRATION_USER_INFO_SCREEN = "registration_user_information_screen"
-    const val PARAM_PROFILE_SELECTION_SCREEN = "parameter_profile_selection_screen"
-    const val UPDATE_PARAMETER_sCREEN = "update_parameter_screen"
-    const val GRAPHICAL_HISTORY_SCREEN = "graphical_history_screen"
-    const val MONTHLY_HISTORY_SCREEN = "monthly_history_screen"
-    const val PARAMETER_DASHBOARD_SCREEN = "parameter_dashboard_screen"
     const val ACC = ""
 
 }

@@ -182,6 +182,7 @@ class HypertensionSummeryFragment : BaseFragment() {
 
         binding.btnViewReportGraph.setOnClickListener {
             findNavController().navigate(R.id.action_hypertensionSummeryFragment_to_hypertensionReportFragment)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HYPERTENSION_VIEW_DETAILED_REPORT_CLICK)
         }
 
     }

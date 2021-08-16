@@ -58,6 +58,7 @@ class DueDateInputFragment : BaseFragment() {
             val bundle = Bundle()
             bundle.putString("lmpDate",lmpDate)
             it.findNavController().navigate(R.id.action_dueDateInputFragment_to_dueDateCalculatorReportFragment,bundle)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.DUE_DATE_CALCULATE_CLICK)
         }
 
         binding.btnCancel.setOnClickListener {

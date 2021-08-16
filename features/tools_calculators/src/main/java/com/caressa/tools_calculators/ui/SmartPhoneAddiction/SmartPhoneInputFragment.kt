@@ -143,6 +143,7 @@ class SmartPhoneInputFragment : BaseFragment() {
                 if (binding.btnNext.text.toString().trim { it <= ' ' }.equals("finish", ignoreCase = true)) {
                     val value = calculateScore()
                     viewModel.callSmartPhoneSaveResponseApi(value,participationID,quizID)
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.SPA_CALCULATE_CLICK)
                 } else {
                     question = smartPhoneAddictionData!!.getSmartPhoneAddictionData(currentQuestion,requireContext())
                     loadPreviousData()

@@ -35,7 +35,7 @@ class HraLastPageFragment(val qCode: String) : BaseFragment() {
             initialise()
             setClickable()
         }
-        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_COMPLETED_EVENT)
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HRA_COMPLETED_SCREEN)
         return binding.root
     }
 

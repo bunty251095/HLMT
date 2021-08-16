@@ -280,6 +280,7 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                                 relationshipCode = relationCode,
                                 relationship = relation )
                             viewModel.callAddNewRelativeApi( true,newRelative,from,this)
+                            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_MEMBER_ADD)
                         }
                     }
                 })

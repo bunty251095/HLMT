@@ -162,6 +162,7 @@ class RevHistoryFragment : BaseFragment() {
 
         binding.layoutHistory.setOnClickListener {
             viewModel.goToDetailHistory()
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.TRACK_PARAMETER_COMPLETE_HISTORY)
         }
 
         binding.tabGraph.setOnClickListener {
@@ -178,6 +179,7 @@ class RevHistoryFragment : BaseFragment() {
 
         binding.tabDetail.setOnClickListener {
             selectTabDetails()
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.TRACK_PARAMETER_DETAIL_VIEW_CLICK)
         }
 
         binding.txtParamSpinner.setOnClickListener { v: View? -> binding.paramSpinner.performClick() }
@@ -223,6 +225,7 @@ class RevHistoryFragment : BaseFragment() {
             launchIntent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.STORE_RECORDS)
             launchIntent.putExtra(Constants.FROM, Constants.TRACK_PARAMETER)
             startActivity(launchIntent)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.TRACK_PARAMETER_UPLOAD_REPORT)
         }
 
         binding.btnParamResultAddMedication.setOnClickListener{
@@ -230,6 +233,7 @@ class RevHistoryFragment : BaseFragment() {
             launchIntent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.MEDICINE_TRACKER)
             launchIntent.putExtra(Constants.FROM, Constants.TRACK_PARAMETER)
             startActivity(launchIntent)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.TRACK_PARAMETER_ADD_MEDICATION)
         }
     }
 

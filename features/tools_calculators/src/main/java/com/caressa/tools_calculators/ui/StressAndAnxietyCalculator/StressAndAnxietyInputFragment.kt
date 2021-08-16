@@ -154,6 +154,7 @@ class StressAndAnxietyInputFragment : BaseFragment() {
                     saveDetails()
                     Timber.i("AnswerList=> %s", getAnswerList())
                     viewModel.callStressAndAnxietySaveResponseApi(participationID,quizID.toInt(),getAnswerList())
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.DAS_CALCULATE_CLICK)
                 } else {
                     saveDetails()
                     currentQuestion = dataHandler!!.getStressNextQuestion(currentQuestion)

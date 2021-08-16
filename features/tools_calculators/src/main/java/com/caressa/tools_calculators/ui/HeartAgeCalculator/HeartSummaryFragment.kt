@@ -76,9 +76,11 @@ class HeartSummaryFragment : BaseFragment() {
                 if (tab.position == 0) {
                     binding.layoutHeartAgeView.visibility = View.VISIBLE
                     binding.layoutHeartRiskView.visibility = View.GONE
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEART_AGE_TAB_CLICKED)
                 } else if (tab.position == 1) {
                     binding.layoutHeartRiskView.visibility = View.VISIBLE
                     binding.layoutHeartAgeView.visibility = View.GONE
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEART_RISK_TAB_CLICKED)
                 }
             }
 
@@ -92,6 +94,7 @@ class HeartSummaryFragment : BaseFragment() {
 
         binding.btnViewReport.setOnClickListener {
             findNavController().navigate(R.id.action_heartSummaryFragment_to_heartReportFragment)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEART_AGE_VIEW_DETAILED_REPORT_CLICK)
         }
 
     }

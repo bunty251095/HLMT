@@ -89,6 +89,7 @@ class HeartAgeRecalculateFragment : BaseFragment(), KoinComponent, ParameterAdap
             if (validateParameter()) {
                 saveParameter()
                 viewModel.callHeartAgeCalculateApi("",participationID,quizID,getAnswerList())
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEART_AGE_RECALCULATE_CLICK)
 /*                val bundle = Bundle()
                 bundle.putString(Constants.FROM, "Home")
                 it.findNavController().navigate(R.id.action_heartAgeRecalculateFragment_to_heartSummaryFragment)*/

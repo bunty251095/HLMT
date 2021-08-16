@@ -117,14 +117,17 @@ class StressAndAnxietySummeryFragment : BaseFragment() {
                 0 -> {
                     binding.imgDas.setImageResource(R.drawable.img_depression)
                     stressData = CalculatorDataSingleton.getInstance()!!.stressSummeryData.depression
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.DEPRESSION_TAB_CLICKED)
                 }
                 1 -> {
                     binding.imgDas.setImageResource(R.drawable.img_anxiety)
                     stressData = CalculatorDataSingleton.getInstance()!!.stressSummeryData.anxiety
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.ANXIETY_TAB_CLICKED)
                 }
                 2 -> {
                     binding.imgDas.setImageResource(R.drawable.img_stress)
                     stressData = CalculatorDataSingleton.getInstance()!!.stressSummeryData.stress
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.STRESS_TAB_CLICKED)
                 }
             }
 

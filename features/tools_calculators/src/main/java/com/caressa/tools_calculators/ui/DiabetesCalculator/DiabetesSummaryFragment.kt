@@ -110,6 +110,7 @@ class DiabetesSummaryFragment : BaseFragment(),KoinComponent {
 
         binding.btnViewReportDiabetes.setOnClickListener {
             findNavController().navigate(R.id.action_diabetesSummaryFragment_to_diabetesReportFragment)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.DIABETES_VIEW_DETAILED_REPORT_CLICK)
         }
 
         binding.btnRestartDiabetes.setOnClickListener {

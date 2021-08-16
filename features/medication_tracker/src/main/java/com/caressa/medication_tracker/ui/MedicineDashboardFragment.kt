@@ -144,6 +144,7 @@ class MedicineDashboardFragment : BaseFragment(),MedCalenderAdapter.OnDateClickL
             launchIntent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.STORE_RECORDS)
             launchIntent.putExtra(Constants.FROM, Constants.MEDICATION)
             startActivity(launchIntent)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICINE_TRACKER_UPLOAD_PRESCRIPTION)
         }
 
         binding.layoutAddMedication.setOnClickListener {

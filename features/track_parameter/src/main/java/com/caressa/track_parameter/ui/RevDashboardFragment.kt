@@ -111,6 +111,7 @@ class RevDashboardFragment : BaseFragment(), DashboardGridAdapter.ParameterSelec
             launchIntent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.STORE_RECORDS)
             launchIntent.putExtra(Constants.FROM, Constants.TRACK_PARAMETER)
             startActivity(launchIntent)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.TRACK_PARAMETER_UPLOAD_REPORT)
         }
 
         binding.btnDashboardAddMedication.setOnClickListener{
@@ -118,6 +119,7 @@ class RevDashboardFragment : BaseFragment(), DashboardGridAdapter.ParameterSelec
             launchIntent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.MEDICINE_TRACKER)
             launchIntent.putExtra(Constants.FROM, Constants.TRACK_PARAMETER)
             startActivity(launchIntent)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.TRACK_PARAMETER_ADD_MEDICATION)
         }
 
     }

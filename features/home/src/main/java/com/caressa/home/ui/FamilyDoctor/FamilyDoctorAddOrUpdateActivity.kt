@@ -50,7 +50,6 @@ class FamilyDoctorAddOrUpdateActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_family_doctor_add_or_update)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        FirebaseHelper.logScreenEvent(FirebaseConstants.FAMILY_DOCTOR_ADD_OR_UPDATE_SCREEN)
         from = intent.getStringExtra(Constants.FROM)!!
         Timber.e("from----->$from")
         setupToolbar()
@@ -72,8 +71,10 @@ class FamilyDoctorAddOrUpdateActivity : BaseActivity() {
             if (!Utilities.isNullOrEmpty(doctorsDetails.affiliatedTo)) {
                 binding.edtAffilatedTo.setText( doctorsDetails.affiliatedTo )
             }
+            FirebaseHelper.logScreenEvent(FirebaseConstants.FAMILY_DOCTOR_UPDATE_SCREEN)
         } else {
             binding.btnAddUpdateDoctor.text = resources.getString(R.string.ADD)
+            FirebaseHelper.logScreenEvent(FirebaseConstants.FAMILY_DOCTOR_ADD_SCREEN)
         }
 
         autocompleteTextViewAdapter = AutocompleteTextViewAdapter(this,ArrayList())
@@ -233,8 +234,10 @@ class FamilyDoctorAddOrUpdateActivity : BaseActivity() {
             doctorDetails.affiliatedTo = affiliatedTo
             if (from.equals("Update", ignoreCase = true)) {
                 viewModel.callUpdateFamilyDoctorApi(this,doctorDetails)
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_DOCTOR_UPDATE)
             } else {
                 viewModel.callAddFamilyDoctorApi(this,doctorDetails)
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_DOCTOR_ADD)
             }
         }
     }

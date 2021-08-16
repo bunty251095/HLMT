@@ -166,6 +166,7 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
                 calculatorDataSingleton!!.answerArrayMap = answerArrayMap
                 calculatorDataSingleton!!.userPreferences = userPreferenceModel
                 viewModel.callHypertensionSaveResponseApi("First",participationID,quizID,getAnswerList())
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HYPERTENSION_CALCULATE_CLICK)
             }
         }
 

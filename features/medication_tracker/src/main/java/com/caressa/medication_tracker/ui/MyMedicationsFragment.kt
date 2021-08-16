@@ -168,6 +168,7 @@ class MyMedicationsFragment : BaseFragment(),DefaultNotificationDialog.OnDialogV
             //launchIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             launchIntent.putExtra(Constants.FROM, Constants.MEDICATION)
             startActivity(launchIntent)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICINE_TRACKER_UPLOAD_PRESCRIPTION)
         }
 
       /*  binding.btnMedicationsOrderMedicine.setOnClickListener {

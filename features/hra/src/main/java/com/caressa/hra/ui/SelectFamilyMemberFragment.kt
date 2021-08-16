@@ -51,7 +51,7 @@ class SelectFamilyMemberFragment : BaseFragment(), DefaultNotificationDialog.OnD
         binding = FragmentSelectFamilyMemberBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_FAMILY_MEMBER_SELECTION_SCREEN)
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HRA_FAMILY_MEMBER_SELECTION_SCREEN)
         initialise()
         registerObservers()
         setClickable()

@@ -193,12 +193,10 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
 
         binding.imgEditPic.setOnClickListener {
             viewBottomSheet()
-            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_PIC_EDIT_CLICK)
         }
 
         binding.imgUserPic.setOnClickListener {
             viewBottomSheet()
-            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_PIC_EDIT_CLICK)
         }
 
         binding.imgEditProfile.setOnClickListener {
@@ -208,7 +206,6 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
             binding.layoutBtnProfile.visibility = View.VISIBLE
             binding.layoutEditDetails.visibility = View.VISIBLE
             binding.layoutShowDetails.visibility = View.GONE
-            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_EDIT_CLICK)
         }
 
         binding.btnCancelProfile.setOnClickListener {
@@ -280,6 +277,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                     addressLine1 = address)
             )
             viewModel.callUpdateUserDetailsApi(newUserDetails)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_EDIT_CLICK)
         }
     }
 
@@ -623,6 +621,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                                     if (save1) {
                                         Utilities.deleteFileFromLocalSystem(pathTemp)
                                         viewModel.callUploadProfileImageApi(this,fileName, mainDirectoryPath, flePath1)
+                                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_PIC_EDIT_CLICK)
                                     }
                                 } else {
                                     Utilities.deleteFileFromLocalSystem(pathTemp)

@@ -186,6 +186,7 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
             if (validate()) {
                 prepareAnswerArray()
                 viewModel.callDiabetesSaveResponseApi(participationID, quizID, getAnswerList())
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.DIABETES_CALCULATE_CLICK)
             }
         }
 

@@ -210,6 +210,7 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
                 calculatorDataSingleton!!.answerArrayMap = answerArrayMap
                 calculatorDataSingleton!!.userPreferences = userPreferenceModel
                 viewModel.callHeartAgeCalculateApi("First",participationID,quizID,getAnswerList())
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEART_AGE_CALCULATE_CLICK)
             }
 /*            val bundle = Bundle()
             bundle.putString(Constants.FROM, "Home")

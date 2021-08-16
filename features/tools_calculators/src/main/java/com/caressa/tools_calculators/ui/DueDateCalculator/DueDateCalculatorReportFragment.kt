@@ -66,6 +66,7 @@ class DueDateCalculatorReportFragment : BaseFragment() {
 
         binding.btnRecalculate.setOnClickListener {
             it.findNavController().navigate(R.id.action_dueDateCalculatorReportFragment_to_dueDateInputFragment)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.DUE_DATE_RECALCULATE_CLICK)
         }
 
     }
