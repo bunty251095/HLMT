@@ -40,12 +40,12 @@ class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionLi
         binding = DataBindingUtil.setContentView(this, R.layout.activity_settings)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        FirebaseHelper.logScreenEvent(FirebaseConstants.SETTINGS_SCREEN)
         setupToolbar()
         initialise()
     }
 
     private fun initialise() {
-        FirebaseHelper.logScreenEvent(FirebaseConstants.SETTINGS_SCREEN)
         viewModel.getSettingsOptionList1()
         optionSettingsAdapter = OptionSettingsAdapter(viewModel, this,this)
         binding.rvOptions.adapter = optionSettingsAdapter
@@ -56,6 +56,7 @@ class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionLi
         when (option.code) {
             "RATE_US" -> {
                 DataHandler(this).goToPlayStore(this)
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.RATE_US_CLICK)
             }
             "FEEDBACK" -> {
                 val intent = Intent()
@@ -68,6 +69,7 @@ class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionLi
                     message = resources.getString(R.string.MSG_LOGOUT_CONFORMATION),
                     leftText = resources.getString(R.string.NO),
                     rightText = resources.getString(R.string.YES))
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.LOGOUT_CLICK)
             }
             "CHANGE_PASSWORD" -> {
                 val intent = Intent()

@@ -10,8 +10,10 @@ import androidx.lifecycle.viewModelScope
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Configuration
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.Event
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.hra.DownloadReportApiService
 import com.caressa.hra.common.HraDataSingleton
@@ -243,6 +245,7 @@ class HraSummaryViewModel(
                         //val writtenToDisk =  dataHandler.writeResponseBodyToDisk(result)
                         val writtenToDisk = HraHelper.writeResponseBodyToDisk(result, context)
                         Timber.i("File download was---->$writtenToDisk")
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_DOWNLOAD_REPORT)
                     } else {
                         Timber.i("Server Contact failed")
                     }

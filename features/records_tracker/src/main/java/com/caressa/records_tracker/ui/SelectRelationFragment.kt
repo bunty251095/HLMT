@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.model.entity.RecordInSession
 import com.caressa.records_tracker.R
@@ -58,6 +60,7 @@ class SelectRelationFragment : BaseFragment() {
         binding = FragmentSelectRelationBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HEALTH_RECORDS_SELECT_RELATION_SCREEN)
         initialise()
         registerObservers()
         setClickable()

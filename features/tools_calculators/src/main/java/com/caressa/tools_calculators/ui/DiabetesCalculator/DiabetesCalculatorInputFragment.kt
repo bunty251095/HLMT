@@ -74,6 +74,7 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
         binding = FragmentDiabetesCalculatorInputBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.DIABETES_CALCULATOR_INPUT_SCREEN)
         try {
             calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
             quizID = calculatorDataSingleton!!.quizId
@@ -82,7 +83,6 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
             initialise()
             setClickable()
             loadUserData()
-            FirebaseHelper.logScreenEvent(FirebaseConstants.DIABETES_CALCULATOR_SCREEN)
         } catch ( e : Exception ) {
             e.printStackTrace()
         }

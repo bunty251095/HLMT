@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.Event
@@ -18,6 +19,7 @@ import com.caressa.fitness_tracker.common.StepsDataSingleton
 import com.caressa.fitness_tracker.domain.FitnessManagementUseCase
 import com.caressa.fitness_tracker.ui.FitnessDashboardFragment
 import com.caressa.common.fitness.FitnessDataManager
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.fitness_tracker.util.StepCountHelper
 import com.caressa.model.fitness.GetStepsGoalModel
 import com.caressa.model.fitness.SetGoalModel
@@ -166,6 +168,7 @@ class FitnessViewModel(private val dispatchers: AppDispatchers,
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 fragment.saveGoalResp(it.data!!.stepsGoals)
                 Utilities.toastMessageShort(context, context.resources.getString(R.string.MSG_GOALS_UPDATED))
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.STEPS_GOAL_UPDATE)
             }
 
             if (it.status == Resource.Status.ERROR) {

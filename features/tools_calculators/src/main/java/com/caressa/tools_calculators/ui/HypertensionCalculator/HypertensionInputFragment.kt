@@ -76,6 +76,7 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
         binding = FragmentHypertensionInputBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HYPERTENSION_CALCULATOR_INPUT_SCREEN)
         try {
             calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
             quizID = calculatorDataSingleton!!.quizId
@@ -84,7 +85,6 @@ class HypertensionInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.
             initialise()
             setClickable()
             loadUserData()
-            FirebaseHelper.logScreenEvent(FirebaseConstants.HYPERTENSION_CALCULATOR_SCREEN)
         } catch ( e : Exception ) {
             e.printStackTrace()
         }

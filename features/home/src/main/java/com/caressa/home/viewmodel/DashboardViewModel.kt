@@ -246,6 +246,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                         intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HOME)
                         intentToPass.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         context.startActivity(intentToPass)
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FEEDBACK_SUBMIT)
                     }
                 }
             }
@@ -332,6 +333,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                         intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HOME)
                         intentToPass.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         context.startActivity(intentToPass)
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.CONTACT_US_SUBMIT_SUCCESS)
                     }
                 }
             }
@@ -341,10 +343,19 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                     _sessionError.value = Event(true)
                 }else {
                     toastMessage(it.errorMessage)
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.CONTACT_US_SUBMIT_FAILED)
                 }
             }
         }
 
+    }
+
+    fun navigateToLinkAccountActivity() {
+        val intent = Intent()
+        intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.LINK_ACCOUNT)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MENU_LINK_ACCOUNT_CLICK)
     }
 
     fun navigateToMyProfileActivityWithStoragePermission(activity:HomeMainActivity,listener: PermissionUtil.AppPermissionListener) {
@@ -355,18 +366,12 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         }
     }
 
-    fun navigateToLinkAccountActivity() {
-        val intent = Intent()
-        intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.LINK_ACCOUNT)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
-    }
-
     fun navigateToMyProfileActivity() {
         val intent = Intent()
         intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.MY_PROFILE)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
+        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MENU_MY_PROFILE_CLICK)
     }
 
     fun navigateToFamilyProfileActivity() {
@@ -374,6 +379,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.FAMILY_PROFILE)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
+        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MENU_FAMILY_MEMBERS_CLICK)
     }
 
     fun navigateToFamilyDoctorsActivity() {
@@ -382,6 +388,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.FAMILY_DOCTOR)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
+        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MENU_FAMILY_DOCTORS_CLICK)
     }
 
     fun navigateToContactUsActivity() {
@@ -389,6 +396,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.CONTACT_US)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
+        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MENU_CONTACT_US_MNU_CLICK)
     }
 
     fun navigateToSettingsActivity() {
@@ -396,6 +404,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         intent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.SETTINGS)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
+        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MENU_SETTINGS_CLICK)
     }
 
     fun navigateToReferrerActivity() {
@@ -450,6 +459,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
             sendIntent.type = "text/plain"
             sendIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             context.startActivity(sendIntent)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MENU_SPREAD_THE_WORD_CLICK)
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -18,9 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.utils.DateHelper
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.model.entity.TrackParameterMaster
 import com.caressa.track_parameter.R
 import com.caressa.track_parameter.adapter.ParameterSpinnerAdapter
@@ -57,6 +59,7 @@ class RevHistoryFragment : BaseFragment() {
         binding = FragmentParametersHistoryBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.TRACK_PARAMETERS_HISTORY_SCREEN)
         initialise()
         setClickable()
         registerObserver()
@@ -77,7 +80,7 @@ class RevHistoryFragment : BaseFragment() {
         viewModel.savedParamList.observe(viewLifecycleOwner, {
             savedParamAdapter.selectedPosition = 0
             if (it.isNotEmpty()){
-                Timber.i("Parameter 0 => "+ it[0])
+                Timber.i("Parameter 0 => ${it[0]}")
                 viewModel.parameterObservationListByParameterCode(it[0].parameterCode)
                 if (it.get(0).profileCode.equals("BLOODPRESSURE")){
                     parameterSelection(savedParamAdapter.updateBloodPressureObservation(it)[0])
@@ -156,9 +159,11 @@ class RevHistoryFragment : BaseFragment() {
             }
             parameterSelection(it)
         }
+
         binding.layoutHistory.setOnClickListener {
             viewModel.goToDetailHistory()
         }
+
         binding.tabGraph.setOnClickListener {
             binding.tabGraph.background.setColorFilter(AppColorHelper.instance!!.primaryColor(), PorterDuff.Mode.SRC_ATOP)
             ImageViewCompat.setImageTintList(binding.tabGraph, ColorStateList.valueOf(resources.getColor(R.color.white)))
@@ -168,11 +173,13 @@ class RevHistoryFragment : BaseFragment() {
             binding.cardDetailsView.visibility = View.GONE
 
             viewModel.getSpinnerData(profileCode)
-
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.TRACK_PARAMETER_GRAPH_VIEW_CLICK)
         }
+
         binding.tabDetail.setOnClickListener {
             selectTabDetails()
         }
+
         binding.txtParamSpinner.setOnClickListener { v: View? -> binding.paramSpinner.performClick() }
 
         binding.paramSpinner.onItemSelectedListener = object : OnItemSelectedListener {

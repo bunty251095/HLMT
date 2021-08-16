@@ -76,13 +76,13 @@ class StepsDetailFragment : BaseFragment(), KoinComponent {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-        FirebaseHelper.logScreenEvent(FirebaseConstants.ACTIVITY_TRACKER_MONTHLY_DETAIL_SCREEN)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentStepsDetailBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.ACTIVITY_TRACKER_MONTHLY_DETAIL_SCREEN)
         try {
             initView()
             setClickable()

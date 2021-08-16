@@ -9,8 +9,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.DialogHelper
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.model.parameter.ParameterListModel
 import com.caressa.track_parameter.adapter.RevInputParamAdapter
 import com.caressa.track_parameter.adapter.RevSelectedParamAdapter
@@ -40,6 +42,7 @@ class RevUpdateParameterFragment : BaseFragment(){
         binding = RevUpdateParameterFragmentBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.TRACK_PARAMETERS_UPDATE_SCREEN)
         initialise()
         return binding.root
     }

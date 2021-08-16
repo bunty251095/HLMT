@@ -25,6 +25,7 @@ class IntroductionFragment : BaseFragment() {
         binding = FragmentIntroductionBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_START_SCREEN)
         initialise()
         setClickable()
         return binding.root

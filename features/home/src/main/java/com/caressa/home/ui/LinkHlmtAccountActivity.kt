@@ -36,6 +36,7 @@ class LinkHlmtAccountActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_link_hlmt_account)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        FirebaseHelper.logScreenEvent(FirebaseConstants.LINK_ACCOUNT_SCREEN)
         initialise()
         setupToolbar()
         setClickable()
@@ -74,7 +75,6 @@ class LinkHlmtAccountActivity : BaseActivity() {
             binding.layoutAccNotLinked.visibility = View.GONE
             binding.imgSubmit.visibility = View.GONE
         } else {
-            FirebaseHelper.logScreenEvent(FirebaseConstants.LINK_ACCOUNT_SCREEN)
             binding.layoutAccLinked.visibility = View.GONE
             binding.layoutAccNotLinked.visibility = View.VISIBLE
             binding.imgSubmit.visibility = View.VISIBLE

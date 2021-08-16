@@ -74,8 +74,6 @@ class ToolsCalculatorsHomeActivity : AppCompatActivity() {
             toolBarToolsCalculator.navigationIcon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
                 appColorHelper.primaryColor(), BlendModeCompat.SRC_ATOP)
         }
-        FirebaseHelper.logScreenEvent(FirebaseConstants.TOOLS_CALCULATORS_SCREEN)
-
     }
 
     override fun onSupportNavigateUp(): Boolean {

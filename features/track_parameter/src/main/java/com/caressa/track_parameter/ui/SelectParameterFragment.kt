@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.track_parameter.R
 import com.caressa.track_parameter.adapter.SelectParameterAdapter
@@ -27,6 +29,7 @@ class SelectParameterFragment : BaseFragment(){
         binding = SelectParameterFragmentBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.TRACK_PARAMETERS_SELECT_SCREEN)
         initialise()
         setClickable()
         return binding.root

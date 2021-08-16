@@ -16,10 +16,8 @@ import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
-import com.caressa.common.utils.AppColorHelper
-import com.caressa.common.utils.KeyboardUtils
-import com.caressa.common.utils.Utilities
-import com.caressa.common.utils.Validation
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.*
 import com.caressa.common.view.AutocompleteTextViewAdapter
 import com.caressa.common.view.AutocompleteTextViewModel
 import com.caressa.home.R
@@ -52,6 +50,7 @@ class FamilyDoctorAddOrUpdateActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_family_doctor_add_or_update)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        FirebaseHelper.logScreenEvent(FirebaseConstants.FAMILY_DOCTOR_ADD_OR_UPDATE_SCREEN)
         from = intent.getStringExtra(Constants.FROM)!!
         Timber.e("from----->$from")
         setupToolbar()

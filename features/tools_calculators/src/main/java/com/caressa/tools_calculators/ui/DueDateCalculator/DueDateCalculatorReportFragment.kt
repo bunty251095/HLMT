@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.DateHelper
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.databinding.FragmentDueDateCalculatorReportBinding
 import com.caressa.tools_calculators.viewmodel.ToolsCalculatorsViewModel
@@ -28,6 +30,7 @@ class DueDateCalculatorReportFragment : BaseFragment() {
         binding = FragmentDueDateCalculatorReportBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.DUE_DATE_CALCULATOR_REPORT_SCREEN)
         lmpDate = requireArguments().getString("lmpDate")!!
         Timber.i("lmpDate--->$lmpDate")
         initialise()

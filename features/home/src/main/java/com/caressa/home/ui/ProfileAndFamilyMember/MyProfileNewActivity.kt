@@ -19,6 +19,7 @@ import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Configuration
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.*
 import com.caressa.home.R
 import com.caressa.home.common.DataHandler
@@ -57,6 +58,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         binding = DataBindingUtil.setContentView(this, R.layout.activity_my_profile_new)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        FirebaseHelper.logScreenEvent(FirebaseConstants.MY_PROFILE_SCREEN)
         initialise()
         registerObservers()
         setClickable()
@@ -191,10 +193,12 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
 
         binding.imgEditPic.setOnClickListener {
             viewBottomSheet()
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_PIC_EDIT_CLICK)
         }
 
         binding.imgUserPic.setOnClickListener {
             viewBottomSheet()
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_PIC_EDIT_CLICK)
         }
 
         binding.imgEditProfile.setOnClickListener {
@@ -204,6 +208,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
             binding.layoutBtnProfile.visibility = View.VISIBLE
             binding.layoutEditDetails.visibility = View.VISIBLE
             binding.layoutShowDetails.visibility = View.GONE
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_EDIT_CLICK)
         }
 
         binding.btnCancelProfile.setOnClickListener {
@@ -215,7 +220,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
             binding.layoutEditDetails.visibility = View.GONE
             binding.layoutShowDetails.visibility = View.VISIBLE
             binding.edtUsername.setText(user.firstName)
-
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_EDIT_CANCELLED)
         }
 
         binding.btnUpdateProfile.setOnClickListener {

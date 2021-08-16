@@ -201,7 +201,7 @@ class UpdateParamViewModel(
                 _saveParam.value = it.data
                 if (it.status == Resource.Status.SUCCESS) {
                     toastMessage("Parameter is successfully updated")
-                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEALTH_PARAM_UPLOAD_EVENT)
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.TRACK_PARAMETER_SAVED)
                 }
 
                 if (it.status == Resource.Status.ERROR) {

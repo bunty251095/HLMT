@@ -14,8 +14,10 @@ import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.AppColorHelper
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.home.R
 import com.caressa.home.adapter.FamilyDoctorsAdapter
 import com.caressa.home.databinding.ActivityFamilyDoctorListBinding
@@ -41,6 +43,7 @@ class FamilyDoctorListActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_family_doctor_list)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        FirebaseHelper.logScreenEvent(FirebaseConstants.FAMILY_DOCTOR_LIST_SCREEN)
         from = intent.getStringExtra(Constants.FROM)!!
         Timber.e("from----->$from")
         setupToolbar()

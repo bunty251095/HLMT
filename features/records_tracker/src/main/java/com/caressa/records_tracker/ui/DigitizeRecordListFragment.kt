@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.model.entity.HealthDocument
 import com.caressa.records_tracker.R
@@ -39,6 +41,7 @@ class DigitizeRecordListFragment : BaseFragment() {
         binding = FragmentDigitizeRecordListBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HEALTH_RECORDS_DIGITIZE_LIST_SCREEN)
         arguments?.let {
             code = it.getString(Constants.CODE)!!
             Timber.e("code----->$code")
