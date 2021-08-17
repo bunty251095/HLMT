@@ -3,12 +3,18 @@ package com.caressa.common.utils
 import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.caressa.common.R
+import com.caressa.common.constants.Constants
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -17,6 +23,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
+import timber.log.Timber
 
 class PermissionUtil : ActivityCompat() {
 
@@ -35,42 +42,26 @@ class PermissionUtil : ActivityCompat() {
         fun isPermissionGranted(isGranted: Boolean)
     }
 
-    fun checkStoragePermissionFromActivity(
-        listener: AppPermissionListener,
-        context: Context,
-        activity: Activity
-    ): Boolean {
+/*    fun checkStoragePermissionFromActivity(listener: AppPermissionListener, context: Context, activity: Activity): Boolean {
         this.appPermissionListener = listener
         var isPermissionGranted = false
 
-        if (checkSelfPermission(
-                context,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-            && checkSelfPermission(
-                context,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
+        if (checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+            && checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
             val dialogData = DefaultNotificationDialog.DialogData()
             dialogData.title = context.resources.getString(R.string.PERMISSION_REQUIRED)
             dialogData.message = context.resources.getString(R.string.NEED_STORAGE_PERMISSION)
             dialogData.btnLeftName = context.resources.getString(R.string.CANCEL)
             dialogData.btnRightName = context.resources.getString(R.string.OK)
-            val defaultNotificationDialog = DefaultNotificationDialog(
-                context,
-                object : DefaultNotificationDialog.OnDialogValueListener {
-                    override fun onDialogClickListener(
-                        isButtonLeft: Boolean,
-                        isButtonRight: Boolean
-                    ) {
+            val defaultNotificationDialog = DefaultNotificationDialog(context,object : DefaultNotificationDialog.OnDialogValueListener {
+
+                    override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
                         if (isButtonRight) {
                             storageDexterPermissionCheck(listener, context)
                         }
                     }
-                }, dialogData
-            )
+                }, dialogData)
             defaultNotificationDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             defaultNotificationDialog.show()
         } else {
@@ -80,41 +71,24 @@ class PermissionUtil : ActivityCompat() {
         return isPermissionGranted
     }
 
-    fun checkStoragePermissionFromFragment(
-        listener: AppPermissionListener,
-        context: Context,
-        fragment: Fragment
-    ): Boolean {
+    fun checkStoragePermissionFromFragment(listener: AppPermissionListener, context: Context, fragment: Fragment): Boolean {
         this.appPermissionListener = listener
         var isPermissionGranted = false
-        if (checkSelfPermission(
-                context,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-            && checkSelfPermission(
-                context,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
+        if (checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+            && checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
             val dialogData = DefaultNotificationDialog.DialogData()
             dialogData.title = context.resources.getString(R.string.PERMISSION_REQUIRED)
             dialogData.message = context.resources.getString(R.string.NEED_STORAGE_PERMISSION)
             dialogData.btnLeftName = context.resources.getString(R.string.CANCEL)
             dialogData.btnRightName = context.resources.getString(R.string.OK)
-            val defaultNotificationDialog = DefaultNotificationDialog(
-                context,
-                object : DefaultNotificationDialog.OnDialogValueListener {
-                    override fun onDialogClickListener(
-                        isButtonLeft: Boolean,
-                        isButtonRight: Boolean
-                    ) {
-                        if (isButtonRight) {
-                            storageDexterPermissionCheck(listener, context)
-                        }
+            val defaultNotificationDialog = DefaultNotificationDialog(context, object : DefaultNotificationDialog.OnDialogValueListener {
+
+                override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
+                    if (isButtonRight) {
+                        storageDexterPermissionCheck(listener, context)
                     }
-                }, dialogData
-            )
+                } }, dialogData)
             defaultNotificationDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             defaultNotificationDialog.show()
         } else {
@@ -122,9 +96,9 @@ class PermissionUtil : ActivityCompat() {
         }
 
         return isPermissionGranted
-    }
+    }*/
 
-/*    fun checkStoragePermissionFromActivity(listener: AppPermissionListener,context:Context,activity: Activity): Boolean {
+    fun checkStoragePermissionFromActivity(listener: AppPermissionListener,context:Context,activity: Activity): Boolean {
         this.appPermissionListener = listener
         var isPermissionGranted = false
 
@@ -244,7 +218,7 @@ class PermissionUtil : ActivityCompat() {
             }
         }
         return isPermissionGranted
-    }*/
+    }
 
     fun checkCameraPermission(listener: AppPermissionListener, context: Context): Boolean {
         this.appPermissionListener = listener

@@ -609,6 +609,7 @@ object RealPathUtil {
      */
     fun getPath(context: Context, uri: Uri): String? {
         Timber.e("uri--->$uri")
+        Timber.e("SCHEME---> ${uri.scheme}")
         val isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
         // DocumentProvider
         if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {

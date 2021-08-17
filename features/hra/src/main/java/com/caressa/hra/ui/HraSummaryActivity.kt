@@ -418,7 +418,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
 
     override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {}
 
-/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -438,6 +438,6 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }*/
+    }
 
 }

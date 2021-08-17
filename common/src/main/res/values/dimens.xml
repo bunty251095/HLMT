@@ -53,4 +53,9 @@
 
     <dimen name="separatorWidth">0.6dp</dimen>
 
+    <dimen name="file_icon_width">43dp</dimen>
+    <dimen name="file_icon_height">43dp</dimen>
+    <dimen name="file_name_textSize">17sp</dimen>
+    <dimen name="file_item_checkbox_size">22dp</dimen>
+
 </resources>

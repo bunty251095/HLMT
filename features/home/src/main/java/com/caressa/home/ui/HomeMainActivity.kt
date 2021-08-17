@@ -291,6 +291,22 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
                     googleAccountListener!!.onGoogleAccountSelection(Constants.FAILURE)
                 }
             }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val per = Environment.isExternalStorageManager()
+                Timber.e("requestCode---> $requestCode")
+                Timber.e("permissionGranted---> $per")
+                when(requestCode) {
+                    Constants.REQ_CODE_STORAGE -> {
+                        if (per) {
+                            permissionListener.isPermissionGranted(true)
+                        } else {
+                            Utilities.toastMessageShort(this,resources.getString(R.string.ERROR_STORAGE_PERMISSION))
+                        }
+                    }
+                }
+            }
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
