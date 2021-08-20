@@ -12,9 +12,9 @@
     <string name="TERMS_AND_CONDITIONS">Terms &amp; Conditions</string>
     <string name="PRIVACY_POLICY">Privacy Policy</string>
     <string name="AND">and</string>
-    <string name="TERMS_OF_SERVICE_LOGIN">By clicking on Sign In Or Register you agree to</string>
+    <string name="TERMS_OF_SERVICE_LOGIN">I confirm that i have read and agreed to the</string>
     <string name="TERMS_OF_SERVICE_SIGNUP">By clicking on Sign Up you agree to</string>
-    <string name="YOU_HAVE_READ_THEM">that you have read them</string>
+    <string name="YOU_HAVE_READ_THEM">to use the services</string>
     <string name="YOUR_DOB">Your Date Of Birth</string>
     <string name="TERMS_CONDITIONS">Terms &amp; Conditions</string>
     <string name="ADDITIONAL_DETAILS">Additional Details</string>
@@ -38,6 +38,7 @@
     <string name="I_AM_DONE">I am done</string>
     <string name="FACEBOOK">Facebook</string>
     <string name="GOOGLE">Google</string>
+<!--    <string name="PLEASE_ACCEPT_TERMS">Please accept Terms and Condition</string>-->
 
     <string name="NAME_COMPULSARY">Name*</string>
     <string name="EMAIL_COMPULSARY">Email*</string>
@@ -56,10 +57,10 @@
     <string name="FORGOT_YOUR_PASSWORD">Forgot Your Password?</string>
     <string name="FORGOT_PASSWORD_DESC">Enter your email address &amp; we will send\nyou instructions to rest your password</string>
     <string name="VERIFICATION_CODE">Verification Code</string>
-    <string name="ENTER_NUMBER_TO_GET_OTP">Enter your mobile number to get TAC</string>
+    <string name="ENTER_NUMBER_TO_GET_OTP">Enter your mobile number to receive your TAC</string>
     <string name="HLMT_LOGIN_DESCRIPTION">Enter your HLMTakaful360&#xb0; account\ndetails to login</string>
 
-    <string name="DO_YOU_HAVE_HLM_360_ACCOUNT">Already an HLMTakaful360&#xb0; \ncertificate holder?</string>
+    <string name="DO_YOU_HAVE_HLM_360_ACCOUNT">Are you a HLMTakaful360&#xb0; \naccount holder? </string>
     <string name="NO_DONT">No, I am not</string>
     <string name="YES_I_HAVE">Yes, I am</string>
     <string name="I_AM_NEW">I\'m New</string>

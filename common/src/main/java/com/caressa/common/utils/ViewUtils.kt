@@ -5,10 +5,12 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
+import android.text.InputFilter
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import com.caressa.common.R
+import java.lang.StringBuilder
 
 
 object ViewUtils {
@@ -123,6 +125,22 @@ object ViewUtils {
     fun dpToPx(dp: Float): Int {
         val density = Resources.getSystem().displayMetrics.density
         return Math.round(dp * density)
+    }
+
+    fun firstLetterCapInputFilter():InputFilter{
+        val toUpperCaseFilter =
+            InputFilter { source, start, end, dest, dstart, dend ->
+                val stringBuilder = StringBuilder()
+                for (i in start until end) {
+                    var character = source[i]
+                    if(i==0 || source[i-1].equals(' ',true)) {
+                        character = Character.toUpperCase(character!!) // THIS IS UPPER CASING
+                    }
+                    stringBuilder.append(character)
+                }
+                stringBuilder.toString()
+            }
+        return toUpperCaseFilter
     }
 
 }

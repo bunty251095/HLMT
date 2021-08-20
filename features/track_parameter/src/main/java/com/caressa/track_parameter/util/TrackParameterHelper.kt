@@ -63,7 +63,7 @@ object TrackParameterHelper {
         if (!Utilities.isNullOrEmpty(observation)) {
             color =
                 when (observation!!.toUpperCase()) {
-                    "VERY HIGH", "HIGH","HIGH NORMAL", "DIABETIC", "MILDLY HIGH", "VERY LOW", "LOW", "POOR", "MILDLY LOW" -> R.color.vivant_watermelon
+                    "VERY HIGH", "HIGH","HIGH NORMAL", "DIABETIC", "MILDLY HIGH", "VERY LOW", "LOW", "POOR", "MILDLY LOW", "ABNORMAL" -> R.color.vivant_watermelon
                     "BORDERLINE HIGH", "EARLY DIABETIC", "MODERATE", "BETTER", "NEAR OPTIMAL", "MODERATE LOW", "MILD LOW", "MILD HIGH", "MODERATE HIGH" -> R.color.vivant_orange_yellow
                     "DESIRABLE", "BEST", "NORMAL", "OPTIMAL", "GOOD" -> R.color.vivant_nasty_green
                     else -> R.color.vivant_charcoal_grey_55

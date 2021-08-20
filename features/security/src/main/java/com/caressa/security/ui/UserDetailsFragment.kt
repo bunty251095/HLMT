@@ -1,5 +1,6 @@
 package com.caressa.security.ui
 
+import android.R.id
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
@@ -34,6 +35,16 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.io.File
 import java.util.*
+import android.text.InputType
+import android.text.Spanned
+
+import android.text.InputFilter
+import java.lang.StringBuilder
+import android.R.id.edit
+
+
+
+
 
 class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.EditProfileImageItemClickListener {
 
@@ -125,6 +136,9 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
         binding.imgUserPic.setOnClickListener {
             viewBottomSheet()
         }
+
+        binding.edtUsername.setFilters(arrayOf(ViewUtils.firstLetterCapInputFilter()))
+
     }
 
     private fun registerObserver() {

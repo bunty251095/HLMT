@@ -80,7 +80,6 @@
         app:isTemplate="true"
         android:text="@string/RECALCULATE"
         style="@style/CustomButton"
-        android:visibility="gone"
         android:layout_marginTop="@dimen/_16sdp"
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_10sdp"

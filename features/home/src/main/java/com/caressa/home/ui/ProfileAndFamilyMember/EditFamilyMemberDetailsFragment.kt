@@ -3,6 +3,7 @@ package com.caressa.home.ui.ProfileAndFamilyMember
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.caressa.model.entity.UserRelatives
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import java.lang.StringBuilder
 import java.util.*
 
 class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDateSetListener ,
@@ -73,6 +75,8 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
                 }
             }
         })
+
+        binding.edtMemberName.setFilters(arrayOf(ViewUtils.firstLetterCapInputFilter()))
 
         binding.edtMemberDob.addTextChangedListener(object : TextWatcher {
 

@@ -228,14 +228,14 @@
     <!--Stress & Anxiety Questions-->
 
     <!--Smart Phone Addiction Questions-->
-    <string name="QUES_SMART_PHONE_ADDICTION_1">Do you often think that your smartphone is ringing/ vibrating when it is not?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_1">Do you often think that your smartphone is ringing/vibrating when it is not?</string>
     <string name="QUES_SMART_PHONE_ADDICTION_2">When your phone rings buzzes , do you feel an intense urge to check ?</string>
-    <string name="QUES_SMART_PHONE_ADDICTION_3">Do you look at your phone after you get up in the morning or before going to bed ?</string>
-    <string name="QUES_SMART_PHONE_ADDICTION_4">Do you sleep with your smartphone on or under your pillow or next to your bed ?</string>
-    <string name="QUES_SMART_PHONE_ADDICTION_5">Do you text, e-mail / surfed the web while waiting at the traffic signal?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_3">Do you look at your phone after you get up in the morning or before going to bed?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_4">Do you sleep with your smartphone on or under your pillow or next to your bed?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_5">Do you text, e-mail/surfed the web while waiting at the traffic signal?</string>
     <string name="QUES_SMART_PHONE_ADDICTION_6">Do you constantly check your phone if you did not have a data signal or Wi-Fi?</string>
-    <string name="QUES_SMART_PHONE_ADDICTION_7">Do you feel a great deal of anxiety if your phone not working/you accidentally left it ?</string>
-    <string name="QUES_SMART_PHONE_ADDICTION_8">Do you find yourself Always passing time in searching on google/ E-commerce sites ?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_7">Do you feel a great deal of anxiety if your phone not working/you accidentally left it?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_8">Do you find yourself Always passing time in searching on google/E-commerce sites?</string>
     <string name="QUES_SMART_PHONE_ADDICTION_9">Do you spend more time texting, tweeting/emailing then talking to real-time people?</string>
     <string name="QUES_SMART_PHONE_ADDICTION_10">Do you spend more time texting, tweeting/emailing then talking to real-time people?</string>
     <string name="QUES_SMART_PHONE_ADDICTION_11">Do you feel lonely if your smartphone doesn\'t ring for several hours?</string>

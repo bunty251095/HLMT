@@ -251,12 +251,39 @@ class ToolsCalculatorsViewModel(
                         calculatorDataSingleton.heartAgeSummeryList.add(heartAgeSummeryModel)
                         navigate(HeartAgeFragmentDirections.actionHeartAgeFragmentToHeartSummaryFragment())
                     } else {
+                        calculatorDataSingleton.heartAge = result.heartAge.toString()
+                        calculatorDataSingleton.riskScorePercentage =
+                            result.riskScorePercentage.toString()
+                        calculatorDataSingleton.riskLabel = result.riskLabel
+
                         heartAgeSummeryModel = HeartAgeSummeryModel()
                         heartAgeSummeryModel.heartAge = result.heartAge.toString()
                         heartAgeSummeryModel.heartRisk = result.riskScorePercentage.toString()
                         heartAgeSummeryModel.riskLabel = result.riskLabel
 
-                        calculatorDataSingleton.heartAgeSummeryList.clear()
+                        val parameterReport = ArrayList<HeartAgeReport>()
+                        val heartRiskReport = ArrayList<HeartAgeReport>()
+                        var heartAgeReport = HeartAgeReport()
+                        heartAgeReport.title = result.heartAgeReport.title
+                        heartAgeReport.description = result.heartAgeReport.description
+                        heartAgeSummeryModel.heartAgeReport = heartAgeReport
+
+                        for (parameter in parameterReportList) {
+                            heartAgeReport = HeartAgeReport()
+                            heartAgeReport.title = parameter.title
+                            heartAgeReport.description = parameter.description
+                            parameterReport.add(heartAgeReport)
+                        }
+                        heartAgeSummeryModel.parameterReport = parameterReport
+
+                        for (heartRisk in heartRiskReportList) {
+                            heartAgeReport = HeartAgeReport()
+                            heartAgeReport.title = heartRisk.title
+                            heartAgeReport.description = heartRisk.description
+                            heartRiskReport.add(heartAgeReport)
+                        }
+                        heartAgeSummeryModel.heartRiskReport = heartRiskReport
+
                         calculatorDataSingleton.heartAgeSummeryList.add(heartAgeSummeryModel)
                         navigate(HeartAgeRecalculateFragmentDirections.actionHeartAgeRecalculateFragmentToHeartSummaryFragment())
                     }

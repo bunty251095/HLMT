@@ -23,6 +23,7 @@ import com.caressa.tools_calculators.model.CalculatorDataSingleton
 import com.caressa.common.utils.ParameterDataModel
 import com.caressa.tools_calculators.viewmodel.ToolsCalculatorsViewModel
 import com.caressa.common.utils.HeightWeightDialog
+import com.caressa.model.toolscalculators.UserInfoModel
 import com.caressa.tools_calculators.views.SystolicDiastolicDialogManager
 import kotlinx.android.synthetic.main.dialog_input_parameter.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -132,6 +133,19 @@ class HeartAgeRecalculateFragment : BaseFragment(), KoinComponent, ParameterAdap
                 }
             }
         }
+        var answerCodes:String = "NONE"
+        if(calculatorDataSingleton?.healthConditionSelection.isNullOrEmpty()){
+            answer = Answer("HHILL", answerCodes, "")
+            answerArrayMap["HHILL"] = answer
+        }else{
+            answerCodes = ""
+            for (item in calculatorDataSingleton!!.healthConditionSelection){
+                answerCodes = answerCodes+item+","
+            }
+            answer = Answer("HHILL", answerCodes, "")
+            answerArrayMap["HHILL"] = answer
+        }
+
         val selectedId1: Int = binding.rgBpMedication.checkedRadioButtonId
         val selectedId2: Int = binding.rgSmoke.checkedRadioButtonId
         val selectedId3: Int = binding.rgDiabetic.checkedRadioButtonId
@@ -140,12 +154,27 @@ class HeartAgeRecalculateFragment : BaseFragment(), KoinComponent, ParameterAdap
         val rgSmk = binding.rgSmoke.findViewById(selectedId2) as RadioButton
         val rgDib = binding.rgDiabetic.findViewById(selectedId3) as RadioButton
 
+        if (UserInfoModel.getInstance()!!.isMale) {
+            answer = Answer("GENDER", "Male", "0")
+        } else {
+            answer = Answer("GENDER", "Female", "0")
+        }
+        answerArrayMap["GENDER"] = answer
         answer = Answer("TRTHYPBP", rgBpMed.text.toString(), "0")
         answerArrayMap["TRTHYPBP"] = answer
         answer = Answer("DIABETIC", rgDib.text.toString(), "0")
         answerArrayMap["DIABETIC"] = answer
         answer = Answer("SMOKING", rgSmk.text.toString(), "0")
         answerArrayMap["SMOKING"] = answer
+
+        answer = Answer("CHOL_LEVEL", "No", "0")
+        answerArrayMap["CHOL_LEVEL"] = answer
+
+        if (!Utilities.isNullOrEmpty(UserInfoModel.getInstance()!!.getAge())
+            && !UserInfoModel.getInstance()!!.getAge().equals("0", ignoreCase = true)) {
+            answer = Answer("AGE", UserInfoModel.getInstance()!!.getAge(), "0")
+            answerArrayMap["AGE"] = answer
+        }
     }
 
     private fun validateParameter(): Boolean {
