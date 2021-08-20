@@ -16,6 +16,8 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.PermissionUtil
 import com.caressa.common.utils.Utilities
 import com.caressa.records_tracker.R
@@ -69,6 +71,7 @@ class HealthRecordsDashboardFragment : BaseFragment() {
         binding = FragmentHealthRecordsDashboardBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HEALTH_RECORDS_HOME_SCREEN)
         initialise()
         setClickable()
         return binding.root
@@ -218,7 +221,7 @@ class HealthRecordsDashboardFragment : BaseFragment() {
         }
     }
 
-/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val per = Environment.isExternalStorageManager()
@@ -237,6 +240,6 @@ class HealthRecordsDashboardFragment : BaseFragment() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }*/
+    }
 
 }

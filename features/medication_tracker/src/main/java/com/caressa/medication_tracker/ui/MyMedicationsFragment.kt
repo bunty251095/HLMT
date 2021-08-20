@@ -16,9 +16,11 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.utils.DefaultNotificationDialog
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.showDialog
 import com.caressa.common.view.SpinnerAdapter
 import com.caressa.common.view.SpinnerModel
@@ -78,6 +80,7 @@ class MyMedicationsFragment : BaseFragment(),DefaultNotificationDialog.OnDialogV
         binding = FragmentMyMedicationsBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.MEDICINE_TRACKER_MY_MEDICATIONS_SCREEN)
         initialise()
         registerObservers()
         setClickable()
@@ -165,6 +168,7 @@ class MyMedicationsFragment : BaseFragment(),DefaultNotificationDialog.OnDialogV
             //launchIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             launchIntent.putExtra(Constants.FROM, Constants.MEDICATION)
             startActivity(launchIntent)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICINE_TRACKER_UPLOAD_PRESCRIPTION)
         }
 
       /*  binding.btnMedicationsOrderMedicine.setOnClickListener {

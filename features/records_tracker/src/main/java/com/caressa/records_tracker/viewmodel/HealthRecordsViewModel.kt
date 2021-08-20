@@ -145,7 +145,7 @@ class HealthRecordsViewModel(
                             bundle.putString("code",code)
                             view.findNavController().navigate(R.id.action_selectRelationFragment_to_viewRecordsFragment,bundle)
                         }
-                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEALTH_RECORDS_UPLOAD_EVENT)
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEALTH_RECORDS_UPLOADED)
                     }
                 }
                 if (it.status == Resource.Status.ERROR) {
@@ -157,9 +157,11 @@ class HealthRecordsViewModel(
 
     fun callDeleteRecordsApi( deleteRecordIds:List<String> )
             = viewModelScope.launch(dispatchers.main) {
-        Timber.i("DeleteRecordIds----->"+deleteRecordIds.toString())
+
+        Timber.i("DeleteRecordIds----->$deleteRecordIds")
         val requestData = DeleteDocumentModel(Gson().toJson(DeleteDocumentModel.JSONDataRequest(
-                personID = personId , documentIDS = deleteRecordIds), DeleteDocumentModel.JSONDataRequest::class.java) , authToken )
+            personID = personId ,
+            documentIDS = deleteRecordIds), DeleteDocumentModel.JSONDataRequest::class.java),authToken )
 
         _progressBar.value = Event("Deleting Records.....")
         _deleteDocument.removeSource(deleteDocSource)
@@ -176,6 +178,7 @@ class HealthRecordsViewModel(
                     if ( isProcessed.equals(Constants.TRUE , ignoreCase = true) ) {
                         documentStatus.postValue(it.status)
                         toastMessage(context.resources.getString(R.string.MSG_RECORD_DELETED))
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEALTH_RECORD_DELETED)
                     }
                 }
             }
@@ -209,6 +212,7 @@ class HealthRecordsViewModel(
                 saveDownloadedRecord( from,it.data!!.healthRelatedDocument,it.status,fileName)
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 toastMessage(context.resources.getString(R.string.MSG_REOCRD_DOWNLOADED))
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEALTH_RECORD_DOWNLOAD)
             }
             if (it.status == Resource.Status.ERROR) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)

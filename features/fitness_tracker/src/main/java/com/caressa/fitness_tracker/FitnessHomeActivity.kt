@@ -37,7 +37,6 @@ class FitnessHomeActivity : AppCompatActivity() , KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fitness_home)
-        FirebaseHelper.logScreenEvent(FirebaseConstants.ACTIVITY_TRACKER_SCREEN)
         setSupportActionBar(toolBar_fitness)
         // Setting up a back button
         navController = nav_host_fragment.findNavController()

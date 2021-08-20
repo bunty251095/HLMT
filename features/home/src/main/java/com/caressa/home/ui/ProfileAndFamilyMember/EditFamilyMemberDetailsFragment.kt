@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.*
 import com.caressa.home.R
 import com.caressa.home.databinding.FragmentEditFamilyMemberDetailsBinding
@@ -46,6 +47,7 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
         binding = FragmentEditFamilyMemberDetailsBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.FAMILY_MEMBER_UPDATE_SCREEN)
         relativeId = requireArguments().getString(Constants.RELATIVE_ID)!!
         relationShipID = requireArguments().getString(Constants.RELATION_SHIP_ID)!!
         relationCode = requireArguments().getString(Constants.RELATION_CODE)!!
@@ -307,6 +309,7 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
                                         relationship = relation ,
                                         relationShipID = relationShipID )
                                     viewModel.callUpdateRelativesApi(true, newRelative,Constants.RELATIVE)
+                                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_MEMBER_UPDATE)
                                 }
                             } else {
                                 Utilities.toastMessageLong( context , resources.getString(R.string.ERROR_DOB_UNAVAILABLE))

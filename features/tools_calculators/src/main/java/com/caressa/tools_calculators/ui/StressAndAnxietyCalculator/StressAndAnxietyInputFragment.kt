@@ -64,6 +64,7 @@ class StressAndAnxietyInputFragment : BaseFragment() {
         binding = FragmentStressAndAnxietyInputBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.STRESS_ANXIETY_CALCULATOR_INPUT_SCREEN)
         try {
             calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
             quizID = calculatorDataSingleton!!.quizId
@@ -71,7 +72,6 @@ class StressAndAnxietyInputFragment : BaseFragment() {
             Timber.e("QuizID,ParticipationID---> $quizID , $participationID")
             initialise()
             setClickable()
-            FirebaseHelper.logScreenEvent(FirebaseConstants.STRESS_CALCULATOR_SCREEN)
         } catch ( e : Exception ) {
             e.printStackTrace()
         }
@@ -154,6 +154,7 @@ class StressAndAnxietyInputFragment : BaseFragment() {
                     saveDetails()
                     Timber.i("AnswerList=> %s", getAnswerList())
                     viewModel.callStressAndAnxietySaveResponseApi(participationID,quizID.toInt(),getAnswerList())
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.DAS_CALCULATE_CLICK)
                 } else {
                     saveDetails()
                     currentQuestion = dataHandler!!.getStressNextQuestion(currentQuestion)

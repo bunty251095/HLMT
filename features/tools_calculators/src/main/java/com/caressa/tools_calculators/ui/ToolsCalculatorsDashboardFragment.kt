@@ -9,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.adapter.TrackersDashboardAdapter
@@ -36,6 +38,7 @@ class ToolsCalculatorsDashboardFragment : BaseFragment(),KoinComponent,TrackersD
         binding = FragmentToolsCalculatorsDashboardBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.TOOLS_CALCULATORS_HOME_SCREEN)
         try {
             calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
             initialise()

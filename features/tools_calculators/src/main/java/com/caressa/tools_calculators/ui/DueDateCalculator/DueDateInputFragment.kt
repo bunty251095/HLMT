@@ -37,11 +37,11 @@ class DueDateInputFragment : BaseFragment() {
     }
 
    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-      binding = FragmentDueDateInputBinding.inflate(inflater, container, false)
-      binding.viewModel = viewModel
-      binding.lifecycleOwner = viewLifecycleOwner
-      initialise()
-       FirebaseHelper.logScreenEvent(FirebaseConstants.DUE_DATE_CALCULATOR_SCREEN)
+       binding = FragmentDueDateInputBinding.inflate(inflater, container, false)
+       binding.viewModel = viewModel
+       binding.lifecycleOwner = viewLifecycleOwner
+       FirebaseHelper.logScreenEvent(FirebaseConstants.DUE_DATE_CALCULATOR_INPUT_SCREEN)
+       initialise()
        return binding.root
    }
 
@@ -58,6 +58,7 @@ class DueDateInputFragment : BaseFragment() {
             val bundle = Bundle()
             bundle.putString("lmpDate",lmpDate)
             it.findNavController().navigate(R.id.action_dueDateInputFragment_to_dueDateCalculatorReportFragment,bundle)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.DUE_DATE_CALCULATE_CLICK)
         }
 
         binding.btnCancel.setOnClickListener {

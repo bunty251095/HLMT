@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.records_tracker.R
 import com.caressa.records_tracker.adapter.DocumentTypeAdapter
@@ -53,6 +55,7 @@ class DocumentTypeFragment : BaseFragment() {
         binding = FragmentDocumentTypeBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HEALTH_RECORDS_DOCUMENT_TYPE_SCREEN)
         initialise()
         setClickable()
         return binding.root

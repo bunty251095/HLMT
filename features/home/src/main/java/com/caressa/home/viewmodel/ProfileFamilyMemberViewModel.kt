@@ -135,7 +135,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                         }
                     }
                 }
-                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_MEMBER_ADD_EVENT)
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_MEMBER_ADD_SUCCESS)
             }
             if (it.status == Resource.Status.ERROR) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
@@ -144,6 +144,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                 }else {
                     navigate(AddFamilyMemberFragmentDirections.actionAddFamilyMemberFragmentToFamilyMembersListFragment())
                     toastMessage(it.errorMessage)
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_MEMBER_ADD_FAILED)
                 }
             }
         }
@@ -431,6 +432,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                     if ( !Utilities.isNullOrEmpty( personDetails.id.toString() ) ) {
                         updateUserDetails(personDetails.firstName,personDetails.id)
                         Utilities.toastMessageShort(context,context.resources.getString(R.string.PROFILE_UPDATED))
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_UPDATE_SUCCESS)
                     }
                 }
 
@@ -441,6 +443,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                     _sessionError.value = Event(true)
                 }else {
                     toastMessage(it.errorMessage)
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_UPDATE_FAILED)
                 }
             }
         }

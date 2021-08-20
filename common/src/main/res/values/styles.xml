@@ -622,4 +622,11 @@
         <item name="android:divider">@color/colorPrimary</item>
     </style>
 
+    <style name="SmoothCheckBoxStyle">
+        <item name="color_checked">@color/colorAccent</item>
+        <item name="color_unchecked">@android:color/white</item>
+        <item name="color_unchecked_stroke">@color/vivant_greyish</item>
+        <item name="color_tick">@android:color/white</item>
+    </style>
+
 </resources>

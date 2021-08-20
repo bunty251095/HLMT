@@ -18,6 +18,7 @@ import androidx.databinding.DataBindingUtil
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.*
 import com.caressa.hra.HraHomeActivity
@@ -63,6 +64,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
         binding = DataBindingUtil.setContentView(this, R.layout.activity_hra_summary)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HRA_SUMMERY_SCREEN)
         try {
             val i = intent
             if ( i.hasExtra(Constants.PERSON_ID) ) {
@@ -103,6 +105,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
             val intentToPass = Intent(this, HraHomeActivity::class.java)
             intentToPass.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intentToPass)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_RESTART_CLICK)
         }
 
         /*binding.btnBookPackage.setOnClickListener {
@@ -415,7 +418,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
 
     override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {}
 
-/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -435,6 +438,6 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }*/
+    }
 
 }

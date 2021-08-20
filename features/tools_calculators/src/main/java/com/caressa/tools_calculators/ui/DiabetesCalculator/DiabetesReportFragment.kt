@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.adapter.DiabetesReportExpandableAdapter
 import com.caressa.tools_calculators.adapter.SummarySuggestionsAdapter
@@ -62,6 +64,7 @@ class DiabetesReportFragment : BaseFragment() {
         binding = FragmentDiabetesReportBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.DIABETES_REPORT_SCREEN)
         calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         setClickable()

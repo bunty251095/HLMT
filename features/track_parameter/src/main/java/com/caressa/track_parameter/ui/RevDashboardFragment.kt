@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.fitness.FitRequestCode
 import com.caressa.common.fitness.FitnessDataManager
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.model.parameter.DashboardParamGridModel
 import com.caressa.model.parameter.FitnessData
@@ -51,6 +53,7 @@ class RevDashboardFragment : BaseFragment(), DashboardGridAdapter.ParameterSelec
         binding = FragmentRevDashboardBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.TRACK_PARAMETERS_DASHBOARD_SCREEN)
         try {
             initialise()
             setClickable()
@@ -108,6 +111,7 @@ class RevDashboardFragment : BaseFragment(), DashboardGridAdapter.ParameterSelec
             launchIntent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.STORE_RECORDS)
             launchIntent.putExtra(Constants.FROM, Constants.TRACK_PARAMETER)
             startActivity(launchIntent)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.TRACK_PARAMETER_UPLOAD_REPORT)
         }
 
         binding.btnDashboardAddMedication.setOnClickListener{
@@ -115,6 +119,7 @@ class RevDashboardFragment : BaseFragment(), DashboardGridAdapter.ParameterSelec
             launchIntent.component = ComponentName(NavigationConstants.APPID, NavigationConstants.MEDICINE_TRACKER)
             launchIntent.putExtra(Constants.FROM, Constants.TRACK_PARAMETER)
             startActivity(launchIntent)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.TRACK_PARAMETER_ADD_MEDICATION)
         }
 
     }

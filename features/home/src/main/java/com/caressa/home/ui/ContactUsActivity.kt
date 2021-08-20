@@ -27,9 +27,9 @@ class ContactUsActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_contact_us)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        FirebaseHelper.logScreenEvent(FirebaseConstants.CONTACT_US_SCREEN)
         initialise()
         setClickable()
-        FirebaseHelper.logScreenEvent(FirebaseConstants.CONTACT_US_SCREEN)
     }
 
     private fun initialise() {
@@ -104,6 +104,7 @@ class ContactUsActivity : BaseActivity() {
             if ( !binding.tilEdtEmail.isErrorEnabled && !binding.tilEdtPhoneNumber.isErrorEnabled
                 && !binding.tilEdtMessage.isErrorEnabled ) {
                 if (NetworkUtility.isOnline(this)) {
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.CONTACT_US_SUBMIT)
                     viewModel.callContactUsApi(this,fromEmail,fromMobile,message)
                 } else {
                     Utilities.toastMessageShort(this, resources.getString(R.string.MSG_NO_INTERNET_CONNECTION))

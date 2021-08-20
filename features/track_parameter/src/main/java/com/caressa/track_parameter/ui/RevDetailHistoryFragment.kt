@@ -10,7 +10,9 @@ import android.view.animation.LayoutAnimationController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.DefaultNotificationDialog
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.common.utils.showDialog
 import com.caressa.model.entity.TrackParameterMaster
@@ -53,6 +55,7 @@ class RevDetailHistoryFragment: BaseFragment(),PreviousMonthsAdapter.OnMonthClic
         binding = FragmentParametersDetailHistoryBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.TRACK_PARAMETERS_COMPLETE_HISTORY_SCREEN)
         try {
             setMonthYearView()
             setExpandableList()

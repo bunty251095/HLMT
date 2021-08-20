@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.caressa.blogs.R
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.caressa.blogs.adapter.BlogAdapter
@@ -15,6 +14,8 @@ import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import com.caressa.blogs.adapter.BlogAdapter.OnBottomReachedListener
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 
 class BlogDashboardFragment : BaseFragment() {
 
@@ -31,6 +32,7 @@ class BlogDashboardFragment : BaseFragment() {
         binding = FragmentBlogsDashboardBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.BLOGS_DASHBOARD_SCREEN)
         startShimmer()
         initialise()
         configureRecyclerView()
@@ -62,7 +64,7 @@ class BlogDashboardFragment : BaseFragment() {
                 viewModel.callGetBlogsFromServerApi(visibleThreshold ,currentPage,this@BlogDashboardFragment)
             }
         })
-        viewModel.blogList.observe( viewLifecycleOwner , Observer {})
+        viewModel.blogList.observe( viewLifecycleOwner , {})
     }
 
     private fun startShimmer() {

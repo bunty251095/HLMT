@@ -17,7 +17,9 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.medication_tracker.R
 import com.caressa.medication_tracker.databinding.FragmentMedicationHomeBinding
 import com.caressa.medication_tracker.viewmodel.MedicineTrackerViewModel
@@ -68,6 +70,7 @@ open class MedicineHomeFragment : BaseFragment() {
         binding = FragmentMedicationHomeBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.MEDICINE_TRACKER_HOME_SCREEN)
         initialise()
         setClickable()
         return binding.root

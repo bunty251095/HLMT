@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.adapter.HeartRiskReportAdapter
 import com.caressa.tools_calculators.adapter.ParamDataReportAdapter
@@ -56,6 +58,7 @@ class HeartReportFragment : BaseFragment() {
         binding = FragmentHeartReportBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HEART_AGE_REPORT_SCREEN)
         calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         initialiseChart()

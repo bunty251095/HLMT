@@ -12,7 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.AppColorHelper
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.home.R
 import com.caressa.home.adapter.FamilyMembersAdapter
 import com.caressa.home.databinding.FragmentFamilyMembersListBinding
@@ -49,6 +51,7 @@ class FamilyMembersListFragment : BaseFragment() {
         binding = FragmentFamilyMembersListBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.FAMILY_MEMBER_LIST_SCREEN)
         initialise()
         setClickable()
         return binding.root

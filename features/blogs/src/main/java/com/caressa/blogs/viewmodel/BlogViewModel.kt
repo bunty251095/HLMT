@@ -19,8 +19,10 @@ import com.caressa.blogs.domain.BlogsManagementUseCase
 import com.caressa.model.blogs.BlogItem
 import com.caressa.blogs.ui.BlogDashboardFragment
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.Event
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.model.blogs.BlogModel
 import com.caressa.repository.utils.Resource
 import kotlinx.coroutines.launch
@@ -132,6 +134,7 @@ class BlogViewModel (private val dispatchers: AppDispatchers,
         sendIntent.type = "text/plain"
         sendIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         context.startActivity(sendIntent)
+        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.BLOGS_SHARE_CLICK)
     }
 
     fun viewBlog( view:View,blog: BlogItem) {

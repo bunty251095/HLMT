@@ -64,6 +64,7 @@ class SmartPhoneInputFragment : BaseFragment() {
         binding = FragmentSmartPhoneInputBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.SMART_PHONE_CALCULATOR_INPUT_SCREEN)
         try {
             calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
             quizID = calculatorDataSingleton!!.quizId
@@ -71,7 +72,6 @@ class SmartPhoneInputFragment : BaseFragment() {
             Timber.e("QuizID,ParticipationID---> $quizID , $participationID")
             initialise()
             setClickable()
-            FirebaseHelper.logScreenEvent(FirebaseConstants.SMART_PHONE_CALCULATOR_SCREEN)
         } catch ( e : Exception ) {
             e.printStackTrace()
         }
@@ -143,6 +143,7 @@ class SmartPhoneInputFragment : BaseFragment() {
                 if (binding.btnNext.text.toString().trim { it <= ' ' }.equals("finish", ignoreCase = true)) {
                     val value = calculateScore()
                     viewModel.callSmartPhoneSaveResponseApi(value,participationID,quizID)
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.SPA_CALCULATE_CLICK)
                 } else {
                     question = smartPhoneAddictionData!!.getSmartPhoneAddictionData(currentQuestion,requireContext())
                     loadPreviousData()

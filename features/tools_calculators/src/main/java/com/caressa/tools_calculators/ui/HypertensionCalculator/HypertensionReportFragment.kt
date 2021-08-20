@@ -14,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.databinding.FragmentHypertensionReportBinding
@@ -57,6 +59,7 @@ class HypertensionReportFragment : BaseFragment() {
         binding = FragmentHypertensionReportBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HYPERTENSION_REPORT_SCREEN)
         calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialiseChart()
         setClickable()

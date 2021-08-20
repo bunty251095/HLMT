@@ -263,7 +263,7 @@ class MedicineTrackerViewModel(
                 if (it.data!!.medication.medicationId != 0) {
                     toastMessage(context.resources.getString(R.string.MEDICINE_ADDED))
                     navigate(ScheduleDetailsFragmentDirections.actionScheduleMedicineFragmentToMedicineHome("", ""))
-                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICINE_UPLOAD_EVENT)
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICATION_ADDED)
                 }
             }
 
@@ -295,6 +295,7 @@ class MedicineTrackerViewModel(
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if (it.data!!.medication.medicationId != 0) {
                     toastMessage(context.resources.getString(R.string.MEDICINE_UPDATED))
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICATION_EDIT)
                     navigate(ScheduleDetailsFragmentDirections.actionScheduleMedicineFragmentToMedicineHome("", ""))
                 }
             }
@@ -328,6 +329,7 @@ class MedicineTrackerViewModel(
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if (it.data!!.isProcessed) {
                     toastMessage(context.resources.getString(R.string.MEDICINE_DELETED))
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICATION_DELETED)
                 }
                 fragment.updateData(spinnerPos)
 
@@ -379,6 +381,14 @@ class MedicineTrackerViewModel(
                     fragment.updateMedicatinesList()
                     updateNotificationAlert(medicationID, setAlert)
                     toastMessage(msgTxt)
+                    when(msgTxt) {
+                        context.resources.getString(R.string.ALERT_ENABLED) ->{
+                            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICATION_NOTIFICATION_ENABLED)
+                        }
+                        context.resources.getString(R.string.ALERT_DISABLED) ->{
+                            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICATION_NOTIFICATION_DISABLED)
+                        }
+                    }
                 }
             }
 

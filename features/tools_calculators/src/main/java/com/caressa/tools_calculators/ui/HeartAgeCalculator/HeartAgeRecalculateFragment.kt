@@ -13,6 +13,8 @@ import android.widget.RadioButton
 import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.adapter.ParameterAdapter
@@ -53,6 +55,7 @@ class HeartAgeRecalculateFragment : BaseFragment(), KoinComponent, ParameterAdap
         binding = FragmentHeartAgeRecalculateBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HEART_AGE_RECALCULATE_SCREEN)
         calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         quizID = calculatorDataSingleton!!.quizId
         participationID = calculatorDataSingleton!!.participantID
@@ -87,6 +90,7 @@ class HeartAgeRecalculateFragment : BaseFragment(), KoinComponent, ParameterAdap
             if (validateParameter()) {
                 saveParameter()
                 viewModel.callHeartAgeCalculateApi("",participationID,quizID,getAnswerList())
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEART_AGE_RECALCULATE_CLICK)
 /*                val bundle = Bundle()
                 bundle.putString(Constants.FROM, "Home")
                 it.findNavController().navigate(R.id.action_heartAgeRecalculateFragment_to_heartSummaryFragment)*/

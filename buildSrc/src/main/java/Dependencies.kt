@@ -26,17 +26,17 @@ object Modules {
 }
 
 object Releases {
-    const val versionCode = 6
-    const val versionName = "1.0.5"
+    const val versionCode = 10
+    const val versionName = "1.0.6"
 }
 
 object Versions {
     val multidex = "1.0.3"
     val kotlin = "1.4.32"
     val gradle = "4.2.1"
-    const val compileSdk = 29
+    const val compileSdk = 30
     const val minSdk = 19
-    const val targetSdk = 29
+    const val targetSdk = 30
     val appDesign = "28.0.0"
     val appCompat = "1.2.0"
     val appLegacySupport = "1.0.0"

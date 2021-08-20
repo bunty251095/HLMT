@@ -13,11 +13,9 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
-import com.caressa.common.utils.DefaultNotificationDialog
-import com.caressa.common.utils.Utilities
-import com.caressa.common.utils.ViewUtils
-import com.caressa.common.utils.showDialog
+import com.caressa.common.utils.*
 import com.caressa.hra.common.HraDataSingleton
 import com.caressa.hra.databinding.FragmentSelectFamilyMemberBinding
 import com.caressa.model.hra.Option
@@ -53,6 +51,7 @@ class SelectFamilyMemberFragment : BaseFragment(), DefaultNotificationDialog.OnD
         binding = FragmentSelectFamilyMemberBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HRA_FAMILY_MEMBER_SELECTION_SCREEN)
         initialise()
         registerObservers()
         setClickable()

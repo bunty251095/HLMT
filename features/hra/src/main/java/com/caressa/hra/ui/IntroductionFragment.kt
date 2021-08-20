@@ -25,6 +25,7 @@ class IntroductionFragment : BaseFragment() {
         binding = FragmentIntroductionBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HRA_START_SCREEN)
         initialise()
         setClickable()
         return binding.root
@@ -40,7 +41,7 @@ class IntroductionFragment : BaseFragment() {
     private fun setClickable() {
 
             binding.btnStartHra.setOnClickListener {
-                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_INITIATED_EVENT)
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_INITIATED)
             it.findNavController().navigate(R.id.action_introductionFragment_to_selectFamilyMemberFragment)
         }
 

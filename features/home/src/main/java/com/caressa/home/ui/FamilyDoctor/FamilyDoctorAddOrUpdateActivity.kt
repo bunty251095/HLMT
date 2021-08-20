@@ -16,10 +16,8 @@ import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
-import com.caressa.common.utils.AppColorHelper
-import com.caressa.common.utils.KeyboardUtils
-import com.caressa.common.utils.Utilities
-import com.caressa.common.utils.Validation
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.*
 import com.caressa.common.view.AutocompleteTextViewAdapter
 import com.caressa.common.view.AutocompleteTextViewModel
 import com.caressa.home.R
@@ -73,8 +71,10 @@ class FamilyDoctorAddOrUpdateActivity : BaseActivity() {
             if (!Utilities.isNullOrEmpty(doctorsDetails.affiliatedTo)) {
                 binding.edtAffilatedTo.setText( doctorsDetails.affiliatedTo )
             }
+            FirebaseHelper.logScreenEvent(FirebaseConstants.FAMILY_DOCTOR_UPDATE_SCREEN)
         } else {
             binding.btnAddUpdateDoctor.text = resources.getString(R.string.ADD)
+            FirebaseHelper.logScreenEvent(FirebaseConstants.FAMILY_DOCTOR_ADD_SCREEN)
         }
 
         autocompleteTextViewAdapter = AutocompleteTextViewAdapter(this,ArrayList())
@@ -234,8 +234,10 @@ class FamilyDoctorAddOrUpdateActivity : BaseActivity() {
             doctorDetails.affiliatedTo = affiliatedTo
             if (from.equals("Update", ignoreCase = true)) {
                 viewModel.callUpdateFamilyDoctorApi(this,doctorDetails)
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_DOCTOR_UPDATE)
             } else {
                 viewModel.callAddFamilyDoctorApi(this,doctorDetails)
+                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_DOCTOR_ADD)
             }
         }
     }

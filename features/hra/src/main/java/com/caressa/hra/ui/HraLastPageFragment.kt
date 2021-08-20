@@ -35,7 +35,7 @@ class HraLastPageFragment(val qCode: String) : BaseFragment() {
             initialise()
             setClickable()
         }
-        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_COMPLETED_EVENT)
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HRA_COMPLETED_SCREEN)
         return binding.root
     }
 
@@ -63,6 +63,7 @@ class HraLastPageFragment(val qCode: String) : BaseFragment() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra(Constants.PERSON_ID,viewPagerActivity!!.personId)
             startActivity(intent)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_VIEW_REPORT_CLICK)
         }
 
     }

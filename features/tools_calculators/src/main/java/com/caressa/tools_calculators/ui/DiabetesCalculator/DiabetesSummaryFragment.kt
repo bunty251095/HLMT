@@ -17,6 +17,8 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.databinding.FragmentDiabetesSummaryBinding
 import com.caressa.tools_calculators.model.CalculatorDataSingleton
@@ -48,6 +50,7 @@ class DiabetesSummaryFragment : BaseFragment(),KoinComponent {
         binding = FragmentDiabetesSummaryBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.DIABETES_SUMMARY_SCREEN)
         calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         setClickable()
@@ -59,7 +62,7 @@ class DiabetesSummaryFragment : BaseFragment(),KoinComponent {
 
         binding.txtDibProbability.text = ( resources.getString(R.string.BASED_ON_YOUR_SCORE_YOU_HAVE) + " "
                 + calculatorDataSingleton!!.diabetesSummeryModel.probabilityPercentage
-                + " " + resources.getString(R.string.BASED_ON_YOUR_SCORE_YOU_HAVE))
+                + " " + resources.getString(R.string.PROBABILITY_OF_GETTING_DIABETES))
         binding.indicatorDiabetesRisk.setOnTouchListener { _: View?, _: MotionEvent? -> true }
 
         setDiabetesRiskDetails(calculatorDataSingleton!!.diabetesSummeryModel.totalScore.toDouble(),
@@ -107,6 +110,7 @@ class DiabetesSummaryFragment : BaseFragment(),KoinComponent {
 
         binding.btnViewReportDiabetes.setOnClickListener {
             findNavController().navigate(R.id.action_diabetesSummaryFragment_to_diabetesReportFragment)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.DIABETES_VIEW_DETAILED_REPORT_CLICK)
         }
 
         binding.btnRestartDiabetes.setOnClickListener {

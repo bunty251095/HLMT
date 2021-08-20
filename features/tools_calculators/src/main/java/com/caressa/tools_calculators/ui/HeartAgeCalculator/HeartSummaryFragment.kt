@@ -15,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.tools_calculators.R
 import com.caressa.tools_calculators.databinding.FragmentHeartSummaryBinding
 import com.caressa.tools_calculators.model.CalculatorDataSingleton
@@ -47,6 +49,7 @@ class HeartSummaryFragment : BaseFragment() {
         binding = FragmentHeartSummaryBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.HEART_AGE_SUMMARY_SCREEN)
         calculatorDataSingleton = CalculatorDataSingleton.getInstance()!!
         initialise()
         initialiseChart()
@@ -85,11 +88,13 @@ class HeartSummaryFragment : BaseFragment() {
                     binding.layoutHeartRiskView.visibility = View.GONE
                     binding.barChartHeartAge.visibility = View.VISIBLE
                     binding.barChartHeartRisk.visibility = View.INVISIBLE
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEART_AGE_TAB_CLICKED)
                 } else if (tab.position == 1) {
                     binding.layoutHeartRiskView.visibility = View.VISIBLE
                     binding.layoutHeartAgeView.visibility = View.GONE
                     binding.barChartHeartAge.visibility = View.INVISIBLE
                     binding.barChartHeartRisk.visibility = View.VISIBLE
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEART_RISK_TAB_CLICKED)
                 }
             }
 
@@ -103,6 +108,7 @@ class HeartSummaryFragment : BaseFragment() {
 
         binding.btnViewReport.setOnClickListener {
             findNavController().navigate(R.id.action_heartSummaryFragment_to_heartReportFragment)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEART_AGE_VIEW_DETAILED_REPORT_CLICK)
         }
 
     }

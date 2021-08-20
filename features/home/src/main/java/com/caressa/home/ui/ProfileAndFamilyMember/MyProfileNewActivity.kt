@@ -22,6 +22,7 @@ import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Configuration
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.*
 import com.caressa.home.R
 import com.caressa.home.common.DataHandler
@@ -31,7 +32,8 @@ import com.caressa.model.home.Person
 import com.caressa.model.home.UpdateUserDetailsModel
 import com.karumi.dexter.Dexter
 import com.yalantis.ucrop.UCrop
-import droidninja.filepicker.FilePickerBuilder
+import com.caressa.common.utils.filepicker.FilePickerBuilder
+//import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
 import droidninja.filepicker.utils.ContentUriUtils
 import kotlinx.android.synthetic.main.activity_my_profile_new.*
@@ -63,6 +65,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         binding = DataBindingUtil.setContentView(this, R.layout.activity_my_profile_new)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        FirebaseHelper.logScreenEvent(FirebaseConstants.MY_PROFILE_SCREEN)
         initialise()
         registerObservers()
         setClickable()
@@ -236,7 +239,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
             binding.layoutEditDetails.visibility = View.GONE
             binding.layoutShowDetails.visibility = View.VISIBLE
             binding.edtUsername.setText(user.firstName)
-
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_EDIT_CANCELLED)
         }
 
         binding.btnUpdateProfile.setOnClickListener {
@@ -324,6 +327,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                     addressLine1 = address)
             )
             viewModel.callUpdateUserDetailsApi(newUserDetails)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_EDIT_CLICK)
         }
     }
 
@@ -668,6 +672,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                                     if (save1) {
                                         Utilities.deleteFileFromLocalSystem(pathTemp)
                                         viewModel.callUploadProfileImageApi(this,fileName, mainDirectoryPath, flePath1)
+                                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_PIC_EDIT_CLICK)
                                     }
                                 } else {
                                     Utilities.deleteFileFromLocalSystem(pathTemp)

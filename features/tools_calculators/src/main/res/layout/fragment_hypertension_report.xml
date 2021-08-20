@@ -47,11 +47,22 @@
                 android:layout_marginTop="@dimen/_4sdp"
                 android:background="@color/vivantDarkGrey" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/bar_chart_heart_age"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"/>
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_hypertension_data"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -60,19 +71,13 @@
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/bar_chart_heart_age"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_150sdp"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_marginTop="@dimen/_16sdp"
-                    android:layout_marginEnd="@dimen/_16sdp"
-                    android:padding="@dimen/_10sdp"
+                    android:layout_height="@dimen/_200sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent">
+                    app:layout_constraintTop_toBottomOf="parent"/>
 
-                </com.github.mikephil.charting.charts.BarChart>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -142,9 +147,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintEnd_toEndOf="@+id/layout_hypertension_data"
-                app:layout_constraintStart_toStartOf="@+id/layout_hypertension_data"
-                app:layout_constraintTop_toBottomOf="@+id/layout_hypertension_data">
+                app:layout_constraintEnd_toEndOf="@+id/bar_chart_heart_age"
+                app:layout_constraintStart_toStartOf="@+id/bar_chart_heart_age"
+                app:layout_constraintTop_toBottomOf="@+id/bar_chart_heart_age">
 
                 <LinearLayout
                     android:id="@+id/lbl_desc"

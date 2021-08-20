@@ -14,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.track_parameter.databinding.HomeFragmentBinding
 import com.caressa.track_parameter.viewmodel.DashboardViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -27,7 +29,6 @@ class HomeFragment : BaseFragment(){
     override fun getViewModel(): BaseViewModel = viewModel
 
     private var from = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +53,7 @@ class HomeFragment : BaseFragment(){
         binding = HomeFragmentBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        FirebaseHelper.logScreenEvent(FirebaseConstants.TRACK_PARAMETERS_HOME_SCREEN)
         initialise()
         setClickable()
         return binding.root

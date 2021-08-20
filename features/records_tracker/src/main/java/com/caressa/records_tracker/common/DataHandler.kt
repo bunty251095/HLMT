@@ -9,6 +9,8 @@ import android.net.Uri
 import android.os.Environment
 import android.os.StrictMode
 import android.text.Html
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.RealPathUtil
 import com.caressa.common.utils.Utilities
 import com.caressa.common.view.SpinnerModel
@@ -199,6 +201,7 @@ class DataHandler(val context: Context) {
             val file = File(completePath)
             val fileToShare = Uri.fromFile(file)
             generateShareIntent(context, fileToShare,viewModel)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEALTH_RECORD_SHARED)
         } else {
             Utilities.toastMessageShort(context,context.resources.getString(R.string.DOWNLOAD_DOCUMENT_TO_PROCEED))
         }

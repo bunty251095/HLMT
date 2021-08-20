@@ -9,8 +9,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.Event
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.common.view.AutocompleteTextViewModel
 import com.caressa.home.common.DataHandler
@@ -149,6 +151,7 @@ class FamilyDoctorViewModel(private val homeManagementUseCase: HomeManagementUse
                         intent.putExtra("from","Add")
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         context.startActivity(intent)
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_DOCTOR_ADD_SUCCESS)
                     }
                 }
             }
@@ -158,6 +161,7 @@ class FamilyDoctorViewModel(private val homeManagementUseCase: HomeManagementUse
                     _sessionError.value = Event(true)
                 }else {
                     toastMessage(it.errorMessage)
+                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_DOCTOR_ADD_FAILED)
                 }
             }
         }

@@ -43,7 +43,7 @@ class FeedbackActivity : BaseActivity() {
             onBackPressed()
         }
 
-        viewModel.saveFeedback.observe( this , Observer {})
+        viewModel.saveFeedback.observe( this , {})
     }
 
 }

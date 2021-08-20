@@ -17,10 +17,8 @@ import androidx.core.widget.ImageViewCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.caressa.common.constants.Constants
-import com.caressa.common.utils.AppColorHelper
-import com.caressa.common.utils.DateHelper
-import com.caressa.common.utils.DefaultNotificationDialog
-import com.caressa.common.utils.Utilities
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.*
 import com.caressa.home.R
 import com.caressa.home.common.DataHandler
 import com.caressa.home.common.DataHandler.NavDrawerOption
@@ -254,6 +252,7 @@ class NavigationDrawerListAdapter(val viewModel:DashboardViewModel,val activity:
                             viewModel.switchProfile(userRelative)
                             familyProfileSelected = position.toString()
                             activity.refreshView()
+                            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_SWITCH_CLICK)
                         }
                         if (isButtonLeft) {
                             keepDefaultFamilyProfileSelected()
