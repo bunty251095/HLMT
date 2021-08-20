@@ -123,6 +123,14 @@ class UpdateParamViewModel(
 
     }
 
+    fun getCurrentUserGender():Int{
+        if(sharedPref.getString(PreferenceConstants.GENDER,"1").equals("1")){
+            return 1
+        }else{
+            return 0
+        }
+    }
+
     private fun getFilterData(data: List<TrackParameterMaster.Parameter>?): List<ParameterListModel.InputParameterModel> {
         val list:MutableList<ParameterListModel.InputParameterModel> = mutableListOf()
         for(item in data!!){

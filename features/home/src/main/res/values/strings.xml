@@ -26,7 +26,7 @@
     <string name="MENU_FAMILY_MEMBERS">Family Members</string>
     <string name="MENU_FAMILY_DOCTORS">Family Doctors</string>
     <string name="MENU_CONTACT_US">Contact Us</string>
-    <string name="MENU_SPREAD_THE_WORD">Spread the Word</string>
+    <string name="MENU_SPREAD_THE_WORD">Invite My Friends</string>
     <string name="REFER_AND_EARN">Refer &amp; Earn</string>
     <string name="MENU_SETTINGS">Settings</string>
     <string name="MENU_LOGOUT">Logout</string>
@@ -73,14 +73,14 @@
     <string name="ACCOUNT_LINKED">Your HLMTakaful360 tran2@yahoo..com is already linked with your HL Pace wellness profile.</string>
     <string name="LINK_HLMT_360_ACCOUNT">Link HLMT 360 Account</string>
     <string name="YOUR_HLMT_360_ACCOUNT">Your HLMTakaful360 account</string>
-    <string name="TO_LINK_HLMT_360_ACCOUNT_CLICK_ON_BUTTON">To Link your HLMTakaful360 account with HL Pace Wellness Profile , Login to your Account and click on button Link my HLMTakaful360 account</string>
+    <string name="TO_LINK_HLMT_360_ACCOUNT_CLICK_ON_BUTTON">Link your HLMTakaful360&#xb0; login account with HL Pace.</string>
     <string name="HAS_BEEN_LINKED_TO_PROFILE">has been linked Successfully with your HL Pace profile.</string>
     <string name="ACCOUNT_ALREADY_LINKED">is already link with your HL Pace wellness profile.</string>
 
     <string name="HELP_US_TO_MAKE_US_BETTER">Help us to make us better...</string>
     <string name="DO_YOU_HAVE_ANY_SUGGESTION_OR_FEEDBACK_TO_MAKE_OUR_APP_BETTER">Do you have any suggestion or feedback to make our app better?</string>
     <string name="WRITE_SOMETHING_TO_US">Write something to us...</string>
-    <string name="CONTACT_US_DESC">Call us or send a message and we will respond as soon as possible</string>
+    <string name="CONTACT_US_DESC">Send us a message and we will respond shortly</string>
     <string name="SEND_US_YOUR_QUERY">Send us your query</string>
 
     <!--HRA Strings-->

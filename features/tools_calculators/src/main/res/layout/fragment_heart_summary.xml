@@ -72,6 +72,7 @@
                 android:id="@+id/layout_heart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="@+id/layout_heart_tab"
                 app:layout_constraintStart_toStartOf="@+id/layout_heart_tab"
                 app:layout_constraintTop_toBottomOf="@+id/layout_heart_tab">
@@ -468,6 +469,48 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_heart_age_chart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="@+id/layout_heart_tab"
+                app:layout_constraintStart_toStartOf="@+id/layout_heart_tab"
+                app:layout_constraintTop_toBottomOf="@+id/layout_heart_tab">
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/bar_chart_heart_age"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:padding="@dimen/_10sdp"
+                    SeekArc:layout_constraintBottom_toBottomOf="parent"
+                    SeekArc:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                </com.github.mikephil.charting.charts.BarChart>
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/bar_chart_heart_risk"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:visibility="invisible"
+                    SeekArc:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                </com.github.mikephil.charting.charts.BarChart>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lbl_summary_msg"
                 android:layout_width="wrap_content"
@@ -489,7 +532,6 @@
                 app:isTemplate="true"
                 style="@style/CustomButton"
                 android:text="@string/RECALCULATE"
-                android:visibility="invisible"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:layout_marginEnd="@dimen/_16sdp"

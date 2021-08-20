@@ -79,21 +79,31 @@ class DashboardViewModel (
                 }
 
                 if ( !paramWeight.isNullOrEmpty() ) {
-                    color = TrackParameterHelper.getObservationColor(paramWeight[0].observation,paramWeight[0].profileCode!!)
-                    list.add(DashboardParamGridModel(R.drawable.img_weight,color,context.resources.getString(R.string.WEIGHT), paramWeight[0].value!!.toString(), "WEIGHT"))
+//                    color = TrackParameterHelper.getObservationColor(paramWeight[0].observation,paramWeight[0].profileCode!!)
+                    list.add(DashboardParamGridModel(R.drawable.img_weight,R.color.vivant_charcoal_grey_55,context.resources.getString(R.string.WEIGHT), paramWeight[0].value!!.toString(), "WEIGHT"))
                 } else {
                     list.add(DashboardParamGridModel(R.drawable.img_weight,R.color.hlmt_warm_grey,context.resources.getString(R.string.WEIGHT), " -- ", "WEIGHT"))
                 }
 
                 if ( !paramWaist.isNullOrEmpty() ) {
-                    color = TrackParameterHelper.getObservationColor(paramWaist[0].observation,paramWeight[0].profileCode!!)
-                    list.add(DashboardParamGridModel(R.drawable.img_waist,color,context.resources.getString(R.string.WAIST), paramWaist[0].value!!.toString(), "WAIST"))
+//                    color = TrackParameterHelper.getObservationColor(paramWaist[0].observation,paramWeight[0].profileCode!!)
+                    list.add(DashboardParamGridModel(R.drawable.img_profile_whr,R.color.vivant_charcoal_grey_55,context.resources.getString(R.string.WAIST), paramWaist[0].value!!.toString(), "WAIST"))
                 } else {
-                    list.add(DashboardParamGridModel(R.drawable.img_waist,R.color.hlmt_warm_grey,context.resources.getString(R.string.WAIST), " -- ", "WAIST"))
+                    list.add(DashboardParamGridModel(R.drawable.img_profile_whr,R.color.hlmt_warm_grey,context.resources.getString(R.string.WAIST), " -- ", "WAIST"))
                 }
 
                 if ( !paramBMI.isNullOrEmpty() ) {
-                    color = TrackParameterHelper.getObservationColor(paramBMI[0].observation,paramBMI[0].profileCode!!)
+                    if(paramBMI[0].observation.isNullOrEmpty()){
+                        color = TrackParameterHelper.getObservationColor(
+                            TrackParameterHelper.getBMIObservation(paramBMI[0].value.toString(),context),
+                            paramBMI[0].profileCode!!
+                        )
+                    }else {
+                        color = TrackParameterHelper.getObservationColor(
+                            paramBMI[0].observation,
+                            paramBMI[0].profileCode!!
+                        )
+                    }
                     list.add(DashboardParamGridModel(R.drawable.img_profile_bmi,color,context.resources.getString(R.string.BMI), paramBMI[0].value!!.toString(), "BMI"))
                 } else {
                     list.add(DashboardParamGridModel(R.drawable.img_profile_bmi,R.color.hlmt_warm_grey,context.resources.getString(R.string.BMI), " -- ", "BMI"))
@@ -108,7 +118,7 @@ class DashboardViewModel (
 
 
                 if (systolic != -1 && diastolic != -1) {
-                    color = TrackParameterHelper.getObservationColor(TrackParameterHelper.getBPObservation(systolic, diastolic,context),"")
+                    color = TrackParameterHelper.getObservationColor(TrackParameterHelper.getBPObservation(paramBp[systolic].value!!.toInt(), paramBp[diastolic].value!!.toInt(),context),"")
                     if ( !Utilities.isNullOrEmpty( paramBp[systolic].value.toString())
                         && !Utilities.isNullOrEmpty( paramBp[diastolic].value.toString()) ) {
                         list.add(DashboardParamGridModel(R.drawable.img_profile_bp,color,context.resources.getString(R.string.BP),paramBp[systolic].value!!.toDouble().toInt().toString() + " / " + paramBp[diastolic].value!!.toDouble().toInt().toString(), "BP"))

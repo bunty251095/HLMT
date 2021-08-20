@@ -51,10 +51,18 @@ class LoginSelectionFragment: BaseFragment() {
     private fun setClickable() {
         viewModel.updateUserPreference()
         binding.btnRegister.setOnClickListener {
-            viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelctionToStepOneFragment())
+            if(binding.termsCheckBox.isChecked) {
+                viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelctionToStepOneFragment())
+            }else{
+                viewModel.toastMessage("Please accept Terms and Conditions")
+            }
         }
         binding.btnSignIn.setOnClickListener {
-            viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelctionToStepOneFragment())
+            if(binding.termsCheckBox.isChecked) {
+                viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelctionToStepOneFragment())
+            }else{
+                viewModel.toastMessage("Please accept Terms and Conditions")
+            }
         }
         binding.txtLoginTermsofservice.setOnClickListener {
             viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelectionToTermsAndCondition())

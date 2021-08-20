@@ -5,7 +5,7 @@
     <string name="TITLE_ADD_MEDICATION">Add Medicine</string>
     <string name="TITLE_SCHEDULE_MEDICATION">Schedule Medicine</string>
 
-    <string name="TRACK_YOUR_MEDICINE_WITH_US">Track your \n medicine with us</string>
+    <string name="TRACK_YOUR_MEDICINE_WITH_US">Track your \nmedication</string>
     <string name="QUICK_VIEW_TO_YOUR_MEDICINES">Quick view to your medicines</string>
     <string name="ADD_MEDICATION">Add Medication</string>
     <string name="ADD_YOUR_MEDICINE">Add your medicine</string>
@@ -75,7 +75,7 @@
     <string name="RESCHEDULE_MEDICINE">Reschedule Medicine</string>
     <string name="UPDATE_MEDICINE_SCHEDULES">Update Medicine Schedules</string>
     <string name="PAST_MEDICINES">Past Medicines</string>
-    <string name="NO_MEDICINES_AVAILABLE">No Medicines Available</string>
+    <string name="NO_MEDICINES_AVAILABLE">No medicine records</string>
     <string name="MEDICINE_DELETED">Medicine Deleted Successfully</string>
     <string name="MEDICINE_ADDED">Medicine Added Successfully</string>
     <string name="MEDICINE_UPDATED">Medicine Updated Successfully</string>

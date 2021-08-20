@@ -11,8 +11,11 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
+import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.caressa.common.base.BaseActivity
@@ -33,9 +36,11 @@ import com.caressa.common.utils.filepicker.FilePickerBuilder
 //import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
 import droidninja.filepicker.utils.ContentUriUtils
+import kotlinx.android.synthetic.main.activity_my_profile_new.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.io.File
+import java.lang.StringBuilder
 import java.util.*
 
 class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.EditProfileImageItemClickListener {
@@ -51,6 +56,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
     var completeFilePath = ""
     var hasProfileImage = false
     var needToSet = true
+    private var mCalendar: Calendar? = null
     var user : Person = Person()
 
     override fun getViewModel(): BaseViewModel = viewModel
@@ -86,6 +92,21 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                 }
             }
         })
+
+        val toUpperCaseFilter =
+            InputFilter { source, start, end, dest, dstart, dend ->
+                val stringBuilder = StringBuilder()
+                for (i in start until end) {
+                    var character = source[i]
+                    if(i==0 || source[i-1].equals(' ',true)) {
+                        character = Character.toUpperCase(character!!) // THIS IS UPPER CASING
+                    }
+                    stringBuilder.append(character)
+                }
+                stringBuilder.toString()
+            }
+
+        binding.edtUsername.setFilters(arrayOf(toUpperCaseFilter))
 
         binding.edtAlternateEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
@@ -230,6 +251,25 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
             onBackPressed()
         }
 
+        binding.layoutDobEdit.setOnClickListener {
+            showDatePickerDialog()
+        }
+
+        binding.edtDob.setOnTouchListener { v, event ->
+            if (MotionEvent.ACTION_UP == event.action) showDatePickerDialog() // Instead of your Toast
+            false
+        }
+    }
+
+    fun showDatePickerDialog(){
+        mCalendar = Calendar.getInstance()
+        mCalendar?.add(Calendar.YEAR, -18)
+
+        DialogHelper().showDatePickerDialog("Your Date of Birth",this, mCalendar,null, mCalendar, object :DialogHelper.DateListener{
+            override fun onDateSet(date: String, year: String, month: String, dayOfMonth: String) {
+                binding.edtDob.setText(date.replace('-',' '))
+            }
+        })
     }
 
     private fun validateAndUpdate() {
@@ -239,6 +279,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         val newNumber = binding.edtNumber.text.toString().trim { it <= ' ' }
         val newAlternateNumber = binding.edtAlternateNumber.text.toString().trim { it <= ' ' }
         val address = binding.edtAddress.text.toString().trim { it <= ' ' }
+        val dateOfBirth = binding.edtDob.text.toString().trim { it <= ' ' }
 
         if ( !Validation.isValidName(username) ) {
             binding.tilEdtUsername.isErrorEnabled = true
@@ -261,13 +302,21 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
             binding.tilEdtAlternateNumber.error = resources.getString(R.string.VALIDATE_DIFFERENT_PHONE)
         }
 
+        if (dateOfBirth.isNullOrEmpty()) {
+            binding.tilEdtAlternateNumber.isErrorEnabled = true
+            binding.tilEdtAlternateNumber.error = resources.getString(R.string.VALIDATE_DATE_OF_BIRTH)
+        }
+
         if (!binding.tilEdtUsername.isErrorEnabled && !binding.tilEdtAlternateEmail.isErrorEnabled
-            && !binding.tilEdtAlternateNumber.isErrorEnabled && !binding.tilEdtAddress.isErrorEnabled) {
+            && !binding.tilEdtAlternateNumber.isErrorEnabled && !binding.tilEdtAddress.isErrorEnabled
+            && !binding.tilEdtDob.isErrorEnabled) {
             //Helper.showMessage(getContext(),"Details Updated");
+                var dateOfBirth = DateHelper.convertDateSourceToDestination(dateValue = binding.edtDob.text.toString(),"dd MMM yyyy",DateHelper.SERVER_DATE_YYYYMMDD)
+
             val newUserDetails = UpdateUserDetailsModel.PersonRequest(
                 id = user.id,
                 firstName = username,
-                dateOfBirth = user.dateOfBirth,
+                dateOfBirth = dateOfBirth,
                 gender = user.gender.toString(),
                 contact = UpdateUserDetailsModel.Contact(
                     emailAddress = user.contact.emailAddress,
@@ -452,6 +501,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                         }
                         binding.layoutDob.visibility = View.VISIBLE
                         binding.txtDob.text = viewDob
+                        binding.edtDob.setText(viewDob)
                     }
                 } else {
                     binding.layoutDob.visibility = View.GONE

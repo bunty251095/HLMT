@@ -194,7 +194,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
                 binding.edtInputValue.isFocusable = false
                 binding.edtInputValue.isFocusableInTouchMode = false
                 if (!parameter.parameterVal.isNullOrEmpty()) {
-                    val observation: String = TrackParameterHelper.getWHRObservation(parameter.parameterVal!!,1,context)
+                    val observation: String = TrackParameterHelper.getWHRObservation(parameter.parameterVal!!,viewModel.getCurrentUserGender(),context)
 //                    val observation: String = ""
                     if (!observation.isNullOrEmpty()) {
                         binding.edtInputValue.setTextColor(binding.edtInputValue.resources.getColor(TrackParameterHelper.getObservationColor(observation, "WHR")))
@@ -563,7 +563,7 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
             dataList.get(whrPosition).parameterVal = whr
             if (edtWHR != null) {
                 edtWHR!!.setText(whr)
-                val observation: String = TrackParameterHelper.getWHRObservation(whr, 1,context)
+                val observation: String = TrackParameterHelper.getWHRObservation(whr, viewModel.getCurrentUserGender(),context)
                 if (!observation.isNullOrEmpty()) {
                     edtWHR!!.setTextColor(edtWHR!!.context.resources.getColor(TrackParameterHelper.getObservationColor(observation, "WHR")))
                 }else{}

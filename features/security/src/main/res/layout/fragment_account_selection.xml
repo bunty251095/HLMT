@@ -91,19 +91,38 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <com.caressa.common.view.ArcTextView
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/layout_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="top"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_login"
+                    app:layout_constraintStart_toStartOf="@+id/btn_login"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_login_signup">
+
+                    <CheckBox
+                        android:id="@+id/termsCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:layout_gravity="top"
+                        android:backgroundTint="@color/colorPrimary"
+                        />
+
+                    <com.caressa.common.view.ArcTextView
                     android:id="@+id/txt_login_termsofservice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_5sdp"
                     android:text="@string/TERMS_OF_SERVICE_LOGIN"
                     android:textSize="@dimen/_11sdp"
                     style="@style/VivantTitle"
-                    app:layout_constraintEnd_toEndOf="@+id/btn_login"
-                    app:layout_constraintStart_toStartOf="@+id/btn_login"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_login_signup" />
+                     />
+                </androidx.appcompat.widget.LinearLayoutCompat>
                 <com.caressa.common.view.ArcTextView
                     android:id="@+id/txt_login_privacy_policy"
                     android:layout_width="match_parent"

@@ -909,6 +909,58 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_dob_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_address_edit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_dob_edit"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:padding="@dimen/_7sdp"
+                        app:srcCompat="@drawable/img_dob"
+                        android:tint="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_edt_dob"
+                        style="@style/VivantTextInputLayoutStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        android:clickable="true"
+                        app:passwordToggleEnabled="false"
+                        android:layout_marginStart="@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_dob_edit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_dob_edit"
+                        app:layout_constraintTop_toTopOf="@+id/img_dob_edit">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_dob"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/VivantEditTextStyle"
+                            android:hint="@string/DATE_OF_BIRTH"
+                            android:focusable="false"
+                            android:clickable="true"
+                            android:textSize="@dimen/_13sdp"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:minLines="2"
+                            android:maxLines="2"
+                            android:paddingTop="@dimen/_10sdp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
