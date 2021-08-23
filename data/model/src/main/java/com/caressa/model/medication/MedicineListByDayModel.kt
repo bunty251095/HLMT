@@ -24,85 +24,85 @@ class MedicineListByDayModel(
     )
 
     data class Medication(
+        @SerializedName("ID")
+        val medicationId: Int = 0,
+        @SerializedName("DrugID")
+        val drugID: Int = 0,
+        @SerializedName("PrescribedDate")
+        var prescribedDate: String = "",
+        @SerializedName("EndDate")
+        var endDate: Any? = Any(),
+        @SerializedName("DrugTypeCode")
+        var drugTypeCode: String = "",
+        @SerializedName("MedicationPeriod")
+        val medicationPeriod: String = "",
+        @SerializedName("Drug")
+        val drug: Drug = Drug(),
+        @SerializedName("Notification")
+        var notification: Notification? = Notification(),
+        @SerializedName("medicationScheduleList")
+        val medicationScheduleList: List<MedicationSchedule> = listOf(),
+        @SerializedName("DurationInDays")
+        val durationInDays: Any? = Any(),
         @SerializedName("Comments")
         val comments: String = "",
-        @SerializedName("CreatedBy")
-        val createdBy: Int = 0,
-        @SerializedName("CreatedDate")
-        val createdDate: String = "",
+        @SerializedName("Notes")
+        val notes: String = "",
+        @SerializedName("PersonID")
+        val personID: Int = 0,
         @SerializedName("DosageConsume")
         val dosageConsume: Any? = Any(),
         @SerializedName("DosagePerPeriod")
         val dosagePerPeriod: String = "",
         @SerializedName("DosageRemaining")
         val dosageRemaining: Double = 0.0,
-        @SerializedName("Drug")
-        val drug: Drug = Drug(),
-        @SerializedName("DrugID")
-        val drugID: Int = 0,
-        @SerializedName("DrugTypeCode")
-        var drugTypeCode: String = "",
-        @SerializedName("DurationInDays")
-        val durationInDays: Any? = Any(),
-        @SerializedName("EndDate")
-        val endDate: Any? = Any(),
-        @SerializedName("ID")
-        val medicationId: Int = 0,
-        @SerializedName("InTakeWay")
-        val inTakeWay: String = "",
-        @SerializedName("MedicationPeriod")
-        val medicationPeriod: String = "",
-        @SerializedName("medicationScheduleList")
-        val medicationScheduleList: List<MedicationSchedule> = listOf(),
-        @SerializedName("ModifiedBy")
-        val modifiedBy: Int = 0,
-        @SerializedName("ModifiedDate")
-        val modifiedDate: String = "",
-        @SerializedName("Notes")
-        val notes: String = "",
-        @SerializedName("Notification")
-        var notification: Notification? = Notification(),
-        @SerializedName("PersonID")
-        val personID: Int = 0,
-        @SerializedName("PrescribedBy")
-        val prescribedBy: String = "",
-        @SerializedName("PrescribedByID")
-        val prescribedByID: Any? = Any(),
-        @SerializedName("PrescribedDate")
-        val prescribedDate: String = "",
         @SerializedName("Quantity")
         val quantity: Double = 0.0,
         @SerializedName("Reason")
         val reason: String = "",
         @SerializedName("Unit")
-        val unit: String = ""
-    )
-
-    data class Drug(
-        @SerializedName("Company")
-        val company: String = "",
-        @SerializedName("Content")
-        val content: String = "",
+        val unit: String = "",
+        @SerializedName("InTakeWay")
+        val inTakeWay: String = "",
+        @SerializedName("PrescribedBy")
+        val prescribedBy: String = "",
+        @SerializedName("PrescribedByID")
+        val prescribedByID: Any? = Any(),
         @SerializedName("CreatedBy")
         val createdBy: Int = 0,
         @SerializedName("CreatedDate")
         val createdDate: String = "",
-        @SerializedName("DrugType")
-        val drugType: DrugType = DrugType(),
-        @SerializedName("DrugTypeCode")
-        val drugTypeCode: String = "",
-        @SerializedName("ID")
-        val iD: Int = 0,
         @SerializedName("ModifiedBy")
         val modifiedBy: Int = 0,
         @SerializedName("ModifiedDate")
         val modifiedDate: String = "",
+    )
+
+    data class Drug(
+        @SerializedName("ID")
+        val iD: Int = 0,
         @SerializedName("Name")
         val name: String = "",
+        @SerializedName("Strength")
+        val strength: String = "",
+        @SerializedName("Company")
+        val company: String = "",
+        @SerializedName("Content")
+        val content: String = "",
+        @SerializedName("DrugTypeCode")
+        val drugTypeCode: String = "",
+        @SerializedName("DrugType")
+        val drugType: DrugType = DrugType(),
         @SerializedName("Status")
         val status: Any? = Any(),
-        @SerializedName("Strength")
-        val strength: String = ""
+        @SerializedName("CreatedBy")
+        val createdBy: Int = 0,
+        @SerializedName("CreatedDate")
+        val createdDate: String = "",
+        @SerializedName("ModifiedBy")
+        val modifiedBy: Int = 0,
+        @SerializedName("ModifiedDate")
+        val modifiedDate: String = ""
     )
 
     data class DrugType(

@@ -70,16 +70,15 @@ class DashboardMedicinesAdapter(val viewModel : MedicineTrackerViewModel, val co
             holder.txtMedInstruction.text = medicine.comments
 
             var medDateDuration: String = DateHelper.getDateTimeAs_ddMMMyyyyNew(medicine.prescribedDate)
-            medDateDuration = if (!Utilities.isNullOrEmpty(medicine.endDate.toString())) {
-                context.resources.getString(R.string.FROM) + " " + medDateDuration +
-                        " " + context.resources.getString(R.string.TO) + " "
-                DateHelper.getDateTimeAs_ddMMMyyyyNew(medicine.endDate.toString())
+            if (!Utilities.isNullOrEmpty(medicine.endDate.toString())) {
+                medDateDuration = context.resources.getString(R.string.FROM) + " " + medDateDuration +
+                        " " + context.resources.getString(R.string.TO) + " " + DateHelper.getDateTimeAs_ddMMMyyyyNew(medicine.endDate.toString())
 
             } else {
                 if (DateHelper.getDateDifference(medicine.prescribedDate, currentDate) < 0) {
-                    context.resources.getString(R.string.STARTING_ON) + "  $medDateDuration"
+                    medDateDuration = context.resources.getString(R.string.STARTING_ON) + "  $medDateDuration"
                 } else {
-                    context.resources.getString(R.string.STARTED) + "  $medDateDuration"
+                    medDateDuration = context.resources.getString(R.string.STARTED) + "  $medDateDuration"
                 }
             }
 

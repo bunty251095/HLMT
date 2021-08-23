@@ -67,15 +67,14 @@ class MyMedicationsAdapter(val viewModel : MedicineTrackerViewModel, val context
             holder.txtMedTime.text = medicine.comments
 
             var medDateDuration: String = DateHelper.getDateTimeAs_ddMMMyyyyNew(medicine.PrescribedDate)
-            medDateDuration = if (!Utilities.isNullOrEmpty(medicine.EndDate)) {
-                context.resources.getString(R.string.FROM) + " " + medDateDuration +
-                        " " + context.resources.getString(R.string.TO) + " "
-                DateHelper.getDateTimeAs_ddMMMyyyyNew(medicine.EndDate)
+            if (!Utilities.isNullOrEmpty(medicine.EndDate)) {
+                medDateDuration = context.resources.getString(R.string.FROM) + " " + medDateDuration +
+                        " " + context.resources.getString(R.string.TO) + " " + DateHelper.getDateTimeAs_ddMMMyyyyNew(medicine.EndDate)
             } else {
                 if (DateHelper.getDateDifference(medicine.PrescribedDate!!, currentDate) < 0) {
-                    context.resources.getString(R.string.STARTING_ON) + "  $medDateDuration"
+                    medDateDuration = context.resources.getString(R.string.STARTING_ON) + "  $medDateDuration"
                 } else {
-                    context.resources.getString(R.string.STARTED) + "  $medDateDuration"
+                    medDateDuration = context.resources.getString(R.string.STARTED) + "  $medDateDuration"
                 }
             }
 

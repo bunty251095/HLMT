@@ -196,12 +196,9 @@ class MedicationRepositoryImpl(
 
     override suspend fun getMedicationListByDay(data: MedicineListByDayModel): LiveData<Resource<MedicineListByDayModel.MedicineListByDayResponse>> {
 
-        return object :
-            NetworkBoundResource<MedicineListByDayModel.MedicineListByDayResponse, BaseResponse<MedicineListByDayModel.MedicineListByDayResponse>>(
-                context
-            ) {
+        return object : NetworkBoundResource<MedicineListByDayModel.MedicineListByDayResponse,BaseResponse<MedicineListByDayModel.MedicineListByDayResponse>>(context) {
 
-            var medications: List<MedicineListByDayModel.Medication> = listOf()
+            var medications:List<MedicineListByDayModel.Medication> = listOf()
 
             override fun shouldStoreInDb(): Boolean = true
 
@@ -220,16 +217,28 @@ class MedicationRepositoryImpl(
             }
 
             override suspend fun saveCallResults(items: MedicineListByDayModel.MedicineListByDayResponse) {
-                for (medicine in items.medications) {
-                    if (medicine.notification == null) {
-                        medicine.notification = MedicineListByDayModel.Notification()
-                        Timber.e("\nNotification is Null in MedicationId----->${medicine.medicationId}")
-                    } else if (medicine.notification != null && medicine.notification!!.setAlert == null) {
-                        medicine.notification = MedicineListByDayModel.Notification()
-                        Timber.e("\nSetAlert is Null in MedicationId----->${medicine.medicationId}")
+                try {
+                    for ( medicine in items.medications ) {
+
+                        if (!Utilities.isNullOrEmpty(medicine.prescribedDate)) {
+                            medicine.prescribedDate = medicine.prescribedDate.split("T").toTypedArray()[0]
+                        }
+                        if (medicine.endDate != null && medicine.endDate != "" ) {
+                            medicine.endDate = medicine.endDate!!.toString().split("T").toTypedArray()[0]
+                        }
+
+                        if ( medicine.notification == null ) {
+                            medicine.notification = MedicineListByDayModel.Notification()
+                            Timber.e("\nNotification is Null in MedicationId----->${medicine.medicationId}")
+                        } else if ( medicine.notification != null && medicine.notification!!.setAlert == null ) {
+                            medicine.notification = MedicineListByDayModel.Notification()
+                            Timber.e("\nSetAlert is Null in MedicationId----->${medicine.medicationId}")
+                        }
                     }
+                    medications = items.medications
+                } catch ( e : Exception ) {
+                    e.printStackTrace()
                 }
-                medications = items.medications
             }
 
             override fun shouldFetch(data: MedicineListByDayModel.MedicineListByDayResponse?): Boolean {
