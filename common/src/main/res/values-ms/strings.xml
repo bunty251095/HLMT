@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HL Pace</string>
+    <string name="LOGOUT">Log keluar</string>
+
+    <string name="FATHER">Bapa</string>
+    <string name="MOTHER">Ibu</string>
+    <string name="SON">Anak lelaki</string>
+    <string name="DAUGHTER">Anak perempuan</string>
+    <string name="BROTHER">Abang</string>
+    <string name="SISTER">Kakak</string>
+    <string name="WIFE">Isteri</string>
+    <string name="HUSBAND">Suami</string>
+    <string name="SPOUSE">Pasangan suami isteri</string>
+    <string name="GRAND_FATHER">Datuk</string>
+    <string name="GRAND_MOTHER">Ibu Besar</string>
+
+</resources>

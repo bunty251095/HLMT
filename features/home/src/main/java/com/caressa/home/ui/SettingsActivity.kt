@@ -1,5 +1,6 @@
 package com.caressa.home.ui
 
+import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
@@ -10,10 +11,6 @@ import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
-import com.caressa.common.utils.AppColorHelper
-import com.caressa.common.utils.DefaultNotificationDialog
-import com.caressa.common.utils.FirebaseHelper
-import com.caressa.common.utils.showDialog
 import com.caressa.home.R
 import com.caressa.home.adapter.OptionSettingsAdapter
 import com.caressa.home.common.DataHandler
@@ -23,6 +20,9 @@ import com.caressa.home.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.toolbar_home.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import android.content.DialogInterface
+import com.caressa.common.utils.*
+
 
 class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionListener,
     DefaultNotificationDialog.OnDialogValueListener{
@@ -46,14 +46,22 @@ class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionLi
     }
 
     private fun initialise() {
-        viewModel.getSettingsOptionList1()
-        optionSettingsAdapter = OptionSettingsAdapter(viewModel, this,this)
+        Timber.i("Language=> "+LocaleHelper.getLanguage(this))
+        if(LocaleHelper.getLanguage(this).equals("ms",true)) {
+            viewModel.getSettingsOptionList1("Malay")
+        }else{
+            viewModel.getSettingsOptionList1("English")
+        }
+        optionSettingsAdapter = OptionSettingsAdapter(viewModel, baseContext,this)
         binding.rvOptions.adapter = optionSettingsAdapter
     }
 
     override fun onSettingsOptionListener(position: Int, option: DataHandler.Option) {
         Timber.e("SelectedPosition=>$position")
         when (option.code) {
+            "LANGUAGE" -> {
+                showLanguageDialog()
+            }
             "RATE_US" -> {
                 DataHandler(this).goToPlayStore(this)
                 FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.RATE_US_CLICK)
@@ -77,6 +85,26 @@ class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionLi
                 startActivity(intent)
             }
         }
+    }
+
+    private fun showLanguageDialog() {
+        val items = arrayOf<String>("English", "Malay")
+
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setTitle(resources.getString(R.string.LANGUAGE))
+        builder.setItems(
+            items,
+            DialogInterface.OnClickListener { dialog, item -> // Do something with the selection
+                viewModel.getSettingsOptionList1(items[item])
+                if(items[item].equals("malay",true)){
+                    LocaleHelper.setLocale(this@SettingsActivity,"ms")
+                }else{
+                    LocaleHelper.setLocale(this@SettingsActivity,"en")
+                }
+                recreate()
+            })
+        val alert: AlertDialog = builder.create()
+        alert.show()
     }
 
     private fun setupToolbar() {

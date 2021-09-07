@@ -8,10 +8,13 @@ import android.content.Intent
 import android.net.Uri
 import androidx.core.content.ContextCompat
 import com.caressa.common.constants.NavigationConstants
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.home.R
 import com.caressa.home.viewmodel.BackgroundCallViewModel
 import com.caressa.model.entity.HRASummary
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DataHandler( val context: Context) {
 
@@ -266,12 +269,32 @@ class DataHandler( val context: Context) {
         return list
     }
 
-    fun getSettingsOptionList() : List<Option>{
+    fun getSettingsOptionList(language: String): List<Option>{
+        var localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<Option> = ArrayList()
-        list.add(Option(R.drawable.ic_star_border,context.resources.getString(R.string.RATE_US),ContextCompat.getColor(context,R.color.vivant_soft_pink),"RATE_US"))
-//        list.add(Option(R.drawable.ic_feedback,context.resources.getString(R.string.FEEDBACK),ContextCompat.getColor(context,R.color.vivant_bright_sky_blue),"FEEDBACK"))
-        //list.add(Option(R.drawable.img_password,context.resources.getString(R.string.CHANGE_PASSWORD),ContextCompat.getColor(context,R.color.vivant_orange_yellow),"CHANGE_PASSWORD"))
-        list.add(Option(R.drawable.img_drawer_logout,context.resources.getString(R.string.LOGOUT),ContextCompat.getColor(context,R.color.vivant_nasty_green),"LOGOUT"))
+        list.add(Option(R.drawable.ic_star_border,localResource.getString(R.string.RATE_US),ContextCompat.getColor(context,R.color.vivant_soft_pink),"RATE_US"))
+//        if(language.isNullOrEmpty()) {
+//            list.add(
+//                Option(
+//                    R.drawable.ic_language,
+//                    localResource.getString(R.string.LANGUAGE) + " (English)",
+//                    ContextCompat.getColor(context, R.color.colorPrimary),
+//                    "LANGUAGE"
+//                )
+//            )
+//        }else{
+//            list.add(
+//                Option(
+//                    R.drawable.ic_language,
+//                    localResource.getString(R.string.LANGUAGE)+" ("+language+")",
+//                    ContextCompat.getColor(context, R.color.colorPrimary),
+//                    "LANGUAGE"
+//                )
+//            )
+//        }
+//        list.add(Option(R.drawable.ic_feedback,localResource.getString(R.string.FEEDBACK),ContextCompat.getColor(context,R.color.vivant_bright_sky_blue),"FEEDBACK"))
+        //list.add(Option(R.drawable.img_password,localResource.getString(R.string.CHANGE_PASSWORD),ContextCompat.getColor(context,R.color.vivant_orange_yellow),"CHANGE_PASSWORD"))
+        list.add(Option(R.drawable.img_drawer_logout,localResource.getString(R.string.LOGOUT),ContextCompat.getColor(context,R.color.vivant_nasty_green),"LOGOUT"))
         return list
     }
 
@@ -293,29 +316,31 @@ class DataHandler( val context: Context) {
 
     fun getFamilyRelationListMale() : List<FamilyRelationOption>{
         val list:ArrayList<FamilyRelationOption> = ArrayList()
-        list.add(FamilyRelationOption(R.drawable.icon_father,context.resources.getString(R.string.FATHER),"FAT" , context.resources.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_mother,context.resources.getString(R.string.MOTHER), "MOT" ,context.resources.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_son,context.resources.getString(R.string.SON), "SON" ,context.resources.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_daughter,context.resources.getString(R.string.DAUGHTER), "DAU" ,context.resources.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_brother,context.resources.getString(R.string.BROTHER), "BRO" ,context.resources.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_sister,context.resources.getString(R.string.SISTER),"SIS" , context.resources.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_gf,context.resources.getString(R.string.GRAND_FATHER), "GRF" ,context.resources.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_gm,context.resources.getString(R.string.GRAND_MOTHER),"GRM" , context.resources.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_wife,context.resources.getString(R.string.WIFE), "WIF"  ,context.resources.getString(R.string.FEMALE)))
+        var resorce = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+        list.add(FamilyRelationOption(R.drawable.icon_father,resorce.getString(R.string.FATHER),"FAT" , context.resources.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_mother,resorce.getString(R.string.MOTHER), "MOT" ,context.resources.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_son,resorce.getString(R.string.SON), "SON" ,context.resources.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_daughter,resorce.getString(R.string.DAUGHTER), "DAU" ,context.resources.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_brother,resorce.getString(R.string.BROTHER), "BRO" ,context.resources.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_sister,resorce.getString(R.string.SISTER),"SIS" , context.resources.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_gf,resorce.getString(R.string.GRAND_FATHER), "GRF" ,context.resources.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_gm,resorce.getString(R.string.GRAND_MOTHER),"GRM" , context.resources.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_wife,resorce.getString(R.string.WIFE), "WIF"  ,context.resources.getString(R.string.FEMALE)))
         return list
     }
 
     fun getFamilyRelationListFemale() : List<FamilyRelationOption>{
         val list:ArrayList<FamilyRelationOption> = ArrayList()
-        list.add(FamilyRelationOption(R.drawable.icon_father,context.resources.getString(R.string.FATHER),"FAT" , context.resources.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_mother,context.resources.getString(R.string.MOTHER), "MOT" ,context.resources.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_son,context.resources.getString(R.string.SON), "SON" ,context.resources.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_daughter,context.resources.getString(R.string.DAUGHTER), "DAU" ,context.resources.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_brother,context.resources.getString(R.string.BROTHER), "BRO" ,context.resources.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_sister,context.resources.getString(R.string.SISTER),"SIS" , context.resources.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_gf,context.resources.getString(R.string.GRAND_FATHER), "GRF" ,context.resources.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_gm,context.resources.getString(R.string.GRAND_MOTHER),"GRM" , context.resources.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_husband,context.resources.getString(R.string.HUSBAND), "HUS" ,context.resources.getString(R.string.MALE)))
+        var resorce = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+        list.add(FamilyRelationOption(R.drawable.icon_father,resorce.getString(R.string.FATHER),"FAT" , resorce.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_mother,resorce.getString(R.string.MOTHER), "MOT" ,resorce.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_son,resorce.getString(R.string.SON), "SON" ,resorce.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_daughter,resorce.getString(R.string.DAUGHTER), "DAU" ,resorce.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_brother,resorce.getString(R.string.BROTHER), "BRO" ,resorce.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_sister,resorce.getString(R.string.SISTER),"SIS" , resorce.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_gf,resorce.getString(R.string.GRAND_FATHER), "GRF" ,resorce.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_gm,resorce.getString(R.string.GRAND_MOTHER),"GRM" , resorce.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_husband,resorce.getString(R.string.HUSBAND), "HUS" ,context.resources.getString(R.string.MALE)))
         return list
     }
 

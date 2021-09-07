@@ -95,4 +95,5 @@
 
     <string name="CHANGE_MOBILE_NUMBER">Change Mobile Number?</string>
     <string name="HLMT_USER_ID">HLMT User ID</string>
+    <string name="ACCEPT_TERMS_CONDITION">Please accept Terms &amp; Conditions</string>
 </resources>

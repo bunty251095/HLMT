@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="TITLE_SETTINGS">Tetapan</string>
+    <string name="RATE_US">Nilaikan Kami</string>
+    <string name="LANGUAGE">Bahasa</string>
+    <string name="MENU_LOGOUT">Log keluar</string>
+    <string name="TITLE_TOOLS_AND_TRACKER">Alat dan Kalkulator</string>
+</resources>

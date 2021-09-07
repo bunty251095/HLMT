@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HL Pace</string>
+    <string name="SIGN_IN">Log masuk</string>
+    <string name="SIGN_UP">Mendaftar</string>
+    <string name="RESEND_CODE">Hantar semula TAC</string>
+    <string name="TERMS_OF_SERVICE_LOGIN">Saya mengesahkan bahawa saya telah membaca dan bersetuju dengan</string>
+    <string name="VIVANT_TERMS_CONDITIONS">Syarat HL Pace &amp; Syarat</string>
+    <string name="ACCEPT_TERMS_CONDITION">Terima Syarat &amp; Syarat</string>
+    <string name="REGISTER">Daftar</string>
+    <string name="EMAIL_PHONE">Nombor Mudah Alih Berdaftar</string>
+    <string name="LOGIN_SELECTION_INFO">Ikuti perkembangan kami!</string>
+    <string name="AND">dan</string>
+    <string name="PRIVACY_POLICY">Dasar Privasi</string>
+    <string name="YOU_HAVE_READ_THEM">untuk menggunakan perkhidmatan</string>
+</resources>

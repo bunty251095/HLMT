@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.DefaultNotificationDialog
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.common.utils.showDialog
 import com.caressa.model.AppConfigurationSingleton
 import com.caressa.repository.utils.Resource
@@ -34,7 +35,7 @@ class SplashScreenActivity : AppCompatActivity(), DefaultNotificationDialog.OnDi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-
+        LocaleHelper.onAttach(this)
         val animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
         val animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out)
 

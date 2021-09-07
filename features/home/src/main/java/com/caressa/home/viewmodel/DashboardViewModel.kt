@@ -109,8 +109,8 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         }
     }
 
-    fun getSettingsOptionList1() {
-        settingsOptionList.postValue( dataHandler.getSettingsOptionList() )
+    fun getSettingsOptionList1(language: String) {
+        settingsOptionList.postValue( dataHandler.getSettingsOptionList(language) )
     }
 
     fun getHraSummaryDetails() = viewModelScope.launch(dispatchers.main) {
