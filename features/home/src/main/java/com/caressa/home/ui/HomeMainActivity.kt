@@ -2,7 +2,9 @@ package com.caressa.home.ui
 
 import android.app.Activity
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -25,6 +27,8 @@ import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.fitness.FitRequestCode
 import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.common.utils.*
+import com.caressa.common.utils.PermissionUtil.AppPermissionListener
+import com.caressa.common.utils.PermissionUtil.StorageAccessListener
 import com.caressa.home.R
 import com.caressa.home.adapter.NavigationDrawerListAdapter
 import com.caressa.home.common.DataHandler
@@ -48,15 +52,31 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
     private lateinit var binding : ActivityHomeMainBinding
 
     private val appColorHelper = AppColorHelper.instance!!
+    private val permissionUtil = PermissionUtil
 
+    private var context : Context?= null
+    private var activity : Activity?= null
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var navigationDrawerListAdapter : NavigationDrawerListAdapter? = null
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var scoreListener:ScoreListener
     private var googleAccountListener: OnGoogleAccountSelectListener? = null
-    private val permissionListener = object : PermissionUtil.AppPermissionListener {
+
+    private val permissionListener = object : AppPermissionListener {
         override fun isPermissionGranted(isGranted: Boolean) {
+            Timber.e("$isGranted")
+            if ( isGranted ) {
+                val isStorageAccess = permissionUtil.checkStorageAccessPermissionFromActivity(context!!,activity!!)
+                if ( isStorageAccess ) {
+                    viewModel.navigateToMyProfileActivity()
+                }
+            }
+        }
+    }
+
+    private val storageAccessListener = object : StorageAccessListener {
+        override fun isStorageAccessGranted(isGranted: Boolean) {
             Timber.e("$isGranted")
             if ( isGranted ) {
                 viewModel.navigateToMyProfileActivity()
@@ -72,6 +92,8 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
         binding.viewModel = viewModel
         binding.backViewModel = backGroundCallViewModel
         binding.lifecycleOwner = this
+        context = this
+        activity = this
         setSupportActionBar(toolbar)
         configureNavController()
         callDashboardAPIs()
@@ -285,25 +307,19 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
                         googleAccountListener!!.onGoogleAccountSelection(Constants.SUCCESS)
                     }
                 }
+
+                if ( requestCode == Constants.REQ_CODE_SAF ) {
+                    if (data != null) {
+                        //this is the uri user has provided us for folder Access
+                        val treeUri: Uri = data.data!!
+                        permissionUtil.releasePermissions(treeUri,this,storageAccessListener)
+                    }
+                }
+
             } else {
                 FitnessDataManager(this).oAuthErrorMsg(requestCode, resultCode)
                 if ( googleAccountListener != null ) {
                     googleAccountListener!!.onGoogleAccountSelection(Constants.FAILURE)
-                }
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                val per = Environment.isExternalStorageManager()
-                Timber.e("requestCode---> $requestCode")
-                Timber.e("permissionGranted---> $per")
-                when(requestCode) {
-                    Constants.REQ_CODE_STORAGE -> {
-                        if (per) {
-                            permissionListener.isPermissionGranted(true)
-                        } else {
-                            Utilities.toastMessageShort(this,resources.getString(R.string.ERROR_STORAGE_PERMISSION))
-                        }
-                    }
                 }
             }
 

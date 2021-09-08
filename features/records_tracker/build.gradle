@@ -20,4 +20,5 @@ dependencies {
     implementation project(Modules.common)
     api Libraries.pdfViewer
     api Libraries.filePicker
+    api Libraries.documentFile
 }

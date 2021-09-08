@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HLMT</string>
+    <string name="app_name">HL Pace</string>
 
     <string name="SAVE">Save</string>
     <string name="SUBMIT">Submit</string>
@@ -200,7 +200,14 @@
     <string name="OPTIMUM">Optimum</string>
     <!--HRA-->
 
+    <string name="PLEASE_SELECT">Please select</string>
+    <string name="FILES_ACCESS_MSG1">Directory in your Primary Storage and click on</string>
+    <string name="FILES_ACCESS_MSG2">button to Allow File Access for it</string>
+    <string name="RELEASE_PERMISSIONS_MSG">Directory in your Primary storage</string>
+    <string name="CAN_NOT_USE_ROOT_FOLDER">Can not use root folder</string>
+
     <string name="POWERED_BY">Powered by</string>
+    <string name="FILES_ACCESS_REQUIRED">Files Access Required</string>
     <string name="PERMISSION_REQUIRED">Permission Required</string>
     <string name="SELECT_RECORDS">Select records</string>
     <string name="SELECT_PROFILE_PHOTO">Select Profile Photo</string>

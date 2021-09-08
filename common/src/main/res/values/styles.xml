@@ -22,6 +22,20 @@
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
     </style>
 
+    <style name="ImageCropperTheme" parent="Base.Theme.AppCompat">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:colorBackground">@android:color/background_light</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="toolbarStyle">@style/ImageCropperToolbarTheme</item>
+    </style>
+
+    <style name="ImageCropperToolbarTheme" parent="Widget.AppCompat.Toolbar">
+        <item name="titleTextColor">@color/white</item>
+        <item name="backgroundColor">@color/colorPrimary</item>
+    </style>
+
     <style name="FilePickerTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>

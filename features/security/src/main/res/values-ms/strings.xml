@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HL Pace</string>
     <string name="SIGN_IN">Log masuk</string>
     <string name="SIGN_UP">Mendaftar</string>
     <string name="RESEND_CODE">Hantar semula TAC</string>

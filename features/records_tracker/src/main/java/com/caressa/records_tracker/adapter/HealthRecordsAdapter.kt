@@ -21,9 +21,9 @@ import java.io.File
 import java.util.ArrayList
 
 class HealthRecordsAdapter(val context : Context, val viewModel : HealthRecordsViewModel,
-                           private val activity: FragmentActivity, val from : String ) :
-    RecyclerView.Adapter<HealthRecordsAdapter.HealthRecordsAdapterViewHolder>() {
+                           private val activity: FragmentActivity, val from : String ) : RecyclerView.Adapter<HealthRecordsAdapter.HealthRecordsAdapterViewHolder>() {
 
+    private val fileUtils = FileUtils
     private var recordList: MutableList<HealthDocument> =  mutableListOf()
     var categoryCode = "ALL"
     var color = intArrayOf(
@@ -52,7 +52,7 @@ class HealthRecordsAdapter(val context : Context, val viewModel : HealthRecordsV
             //name = name.substring(0, name.lastIndexOf("."));
             var ext = ""
             if (!Utilities.isNullOrEmpty(filename)) {
-                ext = RealPathUtil.getFileExt(filename)
+                ext = fileUtils.getFileExt(filename)
             }
 
 /*            if (!Utilities.isNullOrEmpty(code) && code.equals("LAB", ignoreCase = true)) {
@@ -182,7 +182,7 @@ class HealthRecordsAdapter(val context : Context, val viewModel : HealthRecordsV
         if (file.exists()) {
             when {
                 action.equals(Constants.VIEW,ignoreCase = true) -> {
-                    DataHandler(context).viewRecord(record)
+                    DataHandler(context).viewDocument(record)
                 }
                 action.equals(Constants.SHARE,ignoreCase = true) -> {
                     DataHandler(context).shareDataWithAppSingle(record,viewModel)

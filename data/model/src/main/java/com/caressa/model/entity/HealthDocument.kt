@@ -17,6 +17,8 @@ data class HealthDocument(
     var Code: String? = "",
     @field:SerializedName("Type")
     var Type: String? = "",
+    @SerializedName("FileUri")
+    var FileUri: String = "" ,
     @SerializedName("Comments")
     var Comment: String? = "",
     @SerializedName("PersonID")

@@ -11,9 +11,6 @@ import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
 import com.caressa.common.fitness.FitnessDataManager
-import com.caressa.common.utils.CalculateParameters
-import com.caressa.common.utils.RealPathUtil
-import com.caressa.common.utils.Utilities
 import com.caressa.home.R
 import com.caressa.home.adapter.DashboardFeaturesGridAdapter
 import com.caressa.home.common.DataHandler
@@ -27,11 +24,11 @@ import com.caressa.model.parameter.FitnessData
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.*
-import androidx.navigation.findNavController
+import com.caressa.common.utils.FileUtils
 import androidx.navigation.fragment.findNavController
 import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.fitness.FitRequestCode
-import com.caressa.common.utils.FirebaseHelper
+import com.caressa.common.utils.*
 
 class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGridAdapter.OnItemSelectionListener,
     HomeMainActivity.OnGoogleAccountSelectListener {
@@ -50,6 +47,7 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as HomeMainActivity).setDataReceivedListener(this)
+        FileUtils.makeFolderDirectories(requireContext())
     }
 
     override fun onGoogleAccountSelection(from:String) {
@@ -82,8 +80,6 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
     private fun initialise() {
         fitnessDataManager = FitnessDataManager(requireContext())
         (activity as HomeMainActivity).registerListener(this)
-        RealPathUtil.makeFilderDirectories()
-        //Utilities.exportdatabase(requireContext())
         if (fitnessDataManager!!.oAuthPermissionsApproved()) {
             Timber.e("oAuthPermissionsApproved---> true")
             proceedWithFitnessData()

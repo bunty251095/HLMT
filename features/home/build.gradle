@@ -23,6 +23,8 @@ dependencies {
     api Libraries.circleImageview
     api Libraries.ucrop
     api Libraries.filePicker
+    api Libraries.documentFile
+    api Libraries.imageCropper
     implementation Libraries.firebaseMessaging
     implementation Libraries.firebaseDynamicLink
     implementation 'androidx.appcompat:appcompat:1.2.0'

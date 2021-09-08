@@ -94,7 +94,10 @@ object Versions {
     val pdfViewer = "2.0.3"
     val circleImageview = "2.2.0"
     val ucrop = "2.2.6"
+    val imageCropper = "2.8.0"
+    val photoView = "2.3.0"
     val filePicker = "2.2.5"
+    val documentFile = "1.0.1"
     val indicatorseekbar = "2.1.2"
     val gms = "4.3.8"
 }
@@ -162,7 +165,10 @@ object Libraries {
 
     val circleImageview = "de.hdodenhof:circleimageview:${Versions.circleImageview}"
     val ucrop = "com.github.yalantis:ucrop:${Versions.ucrop}"
+    val photoView = "com.github.chrisbanes:PhotoView:${Versions.photoView}"
+    val imageCropper = "com.theartofdev.edmodo:android-image-cropper:${Versions.imageCropper}"
     val filePicker = "com.droidninja:filepicker:${Versions.filePicker}"
+    val documentFile = "androidx.documentfile:documentfile:${Versions.documentFile}"
     val datetimepicker = "com.wdullaer:materialdatetimepicker:${Versions.datetimepicker}"
     val pdfViewer = "com.github.barteksc:android-pdf-viewer:${Versions.pdfViewer}"
     val indicatorseekbar = "com.github.warkiz.widget:indicatorseekbar:${Versions.indicatorseekbar}"

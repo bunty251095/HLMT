@@ -16,6 +16,9 @@ import com.caressa.home.R
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.*
 import com.caressa.common.utils.*
+import com.caressa.common.utils.PermissionUtil
+import com.caressa.common.utils.PermissionUtil.AppPermissionListener
+import com.caressa.common.utils.PermissionUtil.StorageAccessListener
 import com.caressa.home.common.DataHandler
 import com.caressa.home.common.DataHandler.NavDrawerOption
 import com.caressa.home.domain.HomeManagementUseCase
@@ -48,6 +51,8 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
     private var firstName = sharedPref.getString(PreferenceConstants.FIRSTNAME, "")!!
     private var gender = sharedPref.getString(PreferenceConstants.GENDER, "")!!
     private var authToken = sharedPref.getString(PreferenceConstants.TOKEN,"")!!
+
+    private val permissionUtil = PermissionUtil
 
     var userDetails = MutableLiveData<Users>()
     val userRelativesList = MutableLiveData<List<UserRelatives>>()
@@ -358,11 +363,20 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MENU_LINK_ACCOUNT_CLICK)
     }
 
-    fun navigateToMyProfileActivityWithStoragePermission(activity:HomeMainActivity,listener: PermissionUtil.AppPermissionListener) {
-        val isGranted = PermissionUtil().getInstance()!!.checkStoragePermissionFromActivity(
-            listener,activity,activity)
+/*    fun navigateToMyProfileActivityWithStoragePermission(activity:HomeMainActivity,listener: AppPermissionListener) {
+        val isGranted = permissionUtil.checkStoragePermission(listener,activity)
         if (isGranted) {
             navigateToMyProfileActivity()
+        }
+    }*/
+
+    fun navigateToMyProfileActivityWithStoragePermission(activity:HomeMainActivity,listener: AppPermissionListener) {
+        val isGranted = permissionUtil.checkStoragePermission(listener,activity)
+        if (isGranted) {
+            val isStorageAccess = permissionUtil.checkStorageAccessPermissionFromActivity(activity,activity)
+            if ( isStorageAccess ) {
+                navigateToMyProfileActivity()
+            }
         }
     }
 

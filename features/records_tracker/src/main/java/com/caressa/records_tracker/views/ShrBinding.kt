@@ -1,6 +1,7 @@
 package com.caressa.records_tracker.views
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
@@ -19,12 +20,13 @@ import com.caressa.records_tracker.R
 import com.caressa.records_tracker.adapter.SelectRelationshipAdapter
 import com.caressa.records_tracker.adapter.SelectedRecordToUploadAdapter
 import com.caressa.records_tracker.adapter.UploadRecordAdapter
+import com.caressa.records_tracker.common.DataHandler
 import com.caressa.records_tracker.ui.UploadRecordFragment
 
 object ShrBinding {
 
     @BindingAdapter("app:recordInSessionImg")
-    @JvmStatic fun CustomImageView.setRecordInSessionImg( recordInSession: RecordInSession?) {
+    @JvmStatic fun AppCompatImageView.setRecordInSessionImg( recordInSession: RecordInSession?) {
         try {
             if ( recordInSession != null ) {
                 val filePath = recordInSession.Path
@@ -36,7 +38,8 @@ object ShrBinding {
 
                         var bitmap: Bitmap? = null
                         try {
-                            bitmap = RealPathUtil.decodeFile(completeFilePath)
+                            //bitmap = RealPathUtil.decodeFile(completeFilePath)
+                            bitmap = BitmapFactory.decodeFile(completeFilePath)
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
@@ -44,12 +47,21 @@ object ShrBinding {
                             setImageResource(R.drawable.icon_unknown)
                         } else {
                             setImageBitmap(bitmap)
+                            setOnClickListener {
+                                Utilities.showFullImageWithBitmap(bitmap,context,true)
+                            }
                         }
                     }
                 } else if (type.equals("PDF", ignoreCase = true)) {
                     setImageDrawable(ContextCompat.getDrawable(context,R.drawable.img_pdf))
+                    setOnClickListener {
+                        DataHandler(context).viewRecord(recordInSession)
+                    }
                 } else if (type.equals("DOC", ignoreCase = true)) {
                     setImageDrawable(ContextCompat.getDrawable(context,R.drawable.img_doc))
+                    setOnClickListener {
+                        DataHandler(context).viewRecord(recordInSession)
+                    }
                 }
             }
         } catch ( e : Exception ) {

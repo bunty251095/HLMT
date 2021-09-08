@@ -86,9 +86,9 @@ class ShrManagementUseCase( private val repository: StoreRecordRepository ) {
         return repository.getAllHealthDocuments()
     }
 
-    suspend fun invokeUpdateHealthRecordPathSync(id : String, path : String, sync : String )  {
+    suspend fun invokeUpdateHealthRecordPathSync(id : String, path : String, fileUri : String ,sync : String )  {
         Timber.e("Updating Record Path......!!!!!!!!!!")
-        repository.updateHealthRecordPathSync( id , path , sync )
+        repository.updateHealthRecordPathSync( id , path , fileUri ,sync )
     }
 
     suspend fun invokeSaveRecordsInSession( recordsInSession : RecordInSession ) {

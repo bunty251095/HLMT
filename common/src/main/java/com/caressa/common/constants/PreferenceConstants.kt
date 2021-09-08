@@ -1,6 +1,7 @@
 package com.caressa.common.constants
 
 object PreferenceConstants {
+    const val FOLDER_URI = "folder_uri"
     const val IS_LOGIN = "is_login"
     const val EMAIL = "email"
     const val PHONE = "phone"

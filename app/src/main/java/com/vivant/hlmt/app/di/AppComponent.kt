@@ -2,6 +2,7 @@ package com.vivant.hlmt.app.di
 
 import com.caressa.blogs.di.featureBlogsModule
 import com.caressa.common.constants.Constants
+import com.caressa.common.di.commonModule
 import com.caressa.fitness_tracker.di.featureFitnessModule
 import com.caressa.home.di.featureHomeModule
 import com.caressa.hra.di.featureHraModule
@@ -14,9 +15,9 @@ import com.caressa.security.di.featureSecurityModule
 import com.caressa.tools_calculators.di.featureToolsCalculatorsModule
 import com.caressa.track_parameter.di.featureParameterModule
 
-
 val appComponent = listOf(
     createRemoteModule(Constants.strAPIUrl),
+    commonModule,
     repositoryModule,
     featureHomeModule,
     localModule,

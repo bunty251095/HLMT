@@ -13,7 +13,10 @@ import android.text.Html
 import android.view.Gravity
 import android.view.View
 import android.widget.*
+import androidx.core.net.toUri
+import androidx.documentfile.provider.DocumentFile
 import com.caressa.common.constants.Configuration
+import com.caressa.common.constants.Constants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.*
 import com.caressa.common.view.FlowLayout
@@ -23,6 +26,8 @@ import com.caressa.hra.ui.HraQuesBmiFragment
 import com.caressa.hra.views.CustomEditTextHra
 import com.caressa.model.hra.LabRecordsModel.LabRecordDetails
 import okhttp3.ResponseBody
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.get
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
@@ -30,7 +35,10 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.util.*
 
-object HraHelper {
+object HraHelper : KoinComponent {
+
+    private val preferenceUtils: PreferenceUtils = get()
+    private val fileUtils = FileUtils
 
     fun showHeightDialog( height :Int,layHeight: CustomEditTextHra ,listener : HraQuesBmiFragment,context: Context ) {
         val data = ParameterDataModel()
@@ -214,55 +222,75 @@ object HraHelper {
         }
     }
 
-    @SuppressLint("BinaryOperationInTimber")
-    fun writeResponseBodyToDisk(body: ResponseBody, context: Context): Boolean {
+    fun saveHRAReportAppDirectory(body: ResponseBody,context: Context ): Boolean {
+        var save = false
         try {
-            if (RealPathUtil.isExternalStorageAvailable && RealPathUtil.isExternalStorageWritable) {
-                //val path = context.getExternalFilesDir(null)
-                val path = Environment.getExternalStorageDirectory()
-                val file = File(path, RealPathUtil.generateUniqueFileName(Configuration.strAppIdentifier, ".pdf"))
-                Timber.i("downloadReportPath: ----->$file")
+            if (fileUtils.isExternalStorageAvailable && fileUtils.isExternalStorageWritable) {
 
-                var inputStream: InputStream? = null
-                var outputStream: OutputStream? = null
+                val folderName = Utilities.getAppFolderLocation(context)
+                val fileName = fileUtils.generateUniqueFileName(Configuration.strAppIdentifier+ "_HRA", ".pdf")
+                val hraReportFile = File(folderName,fileName)
+                val myDirectory = File(folderName)
+                if (!myDirectory.exists()) {
+                    myDirectory.mkdirs()
+                }
+                val actualFileLocation = hraReportFile.absolutePath
+                Timber.e("Downloaded_Report_Path----->$actualFileLocation")
 
-                try {
-                    val fileReader = ByteArray(4096)
-                    //val fileSize = body.contentLength()
-                    var fileSizeDownloaded: Long = 0
+                val dirUri = preferenceUtils.getPreference(PreferenceConstants.FOLDER_URI)
+                val dir = DocumentFile.fromTreeUri(context, dirUri.toUri())!!
+                if (dir != null || dir.exists()) {
+                    val docFile = dir.createFile("*/txt", fileName)
+                    if (docFile != null && docFile.canWrite()) {
+                        Timber.e("downloadDocUri--->${docFile.uri}")
 
-                    inputStream = body.byteStream()
-                    outputStream = FileOutputStream(file)
+                        val inputStream: InputStream = body.byteStream()
+                        val fileReader = ByteArray(4096)
 
-                    while (true) {
-                        val read = inputStream!!.read(fileReader)
-                        if (read == -1) {
-                            break
+                        context.contentResolver.openFileDescriptor(docFile.uri, "w")?.use { parcelFileDescriptor ->
+                            FileOutputStream(parcelFileDescriptor.fileDescriptor).use { outStream ->
+                                while (true) {
+                                    val read = inputStream.read(fileReader)
+                                    if (read == -1) {
+                                        break
+                                    }
+                                    outStream.write(fileReader, 0, read)
+                                }
+                                save = true
+                                openDownloadedDocumentFile(docFile,context)
+                            }
                         }
-                        outputStream.write(fileReader, 0, read)
-                        fileSizeDownloaded += read.toLong()
-                        //  Timber.i("file download: $fileSizeDownloaded of $fileSize")
+                        inputStream.close()
                     }
-                    outputStream.flush()
-                    openDownloadedFile(file.toString(), context)
-                    return true
-                } catch (e: Exception) {
-                    Timber.i("Error..." + e.printStackTrace())
-                    return false
-                } finally {
-                    inputStream?.close()
-                    outputStream?.close()
                 }
             } else {
-                return false
+                save = false
             }
         } catch (e: Exception) {
-            Timber.i("Error!!!" + e.printStackTrace())
-            return false
+            e.printStackTrace()
+            save = false
+        }
+        return save
+    }
+
+    private fun openDownloadedDocumentFile(file: DocumentFile, context: Context) {
+        try {
+            val uri = file.uri
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(uri,"application/pdf")
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
+            //val openIntent = Intent.createChooser(intent,"Open using")
+            context.startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            e.printStackTrace()
+            Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_NO_APPLICATION_TO_VIEW_PDF))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_UNABLE_TO_OPEN_FILE))
         }
     }
 
-    private fun openDownloadedFile(downloadedFilePath: String, context: Context) {
+/*    private fun openDownloadedFile(downloadedFilePath: String, context: Context) {
         val builder = StrictMode.VmPolicy.Builder()
         StrictMode.setVmPolicy(builder.build())
         val file = File(downloadedFilePath)
@@ -283,6 +311,6 @@ object HraHelper {
             e.printStackTrace()
             Utilities.toastMessageShort(context, context.resources.getString(R.string.ERROR_UNABLE_TO_OPEN_FILE))
         }
-    }
+    }*/
 
 }

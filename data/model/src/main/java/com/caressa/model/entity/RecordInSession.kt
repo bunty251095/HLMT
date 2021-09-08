@@ -17,6 +17,8 @@ data class RecordInSession(
     val Path: String = "",
     @SerializedName("Type")
     val Type: String = "",
+    @SerializedName("FileUri")
+    val FileUri: String = "" ,
     @SerializedName("Sync")
     val Sync: String = "",
     @SerializedName("LastUpdatedTime")
