@@ -25,7 +25,6 @@ import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.*
 import com.caressa.common.utils.PermissionUtil.AppPermissionListener
-import com.caressa.common.utils.PermissionUtil.StorageAccessListener
 import com.caressa.hra.HraHomeActivity
 import com.caressa.hra.R
 import com.caressa.hra.adapter.HraLabTestsAdapter
@@ -61,18 +60,6 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
 
     private val permissionListener = object : AppPermissionListener {
         override fun isPermissionGranted(isGranted: Boolean) {
-            Timber.e("$isGranted")
-            if ( isGranted ) {
-                val isStorageAccess = permissionUtil.checkStorageAccessPermissionFromActivity(context!!,activity!!)
-                if ( isStorageAccess ) {
-                    viewModel.callDownloadReport()
-                }
-            }
-        }
-    }
-
-    private val storageAccessListener = object : StorageAccessListener {
-        override fun isStorageAccessGranted(isGranted: Boolean) {
             Timber.e("$isGranted")
             if ( isGranted ) {
                 viewModel.callDownloadReport()
@@ -135,22 +122,9 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
         binding.btnDownloadReport.setOnClickListener {
             val permissionResult = permissionUtil.checkStoragePermission(permissionListener,this)
             if (permissionResult) {
-                val isStorageAccess = permissionUtil.checkStorageAccessPermissionFromActivity(this,this)
-                if ( isStorageAccess ) {
-                    viewModel.callDownloadReport()
-                }
+                viewModel.callDownloadReport()
             }
         }
-
-/*        binding.btnDownloadReport.setOnClickListener {
-            val permissionResult = permissionUtil.checkStoragePermission(permissionListener,this)
-            if (permissionResult) {
-                val isStorageAccess = permissionUtil.checkStorageAccessPermissionFromActivity(this,this)
-                if ( isStorageAccess ) {
-                    viewModel.callDownloadReport()
-                }
-            }
-        }*/
 
         /*binding.btnBookPackage.setOnClickListener {
             val intentToPass = Intent()
@@ -455,7 +429,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
 
     override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {}
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Timber.e("requestCode-> $requestCode")
         Timber.e("resultCode-> $resultCode")
@@ -471,7 +445,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
+    }*/
 
 /*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

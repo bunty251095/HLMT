@@ -67,23 +67,45 @@ object PermissionUtil : ActivityCompat(), KoinComponent {
         return isPermissionGranted
     }
 
-    fun checkStorageAccessPermissionFromFragment(context:Context,fragment: Fragment): Boolean {
+    fun storageDexterPermissionCheck(listener: AppPermissionListener, context:Context) {
+        Dexter.withContext(context).withPermissions(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            .withListener( object  : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                    report?.let {
+                        if(report.areAllPermissionsGranted()) {
+                            listener.isPermissionGranted(true)
+                            fileUtils.makeFolderDirectories(context)
+                        }
+                        if(report.isAnyPermissionPermanentlyDenied) {
+                            Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_STORAGE_PERMISSION))
+                            listener.isPermissionGranted(false)
+                        }
+                    }
+                }
+                override fun onPermissionRationaleShouldBeShown(permissions: MutableList<PermissionRequest>?, token: PermissionToken?) {
+                    token?.continuePermissionRequest()
+                }
+            })
+            .withErrorListener { }
+            .check()
+    }
+
+    fun checkCameraPermission(listener: AppPermissionListener, context:Context): Boolean {
         var isPermissionGranted = false
-        if ( !checkFolderUriPermission(context) ) {
-            val appName = Utilities.getAppName(context)
-            val location = "<B><font color='#3f4846'>storage/Pictures/$appName</font></B>"
-            val btnText =  "<B><font color='#3f4846'>"+ "USE THIS FOLDER" +"</font></B>"
+        if (checkSelfPermission(context,Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
             val dialogData = DefaultNotificationDialog.DialogData()
-            dialogData.title = context.resources.getString(R.string.FILES_ACCESS_REQUIRED)
-            dialogData.message = "${context.resources.getString(R.string.PLEASE_SELECT)} $location ${context.resources.getString(R.string.FILES_ACCESS_MSG1)} $btnText ${context.resources.getString(R.string.FILES_ACCESS_MSG2)}"
+            dialogData.title = context.resources.getString(R.string.PERMISSION_REQUIRED)
+            dialogData.message = context.resources.getString(R.string.NEED_CAMERA_PERMISSION)
             dialogData.btnLeftName = context.resources.getString(R.string.CANCEL)
             dialogData.btnRightName = context.resources.getString(R.string.OK)
             val defaultNotificationDialog = DefaultNotificationDialog(context,
                 object : DefaultNotificationDialog.OnDialogValueListener {
                     override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
                         if (isButtonRight) {
-                            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-                            fragment.startActivityForResult(intent,Constants.REQ_CODE_SAF)
+                            cameraDexterPermissionCheck(listener,context)
                         }
                     }
                 }, dialogData)
@@ -95,32 +117,27 @@ object PermissionUtil : ActivityCompat(), KoinComponent {
         return isPermissionGranted
     }
 
-    fun checkStorageAccessPermissionFromActivity(context:Context,activity: Activity): Boolean {
-        var isPermissionGranted = false
-        if ( !checkFolderUriPermission(context) ) {
-            val appName = Utilities.getAppName(context)
-            val location = "<B><font color='#3f4846'>storage/Pictures/$appName</font></B>"
-            val btnText =  "<B><font color='#3f4846'>"+ "USE THIS FOLDER" +"</font></B>"
-            val dialogData = DefaultNotificationDialog.DialogData()
-            dialogData.title = context.resources.getString(R.string.FILES_ACCESS_REQUIRED)
-            dialogData.message = "${context.resources.getString(R.string.PLEASE_SELECT)} $location ${context.resources.getString(R.string.FILES_ACCESS_MSG1)} $btnText ${context.resources.getString(R.string.FILES_ACCESS_MSG2)}"
-            dialogData.btnLeftName = context.resources.getString(R.string.CANCEL)
-            dialogData.btnRightName = context.resources.getString(R.string.OK)
-            val defaultNotificationDialog = DefaultNotificationDialog(context,
-                object : DefaultNotificationDialog.OnDialogValueListener {
-                    override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
-                        if (isButtonRight) {
-                            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-                            activity.startActivityForResult(intent,Constants.REQ_CODE_SAF)
-                        }
-                    }
-                }, dialogData)
-            defaultNotificationDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            defaultNotificationDialog.show()
-        } else {
-            isPermissionGranted = true
-        }
-        return isPermissionGranted
+    fun cameraDexterPermissionCheck(listener: AppPermissionListener, context:Context) {
+        Dexter.withContext(context)
+            .withPermission(Manifest.permission.CAMERA)
+            .withListener( object : PermissionListener {
+
+                override fun onPermissionGranted(permissionResp: PermissionGrantedResponse?) {
+                    listener.isPermissionGranted(true)
+                }
+
+                override fun onPermissionDenied(permissionResp: PermissionDeniedResponse?) {
+                    Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_CAMERA_PERMISSION))
+                    listener.isPermissionGranted(false)
+                }
+
+                override fun onPermissionRationaleShouldBeShown(p0: PermissionRequest?, token: PermissionToken?) {
+                    token?.continuePermissionRequest()
+                }
+
+            })
+            .withErrorListener { }
+            .check()
     }
 
 /*    fun checkStoragePermissionFromActivity(listener: AppPermissionListener,context:Context,activity: Activity): Boolean {
@@ -243,45 +260,23 @@ object PermissionUtil : ActivityCompat(), KoinComponent {
         return isPermissionGranted
     }*/
 
-    fun storageDexterPermissionCheck(listener: AppPermissionListener, context:Context) {
-        Dexter.withContext(context).withPermissions(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            .withListener( object  : MultiplePermissionsListener {
-                override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-                    report?.let {
-                        if(report.areAllPermissionsGranted()) {
-                            listener.isPermissionGranted(true)
-                            fileUtils.makeFolderDirectories(context)
-                        }
-                        if(report.isAnyPermissionPermanentlyDenied) {
-                            Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_STORAGE_PERMISSION))
-                            listener.isPermissionGranted(false)
-                        }
-                    }
-                }
-                override fun onPermissionRationaleShouldBeShown(permissions: MutableList<PermissionRequest>?, token: PermissionToken?) {
-                    token?.continuePermissionRequest()
-                }
-            })
-            .withErrorListener { }
-            .check()
-    }
-
-    fun checkCameraPermission(listener: AppPermissionListener, context:Context): Boolean {
+    fun checkStorageAccessPermissionFromFragment(context:Context,fragment: Fragment): Boolean {
         var isPermissionGranted = false
-        if (checkSelfPermission(context,Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-
+        if ( !checkFolderUriPermission(context) ) {
+            val appName = Utilities.getAppName(context)
+            val location = "<B><font color='#3f4846'>storage/Pictures/$appName</font></B>"
+            val btnText =  "<B><font color='#3f4846'>"+ "USE THIS FOLDER" +"</font></B>"
             val dialogData = DefaultNotificationDialog.DialogData()
-            dialogData.title = context.resources.getString(R.string.PERMISSION_REQUIRED)
-            dialogData.message = context.resources.getString(R.string.NEED_CAMERA_PERMISSION)
+            dialogData.title = context.resources.getString(R.string.FILES_ACCESS_REQUIRED)
+            dialogData.message = "${context.resources.getString(R.string.PLEASE_SELECT)} $location ${context.resources.getString(R.string.FILES_ACCESS_MSG1)} $btnText ${context.resources.getString(R.string.FILES_ACCESS_MSG2)}"
             dialogData.btnLeftName = context.resources.getString(R.string.CANCEL)
             dialogData.btnRightName = context.resources.getString(R.string.OK)
             val defaultNotificationDialog = DefaultNotificationDialog(context,
                 object : DefaultNotificationDialog.OnDialogValueListener {
                     override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
                         if (isButtonRight) {
-                            cameraDexterPermissionCheck(listener,context)
+                            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+                            fragment.startActivityForResult(intent,Constants.REQ_CODE_SAF)
                         }
                     }
                 }, dialogData)
@@ -293,27 +288,32 @@ object PermissionUtil : ActivityCompat(), KoinComponent {
         return isPermissionGranted
     }
 
-    fun cameraDexterPermissionCheck(listener: AppPermissionListener, context:Context) {
-        Dexter.withContext(context)
-            .withPermission(Manifest.permission.CAMERA)
-            .withListener( object : PermissionListener {
-
-                override fun onPermissionGranted(permissionResp: PermissionGrantedResponse?) {
-                    listener.isPermissionGranted(true)
-                }
-
-                override fun onPermissionDenied(permissionResp: PermissionDeniedResponse?) {
-                    Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_CAMERA_PERMISSION))
-                    listener.isPermissionGranted(false)
-                }
-
-                override fun onPermissionRationaleShouldBeShown(p0: PermissionRequest?, token: PermissionToken?) {
-                    token?.continuePermissionRequest()
-                }
-
-            })
-            .withErrorListener { }
-            .check()
+    fun checkStorageAccessPermissionFromActivity(context:Context,activity: Activity): Boolean {
+        var isPermissionGranted = false
+        if ( !checkFolderUriPermission(context) ) {
+            val appName = Utilities.getAppName(context)
+            val location = "<B><font color='#3f4846'>storage/Pictures/$appName</font></B>"
+            val btnText =  "<B><font color='#3f4846'>"+ "USE THIS FOLDER" +"</font></B>"
+            val dialogData = DefaultNotificationDialog.DialogData()
+            dialogData.title = context.resources.getString(R.string.FILES_ACCESS_REQUIRED)
+            dialogData.message = "${context.resources.getString(R.string.PLEASE_SELECT)} $location ${context.resources.getString(R.string.FILES_ACCESS_MSG1)} $btnText ${context.resources.getString(R.string.FILES_ACCESS_MSG2)}"
+            dialogData.btnLeftName = context.resources.getString(R.string.CANCEL)
+            dialogData.btnRightName = context.resources.getString(R.string.OK)
+            val defaultNotificationDialog = DefaultNotificationDialog(context,
+                object : DefaultNotificationDialog.OnDialogValueListener {
+                    override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
+                        if (isButtonRight) {
+                            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+                            activity.startActivityForResult(intent,Constants.REQ_CODE_SAF)
+                        }
+                    }
+                }, dialogData)
+            defaultNotificationDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            defaultNotificationDialog.show()
+        } else {
+            isPermissionGranted = true
+        }
+        return isPermissionGranted
     }
 
     private fun checkFolderUriPermission(context:Context) : Boolean {

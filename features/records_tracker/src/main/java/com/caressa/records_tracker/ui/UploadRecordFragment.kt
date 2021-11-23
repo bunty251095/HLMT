@@ -30,10 +30,7 @@ import com.caressa.records_tracker.databinding.FragmentUploadRecordBinding
 import com.caressa.records_tracker.viewmodel.HealthRecordsViewModel
 import com.caressa.common.utils.PermissionUtil
 import com.caressa.common.utils.PermissionUtil.AppPermissionListener
-import com.caressa.common.utils.filepicker.FilePickerBuilder
 //import droidninja.filepicker.FilePickerBuilder
-import droidninja.filepicker.FilePickerConst
-import droidninja.filepicker.utils.ContentUriUtils
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.io.IOException
@@ -295,12 +292,12 @@ class UploadRecordFragment : BaseFragment()  {
                                     val recordFile = fileUtils.saveBitmapToExternalStorage(requireContext(),photo,fileName)
                                     val mainDirectoryPath = Utilities.getAppFolderLocation(requireContext())
                                     if ( recordFile != null ) {
-                                        val fileSize = fileUtils.calculateDocumentFileSize(recordFile,"MB")
+                                        val fileSize = fileUtils.calculateFileSize(recordFile.toString(),"MB")
                                         if (fileSize <= 5.0) {
-                                            val rsData = createRecordInSession(fileName,fileName,mainDirectoryPath,documentType,recordFile.uri)
+                                            val rsData = createRecordInSession(fileName,fileName,mainDirectoryPath,documentType,Uri.fromFile(recordFile))
                                             addRecordToList(rsData)
                                         } else {
-                                            Utilities.deleteDocumentFileFromLocalSystem(requireContext(),recordFile.uri,fileName)
+                                            Utilities.deleteFile(recordFile)
                                             Utilities.toastMessageLong(requireContext(),resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
                                         }
                                     }
@@ -323,11 +320,11 @@ class UploadRecordFragment : BaseFragment()  {
                                 if ( Utilities.isAcceptableDocumentType(extension) ) {
                                     val fileName = fileUtils.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", filePath)
                                     Timber.e("File Path---> $filePath")
-                                    val saveFile = fileUtils.saveRecordToExternalStorage(requireContext(),uriFile,filePath,fileName)
+                                    val saveFile = fileUtils.saveRecordToExternalStorage(requireContext(),filePath,uriFile,fileName)
                                     val mainDirectoryPath = Utilities.getAppFolderLocation(requireContext())
                                     if ( saveFile != null ) {
                                         val origFileName = filePath.substring(filePath.lastIndexOf("/") + 1)
-                                        val rsData = createRecordInSession( origFileName,fileName,mainDirectoryPath,Utilities.getDocumentTypeFromExt(extension),saveFile.uri)
+                                        val rsData = createRecordInSession( origFileName,fileName,mainDirectoryPath,Utilities.getDocumentTypeFromExt(extension),Uri.fromFile(saveFile))
                                         addRecordToList(rsData)
                                     }
                                 } else {
@@ -354,11 +351,11 @@ class UploadRecordFragment : BaseFragment()  {
                                 if ( Utilities.isAcceptableDocumentType(extension1) ) {
                                     val fileName = fileUtils.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", imagePath)
                                     Timber.e("File Path---> $imagePath")
-                                    val saveImage = fileUtils.saveRecordToExternalStorage(requireContext(),uriImage,imagePath,fileName)
+                                    val saveImage = fileUtils.saveRecordToExternalStorage(requireContext(),imagePath,uriImage,fileName)
                                     val mainDirectoryPath = Utilities.getAppFolderLocation(requireContext())
                                     if ( saveImage != null ) {
                                         val origFileName = imagePath.substring(imagePath.lastIndexOf("/") + 1)
-                                        val rsData = createRecordInSession(origFileName,fileName,mainDirectoryPath,Utilities.getDocumentTypeFromExt(extension1),saveImage.uri)
+                                        val rsData = createRecordInSession(origFileName,fileName,mainDirectoryPath,Utilities.getDocumentTypeFromExt(extension1),Uri.fromFile(saveImage))
                                         addRecordToList(rsData)
                                     }
                                 } else {

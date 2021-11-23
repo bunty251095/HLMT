@@ -67,18 +67,6 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
         override fun isPermissionGranted(isGranted: Boolean) {
             Timber.e("$isGranted")
             if ( isGranted ) {
-                val isStorageAccess = permissionUtil.checkStorageAccessPermissionFromActivity(context!!,activity!!)
-                if ( isStorageAccess ) {
-                    viewModel.navigateToMyProfileActivity()
-                }
-            }
-        }
-    }
-
-    private val storageAccessListener = object : StorageAccessListener {
-        override fun isStorageAccessGranted(isGranted: Boolean) {
-            Timber.e("$isGranted")
-            if ( isGranted ) {
                 viewModel.navigateToMyProfileActivity()
             }
         }
@@ -307,15 +295,6 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
                         googleAccountListener!!.onGoogleAccountSelection(Constants.SUCCESS)
                     }
                 }
-
-                if ( requestCode == Constants.REQ_CODE_SAF ) {
-                    if (data != null) {
-                        //this is the uri user has provided us for folder Access
-                        val treeUri: Uri = data.data!!
-                        permissionUtil.releasePermissions(treeUri,this,storageAccessListener)
-                    }
-                }
-
             } else {
                 FitnessDataManager(this).oAuthErrorMsg(requestCode, resultCode)
                 if ( googleAccountListener != null ) {

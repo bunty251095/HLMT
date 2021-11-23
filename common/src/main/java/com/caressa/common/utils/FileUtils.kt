@@ -251,8 +251,8 @@ object FileUtils : KoinComponent {
         }
     }
 
-    fun saveBitmapToExternalStorage(context: Context, bitmap: Bitmap?, fileName: String): DocumentFile? {
-        var recordFile : DocumentFile? = null
+    fun saveBitmapToExternalStorage(context: Context, bitmap: Bitmap?, fileName: String): File? {
+        var recordFile : File? = null
         val folderName = Utilities.getAppFolderLocation(context)
 
         if (isExternalStorageAvailable && isExternalStorageWritable) {
@@ -264,35 +264,30 @@ object FileUtils : KoinComponent {
 
             val absolutePathDic = myDirectory.absolutePath
             if (bitmap != null && absolutePathDic != null) {
-                val dirUri = preferenceUtils.getPreference(PreferenceConstants.FOLDER_URI)
-                val dir = DocumentFile.fromTreeUri(context, dirUri.toUri())!!
-                if (dir != null || dir.exists()) {
-                    val file = dir.createFile("*/txt", fileName)
-                    if (file != null && file.canWrite()) {
-                        Timber.e("downloadDocUri--->${file.uri}")
 
-                        val stream = ByteArrayOutputStream()
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-                        var byteArray: ByteArray? = stream.toByteArray() // convert camera photo to byte array
-                        val compressedBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray!!.size)
+                val file = File(folderName, fileName)
+                Timber.e("downloadDocPath--->$file")
 
-                        context.contentResolver.openFileDescriptor(file.uri, "w")?.use { parcelFileDescriptor ->
-                            FileOutputStream(parcelFileDescriptor.fileDescriptor).use { outStream ->
-                                outStream.write(byteArray)
-                                recordFile = file
-                            }
-                        }
-                        byteArray = null
-                        compressedBitmap.recycle()
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                var byteArray: ByteArray? = stream.toByteArray() // convert camera photo to byte array
+                val compressedBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray!!.size)
+
+                context.contentResolver.openFileDescriptor(Uri.fromFile(file), "w")?.use { parcelFileDescriptor ->
+                    FileOutputStream(parcelFileDescriptor.fileDescriptor).use { outStream ->
+                        outStream.write(byteArray)
+                        recordFile = file
                     }
                 }
+                byteArray = null
+                compressedBitmap.recycle()
             }
         }
         return recordFile
     }
 
-    fun saveByteArrayToExternalStorage(context: Context, byteArray: ByteArray?, fileName: String ): DocumentFile? {
-        var recordFile : DocumentFile? = null
+    fun saveByteArrayToExternalStorage(context: Context, byteArray: ByteArray?, fileName: String ): File? {
+        var recordFile : File? = null
         val folderName = Utilities.getAppFolderLocation(context)
 
         if (isExternalStorageAvailable && isExternalStorageWritable) {
@@ -302,27 +297,21 @@ object FileUtils : KoinComponent {
                 myDirectory.mkdirs()
             }
 
-            val dirUri = preferenceUtils.getPreference(PreferenceConstants.FOLDER_URI)
-            val dir = DocumentFile.fromTreeUri(context, dirUri.toUri())!!
-            if (dir != null || dir.exists()) {
-                val file = dir.createFile("*/txt", fileName)
-                if (file != null && file.canWrite()) {
-                    Timber.e("downloadDocUri--->${file.uri}")
+            val file = File(folderName, fileName)
+            Timber.e("downloadDocPath--->$file")
 
-                    context.contentResolver.openFileDescriptor(file.uri, "w")?.use { parcelFileDescriptor ->
-                        FileOutputStream(parcelFileDescriptor.fileDescriptor).use { outStream ->
-                            outStream.write(byteArray)
-                            recordFile = file
-                        }
-                    }
+            context.contentResolver.openFileDescriptor(Uri.fromFile(file), "w")?.use { parcelFileDescriptor ->
+                FileOutputStream(parcelFileDescriptor.fileDescriptor).use { outStream ->
+                    outStream.write(byteArray)
+                    recordFile = file
                 }
             }
         }
         return recordFile
     }
 
-    fun saveRecordToExternalStorage(context: Context, inputUri:Uri, inputPath: String, fileName: String): DocumentFile? {
-        var recordFile : DocumentFile? = null
+    fun saveRecordToExternalStorage(context:Context, inputPath:String, inputUri:Uri, fileName:String): File? {
+        var downloadedFile : File? = null
         val folderName = Utilities.getAppFolderLocation(context)
         if (isExternalStorageAvailable && isExternalStorageWritable) {
             val myDirectory = File(folderName)
@@ -333,39 +322,33 @@ object FileUtils : KoinComponent {
 
             val absolutePathDic = myDirectory.absolutePath
             if (inputPath != null && absolutePathDic != null) {
-                val dirUri = preferenceUtils.getPreference(PreferenceConstants.FOLDER_URI)
-                val dir = DocumentFile.fromTreeUri(context, dirUri.toUri())!!
-                if (dir != null || dir.exists()) {
-                    val file = dir.createFile("*/txt", fileName)
-                    if (file != null && file.canWrite()) {
-                        Timber.e("downloadDocUri--->${file.uri}")
+                val file = File(folderName, fileName)
+                Timber.e("downloadDocPath: ----->$file")
 
-                        val fileReader = ByteArray(4096)
+                val fileReader = ByteArray(4096)
 
-                        context.contentResolver.openFileDescriptor(inputUri, "r")?.use { parcelFileDescriptor ->
-                            FileInputStream(parcelFileDescriptor.fileDescriptor).use { inStream ->
+                context.contentResolver.openFileDescriptor(inputUri, "r")?.use { parcelFileDescriptor ->
+                    FileInputStream(parcelFileDescriptor.fileDescriptor).use { inStream ->
 
-                                context.contentResolver.openFileDescriptor(file.uri, "w")?.use { parcelFileDescriptor ->
-                                    FileOutputStream(parcelFileDescriptor.fileDescriptor).use { outStream ->
-                                        while (true) {
-                                            val read = inStream.read(fileReader)
-                                            if (read == -1) {
-                                                break
-                                            }
-                                            outStream.write(fileReader, 0, read)
-                                        }
-                                        recordFile = file
+                        context.contentResolver.openFileDescriptor(Uri.fromFile(file), "w")?.use { parcelFileDescriptor ->
+                            FileOutputStream(parcelFileDescriptor.fileDescriptor).use { outStream ->
+                                while (true) {
+                                    val read = inStream.read(fileReader)
+                                    if (read == -1) {
+                                        break
                                     }
+                                    outStream.write(fileReader, 0, read)
                                 }
+                                downloadedFile = file
                             }
                         }
                     }
                 }
+
             }
         }
-        return recordFile
+        return downloadedFile
     }
-
 
     /**
      * make sure to use this getFilePath method from worker thread
