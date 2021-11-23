@@ -36,6 +36,10 @@ class HraViewModel(private val hraManagementUseCase: HraManagementUseCase,
     val _hraHistorySummary = MediatorLiveData<Resource<HraHistoryModel.HRAHistoryResponse>>()
     val hraHistorySummary: LiveData<Resource<HraHistoryModel.HRAHistoryResponse>> get() = _hraHistorySummary
 
+    fun getMainUserPersonID(): String {
+        return sharedPref.getString(PreferenceConstants.ADMIN_PERSON_ID,"0")!!
+    }
+
     fun getLoginStatus(): Boolean{
         val isLogin = sharedPref.getBoolean(PreferenceConstants.IS_LOGIN,false)
         if (isLogin){

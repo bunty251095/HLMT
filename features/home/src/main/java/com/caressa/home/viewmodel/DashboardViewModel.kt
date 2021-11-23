@@ -515,6 +515,10 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         return ""
     }
 
+    fun getMainUserPersonID(): String {
+        return sharedPref.getString(PreferenceConstants.ADMIN_PERSON_ID,"0")!!
+    }
+
     fun fetchHLMT360LoginResponse(username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
 
         if(validateLoginData(username,passwordStr)) {

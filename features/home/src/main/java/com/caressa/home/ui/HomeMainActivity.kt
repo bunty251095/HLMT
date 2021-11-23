@@ -24,6 +24,7 @@ import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.NavigationConstants
+import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.fitness.FitRequestCode
 import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.common.utils.*
@@ -37,6 +38,7 @@ import com.caressa.home.di.ScoreListener
 import com.caressa.home.viewmodel.BackgroundCallViewModel
 import com.caressa.home.viewmodel.DashboardViewModel
 import com.caressa.model.singleton.ToolsTrackerSingleton
+import com.caressa.model.tempconst.Configuration
 import com.caressa.repository.utils.Resource
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -82,6 +84,9 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
         binding.lifecycleOwner = this
         context = this
         activity = this
+
+        Configuration.EntityID = viewModel.getMainUserPersonID()
+
         setSupportActionBar(toolbar)
         configureNavController()
         callDashboardAPIs()
