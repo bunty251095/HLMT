@@ -380,9 +380,31 @@ object Utilities {
         return strConvertedValue
     }
 
-    fun getAppFolderLocation(context: Context): String {
-        val subirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString()
-        return subirectory + "/" + context.resources.getString(R.string.app_name)
+    fun getAppFolderLocation(context: Context) : String {
+        var appFolderLocation = Constants.primaryStorage + "/" + context.resources.getString(R.string.app_name)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val lmn = context.externalMediaDirs
+                for ( i in lmn ) {
+                    if ( i.absolutePath.contains(context.packageName) ) {
+                        Timber.e(i.absolutePath)
+                        appFolderLocation = i.absolutePath + "/" + context.resources.getString(R.string.app_name)
+                        break
+                    }
+                }
+            }
+            val dir = File(appFolderLocation)
+            if (!dir.exists()) {
+                val directoryCreated = dir.mkdirs()
+                Timber.e("DirectoryCreated--->$directoryCreated")
+            } else {
+                Timber.e("DirectoryAlreadyExist")
+            }
+            Timber.e("DirectoryName--->$dir")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return appFolderLocation
     }
 
     fun getAppName(context: Context): String {
@@ -451,23 +473,33 @@ object Utilities {
         return isAcceptable
     }
 
-    fun deleteFileFromLocalSystem(Path: String): Boolean {
+    fun deleteFileFromLocalSystem(Path: String) {
         val file = File(Path)
-        return file.delete()
+        if ( file.exists() ) {
+            val isDeleted = file.delete()
+            Timber.e("isDeleted--->$isDeleted")
+        } else {
+            Timber.e("File not exist")
+        }
     }
 
-    fun deleteDocumentFileFromLocalSystem(context:Context, uri: Uri, filename: String) {
+    fun deleteFile(file: File) {
+        if ( file.exists() ) {
+            val isDeleted = file.delete()
+            Timber.e("isDeleted--->$isDeleted")
+        } else {
+            Timber.e("File not exist")
+        }
+    }
+
+/*    fun deleteDocumentFileFromLocalSystem(context:Context, uri: Uri, filename: String) {
         try {
             val isDeleted = DocumentsContract.deleteDocument(context.contentResolver,uri)
             Timber.e("Deleted : ${filename}--->$isDeleted")
         } catch (e: SecurityException) {
             e.printStackTrace()
         }
-    }
-
-    fun deleteFile(file: File): Boolean {
-        return file.delete()
-    }
+    }*/
 
     fun getVitalParameterData(parameter: String, context: Context): VitalParameter {
         val vitalParameter = VitalParameter()

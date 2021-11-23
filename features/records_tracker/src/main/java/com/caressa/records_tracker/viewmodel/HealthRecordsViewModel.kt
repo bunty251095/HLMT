@@ -2,6 +2,7 @@ package com.caressa.records_tracker.viewmodel
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
@@ -365,6 +366,40 @@ class HealthRecordsViewModel(
                 val path = Utilities.getAppFolderLocation(context)
                 val sync = "N"
                 val extension = fileUtils.getFileExt(fileName).toUpperCase()
+                val saveRecord = when (extension) {
+                    "PNG", "GIF", "BMP", "JPEG", "TIF", "TIFF", "ICO", "JPG" -> {
+                        //fileUtils.saveByteArrayToExternalStorage( context,decodedString,fileName )
+                        fileUtils.saveByteArrayToExternalStorage( context,decodedString,fileName )
+                    }
+                    else -> {
+                        //fileUtils.saveByteArrayToExternalStorage( context,decodedString,fileName )
+                        fileUtils.saveByteArrayToExternalStorage( context,decodedString,fileName )
+                    }
+                }
+                if ( saveRecord != null ) {
+                    withContext(dispatchers.io) {
+                        RecordSingleton.getInstance()!!.getHealthRecord().Path = path
+                        RecordSingleton.getInstance()!!.getHealthRecord().FileUri = Uri.fromFile(saveRecord).toString()
+                        shrManagementUseCase.invokeUpdateHealthRecordPathSync( documentId , path , Uri.fromFile(saveRecord).toString() ,sync )
+                        documentStatus.postValue(status)
+                        postDownload.postValue(from)
+                    }
+                }
+            }
+        } catch ( e : Exception) {
+            e.printStackTrace()
+        }
+    }
+
+/*    fun saveDownloadedRecord( from: String,document:HealthRelatedDocument,status:Resource.Status,fileName:String ) = viewModelScope.launch(dispatchers.main) {
+        try {
+            val byteArray = document.FileBytes
+            val decodedString = Base64.decode(byteArray, Base64.DEFAULT)
+            if (decodedString != null) {
+                val documentId = document.ID
+                val path = Utilities.getAppFolderLocation(context)
+                val sync = "N"
+                val extension = fileUtils.getFileExt(fileName).toUpperCase()
                 val saveRecordUri = when (extension) {
                     "PNG", "GIF", "BMP", "JPEG", "TIF", "TIFF", "ICO", "JPG" -> {
                         fileUtils.saveByteArrayToExternalStorage( context,decodedString,fileName )
@@ -384,7 +419,7 @@ class HealthRecordsViewModel(
         } catch ( e : Exception) {
             e.printStackTrace()
         }
-    }
+    }*/
 
 /*    fun saveDownloadedRecord( from: String,document:HealthRelatedDocument,status:Resource.Status,fileName:String ) = viewModelScope.launch(dispatchers.main) {
         try {

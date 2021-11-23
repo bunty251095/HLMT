@@ -17,7 +17,6 @@ import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.MotionEvent
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
@@ -34,7 +33,6 @@ import com.caressa.home.viewmodel.ProfileFamilyMemberViewModel
 import com.caressa.model.home.Person
 import com.caressa.model.home.UpdateUserDetailsModel
 import com.theartofdev.edmodo.cropper.CropImage
-import com.yalantis.ucrop.UCrop
 import kotlinx.android.synthetic.main.activity_my_profile_new.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -625,40 +623,23 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                         }
                     }
 
-/*                    FilePickerConst.REQUEST_CODE_PHOTO -> {
-                        val photoUriList = data.getParcelableArrayListExtra<Uri>(FilePickerConst.KEY_SELECTED_MEDIA)!!.toMutableList()
-                        val photoUri = photoUriList[0]
-                        val photoPath = ContentUriUtils.getFilePath(this, photoUri)!!
-
-                        val folderName = RealPathUtil.getRecordFolderLocation()
-                        val origFileName = photoPath.substring(photoPath.lastIndexOf("/") + 1)
-                        val fileSize = RealPathUtil.calculateFileSize(photoPath,"MB")
-                        if (fileSize <= 5.0) {
-                            tempFile = File(folderName,origFileName)
-                            val destinationUriGallery = Uri.fromFile(File(folderName,origFileName))
-                            showUcrop(photoUri, destinationUriGallery)
-                        } else {
-                            Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
-                        }
-                    }*/
-
                 }
             }
 
             if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
                 val result = CropImage.getActivityResult(data)
                 if (resultCode == RESULT_OK) {
-                    val resultUri = result.uri
-                    val filePath = fileUtils.getFilePath(this, resultUri!!)!!
-                    val fileSize = fileUtils.calculateFileSize(filePath,"MB")
+                    val imageUri = result.uri
+                    val imagePath = fileUtils.getFilePath(this, imageUri!!)!!
+                    val fileSize = fileUtils.calculateFileSize(imagePath,"MB")
                     if (fileSize <= 5.0) {
-                        val extension = fileUtils.getFileExt(filePath)
+                        val extension = fileUtils.getFileExt(imagePath)
                         if ( Utilities.isAcceptableDocumentType(extension) ) {
-                            val fileName = fileUtils.generateUniqueFileName(Configuration.strAppIdentifier + "_PROFPIC",filePath)
-                            Timber.e("File Path---> $filePath")
-                            val saveImage = fileUtils.saveRecordToExternalStorage(this,resultUri,filePath,fileName)
+                            val fileName = fileUtils.generateUniqueFileName(Configuration.strAppIdentifier + "_PROFPIC",imagePath)
+                            Timber.e("File Path---> $imagePath")
+                            val saveImage = fileUtils.saveRecordToExternalStorage(this,imagePath,imageUri,fileName)
                             if ( saveImage != null ) {
-                                Utilities.deleteFileFromLocalSystem(filePath)
+                                Utilities.deleteFileFromLocalSystem(imagePath)
                                 viewModel.callUploadProfileImageApi(this,fileName,saveImage)
                             }
                         } else {

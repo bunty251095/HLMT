@@ -13,6 +13,7 @@ import android.text.Html
 import android.view.Gravity
 import android.view.View
 import android.widget.*
+import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.documentfile.provider.DocumentFile
 import com.caressa.common.constants.Configuration
@@ -229,40 +230,32 @@ object HraHelper : KoinComponent {
 
                 val folderName = Utilities.getAppFolderLocation(context)
                 val fileName = fileUtils.generateUniqueFileName(Configuration.strAppIdentifier+ "_HRA", ".pdf")
-                val hraReportFile = File(folderName,fileName)
+
                 val myDirectory = File(folderName)
                 if (!myDirectory.exists()) {
                     myDirectory.mkdirs()
                 }
-                val actualFileLocation = hraReportFile.absolutePath
-                Timber.e("Downloaded_Report_Path----->$actualFileLocation")
 
-                val dirUri = preferenceUtils.getPreference(PreferenceConstants.FOLDER_URI)
-                val dir = DocumentFile.fromTreeUri(context, dirUri.toUri())!!
-                if (dir != null || dir.exists()) {
-                    val docFile = dir.createFile("*/txt", fileName)
-                    if (docFile != null && docFile.canWrite()) {
-                        Timber.e("downloadDocUri--->${docFile.uri}")
+                val hraReportFile = File(folderName, fileName)
+                Timber.e("downloadDocPath: ----->$hraReportFile")
 
-                        val inputStream: InputStream = body.byteStream()
-                        val fileReader = ByteArray(4096)
+                val inputStream: InputStream = body.byteStream()
+                val fileReader = ByteArray(4096)
 
-                        context.contentResolver.openFileDescriptor(docFile.uri, "w")?.use { parcelFileDescriptor ->
-                            FileOutputStream(parcelFileDescriptor.fileDescriptor).use { outStream ->
-                                while (true) {
-                                    val read = inputStream.read(fileReader)
-                                    if (read == -1) {
-                                        break
-                                    }
-                                    outStream.write(fileReader, 0, read)
-                                }
-                                save = true
-                                openDownloadedDocumentFile(docFile,context)
+                context.contentResolver.openFileDescriptor(Uri.fromFile(hraReportFile), "w")?.use { parcelFileDescriptor ->
+                    FileOutputStream(parcelFileDescriptor.fileDescriptor).use { outStream ->
+                        while (true) {
+                            val read = inputStream.read(fileReader)
+                            if (read == -1) {
+                                break
                             }
+                            outStream.write(fileReader, 0, read)
                         }
-                        inputStream.close()
+                        save = true
+                        openDownloadedDocumentFile(hraReportFile,context)
                     }
                 }
+                inputStream.close()
             } else {
                 save = false
             }
@@ -273,9 +266,9 @@ object HraHelper : KoinComponent {
         return save
     }
 
-    private fun openDownloadedDocumentFile(file: DocumentFile, context: Context) {
+    private fun openDownloadedDocumentFile(file: File, context: Context) {
         try {
-            val uri = file.uri
+            val uri = FileProvider.getUriForFile(context, context.packageName + ".provider", file)
             val intent = Intent(Intent.ACTION_VIEW)
             intent.setDataAndType(uri,"application/pdf")
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION

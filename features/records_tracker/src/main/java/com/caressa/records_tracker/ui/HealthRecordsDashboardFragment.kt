@@ -1,13 +1,8 @@
 package com.caressa.records_tracker.ui
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
 import android.content.res.ColorStateList
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -23,7 +18,6 @@ import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.PermissionUtil
 import com.caressa.common.utils.PermissionUtil.AppPermissionListener
 import com.caressa.common.utils.FirebaseHelper
-import com.caressa.common.utils.Utilities
 import com.caressa.records_tracker.R
 import com.caressa.records_tracker.databinding.FragmentHealthRecordsDashboardBinding
 import com.caressa.records_tracker.viewmodel.HealthRecordsViewModel
@@ -42,20 +36,6 @@ class HealthRecordsDashboardFragment : BaseFragment() {
 
     private val permissionListener = object : AppPermissionListener {
         override fun isPermissionGranted(isGranted: Boolean) {
-            Timber.e("$isGranted")
-            if ( isGranted ) {
-                Timber.e("action-> $action")
-                val isStorageAccess = permissionUtil.checkStorageAccessPermissionFromFragment(
-                    requireContext(),fragment!!)
-                if ( isStorageAccess ) {
-                    navigateTo(action)
-                }
-            }
-        }
-    }
-
-    private val storageAccessListener = object : PermissionUtil.StorageAccessListener {
-        override fun isStorageAccessGranted(isGranted: Boolean) {
             Timber.e("$isGranted")
             if ( isGranted ) {
                 Timber.e("action-> $action")
@@ -210,10 +190,7 @@ class HealthRecordsDashboardFragment : BaseFragment() {
         //First check Read External Storage Permission
         val isReadExtStorage = permissionUtil.checkStoragePermission(permissionListener,requireContext())
         if (isReadExtStorage) {
-            val isStorageAccess = permissionUtil.checkStorageAccessPermissionFromFragment(requireContext(),fragment!!)
-            if ( isStorageAccess ) {
-                navigateTo(action)
-            }
+            navigateTo(action)
         }
     }
 
@@ -246,7 +223,7 @@ class HealthRecordsDashboardFragment : BaseFragment() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //super.onActivityResult(requestCode, resultCode, data)
         Timber.e("requestCode-> $requestCode")
         Timber.e("resultCode-> $resultCode")
@@ -262,7 +239,7 @@ class HealthRecordsDashboardFragment : BaseFragment() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
+    }*/
 
 /*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {

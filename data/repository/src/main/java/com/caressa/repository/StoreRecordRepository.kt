@@ -1,6 +1,7 @@
 package com.caressa.repository
 
 import android.content.Context
+import android.net.Uri
 import android.util.Base64
 import androidx.core.net.toUri
 import androidx.documentfile.provider.DocumentFile
@@ -191,9 +192,10 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
         }.build().asLiveData()
     }
 
-    override suspend fun deleteRecordFromServer(forceRefresh: Boolean, data: DeleteDocumentModel, deleteRecordIds: List<String>): LiveData<Resource<DeleteDocumentModel.DeleteDocumentResponse>> {
+    override suspend fun deleteRecordFromServer(forceRefresh: Boolean, data: DeleteDocumentModel,deleteRecordIds : List<String>) :
+            LiveData<Resource<DeleteDocumentModel.DeleteDocumentResponse>> {
 
-        return object : NetworkBoundResource<DeleteDocumentModel.DeleteDocumentResponse, BaseResponse<DeleteDocumentModel.DeleteDocumentResponse>>(context) {
+        return object : NetworkBoundResource<DeleteDocumentModel.DeleteDocumentResponse,BaseResponse<DeleteDocumentModel.DeleteDocumentResponse>>(context) {
 
             var isProcessed = ""
 
@@ -208,9 +210,10 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
             override suspend fun saveCallResults(items: DeleteDocumentModel.DeleteDocumentResponse) {
                 isProcessed = items.isProcessed
                 Timber.i("isProcessed----->$isProcessed")
-                if (isProcessed.equals(Constants.TRUE, ignoreCase = true)) {
-                    for (i in deleteRecordIds) {
-                        //shrDao.deleteHealthRecord( i )
+                if ( isProcessed.equals(Constants.TRUE , ignoreCase = true) ) {
+                    for( i in deleteRecordIds ) {
+                        val record = shrDao.getHealthDocumentById(i.toInt())
+                        Utilities.deleteFile(File(record.Path!!,record.Name!!))
                         shrDao.deleteHealthDocument(i)
                         Timber.i("Deleted RecordId----->$i")
                     }
@@ -218,7 +221,7 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
             }
 
             override fun createCallAsync(): Deferred<BaseResponse<DeleteDocumentModel.DeleteDocumentResponse>> {
-                return datasource.deleteRecordsFromServerResponse(data)
+                return   datasource.deleteRecordsFromServerResponse(data)
             }
 
             override fun processResponse(response: BaseResponse<DeleteDocumentModel.DeleteDocumentResponse>): DeleteDocumentModel.DeleteDocumentResponse {
@@ -421,33 +424,26 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
     private fun prepareRecordToUpload(newRecord : HealthDocument ) : SaveDocumentModel.HealthDoc {
         var encodedFile =""
 
-        val imageFullPath = File( newRecord.Path , newRecord.Name!! ).toString()
-        if ( !Utilities.isNullOrEmpty(imageFullPath) ) {
-
-            val file = DocumentFile.fromTreeUri(context, newRecord.FileUri.toUri())!!
-            if (file.exists()) {
-                try {
-                    val bytesFile = ByteArray(file.length().toInt())
-                    context.contentResolver.openFileDescriptor(newRecord.FileUri.toUri(), "r")?.use { parcelFileDescriptor ->
-                        FileInputStream(parcelFileDescriptor.fileDescriptor).use { inStream ->
-                            inStream.read(bytesFile)
-                            encodedFile = Base64.encodeToString(bytesFile, Base64.DEFAULT)
-                        }
+        val file = File( newRecord.Path , newRecord.Name!! )
+        if (file.exists()) {
+            try {
+                val bytesFile = ByteArray(file.length().toInt())
+                context.contentResolver.openFileDescriptor(Uri.fromFile(file), "r")?.use { parcelFileDescriptor ->
+                    FileInputStream(parcelFileDescriptor.fileDescriptor).use { inStream ->
+                        inStream.read(bytesFile)
+                        encodedFile = Base64.encodeToString(bytesFile, Base64.DEFAULT)
                     }
-                } catch (e: Exception) {
-                    Timber.i("Error retrieving document to upload")
-                    e.printStackTrace()
                 }
-            } else {
-                Timber.i("${newRecord.Name} : File not found")
+            } catch (e: Exception) {
+                Timber.i("Error retrieving document to upload")
+                e.printStackTrace()
             }
         } else {
-            Timber.i("${newRecord.Name} : File path is blank")
+            Timber.i("${newRecord.Name} : File not found")
         }
 
         var documentTitle = newRecord.Title
         if (!Utilities.isNullOrEmpty(documentTitle)) {
-            //documentTitle = RealPathUtil.removeFileExt(documentTitle!!)
             documentTitle = FileUtils.getNameWithoutExtension(documentTitle!!)
         }
 
@@ -464,52 +460,6 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
             Path = newRecord.Path!!)
         return healthDoc
     }
-
-/*    fun prepareRecordToUpload(newRecord: HealthDocument): SaveDocumentModel.HealthDoc {
-        var encodedFile = ""
-
-        val imageFullPath = File(newRecord.Path, newRecord.Name!!).toString()
-        if (!Utilities.isNullOrEmpty(imageFullPath)) {
-            val isFileExist = RealPathUtil.isFileExist(imageFullPath)
-            if (isFileExist) {
-                try {
-                    val file = File(newRecord.Path, newRecord.Name!!)
-                    val bytesFile = ByteArray(file.length().toInt())
-
-                    val fileInputStream = FileInputStream(file)
-                    fileInputStream.read(bytesFile)
-                    encodedFile = Base64.encodeToString(bytesFile, Base64.DEFAULT)
-                } catch (e: Exception) {
-                    Timber.i("Error retrieving document to upload")
-                    e.printStackTrace()
-                }
-            } else {
-                Timber.i("${newRecord.Name} : File not found")
-            }
-        } else {
-            Timber.i("${newRecord.Name} : File path is blank")
-        }
-
-        var documentTitle = newRecord.Title
-        if (!Utilities.isNullOrEmpty(documentTitle)) {
-            //documentTitle = RealPathUtil.removeFileExt(documentTitle!!)
-            documentTitle = FileUtils.getNameWithoutExtension(documentTitle!!)
-        }
-
-        val healthDoc = SaveDocumentModel.HealthDoc(
-            personID = newRecord.PersonId!!.toString(),
-            documentTypeCode = newRecord.Code!!,
-            comments = newRecord.Comment!!,
-            fileName = newRecord.Name!!,
-            title = documentTitle!!,
-            relation = newRecord.Relation!!,
-            fileBytes = encodedFile,
-            personName = newRecord.PersonName!!,
-            type = newRecord.Type!!,
-            Path = newRecord.Path!!
-        )
-        return healthDoc
-    }*/
 
     override suspend fun updateHealthRecordPathSync(id: String, path: String, fileUri : String ,sync: String) {
         shrDao.updateHealthDocumentPathSync( id , path , fileUri , sync )
@@ -569,7 +519,8 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
     override suspend fun deleteRecordInSession(record : RecordInSession) {
         shrDao.deleteRecordInSession(record.Name,record.Path)
         //Utilities.deleteFileFromLocalSystem(record.Path+"/"+record.Name)
-        Utilities.deleteDocumentFileFromLocalSystem(context,record.FileUri.toUri(),record.Name)
+        //Utilities.deleteDocumentFileFromLocalSystem(context,record.FileUri.toUri(),record.Name)
+        Utilities.deleteFileFromLocalSystem(record.Path+"/"+record.Name)
         Timber.e("Deleted Record from RecordsInSessionTable...")
     }
 
@@ -578,9 +529,9 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
             val list = shrDao.getRecordsInSession()
             if ( !list.isNullOrEmpty() ) {
                 for ( record in list ) {
-                    //Utilities.deleteFileFromLocalSystem(record.Path+"/"+record.Name)
-                    if ( File(record.Path,record.Name).exists() ) {
-                        Utilities.deleteDocumentFileFromLocalSystem(context,record.FileUri.toUri(),record.Name)
+                    val file = File(record.Path,record.Name)
+                    if ( file.exists() ) {
+                        Utilities.deleteFile(file)
                     }
                     Timber.e("Deleted ${record.Name} from RecordsInSessionTable...")
                 }
