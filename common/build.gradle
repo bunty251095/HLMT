@@ -16,6 +16,8 @@ dependencies {
     api Libraries.glide
     api Libraries.picasso
     api Libraries.dexter
+    api Libraries.documentFile
+    api Libraries.photoView
 
     api Libraries.gsmFitness
     api Libraries.gsmAuth

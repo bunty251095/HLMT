@@ -9,12 +9,17 @@ import android.net.Uri
 import android.os.Environment
 import android.os.StrictMode
 import android.text.Html
+import androidx.core.net.toUri
+import androidx.documentfile.provider.DocumentFile
+import com.caressa.common.constants.Constants
 import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.FileUtils
 import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.RealPathUtil
 import com.caressa.common.utils.Utilities
 import com.caressa.common.view.SpinnerModel
 import com.caressa.model.entity.HealthDocument
+import com.caressa.model.entity.RecordInSession
 import com.caressa.records_tracker.R
 import com.caressa.records_tracker.viewmodel.HealthRecordsViewModel
 import timber.log.Timber
@@ -23,70 +28,11 @@ import java.util.*
 
 class DataHandler(val context: Context) {
 
-    fun writeRecordToDisk(inputPath: String, outputPath: String, fileName : String): Boolean {
-        try {
-            val path = Environment.getExternalStorageDirectory()
-            val file = File( outputPath ,  fileName )
-            Timber.i("downloadDocPath: ----->" + file)
+    private val fileUtils = FileUtils
 
-            var inputStream: InputStream? = null
-            var outputStream: OutputStream? = null
 
-            try {
-                val fileReader = ByteArray(4096)
-                var fileSizeDownloaded: Long = 0
 
-                inputStream = FileInputStream(File(inputPath))
-                outputStream = FileOutputStream(file)
-
-                while (true) {
-                    val read = inputStream!!.read(fileReader)
-                    if (read == -1) {
-                        break
-                    }
-                    outputStream!!.write(fileReader, 0, read)
-                    fileSizeDownloaded += read.toLong()
-                    //  Timber.i("file download: $fileSizeDownloaded of $fileSize")
-                }
-                outputStream!!.flush()
-                return true
-            } catch (e: Exception) {
-                Timber.i("Error..."+e.printStackTrace())
-                return false
-            } finally {
-                inputStream?.close()
-                outputStream?.close()
-            }
-        } catch (e: Exception) {
-            Timber.i("Error!!!"+e.printStackTrace())
-            return false
-        }
-    }
-
-    @Throws(IOException::class)
-    fun saveBitampAsFile(bitmap: Bitmap?, outputPath: String, fileName : String): Boolean {
-        var save = false
-
-        if (bitmap != null ) {
-            val stream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-            var byteArray: ByteArray? = stream.toByteArray() // convert camera photo to byte array
-            val compressedBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray!!.size)
-            // save it in your external storage.
-            val fo = FileOutputStream(File(outputPath , fileName))
-            fo.write(byteArray)
-            fo.flush()
-            fo.close()
-            byteArray = null
-            compressedBitmap.recycle()
-            save = true
-        } else {
-            save = false
-        }
-        return save
-    }
-
-    fun openDownloadedFile( file : File , type :String ,  context: Context) {
+/*    fun openDownloadedFile( file : File , type :String ,  context: Context) {
         val builder = StrictMode.VmPolicy.Builder()
         StrictMode.setVmPolicy(builder.build())
 
@@ -96,6 +42,23 @@ class DataHandler(val context: Context) {
         //val openIntent = Intent.createChooser(intent,"Open using")
 
         try {
+            context.startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            e.printStackTrace()
+            Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_NO_APPLICATION_TO_VIEW_PDF))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_UNABLE_TO_OPEN_FILE))
+        }
+    }*/
+
+    private fun openDownloadedFile(file : DocumentFile, type :String, context: Context) {
+        try {
+            val uri = file.uri
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(uri,type)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
+            //val openIntent = Intent.createChooser(intent,"Open using")
             context.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
@@ -170,9 +133,47 @@ class DataHandler(val context: Context) {
         return list
     }
 
-    fun viewRecord(recordData : HealthDocument) {
+    fun viewDocument(recordData : HealthDocument) {
         val recordName = recordData.Name!!
         val recordPath = recordData.Path
+        val recordType = recordData.Type
+        var type = ""
+        when {
+            recordType.equals("IMAGE", ignoreCase = true) -> {
+                type = "image/*"
+            }
+            recordType.equals("DOC", ignoreCase = true) -> {
+                type = "application/msword"
+            }
+            recordType.equals("PDF", ignoreCase = true) -> {
+                type = "application/pdf"
+            }
+            fileUtils.getFileExt(recordName).equals("txt", ignoreCase = true) -> {
+                type = "text/*"
+            }
+            else -> {
+                type = "application/pdf"
+            }
+        }
+        if (!type.equals("", ignoreCase = true)) {
+            if (recordType.equals("IMAGE", ignoreCase = true)) {
+                val completeFilePath = "$recordPath/$recordName"
+                //val bitmap = RealPathUtil.decodeFile(completeFilePath)
+                val bitmap = BitmapFactory.decodeFile(completeFilePath)
+                Utilities.showFullImageWithBitmap(bitmap,context,true)
+            } else {
+                //val file = File(recordPath , recordName)
+                val file = DocumentFile.fromTreeUri(context, recordData.FileUri.toUri())!!
+                if (file.exists()) {
+                    DataHandler(context).openDownloadedFile(file , type , context)
+                }
+            }
+        }
+    }
+
+    fun viewRecord(recordData : RecordInSession) {
+        val recordName = recordData.Name
+        //val recordPath = recordData.Path
         val recordType = recordData.Type
         var type = ""
         if (recordType.equals("IMAGE", ignoreCase = true)) {
@@ -181,15 +182,16 @@ class DataHandler(val context: Context) {
             type = "application/msword"
         } else if (recordType.equals("PDF", ignoreCase = true)) {
             type = "application/pdf"
-        } else if (RealPathUtil.getFileExt(recordName).equals("txt", ignoreCase = true)) {
+        } else if (fileUtils.getFileExt(recordName).equals("txt", ignoreCase = true)) {
             type = "text/*"
         } else  {
             type = "application/pdf"
         }
         if (!type.equals("", ignoreCase = true)) {
-            val file = File(recordPath , recordName)
+            //val file = File(recordPath , recordName)
+            val file = DocumentFile.fromTreeUri(context, recordData.FileUri.toUri())!!
             if (file.exists()) {
-                DataHandler(context).openDownloadedFile(file,type ,context)
+                DataHandler(context).openDownloadedFile(file , type , context)
             }
         }
     }

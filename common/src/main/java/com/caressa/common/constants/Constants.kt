@@ -1,5 +1,7 @@
 package com.caressa.common.constants
 
+import android.os.Environment
+
 object Constants {
 
     //for PRODUCTION
@@ -65,6 +67,8 @@ object Constants {
 
     const val strEnableFamilyProfile: Boolean = true
     const val strApolloHtml = "file:///android_asset/apollo/apollo_SOP.html"
+
+    val primaryStorage = Environment.getExternalStorageDirectory().toString()
 
     //User APIs
     const val GET_USER_DETAIL_API = "PHR/api/Person/Get"
@@ -209,6 +213,7 @@ object Constants {
     const val MEDICATION = "Medication"
     const val HRA = "HRA"
     const val TRACK_PARAMETER = "TrackParameter"
+    const val URI = "uri"
     const val CODE = "code"
     const val UPLOAD = "Upload"
     const val VIEW = "View"
@@ -315,6 +320,10 @@ object Constants {
     const val WEIGHT_MIN_METRIC = 29
     const val WEIGHT_MAX_METRIC = 150
 
+    const val GALLERY_SELECT_CODE = 2291
+    const val FILE_SELECT_CODE = 2292
+    const val CAMERA_SELECT_CODE = 2293
+    const val REQ_CODE_SAF = 2294
     const val REQ_CODE_STORAGE = 2296
 
     object UserConstants {

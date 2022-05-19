@@ -2,9 +2,12 @@ package com.caressa.records_tracker.viewmodel
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
+import androidx.core.net.toUri
+import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,9 +18,7 @@ import com.caressa.common.constants.Configuration
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.PreferenceConstants
-import com.caressa.common.utils.Event
-import com.caressa.common.utils.FirebaseHelper
-import com.caressa.common.utils.RealPathUtil
+import com.caressa.common.utils.*
 import com.caressa.model.entity.*
 import com.caressa.model.shr.*
 import com.caressa.model.shr.ListDocumentsModel.SearchCriteria
@@ -41,6 +42,8 @@ import kotlin.collections.ArrayList
 class HealthRecordsViewModel(
     private val dispatchers: AppDispatchers , val shrManagementUseCase : ShrManagementUseCase ,
     private val sharedPref: SharedPreferences , val context: Context , val dataHandler: DataHandler ) : BaseViewModel() {
+
+    private val fileUtils = FileUtils
 
     val personId = sharedPref.getString(PreferenceConstants.PERSONID,"")!!
     val authToken = sharedPref.getString(PreferenceConstants.TOKEN,"")!!
@@ -229,15 +232,19 @@ class HealthRecordsViewModel(
             = viewModelScope.launch(dispatchers.main) {
 
         var fileBytes =""
-        val path = record.Path!!
+        //val path = record.Path!!
         val name = record.Name!!
-        //val fullPath = path + "/" + name
+        val uri = record.FileUri
         try {
-            val file = File(path , name )
+            val file = DocumentFile.fromTreeUri(context, record.FileUri.toUri())!!
             val bytesFile = ByteArray(file.length().toInt())
-            val fileInputStream = FileInputStream(file)
-            fileInputStream.read(bytesFile)
-            fileBytes = Base64.encodeToString(bytesFile, Base64.DEFAULT)
+
+            context.contentResolver.openFileDescriptor(record.FileUri.toUri(), "r")?.use { parcelFileDescriptor ->
+                FileInputStream(parcelFileDescriptor.fileDescriptor).use { inStream ->
+                    inStream.read(bytesFile)
+                    fileBytes = Base64.encodeToString(bytesFile, Base64.DEFAULT)
+                }
+            }
         } catch (e: Exception) {
             Timber.i("Error Digitizing document")
             e.printStackTrace()
@@ -262,14 +269,13 @@ class HealthRecordsViewModel(
                 if (it.data != null) {
                     Timber.i("DATA==>${it.data}")
                     val digitizedParametersList = it.data!!.body.healthDataParameters
-                    if ( digitizedParametersList.size > 0 ) {
-                        // Set Digitized ParametersList to Singleton class
+                    if (digitizedParametersList.isNotEmpty()) {
                         RecordSingleton.getInstance()!!.setHealthRecord(record)
                         RecordSingleton.getInstance()!!.setDigitizedParamList(digitizedParametersList)
                         if ( from.equals(Constants.DIGITIZE,ignoreCase = true) ) {
-                            navigate(DigitizeRecordListFragmentDirections.actionDigitizedRecordsListFragmentToFragmentDigitize(from,categoryCode))
+                            navigate(DigitizeRecordListFragmentDirections.actionDigitizedRecordsListFragmentToFragmentDigitize(from,categoryCode,uri))
                         } else {
-                            navigate(ViewRecordsFragmentDirections.actionViewRecordsFragmentToFragmentDigitize(from,categoryCode))
+                            navigate(ViewRecordsFragmentDirections.actionViewRecordsFragmentToFragmentDigitize(from,categoryCode,uri))
                         }
                     }else{
                         toastMessage(context.resources.getString(R.string.ERROR_NOT_ABLE_TO_READ_FILE))
@@ -355,6 +361,70 @@ class HealthRecordsViewModel(
         try {
             val byteArray = document.FileBytes
             val decodedString = Base64.decode(byteArray, Base64.DEFAULT)
+            if (decodedString != null) {
+                val documentId = document.ID
+                val path = Utilities.getAppFolderLocation(context)
+                val sync = "N"
+                val extension = fileUtils.getFileExt(fileName).toUpperCase()
+                val saveRecord = when (extension) {
+                    "PNG", "GIF", "BMP", "JPEG", "TIF", "TIFF", "ICO", "JPG" -> {
+                        //fileUtils.saveByteArrayToExternalStorage( context,decodedString,fileName )
+                        fileUtils.saveByteArrayToExternalStorage( context,decodedString,fileName )
+                    }
+                    else -> {
+                        //fileUtils.saveByteArrayToExternalStorage( context,decodedString,fileName )
+                        fileUtils.saveByteArrayToExternalStorage( context,decodedString,fileName )
+                    }
+                }
+                if ( saveRecord != null ) {
+                    withContext(dispatchers.io) {
+                        RecordSingleton.getInstance()!!.getHealthRecord().Path = path
+                        RecordSingleton.getInstance()!!.getHealthRecord().FileUri = Uri.fromFile(saveRecord).toString()
+                        shrManagementUseCase.invokeUpdateHealthRecordPathSync( documentId , path , Uri.fromFile(saveRecord).toString() ,sync )
+                        documentStatus.postValue(status)
+                        postDownload.postValue(from)
+                    }
+                }
+            }
+        } catch ( e : Exception) {
+            e.printStackTrace()
+        }
+    }
+
+/*    fun saveDownloadedRecord( from: String,document:HealthRelatedDocument,status:Resource.Status,fileName:String ) = viewModelScope.launch(dispatchers.main) {
+        try {
+            val byteArray = document.FileBytes
+            val decodedString = Base64.decode(byteArray, Base64.DEFAULT)
+            if (decodedString != null) {
+                val documentId = document.ID
+                val path = Utilities.getAppFolderLocation(context)
+                val sync = "N"
+                val extension = fileUtils.getFileExt(fileName).toUpperCase()
+                val saveRecordUri = when (extension) {
+                    "PNG", "GIF", "BMP", "JPEG", "TIF", "TIFF", "ICO", "JPG" -> {
+                        fileUtils.saveByteArrayToExternalStorage( context,decodedString,fileName )
+                    }
+                    else -> fileUtils.saveByteArrayToExternalStorage( context,decodedString,fileName )
+                }
+                if ( saveRecordUri != null ) {
+                    withContext(dispatchers.io) {
+                        RecordSingleton.getInstance()!!.getHealthRecord().Path = path
+                        RecordSingleton.getInstance()!!.getHealthRecord().FileUri = saveRecordUri.uri.toString()
+                        shrManagementUseCase.invokeUpdateHealthRecordPathSync( documentId , path , saveRecordUri.uri.toString() ,sync )
+                        documentStatus.postValue(status)
+                        postDownload.postValue(from)
+                    }
+                }
+            }
+        } catch ( e : Exception) {
+            e.printStackTrace()
+        }
+    }*/
+
+/*    fun saveDownloadedRecord( from: String,document:HealthRelatedDocument,status:Resource.Status,fileName:String ) = viewModelScope.launch(dispatchers.main) {
+        try {
+            val byteArray = document.FileBytes
+            val decodedString = Base64.decode(byteArray, Base64.DEFAULT)
             var save = false
             if (decodedString != null) {
                 val documentId = document.ID
@@ -377,7 +447,7 @@ class HealthRecordsViewModel(
         } catch ( e : Exception) {
             e.printStackTrace()
         }
-    }
+    }*/
 
     fun deleteFileFromLocalSystem(path: String): Boolean {
         Timber.e("RecordPath----->"+path)

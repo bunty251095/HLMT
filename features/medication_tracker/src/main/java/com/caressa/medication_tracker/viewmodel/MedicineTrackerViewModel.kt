@@ -803,6 +803,7 @@ class MedicineTrackerViewModel(
             jsonObjectHeader.put("PartnerCode", Configuration.PartnerCode)
             jsonObjectHeader.put("EntityType", Configuration.EntityType)
             jsonObjectHeader.put("HandShake", Configuration.Handshake)
+            jsonObjectHeader.put("EntityID", Configuration.EntityID)
 
             jsonObject.put("Header",jsonObjectHeader)
             jsonObject.put("JSONData",jsonRequest.toString())

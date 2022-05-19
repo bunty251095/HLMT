@@ -7,11 +7,15 @@ import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.os.Build
+import android.os.Environment
+import android.provider.DocumentsContract
 import android.util.Base64
 import android.util.TypedValue
 import android.view.Gravity
@@ -23,6 +27,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.caressa.common.BuildConfig
 import com.caressa.common.R
+import com.caressa.common.base.DialogFullScreenView
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.NavigationConstants
 import com.google.gson.Gson
@@ -183,7 +188,7 @@ object Utilities {
     }
 
     fun FindTypeOfDocument(fileName: String): String {
-        val extension = RealPathUtil.getFileExt(fileName)
+        val extension = FileUtils.getFileExt(fileName)
         println("Extension : $extension")
         var documentType = "Unknown"
         // before uploading verifing it's extension
@@ -375,6 +380,37 @@ object Utilities {
         return strConvertedValue
     }
 
+    fun getAppFolderLocation(context: Context) : String {
+        var appFolderLocation = Constants.primaryStorage + "/" + context.resources.getString(R.string.app_name)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val lmn = context.externalMediaDirs
+                for ( i in lmn ) {
+                    if ( i.absolutePath.contains(context.packageName) ) {
+                        Timber.e(i.absolutePath)
+                        appFolderLocation = i.absolutePath + "/" + context.resources.getString(R.string.app_name)
+                        break
+                    }
+                }
+            }
+            val dir = File(appFolderLocation)
+            if (!dir.exists()) {
+                val directoryCreated = dir.mkdirs()
+                Timber.e("DirectoryCreated--->$directoryCreated")
+            } else {
+                Timber.e("DirectoryAlreadyExist")
+            }
+            Timber.e("DirectoryName--->$dir")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return appFolderLocation
+    }
+
+    fun getAppName(context: Context): String {
+        return context.resources.getString(R.string.app_name)
+    }
+
     fun getAppVersion(context: Context): Int {
         return try {
             val packageInfo: PackageInfo =
@@ -395,16 +431,75 @@ object Utilities {
         }
     }
 
-    fun exportdatabase(context: Context) {
-        if (BuildConfig.DEBUG) {
-            RealPathUtil.exportDatabase(Constants.DATABASE_NAME, context)
+    fun getDocumentTypeFromExt(extension:String) : String {
+        var documentType = ""
+        if (extension.equals("JPEG", ignoreCase = true) ||
+            extension.equals("jpg", ignoreCase = true) ||
+            extension.equals("PNG", ignoreCase = true) ||
+            extension.equals("png", ignoreCase = true)) {
+            documentType = "IMAGE"
+        } else if (extension.equals("PDF", ignoreCase = true) || extension.equals("pdf", ignoreCase = true)) {
+            documentType = "PDF"
+        } else if (extension.equals("txt", ignoreCase = true) ||
+            extension.equals("doc", ignoreCase = true) ||
+            extension.equals("docx", ignoreCase = true)) {
+            documentType = "DOC"
+        }
+        return documentType
+    }
+
+    fun isAcceptableDocumentType(extension:String) : Boolean {
+        var isAcceptable = false
+        var documentType = ""
+        //val extension1 = RealPathUtil.getFileExt(filePath)
+        Timber.e("Extension : $extension")
+
+        if (extension.equals("JPEG", ignoreCase = true) ||
+            extension.equals("jpg", ignoreCase = true) ||
+            extension.equals("PNG", ignoreCase = true) ||
+            extension.equals("png", ignoreCase = true)) {
+            documentType = "IMAGE"
+        } else if (extension.equals("PDF", ignoreCase = true) || extension.equals("pdf", ignoreCase = true)) {
+            documentType = "PDF"
+        } else if (extension.equals("txt", ignoreCase = true) ||
+            extension.equals("doc", ignoreCase = true) ||
+            extension.equals("docx", ignoreCase = true)) {
+            documentType = "DOC"
+        }
+        Timber.e("documentType : $documentType")
+        if ( !isNullOrEmpty(documentType) ) {
+            isAcceptable = true
+        }
+        return isAcceptable
+    }
+
+    fun deleteFileFromLocalSystem(Path: String) {
+        val file = File(Path)
+        if ( file.exists() ) {
+            val isDeleted = file.delete()
+            Timber.e("isDeleted--->$isDeleted")
+        } else {
+            Timber.e("File not exist")
         }
     }
 
-    fun deleteFileFromLocalSystem(Path: String): Boolean {
-        val file = File(Path)
-        return file.delete()
+    fun deleteFile(file: File) {
+        if ( file.exists() ) {
+            val isDeleted = file.delete()
+            Timber.e("isDeleted--->$isDeleted")
+        } else {
+            Timber.e("File not exist")
+        }
     }
+
+/*    fun deleteDocumentFileFromLocalSystem(context:Context, uri: Uri, filename: String) {
+        try {
+            val isDeleted = DocumentsContract.deleteDocument(context.contentResolver,uri)
+            Timber.e("Deleted : ${filename}--->$isDeleted")
+        } catch (e: SecurityException) {
+            e.printStackTrace()
+        }
+    }*/
 
     fun getVitalParameterData(parameter: String, context: Context): VitalParameter {
         val vitalParameter = VitalParameter()
@@ -507,4 +602,23 @@ object Utilities {
     fun Activity.isKeyboardClosed(): Boolean {
         return !this.isKeyboardOpen()
     }
+
+    fun showFullImageWithBitmap(bitmap: Bitmap, context:Context, isImage:Boolean) {
+        try {
+            val  dialog = DialogFullScreenView(context,isImage,"",bitmap)
+            dialog.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun showFullImageWithImgUrl(imgUrl:String,context:Context,isImage:Boolean) {
+        try {
+            val  dialog = DialogFullScreenView(context,isImage,imgUrl,null)
+            dialog.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
 }

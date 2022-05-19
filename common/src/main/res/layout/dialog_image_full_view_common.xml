@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/transparent"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/expanded_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_img_bitmap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/expanded_bitmap_image"
+            android:layout_width="@dimen/_290sdp"
+            android:layout_height="@dimen/_370sdp"
+            android:scaleType="centerCrop"
+            android:elevation="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_close_img"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:background="@drawable/circle_border"
+            android:elevation="@dimen/_5sdp"
+            android:padding="@dimen/_3sdp"
+            app:srcCompat="@drawable/ic_close"
+            android:tint="@color/black"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_3sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/expanded_bitmap_image"
+        android:layout_width="@dimen/_300sdp"
+        android:layout_height="@dimen/_370sdp"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"
+        android:visibility="visible"/>-->
+
+</LinearLayout>

@@ -104,7 +104,7 @@ class CommonWebViewActivity : BaseWebViewActivity() {
             //val file = File("file:///android_asset/apollo/ApolloStoreListwithPincodes.xlsx")
 /*            val path = File(RealPathUtil.getRecordFolderLocation())
             RealPathUtil.copyAndOpenAssetFile(this, "apollo", path)*/
-            //val path = Environment.getExternalStorageDirectory().toString()
+            //val path = Constants.primaryStorage
             val path = getExternalFilesDir(null).toString()
             Timber.i("Path---->$path")
             viewModel.copyAndOpenAssetFile(this, "apollo", path)

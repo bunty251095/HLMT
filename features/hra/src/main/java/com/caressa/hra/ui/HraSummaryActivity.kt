@@ -1,11 +1,14 @@
 package com.caressa.hra.ui
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -21,6 +24,7 @@ import com.caressa.common.constants.Constants
 import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.*
+import com.caressa.common.utils.PermissionUtil.AppPermissionListener
 import com.caressa.hra.HraHomeActivity
 import com.caressa.hra.R
 import com.caressa.hra.adapter.HraLabTestsAdapter
@@ -40,6 +44,8 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
 
     private val appColorHelper = AppColorHelper.instance!!
 
+    private var context : Context?= null
+    private var activity : Activity?= null
     private var personId = ""
     private var hraCutOff = 0
     private var wellnessscore = 0
@@ -49,7 +55,10 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
     private var observation = ""
     private var hraLabTestsAdapter: HraLabTestsAdapter? = null
     private var labTestsDoctorSuggestedAdapter: HraLabTestsAdapter? = null
-    private val permissionListener = object : PermissionUtil.AppPermissionListener {
+
+    private val permissionUtil = PermissionUtil
+
+    private val permissionListener = object : AppPermissionListener {
         override fun isPermissionGranted(isGranted: Boolean) {
             Timber.e("$isGranted")
             if ( isGranted ) {
@@ -64,6 +73,8 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
         binding = DataBindingUtil.setContentView(this, R.layout.activity_hra_summary)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        context = this
+        activity = this
         FirebaseHelper.logScreenEvent(FirebaseConstants.HRA_SUMMERY_SCREEN)
         try {
             val i = intent
@@ -108,6 +119,13 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
             FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_RESTART_CLICK)
         }
 
+        binding.btnDownloadReport.setOnClickListener {
+            val permissionResult = permissionUtil.checkStoragePermission(permissionListener,this)
+            if (permissionResult) {
+                viewModel.callDownloadReport()
+            }
+        }
+
         /*binding.btnBookPackage.setOnClickListener {
             val intentToPass = Intent()
             intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.COMMOM_WEBVIEW)
@@ -117,13 +135,6 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
             startActivity(intentToPass)
         }*/
 
-        binding.btnDownloadReport.setOnClickListener {
-            val permissionResult = PermissionUtil().getInstance()!!.checkStoragePermissionFromActivity(
-                permissionListener,this,this)
-            if (permissionResult) {
-                viewModel.callDownloadReport()
-            }
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -418,7 +429,25 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
 
     override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {}
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Timber.e("requestCode-> $requestCode")
+        Timber.e("resultCode-> $resultCode")
+        Timber.e("data-> $data")
+        try {
+            if (resultCode == Activity.RESULT_OK && requestCode == Constants.REQ_CODE_SAF) {
+                if (data != null) {
+                    //this is the uri user has provided us for folder Access
+                    val treeUri: Uri = data.data!!
+                    permissionUtil.releasePermissions(treeUri,this,storageAccessListener)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }*/
+
+/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -438,6 +467,6 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
+    }*/
 
 }

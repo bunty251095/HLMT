@@ -21,6 +21,7 @@ dependencies {
 
     implementation Libraries.circularProgress
     implementation Libraries.stepbar
+    api Libraries.documentFile
 
     // NETWORK
     implementation Libraries.retrofitCoroutineAdapter

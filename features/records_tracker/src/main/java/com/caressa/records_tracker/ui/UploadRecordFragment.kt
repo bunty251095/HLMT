@@ -28,10 +28,9 @@ import com.caressa.records_tracker.adapter.UploadRecordAdapter
 import com.caressa.records_tracker.common.DataHandler
 import com.caressa.records_tracker.databinding.FragmentUploadRecordBinding
 import com.caressa.records_tracker.viewmodel.HealthRecordsViewModel
-import com.caressa.common.utils.filepicker.FilePickerBuilder
+import com.caressa.common.utils.PermissionUtil
+import com.caressa.common.utils.PermissionUtil.AppPermissionListener
 //import droidninja.filepicker.FilePickerBuilder
-import droidninja.filepicker.FilePickerConst
-import droidninja.filepicker.utils.ContentUriUtils
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.io.IOException
@@ -42,11 +41,19 @@ class UploadRecordFragment : BaseFragment()  {
     private lateinit var binding : FragmentUploadRecordBinding
 
     private var code = ""
-    private val cameraSelectCode = 0
-    private val fileSelectCode = 1
-    private val gallerySelectCode = 2
     private var uploadRecordAdapter : UploadRecordAdapter? = null
     private val appColorHelper = AppColorHelper.instance!!
+
+    private val permissionUtil = PermissionUtil
+    private val fileUtils = FileUtils
+
+    //var mimeTypes = arrayOf("image/*", "application/*|text/*")
+    var mimeTypes = arrayOf(
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .doc & .docx
+        "application/doc",
+        "text/*")
 
     override fun getViewModel(): BaseViewModel = viewModel
 
@@ -140,13 +147,13 @@ class UploadRecordFragment : BaseFragment()  {
         }
 
         binding.layoutFile.setOnClickListener {
-            //showFileChooser(fileSelectCode)
-            showFilePicker()
+            showFileChooser()
+            //showFilePicker()
         }
 
         binding.layoutGallery.setOnClickListener {
-            //showFileChooser(gallerySelectCode)
-            showPhotoPicker()
+            showImageChooser()
+            //showPhotoPicker()
         }
 
         binding.btnBackUploadRecord.setOnClickListener {
@@ -198,7 +205,7 @@ class UploadRecordFragment : BaseFragment()  {
     }
 
     private fun proceedWithCameraPermission() {
-        val permissionResult : Boolean = PermissionUtil().getInstance()!!.checkCameraPermission( object : PermissionUtil.AppPermissionListener {
+        val permissionResult : Boolean = permissionUtil.checkCameraPermission( object : AppPermissionListener {
             override fun isPermissionGranted(isGranted: Boolean) {
                 Timber.e("$isGranted")
                 if ( isGranted ) {
@@ -215,11 +222,27 @@ class UploadRecordFragment : BaseFragment()  {
     private fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(requireContext().packageManager) != null) {
-            startActivityForResult(takePictureIntent, cameraSelectCode)
+            startActivityForResult(takePictureIntent,Constants.CAMERA_SELECT_CODE)
         }
     }
 
-    private fun showPhotoPicker() {
+    private fun showFileChooser() {
+        val chooserIntent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        chooserIntent.type = "*/*"
+        chooserIntent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes)
+        chooserIntent.addCategory(Intent.CATEGORY_OPENABLE)
+        startActivityForResult(Intent.createChooser(chooserIntent,resources.getString(R.string.SELECT_A_FILE)),Constants.FILE_SELECT_CODE)
+    }
+
+    private fun showImageChooser() {
+        val pickIntent = Intent(Intent.ACTION_PICK)
+        pickIntent.type = "image/*"
+        //val chooserIntent = Intent.createChooser(pickIntent,resources.getString(R.string.SELECT_PROFILE_PHOTO))
+        //chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(pickIntent))
+        startActivityForResult(pickIntent,Constants.GALLERY_SELECT_CODE)
+    }
+
+/*    private fun showPhotoPicker() {
         FilePickerBuilder.instance
             .setMaxCount(1)
             .setActivityTitle(resources.getString(R.string.SELECT_AN_IMAGE))
@@ -235,28 +258,9 @@ class UploadRecordFragment : BaseFragment()  {
             .setActivityTheme(R.style.FilePickerTheme)
             //.showFolderView(false)
             .pickFile(this, FilePickerConst.REQUEST_CODE_DOC)
-    }
+    }*/
 
-    private fun showFileChooser(From: Int) {
-        val galleryIntent = Intent(Intent.ACTION_GET_CONTENT, null)
-
-        if (From == fileSelectCode) {
-            galleryIntent.type = "*/*"
-        } else {
-            galleryIntent.type = "image/*"
-        }
-        galleryIntent.addCategory(Intent.CATEGORY_OPENABLE)
-        val removeProfPic = Intent()
-        val intentArray = arrayOf(galleryIntent)
-        val chooser = Intent(Intent.ACTION_CHOOSER)
-        chooser.putExtra(Intent.EXTRA_TITLE, resources.getString(R.string.SELECT_RECORDS))
-        chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray)
-        chooser.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
-        chooser.putExtra(Intent.EXTRA_INTENT, removeProfPic)
-        startActivityForResult(Intent.createChooser(galleryIntent, resources.getString(R.string.SELECT_RECORDS)), From)
-    }
-
-    private fun createRecordInSession( OriginalFileName  :String ,Name: String , Path: String, ImageType: String ) :RecordInSession {
+    private fun createRecordInSession( OriginalFileName  :String ,Name: String , Path: String, ImageType: String,recordUri : Uri ) :RecordInSession {
         val id = (0..100000).random().toString()
         return RecordInSession(
             Name = Name ,
@@ -264,29 +268,38 @@ class UploadRecordFragment : BaseFragment()  {
             OriginalFileName = OriginalFileName ,
             Path = Path ,
             Type = ImageType ,
+            FileUri = recordUri.toString(),
             Sync = "" )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
+            Timber.e("requestCode-> $requestCode")
+            Timber.e("resultCode-> $resultCode")
+            Timber.e("data-> $data")
             if (resultCode == Activity.RESULT_OK && data != null) {
-                var documentType = ""
+                val documentType: String
                 when (requestCode) {
 
-                    cameraSelectCode -> {
+                    Constants.CAMERA_SELECT_CODE -> {
                         val photo = data.extras!!.get("data") as Bitmap
                         documentType = "IMAGE"
 
                         if (!documentType.equals("", ignoreCase = true)) {
-                            val fileName = RealPathUtil.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", Configuration.strAppIdentifier + ".png")
+                            val fileName = fileUtils.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", ".png")
                             run {
-                                val save: Boolean
                                 try {
-                                    save = RealPathUtil.saveBitampAsFileToExternalCard(photo,fileName,Constants.RECORD, "")
-                                    val mainDirectoryPath = RealPathUtil.getRecordFolderLocation()
-                                    if ( save) {
-                                        val rsData = createRecordInSession(fileName,fileName,mainDirectoryPath,documentType )
-                                        addRecordToList(rsData)
+                                    val recordFile = fileUtils.saveBitmapToExternalStorage(requireContext(),photo,fileName)
+                                    val mainDirectoryPath = Utilities.getAppFolderLocation(requireContext())
+                                    if ( recordFile != null ) {
+                                        val fileSize = fileUtils.calculateFileSize(recordFile.toString(),"MB")
+                                        if (fileSize <= 5.0) {
+                                            val rsData = createRecordInSession(fileName,fileName,mainDirectoryPath,documentType,Uri.fromFile(recordFile))
+                                            addRecordToList(rsData)
+                                        } else {
+                                            Utilities.deleteFile(recordFile)
+                                            Utilities.toastMessageLong(requireContext(),resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
+                                        }
                                     }
                                 } catch (e: IOException) {
                                     e.printStackTrace()
@@ -295,7 +308,69 @@ class UploadRecordFragment : BaseFragment()  {
                         }
                     }
 
-                    FilePickerConst.REQUEST_CODE_PHOTO -> {
+                    Constants.FILE_SELECT_CODE -> {
+                        try {
+                            val uriFile = data.data
+                            Timber.e("uri--->$uriFile")
+                            val filePath = fileUtils.getFilePath(requireContext(), uriFile!!)!!
+                            val fileSize = fileUtils.calculateFileSize(filePath,"MB")
+                            if (fileSize <= 5.0) {
+                                val extension = fileUtils.getFileExt(filePath)
+                                Timber.e("Extension : $extension")
+                                if ( Utilities.isAcceptableDocumentType(extension) ) {
+                                    val fileName = fileUtils.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", filePath)
+                                    Timber.e("File Path---> $filePath")
+                                    val saveFile = fileUtils.saveRecordToExternalStorage(requireContext(),filePath,uriFile,fileName)
+                                    val mainDirectoryPath = Utilities.getAppFolderLocation(requireContext())
+                                    if ( saveFile != null ) {
+                                        val origFileName = filePath.substring(filePath.lastIndexOf("/") + 1)
+                                        val rsData = createRecordInSession( origFileName,fileName,mainDirectoryPath,Utilities.getDocumentTypeFromExt(extension),Uri.fromFile(saveFile))
+                                        addRecordToList(rsData)
+                                    }
+                                } else {
+                                    Utilities.toastMessageLong(requireContext(), extension + " " + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
+                                }
+                            } else {
+                                Utilities.toastMessageLong(context, resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
+                            }
+                        } catch (e: Exception) {
+                            Utilities.toastMessageShort(context, resources.getString(R.string.ERROR_UNABLE_TO_READ_FILE))
+                            e.printStackTrace()
+                        }
+                    }
+
+                    Constants.GALLERY_SELECT_CODE -> {
+                        try {
+                            val uriImage = data.data
+                            val imagePath = fileUtils.getFilePath(requireContext(), uriImage!!)!!
+                            val fileSize = fileUtils.calculateFileSize(imagePath,"MB")
+
+                            if (fileSize <= 5.0) {
+                                val extension1 = fileUtils.getFileExt(imagePath)
+                                Timber.e("Extension : $extension1")
+                                if ( Utilities.isAcceptableDocumentType(extension1) ) {
+                                    val fileName = fileUtils.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", imagePath)
+                                    Timber.e("File Path---> $imagePath")
+                                    val saveImage = fileUtils.saveRecordToExternalStorage(requireContext(),imagePath,uriImage,fileName)
+                                    val mainDirectoryPath = Utilities.getAppFolderLocation(requireContext())
+                                    if ( saveImage != null ) {
+                                        val origFileName = imagePath.substring(imagePath.lastIndexOf("/") + 1)
+                                        val rsData = createRecordInSession(origFileName,fileName,mainDirectoryPath,Utilities.getDocumentTypeFromExt(extension1),Uri.fromFile(saveImage))
+                                        addRecordToList(rsData)
+                                    }
+                                } else {
+                                    Utilities.toastMessageLong(context, extension1 + " " + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
+                                }
+                            } else {
+                                Utilities.toastMessageLong(context,resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
+                            }
+                        } catch (e: Exception) {
+                            Utilities.toastMessageShort(context,resources.getString(R.string.ERROR_UNABLE_TO_READ_FILE))
+                            e.printStackTrace()
+                        }
+                    }
+
+/*                    FilePickerConst.REQUEST_CODE_PHOTO -> {
                         try {
                             val photoUriList = data.getParcelableArrayListExtra<Uri>(FilePickerConst.KEY_SELECTED_MEDIA)!!.toMutableList()
                             val photoUri = photoUriList[0]
@@ -303,34 +378,22 @@ class UploadRecordFragment : BaseFragment()  {
                             val photoPath = ContentUriUtils.getFilePath(requireContext(),photoUri)!!
                             Timber.e("File Path---> $photoPath")
                             //val uri1 = photoUri
-                            //val photoPath = RealPathUtil.getPath(requireContext(), uri1!!)
-                            val fileSize = RealPathUtil.calculateFileSize(photoPath,"MB")
+                            //val photoPath = realPathUtil.getPath(requireContext(), uri1!!)
+                            val fileSize = realPathUtil.calculateFileSize(photoPath,"MB")
 
                             if (fileSize <= 5.0) {
                                 val save1: Boolean
-                                val extension1 = RealPathUtil.getFileExt(photoPath)
+                                val extension1 = realPathUtil.getFileExt(photoPath)
                                 Timber.e("Extension : $extension1")
                                 // before uploading verifing it's extension
-                                if (extension1.equals("JPEG", ignoreCase = true) ||
-                                    extension1.equals("jpg", ignoreCase = true) ||
-                                    extension1.equals("PNG", ignoreCase = true) ||
-                                    extension1.equals("png", ignoreCase = true)) {
-                                    documentType = "IMAGE"
-                                } else if (extension1.equals("PDF", ignoreCase = true) || extension1.equals("pdf", ignoreCase = true)) {
-                                    documentType = "PDF"
-                                } else if (extension1.equals("txt", ignoreCase = true) ||
-                                    extension1.equals("doc", ignoreCase = true) ||
-                                    extension1.equals("docx", ignoreCase = true)) {
-                                    documentType = "DOC"
-                                }
-                                if (!documentType.equals("", ignoreCase = true)) {
-                                    val fileName = RealPathUtil.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", photoPath)
-                                    save1 = RealPathUtil.saveFileToExternalCard(photoPath,fileName,Constants.RECORD)
+                                if ( Utilities.isAcceptableDocumentType(extension1) ) {
+                                    val fileName = realPathUtil.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", photoPath)
+                                    save1 = realPathUtil.saveFileToExternalCard(photoPath,fileName,Constants.RECORD)
                                     //save1 = DataHandler(requireContext()).writeRecordToDisk( flePathG , flePath1.toString() , FileName.toString())
-                                    val mainDirectoryPath = RealPathUtil.getRecordFolderLocation()
+                                    val mainDirectoryPath = realPathUtil.getRecordFolderLocation()
                                     if (save1) {
                                         val origFileName = photoPath.substring(photoPath.lastIndexOf("/") + 1)
-                                        val rsData = createRecordInSession(origFileName,fileName,mainDirectoryPath,documentType)
+                                        val rsData = createRecordInSession(origFileName,fileName,mainDirectoryPath,Utilities.getDocumentTypeFromExt(extension1))
                                         addRecordToList(rsData)
                                     }
                                 } else {
@@ -353,33 +416,20 @@ class UploadRecordFragment : BaseFragment()  {
                         Timber.e("File Path---> $filePath")
 
                         try {
-                            val fileSize = RealPathUtil.calculateFileSize(filePath,"MB")
+                            val fileSize = realPathUtil.calculateFileSize(filePath,"MB")
                             val save: Boolean
                             if (fileSize <= 5.0) {
-                                val extension = RealPathUtil.getFileExt(filePath)
+                                val extension = realPathUtil.getFileExt(filePath)
                                 Timber.e("Extension : $extension")
                                 // before uploading verifing it's extension
-                                if (!Utilities.isNullOrEmpty(extension)) {
-                                    if (extension.equals("JPEG", ignoreCase = true) ||
-                                        extension.equals("jpg", ignoreCase = true) ||
-                                        extension.equals("PNG", ignoreCase = true) ||
-                                        extension.equals("png", ignoreCase = true)) {
-                                        documentType = "IMAGE"
-                                    } else if (extension.equals("PDF", ignoreCase = true) || extension.equals("pdf", ignoreCase = true)) {
-                                        documentType = "PDF"
-                                    } else if (extension.equals("txt", ignoreCase = true) ||
-                                        extension.equals("doc", ignoreCase = true) ||
-                                        extension.equals("docx", ignoreCase = true)) {
-                                        documentType = "DOC"
-                                    }
-                                }
-                                if (!documentType.equals("", ignoreCase = true)) {
-                                    val fileName = RealPathUtil.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", filePath)
-                                    save = RealPathUtil.saveFileToExternalCard(filePath,fileName,Constants.RECORD)
-                                    val mainDirectoryPath = RealPathUtil.getRecordFolderLocation()
+
+                                if ( Utilities.isAcceptableDocumentType(extension) ) {
+                                    val fileName = realPathUtil.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", filePath)
+                                    save = realPathUtil.saveFileToExternalCard(filePath,fileName,Constants.RECORD)
+                                    val mainDirectoryPath = realPathUtil.getRecordFolderLocation()
                                     if (save) {
                                         val origFileName = filePath.substring(filePath.lastIndexOf("/") + 1)
-                                        val rsData = createRecordInSession( origFileName,fileName,mainDirectoryPath,documentType )
+                                        val rsData = createRecordInSession( origFileName,fileName,mainDirectoryPath,Utilities.getDocumentTypeFromExt(extension) )
                                         addRecordToList(rsData)
                                     }
                                 } else {
@@ -392,97 +442,7 @@ class UploadRecordFragment : BaseFragment()  {
                             Utilities.toastMessageShort(context, resources.getString(R.string.ERROR_UNABLE_TO_READ_FILE))
                             e.printStackTrace()
                         }
-                    }
-
-                    fileSelectCode -> {
-                        try {
-                            val uri = data.data
-                            val flePathF = RealPathUtil.getPath(requireContext(), uri!!)!!
-                            val fileSize = RealPathUtil.calculateFileSize(flePathF,"MB")
-                            val save: Boolean
-                            if (fileSize <= 5.0) {
-                                val extension = RealPathUtil.getFileExt(flePathF)
-                                Timber.e("Extension : $extension")
-                                // before uploading verifing it's extension
-                                if (!Utilities.isNullOrEmpty(extension)) {
-                                    if (extension.equals("JPEG", ignoreCase = true) ||
-                                        extension.equals("jpg", ignoreCase = true) ||
-                                        extension.equals("PNG", ignoreCase = true) ||
-                                        extension.equals("png", ignoreCase = true)) {
-                                        documentType = "IMAGE"
-                                    } else if (extension.equals("PDF", ignoreCase = true) || extension.equals("pdf", ignoreCase = true)) {
-                                        documentType = "PDF"
-                                    } else if (extension.equals("txt", ignoreCase = true) ||
-                                        extension.equals("doc", ignoreCase = true) ||
-                                        extension.equals("docx", ignoreCase = true)) {
-                                        documentType = "DOC"
-                                    }
-                                }
-                                if (!documentType.equals("", ignoreCase = true)) {
-                                    val fileName = RealPathUtil.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", flePathF)
-                                    Timber.e("File Path---> $flePathF")
-                                    save = RealPathUtil.saveFileToExternalCard(flePathF,fileName,Constants.RECORD)
-                                    val mainDirectoryPath = RealPathUtil.getRecordFolderLocation()
-                                    if (save) {
-                                        val origFileName = flePathF.substring(flePathF.lastIndexOf("/") + 1)
-                                        val rsData = createRecordInSession( origFileName,fileName,mainDirectoryPath,documentType )
-                                        addRecordToList(rsData)
-                                    }
-                                } else {
-                                    Utilities.toastMessageLong(context, extension + " " + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
-                                }
-                            } else {
-                                Utilities.toastMessageLong(context, resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
-                            }
-                        } catch (e: Exception) {
-                            Utilities.toastMessageShort(context, resources.getString(R.string.ERROR_UNABLE_TO_READ_FILE))
-                            e.printStackTrace()
-                        }
-                    }
-                    gallerySelectCode ->
-                        try {
-                            val uri1 = data.data
-                            val flePathG = RealPathUtil.getPath(requireContext(), uri1!!)!!
-                            val fileSize = RealPathUtil.calculateFileSize(flePathG,"MB")
-
-                            if (fileSize <= 5.0) {
-                                val save1: Boolean
-                                val extension1 = RealPathUtil.getFileExt(flePathG)
-                                Timber.e("Extension : $extension1")
-                                // before uploading verifing it's extension
-                                if (extension1.equals("JPEG", ignoreCase = true) ||
-                                    extension1.equals("jpg", ignoreCase = true) ||
-                                    extension1.equals("PNG", ignoreCase = true) ||
-                                    extension1.equals("png", ignoreCase = true)) {
-                                    documentType = "IMAGE"
-                                } else if (extension1.equals("PDF", ignoreCase = true) || extension1.equals("pdf", ignoreCase = true)) {
-                                    documentType = "PDF"
-                                } else if (extension1.equals("txt", ignoreCase = true) ||
-                                    extension1.equals("doc", ignoreCase = true) ||
-                                    extension1.equals("docx", ignoreCase = true)) {
-                                    documentType = "DOC"
-                                }
-                                if (!documentType.equals("", ignoreCase = true)) {
-                                    val fileName = RealPathUtil.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", flePathG)
-                                    Timber.e("File Path---> $flePathG")
-                                    save1 = RealPathUtil.saveFileToExternalCard(flePathG,fileName,Constants.RECORD)
-                                    //save1 = DataHandler(requireContext()).writeRecordToDisk( flePathG , flePath1.toString() , FileName.toString())
-                                    val mainDirectoryPath = RealPathUtil.getRecordFolderLocation()
-                                    if (save1) {
-                                        val origFileName = flePathG.substring(flePathG.lastIndexOf("/") + 1)
-                                        val rsData = createRecordInSession(origFileName,fileName,mainDirectoryPath,documentType)
-                                        addRecordToList(rsData)
-                                    }
-                                } else {
-                                    Utilities.toastMessageLong(context, extension1 + " " + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
-                                }
-                            } else {
-                                Utilities.toastMessageLong(context,resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
-                            }
-                        } catch (e: Exception) {
-                            Utilities.toastMessageShort(context,resources.getString(R.string.ERROR_UNABLE_TO_READ_FILE))
-                            e.printStackTrace()
-                        }
+                    }*/
 
                 }
             }

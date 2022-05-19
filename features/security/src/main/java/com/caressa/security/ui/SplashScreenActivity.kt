@@ -15,6 +15,7 @@ import com.caressa.common.utils.DefaultNotificationDialog
 import com.caressa.common.utils.LocaleHelper
 import com.caressa.common.utils.showDialog
 import com.caressa.model.AppConfigurationSingleton
+import com.caressa.model.tempconst.Configuration
 import com.caressa.repository.utils.Resource
 import com.caressa.security.R
 import com.caressa.security.viewmodel.HraViewModel
@@ -132,6 +133,11 @@ class SplashScreenActivity : AppCompatActivity(), DefaultNotificationDialog.OnDi
     }
 
     private fun proceedInApp() {
+        try {
+            Configuration.EntityID = viewModel.getMainUserPersonID()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
         if (viewModel.getLoginStatus()) {
 //            viewModel.getMedicalProfileSummary(forceRefresh = true)
 //            viewModel.getHraHistory()

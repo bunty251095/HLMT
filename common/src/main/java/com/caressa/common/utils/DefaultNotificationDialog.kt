@@ -3,21 +3,21 @@ package com.caressa.common.utils
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import com.caressa.common.R
 import kotlinx.android.synthetic.main.default_dialog.*
 
-class DefaultNotificationDialog(
-    context: Context?, private val onDialogValueListener: OnDialogValueListener,
-    data: DialogData
-) : Dialog(context!!), View.OnClickListener {
+class DefaultNotificationDialog(context: Context?,
+                                private val onDialogValueListener: OnDialogValueListener,
+                                data: DialogData) : Dialog(context!!), View.OnClickListener {
 
     private var dialogData: DialogData? = null
 
     init {
-        Utilities.printData("dialogData", data)
+        //Utilities.printData("dialogData", data)
         this.dialogData = data
     }
 
@@ -37,7 +37,8 @@ class DefaultNotificationDialog(
         btn_left_side.text = dialogData!!.btnLeftName
         btn_right_side.text = dialogData!!.btnRightName
         txt_dialog_title.text = dialogData!!.title
-        txt_dialog_description.text = dialogData!!.message
+        //txt_dialog_description.text = dialogData!!.message
+        txt_dialog_description.text = Html.fromHtml(dialogData!!.message)
 
         if (!dialogData!!.showLeftButton) {
             btn_left_side.visibility = View.GONE

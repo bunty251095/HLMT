@@ -41,7 +41,10 @@ open class BaseRequest(
         private val utmSource: String = Configuration.UTMSource,
         @SerializedName("UTMMedium")
         @Expose
-        private val utmMedium: String = Configuration.UTMMedium
+        private val utmMedium: String = Configuration.UTMMedium,
+        @SerializedName("EntityID")
+        @Expose
+        private val entityID: String = Configuration.EntityID
     )
 
     companion object {

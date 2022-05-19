@@ -8,6 +8,7 @@ import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import androidx.annotation.WorkerThread
+import com.caressa.common.constants.Constants
 import java.net.URISyntaxException
 
 object ContentUriUtils {
@@ -25,7 +26,7 @@ object ContentUriUtils {
             if (isExternalStorageDocument(uri)) {
                 val docId = DocumentsContract.getDocumentId(uri)
                 val split = docId.split(":").toTypedArray()
-                return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
+                return Constants.primaryStorage + "/" + split[1]
             } else if (isDownloadsDocument(uri)) {
                 val id = DocumentsContract.getDocumentId(uri)
                 uri = ContentUris.withAppendedId(

@@ -7,10 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
-import androidx.lifecycle.Observer
+import androidx.core.net.toUri
 import androidx.navigation.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
@@ -30,7 +27,6 @@ import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
-import java.io.File
 import java.util.*
 
 class DigitizeRecordFragment : BaseFragment() , com.github.barteksc.pdfviewer.listener.OnPageChangeListener ,
@@ -43,6 +39,7 @@ class DigitizeRecordFragment : BaseFragment() , com.github.barteksc.pdfviewer.li
 
     private var from = ""
     private var code = ""
+    private var uri = ""
     private var recordPath = ""
     private var recordName = ""
     private var recordType = ""
@@ -61,12 +58,13 @@ class DigitizeRecordFragment : BaseFragment() , com.github.barteksc.pdfviewer.li
             val record = RecordSingleton.getInstance()!!.getHealthRecord()
             from = it.getString(Constants.FROM)!!
             code = it.getString(Constants.CODE)!!
+            uri = it.getString(Constants.URI)!!
             recordPath = record.Path!!
             recordName = record.Name!!
             recordType = record.Type!!
             personId = record.PersonId!!.toString()
             digitizedParamList = RecordSingleton.getInstance()!!.getDigitizedParamList()
-            Timber.e("From,code,Path,Name,Type,PersonId----->$from,$code,$recordPath,$recordName,$recordType,$personId")
+            Timber.e("From,code,uri,Path,Name,Type,PersonId----->$from,$code,$uri,$recordPath,$recordName,$recordType,$personId")
             Timber.e("DigitizedParamList----->$digitizedParamList")
         }
 
@@ -103,17 +101,17 @@ class DigitizeRecordFragment : BaseFragment() , com.github.barteksc.pdfviewer.li
     }
 
     private fun registerObservers() {
-        viewModel.ocrUnitExist.observe( viewLifecycleOwner , Observer {
+        viewModel.ocrUnitExist.observe( viewLifecycleOwner , {
             if ( it != null ) {
                 Timber.i("OcrUnitExist----->${it.isExist}")
                 digitizeRecordParametersAdapter!!.itemViewRefresh(it.isExist)
             }
-        } )
-        viewModel.ocrSaveDocument.observe( viewLifecycleOwner , Observer {
+        })
+        viewModel.ocrSaveDocument.observe( viewLifecycleOwner , {
             if ( it != null ) {
                 Timber.i("OcrSaveDocument----->${it.isSaved}")
             }
-        } )
+        })
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -130,12 +128,13 @@ class DigitizeRecordFragment : BaseFragment() , com.github.barteksc.pdfviewer.li
         if ( recordType.equals("PDF",ignoreCase = true) ) {
             binding.pdfView.visibility = View.VISIBLE
             binding.docWebview.visibility = View.GONE
-            displayPdf(recordName)
+            displayPdf()
         } else if (recordType.equals("IMAGE",ignoreCase = true)) {
             binding.docWebview.visibility = View.VISIBLE
             binding.pdfView.visibility = View.GONE
-            val base = recordPath
-            val imagePath = "file://$base/$recordName"
+            //val base = recordPath
+            //val imagePath = "file://$base/$recordName"
+            val imagePath = uri
             val html = "<html><body><img src=\"$imagePath\" width=\"100%\" height=\"100%\"\"/></body></html>"
             binding.docWebview.loadDataWithBaseURL("", html, "text/html", "utf-8", "")
         }
@@ -182,10 +181,10 @@ class DigitizeRecordFragment : BaseFragment() , com.github.barteksc.pdfviewer.li
         }
     }
 
-    private fun displayPdf( assetFileName : String) {
-        //pdfFileName = assetFileName;
-        val basePath = recordPath
-        binding.pdfView.fromFile(File(basePath, assetFileName))
+    private fun displayPdf() {
+        //pdfFileName = recordName;
+        //val basePath = recordPath
+        binding.pdfView.fromUri(uri.toUri())
             .defaultPage(pageNumber)
             .enableSwipe(true)
             .swipeHorizontal(false)

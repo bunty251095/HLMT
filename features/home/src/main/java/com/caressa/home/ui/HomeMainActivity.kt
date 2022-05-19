@@ -2,7 +2,9 @@ package com.caressa.home.ui
 
 import android.app.Activity
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -22,9 +24,12 @@ import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.NavigationConstants
+import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.fitness.FitRequestCode
 import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.common.utils.*
+import com.caressa.common.utils.PermissionUtil.AppPermissionListener
+import com.caressa.common.utils.PermissionUtil.StorageAccessListener
 import com.caressa.home.R
 import com.caressa.home.adapter.NavigationDrawerListAdapter
 import com.caressa.home.common.DataHandler
@@ -33,6 +38,7 @@ import com.caressa.home.di.ScoreListener
 import com.caressa.home.viewmodel.BackgroundCallViewModel
 import com.caressa.home.viewmodel.DashboardViewModel
 import com.caressa.model.singleton.ToolsTrackerSingleton
+import com.caressa.model.tempconst.Configuration
 import com.caressa.repository.utils.Resource
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -48,14 +54,18 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
     private lateinit var binding : ActivityHomeMainBinding
 
     private val appColorHelper = AppColorHelper.instance!!
+    private val permissionUtil = PermissionUtil
 
+    private var context : Context?= null
+    private var activity : Activity?= null
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var navigationDrawerListAdapter : NavigationDrawerListAdapter? = null
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var scoreListener:ScoreListener
     private var googleAccountListener: OnGoogleAccountSelectListener? = null
-    private val permissionListener = object : PermissionUtil.AppPermissionListener {
+
+    private val permissionListener = object : AppPermissionListener {
         override fun isPermissionGranted(isGranted: Boolean) {
             Timber.e("$isGranted")
             if ( isGranted ) {
@@ -72,6 +82,11 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
         binding.viewModel = viewModel
         binding.backViewModel = backGroundCallViewModel
         binding.lifecycleOwner = this
+        context = this
+        activity = this
+
+        Configuration.EntityID = viewModel.getMainUserPersonID()
+
         setSupportActionBar(toolbar)
         configureNavController()
         callDashboardAPIs()
@@ -289,21 +304,6 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
                 FitnessDataManager(this).oAuthErrorMsg(requestCode, resultCode)
                 if ( googleAccountListener != null ) {
                     googleAccountListener!!.onGoogleAccountSelection(Constants.FAILURE)
-                }
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                val per = Environment.isExternalStorageManager()
-                Timber.e("requestCode---> $requestCode")
-                Timber.e("permissionGranted---> $per")
-                when(requestCode) {
-                    Constants.REQ_CODE_STORAGE -> {
-                        if (per) {
-                            permissionListener.isPermissionGranted(true)
-                        } else {
-                            Utilities.toastMessageShort(this,resources.getString(R.string.ERROR_STORAGE_PERMISSION))
-                        }
-                    }
                 }
             }
 

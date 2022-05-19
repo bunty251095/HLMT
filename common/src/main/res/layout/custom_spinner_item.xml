@@ -9,14 +9,14 @@
     <com.caressa.common.view.ArcView
         android:id="@+id/view1"
         android:layout_width="@dimen/_4sdp"
-        android:layout_height="@dimen/_26sdp"
+        android:layout_height="@dimen/_28sdp"
         android:background="@color/colorPrimary"
         app:isTemplate="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_spinner_name"
         style="@style/VivantTitle"
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
         android:layout_marginStart="@dimen/_13sdp"
         android:gravity="center_vertical"
         android:text="Prescription"
-        android:textSize="@dimen/_12sdp"
+        android:textSize="@dimen/_13sdp"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

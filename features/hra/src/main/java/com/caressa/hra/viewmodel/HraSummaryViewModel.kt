@@ -242,8 +242,7 @@ class HraSummaryViewModel(
                     val result = response.body()!!
                     if (response.isSuccessful) {
                         Timber.i("Server contacted and has file--> ")
-                        //val writtenToDisk =  dataHandler.writeResponseBodyToDisk(result)
-                        val writtenToDisk = HraHelper.writeResponseBodyToDisk(result, context)
+                        val writtenToDisk =  HraHelper.saveHRAReportAppDirectory(result,context)
                         Timber.i("File download was---->$writtenToDisk")
                         FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_DOWNLOAD_REPORT)
                     } else {

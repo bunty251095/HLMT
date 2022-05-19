@@ -1,25 +1,23 @@
 package com.caressa.records_tracker.ui
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.res.ColorStateList
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.FirebaseConstants
-import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.PermissionUtil
-import com.caressa.common.utils.Utilities
+import com.caressa.common.utils.PermissionUtil.AppPermissionListener
+import com.caressa.common.utils.FirebaseHelper
 import com.caressa.records_tracker.R
 import com.caressa.records_tracker.databinding.FragmentHealthRecordsDashboardBinding
 import com.caressa.records_tracker.viewmodel.HealthRecordsViewModel
@@ -33,7 +31,10 @@ class HealthRecordsDashboardFragment : BaseFragment() {
 
     private var from = ""
     private var action = ""
-    private val permissionListener = object : PermissionUtil.AppPermissionListener {
+    private var fragment : Fragment?= null
+    private val permissionUtil = PermissionUtil
+
+    private val permissionListener = object : AppPermissionListener {
         override fun isPermissionGranted(isGranted: Boolean) {
             Timber.e("$isGranted")
             if ( isGranted ) {
@@ -71,6 +72,7 @@ class HealthRecordsDashboardFragment : BaseFragment() {
         binding = FragmentHealthRecordsDashboardBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        fragment = this
         FirebaseHelper.logScreenEvent(FirebaseConstants.HEALTH_RECORDS_HOME_SCREEN)
         initialise()
         setClickable()
@@ -161,19 +163,19 @@ class HealthRecordsDashboardFragment : BaseFragment() {
     private fun setClickable() {
 
         binding.layoutUploadRecords.setOnClickListener {
-            routeToScreen(Constants.UPLOAD)
+            routeWithPermission(Constants.UPLOAD)
         }
 
         binding.layoutViewRecords.setOnClickListener {
-            routeToScreen(Constants.VIEW)
+            routeWithPermission(Constants.VIEW)
         }
 
         binding.layoutShareRecords.setOnClickListener {
-            routeToScreen(Constants.SHARE)
+            routeWithPermission(Constants.SHARE)
         }
 
         binding.layoutDigitizeRecords.setOnClickListener {
-            routeToScreen(Constants.DIGITIZE)
+            routeWithPermission(Constants.DIGITIZE)
         }
 
         binding.imgBack.setOnClickListener {
@@ -182,13 +184,13 @@ class HealthRecordsDashboardFragment : BaseFragment() {
 
     }
 
-    private fun routeToScreen(act: String) {
+    private fun routeWithPermission(act: String) {
         action = act
         Timber.e("action-> $act")
-        val isGranted = PermissionUtil().getInstance()!!.checkStoragePermissionFromFragment(
-            permissionListener,requireContext(),this)
-        if (isGranted) {
-            navigateTo(act)
+        //First check Read External Storage Permission
+        val isReadExtStorage = permissionUtil.checkStoragePermission(permissionListener,requireContext())
+        if (isReadExtStorage) {
+            navigateTo(action)
         }
     }
 
@@ -221,7 +223,25 @@ class HealthRecordsDashboardFragment : BaseFragment() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        //super.onActivityResult(requestCode, resultCode, data)
+        Timber.e("requestCode-> $requestCode")
+        Timber.e("resultCode-> $resultCode")
+        Timber.e("data-> $data")
+        try {
+            if (resultCode == Activity.RESULT_OK && requestCode == Constants.REQ_CODE_SAF) {
+                if (data != null) {
+                    //this is the uri user has provided us for folder Access
+                    val treeUri: Uri = data.data!!
+                    permissionUtil.releasePermissions(treeUri,requireContext(),storageAccessListener)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }*/
+
+/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val per = Environment.isExternalStorageManager()
@@ -240,6 +260,6 @@ class HealthRecordsDashboardFragment : BaseFragment() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
+    }*/
 
 }

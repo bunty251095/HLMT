@@ -1,41 +1,38 @@
 package com.caressa.home.ui.ProfileAndFamilyMember
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.MotionEvent
 import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.base.DialogFullScreenView
 import com.caressa.common.constants.Configuration
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.*
+import com.caressa.common.utils.PermissionUtil.AppPermissionListener
 import com.caressa.home.R
 import com.caressa.home.common.DataHandler
 import com.caressa.home.databinding.ActivityMyProfileNewBinding
 import com.caressa.home.viewmodel.ProfileFamilyMemberViewModel
 import com.caressa.model.home.Person
 import com.caressa.model.home.UpdateUserDetailsModel
-import com.karumi.dexter.Dexter
-import com.yalantis.ucrop.UCrop
-import com.caressa.common.utils.filepicker.FilePickerBuilder
-//import droidninja.filepicker.FilePickerBuilder
-import droidninja.filepicker.FilePickerConst
-import droidninja.filepicker.utils.ContentUriUtils
+import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_my_profile_new.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -49,15 +46,18 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
     private lateinit var binding : ActivityMyProfileNewBinding
 
     private val appColorHelper = AppColorHelper.instance!!
+    private val permissionUtil = PermissionUtil
+    private val fileUtils = FileUtils
 
     var strAgeGender = ""
-    private val gallerySelectCode = 1
-    private val cameraSelectCode = 2
     var completeFilePath = ""
     var hasProfileImage = false
     var needToSet = true
     private var mCalendar: Calendar? = null
     var user : Person = Person()
+
+    private var dialog : Dialog? = null
+    private var profPicBitmap : Bitmap? = null
 
     override fun getViewModel(): BaseViewModel = viewModel
 
@@ -211,6 +211,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         viewModel.removeProfileImage.observe( this , {})
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     fun setClickable() {
 
         binding.imgEditPic.setOnClickListener {
@@ -358,11 +359,15 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
 
     override fun onEditProfileImageItemClick(position: Int,code:String) {
         if (code == DataHandler.ProfileImgOption.View) {
-            viewProfilePhoto()
+            if ( profPicBitmap != null ) {
+                showProfilePhoto(profPicBitmap!!,true)
+            } else {
+                viewProfilePhoto()
+            }
         }
         if (code == DataHandler.ProfileImgOption.Gallery) {
-            //showFileChooser(gallerySelectCode)
-            showPhotoPicker()
+            showImageChooser()
+            //showPhotoPicker()
         }
         if (code == DataHandler.ProfileImgOption.Photo) {
             proceedWithCameraPermission()
@@ -418,7 +423,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
     }
 
     private fun proceedWithCameraPermission() {
-        val permissionResult : Boolean = PermissionUtil().getInstance()!!.checkCameraPermission( object : PermissionUtil.AppPermissionListener {
+        val permissionResult : Boolean = permissionUtil.checkCameraPermission( object : AppPermissionListener {
             override fun isPermissionGranted(isGranted: Boolean) {
                 Timber.e("$isGranted")
                 if ( isGranted ) {
@@ -434,11 +439,22 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
     private fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(Objects.requireNonNull(this).packageManager) != null) {
-            startActivityForResult(takePictureIntent, cameraSelectCode)
+            startActivityForResult(takePictureIntent,Constants.CAMERA_SELECT_CODE)
         }
     }
 
-    private fun showPhotoPicker() {
+    private fun showImageCropper(uriImage : Uri) {
+        CropImage.activity(uriImage)
+            .start(this)
+    }
+
+    private fun showImageChooser() {
+        val pickIntent = Intent(Intent.ACTION_PICK)
+        pickIntent.type = "image/*"
+        startActivityForResult(pickIntent,Constants.GALLERY_SELECT_CODE)
+    }
+
+/*    private fun showPhotoPicker() {
         FilePickerBuilder.instance
             .setMaxCount(1)
             .setActivityTitle(resources.getString(R.string.SELECT_PROFILE_PHOTO))
@@ -446,34 +462,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
             .setActivityTheme(R.style.FilePickerTheme)
             .enableCameraSupport(false)
             .pickPhoto(this, FilePickerConst.REQUEST_CODE_PHOTO)
-    }
-
-    private fun showFileChooser(From: Int) {
-        val galleryIntent = Intent(Intent.ACTION_GET_CONTENT, null)
-        galleryIntent.type = "image/*"
-        galleryIntent.addCategory(Intent.CATEGORY_OPENABLE)
-        val removeProfPic = Intent()
-        val intentArray = arrayOf(galleryIntent)
-        val chooser = Intent(Intent.ACTION_CHOOSER)
-        chooser.putExtra(Intent.EXTRA_TITLE, resources.getString(R.string.SELECT_RECORDS))
-        chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray)
-        chooser.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
-        chooser.putExtra(Intent.EXTRA_INTENT, removeProfPic)
-        startActivityForResult(Intent.createChooser(galleryIntent,resources.getString(R.string.SELECT_A_FILE_TO_UPLOAD)), From)
-    }
-
-    private fun showUcrop(sourceUri: Uri, destinationUri: Uri) {
-        val options = UCrop.Options()
-        options.setStatusBarColor(appColorHelper.primaryColor())
-        options.setToolbarColor(appColorHelper.primaryColor())
-        options.setActiveControlsWidgetColor(appColorHelper.primaryColor())
-        options.setToolbarWidgetColor(ContextCompat.getColor(this,R.color.white))
-        options.setFreeStyleCropEnabled(true)
-        UCrop.of(sourceUri, destinationUri) //.withAspectRatio(16, 9)
-            //.withMaxResultSize(imageWidth, imageHeight)
-            .withOptions(options)
-            .start(this)
-    }
+    }*/
 
     private fun setUserDetails(user : Person ) {
         try {
@@ -579,10 +568,10 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
             Timber.e("needToSet----->$needToSet")
             if ( needToSet  ) {
                 if (!Utilities.isNullOrEmpty(completeFilePath)) {
-                    var bitmap: Bitmap? = null
-                    bitmap = RealPathUtil.decodeFile(completeFilePath)
+                    val bitmap = BitmapFactory.decodeFile(completeFilePath)
                     if (bitmap != null) {
                         binding.imgUserPic.setImageBitmap(bitmap)
+                        profPicBitmap = bitmap
                         needToSet = false
                     }
                 }
@@ -599,107 +588,96 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        println("requestCode,resultCode,data----->$requestCode,$resultCode,$data")
-        val realPathUtil = RealPathUtil
-        var pathTemp = ""
+        Timber.e("requestCode,resultCode,data----->$requestCode,$resultCode,$data")
         try {
+
             if (resultCode == Activity.RESULT_OK && data != null) {
-                var documentType = ""
                 when (requestCode) {
 
-                    FilePickerConst.REQUEST_CODE_PHOTO -> {
-                        val photoUriList = data.getParcelableArrayListExtra<Uri>(FilePickerConst.KEY_SELECTED_MEDIA)!!.toMutableList()
-                        val photoUri = photoUriList[0]
-                        //Timber.e("photoUri---> $photoUri")
-                        val photoPath = ContentUriUtils.getFilePath(this, photoUri)!!
-                        val origFileName = photoPath.substring(photoPath.lastIndexOf("/") + 1)
-                        val fileSize = RealPathUtil.calculateFileSize(photoPath,"MB")
+                    Constants.CAMERA_SELECT_CODE -> {
+                        val photo = data.extras!!.get("data") as Bitmap
+                        val uriImage = fileUtils.getImageUri(this,photo)
+                        val cameraImgPath = fileUtils.getFilePath(this, uriImage)!!
+                        val fileSize = fileUtils.calculateFileSize(cameraImgPath,"MB")
                         if (fileSize <= 5.0) {
-                            val destinationUriGallery = Uri.fromFile(File(Environment.getExternalStorageDirectory().toString(), origFileName))
-                            showUcrop(photoUri, destinationUriGallery)
+                            showImageCropper(uriImage)
                         } else {
                             Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
                         }
                     }
 
-                    cameraSelectCode -> {
-                        val photo = data.extras!!["data"] as Bitmap?
-                        val sourceUriCamera: Uri = realPathUtil.getImageUri(this, photo)
-                        val newFlePath1: String = realPathUtil.getPath(this, sourceUriCamera)!!
-                        val origFileName1 = newFlePath1.substring(newFlePath1.lastIndexOf("/") + 1)
-                        pathTemp = realPathUtil.getPath(this, sourceUriCamera)!!
-                        val destinationUriCamera = Uri.fromFile(File(Environment.getExternalStorageDirectory().toString(), origFileName1))
-                        showUcrop(sourceUriCamera, destinationUriCamera)
-                    }
+                    Constants.GALLERY_SELECT_CODE -> {
+                        val uriImage = data.data
+                        val imagePath = fileUtils.getFilePath(this, uriImage!!)!!
+                        val fileSize = fileUtils.calculateFileSize(imagePath,"MB")
+                        if (fileSize <= 5.0) {
+                            val extension = fileUtils.getFileExt(imagePath)
+                            if ( Utilities.isAcceptableDocumentType(extension) ) {
 
-                    gallerySelectCode -> {
-                        val sourceUriGallery = data.data
-                        val newFilePathGallery: String = realPathUtil.getPath(this, sourceUriGallery!!)!!
-                        val origFileName2 = newFilePathGallery.substring(newFilePathGallery.lastIndexOf("/") + 1)
-                        val newFile2 = File(Environment.getExternalStorageDirectory().toString(), origFileName2)
-                        val destinationUriGallery = Uri.fromFile(newFile2)
-                        showUcrop(sourceUriGallery, destinationUriGallery)
-                    }
-
-                    UCrop.REQUEST_CROP ->
-                        try {
-                            val resultUri = UCrop.getOutput(data)
-                            val flePath1: String = realPathUtil.getPath(this, resultUri!!)!!
-                            val fileSize = realPathUtil.calculateFileSize(flePath1,"MB")
-                            if (fileSize <= 5.0) {
-                                var save1 = false
-                                val extension1: String = realPathUtil.getFileExt(flePath1)
-                                Timber.e("Extension : $extension1")
-                                // before uploading verifing it's extension
-                                if (extension1.equals("JPEG", ignoreCase = true) ||
-                                    extension1.equals("jpg", ignoreCase = true) ||
-                                    extension1.equals("PNG", ignoreCase = true) ||
-                                    extension1.equals("png", ignoreCase = true)) {
-                                    documentType = "IMAGE"
-                                } else if (extension1.equals("PDF", ignoreCase = true) ||
-                                    extension1.equals("pdf", ignoreCase = true)) {
-                                    documentType = "PDF"
-                                } else if (extension1.equals("txt", ignoreCase = true) ||
-                                    extension1.equals("doc", ignoreCase = true) ||
-                                    extension1.equals("docx", ignoreCase = true)) {
-                                    documentType = "DOC"
-                                }
-                                if (!documentType.equals("", ignoreCase = true)) {
-                                    val fileName: String = realPathUtil.generateUniqueFileName(Configuration.strAppIdentifier + "_REC", flePath1)
-                                    Timber.e("File Path---> $flePath1")
-                                    save1 = realPathUtil.saveFileToExternalCard(flePath1,fileName,Constants.RECORD)
-                                    val mainDirectoryPath: String = realPathUtil.getRecordFolderLocation()
-                                    if (save1) {
-                                        Utilities.deleteFileFromLocalSystem(pathTemp)
-                                        viewModel.callUploadProfileImageApi(this,fileName, mainDirectoryPath, flePath1)
-                                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_PIC_EDIT_CLICK)
-                                    }
-                                } else {
-                                    Utilities.deleteFileFromLocalSystem(pathTemp)
-                                    Utilities.toastMessageShort(this, extension1 + " " + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
-                                }
+                                showImageCropper(uriImage)
                             } else {
-                                Utilities.deleteFileFromLocalSystem(pathTemp)
-                                Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
+                                Utilities.toastMessageLong(this, extension + " " + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
                             }
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_UNABLE_TO_READ_FILE))
+                        } else {
+                            Utilities.toastMessageShort(this, resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
                         }
-
-                    UCrop.RESULT_ERROR -> {
-                        val  cropError: Throwable?= UCrop.getError(data)
                     }
+
                 }
-            } else {
-                //	DialogHelper.showNoticeDialog(" Error: "," Unable to upload this file", 1, context);
             }
+
+            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                val result = CropImage.getActivityResult(data)
+                if (resultCode == RESULT_OK) {
+                    val imageUri = result.uri
+                    val imagePath = fileUtils.getFilePath(this, imageUri!!)!!
+                    val fileSize = fileUtils.calculateFileSize(imagePath,"MB")
+                    if (fileSize <= 5.0) {
+                        val extension = fileUtils.getFileExt(imagePath)
+                        if ( Utilities.isAcceptableDocumentType(extension) ) {
+                            val fileName = fileUtils.generateUniqueFileName(Configuration.strAppIdentifier + "_PROFPIC",imagePath)
+                            Timber.e("File Path---> $imagePath")
+                            val saveImage = fileUtils.saveRecordToExternalStorage(this,imagePath,imageUri,fileName)
+                            if ( saveImage != null ) {
+                                Utilities.deleteFileFromLocalSystem(imagePath)
+                                viewModel.callUploadProfileImageApi(this,fileName,saveImage)
+                            }
+                        } else {
+                            Utilities.toastMessageLong(this, extension + " " + resources.getString(R.string.ERROR_FILES_NOT_ACCEPTED))
+                        }
+                    } else {
+                        Utilities.toastMessageLong(this,resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
+                    }
+                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                    val error = result.error
+                    Timber.e("ImageCropperError--->$error")
+                }
+            }
+
+            /*            if ( requestCode == Constants.CAMERA_SELECT_CODE && resultCode == Activity.RESULT_OK ) {
+                Timber.e("********onCameraPhotoClicked********")
+                //val photo = MediaStore.Images.Media.getBitmap(contentResolver,Uri.fromFile(photoFile))
+                val photo = if (Build.VERSION.SDK_INT < 28) {
+                    MediaStore.Images.Media.getBitmap(contentResolver,cameraFileUri)
+                } else {
+                    val source: ImageDecoder.Source = ImageDecoder.createSource(contentResolver,cameraFileUri!!)
+                    ImageDecoder.decodeBitmap(source)
+                }
+                val fileSize = RealPathUtil.calculateDocumentFileSize(RealPathUtil.recordFile!!,"MB")
+                if (fileSize <= 5.0) {
+                    showImageCropper(RealPathUtil.recordUri.toUri())
+                    //Utilities.deleteDocumentFileFromLocalSystem(this,RealPathUtil.recordUri.toUri(),tempFileName)
+                } else {
+                    Utilities.deleteDocumentFileFromLocalSystem(this,cameraFileUri!!,tempFileName)
+                    Utilities.toastMessageLong(this,resources.getString(R.string.ERROR_FILE_SIZE_LESS_THEN_5MB))
+                }
+                Utilities.deleteFile(photoFile)
+            }*/
+
             //Utilities.hideKeyboard(this)
             super.onActivityResult(requestCode, resultCode, data)
         } catch (e: Exception) {
             e.printStackTrace()
-        } finally {
-
         }
     }
 
@@ -725,6 +703,15 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         binding.layoutDetailsShimmer.startShimmer()
         binding.layoutDetailsShimmer.visibility = View.GONE
         binding.layoutShowDetails.visibility = View.VISIBLE
+    }
+
+    fun showProfilePhoto(bitmap:Bitmap, isImage:Boolean) {
+        try {
+            dialog = DialogFullScreenView(this,isImage,"",bitmap)
+            dialog!!.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 }

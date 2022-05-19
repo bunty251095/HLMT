@@ -91,26 +91,4 @@ class CommonWebViewFragment : BaseWebViewFragment() {
         }
     }
 
-    private fun setClickable() {
-        btn_medicalStoreDetails.setOnClickListener {
-            val file = File("file:///android_asset/apollo/ApolloStoreListwithPincodes.xlsx")
-/*            val path = File(RealPathUtil.getRecordFolderLocation())
-            RealPathUtil.copyAndOpenAssetFile(this, "apollo", path)*/
-            val path = Environment.getExternalStorageDirectory()
-            RealPathUtil.copyAssetFolderToFolder(requireContext(), "apollo", path)
-
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.setDataAndType(
-                Uri.fromFile(File(RealPathUtil.getRecordFolderLocation() + "/" + "ApolloStoreListwithPincodes.xlsx")), "application/vnd.ms-excel")
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            try {
-                requireContext().startActivity(intent)
-            } catch (e: ActivityNotFoundException) {
-                e.printStackTrace()
-                AlertDialogHelper( requireContext() , "No Application Available to View Excel." ,"You need Excel viewer to open this file.")
-            }
-        }
-    }
-
 }

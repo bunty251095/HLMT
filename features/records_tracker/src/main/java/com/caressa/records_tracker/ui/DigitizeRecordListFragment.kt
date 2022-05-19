@@ -113,7 +113,7 @@ class DigitizeRecordListFragment : BaseFragment() {
                 if ( !Utilities.isNullOrEmptyOrZero(record.Id.toString()) ) {
                     when {
                         it.equals(Constants.VIEW,ignoreCase = true) -> {
-                            DataHandler(requireContext()).viewRecord(record)
+                            DataHandler(requireContext()).viewDocument(record)
                         }
                         it.equals(Constants.SHARE,ignoreCase = true) -> {
                             DataHandler(requireContext()).shareDataWithAppSingle(record,viewModel)

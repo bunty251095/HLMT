@@ -55,8 +55,8 @@ interface StoreRecordsDao {
     @Query("UPDATE HealthDocumentTable SET Sync=:sync,RecordDate=:recordDate,PersonName=:name WHERE Id=:id")
     fun updateHealthDocument(id: String, sync: String, recordDate: String, name: String)
 
-    @Query("UPDATE  HealthDocumentTable SET Path=:path , Sync=:sync WHERE Id=:id")
-    fun updateHealthDocumentPathSync(id: String, path: String, sync: String)
+    @Query("UPDATE  HealthDocumentTable SET Path=:path , Sync=:sync , FileUri =:fileUri WHERE Id=:id")
+    fun updateHealthDocumentPathSync(id : String, path : String, fileUri : String ,sync : String )
 
     @Query("DELETE FROM HealthDocumentTable WHERE Id=:recordId")
     fun deleteHealthDocument(recordId: String)
@@ -68,16 +68,16 @@ interface StoreRecordsDao {
 
     // *****************************  RecordInSession Table  *****************************
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRecordInSession(recordsInSession: RecordInSession)
+    fun insertRecordInSession( recordsInSession : RecordInSession )
 
     @Query("SELECT * FROM RecordsInSessionTable")
     fun getRecordsInSession(): List<RecordInSession>
 
-    @Query("DELETE FROM RecordsInSessionTable WHERE Name=:name")
-    fun deleteWhereRecordsInSessionTable(name: String)
+    @Query("SELECT * FROM RecordsInSessionTable WHERE Name=:name")
+    fun getRecordInSessionWhere( name : String ): RecordInSession
 
     @Query("DELETE FROM RecordsInSessionTable WHERE Name=:name and Path=:path")
-    fun deleteRecordInSession(name: String, path: String)
+    fun deleteRecordInSession( name : String , path : String )
 
     @Query("DELETE FROM RecordsInSessionTable")
     fun deleteRecordsInSessionTable()

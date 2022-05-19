@@ -3,8 +3,7 @@ package com.caressa.home.viewmodel
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.net.Uri
 import android.util.Base64
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -45,6 +44,8 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
 
     val personId = sharedPref.getString(PreferenceConstants.PERSONID,"")!!
     val authToken = sharedPref.getString(PreferenceConstants.TOKEN,"")!!
+
+    private val fileUtils = FileUtils
 
     var requestData : UpdateRelativeModel? = null
     var relativeToRemove : List<UserRelatives> = listOf()
@@ -448,7 +449,6 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
             }
         }
     }
-
     fun callGetProfileImageApi( activity: MyProfileNewActivity,documentID : String ) = viewModelScope.launch(dispatchers.main) {
 
         val requestData = ProfileImageModel(Gson().toJson(
@@ -467,30 +467,30 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if (it.data != null ) {
                     val document = it.data!!.healthRelatedDocument
-                    Timber.e("Document--->$document")
                     val fileName = document.fileName
                     val fileBytes = document.fileBytes
-                    //val personId = document.personID
-                    val tempFileurl: String = RealPathUtil.getProfileFolderLocation() + "/" + fileName
-                    val pathUrl: Boolean = RealPathUtil.isFileExist(tempFileurl)
-                    val path = RealPathUtil.getProfileFolderLocation()
-
-                    if (!pathUrl) {
-                        val decodedImage: Bitmap = RealPathUtil.convertBase64ToBitmap(fileBytes)
-                        if (decodedImage != null) {
-                            var save = false
-                            save = RealPathUtil.saveBitampAsFileToExternalCard(decodedImage, fileName, Constants.PROFILE, "")
-                            //save = utilityForFiles.saveBitampAsFileToExternalCard(decodedImage,fileName,Constants.PROFILE, "")
-                            if (save) {
-                                updateUserProfileImgPath(fileName,path)
+                    try {
+                        val path = Utilities.getAppFolderLocation(context)
+                        if (!File(path,fileName).exists()) {
+                            if ( !Utilities.isNullOrEmpty(fileBytes) ) {
+                                val decodedImage = fileUtils.convertBase64ToBitmap(fileBytes)
+                                if (decodedImage != null) {
+                                    val saveRecordUri = fileUtils.saveBitmapToExternalStorage(context,decodedImage,fileName)
+                                    if ( saveRecordUri != null ) {
+                                        updateUserProfileImgPath(fileName,path)
+                                    }
+                                }
                             }
+                        } else {
+                            updateUserProfileImgPath(fileName,path)
                         }
-                    } else {
-                        updateUserProfileImgPath(fileName,path)
+                        activity.completeFilePath = path + "/"  + fileName
+                        activity.setProfilePic()
+                        activity.stopImageShimmer()
+                    } catch ( e : Exception ) {
+                        e.printStackTrace()
+                        activity.stopImageShimmer()
                     }
-                    activity.completeFilePath = path + "/"  + fileName
-                    activity.setProfilePic()
-                    activity.stopImageShimmer()
                 }
             }
             if (it.status == Resource.Status.ERROR) {
@@ -505,18 +505,16 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
         }
     }
 
-    fun callUploadProfileImageApi( activity: MyProfileNewActivity,name:String, path:String, cropImgPath:String)
-            = viewModelScope.launch(dispatchers.main) {
-
+    fun callUploadProfileImageApi( activity: MyProfileNewActivity,name:String,imageFile:File) = viewModelScope.launch(dispatchers.main) {
+        val destPath: String = Utilities.getAppFolderLocation(context)
         var encodedImage =""
         try {
-            val file = File(path , name )
-            val bitmap = BitmapFactory.decodeFile(file.getAbsolutePath())
-            if (bitmap != null) {
-                val bytesFile = ByteArray(file.length().toInt())
-                val fileInputStream = FileInputStream(file)
-                fileInputStream.read(bytesFile)
-                encodedImage = Base64.encodeToString(bytesFile, Base64.DEFAULT)
+            val bytesFile = ByteArray(imageFile.length().toInt())
+            context.contentResolver.openFileDescriptor(Uri.fromFile(imageFile), "r")?.use { parcelFileDescriptor ->
+                FileInputStream(parcelFileDescriptor.fileDescriptor).use { inStream ->
+                    inStream.read(bytesFile)
+                    encodedImage = Base64.encodeToString(bytesFile, Base64.DEFAULT)
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -526,7 +524,6 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
         val DocumentTypeCode = RequestBody.create(MediaType.parse("text/plain"), "PROFPIC")
         val ByteArray = RequestBody.create(MediaType.parse("text/plain"), encodedImage)
         val AuthTicket = RequestBody.create(MediaType.parse("text/plain"), authToken)
-        Utilities.deleteFileFromLocalSystem(cropImgPath)
 
         _progressBar.value = Event("Uploading Profile Photo.....")
         _uploadProfileImage.removeSource(uploadProfileImageSource)
@@ -544,18 +541,10 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                     if ( !Utilities.isNullOrEmptyOrZero(profileImageID) ) {
                         activity.hasProfileImage = true
                         activity.needToSet = true
-                        val sourceFile = File(path,name)
-                        val destpath =  RealPathUtil.getProfileFolderLocation()
-                        RealPathUtil.createDirectory(destpath)
-                        val destFile = File(destpath,name)
-                        val save = RealPathUtil.copy(sourceFile,destFile)
-                        if ( save ) {
-                            Utilities.toastMessageShort(context,context.resources.getString(R.string.PROFILE_PHOTO_UPDATED))
-                            updateUserProfileImgPath(name,destpath)
-                            sourceFile.delete()
-                            activity.completeFilePath = destpath + "/" + name
-                            activity.setProfilePic()
-                        }
+                        Utilities.toastMessageShort(context,context.resources.getString(R.string.PROFILE_PHOTO_UPDATED))
+                        updateUserProfileImgPath(name,destPath)
+                        activity.completeFilePath = destPath + "/" + name
+                        activity.setProfilePic()
                     }
                 }
             }

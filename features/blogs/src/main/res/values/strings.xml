@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">blogs</string>
 
     <string name="blog_link">https://blogs.vivant.vivant.me/</string>
     <string name="CONTINUE_READING">Continue Reading.....</string>
