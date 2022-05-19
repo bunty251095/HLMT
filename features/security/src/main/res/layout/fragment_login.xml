@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.caressa.security.viewmodel.HlmtLoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/_50sdp"
+                android:padding="@dimen/_12sdp">
+
+                <com.caressa.common.view.ArcImageView
+                    android:id="@+id/img_logo"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:scaleType="fitEnd"
+                    app:srcCompat="@drawable/hl_pace_logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <com.caressa.common.view.ArcTextView
+                    android:id="@+id/lbl_hlmt_login_info"
+                    style="@style/VivantTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="@string/LOG_IN"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_16sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/img_logo"
+                    app:layout_constraintStart_toStartOf="@+id/img_logo"
+                    app:layout_constraintTop_toBottomOf="@+id/img_logo" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_edt_login_email_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_40sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/selector_border_button"
+                    app:layout_constraintEnd_toEndOf="@+id/lbl_hlmt_login_info"
+                    app:layout_constraintStart_toStartOf="@+id/lbl_hlmt_login_info"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_hlmt_login_info">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:tint="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/til_edt_login_email_phone"
+                        app:srcCompat="@drawable/ic_mail_outline" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_edt_login_email_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxBackgroundMode="none"
+                        app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:passwordToggleEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:fontFamily="@font/dax_regular"
+                            android:hint="@string/EMAIL_ADDRESS"
+                            android:imeOptions="actionNext"
+                            android:inputType="textEmailAddress"
+                            android:maxLength="50"
+                            android:paddingStart="@dimen/_40sdp"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_10sdp"
+                            android:textSize="@dimen/_14sdp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_validation"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:src="@drawable/img_validation_tick"
+                        android:tint="@color/vivantGreen"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/til_edt_login_email_phone"
+                        app:layout_constraintTop_toBottomOf="@+id/til_edt_login_email_phone" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_edt_login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/selector_border_button"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_email_phone"
+                    app:layout_constraintStart_toStartOf="@+id/layout_edt_login_email_phone"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_email_phone">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_signup_password"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:tint="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/til_edt_login_password"
+                        app:srcCompat="@drawable/img_password" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_edt_login_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxBackgroundMode="none"
+                        app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/security_grey_light">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_login_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:fontFamily="@font/dax_regular"
+                            android:hint="@string/PASSWORD"
+                            android:imeOptions="actionDone"
+                            android:inputType="textPassword"
+                            android:maxLength="20"
+                            android:paddingStart="@dimen/_40sdp"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_10sdp"
+                            android:text=""
+                            android:textSize="@dimen/_14sdp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_forgot_password"
+                    style="@style/VivantDescription"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:text="@string/FORGOT_PASSWORD"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_password"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_edt_login_password" />
+
+                <com.caressa.common.view.ArcButton
+                    android:id="@+id/btn_login"
+                    style="@style/CustomButton"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="@string/LOGIN"
+                    android:textSize="@dimen/_14sdp"
+                    android:visibility="invisible"
+                    app:isTemplate="true"
+                    app:layout_constraintEnd_toEndOf="@+id/layout_edt_login_password"
+                    app:layout_constraintStart_toStartOf="@+id/layout_edt_login_password"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password" />
+
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.caressa.common.view.ArcImageView
+            android:id="@+id/img_submit"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/circle_bg"
+            android:padding="@dimen/_10sdp"
+            android:tint="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/logo_container"
+            app:layout_constraintBottom_toTopOf="@id/logo_container"
+            app:srcCompat="@drawable/arrow_right" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/logo_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.caressa.common.view.ArcTextView
+                style="@style/VivantTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/POWERED_BY"
+                android:textSize="@dimen/_10sdp" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                >
+
+                <com.caressa.common.view.ArcImageView
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_26sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/hlmt_banner" />
+
+                <com.caressa.common.view.ArcImageView
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_26sdp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/vivant_banner_green" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

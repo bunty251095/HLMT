@@ -55,9 +55,9 @@
     <string name="RE_ENTER_NEW_PASSWORD">Re-enter New Password</string>
     <string name="RESET_PASSWORD">Reset Password</string>
     <string name="FORGOT_YOUR_PASSWORD">Forgot Your Password?</string>
-    <string name="FORGOT_PASSWORD_DESC">Enter your email address &amp; we will send\nyou instructions to rest your password</string>
+    <string name="FORGOT_PASSWORD_DESC">Enter your email address to get password.</string>
     <string name="VERIFICATION_CODE">Verification Code</string>
-    <string name="ENTER_NUMBER_TO_GET_OTP">Enter your mobile number to receive your TAC</string>
+    <string name="ENTER_EMAIL_TO_GET_OTP">Your Email Address to receive your TAC</string>
     <string name="HLMT_LOGIN_DESCRIPTION">Enter your HLMTakaful360&#xb0; account\ndetails to login</string>
 
     <string name="DO_YOU_HAVE_HLM_360_ACCOUNT">Are you a HLMTakaful360&#xb0; \naccount holder? </string>
@@ -68,7 +68,7 @@
 
     <string name="PASSWORD_CRITERIA">Your Password Criteria</string>
     <string name="PASSWORD_CRITERIA_DESC">Your Password length Should be minimum 6 characters</string>
-    <string name="OTP_SENT_DESC">Enter TAC (you will receive an SMS)</string>
+    <string name="OTP_SENT_DESC">Your email address to receive TAC</string>
     <string name="LOGIN_SELECTION_INFO">Keep pace with us! </string>
 
     <!--    <string name="error_invalid_otp">Please enter a valid TAC</string>-->
@@ -93,7 +93,25 @@
     <string name="ERROR_FIELD_REQUIRED">This field is required</string>
     <string name="ERROR_STORAGE_PERMISSION_REQUIRED">Storage Permission is required</string>
 
-    <string name="CHANGE_MOBILE_NUMBER">Change Mobile Number?</string>
+    <string name="CHANGE_EMAIL_ADDRESS">Change Email Address?</string>
     <string name="HLMT_USER_ID">HLMT User ID</string>
     <string name="ACCEPT_TERMS_CONDITION">Please accept Terms &amp; Conditions</string>
+
+    <string name="PASSWORD_CRITERIA_DESC1">Password length should be minimum 8 characters</string>
+    <string name="PASSWORD_CRITERIA_DESC2">Password characters must include :</string>
+    <string name="PASSWORD_CRITERIA_DESC3">Minimum one Uppercase</string>
+    <string name="PASSWORD_CRITERIA_DESC4">Minimum one Lowercase</string>
+    <string name="PASSWORD_CRITERIA_DESC5">Minimum one Numeric</string>
+    <string name="PASSWORD_CRITERIA_DESC6">Minimum one Special Character</string>
+    <string name="PASSWORD_CRITERIA_DESC7">Username should not be same as Password</string>
+
+    <string name="VALIDATE_PASSWORD">Please Enter Valid Password</string>
+    <string name="VALIDATE_NEW_PASSWORD">Please Enter Valid New Password</string>
+    <string name="VALIDATE_CONFIRM_PASSWORD">Please Enter Valid Confirm Password</string>
+
+    <string name="VALIDATE_EMPTY_OLD_PASSWORD">Please Enter Old Password</string>
+    <string name="VALIDATE_EMPTY_NEW_PASSWORD">Please Enter New Password</string>
+    <string name="VALIDATE_EMPTY_CONFIRM_PASSWORD">Please Enter Confirm Password</string>
+    <string name="ERROR_UNABLE_TO_RESET_PASSWORD">Unable to Reset Password</string>
+
 </resources>

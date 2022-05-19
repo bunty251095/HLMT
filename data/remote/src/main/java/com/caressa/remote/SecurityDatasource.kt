@@ -29,6 +29,12 @@ class SecurityDatasource(
     fun getValidateOTPResponse(data: GenerateOtpModel) =
         encryptedUserService.validateOTPforUserAPI(data)
 
+    fun getForgetPasswordResponse(data: ForgetPasswordModel)=
+        encryptedUserService.fetchForgetPassword(data)
+
+    fun getResetPasswordResponse(data: ResetPasswordModel)=
+        encryptedUserService.getRestPasswordData(data)
+
     fun updatePasswordResponse(data: ChangePasswordModel) =
         encryptedUserService.updatePasswordAPI(data)
 

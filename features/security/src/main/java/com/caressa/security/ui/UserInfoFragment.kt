@@ -25,7 +25,7 @@ class UserInfoFragment: BaseFragment() {
     private var mCalendar: Calendar? = null
     private val viewModel : SignUpViewModel by viewModel()
     private lateinit var binding: FragmentUserInfoBinding
-    private val args: UserInfoFragmentArgs by navArgs()
+//    private val args: UserInfoFragmentArgs by navArgs()
 
     override fun getViewModel(): BaseViewModel = viewModel
 
@@ -69,27 +69,27 @@ class UserInfoFragment: BaseFragment() {
 
         binding.btnDone.setOnClickListener {
 
-            Timber.i("Name--->${args.name}")
-            Timber.i("Mobile No--->${args.mobileNo}")
-            Timber.i("Email--->${args.email}")
-            Timber.i("Password--->${args.passCode}")
-            if (DateHelper.isDateAbove18Years(DateHelper.convertDateToStr(mCalendar?.time, DateHelper.DISPLAY_DATE_DDMMMYYYY))) {
-                if (args.passCode.equals("123456",true)){
-                    viewModel.callRegisterAPI(name = args.name, emailStr = args.email, passwordStr = "", phoneNumber = args.mobileNo, gender = (if (binding.rbMale.isChecked) 1 else 2).toString(),
-                        dob = DateHelper.convertDateToStr(mCalendar?.time,
-                            DateHelper.SERVER_DATE_YYYYMMDD), socialLogin = true)
-                }else {
-                    viewModel.callRegisterAPI(
-                        name = args.name,
-                        emailStr = args.email,
-                        passwordStr = args.passCode,
-                        phoneNumber = args.mobileNo,
-                        gender = (if (binding.rbMale.isChecked) 1 else 2).toString(),
-                        dob = DateHelper.convertDateToStr(mCalendar?.time, DateHelper.SERVER_DATE_YYYYMMDD))
-                }
-            } else {
-                Utilities.toastMessageShort(context,resources.getString(R.string.ERROR_AGE_GREATER_THEN_18_YEARS))
-            }
+//            Timber.i("Name--->${args.name}")
+//            Timber.i("Mobile No--->${args.mobileNo}")
+//            Timber.i("Email--->${args.email}")
+//            Timber.i("Password--->${args.passCode}")
+//            if (DateHelper.isDateAbove18Years(DateHelper.convertDateToStr(mCalendar?.time, DateHelper.DISPLAY_DATE_DDMMMYYYY))) {
+//                if (args.passCode.equals("123456",true)){
+//                    viewModel.callRegisterAPI(name = args.name, emailStr = args.email, passwordStr = "", phoneNumber = args.mobileNo, gender = (if (binding.rbMale.isChecked) 1 else 2).toString(),
+//                        dob = DateHelper.convertDateToStr(mCalendar?.time,
+//                            DateHelper.SERVER_DATE_YYYYMMDD), socialLogin = true)
+//                }else {
+//                    viewModel.callRegisterAPI(
+//                        name = args.name,
+//                        emailStr = args.email,
+//                        passwordStr = args.passCode,
+//                        phoneNumber = args.mobileNo,
+//                        gender = (if (binding.rbMale.isChecked) 1 else 2).toString(),
+//                        dob = DateHelper.convertDateToStr(mCalendar?.time, DateHelper.SERVER_DATE_YYYYMMDD))
+//                }
+//            } else {
+//                Utilities.toastMessageShort(context,resources.getString(R.string.ERROR_AGE_GREATER_THEN_18_YEARS))
+//            }
         }
 
     }

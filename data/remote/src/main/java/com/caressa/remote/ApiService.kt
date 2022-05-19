@@ -56,6 +56,12 @@ interface ApiService {
     @POST("security/api/OTP/Generate")
     fun generateOTPforUserAPI(@Body generateOtpModel: GenerateOtpModel): Deferred<BaseResponse<GenerateOtpModel.GenerateOTPResponse>>
 
+    @POST("Security/api/Security/ForgotPassword")
+    fun fetchForgetPassword(@Body forgetPasswordModel: ForgetPasswordModel): Deferred<BaseResponse<ForgetPasswordModel.ForgetPasswordResponse>>
+
+    @POST("Security/api/Security/ChangePassword")
+    fun getRestPasswordData(@Body resetPasswordModel: ResetPasswordModel): Deferred<BaseResponse<ResetPasswordModel.ResetPasswordResponse>>
+
     @POST("security/api/OTP/Validate")
     fun validateOTPforUserAPI(@Body generateOtpModel: GenerateOtpModel): Deferred<BaseResponse<GenerateOtpModel.GenerateOTPResponse>>
 

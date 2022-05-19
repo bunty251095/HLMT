@@ -8,20 +8,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
-import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.Event
-import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Validation
 import com.caressa.model.entity.Users
-import com.caressa.model.security.GenerateOtpModel
-import com.caressa.model.security.LoginModel
-import com.caressa.model.security.LoginNameExistsModel
-import com.caressa.model.security.PhoneExistsModel
+import com.caressa.model.security.*
 import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
 import com.caressa.security.R
 import com.caressa.security.domain.UserManagementUseCase
+import com.caressa.security.model.UserInfo
 import com.caressa.security.ui.LoginWithOtpFragmentDirections
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
@@ -39,10 +35,6 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
     val loginResponse: LiveData<LoginModel.Response> get() = _loginResponse
     var hlmtLoginUserSource: LiveData<Resource<LoginModel.Response>> = MutableLiveData()
 
-    var userSourceOTP: LiveData<Resource<PhoneExistsModel.IsExistResponse>> = MutableLiveData()
-    private val _otpLoginData = MediatorLiveData<PhoneExistsModel.IsExistResponse>()
-    val otpLoginData: LiveData<PhoneExistsModel.IsExistResponse> get() = _otpLoginData
-
     var userSourceGenerateOTP: LiveData<Resource<GenerateOtpModel.GenerateOTPResponse>> = MutableLiveData()
     private val _otpGenerateData = MediatorLiveData<GenerateOtpModel.GenerateOTPResponse>()
     val otpGenerateData: LiveData<GenerateOtpModel.GenerateOTPResponse> get() = _otpGenerateData
@@ -51,9 +43,6 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
     private val _otpVerifyData = MediatorLiveData<GenerateOtpModel.GenerateOTPResponse>()
     val otpVerifyData: LiveData<GenerateOtpModel.GenerateOTPResponse> get() = _otpVerifyData
 
-    private val _otpScreenData = MediatorLiveData<JSONObject>()
-    val otpScreenData: LiveData<JSONObject> get() = _otpScreenData
-
     private val _isLoading = MutableLiveData<Resource.Status>()
     val isLoading: LiveData<Resource.Status> get() = _isLoading
 
@@ -61,13 +50,21 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
     val isLoginName: LiveData<LoginNameExistsModel.IsExistResponse> get() = _isLoginName
     var loginNameUserSource: LiveData<Resource<LoginNameExistsModel.IsExistResponse>> = MutableLiveData()
 
-    fun checkLoginNameExistOrNot(phoneNumber: String) = viewModelScope.launch(dispatchers.main){
+    var forgetPasswordSource: LiveData<Resource<ForgetPasswordModel.ForgetPasswordResponse>> = MutableLiveData()
+    val _forgetPassword = MediatorLiveData<ForgetPasswordModel.ForgetPasswordResponse>()
+    val forgetPassword: LiveData<ForgetPasswordModel.ForgetPasswordResponse> get() = _forgetPassword
 
-        if(!phoneNumber.isNullOrEmpty() && Validation.isValidPhoneNumber(phoneNumber)) {
+    init {
+        calIGenerateOTPApi(UserInfo.emailAddress)
+    }
+
+    fun checkLoginNameExistOrNot(emailAddress: String) = viewModelScope.launch(dispatchers.main){
+
+        if(!emailAddress.isEmpty() && Validation.isValidEmail(emailAddress)) {
             val requestData = LoginNameExistsModel(
                 Gson().toJson(
                     LoginNameExistsModel.JSONDataRequest(
-                        loginName = phoneNumber
+                        loginName = emailAddress
                     ), LoginNameExistsModel.JSONDataRequest::class.java
                 )
             )
@@ -84,10 +81,10 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
                     if (it.data?.isExist.equals("true", true)) {
                         isLogin = true
-                        calIGenerateOTPApi(phoneNumber)
+                        calIGenerateOTPApi(emailAddress)
                     } else {
                         isLogin = false
-                        calIGenerateOTPApi(phoneNumber)
+                        calIGenerateOTPApi(emailAddress)
                     }
                 }
 
@@ -97,19 +94,18 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                 }
             }
         }else{
-            toastMessage("Please Enter valid mobile number")
+            toastMessage("Please Enter valid Email Address")
         }
     }
 
-    fun calIGenerateOTPApi(phoneNumber: String) = viewModelScope.launch(dispatchers.main) {
+    fun calIGenerateOTPApi(emailAddress: String) = viewModelScope.launch(dispatchers.main) {
         Timber.i("Generate OTP Called")
         val requestData = GenerateOtpModel(
             Gson().toJson(
                 GenerateOtpModel.JSONDataRequest(
                     GenerateOtpModel.UPN(
-                        loginName = phoneNumber,
-                        emailAddress = "",
-                        primaryPhone = phoneNumber),
+                        emailAddress = emailAddress,
+                        ),
                     from = "102", message = "Generating One Time Password (TAC)"), GenerateOtpModel.JSONDataRequest::class.java))
 
         _progressBar.value = Event("Generating TAC...")
@@ -119,13 +115,6 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
         }
         _otpGenerateData.addSource(userSourceGenerateOTP) {
             _otpGenerateData.value = it.data
-            val jObject = JSONObject()
-
-            jObject.put("email","")
-            jObject.put("phone",phoneNumber)
-
-            _otpScreenData.value = jObject
-
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
             }
@@ -137,16 +126,14 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
         }
     }
 
-    fun callValidateOTPforUserAPI(otpReceived: String, phoneNumber: String) = viewModelScope.launch(dispatchers.main) {
+    fun callValidateOTPforUserAPI(otpReceived: String, emailAddress: String) = viewModelScope.launch(dispatchers.main) {
             Timber.i("Validate OTP Called")
-        if(validateDetails(otpReceived,phoneNumber)) {
+        if(validateDetails(otpReceived,emailAddress)) {
             val requestData = GenerateOtpModel(
                 Gson().toJson(
                     GenerateOtpModel.JSONDataRequest(
                         GenerateOtpModel.UPN(
-                            loginName = phoneNumber,
-                            emailAddress = "",
-                            primaryPhone = phoneNumber
+                            emailAddress = emailAddress,
                         ),
                         OTP = otpReceived, from = "103", message = "Validating OTP..."
                     ), GenerateOtpModel.JSONDataRequest::class.java
@@ -165,14 +152,12 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                 if (it.status == Resource.Status.SUCCESS) {
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
                     if (it.data?.validity.equals("true", true)) {
-                        if (isLogin) {
-                            fetchLoginResponse(username = phoneNumber, passwordStr = "123456")
-                        } else {
-                            navigate(
-                                LoginWithOtpFragmentDirections.actionLoginViaOTPFragmentToUserInfoScreen(
-                                    phoneNumber
-                                )
-                            )
+                        if (UserInfo.from.equals(Constants.LOGIN)) {
+                            fetchLoginResponse(username = UserInfo.emailAddress, passwordStr = UserInfo.password)
+                        }else if(UserInfo.from.equals(Constants.REGISTER)){
+                            navigate(LoginWithOtpFragmentDirections.actionLoginWithOtpFragmentToUserDetailsFragment())
+                        } else if(UserInfo.from.equals(Constants.FORGET)){
+                            callForgetPassword(UserInfo.emailAddress)
                         }
                         //toastMessage("OTP verified successfully")
                     } else {
@@ -203,7 +188,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
 
         val requestData = LoginModel(Gson().toJson(
             LoginModel.JSONDataRequest(
-            mode = "LOGIN",name=name,phoneNumber = username,password = passwordStr), LoginModel.JSONDataRequest::class.java))
+            mode = "LOGIN",name=name, emailAddress = username,password = passwordStr), LoginModel.JSONDataRequest::class.java))
 
         _progressBar.value = Event("Validating Username..")
         _loginResponse.removeSource(hlmtLoginUserSource)
@@ -259,11 +244,11 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                             .apply()
                         // Added by Rohit
                         //RealPathUtil.creatingLocalDirctories()
-                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_LOGIN_SUCCESSFUL_EVENT)
+//                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_LOGIN_SUCCESSFUL_EVENT)
                         saveUserData(loginData)
-                        navigate(LoginWithOtpFragmentDirections.actionLoginViaOTPFragmentToMainActivity())
+                        navigate(LoginWithOtpFragmentDirections.actionLoginWithOtpFragmentToMainActivity())
                     }else{
-                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_LOGIN_FAIL_EVENT)
+//                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_LOGIN_FAIL_EVENT)
                         toastMessage("Unable to login with this user.")
                     }
                 }catch (e: Exception){e.printStackTrace()}
@@ -275,6 +260,42 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
             }
         }
     }
+
+    fun callForgetPassword(email: String) =
+        viewModelScope.launch(dispatchers.main) {
+
+            val requestData = ForgetPasswordModel(
+                Gson().toJson(
+                    ForgetPasswordModel.JSONDataRequest(
+                        emailAddress = email,
+                    ), ForgetPasswordModel.JSONDataRequest::class.java
+                )
+            )
+
+            _progressBar.value = Event("Changing Password...")
+            _forgetPassword.removeSource(forgetPasswordSource)
+            withContext(dispatchers.io) {
+                forgetPasswordSource = userManagementUseCase.invokeForgetPassword(true, requestData)
+            }
+            _forgetPassword.addSource(forgetPasswordSource) {
+                _forgetPassword.value = it.data
+
+                if (it.status == Resource.Status.SUCCESS) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.data!!.success.equals(Constants.TRUE, true)) {
+                        UserInfo.tempPassword = it.data!!.newPassword
+                        navigate(LoginWithOtpFragmentDirections.actionLoginWithOtpFragmentToChangePasswordFragment())
+                    } else {
+                        toastMessage(context.getString(R.string.ERROR_GENERAL))
+                    }
+                }
+
+                if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    toastMessage(it.errorMessage)
+                }
+            }
+        }
 
     private fun saveUserData(usr: LoginModel.Data)= viewModelScope.launch {
         var user = Users(accountId = usr.accountID,personId = usr.personID.toDouble().toInt(),firstName = usr.name,dateOfBirth = usr.dateOfBirth,gender = if(usr.gender.equals("Male",true))"1" else "2",age = usr.age

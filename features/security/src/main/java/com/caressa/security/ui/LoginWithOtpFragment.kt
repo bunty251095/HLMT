@@ -11,6 +11,7 @@ import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.FirebaseHelper
 import com.caressa.security.R
 import com.caressa.security.databinding.FragmentLoginWithOtpBinding
+import com.caressa.security.model.UserInfo
 import com.caressa.security.viewmodel.LoginWithOtpViewModel
 import kotlinx.android.synthetic.main.fragment_login_with_otp.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -34,6 +35,7 @@ class LoginWithOtpFragment : BaseFragment() {
     }
 
     private fun setObserver() {
+        viewModel.forgetPassword.observe(viewLifecycleOwner,{})
         viewModel.isLoginName.observe(viewLifecycleOwner, Observer {
             if (it!=null) {
                 if (it.isExist.equals("TRUE", true)) {
@@ -55,12 +57,10 @@ class LoginWithOtpFragment : BaseFragment() {
         })
 
         viewModel.otpGenerateData.observe(viewLifecycleOwner, Observer {
-            if(it != null) {
+            /*if(it != null) {
                 if (it.status?.equals("SUCCESS", true) == true) {
                     FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.SEND_OTP_SUCCESSFUL_EVENT)
                     binding.verifyCodeLayout.visibility = View.VISIBLE
-//                    binding.btnSendOtp.visibility = View.GONE
-                    binding.txtEditNumber.visibility = View.VISIBLE
                     binding.lblEnterNumberDesc.visibility = View.GONE
                     binding.edtMobileNumber.isClickable = false
                     binding.edtMobileNumber.isCursorVisible = false
@@ -68,7 +68,6 @@ class LoginWithOtpFragment : BaseFragment() {
                 } else {
                     binding.verifyCodeLayout.visibility = View.GONE
 //                    binding.btnSendOtp.visibility = View.VISIBLE
-                    binding.txtEditNumber.visibility = View.GONE
                     binding.lblEnterNumberDesc.visibility = View.VISIBLE
                     binding.edtMobileNumber.isClickable = false
                     binding.edtMobileNumber.isCursorVisible = false
@@ -78,18 +77,22 @@ class LoginWithOtpFragment : BaseFragment() {
             }else{
                 binding.verifyCodeLayout.visibility = View.GONE
 //                binding.btnSendOtp.visibility = View.VISIBLE
-                binding.txtEditNumber.visibility = View.GONE
                 binding.lblEnterNumberDesc.visibility = View.VISIBLE
                 binding.edtMobileNumber.isClickable = true
                 binding.edtMobileNumber.isCursorVisible = true
                 binding.edtMobileNumber.isEnabled = true
 
-            }
+            }*/
         })
     }
 
     private fun init() {
-        binding.verifyCodeLayout.visibility = View.GONE
+        binding.verifyCodeLayout.visibility = View.VISIBLE
+        binding.lblEnterNumberDesc.visibility = View.VISIBLE
+        binding.edtMobileNumber.isClickable = false
+        binding.edtMobileNumber.isCursorVisible = false
+        binding.edtMobileNumber.isEnabled = false
+        binding.edtMobileNumber.setText(UserInfo.emailAddress)
     }
 
     private fun setClickable() {
@@ -108,7 +111,7 @@ class LoginWithOtpFragment : BaseFragment() {
         }
 
         binding.imgSubmit.setOnClickListener {
-            if (binding.txtEditNumber.visibility != View.VISIBLE){
+            if (binding.verifyCodeLayout.visibility != View.VISIBLE){
                 viewModel.checkLoginNameExistOrNot(binding.edtMobileNumber.text.toString())
                 startCountdownTimer(120)
             }else{

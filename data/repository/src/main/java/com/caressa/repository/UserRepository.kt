@@ -69,6 +69,16 @@ interface UserRepository {
         data: HLMTLoginModel
     ): LiveData<Resource<HLMTLoginModel.LoginResponse>>
 
+    suspend fun forgetPasswordResponse(
+        forceRefresh: Boolean = false,
+        data: ForgetPasswordModel
+    ): LiveData<Resource<ForgetPasswordModel.ForgetPasswordResponse>>
+
+    suspend fun resetPasswordResponse(
+        forceRefresh: Boolean = false,
+        data: ResetPasswordModel
+    ): LiveData<Resource<ResetPasswordModel.ResetPasswordResponse>>
+
     suspend fun saveUserInfo(data: Users)
 
 }
@@ -283,6 +293,67 @@ class UserRepositoryImpl(
 
             override fun createCallAsync(): Deferred<BaseResponse<HLMTLoginModel.LoginResponse>> {
                 return datasource.fetchHLMT360LoginResponse(data)
+            }
+
+        }.build().asLiveData()
+    }
+
+    override suspend fun forgetPasswordResponse(
+        forceRefresh: Boolean,
+        data: ForgetPasswordModel
+    ): LiveData<Resource<ForgetPasswordModel.ForgetPasswordResponse>> {
+        return object :
+            NetworkBoundResource<ForgetPasswordModel.ForgetPasswordResponse, BaseResponse<ForgetPasswordModel.ForgetPasswordResponse>>(
+                context
+            ) {
+            override fun processResponse(response: BaseResponse<ForgetPasswordModel.ForgetPasswordResponse>): ForgetPasswordModel.ForgetPasswordResponse {
+                return response.jSONData
+            }
+
+            override suspend fun saveCallResults(items: ForgetPasswordModel.ForgetPasswordResponse) {
+
+            }
+
+            override fun shouldFetch(data: ForgetPasswordModel.ForgetPasswordResponse?): Boolean {
+                return true
+            }
+
+            override fun shouldStoreInDb(): Boolean {
+                return false
+            }
+
+            override suspend fun loadFromDb(): ForgetPasswordModel.ForgetPasswordResponse {
+                return ForgetPasswordModel.ForgetPasswordResponse()
+            }
+
+            override fun createCallAsync(): Deferred<BaseResponse<ForgetPasswordModel.ForgetPasswordResponse>> {
+                return datasource.getForgetPasswordResponse(data)
+            }
+
+        }.build().asLiveData()
+    }
+
+    override suspend fun resetPasswordResponse(
+        forceRefresh: Boolean,
+        data: ResetPasswordModel
+    ): LiveData<Resource<ResetPasswordModel.ResetPasswordResponse>> {
+        return object : NetworkBoundResource<ResetPasswordModel.ResetPasswordResponse,BaseResponse<ResetPasswordModel.ResetPasswordResponse>>(context){
+            override fun processResponse(response: BaseResponse<ResetPasswordModel.ResetPasswordResponse>): ResetPasswordModel.ResetPasswordResponse {
+                return response.jSONData
+            }
+
+            override suspend fun saveCallResults(items: ResetPasswordModel.ResetPasswordResponse) {}
+
+            override fun shouldFetch(data: ResetPasswordModel.ResetPasswordResponse?): Boolean = true
+
+            override fun shouldStoreInDb(): Boolean = false
+
+            override suspend fun loadFromDb(): ResetPasswordModel.ResetPasswordResponse {
+                return ResetPasswordModel.ResetPasswordResponse("")
+            }
+
+            override fun createCallAsync(): Deferred<BaseResponse<ResetPasswordModel.ResetPasswordResponse>> {
+                return datasource.getResetPasswordResponse(data)
             }
 
         }.build().asLiveData()

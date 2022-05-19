@@ -305,6 +305,9 @@ object Constants {
     const val REGISTER_PHR: String = "REGISTER"
     const val USER_INFO: String = "PREF_USER_INFO"
     const val TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss"
+    const val REGISTER = "REGISTER"
+    const val LOGIN = "LOGIN"
+    const val FORGET = "FORGET"
 
     // BMI CALCULATION VALUES
     const val HEIGHT_MIN = 119

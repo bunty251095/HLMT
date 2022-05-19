@@ -40,7 +40,7 @@ class DataHandler( val context: Context) {
     fun getNavDrawerList() : List<NavDrawerOption>{
         val list:ArrayList<NavDrawerOption> = ArrayList()
         list.add(NavDrawerOption(R.drawable.img_drawer_home,context.resources.getString(R.string.MENU_HOME),NavDrawer.HOME,ContextCompat.getColor(context,R.color.vivant_orange_yellow)))
-        list.add(NavDrawerOption(R.drawable.img_link,context.resources.getString(R.string.MENU_LINK),NavDrawer.LINK,ContextCompat.getColor(context,R.color.colorPrimary)))
+//        list.add(NavDrawerOption(R.drawable.img_link,context.resources.getString(R.string.MENU_LINK),NavDrawer.LINK,ContextCompat.getColor(context,R.color.colorPrimary)))
         list.add(NavDrawerOption(R.drawable.img_drawer_my_profile,context.resources.getString(R.string.MENU_MY_PROFILE),NavDrawer.MY_PRO,ContextCompat.getColor(context,R.color.vivant_soft_pink)))
         list.add(NavDrawerOption(R.drawable.img_drawer_family,context.resources.getString(R.string.MENU_FAMILY_MEMBERS),NavDrawer.FAMILY_PRO,ContextCompat.getColor(context,R.color.vivant_purple)))
 //        list.add(NavDrawerOption(R.drawable.img_doctor,context.resources.getString(R.string.MENU_FAMILY_DOCTORS),NavDrawer.FAMILY_DOCTOR,ContextCompat.getColor(context,R.color.vivant_green_blue_two)))
@@ -299,18 +299,20 @@ class DataHandler( val context: Context) {
     }
 
     fun getHasProfileImageOptionList() : List<Option>{
+        var localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<Option> = ArrayList()
-        list.add(Option(R.drawable.img_view,context.resources.getString(R.string.VIEW),R.color.vivantCyan,ProfileImgOption.View))
-        list.add(Option(R.drawable.ic_upload_gallery,context.resources.getString(R.string.OPEN_GALLERY),R.color.purple,ProfileImgOption.Gallery))
-        list.add(Option(R.drawable.ic_upload_photo,context.resources.getString(R.string.TAKE_PHOTO),R.color.green,ProfileImgOption.Photo))
-        list.add(Option(R.drawable.img_delete,context.resources.getString(R.string.REMOVE_PHOTO),R.color.vivant_watermelon,ProfileImgOption.Remove))
+        list.add(Option(R.drawable.img_view,localResource.getString(R.string.VIEW),R.color.vivantCyan,ProfileImgOption.View))
+        list.add(Option(R.drawable.ic_upload_gallery,localResource.getString(R.string.OPEN_GALLERY),R.color.purple,ProfileImgOption.Gallery))
+        list.add(Option(R.drawable.ic_upload_photo,localResource.getString(R.string.TAKE_PHOTO),R.color.green,ProfileImgOption.Photo))
+        list.add(Option(R.drawable.img_delete,localResource.getString(R.string.REMOVE_PHOTO),R.color.vivant_watermelon,ProfileImgOption.Remove))
         return list
     }
 
     fun getNotProfileImageOptionList() : List<Option>{
+        var localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<Option> = ArrayList()
-        list.add(Option(R.drawable.ic_upload_gallery,context.resources.getString(R.string.OPEN_GALLERY),R.color.purple,ProfileImgOption.Gallery))
-        list.add(Option(R.drawable.ic_upload_photo,context.resources.getString(R.string.TAKE_PHOTO),R.color.green,ProfileImgOption.Photo))
+        list.add(Option(R.drawable.ic_upload_gallery,localResource.getString(R.string.OPEN_GALLERY),R.color.purple,ProfileImgOption.Gallery))
+        list.add(Option(R.drawable.ic_upload_photo,localResource.getString(R.string.TAKE_PHOTO),R.color.green,ProfileImgOption.Photo))
         return list
     }
 
@@ -345,10 +347,11 @@ class DataHandler( val context: Context) {
     }
 
     fun getWellnessCentreList() : List<WellnessCentreDetails> {
+        var localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<WellnessCentreDetails> = ArrayList()
-        list.add(WellnessCentreDetails(context.resources.getString(R.string.TITLE_TOOLS_AND_TRACKER), "VIVANT" , context.resources.getString(R.string.DESC_TOOLS_TRACKER) , R.drawable.img_tools_and_cals,ContextCompat.getColor(context,R.color.vivant_watermelon)))
-        list.add(WellnessCentreDetails(context.resources.getString(R.string.TITLE_MEDICINES_HEALTHCARE), "MedLife" , context.resources.getString(R.string.DESC_MED_LIFE) , R.drawable.img_medicines_healthcare,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
-        list.add(WellnessCentreDetails(context.resources.getString(R.string.TITLE_SEARCH_HEALTH_PACKAGE), "VIVANT" , context.resources.getString(R.string.DESC_HEALTH_PACKAGE) , R.drawable.img_health_package,ContextCompat.getColor(context,R.color.vivant_orange_yellow)))
+        list.add(WellnessCentreDetails(localResource.getString(R.string.TITLE_TOOLS_AND_TRACKER), "VIVANT" , context.resources.getString(R.string.DESC_TOOLS_TRACKER) , R.drawable.img_tools_and_cals,ContextCompat.getColor(context,R.color.vivant_watermelon)))
+        list.add(WellnessCentreDetails(localResource.getString(R.string.TITLE_MEDICINES_HEALTHCARE), "MedLife" , context.resources.getString(R.string.DESC_MED_LIFE) , R.drawable.img_medicines_healthcare,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
+        list.add(WellnessCentreDetails(localResource.getString(R.string.TITLE_SEARCH_HEALTH_PACKAGE), "VIVANT" , context.resources.getString(R.string.DESC_HEALTH_PACKAGE) , R.drawable.img_health_package,ContextCompat.getColor(context,R.color.vivant_orange_yellow)))
         return list
     }
 

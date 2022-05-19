@@ -62,6 +62,20 @@ class UserManagementUseCase(private val repository: UserRepository,private val h
         }
     }
 
+    suspend fun invokeForgetPassword(isForceRefresh : Boolean, data: ForgetPasswordModel): LiveData<Resource<ForgetPasswordModel.ForgetPasswordResponse>> {
+        return Transformations.map(
+            repository.forgetPasswordResponse(isForceRefresh,data)) {
+            it
+        }
+    }
+
+    suspend fun invokeResetPassword(isForceRefresh : Boolean, data: ResetPasswordModel): LiveData<Resource<ResetPasswordModel.ResetPasswordResponse>> {
+        return Transformations.map(
+            repository.resetPasswordResponse(isForceRefresh,data)) {
+            it
+        }
+    }
+
     suspend  fun invokeTermsCondition(isForceRefresh : Boolean, data: TermsConditionsModel): LiveData<Resource<TermsConditionsModel.TermsConditionsResponse>> {
         return Transformations.map(
             repository.getTermsConditionsResponse(isForceRefresh,data)) {

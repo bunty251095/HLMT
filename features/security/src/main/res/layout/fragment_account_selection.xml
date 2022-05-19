@@ -159,13 +159,27 @@
                 android:text="@string/POWERED_BY"
                 android:textSize="@dimen/_10sdp" />
 
-            <com.caressa.common.view.ArcImageView
-                android:layout_width="@dimen/_130sdp"
-                android:layout_height="@dimen/_26sdp"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/hlmt_banner" />
+                >
 
+                <com.caressa.common.view.ArcImageView
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_26sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/hlmt_banner" />
+
+                <com.caressa.common.view.ArcImageView
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_26sdp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/vivant_banner_green" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

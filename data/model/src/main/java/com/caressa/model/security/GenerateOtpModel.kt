@@ -44,15 +44,12 @@ data class GenerateOtpModel(
     )
 
     data class UPN(
-        @SerializedName("LoginName")
-        @Expose
-        private val loginName: String = "",
         @SerializedName("EmailAddress")
         @Expose
         private val emailAddress: String = "",
-        @SerializedName("PrimaryPhone")
+        @SerializedName("PartnerCode")
         @Expose
-        private val primaryPhone: String = "",
+        private val partnerCode: String = Configuration.PartnerCode,
         @SerializedName("ApplicationCode")
         @Expose
         private val applicationCode: String = Configuration.ApplicationCode

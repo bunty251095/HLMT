@@ -20,7 +20,6 @@ import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
 import com.caressa.security.R
 import com.caressa.security.domain.UserManagementUseCase
-import com.caressa.security.ui.UserInfoFragmentDirections
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -187,7 +186,7 @@ class SignUpViewModel(private val userManagementUseCase: UserManagementUseCase, 
                 sharedPref.edit().putString(PreferenceConstants.ADMIN_PERSON_ID, pid.toString()).apply()
                 sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE, Constants.SELF_RELATIONSHIP_CODE).apply()
                 if(!dob.equals("")){
-                    navigate(UserInfoFragmentDirections.actionUserInfoFragmentToMainActivity())
+//                    navigate(UserInfoFragmentDirections.actionUserInfoFragmentToMainActivity())
                 }else {
                     //navigate(SignUpFragmentDirections.actionSignUpFragmentToMainActivity())
                 }

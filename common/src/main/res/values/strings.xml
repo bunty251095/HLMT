@@ -79,6 +79,7 @@
     <string name="ALTERNATE_NUMBER">Alternate Number</string>
     <string name="EMAIL">Email</string>
     <string name="EMAIL_ADDRESS">Email Address</string>
+    <string name="EMAIL_ADDRESS_HINT">*Email Address</string>
     <string name="ALTERNATE_EMAIL_ADDRESS">Alternate Email Address</string>
     <string name="ADDRESS">Address</string>
     <string name="AGE">Age</string>
@@ -276,7 +277,7 @@
     <string name="ERROR_MOBILE_ALREADY_REGISTERED">This Number is already Registered with us</string>
     <string name="VALIDATE_NAME">Please Enter valid Name</string>
     <string name="VALIDATE_SPECIALIZATION">Please Enter valid Specialization</string>
-    <string name="ERROR_UNABLE_VERIFY_OTP">Unable to verify OTP provided, please try again</string>
+    <string name="ERROR_UNABLE_VERIFY_OTP">Unable to verify TAC provided, please try again</string>
     <string name="ERROR_CONTACT_US_QUERY">Query Should be between 5–1000 letter\'s</string>
     <string name="ERROR_FILE_NOT_EXIST">File does not exist in the system</string>
     <string name="ERROR_NO_APPLICATION_TO_VIEW_PDF">No Application Available to View PDF</string>

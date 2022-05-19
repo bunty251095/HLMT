@@ -52,23 +52,23 @@ class LoginSelectionFragment: BaseFragment() {
         viewModel.updateUserPreference()
         binding.btnRegister.setOnClickListener {
             if(binding.termsCheckBox.isChecked) {
-                viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelctionToStepOneFragment())
+                viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelectionFragmentToRegistrationFragment())
             }else{
                 viewModel.toastMessage("Please accept Terms and Conditions")
             }
         }
         binding.btnSignIn.setOnClickListener {
             if(binding.termsCheckBox.isChecked) {
-                viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelctionToStepOneFragment())
+                viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelectionFragmentToLoginFragment())
             }else{
                 viewModel.toastMessage("Please accept Terms and Conditions")
             }
         }
         binding.txtLoginTermsofservice.setOnClickListener {
-            viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelectionToTermsAndCondition())
+            viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelectionFragmentToTermsAndConditionFragment())
         }
         binding.txtLoginPrivacyPolicy.setOnClickListener {
-            viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelectionToPrivacyPolicyFragment())
+            viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelectionFragmentToPrivacyPolicyFragment())
         }
     }
 

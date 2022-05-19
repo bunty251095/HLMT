@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_security"
+    app:startDestination="@id/loginSelectionFragment">
+
+
+    <fragment
+        android:id="@+id/loginSelectionFragment"
+        android:name="com.caressa.security.ui.LoginSelectionFragment"
+        android:label="LoginSelectionFragment" >
+        <action
+            android:id="@+id/action_loginSelectionFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_loginSelectionFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginSelectionFragment_to_termsAndConditionFragment"
+            app:destination="@id/termsAndConditionFragment" />
+        <action
+            android:id="@+id/action_loginSelectionFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyPolicyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/termsAndConditionFragment"
+        android:name="com.caressa.security.ui.TermsAndConditionFragment"
+        android:label="TermsAndConditionFragment" />
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.caressa.security.ui.PrivacyPolicyFragment"
+        android:label="PrivacyPolicyFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.caressa.security.ui.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_loginWithOtpFragment"
+            app:destination="@id/loginWithOtpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_main_activity"
+            app:destination="@id/main_activity" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
+            app:destination="@id/forgetPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.caressa.security.ui.RegistrationFragment"
+        android:label="RegistrationFragment" >
+        <action
+            android:id="@+id/action_registrationFragment_to_loginWithOtpFragment"
+            app:destination="@id/loginWithOtpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginWithOtpFragment"
+        android:name="com.caressa.security.ui.LoginWithOtpFragment"
+        android:label="LoginWithOtpFragment" >
+        <action
+            android:id="@+id/action_loginWithOtpFragment_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" />
+        <action
+            android:id="@+id/action_loginWithOtpFragment_to_main_activity"
+            app:destination="@id/main_activity" />
+        <action
+            android:id="@+id/action_loginWithOtpFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userDetailsFragment"
+        android:name="com.caressa.security.ui.UserDetailsFragment"
+        android:label="UserDetailsFragment" >
+        <action
+            android:id="@+id/action_userDetailsFragment_to_main_activity"
+            app:destination="@id/main_activity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/main_activity"
+        android:name="com.caressa.security.ui.SplashScreenActivity"/>
+    <fragment
+        android:id="@+id/forgetPasswordFragment"
+        android:name="com.caressa.security.ui.ForgetPasswordFragment"
+        android:label="ForgetPasswordFragment" >
+        <action
+            android:id="@+id/action_forgetPasswordFragment_to_loginWithOtpFragment"
+            app:destination="@id/loginWithOtpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.caressa.security.ui.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_main_activity"
+            app:destination="@id/main_activity" />
+        <action
+            android:id="@+id/action_changePasswordFragment_to_loginFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@layout/fragment_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+</navigation>
