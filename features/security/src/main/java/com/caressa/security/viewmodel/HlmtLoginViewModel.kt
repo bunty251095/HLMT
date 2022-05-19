@@ -9,10 +9,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.caressa.common.base.BaseViewModel
-import com.caressa.common.constants.Configuration
-import com.caressa.common.constants.Constants
-import com.caressa.common.constants.FirebaseConstants
-import com.caressa.common.constants.PreferenceConstants
+import com.caressa.common.constants.*
 import com.caressa.common.utils.*
 import com.caressa.model.entity.Users
 import com.caressa.model.home.UpdateUserDetailsModel
@@ -21,9 +18,12 @@ import com.caressa.model.security.*
 import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
 import com.caressa.security.domain.UserManagementUseCase
-import com.caressa.security.ui.HlmtLoginFragmentDirections
+import com.caressa.security.model.UserInfo
+import com.caressa.security.ui.LoginFragmentDirections
 import com.caressa.security.ui.UserDetailsFragmentDirections
 import com.google.gson.Gson
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType
@@ -44,6 +44,9 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
 
     private val _user = MediatorLiveData<Users>()
     val user: LiveData<Users> get() = _user
+    val flow:Flow<String> = flow{
+
+    }
 
     private val _isLoginName = MediatorLiveData<LoginNameExistsModel.IsExistResponse>()
     val isLoginName: LiveData<LoginNameExistsModel.IsExistResponse> get() = _isLoginName
@@ -97,10 +100,19 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
                     if (it.data?.isExist.equals("true", true)) {
                         isAccountExist = true
+                        UserInfo.also {
+                            it.emailAddress = username
+                            it.password = passwordStr
+                        }
+                        UserInfo.from = Constants.LOGIN
+                        if(!UserInfo.fromChangePassword) {
+                            navigate(LoginFragmentDirections.actionLoginFragmentToLoginWithOtpFragment())
+                        }else {
+                            fetchLoginResponse(username = username, passwordStr = passwordStr, hlmtEmpId = "", hlmtUserId = "", hlmtLoginStatus = "")
+                        }
                     } else {
                         isAccountExist = false
                     }
-                    fetchHLMT360LoginResponse(username = username, passwordStr = passwordStr)
                 }
 
                 if (it.status == Resource.Status.ERROR) {
@@ -115,7 +127,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
 
         val requestData = LoginModel(Gson().toJson(
             LoginModel.JSONDataRequest(
-                mode = "LOGIN",name=name,phoneNumber = username,password = "123456",hlmtLoginStatus = hlmtLoginStatus,hlmtUserID = hlmtUserId,employeeID = hlmtEmpId), LoginModel.JSONDataRequest::class.java))
+                mode = "LOGIN",name=name, emailAddress = username,password = passwordStr,hlmtLoginStatus = hlmtLoginStatus,hlmtUserID = hlmtUserId,employeeID = hlmtEmpId), LoginModel.JSONDataRequest::class.java))
 
         _progressBar.value = Event("Validating Username..")
         _loginResponse.removeSource(hlmtLoginUserSource)
@@ -126,30 +138,33 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
             if (it.status == Resource.Status.SUCCESS){
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 Timber.i("Data=> "+it)
-                var loginData = it.data?.response?.loginData!!
+                val loginData = it.data?.response?.loginData!!
 
-                sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN,true).apply()
-                sharedPref.edit().putString(PreferenceConstants.EMAIL,loginData.emailAddress).apply()
-                sharedPref.edit().putString(PreferenceConstants.PHONE,loginData.phoneNumber).apply()
-                sharedPref.edit().putString(PreferenceConstants.TOKEN, loginData.context).apply()
-                sharedPref.edit().putString(PreferenceConstants.ACCOUNTID, loginData.accountID.toString()).apply()
-                sharedPref.edit().putString(PreferenceConstants.FIRSTNAME, loginData.name).apply()
-                sharedPref.edit().putString(PreferenceConstants.GENDER, if(loginData.gender.equals("Male",true))"1" else "2").apply()
-                sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE, Constants.SELF_RELATIONSHIP_CODE).apply()
-                sharedPref.edit().putString(PreferenceConstants.DOB,loginData.dateOfBirth).apply()
-                sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER,loginData.IsHLMTUser).apply()
-                sharedPref.edit().putString(PreferenceConstants.HLMT_USER_ID,loginData.HLMTUserID).apply()
-                sharedPref.edit().putString(PreferenceConstants.HLMT_USERNAME,loginData.HLMTUserName).apply()
-                sharedPref.edit().putString(PreferenceConstants.ACCOUNT_LINK_STATUS,loginData.accountLinkStatus).apply()
+                if(loginData.personID.isNullOrEmpty()){
+                    toastMessage("Invalid Credentials Provided")
+                }else{
+                    sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN,true).apply()
+                    sharedPref.edit().putString(PreferenceConstants.EMAIL,loginData.emailAddress).apply()
+                    sharedPref.edit().putString(PreferenceConstants.PHONE,loginData.phoneNumber).apply()
+                    sharedPref.edit().putString(PreferenceConstants.TOKEN, loginData.context).apply()
+                    sharedPref.edit().putString(PreferenceConstants.ACCOUNTID, loginData.accountID.toString()).apply()
+                    sharedPref.edit().putString(PreferenceConstants.FIRSTNAME, loginData.name).apply()
+                    sharedPref.edit().putString(PreferenceConstants.GENDER, if(loginData.gender.equals("Male",true))"1" else "2").apply()
+                    sharedPref.edit().putString(PreferenceConstants.RELATIONSHIPCODE, Constants.SELF_RELATIONSHIP_CODE).apply()
+                    sharedPref.edit().putString(PreferenceConstants.DOB,loginData.dateOfBirth).apply()
+                    sharedPref.edit().putString(PreferenceConstants.IS_HLMT_USER,loginData.IsHLMTUser).apply()
+                    sharedPref.edit().putString(PreferenceConstants.HLMT_USER_ID,loginData.HLMTUserID).apply()
+                    sharedPref.edit().putString(PreferenceConstants.HLMT_USERNAME,loginData.HLMTUserName).apply()
+                    sharedPref.edit().putString(PreferenceConstants.ACCOUNT_LINK_STATUS,loginData.accountLinkStatus).apply()
 
-                val pid = loginData?.personID?.toDouble()?.toInt()
-                Timber.i("Person Id => "+pid)
-                sharedPref.edit().putString(PreferenceConstants.PERSONID, pid.toString()).apply()
-                sharedPref.edit().putString(PreferenceConstants.ADMIN_PERSON_ID, pid.toString()).apply()
-                // Added by Rohit
-                //RealPathUtil.creatingLocalDirctories()
+                    val pid = loginData.personID.toDouble().toInt()
+                    Timber.i("Person Id => "+pid)
+                    sharedPref.edit().putString(PreferenceConstants.PERSONID, pid.toString()).apply()
+                    sharedPref.edit().putString(PreferenceConstants.ADMIN_PERSON_ID, pid.toString()).apply()
+
                     saveUserData(loginData)
-                    navigate(HlmtLoginFragmentDirections.actionHlmtloginfragmentToMainactivity())
+                    navigate(LoginFragmentDirections.actionLoginFragmentToMainActivity())
+                }
 
                 if (loginData.gender.isNullOrEmpty() || loginData.dateOfBirth.isNullOrEmpty()){
 //                    navigate(HlmtLoginFragmentDirections.actionLoginFragmentToUserDetailFragment(hlmtEmployeeID = username, hlmtUserID = it.data!!.HLMTUserID.toString(),loginStatus = it.data!!.loginStatus.toString(),isRegister = "false",mobileNo = ""))
@@ -179,15 +194,15 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if(it.data!= null && !it.data!!.HLMTUserID.isNullOrEmpty()) {
                     if (!isAccountExist) {
-                        navigate(
-                            HlmtLoginFragmentDirections.actionLoginFragmentToUserDetailFragment(
-                                hlmtEmployeeID = username,
-                                hlmtUserID = it.data!!.HLMTUserID.toString(),
-                                loginStatus = it.data!!.loginStatus.toString(),
-                                isRegister = "true",
-                                mobileNo = ""
-                            )
-                        )
+//                        navigate(
+//                            HlmtLoginFragmentDirections.actionLoginFragmentToUserDetailFragment(
+//                                hlmtEmployeeID = username,
+//                                hlmtUserID = it.data!!.HLMTUserID.toString(),
+//                                loginStatus = it.data!!.loginStatus.toString(),
+//                                isRegister = "true",
+//                                mobileNo = ""
+//                            )
+//                        )
                     } else {
                         fetchLoginResponse(
                             hlmtLoginStatus = it.data!!.loginStatus.toString(),
@@ -209,7 +224,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
         }
     }
 
-    fun fetchRegistrationResponse(name: String = "", phoneNumber: String, passwordStr: String = "",gender:String,dob:String,emailStr: String,fName:String,imgPath:String,
+    fun fetchRegistrationResponse(name: String = "", phoneNumber: String, passwordStr: String = "",confirmPassword:String="",gender:String,dob:String,emailStr: String,fName:String,imgPath:String,
     hlmtUserId:String="",hlmtLoginStatus:String="",hlmtEmpId:String="") = viewModelScope.launch(dispatchers.main){
 
         if(validateData(name.trim(),phoneNumber.trim(),emailStr.trim(),dob.trim(),hlmtEmpId.trim())) {
@@ -287,7 +302,8 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                         //RealPathUtil.creatingLocalDirctories()
                         FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_REGISTRATION_SUCCESSFUL_EVENT)
                         saveUserData(loginData)
-                        if (!Utilities.isNullOrEmpty(fName)
+                        navigate(UserDetailsFragmentDirections.actionUserDetailsFragmentToMainActivity())
+                        /*if (!Utilities.isNullOrEmpty(fName)
                             && !Utilities.isNullOrEmpty(imgPath)
                         ) {
                             callUploadProfileImageApi(
@@ -297,8 +313,8 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                                 imgPath
                             )
                         } else {
-                            navigate(UserDetailsFragmentDirections.actionUserDetailsToHomeScreen())
-                        }
+//                            navigate(UserDetailsFragmentDirections.actionUserDetailsToHomeScreen())
+                        }*/
                     }else{
                         _toastMessage.value = Event("Unable to connect, please try again")
                     }
@@ -353,7 +369,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                     Timber.i("UploadProfileImage----->$profileImageID")
                     if ( !Utilities.isNullOrEmptyOrZero(profileImageID) ) {
                         updateUserProfileImgPath( name , path )
-                        navigate(UserDetailsFragmentDirections.actionUserDetailsToHomeScreen())
+//                        navigate(UserDetailsFragmentDirections.actionUserDetailsToHomeScreen())
                     }
                 }
             }
@@ -391,11 +407,11 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
             toastMessage("Invalid Phone Number")
         }else if(!Validation.isValidEmail(emailStr)){
             toastMessage("Invalid email Address")
-        }else if (dob.isNullOrEmpty()){
+        }/*else if (dob.isNullOrEmpty()){
             toastMessage("Invalid Date of Birth")
         }else if (!DateHelper.isDateAbove18Years(dob)) {
             toastMessage("Application user must be 18 years old")
-        }else{
+        }*/else{
             isValid = true
         }
         return isValid

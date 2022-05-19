@@ -15,6 +15,7 @@ val featureSecurityModule = module {
     factory { HraManagementUseCase(get()) }
     viewModel { LoginViewModel(get(), get(), get() , get() ) }
     viewModel { HlmtLoginViewModel(get(), get(), get() , get() ) }
+    viewModel { RegistrationViewModel(get(), get(), get() ) }
     viewModel { HraViewModel(get(), get(), get()) }
     viewModel { LoginWithOtpViewModel(get(), get(), get() , get()) }
     viewModel { SignUpViewModel(get(), get(), get() , get() ) }

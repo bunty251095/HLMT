@@ -32,7 +32,7 @@ android {
             signingConfig signingConfigs.config
             proguardFile 'proguard-rules.pro'
             //proguardFile 'proguard-android-optimized.txt'
-            manifestPlaceholders = [crashlyticsCollectionEnabled: "true"]
+            manifestPlaceholders = [crashlyticsCollectionEnabled: "false"]
         }
         release {
             //for testing only

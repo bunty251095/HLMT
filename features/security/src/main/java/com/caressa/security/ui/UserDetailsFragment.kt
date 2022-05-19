@@ -41,17 +41,34 @@ import android.text.Spanned
 import android.text.InputFilter
 import java.lang.StringBuilder
 import android.R.id.edit
+import com.caressa.security.model.UserInfo
 
-class UserDetailsFragment: BaseFragment() {
+
+class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.EditProfileImageItemClickListener {
+
 
     private var mCalendar: Calendar? = null
     private val viewModel : HlmtLoginViewModel by viewModel()
     private lateinit var binding: FragmentUserDetailsBinding
-    private val args: UserDetailsFragmentArgs by navArgs()
+    var hasProfileImage = false
+    private var completeFilePath = ""
+    private var needToSet = true
+    private val gallerySelectCode = 1
+    private val cameraSelectCode = 2
     private val appColorHelper = AppColorHelper.instance!!
 
     private var fName = ""
     private var fPath = ""
+    /*private val permissionListener = object : PermissionUtil.AppPermissionListener {
+        override fun isPermissionGranted(isGranted: Boolean) {
+            Timber.e("$isGranted")
+            if ( isGranted ) {
+                //showFileChooser(gallerySelectCode)
+                showPhotoPicker()
+            }
+        }
+    }*/
+
 
     override fun getViewModel(): BaseViewModel = viewModel
 
@@ -67,17 +84,19 @@ class UserDetailsFragment: BaseFragment() {
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
 
-        if(!args.hlmtUserID.isEmpty()){
-            binding.layoutMobileEdit.visibility = View.GONE
-        }else{
-            binding.layoutMobileEdit.visibility = View.VISIBLE
-        }
+//        if(!args.hlmtUserID.isEmpty()){
+//            binding.layoutMobileEdit.visibility = View.GONE
+//        }else{
+//            binding.layoutMobileEdit.visibility = View.VISIBLE
+//        }
 
-        binding.edtPhoneNumber.setText(args.mobileNo)
+        RealPathUtil.makeFilderDirectories()
+        binding.edtPhoneNumber.setText(UserInfo.phoneNumber)
+        binding.edtEmail.setText(UserInfo.emailAddress)
+        binding.edtUsername.setText(UserInfo.name)
+
 
         binding.btnDone.setOnClickListener {
-
-            if(args.isRegister.equals("true")) {
                 var gender = "M"
                 if (binding.rbMale.isChecked) {
                     gender = "M"
@@ -86,20 +105,14 @@ class UserDetailsFragment: BaseFragment() {
                 }
                 viewModel.fetchRegistrationResponse(
                     name = binding.edtUsername.text.toString(),
-                    phoneNumber = args.mobileNo,
-                    passwordStr = "123456",
+                    phoneNumber = UserInfo.phoneNumber,
+                    passwordStr = UserInfo.password,
                     gender = gender,
                     dob = binding.edtDob.text.toString(),
                     emailStr = binding.edtEmail.text.toString(),
                     fName = fName,
-                    imgPath = fPath,
-                    hlmtLoginStatus = args.loginStatus,
-                    hlmtEmpId = args.hlmtEmployeeID,
-                    hlmtUserId = args.hlmtUserID
+                    imgPath = fPath
                 )
-            }else{
-//                viewModel.callUpdateUserDetailsApi()
-            }
         }
 
         binding.layoutDob.setOnClickListener {

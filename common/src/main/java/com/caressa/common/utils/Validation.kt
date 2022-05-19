@@ -105,14 +105,14 @@ object Validation {
      * .{8,}             # anything, at least eight places though
      * $                 # end-of-string
      */
-/*    fun isValidPassword(password: String): Boolean { //String password = "aaZZa44@";
+    fun isValidPassword(password: String): Boolean { //String password = "aaZZa44@";
         //String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
         val pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$".toRegex()
         Timber.d("isValidPassword-->" + password.matches(pattern))
         return password.matches(pattern)
-    }*/
+    }
 
-    fun isValidPassword(password: String): Boolean {
+    /*fun isValidPassword(password: String): Boolean {
         var isPassword = false
         if (!Utilities.isNullOrEmpty(password)) {
             if (password.length > 5) {
@@ -120,7 +120,7 @@ object Validation {
             }
         }
         return isPassword
-    }
+    }*/
 
     fun isEmpty(etText: String): Boolean {
         return if (etText.trim { it <= ' ' }.length > 0) {

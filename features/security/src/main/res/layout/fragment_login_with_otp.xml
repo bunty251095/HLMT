@@ -65,7 +65,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:gravity="center"
-                    android:text="@string/ENTER_NUMBER_TO_GET_OTP"
+                    android:visibility="gone"
+                    android:text="@string/ENTER_EMAIL_TO_GET_OTP"
                     android:textSize="@dimen/_13sdp"
                     app:layout_constraintEnd_toEndOf="@+id/lbl_forgot_password"
                     app:layout_constraintStart_toStartOf="@+id/lbl_forgot_password"
@@ -86,18 +87,19 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imageView"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:tint="@color/colorPrimary"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/img_phone" />
+                        app:srcCompat="@drawable/img_email" />
 
                     <TextView
                         android:id="@+id/textView"
                         style="@style/CustomTextRegular"
                         android:text="+60"
+                        android:visibility="gone"
                         android:textSize="@dimen/_14sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -108,7 +110,7 @@
                         android:id="@+id/til_edt_forgot_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="@dimen/_70sdp"
+                        android:paddingStart="@dimen/_40sdp"
                         app:boxBackgroundMode="none"
                         app:hintEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -122,10 +124,10 @@
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:fontFamily="@font/dax_regular"
-                            android:hint="@string/MOBILE_NUMBER"
+                            android:hint="@string/EMAIL_ADDRESS"
                             android:imeOptions="actionDone"
-                            android:inputType="number"
-                            android:maxLength="10"
+                            android:inputType="textEmailAddress"
+                            android:maxLength="50"
                             android:paddingStart="@dimen/_5sdp"
                             android:paddingTop="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_10sdp"
@@ -166,7 +168,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/CHANGE_MOBILE_NUMBER"
+                    android:text="@string/CHANGE_EMAIL_ADDRESS"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"
@@ -312,9 +314,9 @@
             android:gravity="center"
             android:orientation="vertical"
             android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.caressa.common.view.ArcTextView
                 style="@style/VivantTitle"
@@ -323,13 +325,27 @@
                 android:text="@string/POWERED_BY"
                 android:textSize="@dimen/_10sdp" />
 
-            <com.caressa.common.view.ArcImageView
-                android:layout_width="@dimen/_130sdp"
-                android:layout_height="@dimen/_26sdp"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/hlmt_banner" />
+                >
 
+                <com.caressa.common.view.ArcImageView
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_26sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/hlmt_banner" />
+
+                <com.caressa.common.view.ArcImageView
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_26sdp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/vivant_banner_green" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
