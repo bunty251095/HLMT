@@ -35,6 +35,7 @@ class LoginWithOtpFragment : BaseFragment() {
     }
 
     private fun setObserver() {
+        viewModel.loginResponse.observe(viewLifecycleOwner, {})
         viewModel.forgetPassword.observe(viewLifecycleOwner,{})
         viewModel.isLoginName.observe(viewLifecycleOwner, Observer {
             if (it!=null) {

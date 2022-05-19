@@ -85,13 +85,13 @@ class HeartReportFragment : BaseFragment() {
         try {
             val riskPercentage = calculatorDataSingleton!!.riskScorePercentage.toDouble()
 
-            val color: Int = when  {
-                riskPercentage < 1 -> {
+            val color: Int = when {
+                riskPercentage <= 10 -> {
                     R.color.vivant_green_blue_two
                 }
-                riskPercentage in 1.0..10.0 -> {
-                    R.color.vivant_marigold
-                }
+//                riskPercentage in 1.0..10.0 -> {
+//                    R.color.vivant_marigold
+//                }
                 riskPercentage in 11.0..20.0 -> {
                     R.color.vivant_orange_yellow
                 }
@@ -153,6 +153,51 @@ class HeartReportFragment : BaseFragment() {
         val entries: ArrayList<BarEntry> = ArrayList()
         val personAge: Float = calculatorDataSingleton!!.personAge.toFloat()
         entries.add(BarEntry(0f, personAge))
+        val summeryModelArrayList: ArrayList<HeartAgeSummeryModel> =
+            calculatorDataSingleton!!.heartAgeSummeryList
+        val colorArray = IntArray(summeryModelArrayList.size + 1)
+        colorArray[0] = ContextCompat.getColor(requireContext(), R.color.colorAccent)
+        for (i in 1..summeryModelArrayList.size) {
+            val heartAge: Float = summeryModelArrayList[i - 1].heartAge.toFloat()
+            entries.add(BarEntry(i.toFloat(), heartAge))
+            if (personAge <= heartAge) {
+                colorArray[i] = ContextCompat.getColor(requireContext(), R.color.vivant_watermelon)
+            } else {
+                colorArray[i] = ContextCompat.getColor(requireContext(), R.color.vivant_green_blue_two)
+            }
+        }
+        val set = BarDataSet(entries, "BarDataSet")
+        set.colors = colorArray.toMutableList()
+        set.valueTextSize = 10f
+        //set.setColors(colorArray, this)
+        set.valueTextColor = ContextCompat.getColor(requireContext(), R.color.textViewColor)
+        val data = BarData(set)
+        //data.setBarWidth(0.9f); // set custom bar width
+        binding.barChartHeartAge.data = data
+
+        // the labels that should be drawn on the XAxis
+        val xAxis: XAxis = binding.barChartHeartAge.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.textSize = 10f
+        xAxis.textColor = ContextCompat.getColor(requireContext(), R.color.textViewColor)
+        xAxis.setDrawAxisLine(true)
+        xAxis.granularity = 1f
+        xAxis.setDrawGridLines(false)
+        xAxis.valueFormatter =
+            IAxisValueFormatter { value, _ ->
+                var name = resources.getString(R.string.YOUR_AGE)
+                if (value > 0) {
+                    name = "${resources.getString(R.string.HEART_AGE)} " + value.toInt()
+                }
+                name
+            }
+        binding.barChartHeartAge.invalidate() // refresh
+    }
+
+/*    private fun setHeartAgeChartData() {
+        val entries: ArrayList<BarEntry> = ArrayList()
+        val personAge: Float = calculatorDataSingleton!!.personAge.toFloat()
+        entries.add(BarEntry(0f, personAge))
         val summeryModelArrayList: ArrayList<HeartAgeSummeryModel> = calculatorDataSingleton!!.heartAgeSummeryList
         val colorArray = IntArray(summeryModelArrayList.size + 1)
         colorArray[0] = R.color.vivant_bright_sky_blue
@@ -190,9 +235,60 @@ class HeartReportFragment : BaseFragment() {
                 name
             }
         binding.barChartHeartAge.invalidate() // refresh
-    }
+    }*/
 
     private fun setHeartRiskChartData() {
+        val entries: MutableList<BarEntry> = ArrayList()
+        val summeryModelArrayList: ArrayList<HeartAgeSummeryModel> =
+            calculatorDataSingleton!!.heartAgeSummeryList
+        val colorArray = IntArray(summeryModelArrayList.size)
+        for (i in summeryModelArrayList.indices) {
+            val heartRisk: Float = summeryModelArrayList[i].heartRisk.toFloat()
+            /*if (heartRisk < 1) {
+                colorArray[i] = ContextCompat.getColor(requireContext(), R.color.dia_ichi_grey)
+            } else if (heartRisk in 1.0..10.0) {
+                colorArray[i] = ContextCompat.getColor(requireContext(), R.color.dia_ichi_grey)
+            } else if (heartRisk > 10 && heartRisk <= 20) {
+                colorArray[i] = ContextCompat.getColor(requireContext(), R.color.dia_ichi_grey)
+            } else {
+                colorArray[i] = ContextCompat.getColor(requireContext(), R.color.dia_ichi_grey)
+            }*/
+            val heartColour: Int = when {
+                heartRisk <= 10 -> {
+                    R.color.vivant_green_blue_two
+                }
+                heartRisk in 11.0..20.0 -> {
+                    R.color.vivant_orange_yellow
+                }
+                else -> {
+                    R.color.vivant_watermelon
+                }
+            }
+            colorArray[i] = ContextCompat.getColor(requireContext(), heartColour)
+            entries.add(BarEntry(i.toFloat(), heartRisk))
+        }
+        val set = BarDataSet(entries, "BarDataSet")
+        set.colors = colorArray.toMutableList()
+        set.valueTextSize = 10f
+        //set.setColors(colorArray, this)
+        set.valueTextColor = ContextCompat.getColor(requireContext(), R.color.textViewColor)
+        val data = BarData(set)
+        //        data.setBarWidth(0.9f); // set custom bar width
+        binding.barChartHeartRisk.data = data
+        val xAxis: XAxis = binding.barChartHeartRisk.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.textSize = 10f
+        xAxis.textColor = ContextCompat.getColor(requireContext(), R.color.textViewColor)
+        xAxis.setDrawAxisLine(true)
+        xAxis.granularity = 1f
+        xAxis.setDrawGridLines(false)
+        xAxis.valueFormatter = IAxisValueFormatter { value, _ ->
+            "${resources.getString(R.string.HEART_RISK)} " + (value.toInt() + 1)
+        }
+        binding.barChartHeartRisk.invalidate() // refresh
+    }
+
+/*    private fun setHeartRiskChartData() {
         val entries: MutableList<BarEntry> = ArrayList()
         val summeryModelArrayList: ArrayList<HeartAgeSummeryModel> = calculatorDataSingleton!!.heartAgeSummeryList
         val colorArray = IntArray(summeryModelArrayList.size)
@@ -227,7 +323,7 @@ class HeartReportFragment : BaseFragment() {
             "${resources.getString(R.string.HEART_RISK)} " + (value.toInt() + 1)
         }
         binding.barChartHeartRisk.invalidate() // refresh
-    }
+    }*/
 
     private fun setClickable() {
 

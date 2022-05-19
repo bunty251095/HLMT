@@ -82,6 +82,10 @@ class HraViewModel(
     private val _submitHra = MediatorLiveData<SaveAndSubmitHraResponse>()
     val submitHra: LiveData<SaveAndSubmitHraResponse> get() = _submitHra
 
+    fun showLoader() {
+        _progressBar.value = Event("")
+    }
+
     fun getUserRelatives() = viewModelScope.launch {
         withContext(dispatchers.io) {
             if ( adminPersonId != personId ) {
@@ -115,8 +119,8 @@ class HraViewModel(
     fun startHra(relativeId:String,relativeName:String) = viewModelScope.launch {
 
         val requestData = HraStartModel(Gson().toJson(
-                HraStartModel.JSONDataRequest(personID = relativeId),
-                HraStartModel.JSONDataRequest::class.java), authToken)
+            HraStartModel.JSONDataRequest(personID = relativeId),
+            HraStartModel.JSONDataRequest::class.java), authToken)
 
         _progressBar.value = Event(context.resources.getString(R.string.STARTING_HRA))
         _hraStart.removeSource(hraStartSource)
@@ -866,423 +870,423 @@ class HraViewModel(
 
     fun getHRAQuestionData(qCode: String ) = viewModelScope.launch  {
         withContext(dispatchers.io) {
-        var question = Question()
-        val optionList : ArrayList<Option> = arrayListOf()
+            var question = Question()
+            val optionList : ArrayList<Option> = arrayListOf()
 
-        when(qCode) {
-            //************************Vital Question Data ************************
-            "BMI" -> {
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_BMI,
-                    questionType = QuestionType.Other,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_bp,
-                    category = "BMI")
-            }
-
-            "KNWBPNUM" -> {
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_BP,
-                    questionType = QuestionType.Other,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_sys_dia,
-                    category = "BPSCREEN")
-            }
-
-            // SUGAR
-            "KNWDIANUM" -> {
-
-                val paramDataList : MutableList<TrackParameterMaster.Parameter> = mutableListOf()
-                withContext(dispatchers.io) {
-                    paramDataList.addAll(hraManagementUseCase.invokeGetParameterDataByProfileCode("DIABETIC"))
-                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
-                    for (param in paramDataList) {
-                        optionList.add(Option(description = param.description!!, answerCode = param.code!!))
-                    }
+            when(qCode) {
+                //************************Vital Question Data ************************
+                "BMI" -> {
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_BMI,
+                        questionType = QuestionType.Other,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_bp,
+                        category = "BMI")
                 }
+
+                "KNWBPNUM" -> {
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_BP,
+                        questionType = QuestionType.Other,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_sys_dia,
+                        category = "BPSCREEN")
+                }
+
+                // SUGAR
+                "KNWDIANUM" -> {
+
+                    val paramDataList : MutableList<TrackParameterMaster.Parameter> = mutableListOf()
+                    withContext(dispatchers.io) {
+                        paramDataList.addAll(hraManagementUseCase.invokeGetParameterDataByProfileCode("DIABETIC"))
+                        optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
+                        for (param in paramDataList) {
+                            optionList.add(Option(description = param.description!!, answerCode = param.code!!))
+                        }
+                    }
 /*                optionList.add(Option(description = context.resources.getString(R.string.RANDOM_SUGAR), answerCode = "DIAB_RA"))
                 optionList.add(Option(description = context.resources.getString(R.string.FASTING_SUGAR), answerCode = "DIAB_FS"))
                 optionList.add(Option(description = context.resources.getString(R.string.POST_MEAL_SUGAR), answerCode = "DIAB_PM"))
                 optionList.add(Option(description = context.resources.getString(R.string.HBA1C), answerCode = "DIAB_HBA1C"))*/
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_BLOOD_SUGAR,
-                    questionType = QuestionType.MultiSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_blood_suger,
-                    category = "HSNUM")
-            }
-
-            "SUGAR_INPUT" -> {
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_BLOOD_SUGAR_INPUT,
-                    questionType = QuestionType.Other,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_blood_suger,
-                    category = "HSNUM")
-            }
-
-            // LIPID
-            "KNWLIPNUM" -> {
-
-                val paramDataList : MutableList<TrackParameterMaster.Parameter> = mutableListOf()
-                withContext(dispatchers.io) {
-                    paramDataList.addAll(hraManagementUseCase.invokeGetParameterDataByProfileCode("LIPID"))
-                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
-                    for (param in paramDataList) {
-                        optionList.add(Option(description = param.description!!, answerCode = param.code!!))
-                    }
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_BLOOD_SUGAR,
+                        questionType = QuestionType.MultiSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_blood_suger,
+                        category = "HSNUM")
                 }
+
+                "SUGAR_INPUT" -> {
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_BLOOD_SUGAR_INPUT,
+                        questionType = QuestionType.Other,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_blood_suger,
+                        category = "HSNUM")
+                }
+
+                // LIPID
+                "KNWLIPNUM" -> {
+
+                    val paramDataList : MutableList<TrackParameterMaster.Parameter> = mutableListOf()
+                    withContext(dispatchers.io) {
+                        paramDataList.addAll(hraManagementUseCase.invokeGetParameterDataByProfileCode("LIPID"))
+                        optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
+                        for (param in paramDataList) {
+                            optionList.add(Option(description = param.description!!, answerCode = param.code!!))
+                        }
+                    }
 /*                optionList.add(Option(description = context.resources.getString(R.string.TOTAL_CHOLESTEROL), answerCode = "CHOL_TOTAL"))
                 optionList.add(Option(description = context.resources.getString(R.string.HDL), answerCode = "CHOL_HDL"))
                 optionList.add(Option(description = context.resources.getString(R.string.LDL), answerCode = "CHOL_LDL"))
                 optionList.add(Option(description = context.resources.getString(R.string.TRIGLYCERIDES), answerCode = "CHOL_TRY"))
                 optionList.add(Option(description = context.resources.getString(R.string.VLDL), answerCode = "CHOL_VLDL"))*/
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_CHOLESTEROL,
-                    questionType = QuestionType.MultiSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_deaseas,
-                    category = "HSCREEN")
-            }
-
-            "LIPID_INPUT" -> {
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_CHOLESTEROL_INPUT,
-                    questionType = QuestionType.Other,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_deaseas,
-                    category = "HSCREEN")
-            }
-
-            //************************Vital Question Data ************************
-
-            "HHILL" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "15_NONE"))
-                optionList.add(Option(description = context.resources.getString(R.string.HIGH_BLOOD_PRESSURE), answerCode = "15_HBP"))
-                optionList.add(Option(description = context.resources.getString(R.string.THYROID_IMBALANCE), answerCode = "15_THYRIOD"))
-                optionList.add(Option(description = context.resources.getString(R.string.HIGH_CHOLESTEROL), answerCode = "15_INC_CHOL"))
-                optionList.add(Option(description = context.resources.getString(R.string.DIABETES), answerCode = "15_DIAB"))
-                optionList.add(Option(description = context.resources.getString(R.string.ASTHMA), answerCode = "15_ASTAMA"))
-                optionList.add(Option(description = context.resources.getString(R.string.ARTHRITIS), answerCode = "15_ARTH"))
-                optionList.add(Option(description = context.resources.getString(R.string.MENTAL_ILLNESS), answerCode = "15_MENTAL"))
-                optionList.add(Option(description = context.resources.getString(R.string.HEART_DISEASE), answerCode = "15_HRTPROB"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_HEALTH_CONDITION,
-                    questionType = QuestionType.MultiSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_certificate,
-                    category = "HEALTHHIST")
-            }
-
-            "WOMOTHER" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "87_NONE"))
-                optionList.add(Option(description = context.resources.getString(R.string.WOMEN_PERIOD), answerCode = "87_MENSTRUALPRB"))
-                optionList.add(Option(description = context.resources.getString(R.string.WOMEN_PCOS), answerCode = "87_PCOS"))
-                optionList.add(Option(description = context.resources.getString(R.string.WOMEN_DISCHARGE), answerCode = "87_VAGINALDIS"))
-                optionList.add(Option(description = context.resources.getString(R.string.WOMEN_UTI), answerCode = "87_UTI"))
-                optionList.add(Option(description = context.resources.getString(R.string.WOMEN_BRESTPAIN), answerCode = "87_BREASTPAIN"))
-                optionList.add(Option(description = context.resources.getString(R.string.WOMEN_FIB), answerCode = "87_FIBROIDS"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_WOMEN,
-                    questionType = QuestionType.MultiSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_certificate,
-                    category = "WOMEN")
-            }
-
-            "FHIST" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "1_NONE"))
-                optionList.add(Option(description = context.resources.getString(R.string.DIABETES), answerCode = "1_DIABETIC"))
-                optionList.add(Option(description = context.resources.getString(R.string.HIGH_BLOOD_PRESSURE), answerCode = "1_HIGHBP"))
-                optionList.add(Option(description = context.resources.getString(R.string.OBESITY), answerCode = "1_OBESE"))
-                optionList.add(Option(description = context.resources.getString(R.string.ASTHMA), answerCode = "1_ASTAMA"))
-                optionList.add(Option(description = context.resources.getString(R.string.ARTHRITIS), answerCode = "1_ARTHRITIS"))
-                optionList.add(Option(description = context.resources.getString(R.string.HIGH_CHOLESTEROL), answerCode = "1_ELECOHLESTEROL"))
-                optionList.add(Option(description = context.resources.getString(R.string.HEART_PROBLEMS), answerCode = "1_HRTOPR"))
-                if ( gender.equals("2",ignoreCase = true)  ) {
-                    optionList.add(Option(description = context.resources.getString(R.string.BREAST_CANCER), answerCode = "1_BRECANCER"))
-                    optionList.add(Option(description = context.resources.getString(R.string.CERVICAL_CANCER), answerCode = "1_CERCANCER"))
-                } else {
-                    optionList.add(Option(description = context.resources.getString(R.string.COLORECTAL_CANCER), answerCode = "1_COLORECTAL"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_CHOLESTEROL,
+                        questionType = QuestionType.MultiSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_deaseas,
+                        category = "HSCREEN")
                 }
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_FAMILY_HISTORY,
-                    questionType = QuestionType.MultiSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_family_two,
-                    category = "FHIST",
-                    tabName = "SETFAMILYHIST")
-            }
 
-            "5FRUIT" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "12_ALW"))
-                optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "12_NEV"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_SNACKS,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_fruits,
-                    category = "NUTRITION")
-            }
+                "LIPID_INPUT" -> {
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_CHOLESTEROL_INPUT,
+                        questionType = QuestionType.Other,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_deaseas,
+                        category = "HSCREEN")
+                }
 
-            "FATFOOD" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "13_EV"))
-                optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "13_NEV"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_FAT,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_meat,
-                    category = "NUTRITION")
-            }
+                //************************Vital Question Data ************************
 
-            "PHYEXER" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "6_PHYEXEALW"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_USUALLY), answerCode = "6_PHYEXEMSTWEEK"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_SOMETIMES), answerCode = "6_PHYEXERARE"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "6_PHYEXENEVER"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_EXERCISE,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_exercise,
-                    category = "PHYSICAL")
-            }
+                "HHILL" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "15_NONE"))
+                    optionList.add(Option(description = context.resources.getString(R.string.HIGH_BLOOD_PRESSURE), answerCode = "15_HBP"))
+                    optionList.add(Option(description = context.resources.getString(R.string.THYROID_IMBALANCE), answerCode = "15_THYRIOD"))
+                    optionList.add(Option(description = context.resources.getString(R.string.HIGH_CHOLESTEROL), answerCode = "15_INC_CHOL"))
+                    optionList.add(Option(description = context.resources.getString(R.string.DIABETES), answerCode = "15_DIAB"))
+                    optionList.add(Option(description = context.resources.getString(R.string.ASTHMA), answerCode = "15_ASTAMA"))
+                    optionList.add(Option(description = context.resources.getString(R.string.ARTHRITIS), answerCode = "15_ARTH"))
+                    optionList.add(Option(description = context.resources.getString(R.string.MENTAL_ILLNESS), answerCode = "15_MENTAL"))
+                    optionList.add(Option(description = context.resources.getString(R.string.HEART_DISEASE), answerCode = "15_HRTPROB"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_HEALTH_CONDITION,
+                        questionType = QuestionType.MultiSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_certificate,
+                        category = "HEALTHHIST")
+                }
 
-            "PHYSLEEP" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.LESS_THAN_6HOURS), answerCode = "6_PHYSLPMSTNGT"))
-                optionList.add(Option(description = context.resources.getString(R.string.SIXTO_EIGHT_HOURS), answerCode = "6_PHYSLPMOST"))
-                optionList.add(Option(description = context.resources.getString(R.string.MORE_THAN_8HOURS), answerCode = "6_PHYSLPALL"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_SLEEP,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_sleep,
-                    category = "PHYSICAL")
-            }
+                "WOMOTHER" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "87_NONE"))
+                    optionList.add(Option(description = context.resources.getString(R.string.WOMEN_PERIOD), answerCode = "87_MENSTRUALPRB"))
+                    optionList.add(Option(description = context.resources.getString(R.string.WOMEN_PCOS), answerCode = "87_PCOS"))
+                    optionList.add(Option(description = context.resources.getString(R.string.WOMEN_DISCHARGE), answerCode = "87_VAGINALDIS"))
+                    optionList.add(Option(description = context.resources.getString(R.string.WOMEN_UTI), answerCode = "87_UTI"))
+                    optionList.add(Option(description = context.resources.getString(R.string.WOMEN_BRESTPAIN), answerCode = "87_BREASTPAIN"))
+                    optionList.add(Option(description = context.resources.getString(R.string.WOMEN_FIB), answerCode = "87_FIBROIDS"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_WOMEN,
+                        questionType = QuestionType.MultiSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_certificate,
+                        category = "WOMEN")
+                }
 
-            "SMOKECNT" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.RB_DONT_SMOKE), answerCode = "2_NO"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_12CIGAR), answerCode = "SMKCNT12"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_34CIGAR), answerCode = "SMKCNT34"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_MORETHAN_4CIGAR), answerCode = "SMKCNTGT4"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_SMOKE,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_cigar,
-                    category = "DEPENDENCY")
-            }
+                "FHIST" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "1_NONE"))
+                    optionList.add(Option(description = context.resources.getString(R.string.DIABETES), answerCode = "1_DIABETIC"))
+                    optionList.add(Option(description = context.resources.getString(R.string.HIGH_BLOOD_PRESSURE), answerCode = "1_HIGHBP"))
+                    optionList.add(Option(description = context.resources.getString(R.string.OBESITY), answerCode = "1_OBESE"))
+                    optionList.add(Option(description = context.resources.getString(R.string.ASTHMA), answerCode = "1_ASTAMA"))
+                    optionList.add(Option(description = context.resources.getString(R.string.ARTHRITIS), answerCode = "1_ARTHRITIS"))
+                    optionList.add(Option(description = context.resources.getString(R.string.HIGH_CHOLESTEROL), answerCode = "1_ELECOHLESTEROL"))
+                    optionList.add(Option(description = context.resources.getString(R.string.HEART_PROBLEMS), answerCode = "1_HRTOPR"))
+                    if ( gender.equals("2",ignoreCase = true)  ) {
+                        optionList.add(Option(description = context.resources.getString(R.string.BREAST_CANCER), answerCode = "1_BRECANCER"))
+                        optionList.add(Option(description = context.resources.getString(R.string.CERVICAL_CANCER), answerCode = "1_CERCANCER"))
+                    } else {
+                        optionList.add(Option(description = context.resources.getString(R.string.COLORECTAL_CANCER), answerCode = "1_COLORECTAL"))
+                    }
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_FAMILY_HISTORY,
+                        questionType = QuestionType.MultiSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_family_two,
+                        category = "FHIST",
+                        tabName = "SETFAMILYHIST")
+                }
 
-            "DRINKCNT" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.I_DONT_DRINK), answerCode = "1_GENDRINKNO"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_1_2_PEGS), answerCode = "DNKCNT12"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_3_4_PEGS), answerCode = "DNKCNT34"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_4_PEGS), answerCode = "DNKCNTGT4"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_DRINK,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_dirnk,
-                    category = "DEPENDENCY")
-            }
+                "5FRUIT" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "12_ALW"))
+                    optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "12_NEV"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_SNACKS,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_fruits,
+                        category = "NUTRITION")
+                }
 
-            "BALWF" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "68_BALWFALWAYS"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_USUALLY), answerCode = "68_BALWFSOMETIME"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_RARELY), answerCode = "68_BALWFRAR"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "68_BALWFNEVER"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_FAMILY_LIFE,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_work_time,
-                    category = "HEALTHHIST")
-            }
+                "FATFOOD" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "13_EV"))
+                    optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "13_NEV"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_FAT,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_meat,
+                        category = "NUTRITION")
+                }
 
-            "SOCSYSTM" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.RB_VERY_STRONG), answerCode = "7_SOCSYSLOTFRD"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_ABOVE_AVERAGE), answerCode = "7_SOCSYSTLKFRD"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_BELOW_AVERAGE), answerCode = "7_SOCSYSRARFRD"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_NOT_SURE), answerCode = "7_SOCSYSDONTFRD"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_SOCIAL,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_friends,
-                    category = "SOCIAL")
-            }
+                "PHYEXER" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "6_PHYEXEALW"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_USUALLY), answerCode = "6_PHYEXEMSTWEEK"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_SOMETIMES), answerCode = "6_PHYEXERARE"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "6_PHYEXENEVER"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_EXERCISE,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_exercise,
+                        category = "PHYSICAL")
+                }
 
-            "GENOVER" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.COMPLETELY), answerCode = "1_GENOVRALW"))
-                optionList.add(Option(description = context.resources.getString(R.string.MOSTLY), answerCode = "1_GENOVRSMT"))
-                optionList.add(Option(description = context.resources.getString(R.string.PARTLY), answerCode = "1_GENOVRNVR"))
-                optionList.add(Option(description = context.resources.getString(R.string.NOT_SATISFIED), answerCode = "1_GENOVRSTR"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_SATISFIED_LIFE,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_mask,
-                    category = "SOCIAL")
-            }
+                "PHYSLEEP" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.LESS_THAN_6HOURS), answerCode = "6_PHYSLPMSTNGT"))
+                    optionList.add(Option(description = context.resources.getString(R.string.SIXTO_EIGHT_HOURS), answerCode = "6_PHYSLPMOST"))
+                    optionList.add(Option(description = context.resources.getString(R.string.MORE_THAN_8HOURS), answerCode = "6_PHYSLPALL"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_SLEEP,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_sleep,
+                        category = "PHYSICAL")
+                }
 
-            "JPT" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "67_JPTALWAYS"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_USUALLY), answerCode = "67_JPTSOMETIME"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_RARELY), answerCode = "67_JPTRAR"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "67_JPTNEVER"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_JOB_PAY,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_calender_hra,
-                    category = "OCCUPATION")
-            }
+                "SMOKECNT" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_DONT_SMOKE), answerCode = "2_NO"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_12CIGAR), answerCode = "SMKCNT12"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_34CIGAR), answerCode = "SMKCNT34"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_MORETHAN_4CIGAR), answerCode = "SMKCNTGT4"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_SMOKE,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_cigar,
+                        category = "DEPENDENCY")
+                }
 
-            "OCCSHIFT" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "OCCSHIFTYES"))
-                optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "OCCSHIFTNO"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_SHIFT,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_work_time,
-                    category = "OCCUPATION")
-            }
+                "DRINKCNT" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.I_DONT_DRINK), answerCode = "1_GENDRINKNO"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_1_2_PEGS), answerCode = "DNKCNT12"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_3_4_PEGS), answerCode = "DNKCNT34"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_4_PEGS), answerCode = "DNKCNTGT4"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_DRINK,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_dirnk,
+                        category = "DEPENDENCY")
+                }
 
-            "OCCPCTIM" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "OCCPCTIMYES"))
-                optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "OCCPCTIMNO"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_EXTENDED_TIME,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_extended_time,
-                    category = "OCCUPATION")
-            }
+                "BALWF" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "68_BALWFALWAYS"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_USUALLY), answerCode = "68_BALWFSOMETIME"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_RARELY), answerCode = "68_BALWFRAR"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "68_BALWFNEVER"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_FAMILY_LIFE,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_work_time,
+                        category = "HEALTHHIST")
+                }
 
-            "PHYSTRES" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "6_PHYSTRYES"))
-                optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "6_PHYSTRNO"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_STRESS,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_stressed,
-                    category = "SOCIAL")
-            }
+                "SOCSYSTM" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_VERY_STRONG), answerCode = "7_SOCSYSLOTFRD"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_ABOVE_AVERAGE), answerCode = "7_SOCSYSTLKFRD"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_BELOW_AVERAGE), answerCode = "7_SOCSYSRARFRD"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_NOT_SURE), answerCode = "7_SOCSYSDONTFRD"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_SOCIAL,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_friends,
+                        category = "SOCIAL")
+                }
 
-            "PHY" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "66_PHYNONE"))
-                optionList.add(Option(description = context.resources.getString(R.string.DEATH_OF_RELATIVE), answerCode = "66_PHYDEATH"))
-                optionList.add(Option(description = context.resources.getString(R.string.END_OF_RELATIONSHIP), answerCode = "66_PHYDIVORCE"))
-                optionList.add(Option(description = context.resources.getString(R.string.FEEL_DEMOTIVATED), answerCode = "66_PHYDEMOTIVE"))
-                optionList.add(Option(description = context.resources.getString(R.string.PHYSICAL_PROBLEM), answerCode = "66_PHYABUSE"))
-                optionList.add(Option(description = context.resources.getString(R.string.ONGOING_MEDICATION), answerCode = "66_PHYNMEDON"))
-                optionList.add(Option(description = context.resources.getString(R.string.FINANCIAL_MATTER), answerCode = "66_PHYFINMATTER"))
+                "GENOVER" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.COMPLETELY), answerCode = "1_GENOVRALW"))
+                    optionList.add(Option(description = context.resources.getString(R.string.MOSTLY), answerCode = "1_GENOVRSMT"))
+                    optionList.add(Option(description = context.resources.getString(R.string.PARTLY), answerCode = "1_GENOVRNVR"))
+                    optionList.add(Option(description = context.resources.getString(R.string.NOT_SATISFIED), answerCode = "1_GENOVRSTR"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_SATISFIED_LIFE,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_mask,
+                        category = "SOCIAL")
+                }
+
+                "JPT" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "67_JPTALWAYS"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_USUALLY), answerCode = "67_JPTSOMETIME"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_RARELY), answerCode = "67_JPTRAR"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "67_JPTNEVER"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_JOB_PAY,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_calender_hra,
+                        category = "OCCUPATION")
+                }
+
+                "OCCSHIFT" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "OCCSHIFTYES"))
+                    optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "OCCSHIFTNO"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_SHIFT,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_work_time,
+                        category = "OCCUPATION")
+                }
+
+                "OCCPCTIM" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "OCCPCTIMYES"))
+                    optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "OCCPCTIMNO"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_EXTENDED_TIME,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_extended_time,
+                        category = "OCCUPATION")
+                }
+
+                "PHYSTRES" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "6_PHYSTRYES"))
+                    optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "6_PHYSTRNO"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_STRESS,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_stressed,
+                        category = "SOCIAL")
+                }
+
+                "PHY" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "66_PHYNONE"))
+                    optionList.add(Option(description = context.resources.getString(R.string.DEATH_OF_RELATIVE), answerCode = "66_PHYDEATH"))
+                    optionList.add(Option(description = context.resources.getString(R.string.END_OF_RELATIONSHIP), answerCode = "66_PHYDIVORCE"))
+                    optionList.add(Option(description = context.resources.getString(R.string.FEEL_DEMOTIVATED), answerCode = "66_PHYDEMOTIVE"))
+                    optionList.add(Option(description = context.resources.getString(R.string.PHYSICAL_PROBLEM), answerCode = "66_PHYABUSE"))
+                    optionList.add(Option(description = context.resources.getString(R.string.ONGOING_MEDICATION), answerCode = "66_PHYNMEDON"))
+                    optionList.add(Option(description = context.resources.getString(R.string.FINANCIAL_MATTER), answerCode = "66_PHYFINMATTER"))
 //                optionList.add(Option(description = context.resources.getString(R.string.HEALTH_CONCERN), answerCode = "66_PHYHLTHCONCERN"))
-                optionList.add(Option(description = context.resources.getString(R.string.MEDICAL_ILLNESS), answerCode = "66_PHYHLTHCONCERN"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_PHY,
-                    questionType = QuestionType.MultiSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_certificate,
-                    category = "SOCIAL")
-            }
-
-            "EDS" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "NONE"))
-                optionList.add(Option(description = context.resources.getString(R.string.CAVITIES), answerCode = "DENTAL,DENPROB,63_CAVITIES"))
-                optionList.add(Option(description = context.resources.getString(R.string.BAD_BREATH), answerCode = "DENTAL,DENPROB,63_BAD_BREATH"))
-                optionList.add(Option(description = context.resources.getString(R.string.STAINING), answerCode = "DENTAL,DENPROB,63_STAINING"))
-                optionList.add(Option(description = context.resources.getString(R.string.BLEEDING_GUM), answerCode = "DENTAL,DENPROB,63_BLEEDING_GUMS"))
-                optionList.add(Option(description = context.resources.getString(R.string.BLURRED_VISION), answerCode = "EYE,EYEPROB,64_SQUINT"))
-                optionList.add(Option(description = context.resources.getString(R.string.WEARING_LENSES), answerCode = "EYE,EYEPROB,64_REFRACTORY_ERROR"))
-                optionList.add(Option(description = context.resources.getString(R.string.DRY_EYE), answerCode = "EYE,EYEPROB,64_DRY_EYES"))
-                optionList.add(Option(description = context.resources.getString(R.string.DANDRUFF), answerCode = "SKIN,SKINPRB,65_SKNPRBDAND"))
-                optionList.add(Option(description = context.resources.getString(R.string.ACNE), answerCode = "SKIN,SKINPRB,65_SKNPRBACNE"))
-                optionList.add(Option(description = context.resources.getString(R.string.DRYNESS), answerCode = "SKIN,SKINPRB,65_SKNPRBDRY"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_EDS,
-                    questionType = QuestionType.MultiSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_eye_dental,
-                    category = "NA")
-            }
-
-            "EXPOSE" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
-                optionList.add(Option(description = context.resources.getString(R.string.BRIGHT_LIGHT), answerCode = "OCCHWELD,OCCHWELDYES,OCCHWELDNO"))
-                optionList.add(Option(description = context.resources.getString(R.string.LOUD_NOISE), answerCode = "OCCNOISE,OCCNOISYES,OCCNOISNO"))
-                optionList.add(Option(description = context.resources.getString(R.string.HAZARDOUS_GASES), answerCode = "OCCHAZGAS,OCCHGASYES,OCCHGASNO"))
-                optionList.add(Option(description = context.resources.getString(R.string.TALKING_LONG), answerCode = "OCCTALKLOT,OCCTALKLOTYES,OCCTALKLOTNO"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_EXPOSE,
-                    questionType = QuestionType.MultiSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_notification,
-                    category = "OCCUPATION")
-            }
-
-            "CHECKUP" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
-                optionList.add(Option(description = context.resources.getString(R.string.CHOL_TEST), answerCode = "LIPIDSCRN,13_LIPLT1YR,13_LIPNEVER"))
-                if ( gender.equals("2",ignoreCase = true)  ) {
-                    optionList.add(Option(description = context.resources.getString(R.string.PAP_TEST), answerCode = "WOMPAPSMR,11_WMNPAPLSTYR,11_WMNPAPNOPAP"))
+                    optionList.add(Option(description = context.resources.getString(R.string.MEDICAL_ILLNESS), answerCode = "66_PHYHLTHCONCERN"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_PHY,
+                        questionType = QuestionType.MultiSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_certificate,
+                        category = "SOCIAL")
                 }
-                optionList.add(Option(description = context.resources.getString(R.string.THYROID_TEST), answerCode = "TSHSCREEN,TSHL1Y,TSHNVR"))
-                optionList.add(Option(description = context.resources.getString(R.string.BASIC_HEALTH_CHECKUP), answerCode = "GENSCRN,13_GENLT1YR,13_GENNEVER"))
-                optionList.add(Option(description = context.resources.getString(R.string.SUGAR_PROFILE_TEST), answerCode = "DIABSCRN,13_DIBLT1YR,13_DIBNEVER"))
-                if ( gender.equals("2",ignoreCase = true)  ) {
-                    optionList.add(Option(description = context.resources.getString(R.string.MAMMOGRAM), answerCode = "WOMMAMO,11_WMNMAMLSTYR,11_WMNMAMANO"))
-                }
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_CHECKUP,
-                    questionType = QuestionType.MultiSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_certificate,
-                    category = "HSCREEN")
-            }
 
-            "OCCHWELD" -> {
-                optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "OCCHWELDYES"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_SOMETIMES), answerCode = "OCCHWELDSOM"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_RARELY), answerCode = "OCCHWELDRAR"))
-                optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "OCCHWELDNO"))
-                question = Question(
-                    qCode = qCode,
-                    question = R.string.QUESTION_BRIGHT_LIGHT,
-                    questionType = QuestionType.SingleSelection,
-                    optionList = optionList,
-                    bgImage = R.drawable.img_notification,
-                    category = "OCCUPATION")
-            }
+                "EDS" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "NONE"))
+                    optionList.add(Option(description = context.resources.getString(R.string.CAVITIES), answerCode = "DENTAL,DENPROB,63_CAVITIES"))
+                    optionList.add(Option(description = context.resources.getString(R.string.BAD_BREATH), answerCode = "DENTAL,DENPROB,63_BAD_BREATH"))
+                    optionList.add(Option(description = context.resources.getString(R.string.STAINING), answerCode = "DENTAL,DENPROB,63_STAINING"))
+                    optionList.add(Option(description = context.resources.getString(R.string.BLEEDING_GUM), answerCode = "DENTAL,DENPROB,63_BLEEDING_GUMS"))
+                    optionList.add(Option(description = context.resources.getString(R.string.BLURRED_VISION), answerCode = "EYE,EYEPROB,64_SQUINT"))
+                    optionList.add(Option(description = context.resources.getString(R.string.WEARING_LENSES), answerCode = "EYE,EYEPROB,64_REFRACTORY_ERROR"))
+                    optionList.add(Option(description = context.resources.getString(R.string.DRY_EYE), answerCode = "EYE,EYEPROB,64_DRY_EYES"))
+                    optionList.add(Option(description = context.resources.getString(R.string.DANDRUFF), answerCode = "SKIN,SKINPRB,65_SKNPRBDAND"))
+                    optionList.add(Option(description = context.resources.getString(R.string.ACNE), answerCode = "SKIN,SKINPRB,65_SKNPRBACNE"))
+                    optionList.add(Option(description = context.resources.getString(R.string.DRYNESS), answerCode = "SKIN,SKINPRB,65_SKNPRBDRY"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_EDS,
+                        questionType = QuestionType.MultiSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_eye_dental,
+                        category = "NA")
+                }
+
+                "EXPOSE" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
+                    optionList.add(Option(description = context.resources.getString(R.string.BRIGHT_LIGHT), answerCode = "OCCHWELD,OCCHWELDYES,OCCHWELDNO"))
+                    optionList.add(Option(description = context.resources.getString(R.string.LOUD_NOISE), answerCode = "OCCNOISE,OCCNOISYES,OCCNOISNO"))
+                    optionList.add(Option(description = context.resources.getString(R.string.HAZARDOUS_GASES), answerCode = "OCCHAZGAS,OCCHGASYES,OCCHGASNO"))
+                    optionList.add(Option(description = context.resources.getString(R.string.TALKING_LONG), answerCode = "OCCTALKLOT,OCCTALKLOTYES,OCCTALKLOTNO"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_EXPOSE,
+                        questionType = QuestionType.MultiSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_notification,
+                        category = "OCCUPATION")
+                }
+
+                "CHECKUP" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
+                    optionList.add(Option(description = context.resources.getString(R.string.CHOL_TEST), answerCode = "LIPIDSCRN,13_LIPLT1YR,13_LIPNEVER"))
+                    if ( gender.equals("2",ignoreCase = true)  ) {
+                        optionList.add(Option(description = context.resources.getString(R.string.PAP_TEST), answerCode = "WOMPAPSMR,11_WMNPAPLSTYR,11_WMNPAPNOPAP"))
+                    }
+                    optionList.add(Option(description = context.resources.getString(R.string.THYROID_TEST), answerCode = "TSHSCREEN,TSHL1Y,TSHNVR"))
+                    optionList.add(Option(description = context.resources.getString(R.string.BASIC_HEALTH_CHECKUP), answerCode = "GENSCRN,13_GENLT1YR,13_GENNEVER"))
+                    optionList.add(Option(description = context.resources.getString(R.string.SUGAR_PROFILE_TEST), answerCode = "DIABSCRN,13_DIBLT1YR,13_DIBNEVER"))
+                    if ( gender.equals("2",ignoreCase = true)  ) {
+                        optionList.add(Option(description = context.resources.getString(R.string.MAMMOGRAM), answerCode = "WOMMAMO,11_WMNMAMLSTYR,11_WMNMAMANO"))
+                    }
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_CHECKUP,
+                        questionType = QuestionType.MultiSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_certificate,
+                        category = "HSCREEN")
+                }
+
+                "OCCHWELD" -> {
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "OCCHWELDYES"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_SOMETIMES), answerCode = "OCCHWELDSOM"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_RARELY), answerCode = "OCCHWELDRAR"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "OCCHWELDNO"))
+                    question = Question(
+                        qCode = qCode,
+                        question = R.string.QUESTION_BRIGHT_LIGHT,
+                        questionType = QuestionType.SingleSelection,
+                        optionList = optionList,
+                        bgImage = R.drawable.img_notification,
+                        category = "OCCUPATION")
+                }
 
 /*            "GENSCRN" -> {
                 optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "None"))
@@ -1299,7 +1303,7 @@ class HraViewModel(
                     bgImage = R.drawable.ic_hra_check_up,
                     category = "HSCREEN")
             }*/
-        }
+            }
             quesData.postValue(question)
         }
     }

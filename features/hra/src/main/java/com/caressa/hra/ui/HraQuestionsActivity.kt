@@ -196,7 +196,12 @@ class HraQuestionsActivity : AppCompatActivity()  {
                         }
                     }
                 }
-                setCurrentScreen(currentScreen - 1)
+                //setCurrentScreen(currentScreen - 1)
+                if (prevList.any { it.answerCode.equals("6_PHYSTRNO", ignoreCase = true) }) {
+                    setCurrentScreen(currentScreen - 2)
+                } else {
+                    setCurrentScreen(currentScreen - 1)
+                }
             }
 
             else -> {

@@ -80,7 +80,6 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@drawable/selector_border_button"
-                    android:tag="@{viewModel.loginResponse.response}"
                     app:layout_constraintEnd_toEndOf="@+id/lbl_enter_number_desc"
                     app:layout_constraintStart_toStartOf="@+id/lbl_enter_number_desc"
                     app:layout_constraintTop_toBottomOf="@+id/lbl_enter_number_desc">

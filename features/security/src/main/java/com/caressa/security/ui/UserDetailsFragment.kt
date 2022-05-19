@@ -44,7 +44,7 @@ import android.R.id.edit
 import com.caressa.security.model.UserInfo
 
 
-class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.EditProfileImageItemClickListener {
+class UserDetailsFragment: BaseFragment() {
 
 
     private var mCalendar: Calendar? = null
@@ -90,7 +90,7 @@ class UserDetailsFragment: BaseFragment(),EditProfilePhotoBottomsheetFragment.Ed
 //            binding.layoutMobileEdit.visibility = View.VISIBLE
 //        }
 
-        RealPathUtil.makeFilderDirectories()
+        //RealPathUtil.makeFilderDirectories()
         binding.edtPhoneNumber.setText(UserInfo.phoneNumber)
         binding.edtEmail.setText(UserInfo.emailAddress)
         binding.edtUsername.setText(UserInfo.name)

@@ -233,7 +233,7 @@
     <string name="WELLNESS_DESC_SCORE_ZERO_NEGATIVE">Your wellness score is 0 (out of 100), which places you in High Risk category</string>
     <string name="CONGRATULATION_NO_RISK">Congratulations!! As per the information you have provided, it seems, at present,you have no risks.\n\nKeep up the good work, maintain a healthy lifestyle</string>
     <string name="WELLNESS_SCORE_SUBTITLE_TEXT">Your Wellness score represents your holistic health status basis of your responses to the questionnaire</string>
-    <string name="SUMMERY_SUBTITLE_TEXT">Your Risk Summary provides you with potential areas of “At Risk” aspects, which require your attention, basis your submission</string>
+    <string name="SUMMERY_SUBTITLE_TEXT">The highlighted risks are basis the responses provided by you and risk categories under personal health, family history and health parameters</string>
     <string name="LAB_TESTS_SUBTITLE_TEXT">Test Recommendations provide you a schedule and frequency of vital tests to identify your health regularly, based on your wellness score &amp; Risk summary</string>
     <string name="RECOMMENDED_LAB_TESTS_CHECK_UPS">Recommended Lab Tests/\nCheck-Ups</string>
     <string name="LAB_TEST_CHECK_UPS">Lab Test/Check-Ups</string>
@@ -244,7 +244,7 @@
     <string name="QUES_FAMILY_PROFILE"><![CDATA[Before we begin, please tell me <b>who</b> is taking this assessment?]]></string>
     <string name="QUESTION_BMI"><![CDATA[Let\'s calculate your Body mass index (BMI); a simple way to gauge your weight: height ratio.
     Please enter your vital <b>health parameters.</b>]]></string>
-    <string name="QUESTION_BP"><![CDATA[What is your <b>blood pressure</b> value? \nKindly mention input in mmHg]]></string>
+    <string name="QUESTION_BP"><![CDATA[What ais your <b>blood pressure</b> value? \nKindly mention input in mmHg]]></string>
     <string name="QUESTION_HEALTH_CONDITION"><![CDATA[Do you have any of these <b> Health Conditions?</b>]]></string>
     <string name="QUESTION_PHY"><![CDATA[Which of the following <b> apply to you?</b>]]></string>
     <string name="QUESTION_WOMEN"><![CDATA[Do you have history of any of these <b>Medical Illnesses?</b>]]></string>

@@ -204,7 +204,7 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
         var isValid = false
         try {
             if (paramList[0].finalValue.isNotEmpty()) {
-                val `val`: Double = paramList[0].finalValue.toDouble()
+                val `val`: Double = paramList[0].finalValue.toDouble() / 2.54
                 if ( `val` >= paramList[0].minRange && `val` <= paramList[0].maxRange ) {
                     isValid = true
                 }
@@ -214,7 +214,8 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
         }
         if (!isValid) {
             Utilities.toastMessageShort(context,resources.getString(R.string.PLEASE_ENTER_WAIST_SIZE_BETWEEN)
-                    + paramList[0].minRange + " " + resources.getString(R.string.TO) + " " + paramList[0].maxRange)
+                    + " " + paramList[0].minRange + " " + resources.getString(R.string.TO) + " " + paramList[0].maxRange + resources.getString(R.string.INCH))
+
         }
         return isValid
     }
@@ -290,7 +291,7 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
     }
 
     private fun calculateWaistScore(waist: Double): Int {
-        val `val` = waist * 2.54
+        val `val` = waist // * 2.54
         if (answerArrayMap["GENDER"]!!.answerCode.equals(resources.getString(R.string.MALE), ignoreCase = true)) {
             if (answerArrayMap["ORIGIN"]!!.answerCode.equals("rdbAsianOriginYes", ignoreCase = true)) {
                 if (`val` in 90.0..100.0) {
@@ -340,7 +341,7 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
             Timber.e("Value=>$centimeter")
         }
         paramList[0].unit = unit!!
-        paramList[0].finalValue = inch!!
+        paramList[0].finalValue = centimeter!!
         parameterAdapter!!.notifyDataSetChanged()
         //parameterAdapter!!.updateList(paramList)
     }

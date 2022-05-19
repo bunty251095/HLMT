@@ -2,6 +2,8 @@ package com.caressa.hra.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -149,8 +151,11 @@ class HraQuesExposeCheckupFragment(val qCode: String) : BaseFragment() {
             }
 
             "CHECKUP" -> {
+                viewModel.showLoader()
                 saveResponse(selectedOptions)
-                viewModel.saveAndSubmitHRA(viewPagerActivity!!.personId,viewPagerActivity!!.hraTemplateId)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    viewModel.saveAndSubmitHRA(viewPagerActivity!!.personId,viewPagerActivity!!.hraTemplateId)
+                }, 1000)
             }
         }
         hraDataSingleton.selectedOptionList.clear()
@@ -183,6 +188,12 @@ class HraQuesExposeCheckupFragment(val qCode: String) : BaseFragment() {
                                 }
                             }
                         }
+                    }
+
+                    if (prevAnsList.any { it.answerCode.equals("6_PHYSTRNO", ignoreCase = true) }) {
+                        viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() - 2)
+                    } else {
+                        viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() - 1)
                     }
                 }
                 viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() - 1)

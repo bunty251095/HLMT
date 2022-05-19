@@ -268,13 +268,23 @@ class SmartPhoneInputFragment : BaseFragment() {
     }
 
     private fun autoNext() {
+        if (currentQuestion.equals("ADDIC11", ignoreCase = true)) {
+            binding.btnNext.text = resources.getString(R.string.FINISH)
+        }
+        val handler = Handler()
+        handler.postDelayed({ //Do something after 100ms
+            binding.btnNext.performClick()
+        }, 300)
+    }
+
+/*    private fun autoNext() {
         if (!currentQuestion.equals("ADDIC11", ignoreCase = true)) {
             val handler = Handler()
             handler.postDelayed({ //Do something after 100ms
                 binding.btnNext.performClick()
             }, 300)
         }
-    }
+    }*/
 
     private fun validateData(): Boolean {
         return if (binding.imgAlways.tag.toString().equals("0", ignoreCase = true)

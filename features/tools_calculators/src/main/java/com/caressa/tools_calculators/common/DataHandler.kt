@@ -277,7 +277,8 @@ class DataHandler(val context: Context) {
                     val `val` = "" + waistSize.toDouble().toInt()
                     val waist = CalculateParameters.convertCmToInch2(`val`).toDouble().roundToInt()
                     data.value = waist.toString()
-                    data.finalValue = waist.toString()
+                    data.finalValue = `val`
+                    //data.finalValue = waist.toString()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

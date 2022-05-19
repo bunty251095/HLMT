@@ -83,18 +83,18 @@ class HraQuesSingleSelectionFragment(val qCode: String) : BaseFragment() {
     @SuppressLint("BinaryOperationInTimber")
     private fun loadData() {
         var toProceed = true
-        viewModel.quesData.observe(viewLifecycleOwner, {
-            if ( it != null ) {
-                if ( toProceed ) {
-                    Timber.i("OptionList-----> "+it.optionList)
+        viewModel.quesData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                if (toProceed) {
+                    Timber.i("OptionList-----> " + it.optionList)
                     questionData = it
                     hraDataSingleton.question = it
-                    HraHelper.addRadioButtonsSingleSelection(it.optionList,binding.rgSelection,listener,requireContext())
+                    HraHelper.addRadioButtonsSingleSelection(it.optionList, binding.rgSelection, listener, requireContext())
                     loadPreviousSelectedData()
                     toProceed = false
                 }
             }
-        })
+        }
     }
 
     private fun loadPreviousSelectedData() {
@@ -107,7 +107,43 @@ class HraQuesSingleSelectionFragment(val qCode: String) : BaseFragment() {
         }
     }
 
-    private fun saveQuestionResponse() {
+    var listener = View.OnClickListener { view ->
+/*        val rb = view as RadioButton
+        if ( rb.isChecked ) {
+            rb.setButtonDrawable(R.drawable.ic_circle_check)
+        } else {
+            rb.setButtonDrawable(null)
+        }*/
+        val ansCode = ViewUtils.getRadioSelectedValueTag(binding.rgSelection)
+        val ansDesc = ViewUtils.getRadioButtonSelectedValue(binding.rgSelection)
+        //val ansDescEng = resources.getString(optionList.find { it.answerCode == ansCode }!!.description)
+        Timber.e("AnswerCode----->$ansCode")
+        Timber.e("AnswerDesc----->$ansDesc")
+        //Timber.e("AnsDescEng----->$ansDescEng")
+        viewModel.saveResponse(qCode, ansCode, ansDesc, questionData.category, questionData.tabName, "")
+        saveResponseForNextScreen(ansCode, ansDesc)
+
+        when (qCode) {
+            "PHYSTRES" -> {
+                if ( ansCode.equals("6_PHYSTRNO",ignoreCase = true) ) {
+                    viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() + 2)
+                } else {
+                    viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() + 1)
+                }
+            }
+            else -> {
+                viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() + 1)
+            }
+        }
+    }
+
+    private fun saveResponseForNextScreen(ansCode: String, ansDesc: String) {
+        val selectedOptionList: MutableList<Option> = mutableListOf()
+        selectedOptionList.add(Option(ansDesc, ansCode, true))
+        hraDataSingleton.previousAnsList[viewPagerActivity!!.getCurrentScreen()] = selectedOptionList
+    }
+
+/*    private fun saveQuestionResponse() {
         val ansCode = ViewUtils.getRadioSelectedValueTag(binding.rgSelection)
         val ansDesc = ViewUtils.getRadioButtonSelectedValue(binding.rgSelection)
         Timber.e("AnswerCode , AnswerDesc----->$ansCode , $ansDesc")
@@ -124,6 +160,6 @@ class HraQuesSingleSelectionFragment(val qCode: String) : BaseFragment() {
     var listener = View.OnClickListener {
         saveQuestionResponse()
         viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() + 1)
-    }
+    }*/
 
 }
