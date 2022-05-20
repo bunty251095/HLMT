@@ -128,6 +128,7 @@ class LoginWithOtpFragment : BaseFragment() {
 
         binding.txtResendCode.setOnClickListener {
             binding.layoutCodeView.setText("")
+            viewModel.fromResendOTP = true
             viewModel.checkLoginNameExistOrNot(binding.edtMobileNumber.text.toString())
             FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.RESEND_OTP_EVENT)
         }
