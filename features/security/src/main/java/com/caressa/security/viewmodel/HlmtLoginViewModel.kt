@@ -17,6 +17,7 @@ import com.caressa.model.home.UploadProfileImageResponce
 import com.caressa.model.security.*
 import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
+import com.caressa.security.R
 import com.caressa.security.domain.UserManagementUseCase
 import com.caressa.security.model.UserInfo
 import com.caressa.security.ui.LoginFragmentDirections
@@ -113,6 +114,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                         }
                     } else {
                         isAccountExist = false
+                        toastMessage(context.getString(R.string.ERROR_EMAIL_NOT_REGISTERED))
                     }
                 }
 
@@ -145,6 +147,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                     toastMessage("Invalid Credentials Provided")
                 }else{
                     sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN,true).apply()
+                    sharedPref.edit().putBoolean(PreferenceConstants.STEPS_TRACKER_FIRST, true).apply()
                     sharedPref.edit().putString(PreferenceConstants.EMAIL,loginData.emailAddress).apply()
                     sharedPref.edit().putString(PreferenceConstants.PHONE,loginData.phoneNumber).apply()
                     sharedPref.edit().putString(PreferenceConstants.TOKEN, loginData.context).apply()
@@ -260,6 +263,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                     if(it.data != null) {
                         var loginData = it.data?.response?.loginData!!
                         sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN, true).apply()
+                        sharedPref.edit().putBoolean(PreferenceConstants.STEPS_TRACKER_FIRST, true).apply()
                         sharedPref.edit()
                             .putString(PreferenceConstants.EMAIL, loginData.emailAddress)
                             .apply()
@@ -408,11 +412,11 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
             toastMessage("Invalid Phone Number")
         }else if(!Validation.isValidEmail(emailStr)){
             toastMessage("Invalid email Address")
-        }/*else if (dob.isNullOrEmpty()){
+        }else if (dob.isNullOrEmpty()){
             toastMessage("Invalid Date of Birth")
         }else if (!DateHelper.isDateAbove18Years(dob)) {
             toastMessage("Application user must be 18 years old")
-        }*/else{
+        }else{
             isValid = true
         }
         return isValid

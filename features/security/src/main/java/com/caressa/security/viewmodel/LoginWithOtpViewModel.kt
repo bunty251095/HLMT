@@ -54,6 +54,8 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
     val _forgetPassword = MediatorLiveData<ForgetPasswordModel.ForgetPasswordResponse>()
     val forgetPassword: LiveData<ForgetPasswordModel.ForgetPasswordResponse> get() = _forgetPassword
 
+    var fromResendOTP = false
+
     init {
         calIGenerateOTPApi(UserInfo.emailAddress)
     }
@@ -117,6 +119,10 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
             _otpGenerateData.value = it.data
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if (fromResendOTP){
+                    toastMessage("TAC sent successfully.")
+                    fromResendOTP = false
+                }
             }
 
             if (it.status == Resource.Status.ERROR) {
@@ -203,6 +209,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                     var loginData = it.data?.response?.loginData!!
                     if(!loginData!!.personID.isNullOrEmpty()) {
                         sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN, true).apply()
+                        sharedPref.edit().putBoolean(PreferenceConstants.STEPS_TRACKER_FIRST, true).apply()
                         sharedPref.edit()
                             .putString(PreferenceConstants.EMAIL, loginData.emailAddress)
                             .apply()

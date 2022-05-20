@@ -10,6 +10,7 @@ import com.caressa.common.utils.Validation
 import com.caressa.model.security.LoginNameExistsModel
 import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
+import com.caressa.security.R
 import com.caressa.security.domain.UserManagementUseCase
 import com.caressa.security.model.UserInfo
 import com.caressa.security.ui.RegistrationFragmentDirections
@@ -70,7 +71,7 @@ class RegistrationViewModel(private val userManagementUseCase: UserManagementUse
                 if (it.status == Resource.Status.SUCCESS) {
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
                     if (it.data?.isExist.equals("true", true)) {
-
+                        toastMessage("This email is already registered with us")
                     } else {
                         UserInfo.apply {
                             this.name = name

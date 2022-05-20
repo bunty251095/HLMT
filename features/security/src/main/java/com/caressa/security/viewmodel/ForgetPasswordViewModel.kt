@@ -73,7 +73,7 @@ class ForgetPasswordViewModel(private val userCase: UserManagementUseCase, priva
                     navigate(ForgetPasswordFragmentDirections.actionForgetPasswordFragmentToLoginWithOtpFragment())
 //                    callGenerateVerificationCode(email = emailStr , from = "ForgetPassword")
                 }else if(it.data?.isExist.equals(Constants.FALSE,true)) {
-                    toastMessage("This Email Address is not Registered with us")
+                    toastMessage("This email address is not registered with us")
                 }
             }
 

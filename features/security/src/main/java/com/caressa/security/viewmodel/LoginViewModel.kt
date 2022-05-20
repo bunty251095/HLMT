@@ -62,6 +62,7 @@ class LoginViewModel(private val userManagementUseCase: UserManagementUseCase, p
             if (it.status == Resource.Status.SUCCESS){
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN,true).apply()
+                sharedPref.edit().putBoolean(PreferenceConstants.STEPS_TRACKER_FIRST, true).apply()
                 sharedPref.edit().putString(PreferenceConstants.EMAIL,it.data?.emailAddress).apply()
                 sharedPref.edit().putString(PreferenceConstants.PHONE,it.data?.phoneNumber).apply()
                 sharedPref.edit().putString(PreferenceConstants.TOKEN, it.data?.authToken).apply()
@@ -153,6 +154,7 @@ class LoginViewModel(private val userManagementUseCase: UserManagementUseCase, p
             if (it.status == Resource.Status.SUCCESS) {
                 _snackbarMessage.value = Event("Register Successful")
                 sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN,true).apply()
+                sharedPref.edit().putBoolean(PreferenceConstants.STEPS_TRACKER_FIRST, true).apply()
                 sharedPref.edit().putString(PreferenceConstants.EMAIL,it.data?.emailAddress).apply()
                 sharedPref.edit().putString(PreferenceConstants.PHONE,it.data?.phoneNumber).apply()
                 sharedPref.edit().putString(PreferenceConstants.TOKEN, it.data?.authToken).apply()

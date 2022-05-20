@@ -1,5 +1,7 @@
 package com.caressa.tools_calculators.ui
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.DefaultNotificationDialog
 import com.caressa.common.utils.FirebaseHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.tools_calculators.R
@@ -79,7 +82,21 @@ class ToolsCalculatorsDashboardFragment : BaseFragment(),KoinComponent,TrackersD
                 //SessionInfoSingleton.getInstance().setQuizId("9")
             }
             "SAC" -> {
-                viewModel.callStartQuizApi(true, Constants.QUIZ_CODE_STRESS_ANXIETY)
+                val dialogData = DefaultNotificationDialog.DialogData()
+                dialogData.title = requireContext().resources.getString(R.string.DISCLAIMER_TITLE)
+                dialogData.message = requireContext().resources.getString(R.string.DISCLAIMER_MESSAGE_HRA)
+                dialogData.btnRightName = requireContext().resources.getString(R.string.CONTINUE)
+                dialogData.showLeftButton = false
+                val defaultNotificationDialog = DefaultNotificationDialog(context,
+                    object : DefaultNotificationDialog.OnDialogValueListener {
+                        override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
+                            if (isButtonRight) {
+                                viewModel.callStartQuizApi(true, Constants.QUIZ_CODE_STRESS_ANXIETY)
+                            }
+                        }
+                    }, dialogData)
+                defaultNotificationDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                defaultNotificationDialog.show()
                 //SessionInfoSingleton.getInstance().setQuizId("7")
             }
             "SPC" -> {

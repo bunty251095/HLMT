@@ -18,6 +18,7 @@ import com.caressa.model.AppConfigurationSingleton
 import com.caressa.model.tempconst.Configuration
 import com.caressa.repository.utils.Resource
 import com.caressa.security.R
+import com.caressa.security.model.UserInfo
 import com.caressa.security.viewmodel.HraViewModel
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
@@ -148,7 +149,9 @@ class SplashScreenActivity : AppCompatActivity(), DefaultNotificationDialog.OnDi
     }
 
     private fun navigateToHome() {
+
         Handler(Looper.getMainLooper()).postDelayed({
+            UserInfo.emptyAllValues()
             val intentToPass = Intent()
             intentToPass.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             intentToPass.component =

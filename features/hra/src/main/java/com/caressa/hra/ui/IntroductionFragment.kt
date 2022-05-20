@@ -1,5 +1,7 @@
 package com.caressa.hra.ui
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +11,10 @@ import com.caressa.hra.R
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.utils.DefaultNotificationDialog
+import com.caressa.common.utils.DialogHelper
 import com.caressa.common.utils.FirebaseHelper
+import com.caressa.common.utils.PermissionUtil
 import com.caressa.hra.viewmodel.HraViewModel
 import com.caressa.hra.databinding.FragmentIntroductionBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -41,8 +46,22 @@ class IntroductionFragment : BaseFragment() {
     private fun setClickable() {
 
             binding.btnStartHra.setOnClickListener {
-                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_INITIATED)
-            it.findNavController().navigate(R.id.action_introductionFragment_to_selectFamilyMemberFragment)
+                val dialogData = DefaultNotificationDialog.DialogData()
+                dialogData.title = requireContext().resources.getString(R.string.DISCLAIMER_TITLE)
+                dialogData.message = requireContext().resources.getString(R.string.DISCLAIMER_MESSAGE_HRA)
+                dialogData.btnRightName = requireContext().resources.getString(R.string.CONTINUE)
+                dialogData.showLeftButton = false
+                val defaultNotificationDialog = DefaultNotificationDialog(context,
+                    object : DefaultNotificationDialog.OnDialogValueListener {
+                        override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
+                            if (isButtonRight) {
+                                FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HRA_INITIATED)
+                                it.findNavController().navigate(R.id.action_introductionFragment_to_selectFamilyMemberFragment)
+                            }
+                        }
+                    }, dialogData)
+                defaultNotificationDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                defaultNotificationDialog.show()
         }
 
     }

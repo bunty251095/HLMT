@@ -591,5 +591,9 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         return isValidate
     }
 
+    fun checkForFirstTime(): Boolean {
+        return sharedPref.getBoolean(PreferenceConstants.STEPS_TRACKER_FIRST,true)
+    }
+
 
 }

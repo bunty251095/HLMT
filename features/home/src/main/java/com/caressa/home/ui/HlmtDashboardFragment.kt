@@ -1,16 +1,21 @@
 package com.caressa.home.ui
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
+import com.caressa.common.constants.FirebaseConstants
+import com.caressa.common.fitness.FitRequestCode
 import com.caressa.common.fitness.FitnessDataManager
+import com.caressa.common.utils.*
 import com.caressa.home.R
 import com.caressa.home.adapter.DashboardFeaturesGridAdapter
 import com.caressa.home.common.DataHandler
@@ -24,11 +29,6 @@ import com.caressa.model.parameter.FitnessData
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.*
-import com.caressa.common.utils.FileUtils
-import androidx.navigation.fragment.findNavController
-import com.caressa.common.constants.FirebaseConstants
-import com.caressa.common.fitness.FitRequestCode
-import com.caressa.common.utils.*
 
 class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGridAdapter.OnItemSelectionListener,
     HomeMainActivity.OnGoogleAccountSelectListener {
@@ -209,11 +209,40 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
     override fun onItemSelected(item: DataHandler.DashboardFeatureGrid) {
         when(item.code){
             "HRA"-> viewModel.goToHRA()
-            "STEP"->{findNavController().navigate(R.id.action_dashboardFragment_to_fitnessActivity)}
-                "PARAM"->{
-                val bundle = Bundle()
-                bundle.putString(Constants.FROM, "Dashboard")
-                findNavController().navigate(R.id.action_dashboardFragment_to_trackParamActivity,bundle)
+            "STEP"->{
+                if(viewModel.checkForFirstTime()) {
+                    val dialogData = DefaultNotificationDialog.DialogData()
+                    dialogData.title =
+                        requireContext().resources.getString(R.string.DISCLAIMER_TITLE)
+                    dialogData.message =
+                        requireContext().resources.getString(R.string.DISCLAIMER_MESSAGE_ACTIVITY_TRACKER)
+                    dialogData.btnRightName =
+                        requireContext().resources.getString(R.string.CONTINUE)
+                    dialogData.showLeftButton = false
+                    val defaultNotificationDialog = DefaultNotificationDialog(context,
+                        object : DefaultNotificationDialog.OnDialogValueListener {
+                            override fun onDialogClickListener(
+                                isButtonLeft: Boolean,
+                                isButtonRight: Boolean
+                            ) {
+                                if (isButtonRight) {
+                                    findNavController().navigate(R.id.action_dashboardFragment_to_fitnessActivity)
+                                }
+                            }
+                        }, dialogData
+                    )
+                    defaultNotificationDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    defaultNotificationDialog.show()
+                }else{
+                    findNavController().navigate(R.id.action_dashboardFragment_to_fitnessActivity)}
+                }
+            "PARAM"->{
+                    val bundle = Bundle()
+                    bundle.putString(Constants.FROM, "Dashboard")
+                    findNavController().navigate(
+                        R.id.action_dashboardFragment_to_trackParamActivity,
+                        bundle
+                    )
             }
             "RECORD"->{
                 findNavController().navigate(R.id.action_dashboardFragment_to_shrActivity)
