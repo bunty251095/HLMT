@@ -22,6 +22,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
+        <com.caressa.common.view.ArcImageView
+            android:id="@+id/img_loading"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:visibility="gone"
+            app:srcCompat="@drawable/loader_petal"
+            app:layout_constraintBottom_toBottomOf="@+id/webView_terms"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/webView_terms" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
