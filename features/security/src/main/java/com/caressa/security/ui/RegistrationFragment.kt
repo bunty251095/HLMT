@@ -79,7 +79,7 @@ class RegistrationFragment: BaseFragment(), DefaultNotificationDialog.OnDialogVa
             showDialog(
                 listener = this,
                 title = resources.getString(R.string.PASSWORD_CRITERIA),
-                message = Html.fromHtml("<a>" +  "- ${resources.getString(R.string.PASSWORD_CRITERIA_DESC1)} <br/><br/> - ${resources.getString(R.string.PASSWORD_CRITERIA_DESC2)} <br/> \t\t - ${resources.getString(R.string.PASSWORD_CRITERIA_DESC3)} <br/> \t\t - ${resources.getString(R.string.PASSWORD_CRITERIA_DESC4)} <br/> \t\t - ${resources.getString(R.string.PASSWORD_CRITERIA_DESC5)} <br/> \t\t - ${resources.getString(R.string.PASSWORD_CRITERIA_DESC6)}" + "</a>").toString(),
+                message = "<a>" +  "- ${resources.getString(R.string.PASSWORD_CRITERIA_DESC1)} <br/><br/> - ${resources.getString(R.string.PASSWORD_CRITERIA_DESC2)} <br/> \t\t - ${resources.getString(R.string.PASSWORD_CRITERIA_DESC3)} <br/> \t\t - ${resources.getString(R.string.PASSWORD_CRITERIA_DESC4)} <br/> \t\t - ${resources.getString(R.string.PASSWORD_CRITERIA_DESC5)} <br/> \t\t - ${resources.getString(R.string.PASSWORD_CRITERIA_DESC6)}" + "</a>",
                 showLeftBtn = false)
         }
 

@@ -212,13 +212,11 @@
 
                     <com.caressa.common.view.ArcRadioButton
                         android:id="@+id/off1"
-                        app:isTemplate="true"
                         style="@style/ToolsToggleLeft"
                         android:background="@drawable/sw_on"/>
 
                     <com.caressa.common.view.ArcRadioButton
                         android:id="@+id/on1"
-                        app:isTemplate="true"
                         style="@style/ToolsToggleRight"
                         android:background="@drawable/sw_on"/>
 
@@ -256,13 +254,11 @@
 
                     <com.caressa.common.view.ArcRadioButton
                         android:id="@+id/off2"
-                        app:isTemplate="true"
                         style="@style/ToolsToggleLeft"
                         android:background="@drawable/sw_on"/>
 
                     <com.caressa.common.view.ArcRadioButton
                         android:id="@+id/on2"
-                        app:isTemplate="true"
                         style="@style/ToolsToggleRight"
                         android:background="@drawable/sw_on"/>
 
@@ -299,13 +295,11 @@
 
                     <com.caressa.common.view.ArcRadioButton
                         android:id="@+id/off3"
-                        app:isTemplate="true"
                         style="@style/ToolsToggleLeft"
                         android:background="@drawable/sw_on"/>
 
                     <com.caressa.common.view.ArcRadioButton
                         android:id="@+id/on3"
-                        app:isTemplate="true"
                         style="@style/ToolsToggleRight"
                         android:background="@drawable/sw_on"/>
 

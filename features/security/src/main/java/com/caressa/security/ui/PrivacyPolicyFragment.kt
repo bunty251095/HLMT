@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.caressa.security.R
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.security.databinding.FragmentTermsAndConditionBinding
@@ -32,6 +34,10 @@ class PrivacyPolicyFragment : BaseFragment() {
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initialiseWebView() {
+        val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_forward)
+        binding.imgLoading.startAnimation(animation)
+        binding.imgLoading.visibility = View.VISIBLE
+
         binding.webViewTerms.webViewClient = CustomWebViewClient()
         val webSettings = binding.webViewTerms.settings
         webSettings.javaScriptEnabled = true
@@ -65,8 +71,8 @@ class PrivacyPolicyFragment : BaseFragment() {
 
         override fun onPageFinished(view: WebView, url: String) {
             super.onPageFinished(view, url)
-            //binding.imgLoading.clearAnimation()
-            //binding.imgLoading.visibility = View.GONE
+            binding.imgLoading.clearAnimation()
+            binding.imgLoading.visibility = View.GONE
         }
 
     }
