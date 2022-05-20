@@ -38,6 +38,7 @@ class ChangePasswordFragment : BaseFragment(), DefaultNotificationDialog.OnDialo
     }
 
     private fun initialise() {
+        binding.edtReenterNewPassword.transformationMethod = null
 
 //        dialogPasswordUpdated = DialogSuccess(requireContext())
 //        dialogPasswordUpdated!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -75,7 +76,6 @@ class ChangePasswordFragment : BaseFragment(), DefaultNotificationDialog.OnDialo
         val newPassword: String = binding.edtNewPassword.text.toString()
         val confirmPassword: String = binding.edtReenterNewPassword.text.toString()
 
-        binding.edtReenterNewPassword.transformationMethod = null
 
         if ( Utilities.isNullOrEmpty(newPassword) ) {
             Utilities.toastMessageShort(requireContext(),resources.getString(R.string.VALIDATE_EMPTY_NEW_PASSWORD))

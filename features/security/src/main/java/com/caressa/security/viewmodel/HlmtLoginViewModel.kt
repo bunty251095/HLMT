@@ -108,6 +108,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                         if(!UserInfo.fromChangePassword) {
                             navigate(LoginFragmentDirections.actionLoginFragmentToLoginWithOtpFragment())
                         }else {
+                            UserInfo.fromChangePassword = false
                             fetchLoginResponse(username = username, passwordStr = passwordStr, hlmtEmpId = "", hlmtUserId = "", hlmtLoginStatus = "")
                         }
                     } else {
