@@ -59,15 +59,6 @@ class UserDetailsFragment: BaseFragment() {
 
     private var fName = ""
     private var fPath = ""
-    /*private val permissionListener = object : PermissionUtil.AppPermissionListener {
-        override fun isPermissionGranted(isGranted: Boolean) {
-            Timber.e("$isGranted")
-            if ( isGranted ) {
-                //showFileChooser(gallerySelectCode)
-                showPhotoPicker()
-            }
-        }
-    }*/
 
 
     override fun getViewModel(): BaseViewModel = viewModel
@@ -84,13 +75,6 @@ class UserDetailsFragment: BaseFragment() {
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
 
-//        if(!args.hlmtUserID.isEmpty()){
-//            binding.layoutMobileEdit.visibility = View.GONE
-//        }else{
-//            binding.layoutMobileEdit.visibility = View.VISIBLE
-//        }
-
-        //RealPathUtil.makeFilderDirectories()
         binding.edtPhoneNumber.setText(UserInfo.phoneNumber)
         binding.edtEmail.setText(UserInfo.emailAddress)
         binding.edtUsername.setText(UserInfo.name)

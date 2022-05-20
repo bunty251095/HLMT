@@ -203,6 +203,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                     var loginData = it.data?.response?.loginData!!
                     if(!loginData!!.personID.isNullOrEmpty()) {
                         sharedPref.edit().putBoolean(PreferenceConstants.IS_LOGIN, true).apply()
+                        sharedPref.edit().putBoolean(PreferenceConstants.STEPS_TRACKER_FIRST, true).apply()
                         sharedPref.edit()
                             .putString(PreferenceConstants.EMAIL, loginData.emailAddress)
                             .apply()

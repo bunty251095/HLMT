@@ -238,4 +238,10 @@ class FitnessViewModel(private val dispatchers: AppDispatchers,
         }
     }
 
+    fun checkForFirstTime() {
+        if (sharedPref.getBoolean(PreferenceConstants.STEPS_TRACKER_FIRST,true)){
+            sharedPref.edit().putBoolean(PreferenceConstants.STEPS_TRACKER_FIRST,false).apply()
+        }
+    }
+
 }

@@ -13,4 +13,15 @@ object UserInfo {
     var from:String = ""
     var tempPassword:String? =""
     var fromChangePassword = false
+
+    fun emptyAllValues(){
+        name = ""
+        dob = ""
+        emailAddress = ""
+        gender = ""
+        password = ""
+        from = ""
+        tempPassword = ""
+        fromChangePassword = false
+    }
 }

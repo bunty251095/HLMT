@@ -476,7 +476,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                     address = user.address.addressLine1
                 }
 
-                if ( !user.dateOfBirth.equals("", ignoreCase = true)) {
+                if ( !user.dateOfBirth.isNullOrEmpty()) {
                     var dateOfBirth = user.dateOfBirth
                     dateOfBirth = DateHelper.formatDateValue(DateHelper.DISPLAY_DATE_DDMMMYYYY, dateOfBirth)!!
                     val viewDob = DateHelper.formatDateValue(DateHelper.DATEFORMAT_DDMMMYYYY_NEW, dateOfBirth)!!

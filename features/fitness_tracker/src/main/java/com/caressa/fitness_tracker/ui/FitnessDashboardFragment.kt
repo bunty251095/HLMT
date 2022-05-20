@@ -85,7 +85,7 @@ class FitnessDashboardFragment : BaseFragment(),WeekdayAdapter.OnWeekDayClickLis
             from = it.getString(Constants.FROM,"")!!
             Timber.e("routeFromOnCreate--->$from")
         }
-
+        viewModel.checkForFirstTime()
         // Callback to Handle back button event
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {

@@ -38,13 +38,13 @@ class LoginWithOtpFragment : BaseFragment() {
         viewModel.loginResponse.observe(viewLifecycleOwner, {})
         viewModel.forgetPassword.observe(viewLifecycleOwner,{})
         viewModel.isLoginName.observe(viewLifecycleOwner, Observer {
-            if (it!=null) {
+            /*if (it!=null) {
                 if (it.isExist.equals("TRUE", true)) {
                     binding.btnVerify.text = resources.getString(R.string.VERIFY_AND_LOGIN)
                 } else {
                     binding.btnVerify.text = resources.getString(R.string.VERIFY)
                 }
-            }
+            }*/
         })
 
         viewModel.otpVerifyData.observe(viewLifecycleOwner, Observer {
@@ -62,14 +62,12 @@ class LoginWithOtpFragment : BaseFragment() {
                 if (it.status?.equals("SUCCESS", true) == true) {
                     FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.SEND_OTP_SUCCESSFUL_EVENT)
                     binding.verifyCodeLayout.visibility = View.VISIBLE
-                    binding.lblEnterNumberDesc.visibility = View.GONE
                     binding.edtMobileNumber.isClickable = false
                     binding.edtMobileNumber.isCursorVisible = false
                     binding.edtMobileNumber.isEnabled = false
                 } else {
                     binding.verifyCodeLayout.visibility = View.GONE
 //                    binding.btnSendOtp.visibility = View.VISIBLE
-                    binding.lblEnterNumberDesc.visibility = View.VISIBLE
                     binding.edtMobileNumber.isClickable = false
                     binding.edtMobileNumber.isCursorVisible = false
                     binding.edtMobileNumber.isEnabled = false
@@ -78,7 +76,6 @@ class LoginWithOtpFragment : BaseFragment() {
             }else{
                 binding.verifyCodeLayout.visibility = View.GONE
 //                binding.btnSendOtp.visibility = View.VISIBLE
-                binding.lblEnterNumberDesc.visibility = View.VISIBLE
                 binding.edtMobileNumber.isClickable = true
                 binding.edtMobileNumber.isCursorVisible = true
                 binding.edtMobileNumber.isEnabled = true
@@ -89,7 +86,6 @@ class LoginWithOtpFragment : BaseFragment() {
 
     private fun init() {
         binding.verifyCodeLayout.visibility = View.VISIBLE
-        binding.lblEnterNumberDesc.visibility = View.VISIBLE
         binding.edtMobileNumber.isClickable = false
         binding.edtMobileNumber.isCursorVisible = false
         binding.edtMobileNumber.isEnabled = false
@@ -128,7 +124,6 @@ class LoginWithOtpFragment : BaseFragment() {
             binding.verifyCodeLayout.visibility = View.GONE
 //            binding.btnSendOtp.visibility = View.VISIBLE
             binding.txtEditNumber.visibility = View.GONE
-            binding.lblEnterNumberDesc.visibility = View.VISIBLE
         }
 
         binding.txtResendCode.setOnClickListener {
