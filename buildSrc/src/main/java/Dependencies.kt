@@ -27,7 +27,7 @@ object Modules {
 
 object Releases {
     const val versionCode = 12
-    const val versionName = "1.0.9"
+    const val versionName = "1.1.0"
 }
 
 object Versions {

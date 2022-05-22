@@ -327,7 +327,7 @@
     <!--File Picker Strings-->
 
     <string name="DISCLAIMER_TITLE">DISCLAIMER</string>
-    <string name="DISCLAIMER_MESSAGE_HRA">All Information is provided is for the reference purpose only. This information should not be considered substitute for professional medical expertise, diagnosis and tretement of any health problem. Please consult with your healthcare professional for further information about your health condition. </string>
+    <string name="DISCLAIMER_MESSAGE_HRA">All Information presented is for the reference purpose only.\nThis information should not be considered a substitute for professional medical expertise, diagnosis or treatment of any health problem.\n\nPlease consult with your healthcare professional for further information about your health condition. </string>
     <string name="DISCLAIMER_MESSAGE_ACTIVITY_TRACKER">Note that this is a reference tool only. It should not be used as a substitute for professional diagnostic tool. Please consult your healthcare professional on this.</string>
 
 </resources>
