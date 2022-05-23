@@ -107,9 +107,8 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                         }
                         UserInfo.from = Constants.LOGIN
                         if(!UserInfo.fromChangePassword) {
-                            navigate(LoginFragmentDirections.actionLoginFragmentToLoginWithOtpFragment())
+                            checkLoginStatus(username = username, passwordStr = passwordStr, hlmtEmpId = "", hlmtUserId = "", hlmtLoginStatus = "")
                         }else {
-                            UserInfo.fromChangePassword = false
                             fetchLoginResponse(username = username, passwordStr = passwordStr, hlmtEmpId = "", hlmtUserId = "", hlmtLoginStatus = "")
                         }
                     } else {
@@ -142,6 +141,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 Timber.i("Data=> "+it)
                 val loginData = it.data?.response?.loginData!!
+                UserInfo.fromChangePassword = false
 
                 if(loginData.personID.isNullOrEmpty()){
                     toastMessage("Invalid Credentials Provided")
@@ -174,6 +174,30 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
 //                    navigate(HlmtLoginFragmentDirections.actionLoginFragmentToUserDetailFragment(hlmtEmployeeID = username, hlmtUserID = it.data!!.HLMTUserID.toString(),loginStatus = it.data!!.loginStatus.toString(),isRegister = "false",mobileNo = ""))
                 }
 
+            }
+
+            if (it.status == Resource.Status.ERROR) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                toastMessage(it.errorMessage)
+            }
+        }
+    }
+
+    fun checkLoginStatus(name: String = "", username: String, passwordStr: String = "",hlmtUserId: String,hlmtEmpId: String,hlmtLoginStatus: String) = viewModelScope.launch(dispatchers.main){
+
+        val requestData = LoginModel(Gson().toJson(
+            LoginModel.JSONDataRequest(
+                mode = "LOGIN",name=name, emailAddress = username,password = passwordStr,hlmtLoginStatus = hlmtLoginStatus,hlmtUserID = hlmtUserId,employeeID = hlmtEmpId), LoginModel.JSONDataRequest::class.java))
+
+        _progressBar.value = Event("Validating Username..")
+        _loginResponse.removeSource(hlmtLoginUserSource)
+        withContext(dispatchers.io){ hlmtLoginUserSource = userManagementUseCase.invokeLoginResponse(true,requestData)}
+        _loginResponse.addSource(hlmtLoginUserSource){
+            _loginResponse.value = it.data
+
+            if (it.status == Resource.Status.SUCCESS){
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                navigate(LoginFragmentDirections.actionLoginFragmentToLoginWithOtpFragment())
             }
 
             if (it.status == Resource.Status.ERROR) {
