@@ -130,7 +130,7 @@ class HeartSummaryFragment : BaseFragment() {
             }
         }
         //binding.indicatorHeartAge.progress = heartAge
-        binding.indicatorHeartAge.setProgressWithAnimation(heartAge.toDouble())
+        binding.indicatorHeartAge.setProgress(heartAge.toDouble())
         binding.txtHeartAge.text = heartAge.toString()
         binding.txtAgeHeart.text = heartAge.toString()
     }
@@ -144,7 +144,7 @@ class HeartSummaryFragment : BaseFragment() {
             binding.indicatorYourAge.mThumb!!.setTint(ContextCompat.getColor(requireContext(),heartColor))
         }
         //binding.indicatorYourAge.progress = yourAge
-        binding.indicatorYourAge.setProgressWithAnimation(yourAge.toDouble())
+        binding.indicatorYourAge.setProgress(yourAge.toDouble())
         binding.txtYourAge.text = yourAge.toString()
     }
 
@@ -174,7 +174,7 @@ class HeartSummaryFragment : BaseFragment() {
         try {
             val finalRiskPercent = riskPercent
             //binding.indicatorHeartRisk.progress = riskPercent
-            binding.indicatorHeartRisk.setProgressWithAnimation(riskPercent.toDouble())
+            binding.indicatorHeartRisk.setProgress(riskPercent.toDouble())
             binding.txtRiskPercent.text = "$finalRiskPercent %"
             binding.txtRisk.text = riskType
         } catch (e: java.lang.Exception) {

@@ -17,6 +17,8 @@ class ContactUsModel(
         val applicationCode: String = Configuration.ApplicationCode,
         @SerializedName("PartnerCode")
         val partnerCode: String = Configuration.PartnerCode,
+        @SerializedName("Name")
+        val name: String = "",
         @SerializedName("EmailAddress")
         val emailAddress: String = "",
         @SerializedName("FromEmail")

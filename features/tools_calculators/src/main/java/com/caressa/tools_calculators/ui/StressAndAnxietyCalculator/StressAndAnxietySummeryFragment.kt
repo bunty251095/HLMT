@@ -177,7 +177,7 @@ class StressAndAnxietySummeryFragment : BaseFragment() {
                 PorterDuff.Mode.SRC_ATOP)
         }
         //binding.indicatorProgtress.progress = riskPercentage
-        binding.indicatorProgtress.setProgressWithAnimation(riskPercentage.toDouble())
+        binding.indicatorProgtress.setProgress(riskPercentage.toDouble())
         binding.txtRiskPercentReport.text = "" + riskPercentage
         binding.txtDiabetesRiskTypeReport.text = riskType
     }

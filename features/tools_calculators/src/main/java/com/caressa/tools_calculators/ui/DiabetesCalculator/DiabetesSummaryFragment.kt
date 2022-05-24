@@ -12,11 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
-import com.caressa.common.constants.Constants
 import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.FirebaseHelper
 import com.caressa.tools_calculators.R
@@ -101,7 +99,7 @@ class DiabetesSummaryFragment : BaseFragment(),KoinComponent {
                 PorterDuff.Mode.SRC_ATOP)
         }
         //binding.indicatorDiabetesRisk.progress = riskPercentage.toInt()
-        binding.indicatorDiabetesRisk.setProgressWithAnimation(riskPercentage)
+        binding.indicatorDiabetesRisk.setProgress(riskPercentage)
         binding.txtScore.text = riskPercentage.toInt().toString()
         binding.txtObservation.text = riskType
     }

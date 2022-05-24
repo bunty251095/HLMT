@@ -424,7 +424,7 @@ class SeekArc : View {
     }*/
 
     @Keep
-    fun setProgress(progress: Float) {
+    fun setProgress(progress: Double) {
         updateProgress(progress.toInt(), false)
     }
 

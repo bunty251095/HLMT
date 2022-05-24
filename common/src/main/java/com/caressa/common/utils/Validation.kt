@@ -107,9 +107,14 @@ object Validation {
      */
     fun isValidPassword(password: String): Boolean { //String password = "aaZZa44@";
         //String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
-        val pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$".toRegex()
-        Timber.d("isValidPassword-->" + password.matches(pattern))
-        return password.matches(pattern)
+        try {
+            val pattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@\$%^&*-=])(?=\\S+\$).{8,}\$".toRegex()
+            Timber.d("isValidPassword-->" + password.matches(pattern))
+            return password.matches(pattern)
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        return false
     }
 
     /*fun isValidPassword(password: String): Boolean {

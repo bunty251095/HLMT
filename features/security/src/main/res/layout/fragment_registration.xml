@@ -440,7 +440,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/CONFIRM_PASSWORD"
-                                android:password="false"
                                 android:imeOptions="actionNext"
                                 android:inputType="textPassword"
                                 android:maxLength="30"/>

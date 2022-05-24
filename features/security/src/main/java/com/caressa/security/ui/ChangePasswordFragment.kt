@@ -38,7 +38,6 @@ class ChangePasswordFragment : BaseFragment(), DefaultNotificationDialog.OnDialo
     }
 
     private fun initialise() {
-        binding.edtReenterNewPassword.transformationMethod = null
 
 //        dialogPasswordUpdated = DialogSuccess(requireContext())
 //        dialogPasswordUpdated!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

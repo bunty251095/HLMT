@@ -75,7 +75,7 @@ class SmartPhoneAddictionSummaryFragment : BaseFragment() {
             val progress = ( score * 100) / 55
             Timber.i("Progress=> ${progress.toInt()}")
             //binding.indicatorRisk.progress = progress.toInt()
-            binding.indicatorRisk.setProgressWithAnimation(progress)
+            binding.indicatorRisk.setProgress(progress)
             when {
                 score < 7 -> {
                     observation = resources.getString(R.string.NO_NOMOPHOBIC)

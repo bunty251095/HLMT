@@ -162,7 +162,7 @@ class DiabetesReportFragment : BaseFragment() {
                 PorterDuff.Mode.SRC_ATOP)
         }
         //binding.indicatorDiabetesRiskReport.progress = riskPercentage.toInt()
-        binding.indicatorDiabetesRiskReport.setProgressWithAnimation(riskPercentage)
+        binding.indicatorDiabetesRiskReport.setProgress(riskPercentage)
         binding.txtDiabetesRiskPercentReport.text =  riskPercentage.toInt().toString()
         binding.txtDiabetesRiskTypeReport.text = riskType
     }

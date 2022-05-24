@@ -314,6 +314,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
     fun callContactUsApi(context:Context,fromEmail:String,fromMobile:String,message:String) = viewModelScope.launch(dispatchers.main) {
 
         val requestData = ContactUsModel(Gson().toJson(ContactUsModel.JSONDataRequest(
+            name = (userDetails.value?.firstName +" "+ userDetails.value?.lastName)?.trim(),
             emailAddress = email,
             fromEmail = fromEmail,
             fromMobile = fromMobile,

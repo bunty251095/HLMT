@@ -58,7 +58,6 @@ class RegistrationFragment: BaseFragment(), DefaultNotificationDialog.OnDialogVa
 
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
-        binding.edtReenterNewPassword.transformationMethod = null
         binding.btnDone.setOnClickListener {
              var gender = "M"
                 if (binding.rbMale.isChecked) {

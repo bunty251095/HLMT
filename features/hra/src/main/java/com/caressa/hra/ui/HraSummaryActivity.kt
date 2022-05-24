@@ -187,7 +187,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
 
                 setColors(color)
                 //binding.indicatorScore.progress = wellnessscore
-                binding.indicatorScore.setProgressWithAnimation(wellnessscore.toDouble())
+                binding.indicatorScore.setProgress(wellnessscore.toDouble())
                 binding.txtScore.text = wellnessscore.toString()
                 binding.txtObservation.text = observation
 
