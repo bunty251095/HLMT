@@ -111,30 +111,35 @@
                         android:backgroundTint="@color/colorPrimary"
                         />
 
-                    <com.caressa.common.view.ArcTextView
-                    android:id="@+id/txt_login_termsofservice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/TERMS_OF_SERVICE_LOGIN"
-                    android:textSize="@dimen/_11sdp"
-                    style="@style/VivantTitle"
-                     />
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <com.caressa.common.view.ArcTextView
+                            android:id="@+id/txt_login_termsofservice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="start"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/TERMS_OF_SERVICE_LOGIN"
+                            android:textSize="@dimen/_11sdp"
+                            style="@style/VivantTitle"
+                            />
+                        <com.caressa.common.view.ArcTextView
+                            android:id="@+id/txt_login_privacy_policy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="start"
+                            android:text="@string/PRIVACY_POLICY"
+                            android:textSize="@dimen/_11sdp"
+                            style="@style/VivantTitle"
+                            />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
                 </androidx.appcompat.widget.LinearLayoutCompat>
-                <com.caressa.common.view.ArcTextView
-                    android:id="@+id/txt_login_privacy_policy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/PRIVACY_POLICY"
-                    android:textSize="@dimen/_11sdp"
-                    style="@style/VivantTitle"
-                    app:layout_constraintEnd_toEndOf="@+id/btn_login"
-                    app:layout_constraintStart_toStartOf="@+id/btn_login"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_login_signup" />
 
 
             </androidx.appcompat.widget.LinearLayoutCompat>

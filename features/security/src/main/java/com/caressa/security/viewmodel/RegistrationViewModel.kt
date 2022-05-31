@@ -30,23 +30,23 @@ class RegistrationViewModel(private val userManagementUseCase: UserManagementUse
         var result:Boolean = true
         var message:String = "Invalid Details"
         if(!Validation.isValidName(name)){
-            message = "Invalid Name."
+            message = "Please enter valid Name."
             result = false
         }else
         if(!Validation.isValidEmail(emailAddress)){
-            message = "Invalid Email Address."
+            message = "Please enter valid email address."
             result = false
         }else
         if(!Validation.isValidPhoneNumber(phoneNumber)){
-            message = "Invalid Phone Number."
+            message = "Please enter valid phone number."
             result = false
         }else
         if(!Validation.isValidPassword(password)){
-            message = "Invalid Password."
+            message = "Please enter valid password."
             result = false
         }else
         if(!Validation.isValidPassword(confirmPassword)){
-            message = "Invalid Confirm Password."
+            message = "Please enter valid confirm password."
             result = false
         }else if(!password.equals(confirmPassword,false)){
             message = "Password and Confirm Password does not match."

@@ -180,7 +180,7 @@ class ForgetPasswordViewModel(private val userCase: UserManagementUseCase, priva
                         toastMessage("Password changed successfully.")
                         UserInfo.fromChangePassword = true
                         navigate(ChangePasswordFragmentDirections.actionChangePasswordFragmentToLoginFragment())
-                        it.data!!.newPassword?.let { it1 -> fetchLoginResponse(username = UserInfo.emailAddress, passwordStr = it1, hlmtUserId = "") }
+                        it.data!!.newPassword?.let { it1 -> fetchLoginResponse(username = UserInfo.emailAddress, passwordStr = it1) }
                     }
                 }
 
@@ -228,11 +228,11 @@ class ForgetPasswordViewModel(private val userCase: UserManagementUseCase, priva
             }
         }
 
-    fun fetchLoginResponse(name: String = "", username: String, passwordStr: String = "",hlmtUserId: String,hlmtEmpId: String="",hlmtLoginStatus: String="") = viewModelScope.launch(dispatchers.main){
+    fun fetchLoginResponse(name: String = "", username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
 
         val requestData = LoginModel(Gson().toJson(
             LoginModel.JSONDataRequest(
-                mode = "LOGIN",name=name, emailAddress = username,password = passwordStr,hlmtLoginStatus = hlmtLoginStatus,hlmtUserID = hlmtUserId,employeeID = hlmtEmpId), LoginModel.JSONDataRequest::class.java))
+                mode = "LOGIN",name=name, emailAddress = username,password = passwordStr), LoginModel.JSONDataRequest::class.java))
 
         _progressBar.value = Event("Validating Username..")
         _loginResponse.removeSource(hlmtLoginUserSource)

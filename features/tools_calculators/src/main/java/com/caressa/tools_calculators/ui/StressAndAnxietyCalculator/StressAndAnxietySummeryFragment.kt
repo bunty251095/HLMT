@@ -147,13 +147,13 @@ class StressAndAnxietySummeryFragment : BaseFragment() {
         val heartColour: Int
         if (riskPercentage >= stressData.normal.split("-")[0].toDouble()
             && riskPercentage <= stressData.normal.split("-")[1].toDouble()) {
-            heartColour = R.color.vivant_marigold
+            heartColour = R.color.vivant_nasty_green
         } else if (riskPercentage >= stressData.mild.split("-")[0].toDouble()
             && riskPercentage <= stressData.mild.split("-")[1].toDouble()) {
-            heartColour = R.color.vivant_orange_yellow
+            heartColour = R.color.vivant_marigold
         } else if (riskPercentage >= stressData.moderate.split("-")[0].toDouble()
             && riskPercentage <= stressData.moderate.split("-")[1].toDouble()) {
-            heartColour = R.color.vivant_dusty_orange
+            heartColour = R.color.vivant_orange_yellow
         } else if (riskPercentage >= stressData.severe.split("-")[0].toDouble()
             && riskPercentage <= stressData.severe.split("-")[1].toDouble()) {
             heartColour = R.color.vivant_watermelon

@@ -107,9 +107,9 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                         }
                         UserInfo.from = Constants.LOGIN
                         if(!UserInfo.fromChangePassword) {
-                            checkLoginStatus(username = username, passwordStr = passwordStr, hlmtEmpId = "", hlmtUserId = "", hlmtLoginStatus = "")
+                            checkLoginStatus(username = username, passwordStr = passwordStr)
                         }else {
-                            fetchLoginResponse(username = username, passwordStr = passwordStr, hlmtEmpId = "", hlmtUserId = "", hlmtLoginStatus = "")
+                            fetchLoginResponse(username = username, passwordStr = passwordStr)
                         }
                     } else {
                         isAccountExist = false
@@ -125,11 +125,11 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
         }
     }
 
-    fun fetchLoginResponse(name: String = "", username: String, passwordStr: String = "",hlmtUserId: String,hlmtEmpId: String,hlmtLoginStatus: String) = viewModelScope.launch(dispatchers.main){
+    fun fetchLoginResponse(name: String = "", username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
 
         val requestData = LoginModel(Gson().toJson(
             LoginModel.JSONDataRequest(
-                mode = "LOGIN",name=name, emailAddress = username,password = passwordStr,hlmtLoginStatus = hlmtLoginStatus,hlmtUserID = hlmtUserId,employeeID = hlmtEmpId), LoginModel.JSONDataRequest::class.java))
+                mode = "LOGIN",name=name, emailAddress = username,password = passwordStr), LoginModel.JSONDataRequest::class.java))
 
         _progressBar.value = Event("Validating Username..")
         _loginResponse.removeSource(hlmtLoginUserSource)
@@ -183,11 +183,11 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
         }
     }
 
-    fun checkLoginStatus(name: String = "", username: String, passwordStr: String = "",hlmtUserId: String,hlmtEmpId: String,hlmtLoginStatus: String) = viewModelScope.launch(dispatchers.main){
+    fun checkLoginStatus(name: String = "", username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
 
         val requestData = LoginModel(Gson().toJson(
             LoginModel.JSONDataRequest(
-                mode = "LOGIN",name=name, emailAddress = username,password = passwordStr,hlmtLoginStatus = hlmtLoginStatus,hlmtUserID = hlmtUserId,employeeID = hlmtEmpId), LoginModel.JSONDataRequest::class.java))
+                mode = "LOGIN",name=name, emailAddress = username,password = passwordStr), LoginModel.JSONDataRequest::class.java))
 
         _progressBar.value = Event("Validating Username..")
         _loginResponse.removeSource(hlmtLoginUserSource)
@@ -233,9 +233,6 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
 //                        )
                     } else {
                         fetchLoginResponse(
-                            hlmtLoginStatus = it.data!!.loginStatus.toString(),
-                            hlmtUserId = it.data!!.HLMTUserID.toString(),
-                            hlmtEmpId = username,
                             username = ""
                         )
                     }
@@ -265,10 +262,7 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
                         password = passwordStr,
                         gender = gender,
                         dateOfBirth = dob,
-                        emailAddress = emailStr,
-                        hlmtUserID = hlmtUserId,
-                        hlmtLoginStatus = hlmtLoginStatus,
-                        employeeID = hlmtEmpId
+                        emailAddress = emailStr
                     ), LoginModel.JSONDataRequest::class.java
                 )
             )
@@ -427,17 +421,17 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
         hlmtEmpId: String
     ): Boolean {
         var isValid = false
-        val emailPattern:Regex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
+//        val emailPattern:Regex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
         val namePattern:Regex = "^[a-zA-Z\\s]*\$".toRegex()
 
         if (name.isNullOrEmpty() || name.length<=3 || !name.matches(namePattern)){
             toastMessage("Please Enter Valid Name.")
         }else if((phoneNumber.isNullOrEmpty() || !Validation.isValidPhoneNumber(phoneNumber)) && hlmtEmpId.isEmpty()){
-            toastMessage("Invalid Phone Number")
+            toastMessage("Please enter valid Phone Number")
         }else if(!Validation.isValidEmail(emailStr)){
-            toastMessage("Invalid email Address")
+            toastMessage("Please enter valid email address")
         }else if (dob.isNullOrEmpty()){
-            toastMessage("Invalid Date of Birth")
+            toastMessage("Please enter valid Date of Birth")
         }else if (!DateHelper.isDateAbove18Years(dob)) {
             toastMessage("Application user must be 18 years old")
         }else{
@@ -447,11 +441,10 @@ class HlmtLoginViewModel(private val userManagementUseCase: UserManagementUseCas
     }
 
     private fun validateLoginData(username: String, passwordStr: String): Boolean {
-        val emailPattern:Regex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
 
         var isValidate:Boolean = false
-        if (username.isNullOrEmpty() || !username.matches(emailPattern)){
-            toastMessage("Please enter valid user ID.")
+        if (!Validation.isValidEmail(username)){
+            toastMessage("Please enter valid email address.")
         }else if(passwordStr.isNullOrEmpty()){
             toastMessage("Please enter valid password.")
         }else if(passwordStr.length < 6){

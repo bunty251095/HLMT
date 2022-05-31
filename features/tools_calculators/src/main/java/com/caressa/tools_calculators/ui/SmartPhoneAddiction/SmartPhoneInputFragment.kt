@@ -118,7 +118,7 @@ class SmartPhoneInputFragment : BaseFragment() {
             autoNext()
         }
 
-        binding.btnBack.setOnClickListener {
+/*        binding.btnBack.setOnClickListener {
             currentQuestion = dataHandler!!.getSmartPhoneAddictionPrevious(currentQuestion)
             binding.indicatorSeekbar.setProgress(binding.indicatorSeekbar.progressFloat - 1)
             binding.btnNext.text = resources.getString(R.string.NEXT)
@@ -130,6 +130,23 @@ class SmartPhoneInputFragment : BaseFragment() {
                 binding.btnBack.visibility = View.VISIBLE
                 question = smartPhoneAddictionData!!.getSmartPhoneAddictionData(currentQuestion,requireContext())
                 loadPreviousData()
+            }
+        }*/
+
+        binding.btnBack.setOnClickListener {
+            currentQuestion = dataHandler!!.getSmartPhoneAddictionPrevious(currentQuestion)
+            binding.indicatorSeekbar.setProgress(binding.indicatorSeekbar.progressFloat - 1)
+            binding.btnNext.text = resources.getString(R.string.NEXT)
+            binding.btnNext.visibility = View.VISIBLE
+
+            if (currentQuestion.equals("FIRST", ignoreCase = true)) {
+                binding.btnBack.visibility = View.INVISIBLE
+            } else {
+                question = smartPhoneAddictionData!!.getSmartPhoneAddictionData(currentQuestion,requireContext())
+                loadPreviousData()
+                if (currentQuestion.equals("ADDIC1", ignoreCase = true)) {
+                    binding.btnBack.visibility = View.INVISIBLE
+                }
             }
         }
 

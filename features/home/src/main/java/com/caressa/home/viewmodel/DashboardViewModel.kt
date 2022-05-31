@@ -423,6 +423,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
             var himOrHer = ""
             val userName = firstName
             val appName = "HL Pace"
+            val link = "https://onelink.to/g2zpq4"
 
             when(gender) {
                 "1" -> himOrHer = " him "
@@ -450,10 +451,8 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
 
             val text = "Hello," + "\n\n" +  title + "\n\n" + "This Health & Wellness App that helps you to Store, Track and Manage your Health Data." +
                     "\n\n" + "Join" + himOrHer + "on "+
-                    Html.fromHtml("<br><br>" + "IOS : " +
-                            " -- </a> " + "</br></br>") +
-                    Html.fromHtml("<br><br>" + " Android : " +
-                            " -- " + "</br></br>")+
+                    Html.fromHtml("<br><br>" + "App Link : " +
+                            " -- </a> " +link+ "</br></br>") +
                     Html.fromHtml("<br><br>" + "Keep pace with us!</br></br>")
 
             val sendIntent = Intent()
@@ -577,11 +576,11 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
     }
 
     private fun validateLoginData(username: String, passwordStr: String): Boolean {
-        val emailPattern:Regex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
+//        val emailPattern:Regex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
 
         var isValidate:Boolean = false
-        if (username.isNullOrEmpty() || !username.matches(emailPattern)){
-            toastMessage("Please enter valid user ID.")
+        if (!Validation.isValidEmail(username)){
+            toastMessage("Please enter valid email address.")
         }else if(passwordStr.isNullOrEmpty()){
             toastMessage("Please enter valid password.")
         }else if(passwordStr.length < 6){

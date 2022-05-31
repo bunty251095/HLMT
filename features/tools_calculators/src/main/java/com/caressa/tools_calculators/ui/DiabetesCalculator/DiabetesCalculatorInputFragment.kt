@@ -35,6 +35,7 @@ import org.koin.standalone.KoinComponent
 import org.koin.standalone.get
 import timber.log.Timber
 import java.util.*
+import kotlin.math.roundToInt
 
 class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAdapter.ParameterOnClickListener,
     WaistDialogManager.OnDialogValueListener {
@@ -204,7 +205,8 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
         var isValid = false
         try {
             if (paramList[0].finalValue.isNotEmpty()) {
-                val `val`: Double = paramList[0].finalValue.toDouble() / 2.54
+                val `val`: Double = (paramList[0].finalValue.toDouble() / 2.54).roundToInt().toDouble()
+                Timber.e("ValidateInchValue=>$`val`")
                 if ( `val` >= paramList[0].minRange && `val` <= paramList[0].maxRange ) {
                     isValid = true
                 }
@@ -333,6 +335,7 @@ class DiabetesCalculatorInputFragment : BaseFragment(),KoinComponent,ParameterAd
     override fun onDialogValueListener(inch: String?, centimeter: String?, unit: String?) {
         paramList = parameterAdapter!!.paramList
         Timber.e("InchValue=>$inch")
+        Timber.e("CmValue=>$centimeter")
         if (unit.equals("Inch", ignoreCase = true)) {
             paramList[0].value = inch!!
             Timber.e("Value=>$inch")
