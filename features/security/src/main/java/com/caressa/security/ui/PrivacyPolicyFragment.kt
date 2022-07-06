@@ -10,19 +10,24 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.caressa.security.R
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
+import com.caressa.common.constants.Constants
+import com.caressa.security.R
 import com.caressa.security.databinding.FragmentTermsAndConditionBinding
 import com.caressa.security.viewmodel.TermsAndConditionViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PrivacyPolicyFragment : BaseFragment() {
 
-    private val viewModel : TermsAndConditionViewModel by viewModel()
+    private val viewModel: TermsAndConditionViewModel by viewModel()
     private lateinit var binding: FragmentTermsAndConditionBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentTermsAndConditionBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -41,7 +46,7 @@ class PrivacyPolicyFragment : BaseFragment() {
         binding.webViewTerms.webViewClient = CustomWebViewClient()
         val webSettings = binding.webViewTerms.settings
         webSettings.javaScriptEnabled = true
-        binding.webViewTerms.loadUrl("https://hlmtcoreuat.vivant.me/privacy%20policy.html")
+        binding.webViewTerms.loadUrl(Constants.strAPIUrl + "/privacy%20policy.html")
     }
 
     inner class CustomWebViewClient : WebViewClient() {
