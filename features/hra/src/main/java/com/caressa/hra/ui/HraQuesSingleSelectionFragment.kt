@@ -120,7 +120,17 @@ class HraQuesSingleSelectionFragment(val qCode: String) : BaseFragment() {
         Timber.e("AnswerCode----->$ansCode")
         Timber.e("AnswerDesc----->$ansDesc")
         //Timber.e("AnsDescEng----->$ansDescEng")
-        viewModel.saveResponse(qCode, ansCode, ansDesc, questionData.category, questionData.tabName, "")
+
+        if ( qCode == "SMOKECNT" ) {
+            if ( ansCode.contains("SMKCNT",ignoreCase = true) ) {
+                viewModel.saveResponse("HABIT", "86_SMOKE","Yes", questionData.category, questionData.tabName, "")
+                viewModel.saveResponse(qCode, ansCode, ansDesc, questionData.category, questionData.tabName, "")
+            } else {
+                viewModel.saveResponse("HABIT", "86_NONE","No", questionData.category, questionData.tabName, "")
+            }
+        } else {
+            viewModel.saveResponse(qCode, ansCode, ansDesc, questionData.category, questionData.tabName, "")
+        }
         saveResponseForNextScreen(ansCode, ansDesc)
 
         when (qCode) {

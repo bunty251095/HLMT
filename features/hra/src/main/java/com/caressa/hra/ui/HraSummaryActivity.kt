@@ -224,26 +224,27 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
         val moderateList: ArrayList<HraAssessmentSummaryModel.AssessmentDetails> = ArrayList()
         val highList: ArrayList<HraAssessmentSummaryModel.AssessmentDetails> = ArrayList()
         binding.layoutRiskSummery.visibility = View.GONE
-        viewModel.hraAssessmentSummaryDetails.observe(this, {
+        viewModel.hraAssessmentSummaryDetails.observe(this) {
             if (it != null) {
                 for (i in it) {
-                    if (i.riskLevel == "At Risk") {
-                        if ( !atRiskList.contains(i) ) {
+                    if ( i.riskLevel.equals("At Risk",ignoreCase = true)
+                        || i.riskLevel.equals("Low",ignoreCase = true) ) {
+                        if (!atRiskList.contains(i)) {
                             atRiskList.add(i)
                         }
                     }
-                    if (i.riskLevel == "Need improvements") {
-                        if ( !atRiskList.contains(i) ) {
+                    if (i.riskLevel.equals("Need improvements",ignoreCase = true)) {
+                        if (!atRiskList.contains(i)) {
                             needImprovementsList.add(i)
                         }
                     }
-                    if (i.riskLevel == "Moderate") {
-                        if ( !atRiskList.contains(i) ) {
+                    if (i.riskLevel.equals("Moderate",ignoreCase = true)) {
+                        if (!atRiskList.contains(i)) {
                             moderateList.add(i)
                         }
                     }
-                    if (i.riskLevel == "High") {
-                        if ( !atRiskList.contains(i) ) {
+                    if (i.riskLevel.equals("High",ignoreCase = true)) {
+                        if (!atRiskList.contains(i)) {
                             highList.add(i)
                         }
                     }
@@ -262,12 +263,12 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
                 }
                 val strLow = sbLow.toString()
                 Timber.i("AtRisk---->%s", strLow)
-                binding.layoutAtRisk.visibility = View.VISIBLE
+                binding.cardAtRisk.visibility = View.VISIBLE
                 if (!Utilities.isNullOrEmpty(strLow)) {
                     binding.txtAtRisk.text = strLow
                 } else {
                     binding.txtAtRisk.text = "-"
-                    binding.layoutAtRisk.visibility = View.GONE
+                    binding.cardAtRisk.visibility = View.GONE
                 }
                 // ************************ At Risk data ************************
 
@@ -290,15 +291,21 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
 
                 var strNeedImprovements = sbNeedImprovements.toString()
                 val strModerate = sbModerate.toString()
-                if (!Utilities.isNullOrEmpty(strNeedImprovements) && !Utilities.isNullOrEmpty(strModerate)) {
+                if (!Utilities.isNullOrEmpty(strNeedImprovements) && !Utilities.isNullOrEmpty(
+                        strModerate
+                    )
+                ) {
                     strNeedImprovements += ", "
                 }
                 Timber.i("Moderate---->%s", (strNeedImprovements + strModerate))
                 binding.txtModerateDesc.text = (strNeedImprovements + strModerate)
-                binding.layoutModerateRisk.visibility = View.VISIBLE
-                if (Utilities.isNullOrEmpty(strNeedImprovements) && Utilities.isNullOrEmpty(strModerate)) {
+                binding.cardModerateRisk.visibility = View.VISIBLE
+                if (Utilities.isNullOrEmpty(strNeedImprovements) && Utilities.isNullOrEmpty(
+                        strModerate
+                    )
+                ) {
                     binding.txtModerateDesc.text = "-"
-                    binding.layoutModerateRisk.visibility = View.GONE
+                    binding.cardModerateRisk.visibility = View.GONE
                 }
                 //************************ Moderate Risk data ************************
 
@@ -312,17 +319,18 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
                 }
                 val strHigh = sbHigh.toString()
                 Timber.i("High :-%s", strHigh)
-                binding.layoutHighRisk.visibility = View.VISIBLE
+                binding.cardHighRisk.visibility = View.VISIBLE
                 if (!Utilities.isNullOrEmpty(strHigh)) {
                     binding.txtHighDesc.text = strHigh
                 } else {
                     binding.txtHighDesc.text = "-"
-                    binding.layoutHighRisk.visibility = View.GONE
+                    binding.cardHighRisk.visibility = View.GONE
                 }
                 binding.layoutRiskSummery.visibility = View.VISIBLE
                 //************************ High Risk data ************************
                 if (Utilities.isNullOrEmpty(strLow) && Utilities.isNullOrEmpty(strModerate) &&
-                    Utilities.isNullOrEmpty(strNeedImprovements) && Utilities.isNullOrEmpty(strHigh)) {
+                    Utilities.isNullOrEmpty(strNeedImprovements) && Utilities.isNullOrEmpty(strHigh)
+                ) {
                     binding.layoutRiskSummery.visibility = View.GONE
                     binding.txtCongratsMsg.visibility = View.VISIBLE
                 } else {
@@ -330,7 +338,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
                     binding.txtCongratsMsg.visibility = View.GONE
                 }
             }
-        })
+        }
     }
 
     private fun setLabTestsList() {

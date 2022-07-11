@@ -1079,7 +1079,8 @@ class HraViewModel(
                 }
 
                 "SMOKECNT" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_DONT_SMOKE), answerCode = "2_NO"))
+                    //optionList.add(Option(description = context.resources.getString(R.string.RB_DONT_SMOKE), answerCode = "2_NO"))
+                    optionList.add(Option(description = context.resources.getString(R.string.RB_DONT_SMOKE), answerCode = "86_NONE"))
                     optionList.add(Option(description = context.resources.getString(R.string.RB_12CIGAR), answerCode = "SMKCNT12"))
                     optionList.add(Option(description = context.resources.getString(R.string.RB_34CIGAR), answerCode = "SMKCNT34"))
                     optionList.add(Option(description = context.resources.getString(R.string.RB_MORETHAN_4CIGAR), answerCode = "SMKCNTGT4"))

@@ -3,14 +3,11 @@ package com.caressa.repository
 import android.content.Context
 import android.net.Uri
 import android.util.Base64
-import androidx.core.net.toUri
-import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.LiveData
 import com.caressa.common.constants.ApiConstants
 import com.caressa.common.constants.Constants
 import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.FileUtils
-import com.caressa.common.utils.RealPathUtil
 import com.caressa.common.utils.Utilities
 import com.caressa.local.dao.DataSyncMasterDao
 import com.caressa.local.dao.StoreRecordsDao
@@ -519,7 +516,6 @@ class ShrRepositoryImpl(private val datasource: ShrDatasource,
     override suspend fun deleteRecordInSession(record : RecordInSession) {
         shrDao.deleteRecordInSession(record.Name,record.Path)
         //Utilities.deleteFileFromLocalSystem(record.Path+"/"+record.Name)
-        //Utilities.deleteDocumentFileFromLocalSystem(context,record.FileUri.toUri(),record.Name)
         Utilities.deleteFileFromLocalSystem(record.Path+"/"+record.Name)
         Timber.e("Deleted Record from RecordsInSessionTable...")
     }

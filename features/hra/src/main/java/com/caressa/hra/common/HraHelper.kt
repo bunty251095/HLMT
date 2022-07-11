@@ -1,24 +1,16 @@
 package com.caressa.hra.common
 
-import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
-import android.os.Environment
-import android.os.StrictMode
-import android.text.Html
 import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.core.content.FileProvider
-import androidx.core.net.toUri
-import androidx.documentfile.provider.DocumentFile
 import com.caressa.common.constants.Configuration
-import com.caressa.common.constants.Constants
-import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.*
 import com.caressa.common.view.FlowLayout
 import com.caressa.hra.R
@@ -33,7 +25,6 @@ import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
-import java.io.OutputStream
 import java.util.*
 
 object HraHelper : KoinComponent {

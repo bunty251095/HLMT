@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.util.Base64
 import android.view.View
 import androidx.core.net.toUri
-import androidx.documentfile.provider.DocumentFile
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -95,7 +95,7 @@ class HealthRecordsViewModel(
 
     fun callListDocumentsApi( forceRefresh : Boolean ) = viewModelScope.launch(dispatchers.main) {
         val requestData = ListDocumentsModel(Gson().toJson(ListDocumentsModel.JSONDataRequest(
-                searchCriteria = SearchCriteria(personID = personId)), ListDocumentsModel.JSONDataRequest::class.java) , authToken )
+            searchCriteria = SearchCriteria(personID = personId)), ListDocumentsModel.JSONDataRequest::class.java) , authToken )
 
         _listDocuments.removeSource(listDocumentsSource)
         withContext(dispatchers.io) {
@@ -232,17 +232,18 @@ class HealthRecordsViewModel(
             = viewModelScope.launch(dispatchers.main) {
 
         var fileBytes =""
-        //val path = record.Path!!
+        val path = record.Path!!
         val name = record.Name!!
         val uri = record.FileUri
         try {
-            val file = DocumentFile.fromTreeUri(context, record.FileUri.toUri())!!
-            val bytesFile = ByteArray(file.length().toInt())
-
-            context.contentResolver.openFileDescriptor(record.FileUri.toUri(), "r")?.use { parcelFileDescriptor ->
-                FileInputStream(parcelFileDescriptor.fileDescriptor).use { inStream ->
-                    inStream.read(bytesFile)
-                    fileBytes = Base64.encodeToString(bytesFile, Base64.DEFAULT)
+            val file = File( path , name )
+            if (file.exists()) {
+                val bytesFile = ByteArray(file.length().toInt())
+                context.contentResolver.openFileDescriptor(Uri.fromFile(file), "r")?.use { parcelFileDescriptor ->
+                    FileInputStream(parcelFileDescriptor.fileDescriptor).use { inStream ->
+                        inStream.read(bytesFile)
+                        fileBytes = Base64.encodeToString(bytesFile, Base64.DEFAULT)
+                    }
                 }
             }
         } catch (e: Exception) {

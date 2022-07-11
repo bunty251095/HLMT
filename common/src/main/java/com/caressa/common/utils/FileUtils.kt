@@ -14,10 +14,7 @@ import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Base64
 import androidx.annotation.WorkerThread
-import androidx.core.net.toUri
-import androidx.documentfile.provider.DocumentFile
 import com.caressa.common.constants.Constants
-import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.R
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.get
@@ -116,41 +113,6 @@ object FileUtils : KoinComponent {
         //inImage!!.compress(Bitmap.CompressFormat.PNG, 100, bytes)
         val path = MediaStore.Images.Media.insertImage(inContext.contentResolver, inImage, "img_" + System.currentTimeMillis(), null)
         return Uri.parse(path)
-    }
-
-    fun calculateDocumentFileSize(file: DocumentFile,type:String): Double {
-        //Timber.e("File Path---> $filepath")
-        var calculatedSize = 0.0
-        //val file = File(filepath)
-
-        val bytes = if (!file.exists()) 0.0 else file.length().toDouble()
-
-        // Convert the bytes to Kilobytes (1 KB = 1024 Bytes)
-        val kilobytes = bytes / 1024
-
-        // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
-        val megabytes = kilobytes / 1024
-
-        val gigabytes = megabytes / 1024
-        val terabytes = gigabytes / 1024
-
-        when {
-            type.equals("KB",ignoreCase = true) -> {
-                calculatedSize = kilobytes
-            }
-            type.equals("MB",ignoreCase = true) -> {
-                calculatedSize = megabytes
-            }
-            type.equals("GB",ignoreCase = true) -> {
-                calculatedSize = gigabytes
-            }
-            type.equals("TB",ignoreCase = true) -> {
-                calculatedSize = terabytes
-            }
-        }
-        val finalSize = Utilities.roundOffPrecision(calculatedSize,2)
-        Timber.e("File Size : $finalSize ${type.toUpperCase()}")
-        return finalSize
     }
 
     fun calculateFileSize(filepath: String,type:String): Double {

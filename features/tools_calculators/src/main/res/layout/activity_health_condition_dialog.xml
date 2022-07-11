@@ -126,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_3sdp"
-                        android:tag="STROCK" />
+                        android:tag="STROCK"
                         android:text="@string/STROKE"/>
 
                     <androidx.appcompat.widget.AppCompatTextView

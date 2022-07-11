@@ -3,20 +3,12 @@ package com.caressa.records_tracker.common
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Environment
-import android.os.StrictMode
 import android.text.Html
-import androidx.core.net.toUri
-import androidx.documentfile.provider.DocumentFile
-import com.caressa.common.constants.Constants
+import androidx.core.content.FileProvider
 import com.caressa.common.constants.FirebaseConstants
-import com.caressa.common.utils.FileUtils
-import com.caressa.common.utils.FirebaseHelper
-import com.caressa.common.utils.RealPathUtil
-import com.caressa.common.utils.Utilities
+import com.caressa.common.utils.*
 import com.caressa.common.view.SpinnerModel
 import com.caressa.model.entity.HealthDocument
 import com.caressa.model.entity.RecordInSession
@@ -30,31 +22,10 @@ class DataHandler(val context: Context) {
 
     private val fileUtils = FileUtils
 
-
-
-/*    fun openDownloadedFile( file : File , type :String ,  context: Context) {
-        val builder = StrictMode.VmPolicy.Builder()
-        StrictMode.setVmPolicy(builder.build())
-
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.setDataAndType(Uri.fromFile(file),type)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
-        //val openIntent = Intent.createChooser(intent,"Open using")
-
+    private fun openDownloadedFile(file : File, type :String) {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)!!))!!
         try {
-            context.startActivity(intent)
-        } catch (e: ActivityNotFoundException) {
-            e.printStackTrace()
-            Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_NO_APPLICATION_TO_VIEW_PDF))
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_UNABLE_TO_OPEN_FILE))
-        }
-    }*/
-
-    private fun openDownloadedFile(file : DocumentFile, type :String, context: Context) {
-        try {
-            val uri = file.uri
+            val uri = FileProvider.getUriForFile(context, context.packageName + ".provider", file)
             val intent = Intent(Intent.ACTION_VIEW)
             intent.setDataAndType(uri,type)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
@@ -62,10 +33,10 @@ class DataHandler(val context: Context) {
             context.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
-            Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_NO_APPLICATION_TO_VIEW_PDF))
+            Utilities.toastMessageShort(context,localResource.getString(R.string.ERROR_NO_APPLICATION_TO_VIEW_PDF))
         } catch (e: Exception) {
             e.printStackTrace()
-            Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_UNABLE_TO_OPEN_FILE))
+            Utilities.toastMessageShort(context,localResource.getString(R.string.ERROR_UNABLE_TO_OPEN_FILE))
         }
     }
 
@@ -162,10 +133,9 @@ class DataHandler(val context: Context) {
                 val bitmap = BitmapFactory.decodeFile(completeFilePath)
                 Utilities.showFullImageWithBitmap(bitmap,context,true)
             } else {
-                //val file = File(recordPath , recordName)
-                val file = DocumentFile.fromTreeUri(context, recordData.FileUri.toUri())!!
+                val file = File(recordPath , recordName)
                 if (file.exists()) {
-                    DataHandler(context).openDownloadedFile(file , type , context)
+                    DataHandler(context).openDownloadedFile(file , type )
                 }
             }
         }
@@ -173,7 +143,7 @@ class DataHandler(val context: Context) {
 
     fun viewRecord(recordData : RecordInSession) {
         val recordName = recordData.Name
-        //val recordPath = recordData.Path
+        val recordPath = recordData.Path
         val recordType = recordData.Type
         var type = ""
         if (recordType.equals("IMAGE", ignoreCase = true)) {
@@ -188,10 +158,9 @@ class DataHandler(val context: Context) {
             type = "application/pdf"
         }
         if (!type.equals("", ignoreCase = true)) {
-            //val file = File(recordPath , recordName)
-            val file = DocumentFile.fromTreeUri(context, recordData.FileUri.toUri())!!
+            val file = File(recordPath , recordName)
             if (file.exists()) {
-                DataHandler(context).openDownloadedFile(file , type , context)
+                DataHandler(context).openDownloadedFile(file , type)
             }
         }
     }
@@ -234,7 +203,7 @@ class DataHandler(val context: Context) {
 //                            "to connect with your other patients too!" + "</br></br>") +
 //                    Html.fromHtml(("<br><br>" + "Team Vivant</br><br>" +
 //                            "<a href=\"https://vivant.me\">www.vivant.vivant.me</a></br></br>"
-                            ))
+                    ))
 
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
             shareIntent.type = "*/*"

@@ -492,15 +492,6 @@ object Utilities {
         }
     }
 
-/*    fun deleteDocumentFileFromLocalSystem(context:Context, uri: Uri, filename: String) {
-        try {
-            val isDeleted = DocumentsContract.deleteDocument(context.contentResolver,uri)
-            Timber.e("Deleted : ${filename}--->$isDeleted")
-        } catch (e: SecurityException) {
-            e.printStackTrace()
-        }
-    }*/
-
     fun getVitalParameterData(parameter: String, context: Context): VitalParameter {
         val vitalParameter = VitalParameter()
 
