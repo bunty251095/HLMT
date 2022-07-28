@@ -99,6 +99,10 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
     val _checkAppUpdate = MediatorLiveData<CheckAppUpdateModel.CheckAppUpdateResponse>()
     val checkAppUpdate: LiveData<CheckAppUpdateModel.CheckAppUpdateResponse> get() = _checkAppUpdate
 
+    var labRecordVitalsUserSource: LiveData<Resource<VitalsHistoryModel.Response>> = MutableLiveData()
+    val _labRecordVitalsList = MediatorLiveData<Resource<VitalsHistoryModel.Response>>()
+    val labRecordVitalsList: LiveData<Resource<VitalsHistoryModel.Response>> get() = _labRecordVitalsList
+
     val labParameterList = MutableLiveData<List<TrackParameterMaster.History>>()
 
     fun callBackgroundApiCall(showProgress:Boolean) = viewModelScope.launch(dispatchers.main){
@@ -271,7 +275,7 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
         }
     }
 
-    private fun getParameterList() = viewModelScope.launch(dispatchers.main) {
+    fun getParameterList() = viewModelScope.launch(dispatchers.main) {
 
         val requestData = ParameterListModel(Gson().toJson(ParameterListModel.JSONDataRequest(
                     from = "60",
@@ -385,7 +389,7 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
         }
     }
 
-    private fun getLabRecordList(lastSyncDate : String) = viewModelScope.launch(dispatchers.main) {
+    fun getLabRecordList(lastSyncDate : String) = viewModelScope.launch(dispatchers.main) {
 
         val jsonReq: LabRecordsListModel.JSONDataRequest
         if(lastSyncDate.isNotEmpty()) {
@@ -409,6 +413,41 @@ class BackgroundCallViewModel(private val useCase: BackgroundCallUseCase, privat
                 if(it.errorNumber.equals("1100014",true)){
                     _sessionError.value = Event(true)
                 }else {
+                    toastMessage(it.errorMessage)
+                }
+            }
+        }
+    }
+
+    fun getLabRecordVitalsList(lastSyncDate: String) = viewModelScope.launch(dispatchers.main) {
+
+        val jsonReq: VitalsHistoryModel.JSONDataRequest
+        if (lastSyncDate.isNotEmpty()) {
+            jsonReq = VitalsHistoryModel.JSONDataRequest(
+                personID = personId,
+                lastSyncDate = DateHelper.convertDateTimeValue(lastSyncDate, DateHelper.SERVER_DATE_YYYYMMDD, DateHelper.DISPLAY_DATE_DDMMMYYYY)!!)
+        } else {
+            jsonReq = VitalsHistoryModel.JSONDataRequest(personID = personId)
+        }
+        val requestData = VitalsHistoryModel(Gson().toJson(jsonReq, VitalsHistoryModel.JSONDataRequest::class.java), sharedPref.getString(PreferenceConstants.TOKEN, "")!!)
+
+        _labRecordVitalsList.removeSource(labRecordVitalsUserSource)
+        withContext(dispatchers.io) {
+            labRecordVitalsUserSource =
+                useCase.invokeLabRecordsVitalsList(data = requestData, personId = personId)
+        }
+        _labRecordVitalsList.addSource(labRecordVitalsUserSource) {
+            _labRecordVitalsList.value = it
+            if (it.status == Resource.Status.SUCCESS) {
+//                getParameterData("BMI", "BLOODPRESSURE", personId)
+                Timber.e("ListVitalsHistor--->${it.data!!.vHistory}")
+            }
+
+            if (it.status == Resource.Status.ERROR) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if (it.errorNumber.equals("1100014", true)) {
+                    _sessionError.value = Event(true)
+                } else {
                     toastMessage(it.errorMessage)
                 }
             }

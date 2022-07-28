@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.caressa.track_parameter.R
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.FirebaseConstants
@@ -142,14 +143,14 @@ class RevUpdateParameterFragment : BaseFragment(){
         }
 
         // Observer
-        viewModel.saveParam.observe(viewLifecycleOwner, {
-          Timber.i("Inside SAVE API Call Response: "+it)
-        })
+        viewModel.saveParam.observe(viewLifecycleOwner) {
+            Timber.i("Inside SAVE API Call Response: " + it)
+        }
 
-        viewModel.selectedParameter.observe(viewLifecycleOwner, {
+        viewModel.selectedParameter.observe(viewLifecycleOwner) {
             var counter: Int = 0
-            if(it.isNotEmpty()){
-                if(isFirstTime) {
+            if (it.isNotEmpty()) {
+                if (isFirstTime) {
                     for (item in it) {
                         if (item.profileCode.equals(profileCode, true)) {
                             break
@@ -160,17 +161,18 @@ class RevUpdateParameterFragment : BaseFragment(){
                     profileAdapter.selectedPosition = counter
                     profileAdapter.updateData(it)
 
-                    paramAdapter = RevInputParamAdapter(profileCode, viewModel,requireContext())
-                    binding.rvInputParameters.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                    paramAdapter = RevInputParamAdapter(profileCode, viewModel, requireContext())
+                    binding.rvInputParameters.layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     binding.rvInputParameters.adapter = paramAdapter
                     viewModel.getParameterByProfileCodeAndDate(profileCode, serverDate)
                     paramAdapter.profileCode = profileCode
                     binding.rvSelectedParameters.scrollToPosition(profileAdapter.selectedPosition)
-                }else{
+                } else {
                     profileAdapter.updateData(it)
                 }
             }
-        })
+        }
 
         binding.btnSaveUpdateParameters.setOnClickListener { view: View? ->
             try {
@@ -207,7 +209,7 @@ class RevUpdateParameterFragment : BaseFragment(){
                         viewModel.saveParameter(paramAdapter.dataList!! as ArrayList<ParameterListModel.InputParameterModel>, recordDate)
                     } else {
                         isValidateSuccess = false
-                        validationMessage = "Please enter at least one value for $profileCode"
+                        validationMessage = "${resources.getString(R.string.PLEASE_ENTER_AT_LEAST_ONE_VALUE_FOR)} $profileCode"
                     }
 //                    checkIfDiastolicIsGreaterThanSystolic()
                     if (isValidateSuccess) {

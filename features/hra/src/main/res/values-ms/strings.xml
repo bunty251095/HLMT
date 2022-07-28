@@ -1,4 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="HEALTH_CONCERN">Health Concerns</string>
+
+    <!--New-->
+    <string name="TITLE_HRA">Penilaian Risiko Kesihatan</string>
+    <string name="TITLE_HRA_SUMMARY">Ringkasan HRA</string>
+    <string name="I_DONT_REMEMBER">Saya tidak ingat</string>
+    <string name="RESTART_HRA">Mulakan semula HRA</string>
+    <string name="BOOK_HEALTH_PACKAGES">Tempah Pakej</string>
+    <string name="DOWNLOAD_REPORT">Muat Turun Laporan</string>
+
+    <string name="WELLNESS_SCORE">Skor Kesihatan </string>
+    <string name="RISK_SUMMARY">Ringkasan Risiko</string>
+    <string name="RECOMMENDED_LAB_TESTS">Ujian Makmal Disarankan</string>
+    <string name="FREQUENCY">Kekerapan</string>
+    <string name="COMMON_TEST_CHECK_UPS">Pemeriksaan/Ujian Biasa </string>
+    <string name="TEST_CHECK_UPS_SUGGESTED_BY_DOCTOR">Pemeriksaan/Ujian Disarankan oleh Doktor</string>
+
+    <string name="HRA_RANGE_HIGH_RISK">0 – 15</string>
+    <string name="HRA_RANGE_MODERATE_RISK">16 – 45</string>
+    <string name="HRA_RANGE_HEALTHY">46 – 85</string>
+    <string name="HRA_RANGE_OPTIMUM">86 – 100</string>
+
+    <string name="YOUR_BMI">BMI Anda</string>
+    <string name="YOUR_BP_IS">Tekanan Gula dalam Darah  anda adalah</string>
+    <string name="YOUR_BS_IS">Tahap Gula dalam darah adalah</string>
+    <string name="YOUR_CL_IS">Tahap Kolesterol Anda adalah</string>
+    <string name="SYSTOLIC_BP">Sistolik (mm Hg)</string>
+    <string name="DIASTOLIC_BP">Diastolik (mm Hg)</string>
+    <string name="STARTING_HRA">Memulakan HRA</string>
+
+    <string name="SWITCH_PROFILE_DESC">Untuk memberikan HRA kepada Ahli Keluarga, Profil anda akan Ditukar kepada Ahli Keluarga Tersebut</string>
+    <string name="START_HRA">Mula Penilaian Risiko Kesihatan </string>
+    <string name="ADD_FAMILY_MEMBER">Tambah Ahli Keluarga </string>
+    <string name="THATS_ALL">Itu Sahaja</string>
+    <string name="VIEW_REPORT">Lihat Laporan</string>
+
+    <string name="NONE">Tiada</string>
+    <string name="OTHERS">Lain-lain</string>
+    <string name="NONE_OF_ABOVE">Tiada yang di atas</string>
+    <string name="NONE_OF_BELOW">Tiada yang di bawah</string>
+
+    <string name="HIGH_RISK">Risiko Tinggi</string>
+    <string name="MODERATE_RISK">Risiko Sederhana</string>
+    <string name="MODERATE_RISK2">Risiko \n Sederhana</string>
+    <string name="AT_RISK">Berisiko</string>
+
+    <string name="UNDER_WEIGHT">Kurang berat badan</string>
+    <string name="NORMAL">Normal</string>
+    <string name="OVER_WEIGHT">Lebih berat badan</string>
+    <string name="PRE_OBESE">Pra-Obesiti</string>
+    <string name="OBESE">Obesiti</string>
+    <string name="OBESE_LEVEL_1">Obesiti Tahap 1</string>
+    <string name="OBESE_LEVEL_2">Obesiti Tahap 2</string>
+    <string name="OBESE_LEVEL_3">Obesiti Tahap 3</string>
+
+    <string name="PRE_HYPERTENSION">Pra-Hipertensi</string>
+    <string name="HYP_TENSION_STAGE1">Hipertensi - Tahap 1</string>
+    <string name="HYP_TENSION_STAGE2">Hipertensi - Tahap 2</string>
+    <string name="HYP_TENSION_CRITICAL">Hipertensi - Kritikal</string>
+
+    <string name="LOW">Rendah</string>
+    <string name="EARLY_DIABETIC">Diabetis Awal</string>
+    <string name="DIABETIC">Diabetis</string>
+
+    <string name="RANDOM_BLOOD_SUGAR">Gula Dalam Darah Rawak</string>
+    <string name="FASTING_BLOOD_SUGAR">Gula Dalam Darah Berpuasa</string>
+    <string name="POST_MEAL_BLOOD_SUGAR">Gula Dalam Darah Selepas Makan</string>
+    <string name="HBA1C">HbA1c</string>
+
+    <string name="RANDOM_BS">Gula \n Dalam Darah Rawak</string>
+    <string name="FASTING_BS">Gula \n Dalam Darah Berpuasa</string>
+    <string name="POST_MEAL_BS">Gula \n Dalam Darah Selepas Makan</string>
+
+    <string name="TOTAL_CHOL">Jumlah \n Kolesterol</string>
+    <string name="TOTAL_CHOLESTEROL">Jumlah Kolesterol</string>
+    <string name="HDL">HDL</string>
+    <string name="LDL">LDL</string>
+    <string name="TRIGLYCERIDES">Triglycerides</string>
+    <string name="VLDL">VLDL</string>
+
+    <string name="HIGH_BLOOD_PRESSURE">Tekanan darah tinggi</string>
+    <string name="THYROID_IMBALANCE">Ketidakseimbangan Tiroid</string>
+    <string name="HIGH_CHOLESTEROL">Kolesterol tinggi</string>
+    <string name="DIABETES">Diabetes</string>
+    <string name="ASTHMA">Asma</string>
+    <string name="ARTHRITIS">Artritis</string>
+    <string name="MENTAL_ILLNESS">Sakit mental</string>
+    <string name="HEART_DISEASE">Penyakit jantung</string>
+
+    <string name="WOMEN_PERIOD">Menstruasi tidak teratur</string>
+    <string name="WOMEN_PCOS">Sindrom Ovari Polisistik (PCOS)</string>
+    <string name="WOMEN_DISCHARGE">Keputihan</string>
+    <string name="WOMEN_UTI">Jangkitan saluran kencing</string>
+    <string name="WOMEN_BRESTPAIN">Kesakitan Payudara</string>
+    <string name="WOMEN_FIB">Fibroid</string>
+
+    <string name="CAVITIES">Kaviti</string>
+    <string name="BAD_BREATH">Nafas Berbau</string>
+    <string name="STAINING">Gigi kuning</string>
+    <string name="BLEEDING_GUM">Gusi Berdarah</string>
+    <string name="BLURRED_VISION">Penglihatan Kabur</string>
+    <string name="DRY_EYES">Mata Kering</string>
+    <string name="NEAR_FAR_SIGHTEDNESS">Rabun Dekat / Jauh</string>
+    <string name="DANDRUFF">Dandruff</string>
+    <string name="ACNE">Jerawat</string>
+    <string name="SKIN_DRYNESS">Kekeringan Kulit</string>
+
+    <string name="OBESITY">Obesiti</string>
+    <string name="HEART_PROBLEMS">Masalah Jantung</string>
+    <string name="BREAST_CANCER">Kanser Payudara</string>
+    <string name="COLORECTAL_CANCER">Kanser kolorektal</string>
+    <string name="CERVICAL_CANCER">Kanser serviks</string>
+    <string name="STROKE">Strok</string>
+
+    <string name="RB_ALWAYS">Sentiasa</string>
+    <string name="RB_SOMETIMES">Kadang kala</string>
+    <string name="RB_RARELY">Kadang kala</string>
+    <string name="RB_NEVER">Tidak pernah</string>
+    <string name="RB_USUALLY">Selalunya</string>
+
+    <string name="LESS_THAN_6HOURS">Kurang dari 6 jam</string>
+    <string name="SIXTO_EIGHT_HOURS">6 hingga 8 jam</string>
+    <string name="MORE_THAN_8HOURS">Lebih dari 8 jam</string>
+
+    <string name="RB_DONT_SMOKE">Tidak, saya tidak merokok</string>
+    <string name="RB_12CIGAR">1 – 2 batang Rokok</string>
+    <string name="RB_34CIGAR">3 – 4 batang Rokok</string>
+    <string name="RB_MORETHAN_4CIGAR">Lebih daripada 4 batang Rokok</string>
+
+    <string name="I_DONT_DRINK">Tidak, saya tidak minum</string>
+    <string name="RB_1_2_PEGS">Hingga 60 ml</string>
+    <string name="RB_3_4_PEGS">60 – 120 ml</string>
+    <string name="RB_4_PEGS">Lebih daripada 120 ml</string>
+
+    <string name="RB_VERY_STRONG">Sangat kuat</string>
+    <string name="RB_ABOVE_AVERAGE">Di atas kebiasaan</string>
+    <string name="RB_BELOW_AVERAGE">Di bawah kebiasaan</string>
+    <string name="RB_NOT_SURE">Tidak pasti</string>
+
+    <string name="COMPLETELY">Sepenuhnya</string>
+    <string name="MOSTLY">Selalunya</string>
+    <string name="PARTLY">Sebahagiannya</string>
+    <string name="NOT_SATISFIED">Tidak Puas Hati</string>
+
+    <string name="BRIGHT_LIGHT">Cahaya yang terang</string>
+    <string name="LOUD_NOISE">Bunyi yang kuat</string>
+    <string name="HAZARDOUS_GASES">Gas berbahaya</string>
+    <string name="TALKING_LONG">Bercakap selama berjam-jam</string>
+
+    <string name="DEATH_OF_RELATIVE">Kematian saudara / saudara terdekat</string>
+    <string name="END_OF_RELATIONSHIP">Menamatkan hubungan seperti Perceraian / Putus Cinta</string>
+    <string name="FEEL_DEMOTIVATED">Rasa tidak bersemangat untuk kerja</string>
+    <string name="PHYSICAL_PROBLEM">Penderaan fizikal, seksual atau emosi</string>
+    <string name="ONGOING_MEDICATION">Sedang mengambil ubatan</string>
+    <string name="FINANCIAL_MATTER">Masalah Kewangan / Kehilangan Kerja</string>
+    <string name="HEALTH_CONCERNS">Kebimbangan terhadap Kesihatan</string>
+    <string name="MEDICAL_ILLNESS">Penyakit Mental</string>
+
+    <string name="CHOL_TEST">Ujian Kolesterol</string>
+
+    <string name="GESTATION_DIAB">Gestational diabetes</string>
+    <string name="WOMEN_CONCEIVE">Complication in conceiving</string>
+    <string name="WOMEN_PID">Pelvic Inflammatory Disease</string>
+
+    <string name="CHOLESTEROL_TEST">Ujian Kolesterol</string>
+    <string name="PAP_TEST">Ujian Pap</string>
+    <string name="THYROID_TEST">Profil Tiroid</string>
+    <string name="BASIC_HEALTH_CHECKUP">Pemeriksaan Kesihatan Asas</string>
+    <string name="SUGAR_PROFILE_TEST">Profil Gula</string>
+    <string name="MAMMOGRAM">Mamogram</string>
+<!--    <string name="PAP_SMEAR_TEST">Pap Smear Test</string>-->
+
+    <string name="PLEASE_SELECT_OPTION">Sila Pilih Pilihan</string>
+    <string name="PLEASE_ENTER_VALID_RANDOM_SUGAR_VALUE">Sila masukkan nilai Gula Rawak yang Sah</string>
+    <string name="PLEASE_ENTER_VALID_FASTING_SUGAR_VALUE">Sila masukkan nilai Gula Berpuasa yang Sah</string>
+    <string name="PLEASE_ENTER_VALID_POST_MEAL_BLOOD_SUGAR_VALUE">Sila masukkan nilai Gula dalam Darah Selepas Makan yang Sah</string>
+    <string name="PLEASE_ENTER_VALID_HBA1C_SUGAR_VALUE">Sila masukkan nilai HbA1c yang Sah</string>
+
+    <string name="RANDOM_SUGAR_VALUE_MUST_BE_BETWEEN">Nila Gula Rawak hendaklah di antara</string>
+    <string name="FASTING_SUGAR_VALUE_MUST_BE_BETWEEN">Nilai Gula Berpuasa hendaklah di antara</string>
+    <string name="POST_MEAL_BLOOD_SUGAR_VALUE_MUST_BE_BETWEEN">Nilai Selepas Makan hendaklah di antara</string>
+    <string name="HBA1C_VALUE_MUST_BE_BETWEEN">Nilai HbA1c hendaklah di antara</string>
+
+<!--    <string name="PLEASE_SELECT_VALID_HEIGHT_BETWEEN">Please Select valid height between</string>
+    <string name="PLEASE_SELECT_VALID_WEIGHT_BETWEEN">Please Select valid weight between</string>-->
+    <string name="PLEASE_ENTER_VALID_TOTAL_CHOLESTEROL_VALUE">Sila masukkan Nilai Jumlah Kolesterol yang Sah</string>
+    <string name="PLEASE_ENTER_VALID_HDL_VALUE">Sila masukkan HDL yang Sah</string>
+    <string name="PLEASE_ENTER_VALID_LDL_VALUE">Sila masukkan LDL yang Sah</string>
+    <string name="PLEASE_ENTER_VALID_TRIGLYCERIDES_VALUE">Sila masukkan Triglycerides yang Sah</string>
+    <string name="PLEASE_ENTER_VALID_VLDL_VALUE">Sila masukkan VLDL yang Sah</string>
+
+    <string name="TOTAL_CHOLESTEROL_VALUE_MUST_BE_BETWEEN">Jumlah nilai Kolesterol hendaklah di antara</string>
+    <string name="HDL_VALUE_MUST_BE_BETWEEN">Nilai HDL hendaklah di antara</string>
+    <string name="LDL_VALUE_MUST_BE_BETWEEN">Nilai LDL hendaklah di antara</string>
+    <string name="TRIGLYCERIDES_VALUE_MUST_BE_BETWEEN">Nilai Triglycerides hendaklah di antara</string>
+    <string name="VLDL_VALUE_MUST_BE_BETWEEN">Nilai VLDL hendaklah di antara</string>
+
+    <!--HRA Questions-->
+    <string name="TEXT_START_ASSESSMENT"><![CDATA[Hai <b>%s.</b> dalam 10 minit yang akan datang, anda perlu menjawab beberapa soalan dan mendapatkan pandangan mengenai kesihatan menyeluruh anda. \ nSelama penilaian risiko Kesihatan ini, kami akan memahami 3 tonggak utama kesejahteraan anda - Vital, Gaya Hidup & Kesihatan Pekerjaan. \ n Sebagai bonus, kami akan memberi anda skor kesihatan & ringkasan & cadangan lengkap untuk mengurangkan risiko kesihatan anda (jika ada).]]></string>
+    <string name="QUES_FAMILY_PROFILE"><![CDATA[Sebelum kita mula, sila beritahu saya <b>siapa</b> yang mengambil penilaian ini?]]></string>
+    <string name="QUESTION_BMI"><![CDATA[Mari hitung indeks jisim badan anda (BMI); cara yang mudah untuk mengukur nisbah berat badan: tinggi. Sila masukkan parameter Kesihatan Vital anda.</b>]]></string>
+    <string name="QUESTION_BP"><![CDATA[Berapakah bacaan tekanan darah anda? Sila sebutkan bacaan dalam mmHg?]]></string>
+    <string name="QUESTION_BLOOD_SUGAR"><![CDATA[Yang manakah antara laporan Gula berikut yang baru telah anda lakukan?]]></string>
+    <string name="QUESTION_BLOOD_SUGAR_INPUT"><![CDATA[Sila masukkan bacaan tahap Gula Darah terakhir anda]]></string>
+    <string name="QUESTION_CHOLESTEROL"><![CDATA[Yang manakah antara laporan Kolesterol berikut yang terbaru telah anda lakukan?]]></string>
+    <string name="QUESTION_CHOLESTEROL_INPUT"><![CDATA[Sila kemas kini bacaan tahap <b> Kolesterol Darah </b> terakhir anda]]></string>
+    <string name="QUESTION_HEALTH_CONDITION"><![CDATA[Adakah anda mempunyai mana-mana Keadaan Kesihatan seperti berikut?]]></string>
+    <string name="QUESTION_WOMEN"><![CDATA[Adakah anda mempunyai sejarah mana-mana Penyakit Perubatan seperti berikut?</b>]]></string>
+    <string name="QUESTION_EDS"><![CDATA[Yang manakah antara Gangguan Kulit / Gigi / Mata berikut yang anda alami?]]></string>
+    <string name="QUESTION_FAMILY_HISTORY"><![CDATA[Adakah sesiapa yang mempunyai hubungan darah dengan anda mempunyai mana-mana keadaan kesihatan seperti berikut?]]></string>
+    <string name="QUESTION_SNACKS"><![CDATA[Adakah anda makan buah-buahan & sayur-sayuran 2 hingga 3 kali sehari?]]></string>
+    <string name="QUESTION_FAT"><![CDATA[Adakah anda makan makanan segera seperti daging merah, keju, makanan goreng lebih dari 3 kali seminggu?]]></string>
+    <string name="QUESTION_EXERCISE"><![CDATA[Adakah anda bersenam lebih dari 3 jam seminggu?]]></string>
+    <string name="QUESTION_SLEEP"><![CDATA[Berapa jam anda tidur dalam sehari?]]></string>
+    <string name="QUESTION_SMOKE"><![CDATA[Berapa batang rokok anda hisap dalam sehari?]]></string>
+    <string name="QUESTION_DRINK"><![CDATA[Berapa banyak alkohol yang anda minum setiap minggu?]]></string>
+    <string name="QUESTION_FAMILY_LIFE"><![CDATA[Adakah anda merasakan bahawa anda mempunyai keseimbangan yang baik antara kehidupan kerja dan keluarga anda?]]></string>
+    <string name="QUESTION_SOCIAL"><![CDATA[Berapa kuat hubungan sosial anda dengan keluarga & rakan anda?]]></string>
+    <string name="QUESTION_SATISFIED_LIFE"><![CDATA[Sejauh mana anda berpuas hati dengan hidup anda?]]></string>
+    <string name="QUESTION_JOB_PAY"><![CDATA[Adakah pekerjaan anda menawarkan jumlah bayaran yang munasabah?]]></string>
+    <string name="QUESTION_SHIFT"><![CDATA[Adakah anda bekerja shift?]]></string>
+    <string name="QUESTION_EXTENDED_TIME"><![CDATA[Adakah anda menghabiskan lebih daripada 8 jam di hadapan PC / Laptop?]]></string>
+    <string name="QUESTION_EXPOSE"><![CDATA[Adakah anda terdedah kepada perkara berikut di tempat kerja anda?]]></string>
+    <string name="QUESTION_STRESS"><![CDATA[Adakah anda selalu berasa tertekan?]]></string>
+    <string name="QUESTION_PHY"><![CDATA[Yang manakah di antara berikut yang berlaku kepada anda?]]></string>
+    <string name="QUESTION_CHECKUP"><![CDATA[Di antara pemeriksaan kesihatan berikut, mana yang anda telah ambil di sepanjang tahun lalu?]]></string>
+    <string name="QUESTION_LAST"><![CDATA[Terima kasih kerana berkongsi maklumat dengan kami. Hasil penilaian risiko kesihatan anda sedang diproses.]]></string>
+    <string name="PLEASE_SELECT_ALL_THAT_APPLY">Sila pilih semua yang berkaitan &amp; klik seterusnya</string>
+
+    <string name="QUESTION_HEALTH_CHECKUP">Have you had any of these tests done within the past one year?</string>
+    <string name="QUESTION_FAMILY_PROFILE"><![CDATA[Before we begin, please tell me <b>who</b> is taking this assessment?]]></string>
+    <string name="QUESTION_BRIGHT_LIGHT"><![CDATA[Are you <b>exposed to</b> any of the following <b>at your workplace?</b>]]></string>
+    <string name="QUESTION_WHR">Enter your Waist &amp; Hip measurement</string>
+    <!--HRA Questions-->
+
+    <!--HRA Summary-->
+    <string name="YOUR_WELLNESS_SCORE_PLACES">Skor kesihatan anda \n meletakkan anda di </string>
+    <string name="WELLNESS_DESC_CURRENT_HRA_HISTORY_ID">Kami tidak dapat mengira Skor Kesihatan anda kerana anda tidak melengkapkan HRA. Sila Ambil HRA untuk melihat skor anda</string>
+    <string name="WELLNESS_DESC_HRA_CUTOFF">Kami tidak dapat mengira Skor Kesihatan anda kerana anda tidak menjawab soalan mandatori yang diperlukan untuk mengira Skor Kesihatan. Sila Lengkapkan HRA untuk melihat skor anda</string>
+    <string name="WELLNESS_DESC_SCORE_ZERO_NEGATIVE">Skor Kesihatan anda adalah 0 (daripada 100), yang meletakkan anda dalam kategori Risiko Tinggi</string>
+    <string name="CONGRATULATION_NO_RISK">Tahniah !! Mengikut maklumat yang anda berikan, pada masa ini, anda tidak mempunyai risiko. \n\n Teruskan usaha yang baik, kekalkan gaya hidup yang sihat</string>
+    <string name="WELLNESS_SCORE_SUBTITLE_TEXT">Skor Kesihatan anda mewakili status kesihatan holistik anda berasaskan jawapan anda kepada soal selidik</string>
+<!--    <string name="SUMMERY_SUBTITLE_TEXT">The highlighted risks are basis the responses provided by you and risk categories under personal health, family history and health parameters</string>-->
+    <string name="LAB_TESTS_SUBTITLE_TEXT">Cadangan ujian memberikan anda jadual dan kekerapan ujian penting untuk mengenalpasti kesihatan anda secara berkalas, berdasarkan skor kesihatan anda &amp; Ringkasan Risiko</string>
+    <string name="RECOMMENDED_LAB_TESTS_CHECK_UPS">Ujian/\n Pemeriksaan Makmal Disarankan</string>
+    <string name="LAB_TEST_CHECK_UPS">Pemeriksaan/Ujian makmal</string>
+    <!--HRA Summary-->
+
+    <string name="FETCHING_BMI_DETAILS">Mengambil Butiran BMI</string>
+    <string name="FETCHING_BP_DETAILS">Mengambil  Butiran Tekanan Darah</string>
+    <string name="FETCHING_LAB_DETAILS">Mengambil Maklumat Makmal</string>
+    <string name="SUBMITTING_HRA_DETAILS">Menghantar Maklumat HRA</string>
+    <string name="DOWNLOADING_HRA_REPORT">Muat turun Laporan HRA</string>
+    <string name="LOADING_HRA_SUMMARY">Muat turun Ringkasan HRA</string>
+
+    <string name="YOUR_BMI_IS">BMI Anda</string>
+
+    <string name="OBS_HIGH_RISK">Risiko Tinggi</string>
+    <string name="OBS_MODERATE_RISK">Risiko Sederhana</string>
+    <string name="OBS_HEALTHY">Sihat</string>
+    <string name="OBS_OPTIMUM">Optimum</string>
+    <string name="HIGH">High</string>
+    <string name="MODERATE">Risiko</string>
+    <string name="LOW_RISK">Berisiko</string>
+
+<!--    <string name="HIGH_NORMAL">High normal</string>
+    <string name="DESIRABLE">Desirable</string>
+    <string name="MILDLY_HIGH">Mildly High</string>-->
+
 </resources>

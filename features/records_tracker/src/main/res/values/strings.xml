@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="TITLE_STORE_HEALTH_RECORDS">Store Health Records</string>
@@ -17,6 +18,7 @@
     <string name="DIGITIZE_YOUR_PATHOLOGY_LAB_REPORTS">Digitize your pathology lab reports</string>
     <string name="CLICK_ON_THE_BELOW_OPTIONS_TO_START_UPLOADING">Click on the below options to start uploading</string>
     <string name="PLEASE_SELECT_THE_TYPE_OF_DOCUMENT_FROM_THE_BELOW_LISTED_OPTIONS">Please select the type of document from the below listed options</string>
+    <string name="PLEASE_SELECT_THE_TYPE_OF_DOCUMENT_TYPE">Please Select Document Type</string>
 
     <string name="DIET_PLAN">Diet Plan</string>
     <string name="FITNESS_PLAN">Fitness Plan</string>

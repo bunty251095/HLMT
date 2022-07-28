@@ -74,4 +74,8 @@ class HomeDatasource(
     fun fetchHLMT360LoginResponse(data: HLMTLoginModel) =
         encryptedUserService.hlmt360UserLogin(data)
 
+    fun updateLanguagePreferences(data: UpdateLanguageProfileModel) = encryptedUserService.updateLanguagePreference(data)
+
+    fun fetchRefreshToken(data: RefreshTokenModel) = encryptedUserService.getRefreshToken(data)
+
 }

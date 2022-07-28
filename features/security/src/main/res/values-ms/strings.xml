@@ -1,5 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="facebook_app_id" translatable="false">397824020674947</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb397824020674947</string>
+    <string name="google_web_client_id" translatable="false">131375685253-kgb90ksquontqa1gion390lql0fpanku.apps.googleusercontent.com</string>
+    <!--    <string name="google_web_client_id" translatable="false">694765538505-tg34ue2keb3ghfbkurjp2op8tehflek8.apps.googleusercontent.com</string>-->
+
+    <string name="LOGIN_WITH_OTP">Log masuk dengan OTP</string>
+    <string name="DONT_HAVE_ACCOUNT">Belum mempunyai akaun?</string>
+<!--    <string name="I_AGREE_CONSENT">I provide my Consent and I agree to the</string>-->
+    <string name="TERMS_AND_CONDITIONS">Terma dan Syarat</string>
+<!--    <string name="PRIVACY_POLICY">Privacy Policy</string>-->
+    <string name="AND">dan</string>
+<!--    <string name="TERMS_OF_SERVICE_LOGIN">I confirm that I have read and agreed to the</string>-->
+    <string name="TERMS_OF_SERVICE_SIGNUP">Dengan menekan Daftar anda bersetuju untuk</string>
+<!--    <string name="TO_USE_THE_SERVICES">to use the services</string>-->
+    <string name="YOUR_DOB">Tarikh Lahir Anda</string>
+    <string name="ADDITIONAL_DETAILS">Maklumat Tambahan</string>
+    <string name="VIVANT_TERMS_CONDITIONS">HL Pace Terma dan Syarat</string>
+    <string name="LOGIN_USING_FB">Log Masuk dengan Facebook</string>
+    <string name="LOGIN_USING_GOOGLE">Log Masuk dengan Google</string>
+    <string name="OR_LOGIN_WITH">ATAU Log Masuk dengan</string>
+    <string name="SIGN_UP_USING_FB">Daftar dengan Facebook</string>
+    <string name="SIGNUP_USING_GOOGLE">Daftar dengan Facebook</string>
+    <string name="OR_SIGN_UP_USING_EMAIL">ATAU Daftar dengan Emel</string>
+    <string name="MSG_USER_LESS_THAN_18_TO_ACCESS_HRA">Adakah kami mempunyai tarikh lahir anda yang betul? Jika tidak, sila kemaskini. Sila maklum untuk membuat penilaian Risiko Kesihatan, anda hendaklah sekurang-kurangnya berumur 18 tahun</string>
+    <string name="MSG_SIGN_UP_WELCOME">Selamat Datang ke HL Pace, sila berikan maklumat asas anda untuk membina profil kesihatan anda</string>
+    <string name="EMAIL_OR_PHONE">Emel Atau Telefon</string>
+    <string name="CONFIRM_PASSWORD">Sahkan Kata Laluan</string>
+    <string name="OTP">OTP</string>
+    <string name="LOG_IN">Log Masuk</string>
+    <string name="SIGN_IN">Daftar Masuk</string>
+    <string name="SIGN_UP">Daftar</string>
+    <string name="FORGOT_PASSWORD">Lupa Kata Laluan?</string>
+    <string name="I_AM_DONE">Saya selesai</string>
+    <string name="FACEBOOK">Facebook</string>
+    <string name="GOOGLE">Google</string>
+    <!--    <string name="PLEASE_ACCEPT_TERMS">Please accept Terms and Condition</string>-->
+
+    <string name="NAME_COMPULSARY">Nama*</string>
+    <string name="EMAIL_COMPULSARY">Emel*</string>
+    <string name="PASSWORD_COMPULSARY">Kata Laluan*</string>
+    <string name="PHONE_OPTIONAL">Nombor Telefon (Jika ada)</string>
+
+    <string name="VERIFY">Sahkan</string>
+    <string name="VERIFY_AND_LOGIN">Verify &amp; Login</string>
+    <string name="RESEND_MAIL">Hantar Semula Emel</string>
+    <string name="RESEND_CODE">Hantar Semula TAC</string>
+    <string name="NEW_PASSWORD">Kata Laluan Baru</string>
+    <string name="CHANGE_PASSWORD">Tukar Kata Laluan Anda</string>
+    <string name="ENTER_NEW_PASSWORD">Masukkan Kata Laluan Baru</string>
+    <string name="RE_ENTER_NEW_PASSWORD">Masukkan Semula Kata Laluan Baru</string>
+    <string name="RESET_PASSWORD">Tetapkan Semula Kata Laluan</string>
+    <string name="FORGOT_YOUR_PASSWORD">Lupa Kata Laluan?</string>
+<!--    <string name="FORGOT_PASSWORD_DESC">Enter your email address to get password.</string>-->
+    <string name="VERIFICATION_CODE">Kod Pengesahan</string>
+    <string name="HLMT_LOGIN_DESCRIPTION">Enter your HLMTakaful360&#xb0; account\ndetails to login</string>
+
+    <string name="DO_YOU_HAVE_HLM_360_ACCOUNT">Are you a HLMTakaful360&#xb0; \naccount holder? </string>
+    <string name="NO_DONT">Tidak </string>
+    <string name="YES_I_HAVE">Ya</string>
+<!--    <string name="REGISTER">Register</string>-->
+
+    <string name="PASSWORD_CRITERIA">Kriteria Kata Laluan</string>
+    <string name="PASSWORD_CRITERIA_DESC">Panjang kata laluan anda hendaklah sekurang-kurangnya 6 karakter</string>
+<!--    <string name="OTP_SENT_DESC">Your email address to receive TAC</string>-->
+    <string name="LOGIN_SELECTION_INFO">Teruskan langkah bersama Kami!</string>
+
+    <!--    <string name="error_invalid_otp">Please enter a valid TAC</string>-->
+    <string name="ERROR_INVALID_EMAIL_PHONE">Sila masukkan alamat emel atau nombor telefon yang sah</string>
+    <string name="ERROR_AGE_GREATER_THEN_18_YEARS">Umur hendaklah lebih daripada 18 tahun</string>
+    <string name="ERROR_EMAIL_REGISTERED">Emel ini telah berdaftar dengan kami</string>
+    <string name="ERROR_PHONE_REGISTERED">Nombor Telefon ini telah berdaftar dengan kami</string>
+    <string name="ERROR_PHONE_NOT_REGISTERED">Nombor Telefon ini tidak berdaftar dengan kami</string>
+    <string name="ERROR_EMAIL_NOT_REGISTERED">Email atau Nombor Telefon ini tidak berdaftar dengan kami</string>
+    <string name="ERROR_INVALID_NAME">Sila masukkan nama pengguna yang sah </string>
+    <string name="ERROR_INVALID_PHONE">Sila masukkan nombor telefon yang sah</string>
+    <string name="ERROR_INVALID_EMAIL">Sila masukkan emel yang sah</string>
+    <string name="ERROR_INVALID_DETAILS">Invalid Details</string>
+
+    <string name="ERROR_INCORRECT_PASSWORD">Kata Laluan ini tidak betul</string>
+    <string name="ERROR_FIELD_REQUIRED">Bahagian ini diperlukan</string>
+
+    <string name="HLMT_USER_ID">HLMT User ID</string>
+
+<!--    <string name="PASSWORD_CRITERIA_DESC1">Password length should be minimum 8 characters</string>
+    <string name="PASSWORD_CRITERIA_DESC2">Password characters must include :</string>
+    <string name="PASSWORD_CRITERIA_DESC3">Minimum one Uppercase</string>
+    <string name="PASSWORD_CRITERIA_DESC4">Minimum one Lowercase</string>
+    <string name="PASSWORD_CRITERIA_DESC5">Minimum one Numeric</string>
+    <string name="PASSWORD_CRITERIA_DESC6">Minimum one Special Character</string>
+    <string name="PASSWORD_CRITERIA_DESC7">Username should not be same as Password</string>-->
+
+<!--    <string name="VALIDATE_NEW_PASSWORD">Please Enter Valid New Password</string>
+    <string name="VALIDATE_CONFIRM_PASSWORD">Please Enter Valid Confirm Password</string>-->
+
+<!--    <string name="VALIDATE_EMPTY_NEW_PASSWORD">Please Enter New Password</string>-->
+<!--    <string name="VALIDATE_EMPTY_CONFIRM_PASSWORD">Please Enter Confirm Password</string>-->
+<!--    <string name="ERROR_UNABLE_TO_RESET_PASSWORD">Unable to Reset Password</string>-->
+
+</resources>
+
+<!--
+<resources>
     <string name="SIGN_IN">Log masuk</string>
     <string name="SIGN_UP">Mendaftar</string>
     <string name="RESEND_CODE">Hantar semula TAC</string>
@@ -12,4 +115,4 @@
     <string name="AND">dan</string>
     <string name="PRIVACY_POLICY">Dasar Privasi</string>
     <string name="YOU_HAVE_READ_THEM">untuk menggunakan perkhidmatan</string>
-</resources>
+</resources>-->

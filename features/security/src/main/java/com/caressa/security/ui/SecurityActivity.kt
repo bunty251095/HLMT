@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_security.*
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.caressa.common.utils.AppColorHelper
+import com.caressa.common.utils.LocaleHelper
 import kotlinx.android.synthetic.main.toolbar_layout_security.*
 import com.caressa.security.R
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
@@ -28,6 +29,11 @@ class SecurityActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try {
+            LocaleHelper.onAttach(this, LocaleHelper.getLanguage(this))
+        } catch (e:Exception) {
+            e.printStackTrace()
+        }
         setContentView(R.layout.activity_security)
 
         /*val crashButton = Button(this)
@@ -47,7 +53,7 @@ class SecurityActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener{ controller, destination, _ ->
             toolbar_title.text = when (destination.id) {
-                R.id.termsAndConditionFragment -> resources.getString(R.string.TERMS_CONDITIONS)
+                R.id.termsAndConditionFragment -> resources.getString(R.string.TERMS_AND_CONDITIONS)
                 R.id.privacyPolicyFragment -> resources.getString(R.string.PRIVACY_POLICY)
                 R.id.userDetailsFragment -> resources.getString(R.string.ADDITIONAL_DETAILS)
                 else -> ""

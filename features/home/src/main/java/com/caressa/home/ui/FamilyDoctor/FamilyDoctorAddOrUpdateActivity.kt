@@ -268,9 +268,9 @@ class FamilyDoctorAddOrUpdateActivity : BaseActivity() {
     private fun setupToolbar() {
         setSupportActionBar(toolbar_home)
         if (from.equals("Update",ignoreCase = true)) {
-            toolbar_title!!.text = resources.getString(R.string.TITLE_UPDATE_DOCTOR)
+            //toolbar_title!!.text = resources.getString(R.string.TITLE_UPDATE_DOCTOR)
         } else {
-            toolbar_title!!.text = resources.getString(R.string.TITLE_ADD_DOCTOR)
+            //toolbar_title!!.text = resources.getString(R.string.TITLE_ADD_DOCTOR)
         }
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)

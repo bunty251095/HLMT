@@ -67,33 +67,33 @@ class RevHistoryFragment : BaseFragment() {
     }
 
     private fun registerObserver() {
-        viewModel.paramBPHistory.observe(viewLifecycleOwner, {
+        viewModel.paramBPHistory.observe(viewLifecycleOwner) {
             setBPChartData(it["BP_SYS"]!!, it["BP_DIA"]!!)
             setBpTableData(it["BP_SYS"]!!, it["BP_DIA"]!!)
-        })
+        }
 
-        viewModel.paramHistory.observe(viewLifecycleOwner, {
+        viewModel.paramHistory.observe(viewLifecycleOwner) {
             setChartData(it)
             setTableData(it)
-        })
+        }
 
-        viewModel.savedParamList.observe(viewLifecycleOwner, {
+        viewModel.savedParamList.observe(viewLifecycleOwner) {
             savedParamAdapter.selectedPosition = 0
-            if (it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 Timber.i("Parameter 0 => ${it[0]}")
                 viewModel.parameterObservationListByParameterCode(it[0].parameterCode)
-                if (it.get(0).profileCode.equals("BLOODPRESSURE")){
+                if (it.get(0).profileCode.equals("BLOODPRESSURE")) {
                     parameterSelection(savedParamAdapter.updateBloodPressureObservation(it)[0])
-                }else {
+                } else {
                     parameterSelection(it[0])
                 }
                 binding.layoutNoHistory.visibility = Group.GONE
                 binding.layoutParameterResultDetails.visibility = Group.VISIBLE
-            }else{
+            } else {
                 binding.layoutNoHistory.visibility = Group.VISIBLE
                 binding.layoutParameterResultDetails.visibility = Group.GONE
             }
-        })
+        }
     }
 
 
@@ -119,21 +119,21 @@ class RevHistoryFragment : BaseFragment() {
         binding.rvParamHistory.layoutManager = LinearLayoutManager(context)
         binding.rvParamHistory.adapter = paramDetailsTableAdapter
 
-        viewModel.spinnerHistoryLiveData.observe(viewLifecycleOwner, {
+        viewModel.spinnerHistoryLiveData.observe(viewLifecycleOwner) {
             spinnerAdapter = ParameterSpinnerAdapter(requireContext())
             binding.paramSpinner.adapter = spinnerAdapter
-            if(it!= null && it.isNotEmpty()) {
+            if (it != null && it.isNotEmpty()) {
                 val list = it.filter { item ->
                     !item.parameterCode.equals("WBC", true)
                             && !item.parameterCode.equals("DLC", true)
                 }
                 spinnerAdapter.updateList(list)
-            }else{
+            } else {
                 spinnerAdapter.updateList(it)
             }
 
             binding.paramSpinner.setSelection(0)
-        })
+        }
 
         viewModel.parameterHistoryByProfileCode(profileCode)
         selectTabDetails()

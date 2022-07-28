@@ -1,5 +1,6 @@
 package com.caressa.records_tracker.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
@@ -37,12 +38,15 @@ import com.caressa.records_tracker.ui.*
 import okhttp3.*
 import timber.log.Timber
 import java.io.*
+import java.util.*
 import kotlin.collections.ArrayList
 
+@SuppressLint("StaticFieldLeak")
 class HealthRecordsViewModel(
-    private val dispatchers: AppDispatchers , val shrManagementUseCase : ShrManagementUseCase ,
-    private val sharedPref: SharedPreferences , val context: Context , val dataHandler: DataHandler ) : BaseViewModel() {
+    private val dispatchers: AppDispatchers, val shrManagementUseCase : ShrManagementUseCase,
+    private val sharedPref: SharedPreferences, val context: Context, val dataHandler: DataHandler ) : BaseViewModel() {
 
+    private val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
     private val fileUtils = FileUtils
 
     val personId = sharedPref.getString(PreferenceConstants.PERSONID,"")!!
@@ -142,7 +146,7 @@ class HealthRecordsViewModel(
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
                     if (it.data != null) {
                         if ( it.data!!.healthDocuments.size > 0 ) {
-                            toastMessage(context.resources.getString(R.string.MSG_RECORD_SAVED))
+                            toastMessage(localResource.getString(R.string.MSG_RECORD_SAVED))
                             val bundle = Bundle()
                             bundle.putString("from",from)
                             bundle.putString("code",code)
@@ -180,7 +184,7 @@ class HealthRecordsViewModel(
                     val isProcessed = it.data!!.isProcessed
                     if ( isProcessed.equals(Constants.TRUE , ignoreCase = true) ) {
                         documentStatus.postValue(it.status)
-                        toastMessage(context.resources.getString(R.string.MSG_RECORD_DELETED))
+                        toastMessage(localResource.getString(R.string.MSG_RECORD_DELETED))
                         FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEALTH_RECORD_DELETED)
                     }
                 }
@@ -214,7 +218,7 @@ class HealthRecordsViewModel(
             if (it.status == Resource.Status.SUCCESS) {
                 saveDownloadedRecord( from,it.data!!.healthRelatedDocument,it.status,fileName)
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
-                toastMessage(context.resources.getString(R.string.MSG_REOCRD_DOWNLOADED))
+                toastMessage(localResource.getString(R.string.MSG_REOCRD_DOWNLOADED))
                 FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEALTH_RECORD_DOWNLOAD)
             }
             if (it.status == Resource.Status.ERROR) {
@@ -279,10 +283,10 @@ class HealthRecordsViewModel(
                             navigate(ViewRecordsFragmentDirections.actionViewRecordsFragmentToFragmentDigitize(from,categoryCode,uri))
                         }
                     }else{
-                        toastMessage(context.resources.getString(R.string.ERROR_NOT_ABLE_TO_READ_FILE))
+                        toastMessage(localResource.getString(R.string.ERROR_NOT_ABLE_TO_READ_FILE))
                     }
                 } else {
-                    toastMessage(context.resources.getString(R.string.ERROR_DOC_CANNOT_DIGITIZE))
+                    toastMessage(localResource.getString(R.string.ERROR_DOC_CANNOT_DIGITIZE))
                 }
             }
             if (it.status == Resource.Status.ERROR) {
@@ -344,7 +348,7 @@ class HealthRecordsViewModel(
 
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
-                toastMessage(context.resources.getString(R.string.MSG_DATA_UPLOADED))
+                toastMessage(localResource.getString(R.string.MSG_DATA_UPLOADED))
                 fragment.performBackClick(view)
             }
             if (it.status == Resource.Status.ERROR) {

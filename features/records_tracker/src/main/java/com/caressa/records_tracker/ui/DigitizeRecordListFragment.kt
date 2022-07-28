@@ -126,14 +126,14 @@ class DigitizeRecordListFragment : BaseFragment() {
             }
         })
 
-        viewModel.documentStatus.observe( viewLifecycleOwner , {
-            if ( it != null) {
-                if ( it == Resource.Status.SUCCESS) {
+        viewModel.documentStatus.observe( viewLifecycleOwner) {
+            if (it != null) {
+                if (it == Resource.Status.SUCCESS) {
                     isDataChanged = true
                     viewModel.getHealthDocumentsWhereCode(code)
                 }
             }
-        })
+        }
 
         viewModel.downloadDoc.observe( viewLifecycleOwner , {})
         viewModel.ocrDigitizeDocument.observe( viewLifecycleOwner , {})

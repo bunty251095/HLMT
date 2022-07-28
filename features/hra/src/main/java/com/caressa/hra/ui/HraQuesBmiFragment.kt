@@ -1,17 +1,13 @@
 package com.caressa.hra.ui
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
-import androidx.core.widget.ImageViewCompat
-import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
@@ -87,12 +83,12 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
 
         binding.layHeight.setNonEditable()
         binding.layHeight.setImage(R.drawable.img_height)
-        binding.layHeight.setHint("Height")
+        binding.layHeight.setHint(resources.getString(R.string.HEIGHT))
         binding.layHeight.setUnit(resources.getString(R.string.CM))
 
         binding.layWeight.setNonEditable()
         binding.layWeight.setImage(R.drawable.img_weight)
-        binding.layWeight.setHint("Weight")
+        binding.layWeight.setHint(resources.getString(R.string.WEIGHT))
         binding.layWeight.setUnit(resources.getString(R.string.KG))
     }
 
@@ -117,32 +113,36 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
     private fun registerObservers() {
 
         var toProceed = true
-        viewModel.quesData.observe(viewLifecycleOwner, {
-            if ( it != null ) {
-                if ( toProceed ) {
+        viewModel.quesData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                if (toProceed) {
                     questionData = it
                     hraDataSingleton.question = it
                     toProceed = false
                 }
             }
-        })
+        }
 
-        viewModel.vitalDetailsSavedResponse.observe(viewLifecycleOwner, { vitalDetails ->
+        viewModel.vitalDetailsSavedResponse.observe(viewLifecycleOwner) { vitalDetails ->
             if (vitalDetails != null) {
                 var isHeight = true
                 var isWeight = true
                 var isBmi = true
                 //Timber.i("HraVitalDetails--->$vitalDetails")
                 val bmiDetails = vitalDetails.filter { vital ->
-                    vital.VitalsKey.equals(HRAConstants.VitalKey_Height,ignoreCase = true)
-                            || vital.VitalsKey.equals(HRAConstants.VitalKey_Weight,ignoreCase = true)
-                            || vital.VitalsKey.equals(HRAConstants.VitalKey_BMI,ignoreCase = true)
+                    vital.VitalsKey.equals(HRAConstants.VitalKey_Height, ignoreCase = true)
+                            || vital.VitalsKey.equals(
+                        HRAConstants.VitalKey_Weight,
+                        ignoreCase = true
+                    )
+                            || vital.VitalsKey.equals(HRAConstants.VitalKey_BMI, ignoreCase = true)
                 }
                 Timber.i("HRAVitalDetails----> $bmiDetails")
-                for ( vital in bmiDetails ) {
-                    Timber.i("VitalParameter , VitalValue---->"+vital.VitalsKey + " , " +vital.VitalsValue)
-                    if ( vital.VitalsKey.equals(HRAConstants.VitalKey_Height, ignoreCase = true)
-                        && !Utilities.isNullOrEmpty(vital.VitalsValue) ) {
+                for (vital in bmiDetails) {
+                    Timber.i("VitalParameter , VitalValue---->" + vital.VitalsKey + " , " + vital.VitalsValue)
+                    if (vital.VitalsKey.equals(HRAConstants.VitalKey_Height, ignoreCase = true)
+                        && !Utilities.isNullOrEmpty(vital.VitalsValue)
+                    ) {
                         height = vital.VitalsValue.toDouble()
                         toShow = false
                         binding.layHeight.setValue(height.toInt().toString())
@@ -150,14 +150,16 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
                         isHeight = false
                     }
                     if (vital.VitalsKey.equals(HRAConstants.VitalKey_Weight, ignoreCase = true)
-                        && !Utilities.isNullOrEmpty(vital.VitalsValue) ) {
+                        && !Utilities.isNullOrEmpty(vital.VitalsValue)
+                    ) {
                         weight = vital.VitalsValue.toDouble()
                         binding.layWeight.setValue(weight.toString())
                         binding.layWeight.setUnit(resources.getString(R.string.KG))
                         isWeight = false
                     }
                     if (vital.VitalsKey.equals(HRAConstants.VitalKey_BMI, ignoreCase = true)
-                        && !Utilities.isNullOrEmpty(vital.VitalsValue) ) {
+                        && !Utilities.isNullOrEmpty(vital.VitalsValue)
+                    ) {
                         bmi = vital.VitalsValue.toDouble()
                         isBmi = false
                     }
@@ -165,21 +167,26 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
 /*                if ( Utilities.isNullOrEmptyOrZero(height.toString())
                     && Utilities.isNullOrEmptyOrZero(weight.toString())
                     && Utilities.isNullOrEmptyOrZero(bmi.toString()) ) {*/
-                if ( isHeight && isWeight && isBmi ) {
+                if (isHeight && isWeight && isBmi) {
                     Timber.e("BMI not Exist...!!!")
-                    viewModel.callIsBMIExist(true,viewPagerActivity!!.personId)
+                    viewModel.callIsBMIExist(true, viewPagerActivity!!.personId)
                 } else {
-                    Observations.setBMIResult(bmi.toString(), binding.txtObservation, requireContext())
+                    Observations.setBMIResult(
+                        bmi.toString(),
+                        binding.txtObservation,
+                        requireContext()
+                    )
                     enableNextBtn()
                 }
             }
-        })
+        }
 
-        viewModel.bmiDetails.observe(viewLifecycleOwner, {
+        viewModel.bmiDetails.observe(viewLifecycleOwner) {
             if (it != null) {
                 val bmiDetails = it
-                if ( !Utilities.isNullOrEmptyOrZero( bmiDetails.BMI.Height)
-                    && !Utilities.isNullOrEmptyOrZero( bmiDetails.BMI.Height) ) {
+                if (!Utilities.isNullOrEmptyOrZero(bmiDetails.BMI.Height)
+                    && !Utilities.isNullOrEmptyOrZero(bmiDetails.BMI.Height)
+                ) {
                     try {
                         height = bmiDetails.BMI.Height!!.toDouble()
                         weight = bmiDetails.BMI.Weight!!.toDouble()
@@ -190,14 +197,18 @@ class HraQuesBmiFragment(val qCode: String) : BaseFragment(),
                         binding.layWeight.setValue(weight.toString())
                         binding.layWeight.setUnit(resources.getString(R.string.KG))
 
-                        Observations.setBMIResult(bmiDetails.BMI.Value!!,binding.txtObservation,requireContext())
+                        Observations.setBMIResult(
+                            bmiDetails.BMI.Value!!,
+                            binding.txtObservation,
+                            requireContext()
+                        )
                         enableNextBtn()
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
                 }
             }
-        })
+        }
 
     }
 

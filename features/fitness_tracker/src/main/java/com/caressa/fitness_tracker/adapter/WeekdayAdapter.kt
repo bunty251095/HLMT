@@ -1,5 +1,6 @@
 package com.caressa.fitness_tracker.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,8 @@ class WeekdayAdapter(mListener: OnWeekDayClickListener) : RecyclerView.Adapter<W
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeekdayViewHolder =
         WeekdayViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_weekday, parent, false))
 
-    override fun onBindViewHolder(holder: WeekdayAdapter.WeekdayViewHolder, position: Int) {
+    @SuppressLint("RecyclerView")
+    override fun onBindViewHolder(holder: WeekdayAdapter.WeekdayViewHolder,position: Int) {
 
         val weekday = weekDayList[position]
         holder.bindTo( weekday )

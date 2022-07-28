@@ -124,6 +124,8 @@ interface ParameterRepository {
         recordDate: String
     ): List<ParameterListModel.InputParameterModel>
 
+    suspend fun fetchLabRecordsVitalsList(data: VitalsHistoryModel, personId: String): LiveData<Resource<VitalsHistoryModel.Response>>
+
     suspend fun logoutUser()
 }
 
@@ -808,6 +810,67 @@ class ParameterRepositoryImpl(
             }
         }
         return list
+    }
+
+    override suspend fun fetchLabRecordsVitalsList(data: VitalsHistoryModel, personId: String): LiveData<Resource<VitalsHistoryModel.Response>> {
+//        paramDao.deleteHistory()
+        return object : NetworkBoundResource<VitalsHistoryModel.Response, BaseResponse<VitalsHistoryModel.Response>>(context) {
+
+            override fun shouldStoreInDb(): Boolean = true
+
+            override suspend fun loadFromDb(): VitalsHistoryModel.Response {
+                return VitalsHistoryModel.Response()
+            }
+
+            override suspend fun saveCallResults(items: VitalsHistoryModel.Response) {
+                Timber.i("History list size(Vitals)=> ${items.vHistory.size}")
+                var whrList = arrayListOf<VitalsHistoryModel.VitalsHistory>()
+                var bmiList = arrayListOf<VitalsHistoryModel.VitalsHistory>()
+                var bpList = arrayListOf<VitalsHistoryModel.VitalsHistory>()
+                for (vHistory in items.vHistory) {
+                    val recordDate = DateHelper.convertServerDateToDBDate(vHistory.recordDate)
+                    vHistory.recordDate = recordDate
+                    vHistory.recordDateMillisec =
+                        DateHelper.getDateTimeAs_ddMMMyyyy_ToMilliSec(recordDate)
+                    if(vHistory.profileCode.equals("WHR",true)){
+                        whrList.add(vHistory)
+                    }else if (vHistory.profileCode.equals("BMI",true)){
+                        bmiList.add(vHistory)
+                    }else if (vHistory.profileCode.equals("BLOODPRESSURE",true)){
+                        bpList.add(vHistory)
+                    }
+                }
+                if (!whrList.isNullOrEmpty()) {
+                    paramDao.saveWHRHistoryVital(whrList)
+                }
+                if (!bmiList.isNullOrEmpty()){
+                    paramDao.saveBMIHistoryVital(bmiList)
+                }
+                if (!bpList.isNullOrEmpty()){
+                    paramDao.saveBloodPressureHistoryVital(bpList)
+                }
+                val dataSyc = DataSyncMaster(apiName = ApiConstants.VITALS_HISTORY, syncDate = DateHelper.currentDateAsStringyyyyMMdd, personId = personId)
+//                if(dataSyncMasterDao.getLastSyncDataList().find { it.apiName == ApiConstants.PARAMETER_HISTORY } == null)
+                dataSyncMasterDao.insertApiSyncData(dataSyc)
+//                else
+//                    dataSyncMasterDao.updateRecord(dataSyc)
+            }
+
+            override fun createCallAsync(): Deferred<BaseResponse<VitalsHistoryModel.Response>> {
+                return dataSource.fetchLabRecordsVitalsList(data = data)
+            }
+
+/*            override suspend fun createCallAsync(): BaseResponse<VitalsHistoryModel.Response> {
+                return dataSource.fetchLabRecordsVitalsList(data)
+            }*/
+
+            override fun processResponse(response: BaseResponse<VitalsHistoryModel.Response>): VitalsHistoryModel.Response {
+                return response.jSONData
+            }
+
+            override fun shouldFetch(data: VitalsHistoryModel.Response?): Boolean = true
+
+        }.build().asLiveData()
     }
 
     override suspend fun logoutUser() {

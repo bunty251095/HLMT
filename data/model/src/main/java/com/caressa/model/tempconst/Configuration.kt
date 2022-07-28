@@ -11,4 +11,6 @@ object Configuration {
     const val UTMSource: String = "VIVANT_HLMT_REG"
     const val UTMMedium: String = "android"
     var EntityID: String = "0"
+
+    var LanguageCode: String = "en"
 }

@@ -142,6 +142,18 @@ class HomeManagementUseCase( private val homeRepository: HomeRepository , privat
         }
     }
 
+    suspend fun invokeUpdateLanguageSettings(isForceRefresh: Boolean, data: UpdateLanguageProfileModel): LiveData<Resource<UpdateLanguageProfileModel.UpdateLanguageProfileResponse>> {
+        return Transformations.map(homeRepository.fetchUpdateProfileResponse(data)){
+            it
+        }
+    }
+
+    suspend fun invokeRefreshTokenResponse(isForceRefresh: Boolean, data: RefreshTokenModel): LiveData<Resource<RefreshTokenModel.RefreshTokenResponse>> {
+        return Transformations.map(homeRepository.fetchRefreshTokenResponse(data)){
+            it
+        }
+    }
+
     suspend fun invokeGetLoggedInPersonDetails( ) : Users {
         return homeRepository.getLoggedInPersonDetails()
     }

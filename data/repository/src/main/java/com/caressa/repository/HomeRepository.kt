@@ -140,6 +140,8 @@ interface HomeRepository {
         data: HLMTLoginModel
     ): LiveData<Resource<HLMTLoginModel.LoginResponse>>
 
+    suspend fun fetchUpdateProfileResponse(data: UpdateLanguageProfileModel): LiveData<Resource<UpdateLanguageProfileModel.UpdateLanguageProfileResponse>>
+    suspend fun fetchRefreshTokenResponse(data: RefreshTokenModel): LiveData<Resource<RefreshTokenModel.RefreshTokenResponse>>
 }
 
 class HomeRepositoryImpl(
@@ -965,5 +967,76 @@ class HomeRepositoryImpl(
 
         }.build().asLiveData()
     }
+
+    override suspend fun fetchUpdateProfileResponse(data: UpdateLanguageProfileModel):LiveData<Resource<UpdateLanguageProfileModel.UpdateLanguageProfileResponse>> {
+
+        return object : NetworkBoundResource<UpdateLanguageProfileModel.UpdateLanguageProfileResponse, BaseResponse<UpdateLanguageProfileModel.UpdateLanguageProfileResponse>>(context) {
+
+            override fun processResponse(response: BaseResponse<UpdateLanguageProfileModel.UpdateLanguageProfileResponse>): UpdateLanguageProfileModel.UpdateLanguageProfileResponse {
+                return response.jSONData
+            }
+
+            override suspend fun saveCallResults(items: UpdateLanguageProfileModel.UpdateLanguageProfileResponse) {
+
+            }
+
+            override fun shouldFetch(data: UpdateLanguageProfileModel.UpdateLanguageProfileResponse?): Boolean {
+                return true
+            }
+
+            override fun shouldStoreInDb(): Boolean {
+                return false
+            }
+
+            override suspend fun loadFromDb(): UpdateLanguageProfileModel.UpdateLanguageProfileResponse {
+                return UpdateLanguageProfileModel.UpdateLanguageProfileResponse()
+            }
+
+            override fun createCallAsync(): Deferred<BaseResponse<UpdateLanguageProfileModel.UpdateLanguageProfileResponse>> {
+                return datasource.updateLanguagePreferences(data)
+            }
+
+/*            override suspend fun createCallAsync(): BaseResponse<UpdateLanguageProfileModel.UpdateLanguageProfileResponse> {
+                return datasource.updateLanguagePreferences(data)
+            }*/
+
+        }.build().asLiveData()
+    }
+
+    override suspend fun fetchRefreshTokenResponse(data: RefreshTokenModel): LiveData<Resource<RefreshTokenModel.RefreshTokenResponse>> {
+
+        return object : NetworkBoundResource<RefreshTokenModel.RefreshTokenResponse, BaseResponse<RefreshTokenModel.RefreshTokenResponse>>(context) {
+
+            override fun processResponse(response: BaseResponse<RefreshTokenModel.RefreshTokenResponse>): RefreshTokenModel.RefreshTokenResponse {
+                return response.jSONData
+            }
+
+            override suspend fun saveCallResults(items: RefreshTokenModel.RefreshTokenResponse) {
+
+            }
+
+            override fun shouldFetch(data: RefreshTokenModel.RefreshTokenResponse?): Boolean {
+                return true
+            }
+
+            override fun shouldStoreInDb(): Boolean {
+                return false
+            }
+
+            override suspend fun loadFromDb(): RefreshTokenModel.RefreshTokenResponse {
+                return RefreshTokenModel.RefreshTokenResponse()
+            }
+
+            override fun createCallAsync(): Deferred<BaseResponse<RefreshTokenModel.RefreshTokenResponse>> {
+                return datasource.fetchRefreshToken(data)
+            }
+
+/*            override suspend fun createCallAsync(): BaseResponse<RefreshTokenModel.RefreshTokenResponse> {
+                return datasource.fetchRefreshToken(data)
+            }*/
+
+        }.build().asLiveData()
+    }
+
 
 }

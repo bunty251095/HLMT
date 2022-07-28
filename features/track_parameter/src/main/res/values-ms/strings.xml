@@ -1,4 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="TITLE_TRACK_HEALTH_PARAMETERS">Track Health Parameters</string>
+
+    <string name="TITLE_TRACK_HEALTH_PARAMETERS">Jejak Parameter Kesihatan</string>
+    <string name="TITLE_TRACK_HEALTH_PARAMETERS2">Jejak Parameter\nKesihatan</string>
+    <string name="TITLE_SELECT_PARAMETERS">Pilih Parameter</string>
+    <string name="TITLE_UPDATE_PARAMETERS">Kemaskini Parameter</string>
+    <string name="TITLE_PARAMETER_HISTORY">Sejarah Parameter</string>
+    <string name="TITLE_COMPLETE_HISTORY">Lengkapkan Sejarah</string>
+
+    <string name="SELECT_PARAMETERS">Pilih Parameter</string>
+    <string name="UPDATE_PARAMETER">Kemaskini Parameter</string>
+
+<!--    <string name="SELECT_PARAMETERS_DESC">Select key health parameters to track</string>
+    <string name="UPDATE_PARAMETER_DESC">Update parameters to see the trend</string>
+    <string name="DASHBOARD_DESC">Quick View of Your Health Data</string>
+    <string name="HISTORY_DESC">Check your existing data</string>-->
+
+<!--    <string name="ADD_EDIT">Add/Edit</string>
+    <string name="LAST_CHECKED_ON">Last checked on</string>-->
+    <string name="SYSTOLIC_DIASTOLIC">Sistolik/Diastolik</string>
+
+    <string name="BLOOD_PRESSURE">Tekanan Darah</string>
+    <string name="BLOOD_SUGAR_PROFILE">Profil Gula dalam Darah</string>
+    <string name="HEMOGRAM_PRESSURE">Profil Hemogram</string>
+    <string name="KIDNEY_PRESSURE">Profil Buah Pinggang</string>
+    <string name="LIPID_PRESSURE">Profil Lipid</string>
+    <string name="LIVER_PRESSURE">Profil Hati</string>
+    <string name="THYROID_PRESSURE">Profil Tiroid</string>
+    <string name="URINE_PRESSURE">Profil Air Kencing</string>
+
+    <string name="WEIGHT">Berat</string>
+    <string name="WAIST">Pinggang</string>
+    <string name="BMI">Indeks Jisim Badam </string>
+    <string name="WHR">Nisbah Pinggang-Pinggul </string>
+    <string name="BP">Tekanan Darah</string>
+    <string name="BLOOD_SUGAR">Gula dalam Darah</string>
+    <string name="CHOLESTEROL">Kolesterol</string>
+    <string name="HEMOGLOBIN">Hemoglobin</string>
+    <string name="HEMOGRAM">Hemogram</string>
+    <string name="KIDNEY">Buah Pinggang</string>
+    <string name="LIPID">Lipid</string>
+    <string name="LIVER">Hati</string>
+    <string name="THYROID">Tiroid</string>
+    <string name="URINE">Air Kencing</string>
+    <string name="PULSE">Nadi</string>
+
+<!--    <string name="PLEASE_ENTER_AT_LEAST_ONE_VALUE_FOR">Please enter at least one value for</string>-->
+    <string name="MSG_SELECT_PARAM_TO_TRACK">Sila Pilih sekurang-kurangnya satu Parameter untuk Dijejak</string>
+    <string name="MSG_SELECT_PROFILE_TO_PROCEED">Sila Pilih satu Profil untuk Teruskan</string>
+    <string name="MSG_PARAMETER_IS_UPDATED">Parameter Berjaya Dikemaskini</string>
+    <string name="PLEASE_ENTER_ALL_BMI_PROFILE_FIELDS">Sila masukkan semua bahagian profil Indeks Jisim Badan</string>
+    <string name="PLEASE_ENTER_ALL_WHR_PROFILE_FIELDS">Sila masukkan semua bahagian profil WHR</string>
+
 </resources>

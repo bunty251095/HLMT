@@ -62,7 +62,7 @@ class FamilyDoctorsAdapter(val  activity:FamilyDoctorListActivity, val viewModel
         }
 
         if (!Utilities.isNullOrEmpty(doctorDetail.affiliatedTo)) {
-            holder.txt_affiliated_to.text = "${context.resources.getString(R.string.AFFILIATED_TO)} " + doctorDetail.affiliatedTo
+            //holder.txt_affiliated_to.text = "${context.resources.getString(R.string.AFFILIATED_TO)} " + doctorDetail.affiliatedTo
         } else {
             holder.txt_affiliated_to.visibility = View.GONE
         }

@@ -149,7 +149,7 @@ class UserDetailsFragment: BaseFragment() {
         mCalendar = Calendar.getInstance()
         mCalendar?.add(Calendar.YEAR, -18)
 
-        DialogHelper().showDatePickerDialog("Your Date of Birth",requireContext(), mCalendar,null, mCalendar, object :DialogHelper.DateListener{
+        DialogHelper().showDatePickerDialog(resources.getString(R.string.DATE_OF_BIRTH),requireContext(), mCalendar,null, mCalendar, object :DialogHelper.DateListener{
             override fun onDateSet(date: String, year: String, month: String, dayOfMonth: String) {
                 binding.edtDob.setText(date)
             }

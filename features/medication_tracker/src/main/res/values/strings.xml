@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="TITLE_MEDICINE_TRACKER">Medicine Tracker</string>
@@ -75,7 +76,7 @@
     <string name="RESCHEDULE_MEDICINE">Reschedule Medicine</string>
     <string name="UPDATE_MEDICINE_SCHEDULES">Update Medicine Schedules</string>
     <string name="PAST_MEDICINES">Past Medicines</string>
-    <string name="NO_MEDICINES_AVAILABLE">No medicine records</string>
+    <string name="NO_MEDICINES_AVAILABLE">No Medicines Available</string>
     <string name="MEDICINE_DELETED">Medicine Deleted Successfully</string>
     <string name="MEDICINE_ADDED">Medicine Added Successfully</string>
     <string name="MEDICINE_UPDATED">Medicine Updated Successfully</string>

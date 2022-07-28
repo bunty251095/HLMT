@@ -152,4 +152,17 @@ class BackgroundCallUseCase(private val homeRepository: HomeRepository, private 
         homeRepository.logoutUser()
         fitnessRepository.logoutUser()
     }
+
+    suspend fun invokeLabRecordsVitalsList(
+        isForceRefresh: Boolean = true,
+        data: VitalsHistoryModel,
+        personId: String
+    ): LiveData<Resource<VitalsHistoryModel.Response>> {
+        return Transformations.map(
+            trackParamRepo.fetchLabRecordsVitalsList(data, personId)
+        ) {
+            it
+        }
+    }
+
 }

@@ -111,20 +111,20 @@ class ViewRecordsFragment : BaseFragment()  {
 
     private fun registerObservers() {
 
-        viewModel.listDocuments.observe( viewLifecycleOwner , {
-            if ( it != null) {
-                if ( it.status == Resource.Status.SUCCESS) {
+        viewModel.listDocuments.observe( viewLifecycleOwner) {
+            if (it != null) {
+                if (it.status == Resource.Status.SUCCESS) {
                     try {
-                        val list =  it.data!!.documents
-                        val documentsList: MutableList<HealthDocument> =  mutableListOf()
-                        if ( !list.isNullOrEmpty() ) {
+                        val list = it.data!!.documents
+                        val documentsList: MutableList<HealthDocument> = mutableListOf()
+                        if (!list.isNullOrEmpty()) {
                             documentsList.clear()
                             documentsList.addAll(list)
-                            if ( documentsList.size > 0) {
+                            if (documentsList.size > 0) {
                                 binding.rvRecords.visibility = View.VISIBLE
                                 binding.layoutNoRecords.visibility = View.GONE
                                 binding.rvRecords.adapter = healthRecordsAdapter
-                                healthRecordsAdapter!!.updateList(documentsList,code)
+                                healthRecordsAdapter!!.updateList(documentsList, code)
                             } else {
                                 binding.rvRecords.visibility = View.GONE
                                 binding.layoutNoRecords.visibility = View.VISIBLE
@@ -135,32 +135,32 @@ class ViewRecordsFragment : BaseFragment()  {
                             binding.layoutNoRecords.visibility = View.VISIBLE
                         }
                         stopShimmer()
-                    } catch ( e : Exception ) {
+                    } catch (e: Exception) {
                         e.printStackTrace()
                     }
                 }
             }
-        })
+        }
 
-        viewModel.healthDocumentsList.observe( viewLifecycleOwner , {
-            if ( it != null ) {
+        viewModel.healthDocumentsList.observe( viewLifecycleOwner) {
+            if (it != null) {
                 val labRecords = it
                 recordsList.clear()
                 recordsList.addAll(labRecords)
                 //recordsList.addAll(allRecords.filter { it.Code == "LAB" })
-                if ( recordsList.size > 0 ) {
-                    Timber.e("RecordCount--->{recordsList.size}", )
+                if (recordsList.size > 0) {
+                    Timber.e("RecordCount--->{recordsList.size}",)
                     binding.rvRecords.visibility = View.VISIBLE
                     binding.layoutNoRecords.visibility = View.GONE
                     binding.rvRecords.layoutAnimation = animation
-                    healthRecordsAdapter!!.updateList(recordsList,code)
+                    healthRecordsAdapter!!.updateList(recordsList, code)
                     binding.rvRecords.scheduleLayoutAnimation()
                 } else {
                     binding.rvRecords.visibility = View.GONE
                     binding.layoutNoRecords.visibility = View.VISIBLE
                 }
             }
-        })
+        }
 
         viewModel.postDownload.observe( viewLifecycleOwner , Observer {
             if ( it != null) {

@@ -43,6 +43,7 @@ import timber.log.Timber
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+@SuppressLint("StaticFieldLeak")
 class HraSummaryViewModel(
     private val dispatchers: AppDispatchers,
     private val hraManagementUseCase: HraManagementUseCase,
@@ -81,7 +82,7 @@ class HraSummaryViewModel(
                 HraMedicalProfileSummaryModel.JSONDataRequest(PersonID = hraPersonId),
                 HraMedicalProfileSummaryModel.JSONDataRequest::class.java), authToken)
 
-        _progressBar.value = Event("Getting Wellness Score.....")
+        _progressBar.value = Event("")
         _medicalProfileSummary.removeSource(medicalProfileSummarySource)
         withContext(dispatchers.io) {
             medicalProfileSummarySource =
@@ -120,7 +121,7 @@ class HraSummaryViewModel(
                 HraAssessmentSummaryModel.JSONDataRequest(PersonID = hraPersonId),
                 HraAssessmentSummaryModel.JSONDataRequest::class.java), authToken)
 
-        _progressBar.value = Event("Getting Assessment Summary.....")
+        _progressBar.value = Event("")
         _assessmentSummary.removeSource(assessmentSummarySource)
         withContext(dispatchers.io) {
             assessmentSummarySource = hraManagementUseCase.invokeGetAssessmentSummary(isForceRefresh = forceRefresh, data = requestData)
@@ -141,8 +142,7 @@ class HraSummaryViewModel(
                         assessmentSummaryList.addAll(assessmentSummaryData.otherAssessments)
                     }
                     assessmentSummaryList = assessmentSummaryList.filter {
-                        it.riskCategory != "Fitness"
-                                && it.riskCategory != "Nutrition" }.toMutableList()
+                        it.riskCategory != "Fitness" && it.riskCategory != "Nutrition" }.toMutableList()
                     hraAssessmentSummaryDetails.postValue( assessmentSummaryList )
                 }
             }
@@ -169,7 +169,7 @@ class HraSummaryViewModel(
                 HraListRecommendedTestsModel.JSONDataRequest(PersonID = hraPersonId),
                 HraListRecommendedTestsModel.JSONDataRequest::class.java), authToken)
 
-        _progressBar.value = Event("Getting Recommended Tests.....")
+        _progressBar.value = Event("")
         _listRecommendedTests.removeSource(listRecommendedTestsSource)
         withContext(dispatchers.io) {
             listRecommendedTestsSource =
@@ -200,7 +200,7 @@ class HraSummaryViewModel(
 
     fun callDownloadReport() {
 
-        _progressBar.value = Event("Downloading HRA Report.....")
+        _progressBar.value = Event("")
         val baseURL = Constants.strAPIUrl
         val proxyURL = Constants.strProxyUrl
         val hraUrl = Constants.HRAurl

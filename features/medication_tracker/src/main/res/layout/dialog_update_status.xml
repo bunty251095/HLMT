@@ -45,7 +45,7 @@
                     android:layout_width="@dimen/_22sdp"
                     android:layout_height="@dimen/_22sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
-                    android:tint="@color/vivant_heather"
+                    android:tint="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/img_alert_on" />

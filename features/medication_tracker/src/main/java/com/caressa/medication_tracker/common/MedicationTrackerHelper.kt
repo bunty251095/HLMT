@@ -13,6 +13,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.caressa.common.constants.Constants
 import com.caressa.common.utils.DateHelper
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.medication_tracker.R
 import com.caressa.medication_tracker.model.InstructionModel
@@ -27,26 +28,28 @@ import java.util.*
 class MedicationTrackerHelper( val context: Context) {
 
     fun getFrequencyList(): ArrayList<String> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val frequencyList: ArrayList<String> = ArrayList()
-        frequencyList.add(context.resources.getString(R.string.EVERY_DAY))
-        frequencyList.add(context.resources.getString(R.string.FOR_X_DAYS))
+        frequencyList.add(localResource.getString(R.string.EVERY_DAY))
+        frequencyList.add(localResource.getString(R.string.FOR_X_DAYS))
         return frequencyList
     }
 
     fun getMedTypeList(): ArrayList<MedTypeModel> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val medTypeList: ArrayList<MedTypeModel> = ArrayList()
-        medTypeList.add(MedTypeModel(context.resources.getString(R.string.TABLET), "TAB", R.drawable.img_pill))
-        medTypeList.add(MedTypeModel(context.resources.getString(R.string.CAPSULE), "CAP", R.drawable.img_capsul))
-        medTypeList.add(MedTypeModel(context.resources.getString(R.string.SYRUP), "SYRUP", R.drawable.img_syrup))
-        medTypeList.add(MedTypeModel(context.resources.getString(R.string.DROPS), "DROPS", R.drawable.img_drop))
-        medTypeList.add(MedTypeModel(context.resources.getString(R.string.INJECTION), "INJ", R.drawable.img_syringe))
-        medTypeList.add(MedTypeModel(context.resources.getString(R.string.GEL), "GEL", R.drawable.img_gel))
-        medTypeList.add(MedTypeModel(context.resources.getString(R.string.TUBE), "TUBE", R.drawable.img_tube))
-        medTypeList.add(MedTypeModel(context.resources.getString(R.string.SPRAY), "SPRAY", R.drawable.img_spray))
-        medTypeList.add(MedTypeModel(context.resources.getString(R.string.MOUTHWASH), "MOUTHWASH", R.drawable.img_mouth_wash))
-        medTypeList.add(MedTypeModel(context.resources.getString(R.string.SOLUTION), "SOL", R.drawable.img_solution))
-        medTypeList.add(MedTypeModel(context.resources.getString(R.string.OINTMENT), "OINT", R.drawable.img_ointment))
-        medTypeList.add(MedTypeModel(context.resources.getString(R.string.OTHER), "OTHER", R.drawable.img_other_med))
+        medTypeList.add(MedTypeModel(localResource.getString(R.string.TABLET), "TAB", R.drawable.img_pill))
+        medTypeList.add(MedTypeModel(localResource.getString(R.string.CAPSULE), "CAP", R.drawable.img_capsul))
+        medTypeList.add(MedTypeModel(localResource.getString(R.string.SYRUP), "SYRUP", R.drawable.img_syrup))
+        medTypeList.add(MedTypeModel(localResource.getString(R.string.DROPS), "DROPS", R.drawable.img_drop))
+        medTypeList.add(MedTypeModel(localResource.getString(R.string.INJECTION), "INJ", R.drawable.img_syringe))
+        medTypeList.add(MedTypeModel(localResource.getString(R.string.GEL), "GEL", R.drawable.img_gel))
+        medTypeList.add(MedTypeModel(localResource.getString(R.string.TUBE), "TUBE", R.drawable.img_tube))
+        medTypeList.add(MedTypeModel(localResource.getString(R.string.SPRAY), "SPRAY", R.drawable.img_spray))
+        medTypeList.add(MedTypeModel(localResource.getString(R.string.MOUTHWASH), "MOUTHWASH", R.drawable.img_mouth_wash))
+        medTypeList.add(MedTypeModel(localResource.getString(R.string.SOLUTION), "SOL", R.drawable.img_solution))
+        medTypeList.add(MedTypeModel(localResource.getString(R.string.OINTMENT), "OINT", R.drawable.img_ointment))
+        medTypeList.add(MedTypeModel(localResource.getString(R.string.OTHER), "OTHER", R.drawable.img_other_med))
         return medTypeList
     }
 
@@ -139,28 +142,52 @@ class MedicationTrackerHelper( val context: Context) {
     }
 
     fun getMedInstructionList(): ArrayList<InstructionModel> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val instructionList: ArrayList<InstructionModel> = ArrayList()
-        instructionList.add(InstructionModel(context.resources.getString(R.string.BEFORE_MEAL), R.drawable.img_before_meal))
-        instructionList.add(InstructionModel(context.resources.getString(R.string.WITH_MEAL), R.drawable.img_with_meal))
-        instructionList.add(InstructionModel(context.resources.getString(R.string.AFTER_MEAL), R.drawable.img_after_meal))
-        instructionList.add(InstructionModel(context.resources.getString(R.string.ANYTIME), R.drawable.img_anytime))
+        instructionList.add(InstructionModel(localResource.getString(R.string.BEFORE_MEAL), R.drawable.img_before_meal))
+        instructionList.add(InstructionModel(localResource.getString(R.string.WITH_MEAL), R.drawable.img_with_meal))
+        instructionList.add(InstructionModel(localResource.getString(R.string.AFTER_MEAL), R.drawable.img_after_meal))
+        instructionList.add(InstructionModel(localResource.getString(R.string.ANYTIME), R.drawable.img_anytime))
         return instructionList
     }
 
     fun getCategoryList(): ArrayList<SpinnerModel> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list: ArrayList<SpinnerModel> = ArrayList()
-        list.add(SpinnerModel( context.resources.getString(R.string.ONGOING), "",0,false))
-        list.add(SpinnerModel( context.resources.getString(R.string.COMPLETED), "",1,false))
-        list.add(SpinnerModel( context.resources.getString(R.string.ALL), "",2,false))
+        list.add(SpinnerModel( localResource.getString(R.string.ONGOING), "",0,false))
+        list.add(SpinnerModel( localResource.getString(R.string.COMPLETED), "",1,false))
+        list.add(SpinnerModel( localResource.getString(R.string.ALL), "",2,false))
         return list
+    }
+
+    fun getMedInstructionByCode(code: String): String {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+        var instruction = localResource.getString(R.string.BEFORE_MEAL)
+        when(code) {
+            Constants.BEFORE_MEAL -> {
+                instruction = localResource.getString(R.string.BEFORE_MEAL)
+            }
+            Constants.WITH_MEAL -> {
+                instruction = localResource.getString(R.string.WITH_MEAL)
+            }
+            Constants.AFTER_MEAL -> {
+                instruction = localResource.getString(R.string.AFTER_MEAL)
+            }
+            Constants.ANYTIME -> {
+                instruction = localResource.getString(R.string.ANYTIME)
+            }
+        }
+        return instruction
     }
 
     fun displayMedicineReminderNotification(context:Context,data:ReminderNotification,relative: UserRelatives) {
         try {
-            val strMessage: String = data.dosage + " " + context.resources.getString(R.string.DOSE) + " , " + data.instruction
+            val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+            val instruction = getMedInstructionByCode(data.instruction)
+            val strMessage: String = data.dosage + " " + localResource.getString(R.string.DOSE) + " , " + instruction
             val timeToDisplay: String = DateHelper.getTimeIn12HrFormatAmOrPm(data.scheduleTime)
             val firstName: String = relative.firstName.split(" ")[0]
-            val personName = context.resources.getString(R.string.FOR) + " $firstName"
+            val personName = localResource.getString(R.string.FOR) + " $firstName"
 
             //In Android "O" or higher version, it's Mandatory to use a channel with your Notification Builder
             //int NOTIFICATION_ID = (int) System.currentTimeMillis();
@@ -205,6 +232,7 @@ class MedicationTrackerHelper( val context: Context) {
             remoteViewCollapsed.setTextViewText(R.id.med_notification_subtext, strMessage)
             remoteViewCollapsed.setTextViewText(R.id.med_schedule_time, timeToDisplay)
             remoteViewCollapsed.setTextViewText(R.id.med_person_name, personName)
+            remoteViewCollapsed.setTextViewText(R.id.lbl_med_reminder,localResource.getString(R.string.MEDICINE_REMINDER))
             remoteViewCollapsed.setOnClickPendingIntent(R.id.med_reminder_collapsed, pendingOnClickIntent)
 
             // Notification's Expanded layout
@@ -213,6 +241,9 @@ class MedicationTrackerHelper( val context: Context) {
             remoteViewExpanded.setTextViewText(R.id.med_notification_subtext, strMessage)
             remoteViewExpanded.setTextViewText(R.id.med_schedule_time, timeToDisplay)
             remoteViewExpanded.setTextViewText(R.id.med_person_name, personName)
+            remoteViewExpanded.setTextViewText(R.id.lbl_med_reminder,localResource.getString(R.string.MEDICINE_REMINDER))
+            remoteViewExpanded.setTextViewText(R.id.txt_taken,localResource.getString(R.string.TAKEN))
+            remoteViewExpanded.setTextViewText(R.id.txt_skip,localResource.getString(R.string.SKIP))
             remoteViewExpanded.setOnClickPendingIntent(R.id.layout_taken, pendingTakenIntent)
             remoteViewExpanded.setOnClickPendingIntent(R.id.layout_skip, pendingSkipIntent)
             remoteViewExpanded.setOnClickPendingIntent(R.id.med_reminder_expanded, pendingOnClickIntent)
@@ -226,7 +257,7 @@ class MedicationTrackerHelper( val context: Context) {
                 .setAutoCancel(true) //.setDefaults(Notification.DEFAULT_SOUND)
                 .setSound(alarmSound)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setTicker(context.resources.getString(R.string.app_name))
+                .setTicker(localResource.getString(R.string.app_name))
                 //.setWhen(System.currentTimeMillis())
                 .setContentIntent(pendingOnClickIntent)
                 .setContent(remoteViewCollapsed)

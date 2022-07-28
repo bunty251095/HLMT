@@ -120,30 +120,34 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
 
         viewModel.getUserRelativeForRelativeId(relativeId)
         viewModel.getLoggedInPersonDetails()
-        viewModel.userDetails.observe( viewLifecycleOwner , {
-            if ( it != null ) {
+        viewModel.userDetails.observe( viewLifecycleOwner) {
+            if (it != null) {
                 userDob = DateHelper.getDateTimeAs_ddMMMyyyy(it.dateOfBirth)
             }
-        })
-        viewModel.alreadyExistRelatives.observe( viewLifecycleOwner , {
-            if ( it != null ) {
+        }
+        viewModel.alreadyExistRelatives.observe( viewLifecycleOwner) {
+            if (it != null) {
                 val relativeDetails = it[0]
-                if ( !Utilities.isNullOrEmpty(relativeDetails.dateOfBirth) ) {
+                if (!Utilities.isNullOrEmpty(relativeDetails.dateOfBirth)) {
                     //dob = DateHelper.getDateTimeAs_ddMMMyyyy(relativeDetails.dateOfBirth)
-                    dob = DateHelper.formatDateValue(DateHelper.DATEFORMAT_DDMMMYYYY_NEW, relativeDetails.dateOfBirth)!!
-                    dateOfBirth = DateHelper.formatDateValue("yyyy-MM-dd", relativeDetails.dateOfBirth)!!
+                    dob = DateHelper.formatDateValue(
+                        DateHelper.DATEFORMAT_DDMMMYYYY_NEW,
+                        relativeDetails.dateOfBirth
+                    )!!
+                    dateOfBirth =
+                        DateHelper.formatDateValue("yyyy-MM-dd", relativeDetails.dateOfBirth)!!
                     try {
-                        if ( !Utilities.isNullOrEmpty( dob ) ) {
+                        if (!Utilities.isNullOrEmpty(dob)) {
                             binding.edtMemberDob.setText(dob)
                         } else {
                             binding.edtMemberDob.setText(dob)
                         }
-                    } catch ( e : Exception ) {
+                    } catch (e: Exception) {
                         e.printStackTrace()
                     }
                 }
             }
-        })
+        }
     }
 
     private fun setClickable() {
@@ -211,56 +215,60 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
 
                 if (!binding.tilEdtMemberName.isErrorEnabled && !binding.tilEdtMemberDob.isErrorEnabled
                     && !binding.tilEdtMemberMobile.isErrorEnabled && !binding.tilEdtMemberEmail.isErrorEnabled) {
-                    viewModel.alreadyExistRelatives.observe( viewLifecycleOwner , {
-                        if ( it != null ) {
+                    viewModel.alreadyExistRelatives.observe( viewLifecycleOwner) {
+                        if (it != null) {
                             val relativeDetails = it[0]
                             val gender = relativeDetails.gender
                             val relation = relativeDetails.relationship
                             dob = DateHelper.getDateTimeAs_ddMMMyyyy(relativeDetails.dateOfBirth)
-                            if ( !Utilities.isNullOrEmpty(userDob) ) {
+                            if (!Utilities.isNullOrEmpty(userDob)) {
                                 val famDate = DateHelper.convertStringToDate(dob)
                                 val userDOB = DateHelper.convertStringToDate(userDob)
 
                                 // Validations for Age
-                                when( relationCode ) {
+                                when (relationCode) {
 
-                                    Constants.FATHER_RELATIONSHIP_CODE,Constants.MOTHER_RELATIONSHIP_CODE -> {
-                                        if ( userDOB!!.compareTo(famDate) > 0 ) {
+                                    Constants.FATHER_RELATIONSHIP_CODE, Constants.MOTHER_RELATIONSHIP_CODE -> {
+                                        if (userDOB!!.compareTo(famDate) > 0) {
                                             isValidFAM = true
                                         } else {
                                             binding.tilEdtMemberDob.isErrorEnabled = true
-                                            binding.tilEdtMemberDob.error = resources.getString(R.string.ERROR_PARENTS_AGE)
+                                            binding.tilEdtMemberDob.error =
+                                                resources.getString(R.string.ERROR_PARENTS_AGE)
                                         }
                                     }
 
-                                    Constants.SON_RELATIONSHIP_CODE,Constants.DAUGHTER_RELATIONSHIP_CODE-> {
-                                        if ( userDOB!!.compareTo(famDate) < 0 ) {
+                                    Constants.SON_RELATIONSHIP_CODE, Constants.DAUGHTER_RELATIONSHIP_CODE -> {
+                                        if (userDOB!!.compareTo(famDate) < 0) {
                                             isValidFAM = true
                                         } else {
                                             binding.tilEdtMemberDob.isErrorEnabled = true
-                                            binding.tilEdtMemberDob.error = resources.getString(R.string.ERROR_KIDS_AGE)
+                                            binding.tilEdtMemberDob.error =
+                                                resources.getString(R.string.ERROR_KIDS_AGE)
                                         }
                                     }
 
-                                    Constants.GRANDFATHER_RELATIONSHIP_CODE,Constants.GRANDMOTHER_RELATIONSHIP_CODE -> {
-                                        if ( userDOB!!.compareTo(famDate) > 0 ) {
+                                    Constants.GRANDFATHER_RELATIONSHIP_CODE, Constants.GRANDMOTHER_RELATIONSHIP_CODE -> {
+                                        if (userDOB!!.compareTo(famDate) > 0) {
                                             isValidFAM = true
                                         } else {
                                             binding.tilEdtMemberDob.isErrorEnabled = true
-                                            binding.tilEdtMemberDob.error = resources.getString(R.string.ERROR__GP_AGE)
+                                            binding.tilEdtMemberDob.error =
+                                                resources.getString(R.string.ERROR__GP_AGE)
                                         }
                                     }
 
-                                    Constants.HUSBAND_RELATIONSHIP_CODE,Constants.WIFE_RELATIONSHIP_CODE -> {
-                                        if ( !DateHelper.isDateAbove18Years(dob) ) {
+                                    Constants.HUSBAND_RELATIONSHIP_CODE, Constants.WIFE_RELATIONSHIP_CODE -> {
+                                        if (!DateHelper.isDateAbove18Years(dob)) {
                                             binding.tilEdtMemberDob.isErrorEnabled = true
-                                            binding.tilEdtMemberDob.error = resources.getString(R.string.ERROR_AGE_NOT_LESS_THAN_18)
+                                            binding.tilEdtMemberDob.error =
+                                                resources.getString(R.string.ERROR_AGE_NOT_LESS_THAN_18)
                                         } else {
                                             isValidFAM = true
                                         }
                                     }
 
-                                    Constants.BROTHER_RELATIONSHIP_CODE,Constants.SISTER_RELATIONSHIP_CODE -> {
+                                    Constants.BROTHER_RELATIONSHIP_CODE, Constants.SISTER_RELATIONSHIP_CODE -> {
                                         isValidFAM = true
                                     }
 
@@ -306,16 +314,24 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
                                         contactNo = mobile,
                                         emailAddress = email,
                                         relationshipCode = relationCode,
-                                        relationship = relation ,
-                                        relationShipID = relationShipID )
-                                    viewModel.callUpdateRelativesApi(true, newRelative,Constants.RELATIVE)
+                                        relationship = relation,
+                                        relationShipID = relationShipID
+                                    )
+                                    viewModel.callUpdateRelativesApi(
+                                        true,
+                                        newRelative,
+                                        Constants.RELATIVE
+                                    )
                                     FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_MEMBER_UPDATE)
                                 }
                             } else {
-                                Utilities.toastMessageLong( context , resources.getString(R.string.ERROR_DOB_UNAVAILABLE))
+                                Utilities.toastMessageLong(
+                                    context,
+                                    resources.getString(R.string.ERROR_DOB_UNAVAILABLE)
+                                )
                             }
                         }
-                    })
+                    }
                 }
 
             } else {
@@ -334,7 +350,7 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
         val day = Integer.parseInt(dob[2])
         val dpd = DatePickerDialog.newInstance(this@EditFamilyMemberDetailsFragment, year, month, day)
             dpd.accentColor = appColorHelper.primaryColor()
-            dpd.setTitle(resources.getString(R.string.PICK_DOB))
+            dpd.setTitle(resources.getString(R.string.DATE_OF_BIRTH))
             dpd.maxDate = cal
             dpd.isThemeDark = false
             dpd.vibrate(false)
@@ -360,10 +376,10 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
         val email = binding.edtMemberMobile.text.toString()
         val dobNew = DateHelper.getDateTimeAs_ddMMMyyyy(dateOfBirth)
         Timber.i("username,mobile,email,DateOfBirth----->$username , $mobile , $email , $dobNew")
-        viewModel.alreadyExistRelatives.observe( viewLifecycleOwner , {
-            if ( it != null ) {
+        viewModel.alreadyExistRelatives.observe( viewLifecycleOwner) {
+            if (it != null) {
                 val relativeDetails = it[0]
-                Timber.i("RelativeDetailsBefore----->"+it[0])
+                Timber.i("RelativeDetailsBefore----->" + it[0])
                 val userNameBefore = relativeDetails.firstName
                 val mobileBefore = relativeDetails.contactNo
                 val emailBefore = relativeDetails.emailAddress
@@ -382,7 +398,7 @@ class EditFamilyMemberDetailsFragment : BaseFragment() , DatePickerDialog.OnDate
                     isChanges = true
                 }
             }
-        })
+        }
         Timber.i("Details_Changed----->$isChanges")
         return isChanges
     }

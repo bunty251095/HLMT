@@ -190,7 +190,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:text="@string/LOGIN"
+                    android:text="@string/LOG_IN"
                     android:textSize="@dimen/_14sdp"
                     android:visibility="invisible"
                     app:isTemplate="true"

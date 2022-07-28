@@ -12,9 +12,7 @@ import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.DefaultNotificationDialog
-import com.caressa.common.utils.DialogHelper
 import com.caressa.common.utils.FirebaseHelper
-import com.caressa.common.utils.PermissionUtil
 import com.caressa.hra.viewmodel.HraViewModel
 import com.caressa.hra.databinding.FragmentIntroductionBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -30,9 +28,13 @@ class IntroductionFragment : BaseFragment() {
         binding = FragmentIntroductionBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        FirebaseHelper.logScreenEvent(FirebaseConstants.HRA_START_SCREEN)
-        initialise()
-        setClickable()
+        try {
+            FirebaseHelper.logScreenEvent(FirebaseConstants.HRA_START_SCREEN)
+            initialise()
+            setClickable()
+        } catch ( e : Exception ) {
+            e.printStackTrace()
+        }
         return binding.root
     }
 
@@ -47,11 +49,11 @@ class IntroductionFragment : BaseFragment() {
 
             binding.btnStartHra.setOnClickListener {
                 val dialogData = DefaultNotificationDialog.DialogData()
-                dialogData.title = requireContext().resources.getString(R.string.DISCLAIMER_TITLE)
-                dialogData.message = requireContext().resources.getString(R.string.DISCLAIMER_MESSAGE_HRA)
-                dialogData.btnRightName = requireContext().resources.getString(R.string.CONTINUE)
+                dialogData.title = resources.getString(R.string.DISCLAIMER_TITLE)
+                dialogData.message = resources.getString(R.string.DISCLAIMER_MESSAGE_HRA)
+                dialogData.btnRightName = resources.getString(R.string.CONTINUE)
                 dialogData.showLeftButton = false
-                val defaultNotificationDialog = DefaultNotificationDialog(context,
+                val defaultNotificationDialog = DefaultNotificationDialog(requireContext(),
                     object : DefaultNotificationDialog.OnDialogValueListener {
                         override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
                             if (isButtonRight) {

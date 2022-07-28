@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/_3sdp"
-            android:text="@string/TITLE_CALL_VISIT"
+            android:text=""
             android:textSize="@dimen/_12sdp" />
 
     </LinearLayout>
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/_3sdp"
-            android:text="@string/TITLE_ORDER_ONLINE"
+            android:text=""
             android:textSize="@dimen/_12sdp" />
 
     </LinearLayout>

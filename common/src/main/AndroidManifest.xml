@@ -8,13 +8,6 @@
         android:largeHeap="true"
         android:screenOrientation="portrait">
 
-        <activity
-            android:name="com.caressa.common.utils.filepicker.FilePickerActivity"
-            android:configChanges="orientation|screenSize"/>
-
-        <activity android:name="com.caressa.common.utils.filepicker.MediaDetailsActivity"
-            android:configChanges="orientation|screenSize"/>
-
     </application>
 
 </manifest>

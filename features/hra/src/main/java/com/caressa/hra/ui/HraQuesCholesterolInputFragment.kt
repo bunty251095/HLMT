@@ -161,56 +161,63 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
     private fun registerObservers() {
 
         var toProceed = true
-        viewModel.quesData.observe(viewLifecycleOwner, {
-            if ( it != null ) {
-                if ( toProceed ) {
+        viewModel.quesData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                if (toProceed) {
                     questionData = it
                     hraDataSingleton.question = it
                     toProceed = false
                 }
             }
-        })
+        }
 
-        viewModel.labParameter.observe(viewLifecycleOwner, {
-            if ( it != null ) {
+        viewModel.labParameter.observe(viewLifecycleOwner) {
+            if (it != null) {
                 allParamList.clear()
                 allParamList.addAll(it)
                 showHideFields(prevAnsList)
             }
-        })
+        }
 
-        viewModel.labDetailsSavedResponse.observe(viewLifecycleOwner, {
+        viewModel.labDetailsSavedResponse.observe(viewLifecycleOwner) {
             if (it != null) {
                 val labDetailsList = it
                 Timber.i("HRALabCholDetailsFromDB----> $labDetailsList")
-                if ( labDetailsList.any { labDetail ->
+                if (labDetailsList.any { labDetail ->
                         prevAnsList.any { option ->
-                            option.answerCode.equals(labDetail.ParameterCode,ignoreCase = true) } } ) {
-                    for ( record in labDetailsList ) {
-                        setSavedData(record.ParameterCode,record.LabValue!!)
+                            option.answerCode.equals(labDetail.ParameterCode, ignoreCase = true)
+                        }
+                    }) {
+                    for (record in labDetailsList) {
+                        setSavedData(record.ParameterCode, record.LabValue!!)
                     }
                     isCholesterolExist = true
                 }
-                if ( !isCholesterolExist ) {
+                if (!isCholesterolExist) {
                     Timber.i("Cholesterol Details does not Exist.")
-                    viewModel.callGetLabRecordsCholesterol(true,viewPagerActivity!!.personId)
+                    viewModel.callGetLabRecordsCholesterol(true, viewPagerActivity!!.personId)
                 }
             }
-        })
+        }
 
-        viewModel.labRecordsChol.observe(viewLifecycleOwner, {
+        viewModel.labRecordsChol.observe(viewLifecycleOwner) {
             if (it != null) {
                 val labRecords = it.LabRecords!!
-                if ( labRecords.isNotEmpty() ) {
+                if (labRecords.isNotEmpty()) {
                     val list = HraHelper.filterLabRecords(labRecords)
                     Timber.i("HRALabCholDetailsFromServer----> $list")
-                    for ( record in list) {
-                        setSavedData(record.ParameterCode!!,record.Value!!)
-                        viewModel.saveHRALabDetailsBasedOnType("LIPID",record.ParameterCode!!,record.Value!!,record.Unit!!)
+                    for (record in list) {
+                        setSavedData(record.ParameterCode!!, record.Value!!)
+                        viewModel.saveHRALabDetailsBasedOnType(
+                            "LIPID",
+                            record.ParameterCode!!,
+                            record.Value!!,
+                            record.Unit!!
+                        )
                     }
                 }
             }
-        })
+        }
 
     }
 

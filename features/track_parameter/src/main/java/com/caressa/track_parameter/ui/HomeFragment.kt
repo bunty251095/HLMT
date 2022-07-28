@@ -1,16 +1,11 @@
 package com.caressa.track_parameter.ui
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import com.caressa.track_parameter.R
-import androidx.core.content.ContextCompat
-import androidx.core.widget.ImageViewCompat
-import androidx.navigation.fragment.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
@@ -62,82 +57,6 @@ class HomeFragment : BaseFragment(){
     @SuppressLint("ClickableViewAccessibility")
     private fun initialise() {
 
-        binding.layoutSelectParam.setOnTouchListener { v: View, event: MotionEvent ->
-            if (event.action == MotionEvent.ACTION_DOWN ||
-                event.action == MotionEvent.ACTION_MOVE) {
-                v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.vivant_bright_blue))
-                ImageViewCompat.setImageTintList(binding.imgUpload,
-                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.white)))
-                binding.lblUploadRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
-                binding.descUploadRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
-            }
-            if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
-                v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
-                ImageViewCompat.setImageTintList(binding.imgUpload,
-                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.colorPrimary)))
-                binding.lblUploadRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_title_charcoal_grey))
-                binding.descUploadRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_charcoal_grey_55))
-            }
-            false
-        }
-
-        binding.layoutUpdateParam.setOnTouchListener { v: View, event: MotionEvent ->
-            if (event.action == MotionEvent.ACTION_DOWN ||
-                event.action == MotionEvent.ACTION_MOVE) {
-                v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.vivant_marigold))
-                ImageViewCompat.setImageTintList(binding.imgView,
-                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.white)))
-                binding.lblViewRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
-                binding.descViewRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
-            }
-            if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
-                v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
-                ImageViewCompat.setImageTintList(binding.imgView,
-                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.colorPrimary)))
-                binding.lblViewRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_title_charcoal_grey))
-                binding.descViewRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_charcoal_grey_55))
-            }
-            false
-        }
-
-        binding.layoutDashboardParam.setOnTouchListener { v: View, event: MotionEvent ->
-            if (event.action == MotionEvent.ACTION_DOWN ||
-                event.action == MotionEvent.ACTION_MOVE) {
-                v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.vivant_dusky_blue))
-                ImageViewCompat.setImageTintList(binding.imgShare,
-                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.white)))
-                binding.lblShareRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
-                binding.descShareRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
-            }
-            if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
-                v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
-                ImageViewCompat.setImageTintList(binding.imgShare,
-                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.colorPrimary)))
-                binding.lblShareRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_title_charcoal_grey))
-                binding.descShareRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_charcoal_grey_55))
-            }
-            false
-        }
-
-        binding.layoutHistoryParam.setOnTouchListener { v: View, event: MotionEvent ->
-            if (event.action == MotionEvent.ACTION_DOWN ||
-                event.action == MotionEvent.ACTION_MOVE) {
-                v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.vivant_green_blue_two))
-                ImageViewCompat.setImageTintList(binding.imgDigitize,
-                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.white)))
-                binding.lblDigitizeRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
-                binding.descDigitizeRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
-            }
-            if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
-                v.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
-                ImageViewCompat.setImageTintList(binding.imgDigitize,
-                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.colorPrimary)))
-                binding.lblDigitizeRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_title_charcoal_grey))
-                binding.descDigitizeRecord.setTextColor(ContextCompat.getColor(requireContext(),R.color.vivant_charcoal_grey_55))
-            }
-            false
-        }
-
     }
 
     private fun setClickable() {
@@ -163,14 +82,5 @@ class HomeFragment : BaseFragment(){
         }
 
     }
-
-/*    private fun initialise() {
-//        viewModel.getParameterList()
-//        viewModel.paramList.observe(this, Observer {  })
-//        viewModel.getLabRecordList()
-//        viewModel.getBMIHistory()
-//        viewModel.getWHRHistory()
-//        viewModel.getBloodPressureHistory()
-    }*/
 
 }

@@ -13,6 +13,7 @@ val featureHomeModule = module {
     factory { BackgroundCallUseCase(get(), get(), get(), get(), get(), get()) }
     viewModel { BackgroundCallViewModel(get(), get(), get(), get()) }
     viewModel { DashboardViewModel(get(), get(), get(), get(), get()) }
+    viewModel { SettingsViewModel(get(), get(), get(), get(), get()) }
     viewModel { FamilyDoctorViewModel(get(), get(), get(), get()) }
     viewModel { WebViewViewModel(get(), get(), get() ,get()) }
     viewModel { ProfileFamilyMemberViewModel( get(), get(), get(), get() , get() ) }

@@ -28,7 +28,7 @@ class MedCalenderAdapter(val viewModel : MedicineTrackerViewModel, val context: 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedCalenderViewHolder =
         MedCalenderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_medicine_calender, parent, false))
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n","RecyclerView")
     override fun onBindViewHolder(holder: MedCalenderViewHolder, position: Int) {
         try {
             val date = calenderDateList[position]
@@ -41,9 +41,9 @@ class MedCalenderAdapter(val viewModel : MedicineTrackerViewModel, val context: 
             holder.txtDay.text = date.DayOfMonth
             if (selectedPos == position) {
                 //listener.onDateSelection(date,position);
-                holder.layoutSelectedDay.background.setColorFilter(ContextCompat.getColor(context,R.color.vivant_heather), PorterDuff.Mode.SRC_ATOP)
+                holder.layoutSelectedDay.background.setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP)
                 if (position == todayPos) {
-                    holder.txtDate.setTextColor(ContextCompat.getColor(context,R.color.vivant_heather))
+                    holder.txtDate.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary))
                 } else {
                     holder.txtDate.setTextColor(ContextCompat.getColor(context,R.color.vivant_greyish))
                 }
@@ -53,7 +53,7 @@ class MedCalenderAdapter(val viewModel : MedicineTrackerViewModel, val context: 
             } else {
                 holder.layoutSelectedDay.background.setColorFilter(ContextCompat.getColor(context,R.color.white), PorterDuff.Mode.SRC_ATOP)
                 if ( date.IsToday ) {
-                    holder.txtDate.setTextColor(ContextCompat.getColor(context,R.color.vivant_heather))
+                    holder.txtDate.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary))
                 } else {
                     holder.txtDate.setTextColor(ContextCompat.getColor(context,R.color.white))
                 }

@@ -1,4 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="TITLE_TOOLS_CALCULATORS">Tools and Calculators</string>
+
+    <string name="TITLE_TOOLS_CALCULATORS">Alat dan Kalkulator</string>
+    <string name="HEART_AGE_CALCULATOR">Kalkulator Umur Jantung</string>
+    <string name="DIABETES_CALCULATOR">Kalkulator Diabetes</string>
+    <string name="HYPERTENSION_CALCULATOR">Kalkulator Hipertensi</string>
+    <string name="STRESS_ANXIETY_CALCULATOR">Kalkulator Tekanan dan Kebimbangan</string>
+    <string name="SMART_PHONE_CALCULATOR">Ketagihan Telefon Pintar</string>
+    <string name="DUE_DATE_CALCULATOR">Kalkulator Tarikh Bersalin</string>
+
+    <string name="TRACKER_HEART_AGE">Kalkulator \n Umur Jantung</string>
+    <string name="TRACKER_DIABETES">Kalkulator \n Diabetes</string>
+    <string name="TRACKER_HYPERTENSION">Kalkulator  \n Hipertensi</string>
+    <string name="TRACKER_STRESS_ANXIETY">Kalkulator \n Tekanan dan Kebimbangan</string>
+    <string name="TRACKER_SMART_PHONE">Ketagihan \n Telefon Pintar</string>
+    <string name="TRACKER_DUE_DATE">Kalkulator n\ Tarikh Akhir</string>
+    <string name="TRACKER_VACCINATION">Kalkulator \n Vaksinasi</string>
+
+    <string name="TRACKER_DESC_HEART_AGE">Adakah Jantung anda semuda seperti anda ?</string>
+    <string name="TRACKER_DESC_DIABETES">Ketahui risiko diabetes anda \n</string>
+    <string name="TRACKER_DESC_HYPERTENSION">Ketahui tekanan darah anda \n\n</string>
+    <string name="TRACKER_DESC_STRESS_ANXIETY">Adakah anda berasa tertekan?\n</string>
+    <string name="TRACKER_DESC_SMART_PHONE">Ketagih telefon pintar?\n</string>
+    <string name="TRACKER_DESC_DUE_DATE">Ketahui tarikh bersalin anda\n</string>
+    <string name="TRACKER_DESC_VACCINATION">Jejak vaksinasi anda\n</string>
+
+    <string name="PROFILE_PARAMETERS">Profil Parameter</string>
+    <string name="MEASUREMENT_PARAMETERS">Ukuran Parameter</string>
+    <string name="LIFESTYLE_CHANGES">Lifestyle Changes</string>
+    <string name="AGE_IN_YEARS">Umur dalam tahun</string>
+    <string name="TODAY_VIA_MOBILE_ENTRY">Hari ini dengan melalui penyertaan mudah alih</string>
+
+    <string name="LOW_RISK_1">Risiko Rendah</string>
+    <string name="HIGH_RISK_1">Risiko Tinggi</string>
+
+    <string name="SELECT_ALL_THAT_APPLIES_TO_YOU">Pilih semua yang sesuai dengan anda</string>
+    <string name="HEALTH_CONDITION">Keadaan Kesihatan</string>
+    <string name="DIABETES">Diabetes</string>
+    <string name="KIDNEY_DISEASE">Penyakit buah pinggang</string>
+    <string name="STROKE">Strok</string>
+    <string name="CORONARY_ARTERY">Arteri koronari</string>
+    <string name="HIGH_CHOLESTEROL">Kolesterol tinggi</string>
+    <string name="FAMILY_HISTORY_OF_HEART_DISEASE">Sejarah keluarga yang berpenyakit jantung</string>
+    <string name="HEART_DISEASE">Penyakit jantung</string>
+
+    <string name="UNDER_35_YEARS">Bawah 35 tahun</string>
+    <string name="AGE_35_TO_44">35 – 44</string>
+    <string name="AGE_45_TO_54">45 – 54</string>
+    <string name="AGE_55_TO_64">55 – 64</string>
+    <string name="AGE_65_YRS_OR_OVER">65 tahun atau ke atas</string>
+
+    <string name="RANGE_0_TO_4">0 – 4</string>
+<!--    <string name="UPPER_LIMIT">Upper Limit</string>
+    <string name="LOWER_LIMIT">Lower Limit</string>-->
+
+    <string name="DEPRESSION">Depresi</string>
+    <string name="ANXIETY">Kebimbangan</string>
+    <string name="STRESS">Tekanan</string>
+
+    <string name="DYSPHORIA">Dysphoria</string>
+    <string name="LACK_OF_INTEREST_INVOLVEMENT">Kurang Minat/Penglibatan</string>
+    <string name="HOPELESSNESS">Berputus Asa</string>
+    <string name="ANHEDONIA">Anhedonia</string>
+    <string name="DEVALUATION_OF_LIFE">Tiada Nilai Hidup</string>
+    <string name="INERTIA">Inertia</string>
+
+    <string name="AUTONOMIC_AROUSAL">Rangsangan Autonomi</string>
+    <string name="SELF_DEPRECATION">Pengasingan Diri</string>
+    <string name="SKELETAL_MUSCLE_EFFECTS">Tekanan</string>
+    <string name="SUBJECTIVE_EXPERIENCE_OF_ANXIOUS_AFFECT">Pengalaman Subjektif kesan daripada kebimbangan</string>
+    <string name="SITUATIONAL_ANXIETY">Kebimbangan keadaan</string>
+
+    <string name="DIFFICULTY_RELAXING">Kesukaran bertenang</string>
+    <string name="NERVOUS_AROUSAL">Ransangan Saraf</string>
+    <string name="BEING_EASILY_UPSET_AGITATED_IRRITABLE_OVER_REACTIVE_AND_IMPATIENT">Being easily upset/agitated, irritable/over-reactive and impatient</string>
+
+    <string name="BASED_ON_YOUR_SCORE_YOU_HAVE">Berdasarkan markah anda</string>
+    <string name="PROBABILITY_OF_GETTING_DIABETES">% Kebarangkalian untuk menghidap diabetes</string>
+
+    <string name="YRS">tahun</string>
+    <string name="HEART_AGE">Umur Jantung</string>
+    <string name="HEART_RISK">Risiko Jantung</string>
+    <string name="YOUR_AGE">Umur Anda</string>
+    <string name="YOU_ARE_UNDER">Anda di bawah</string>
+    <string name="HYPERTENSION_SUMMARY">Ringkasan Hipertensi</string>
+    <string name="OPTIMUM_RISK">Risiko Optimum</string>
+    <string name="RISK_1">Risiko 1</string>
+    <string name="RISK_2">Risiko 2</string>
+    <string name="YEAR_1">Tahun 1</string>
+    <string name="YEAR_2">Tahun 2</string>
+    <string name="YEAR_4">Tahun 4</string>
+
+    <string name="VIEW_DETAILED_REPORT">Lihat Laporan Terperinci</string>
+    <string name="RESTART_ASSESSMENT">Mulakan Semula Penilaian</string>
+
+    <string name="SYSTOLIC_BP">Tekanan Darah Sistolik</string>
+    <string name="DIASTOLIC_BP">Tekanan Darah Diastolik</string>
+    <string name="SYSTOLIC_DIALOG_TITLE">Tekanan Darah Sistolik &amp; Diastolik</string>
+    <string name="SYSTOLIC_DIALOG_MESSAGE">Masukkan maklumat tekanan darah anda</string>
+
+    <string name="BMI">BMI</string>
+    <string name="LIPID">LIPID</string>
+    <string name="INCH">Inci</string>
+
+    <string name="DIABETES_RANGE_LOW_RISK">0–5</string>
+    <string name="DIABETES_RANGE_MILD_RISK">6–11</string>
+    <string name="DIABETES_RANGE_MODERATE_RISK">12–19</string>
+    <string name="DIABETES_RANGE_HIGH_RISK">20–47</string>
+
+    <string name="SPA_RANGE_LOW_RISK">0 – 6</string>
+    <string name="SPA_RANGE_MILD_RISK">7 – 23</string>
+    <string name="SPA_RANGE_MODERATE_RISK">24 – 39</string>
+    <string name="SPA_RANGE_SEVERE_RISK">40 – 55</string>
+
+    <string name="NEVER">Tidak pernah</string>
+    <string name="SOMETIMES">Kadang-kadang</string>
+    <string name="OFTEN">Selalu</string>
+    <string name="ALWAYS">Sentiasa</string>
+    <string name="ALMOST_ALWAYS">Hampir sentiasa</string>
+
+    <string name="NORMAL">Normal</string>
+    <string name="MILD">Ringan</string>
+    <string name="MODERATE">Sederhana</string>
+    <string name="SEVERE">Teruk</string>
+    <string name="EXTREMELY_SEVERE">Sangat \n Teruk</string>
+
+    <string name="LOW_RISK">Risiko \n Rendah</string>
+    <string name="MILD_RISK">Risiko \n Ringan</string>
+    <string name="MODERATE_RISK">Risiko \n Sederhana</string>
+    <string name="SEVERE_RISK">Risiko \n Teruk</string>
+    <string name="HIGH_RISK">Risiko \n Tinggi</string>
+    <string name="NORMAL_RISK">Risiko \n Normal</string>
+    <string name="EXTREMELY_SEVER_RISK">Sangat \n Risiko Teruk</string>
+
+    <string name="LAST_MENSTRUAL_PERIOD">Tempoh Menstruasi Terakhir</string>
+    <string name="YOUR_BABY_IS_DUE_ON_OR_AROUND">Bayi anda dilahirkan pada atau sekitar</string>
+    <string name="DUE_DATE_OBSERVATION">*Ini adalah anggaran bila bayi anda akan dilahirkan. Bayi jarang mengikuti jadual yang tepat, oleh itu kehamilan jangka masa penuh anda adalah di antara <h2><b>37 dan 42 minggu.</b></h2> </string>
+    <string name="LABEL_MENSTRUAL_PERIOD_LMP">Masukkan tarikh hari pertama haid terakhir anda :</string>
+    <string name="THE_DEPRESSION_SCALE_ASSESSES">penilaian skala Kemurungan </string>
+    <string name="THE_ANXIETY_SCALE_ASSESSES">penilaian skala kebimbangan</string>
+    <string name="THE_STRESS_SCALE_ASSESSES">penilaian skala Tekanan</string>
+    <string name="YOU_HAVE_FOLLOWING_NON_MODERATE_RISK">Anda mempunyai Risiko Bukan Sederhana berikut</string>
+    <string name="TO_MANAGE_YOUR_EMOTIONAL_HEALTH">Urus kesihatan emosi anda</string>
+    <string name="HEALTH_CONDITION_CONTENT">Jika anda mempunyai sebarang faktor risiko ini, risiko anda mungkin lebih tinggi daripada yang ditunjukkan di dalam alat ini</string>
+    <string name="HEALTH_CONDITION_QUESTION">Adakah anda mempunyai mana-mana keadaan kesihatan tersebut ?</string>
+    <string name="HEALTH_CONDITION_RESULT">Anda telah memilih</string>
+    <string name="STRESS_SUMMERY_OBSERVATION1">DASS-21 tidak boleh digunakan untuk menggantikan temuramah klinikal secara bersemuka. Jika anda mengalami masalah emosi yang ketara, anda harus menghubungi doktor anda.</string>
+    <string name="STRESS_SUMMERY_OBSERVATION">Skala Depresi, Kebimbangan dan Tekanan - 21 Item (DASS-21) adalah satu set tiga skala laporan diri yang direka untuk mengukur keadaan emosi kemurungan, kegelisahan dan tekanan. Setiap tiga skala DASS-21 mengandungi 7 item, dibahagikan kepada subskala dengan kandungan yang serupa.</string>
+    <string name="HYPERTENSION_SUMMARY_TEXT">Kalkulator Hipertensi memberi anda gambaran keseluruhan mengenai kesihatan dan petunjuk umum mengenai bagaimana faktor-faktor yang berkaitan dengan gaya hidup boleh mempengaruhi Tekanan Darah anda. Risiko telah dikira berdasarkan parameter untuk kumpulan umur anda, jantina.</string>
+    <string name="HEART_AGE_SUMMARY_TEXT">Umur dan Risiko Jantung memberi anda gambaran keseluruhan mengenai kesihatan jantung anda dan petunjuk umum mengenai bagaimana faktor-faktor yang berkaitan dengan gaya hidup boleh mempengaruhi kesihatan jantung anda.</string>
+
+    <string name="ITS_TIME_TO_MAKE_SOME_CHANGES">Ini adalah masa untuk membuat perubahan!</string>
+    <string name="PLEASE_INPUT_VALUE_BETWEEN">Sila masukkan nilai di antara</string>
+    <string name="PLEASE_FILL">Sila masukkan</string>
+    <string name="PLEASE_FILL_HEIGHT_DETAILS">Sila masukkan maklumat ketinggian</string>
+    <string name="PLEASE_FILL_WEIGHT_DETAILS">Sila masukkan maklumat berat</string>
+    <string name="ENTER_YOUR">Masukkan</string>
+    <string name="PARAMETER_VALUE">nilai parameter </string>
+    <string name="SHOULD_BE_BETWEEN">hendaklah di antara</string>
+    <string name="PLEASE_PROVIDE_AGE">Sila masukkan umur</string>
+    <string name="ENTER_AGE_BETWEEN_18_AND_74_YEARS">Masukkan Umur di antara 18 dan 74 tahun</string>
+
+    <string name="YOU_ARE_DOING_GOOD_IN">Anda berjaya dalam</string>
+    <string name="YOU_NEED_TO_IMPROVE_ON">Anda perlu memperbaiki</string>
+    <string name="YOU_HAVE_FOLLOWING_ON_MODIFIABLE_RISK">Anda mempunyai Risiko Tidak Boleh Diubah </string>
+
+    <string name="NO_NOMOPHOBIC">Nomofobia \n Tiada</string>
+    <string name="MILD_NOMOPHOBIC">Nomofobia \n Ringan</string>
+    <string name="MODERATE_NOMOPHOBIC">Nomofobia \n Sederhana</string>
+    <string name="SEVERE_NOMOPHOBIC">Nomofobia \n Teruk</string>
+
+    <string name="NOT_AT_ALL_NOMOPHOBIC">Nomofobia \n Tiada</string>
+    <string name="MILD_NOMOPHOBIA">Nomofobia \n Ringan</string>
+    <string name="MODERATE_NOMOPHOBIA">Nomofobia \n Sederhana</string>
+    <string name="SEVERE_NOMOPHOBIA">Nomofobia \n Teruk</string>
+
+    <string name="HAVE_NO_NOMOPHOBIA">Anda tidak mempunyai Nomofobia</string>
+    <string name="HAVE_MILD_NOMOPHOBIA">Anda mempunyai Nomofobia Ringan</string>
+    <string name="HAVE_MODERATE_NOMOPHOBIA">Anda mempunyai Nomofobia Sederhana</string>
+    <string name="HAVE_SEVERE_NOMOPHOBIA">Anda mempunyai Nomofobia Teruk</string>
+
+    <string name="DESC_MILD_NOMOPHOBIC">Anda menghidap nomofobia ringan. Anda berasa sedikit gelisah apabila anda melupakan telefon anda di rumah selama sehari atau tersekat di suatu tempat tanpa WiFi, tetapi kegelisahan itu tidak keterlaluan.</string>
+    <string name="DESC_MODERATE_NOMOPHOBIC">Anda mempunyai nomofobia sederhana. Anda sangat bergantung kepada peranti anda. Anda sering memeriksa kemas kini semasa berjalan di jalan atau bercakap dengan rakan, dan anda sering merasa cemas apabila anda terputus. Anda baru sahaja menjadi ketagihan. Namun, ada baiknya anda tidak membiarkan Telefon Pintar anda menghalangi. Kadang-kadang, anda mengelakkan telefon anda dan merasa tidak senang, tetapi selebihnya dengan keluarga, anak-anak dan lain-lain, membuat anda bahagia. Jadi, anda hanya perlu berhati-hati !.</string>
+    <string name="DESC_SEVERE_NOMOPHOBIC">Anda menghidap nomofobia teruk. Anda hampir tidak dapat berjalan selama 60 saat tanpa memeriksa telefon anda. Ini adalah perkara pertama yang anda periksa pada waktu pagi dan yang terakhir pada waktu malam, dan menguasai sebahagian besar aktiviti anda di antara. Anda pasti menderita Nomophobia, dan Tuhan menolong orang lain jika anda lupa telefon anda di rumah atau kehilangannya! Anda begitu ketagih dengan telefon anda sehingga kadang-kadang anda tertanya-tanya bagaimana jika anda boleh melekatkan telefon anda di tangan !.</string>
+
+    <string name="SELECT_YOUR_AGE_GROUP">Pilih Kumpulan Umur Anda</string>
+    <string name="PLEASE_ENTER_WAIST_SIZE_BETWEEN">Sila masukkan saiz pinggang di antara</string>
+
+    <!--Hypertension Questions-->
+    <string name="ARE_YOU_UNDER_MEDICATION_FOR_HIGH_BLOOD_PRESSURE">Adakah anda sedang mengambil ubat Tekanan Darah Tinggi?</string>
+    <string name="MEDICATION_FOR_BP">Ubat untuk Tekanan Darah</string>
+    <string name="HAVE_YOU_EVER_SMOKED">Adakah anda merokok?</string>
+    <string name="ARE_YOU_DIABETIC">Adakah anda menghidapi Diabetes?</string>
+    <!--Hypertension Questions-->
+
+    <!--Diabetes Questions-->
+    <string name="QUES_DIABETES_1">Adakah anda berasal dari Asia? </string>
+    <string name="QUES_DIABETES_2">Pernahkah ibubapa atau adik beradik anda didiagnosis mempunyai Diabetes?</string>
+    <string name="QUES_DIABETES_3">Pernahkah anda mempunyai Gula Tinggi dalam Darah? (ketika pemeriksaan kesihatan/penyakit/kehamilan)?</string>
+    <string name="QUES_DIABETES_4">Adakah anda sedang mengambil ubatan untuk Tekanan Darah?</string>
+    <string name="QUES_DIABETES_5">Adakah anda menghisap rokok atau sebarang produk tembakau lain setiap hari?</string>
+    <string name="QUES_DIABETES_6">Adakah anda makan buah dan sayur 2 hingga 3 kali sehari? </string>
+    <string name="QUES_DIABETES_7">Secara purata, adakah anda bersenam lebih daripada 3 jam seminggu?</string>
+    <!--Diabetes Questions-->
+
+    <!--Stress & Anxiety Questions-->
+    <string name="QUES_STRESS_ANXIETY_1">Saya berasa hidup saya tidak bermakna</string>
+    <string name="QUES_STRESS_ANXIETY_2">Saya berasa saya tidak berharga</string>
+    <string name="QUES_STRESS_ANXIETY_3">Saya tidak dapat bersemangat dalam apa-apa sahaja</string>
+    <string name="QUES_STRESS_ANXIETY_4">Saya berasa sedih dan sayu</string>
+    <string name="QUES_STRESS_ANXIETY_5">Saya berasa tidak ada apa yang saya inginkan</string>
+    <string name="QUES_STRESS_ANXIETY_6">Saya berasa sukar untuk melakukan  inisiatif untuk melakukan sesuatu perkara</string>
+    <string name="QUES_STRESS_ANXIETY_7">Saya nampaknya langsung tidak mempunyai perasaan positif</string>
+    <string name="QUES_STRESS_ANXIETY_8">Saya berasa takut tanpa sebab</string>
+    <string name="QUES_STRESS_ANXIETY_9">Saya sedar akan keadaan jantung saya ketika tidak melakukan sebarang aktiviti\n (Cth: perasaan kadar degupan jantung meningkat, jantung tidak berdegup)</string>
+    <string name="QUES_STRESS_ANXIETY_10">Saya rasa saya hampir kepada panik</string>
+    <string name="QUES_STRESS_ANXIETY_11">Saya risau akan situasi yang membuatkan saya panik dan memperbodohkan diri sendiri</string>
+    <string name="QUES_STRESS_ANXIETY_12">Saya mengalami tangan menggigil</string>
+    <string name="QUES_STRESS_ANXIETY_13">Saya mengalami kesukaran bernafas\n (cth: bernafas dengan terlalu laju, tidak bernafas walaupun tidak melakukan aktiviti fizikal)</string>
+    <string name="QUES_STRESS_ANXIETY_14">Saya sedar kekeringan mulut saya </string>
+    <string name="QUES_STRESS_ANXIETY_15">Saya rasa saya mudah tersentuh</string>
+    <string name="QUES_STRESS_ANXIETY_16">Saya tidak dapat bertolak ansur dengan apa yang menghalang ketika saya melakukan sesuatu perkara</string>
+    <string name="QUES_STRESS_ANXIETY_17">Saya mendapati sangat sukar untuk bertenang</string>
+    <string name="QUES_STRESS_ANXIETY_18">Saya mendapati diri saya semakin gelisah</string>
+    <string name="QUES_STRESS_ANXIETY_19">Saya rasa saya telah menggunakan banyak tenaga gementar</string>
+    <string name="QUES_STRESS_ANXIETY_20">Saya cenderung bertindak balas secara berlebihan terhadap situasi</string>
+    <string name="QUES_STRESS_ANXIETY_21">Saya berasa sukar untuk bertenang</string>
+    <!--Stress & Anxiety Questions-->
+
+    <!--Smart Phone Addiction Questions-->
+    <string name="QUES_SMART_PHONE_ADDICTION_1">Adakah anda sering berfikir telefon pintar anda berdering/bergetar sedangkan ianya tidak? </string>
+    <string name="QUES_SMART_PHONE_ADDICTION_2">Apabila telefon anda berdering, adakah anda merasakan keinginan yang kuat untuk memeriksanya?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_3">Adakah anda melihat telefon anda setelah bangun pada waktu pagi atau sebelum tidur?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_4">Adakah anda tidur dengan telefon pintar di atas atau di bawah bantal anda atau di sebelah katil anda?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_5">Adakah anda menghantar mesej, emel/melayari web ketika menunggu di lampu isyarat?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_6">Adakah anda sering memeriksa telefon anda jika anda tidak mempunyai isyarat data atau WiFi?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_7">Adakah anda berasa sangat gelisah sekiranya telefon anda tidak berfungsi/ tidak sengaja tertinggal? </string>
+    <string name="QUES_SMART_PHONE_ADDICTION_8">Adakah anda sering meluangkan masa melayari laman google/ e-dagang?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_9">Adakah anda sering meluangkan lebih masa untuk menghantar mesej, menciap, emel daripada berbual dengan orang secara langsung?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_10">Adakah anda sering meluangkan lebih masa untuk menghantar mesej, menciap, emel daripada berbual dengan orang secara langsung?</string>
+    <string name="QUES_SMART_PHONE_ADDICTION_11">Adakah anda berasa sunyi jika telefon pintar anda tidak berdering untuk beberapa jam?</string>
+    <!--Smart Phone Addiction Questions-->
+
+<!--    <string name="PHYSICAL_EFFECTS_OF_ADDICTION">Physical Effects of Addiction</string>
+    <string name="PHYSICAL_EFFECTS_OF_ADDICTION_DESC">Over use of your cell phone or smartphone can result in a number of different physical problems that may cause permanent damage or be difficult to treat, including:</string>
+    <string name="PSYCHOLOGICAL_EFFECTS_OF_CELL_PHONE_ADDICTION">Psychological Effects of Cell Phone Addiction</string>-->
+
+    <string name="DIGITAL_EYE_STRAIN">Ketegangan mata digital</string>
+    <string name="NECK_PROBLEMS">Masalah leher</string>
+    <string name="INCREASED_ILLNESSES_DUE_TO_GERMS">Peningkatan penyakit akibat kuman</string>
+    <string name="SLEEP_DISTURBANCES">Gangguan tidur</string>
+    <string name="OBSESSIVE_COMPULSIVE_DISORDER">Gangguan Kompulsif Obsesif</string>
+    <string name="RELATIONSHIP_PROBLEMS">Masalah hubungan</string>
+
+    <string name="SUB_1_DIGITAL_EYE_STRAIN">Mata mula terbakar dan gatal.</string>
+    <string name="SUB_2_DIGITAL_EYE_STRAIN">Penglihatan kabur.</string>
+    <string name="SUB_3_DIGITAL_EYE_STRAIN">Keletihan mata.</string>
+    <string name="SUB_4_DIGITAL_EYE_STRAIN">Ketegangan Mata Digital boleh menyebabkan sakit kepala.</string>
+    <string name="SUB_5_DIGITAL_EYE_STRAIN">Kesakitan dan ketidakselesaan yang berkaitan dengan melihat skrin digital selama lebih dari 2 jam.</string>
+
+    <string name="SUB_1_NECK_PROBLEMS">Juga dikenali sebagai &amp; quot; leher teks, &amp; quot; yang merujuk kepada sakit leher akibat terlalu lama melihat telefon bimbit atau tablet.</string>
+
+    <string name="SUB_1_INCREASED_ILLNESSES_DUE_TO_GERMS">1 dari 6 telefon bimbit mempunyai kotoran padanya.</string>
+    <string name="SUB_2_INCREASED_ILLNESSES_DUE_TO_GERMS">Bakteria E. coli di mana boleh menyebabkan demam, muntah, dan cirit-birit terdapat di banyak telefon.</string>
+    <string name="SUB_3_INCREASED_ILLNESSES_DUE_TO_GERMS">Telefon bimbit didapati tercemar dengan MRSA.</string>
+    <string name="SUB_31_INCREASED_ILLNESSES_DUE_TO_GERMS">Menyebabkan abses yang menyakitkan.</string>
+    <string name="SUB_32_INCREASED_ILLNESSES_DUE_TO_GERMS">Jangkitan yang mengancam nyawa di bahagian tulang, sendi, luka pembedahan, aliran darah, injap jantung, dan paru-paru.</string>
+    <string name="SUB_4_INCREASED_ILLNESSES_DUE_TO_GERMS">Kemalangan kereta.</string>
+    <string name="SUB_41_INCREASED_ILLNESSES_DUE_TO_GERMS">Kebanyakan orang percaya bahawa mereka boleh melakukan pelbagai tugas dan mengunakan telefon bimbit mereka sementara semasa memandu, tetapi ini akan menyebabkan kemerosotan yang ketara dan ini akan menyebabkan pemandu dan yang lain di jalan raya dalam bahaya.</string>
+    <string name="SUB_42_INCREASED_ILLNESSES_DUE_TO_GERMS">Penyelidikan telah menunjukkan bahawa menghantar teks semasa memandu adalah sama berbahaya dengan minum dan memandu.</string>
+    <string name="SUB_5_INCREASED_ILLNESSES_DUE_TO_GERMS">Kemandulan lelaki.</string>
+    <string name="SUB_51_INCREASED_ILLNESSES_DUE_TO_GERMS">Kajian awal menunjukkan bahawa radiasi telefon bimbit dapat menurunkan jumlah sperma, pergerakan dan daya maju sperma.</string>
+
+    <string name="SUB_1_SLEEP_DISTURBANCES">Ketagihan telefon bimbit dikaitkan dengan peningkatan gangguan tidur dan keletihan pengguna.</string>
+    <string name="SUB_2_SLEEP_DISTURBANCES">Menggunakan telefon bimbit anda sebelum tidur akan meningkatkan kemungkinan insomnia.</string>
+    <string name="SUB_21_SLEEP_DISTURBANCES">Cahaya terang boleh menurunkan kualiti tidur.</string>
+    <string name="SUB_22_SLEEP_DISTURBANCES">Penggunaan telefon pintar dapat meningkatkan jumlah masa yang diperlukan untuk tidur.</string>
+    <string name="SUB_23_SLEEP_DISTURBANCES">Cahaya yang dipancarkan dari telefon bimbit boleh mengaktifkan otak.</string>
+
+    <string name="SUB_1_RELATIONSHIP_PROBLEMS">Hubungan luar talian mungkin terjejas akibat pengabaian kerana penggunaan telefon bimbit dan media sosial yang berlebihan.</string>
+
+<!--    <string name="SUB_1_ANXIETY">Research has found that college students who use their cell phones the most are more likely to feel anxious during downtime.</string>-->
+
 </resources>

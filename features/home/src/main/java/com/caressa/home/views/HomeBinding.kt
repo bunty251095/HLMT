@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.caressa.common.utils.DateHelper
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.common.view.ArcTextView
 import com.caressa.home.R
@@ -27,6 +28,7 @@ import com.caressa.model.entity.UserRelatives
 import com.caressa.repository.utils.Resource
 import com.squareup.picasso.Picasso
 import timber.log.Timber
+import java.util.*
 
 object HomeBinding {
 
@@ -41,22 +43,6 @@ object HomeBinding {
     @JvmStatic fun AppCompatImageView.setImageView(resource: Int ) {
         //Picasso.get().load(resource).into(this)
         setImageResource(resource)
-    }
-
-    @SuppressLint("SetTextI18n")
-    @BindingAdapter("android:memberCount")
-    @JvmStatic fun AppCompatTextView.setMemberCount( list: List<UserRelatives>? ) {
-        try {
-            if ( list != null ) {
-                text = if ( list.size <= 1 ) {
-                    list.size.toString() + " " + context.resources.getString(R.string.MEMBER)
-                } else {
-                    list.size.toString() + " " + context.resources.getString(R.string.MEMBERS)
-                }
-            }
-        } catch ( e : Exception ) {
-            e.printStackTrace()
-        }
     }
 
     @BindingAdapter("android:showGender")
@@ -74,6 +60,7 @@ object HomeBinding {
 
     @BindingAdapter("android:showAge")
     @JvmStatic fun AppCompatTextView.setAge( userRelatives: UserRelatives ) {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         if ( !Utilities.isNullOrEmpty(userRelatives.dateOfBirth) ) {
             val dob = userRelatives.dateOfBirth
             try {
@@ -82,9 +69,9 @@ object HomeBinding {
                     val age = DateHelper.calculatePersonAge(dob)
                     if (!Utilities.isNullOrEmpty(userRelatives.age) && userRelatives.age.toDouble().toInt() != 0) {
                         strAge += if (userRelatives.age.equals("1", ignoreCase = true)) {
-                            " ${context.resources.getString(R.string.YEAR)}"
+                            " ${localResource.getString(R.string.YEAR)}"
                         } else {
-                            " ${context.resources.getString(R.string.YEARS)}"
+                            " ${localResource.getString(R.string.YEARS)}"
                         }
                     } else {
                         strAge = age
@@ -171,6 +158,7 @@ object HomeBinding {
     @BindingAdapter("app:showHraObservation")
     @JvmStatic fun AppCompatTextView.setHraObservation( hraSummary: HRASummary? ) {
         try {
+            val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
             if ( hraSummary != null ) {
                 var wellnessScore = 0
                 var hraCutOff = ""
@@ -184,23 +172,23 @@ object HomeBinding {
                 if ( !Utilities.isNullOrEmpty( currentHRAHistoryID) && !currentHRAHistoryID.equals("0", ignoreCase = true) ) {
                     when {
                         hraCutOff.equals("0", ignoreCase = true) -> {
-                            text = context.resources.getString(R.string.COMPLETE_YOUR_HRA)
+                            text = localResource.getString(R.string.COMPLETE_YOUR_HRA)
                         }
                         wellnessScore in 0..15 -> {
-                            text = context.resources.getString(R.string.HIGH_RISK)
+                            text = localResource.getString(R.string.HIGH_RISK)
                         }
                         wellnessScore in 16..45 -> {
-                            text = context.resources.getString(R.string.NEEDS_IMPROVEMENT)
+                            text = localResource.getString(R.string.NEEDS_IMPROVEMENT)
                         }
                         wellnessScore in 46..85 -> {
-                            text = context.resources.getString(R.string.HEALTHY)
+                            text = localResource.getString(R.string.HEALTHY)
                         }
                         wellnessScore > 85 -> {
-                            text = context.resources.getString(R.string.OPTIMUM)
+                            text = localResource.getString(R.string.OPTIMUM)
                         }
                     }
                 } else {
-                    text = context.resources.getString(R.string.TAKE_YOUR_HRA)
+                    text = localResource.getString(R.string.TAKE_ASSESSMENT)
                 }
             }
         } catch (e: Exception) {
@@ -304,6 +292,15 @@ object HomeBinding {
             View.GONE
         else
             View.VISIBLE
+    }
+
+    @BindingAdapter("app:languageList")
+    @JvmStatic
+    fun RecyclerView.setLanguageList(list: List<DataHandler.LanguageModel>?) {
+        with(this.adapter as LanguageAdapter) {
+            layoutManager = LinearLayoutManager(context)
+            list?.let { updateList(it.toMutableList()) }
+        }
     }
 
 }

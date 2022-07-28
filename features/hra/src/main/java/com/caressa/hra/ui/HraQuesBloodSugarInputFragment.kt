@@ -3,7 +3,6 @@ package com.caressa.hra.ui
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
 import android.text.TextWatcher
@@ -13,7 +12,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
-import com.caressa.common.utils.DecimalDigitsInputFilter
 import com.caressa.common.utils.DecimalValueFilter
 import com.caressa.common.utils.Utilities
 import com.caressa.hra.R
@@ -159,57 +157,64 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
     private fun registerObservers() {
 
         var toProceed = true
-        viewModel.quesData.observe(viewLifecycleOwner, {
-            if ( it != null ) {
-                if ( toProceed ) {
+        viewModel.quesData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                if (toProceed) {
                     questionData = it
                     hraDataSingleton.question = it
                     toProceed = false
                 }
             }
-        })
+        }
 
-        viewModel.labParameter.observe(viewLifecycleOwner, {
-            if ( it != null ) {
-                Utilities.printData("allParamList",allParamList,true)
+        viewModel.labParameter.observe(viewLifecycleOwner) {
+            if (it != null) {
+                Utilities.printData("allParamList", allParamList, true)
                 allParamList.clear()
                 allParamList.addAll(it)
                 showHideFields(prevAnsList)
             }
-        })
+        }
 
-        viewModel.labDetailsSavedResponse.observe(viewLifecycleOwner, {
+        viewModel.labDetailsSavedResponse.observe(viewLifecycleOwner) {
             if (it != null) {
                 val labDetailsList = it
                 Timber.i("HRALabBsDetailsFromDB----> $labDetailsList")
-                if (  labDetailsList.any { labDetail ->
+                if (labDetailsList.any { labDetail ->
                         prevAnsList.any { option ->
-                            option.answerCode.equals(labDetail.ParameterCode,ignoreCase = true) } } ) {
-                    for ( record in labDetailsList ) {
-                        setSavedData(record.ParameterCode,record.LabValue!!)
+                            option.answerCode.equals(labDetail.ParameterCode, ignoreCase = true)
+                        }
+                    }) {
+                    for (record in labDetailsList) {
+                        setSavedData(record.ParameterCode, record.LabValue!!)
                     }
                     isBsExist = true
                 }
-                if ( !isBsExist ) {
+                if (!isBsExist) {
                     Timber.i("Blood Sugar Details does not Exist.")
-                    viewModel.callGetLabRecordsBloodSugar(true,viewPagerActivity!!.personId)
+                    viewModel.callGetLabRecordsBloodSugar(true, viewPagerActivity!!.personId)
                 }
             }
-        })
+        }
 
-        viewModel.labRecordsBs.observe(viewLifecycleOwner, {
+        viewModel.labRecordsBs.observe(viewLifecycleOwner) {
             if (it != null) {
                 val labRecords = it.LabRecords!!
-                if ( labRecords.isNotEmpty() ) {
+                if (labRecords.isNotEmpty()) {
                     val list = HraHelper.filterLabRecords(labRecords)
                     Timber.i("HRALabBsDetailsFromServer----> $list")
-                    for ( record in list) {
-                        setSavedData(record.ParameterCode!!,record.Value!!)
-                        viewModel.saveHRALabDetailsBasedOnType("SUGAR",record.ParameterCode!!,record.Value!!,record.Unit!!)
+                    for (record in list) {
+                        setSavedData(record.ParameterCode!!, record.Value!!)
+                        viewModel.saveHRALabDetailsBasedOnType(
+                            "SUGAR",
+                            record.ParameterCode!!,
+                            record.Value!!,
+                            record.Unit!!
+                        )
                     }
                 }
             }
-        })
+        }
 
     }
 
@@ -247,7 +252,7 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
                 Utilities.hideKeyboard(requireActivity())
                 hraDataSingleton.previousAnsList[viewPagerActivity!!.getCurrentScreen() ] = selectedOptionList
 
-                viewModel.saveResponse("KNWDIANUM","85_YES",resources.getString(R.string.YES),questionData.category,questionData.tabName,"")
+                viewModel.saveResponse("KNWDIANUM","85_YES","Yes",questionData.category,questionData.tabName,"")
                 clearUnselectedLabValues()
                 viewModel.removeSource(qCode)
                 viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() + 1)

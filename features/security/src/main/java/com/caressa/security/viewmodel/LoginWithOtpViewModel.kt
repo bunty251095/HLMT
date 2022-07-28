@@ -1,5 +1,6 @@
 package com.caressa.security.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
@@ -10,6 +11,7 @@ import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.Event
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.common.utils.Validation
 import com.caressa.model.entity.Users
 import com.caressa.model.security.*
@@ -24,9 +26,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import timber.log.Timber
+import java.util.*
 
+@SuppressLint("StaticFieldLeak")
 class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUseCase, private val dispatchers: AppDispatchers,
-                             private val sharedPref: SharedPreferences , val context: Context) : BaseViewModel() {
+                             private val sharedPref: SharedPreferences, val context: Context) : BaseViewModel() {
+
+    private val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
 
     private lateinit var argsLogin: String
     private var isLogin = false
@@ -96,7 +102,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                 }
             }
         }else{
-            toastMessage("Please Enter valid Email Address")
+            toastMessage(localResource.getString(R.string.ERROR_INVALID_EMAIL))
         }
     }
 
@@ -167,7 +173,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                         }
                         //toastMessage("OTP verified successfully")
                     } else {
-                        toastMessage(context.resources.getString(R.string.ERROR_UNABLE_VERIFY_OTP))
+                        toastMessage(localResource.getString(R.string.ERROR_UNABLE_VERIFY_OTP))
                     }
                 }
 
@@ -293,7 +299,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                         UserInfo.tempPassword = it.data!!.newPassword
                         navigate(LoginWithOtpFragmentDirections.actionLoginWithOtpFragmentToChangePasswordFragment())
                     } else {
-                        toastMessage(context.getString(R.string.ERROR_GENERAL))
+                        toastMessage(localResource.getString(R.string.ERROR_GENERAL))
                     }
                 }
 

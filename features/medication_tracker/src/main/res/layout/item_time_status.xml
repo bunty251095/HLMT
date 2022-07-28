@@ -16,7 +16,7 @@
         style="@style/VivantTitle"
         android:gravity="center"
         android:text="09:00 AM"
-        android:textColor="@color/vivant_heather"
+        android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_11sdp"
         android:layout_marginStart="@dimen/_4sdp"
         app:layout_constraintTop_toTopOf="@+id/rv_med_time_status"

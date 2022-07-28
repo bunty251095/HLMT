@@ -177,8 +177,8 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
             ) {
                 //***********************
                 val relativeId = FileUtils.getUniqueIdLong()
-                viewModel.userDetails.observe( viewLifecycleOwner , {
-                    if ( it != null ) {
+                viewModel.userDetails.observe( viewLifecycleOwner) {
+                    if (it != null) {
                         userDob = DateHelper.getDateTimeAs_ddMMMyyyy(it.dateOfBirth)
                         val relDob = DateHelper.getDateTimeAs_ddMMMyyyy(dob)
                         Timber.i("UserDob  , RelativeDob----->$userDob , $relDob")
@@ -186,49 +186,53 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                         val userDOB = DateHelper.convertStringToDate(userDob)
 
                         // Validations for Age
-                        when( relationCode ) {
+                        when (relationCode) {
 
-                            Constants.FATHER_RELATIONSHIP_CODE,Constants.MOTHER_RELATIONSHIP_CODE -> {
+                            Constants.FATHER_RELATIONSHIP_CODE, Constants.MOTHER_RELATIONSHIP_CODE -> {
                                 if (userDOB!!.compareTo(famDate) > 0) {
                                     isValidFAM = true
                                     relativeDob = dob
                                 } else {
                                     binding.tilEdtMemberDob.isErrorEnabled = true
-                                    binding.tilEdtMemberDob.error = resources.getString(R.string.ERROR_PARENTS_AGE)
+                                    binding.tilEdtMemberDob.error =
+                                        resources.getString(R.string.ERROR_PARENTS_AGE)
                                 }
                             }
 
-                            Constants.SON_RELATIONSHIP_CODE,Constants.DAUGHTER_RELATIONSHIP_CODE -> {
+                            Constants.SON_RELATIONSHIP_CODE, Constants.DAUGHTER_RELATIONSHIP_CODE -> {
                                 if (userDOB!!.compareTo(famDate) < 0) {
                                     isValidFAM = true
                                     relativeDob = dob
                                 } else {
                                     binding.tilEdtMemberDob.isErrorEnabled = true
-                                    binding.tilEdtMemberDob.error = resources.getString(R.string.ERROR_KIDS_AGE)
+                                    binding.tilEdtMemberDob.error =
+                                        resources.getString(R.string.ERROR_KIDS_AGE)
                                 }
                             }
 
-                            Constants.GRANDFATHER_RELATIONSHIP_CODE,Constants.GRANDMOTHER_RELATIONSHIP_CODE -> {
+                            Constants.GRANDFATHER_RELATIONSHIP_CODE, Constants.GRANDMOTHER_RELATIONSHIP_CODE -> {
                                 if (userDOB!!.compareTo(famDate) > 0) {
                                     isValidFAM = true
                                     relativeDob = dob
                                 } else {
                                     binding.tilEdtMemberDob.isErrorEnabled = true
-                                    binding.tilEdtMemberDob.error = resources.getString(R.string.ERROR__GP_AGE)
+                                    binding.tilEdtMemberDob.error =
+                                        resources.getString(R.string.ERROR__GP_AGE)
                                 }
                             }
 
-                            Constants.HUSBAND_RELATIONSHIP_CODE,Constants.WIFE_RELATIONSHIP_CODE -> {
+                            Constants.HUSBAND_RELATIONSHIP_CODE, Constants.WIFE_RELATIONSHIP_CODE -> {
                                 if (!DateHelper.isDateAbove18Years(dob)) {
                                     binding.tilEdtMemberDob.isErrorEnabled = true
-                                    binding.tilEdtMemberDob.error = resources.getString(R.string.ERROR_AGE_NOT_LESS_THAN_18)
+                                    binding.tilEdtMemberDob.error =
+                                        resources.getString(R.string.ERROR_AGE_NOT_LESS_THAN_18)
                                 } else {
                                     isValidFAM = true
                                     relativeDob = dob
                                 }
                             }
 
-                            Constants.BROTHER_RELATIONSHIP_CODE,Constants.SISTER_RELATIONSHIP_CODE -> {
+                            Constants.BROTHER_RELATIONSHIP_CODE, Constants.SISTER_RELATIONSHIP_CODE -> {
                                 isValidFAM = true
                                 relativeDob = dob
                             }
@@ -272,7 +276,7 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                             relativeDob = dob
                         }*/
 
-                        if ( isValidFAM ) {
+                        if (isValidFAM) {
                             val newRelative = UserRelatives(
                                 relativeID = relativeId,
                                 firstName = name,
@@ -282,12 +286,13 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                                 contactNo = mobile,
                                 emailAddress = email,
                                 relationshipCode = relationCode,
-                                relationship = relation )
-                            viewModel.callAddNewRelativeApi( true,newRelative,from,this)
+                                relationship = relation
+                            )
+                            viewModel.callAddNewRelativeApi(true, newRelative, from, this)
                             FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_MEMBER_ADD)
                         }
                     }
-                })
+                }
                 // it.findNavController().navigate(R.id.action_addFamilyMemberFragment_to_familyMembersListFragment)
                 //***********************
             }
@@ -306,7 +311,7 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
             cal.get(Calendar.MONTH),
             cal.get(Calendar.DAY_OF_MONTH))
         dpd.accentColor = appColorHelper.primaryColor()
-        dpd.setTitle(resources.getString(R.string.PICK_DOB))
+        dpd.setTitle(resources.getString(R.string.DATE_OF_BIRTH))
         dpd.maxDate = cal
         dpd.isThemeDark = false
         dpd.vibrate(false)

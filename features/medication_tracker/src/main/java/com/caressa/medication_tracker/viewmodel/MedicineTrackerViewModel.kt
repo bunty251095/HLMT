@@ -65,6 +65,7 @@ class MedicineTrackerViewModel(
     val medicationTrackerHelper: MedicationTrackerHelper,
      private val context: Context): BaseViewModel() {
 
+    private val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
     private var medDashboardFragment: MedicineDashboardFragment? = null
 
     val personId = sharedPref.getString(PreferenceConstants.PERSONID, "")!!
@@ -261,7 +262,7 @@ class MedicineTrackerViewModel(
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if (it.data!!.medication.medicationId != 0) {
-                    toastMessage(context.resources.getString(R.string.MEDICINE_ADDED))
+                    toastMessage(localResource.getString(R.string.MEDICINE_ADDED))
                     navigate(ScheduleDetailsFragmentDirections.actionScheduleMedicineFragmentToMedicineHome("", ""))
                     FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICATION_ADDED)
                 }
@@ -294,7 +295,7 @@ class MedicineTrackerViewModel(
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if (it.data!!.medication.medicationId != 0) {
-                    toastMessage(context.resources.getString(R.string.MEDICINE_UPDATED))
+                    toastMessage(localResource.getString(R.string.MEDICINE_UPDATED))
                     FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICATION_EDIT)
                     navigate(ScheduleDetailsFragmentDirections.actionScheduleMedicineFragmentToMedicineHome("", ""))
                 }
@@ -328,7 +329,7 @@ class MedicineTrackerViewModel(
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if (it.data!!.isProcessed) {
-                    toastMessage(context.resources.getString(R.string.MEDICINE_DELETED))
+                    toastMessage(localResource.getString(R.string.MEDICINE_DELETED))
                     FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICATION_DELETED)
                 }
                 fragment.updateData(spinnerPos)
@@ -366,9 +367,9 @@ class MedicineTrackerViewModel(
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 val msgTxt: String = if (setAlert) {
-                    context.resources.getString(R.string.ALERT_ENABLED)
+                    localResource.getString(R.string.ALERT_ENABLED)
                 } else {
-                    context.resources.getString(R.string.ALERT_DISABLED)
+                    localResource.getString(R.string.ALERT_DISABLED)
                 }
                 if (it.data!!.isProcessed) {
                     val list = MedicationSingleton.getInstance()!!.geMedicineListByDay()
@@ -382,10 +383,10 @@ class MedicineTrackerViewModel(
                     updateNotificationAlert(medicationID, setAlert)
                     toastMessage(msgTxt)
                     when(msgTxt) {
-                        context.resources.getString(R.string.ALERT_ENABLED) ->{
+                        localResource.getString(R.string.ALERT_ENABLED) ->{
                             FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICATION_NOTIFICATION_ENABLED)
                         }
-                        context.resources.getString(R.string.ALERT_DISABLED) ->{
+                        localResource.getString(R.string.ALERT_DISABLED) ->{
                             FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MEDICATION_NOTIFICATION_DISABLED)
                         }
                     }
@@ -564,7 +565,7 @@ class MedicineTrackerViewModel(
                 launchIntent.putExtra(Constants.DATE,intent.getStringExtra(Constants.DATE))
                 context.startActivity(launchIntent)
             } else {
-                Utilities.toastMessageLong( context,context.resources.getString(R.string.ALREADY_DELETED_MEMBER_RELATED_TO_NOTIFICATION))
+                Utilities.toastMessageLong( context,localResource.getString(R.string.ALREADY_DELETED_MEMBER_RELATED_TO_NOTIFICATION))
                 Timber.e("Relative Details not Exist for PersonID--->$relativeId")
             }
         }
@@ -589,7 +590,7 @@ class MedicineTrackerViewModel(
             }
         }
         if (isAdded) {
-            Utilities.toastMessageShort(context, context.resources.getString(R.string.YOU_ARE_ALREADY_TAKING) +" " + bundle.get(Constants.MEDICINE_NAME))
+            Utilities.toastMessageShort(context, localResource.getString(R.string.YOU_ARE_ALREADY_TAKING) +" " + bundle.get(Constants.MEDICINE_NAME))
         } else {
             view.findNavController().navigate(R.id.action_addMedicineFragment_to_scheduleMedicineFragment, bundle)
         }
@@ -687,13 +688,13 @@ class MedicineTrackerViewModel(
                     } else {
                         closeNotificationDrawer(context)
                         cancelNotification(notificationManager, notificationID)
-                        Utilities.toastMessageShort(context,context.resources.getString(R.string.YOU_HAVE_REMOVED_OR_RESCHEDULED_TIME) + " $time" + " " + context.resources.getString(R.string.FOR) + " " + medName)
+                        Utilities.toastMessageShort(context,localResource.getString(R.string.YOU_HAVE_REMOVED_OR_RESCHEDULED_TIME) + " $time" + " " + context.resources.getString(R.string.FOR) + " " + medName)
                     }
 
                 } else {
                     closeNotificationDrawer(context)
                     cancelNotification(notificationManager, notificationID)
-                    Utilities.toastMessageShort(context, context.resources.getString(R.string.YOU_HAVE_REMOVED_OR_RESCHEDULED_TIME) +" $medName")
+                    Utilities.toastMessageShort(context, localResource.getString(R.string.YOU_HAVE_REMOVED_OR_RESCHEDULED_TIME) +" $medName")
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -803,6 +804,9 @@ class MedicineTrackerViewModel(
             jsonObjectHeader.put("PartnerCode", Configuration.PartnerCode)
             jsonObjectHeader.put("EntityType", Configuration.EntityType)
             jsonObjectHeader.put("HandShake", Configuration.Handshake)
+            jsonObjectHeader.put("UTMSource", Configuration.UTMSource)
+            jsonObjectHeader.put("UTMMedium", Configuration.UTMMedium)
+            jsonObjectHeader.put("LanguageCode", Configuration.LanguageCode)
             jsonObjectHeader.put("EntityID", Configuration.EntityID)
 
             jsonObject.put("Header",jsonObjectHeader)

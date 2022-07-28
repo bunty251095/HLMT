@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HL Pace</string>
 
@@ -30,7 +31,6 @@
     <string name="ADD_MORE">Add More</string>
     <string name="LOGOUT">Logout</string>
     <string name="LOGOUT_APPLICATION">Logout Application</string>
-    <string name="LOGIN">Login</string>
     <string name="PASSWORD">Password</string>
 
     <string name="ALERT">Alert</string>
@@ -47,8 +47,6 @@
     <string name="CATEGORY">Category</string>
     <string name="DOSE">Dose</string>
     <string name="TIME">Time</string>
-    <string name="NORMAL">Normal</string>
-    <string name="ABNORMAL">Abnormal</string>
     <string name="RESEND_OTP">Resend OTP</string>
     <string name="NO_THANKS">No thanks</string>
     <string name="DEAR_USER">Dear User</string>
@@ -69,9 +67,6 @@
     <string name="MALE">Male</string>
     <string name="FEMALE">Female</string>
     <string name="NAME">Name</string>
-    <string name="CONTACT">Contact</string>
-    <string name="SPECIALIZATION">Specialization</string>
-    <string name="AFFILIATED_TO">Affiliated To</string>
     <string name="GENDER">Gender</string>
     <string name="PHONE">Phone</string>
     <string name="PHONE_NUMBER">Phone Number</string>
@@ -118,8 +113,6 @@
 
     <string name="SESSION">Session</string>
     <string name="MYSELF">Myself</string>
-    <string name="MEMBER">Member</string>
-    <string name="MEMBERS">Members</string>
 
     <string name="FATHER">Father</string>
     <string name="MOTHER">Mother</string>
@@ -133,19 +126,18 @@
     <string name="GRAND_FATHER">Grand Father</string>
     <string name="GRAND_MOTHER">Grand Mother</string>
 
-    <string name="HEIGHT">Height</string>
-    <string name="WEIGHT">Weight</string>
-    <string name="WAIST">Waist</string>
-    <string name="CHOLESTEROL">Cholesterol</string>
+    <string name="HEIGHT">Tinggi</string>
+    <string name="WEIGHT">Berat</string>
+    <string name="WAIST">Pinggang</string>
+    <string name="CHOLESTEROL">Kolesterol</string>
     <string name="HDL">HDL</string>
-    <string name="SYSTOLIC">Systolic</string>
-    <string name="DIASTOLIC">Diastolic</string>
-    <string name="FEET_INCH">Feet/inch</string>
-    <string name="FT_IN">ft,in</string>
-    <string name="FT">ft</string>
-    <string name="INCH">in</string>
+    <string name="SYSTOLIC">Sistolik</string>
+    <string name="DIASTOLIC">Diastolik</string>
+    <string name="FEET_INCH">Kaki/inci</string>
+    <string name="FT_IN">Kaki/inci</string>
+    <string name="FT">kaki</string>
+    <string name="INCH">inci</string>
     <string name="CM">cm</string>
-    <string name="CENTIMETER">Centimeter</string>
     <string name="LBS">lbs</string>
     <string name="KG">kg</string>
     <string name="MM_HG">mm Hg</string>
@@ -158,8 +150,29 @@
 
     <string name="LOW">Low</string>
     <string name="HIGH">High</string>
-    <string name="HIGH_NORMAL">High normal</string>
     <string name="MODERATE">Moderate</string>
+    <string name="HIGH_NORMAL">High normal</string>
+    <string name="DESIRABLE">Desirable</string>
+    <string name="MILDLY_HIGH">Mildly High</string>
+
+    <string name="NORMAL">Normal</string>
+    <string name="ABNORMAL">Abnormal</string>
+    <string name="DIABETIC">Diabetic</string>
+    <string name="EARLY_DIABETIC">Early Diabetic</string>
+    <string name="VERY_HIGH">Very High</string>
+    <string name="VERY_LOW">Very Low</string>
+    <string name="MILDLY_LOW">Mildly Low</string>
+    <string name="BORDERLINE_HIGH">Borderline High</string>
+    <string name="BETTER">Better</string>
+    <string name="NEAR_OPTIMAL">Near Optimal</string>
+    <string name="MODERATE_LOW">Moderate Low</string>
+    <string name="MODERATE_HIGH">Moderate High</string>
+    <string name="MILD_LOW">Mild Low</string>
+    <string name="MILD_HIGH">Mild High</string>
+    <string name="AVERAGE_RISK">Average Risk</string>
+    <string name="BEST">Best</string>
+    <string name="OPTIMAL">Optimal</string>
+    <string name="GOOD">Good</string>
 
     <string name="OPEN_GALLERY">Open Gallery</string>
     <string name="TAKE_PHOTO">Take Photo</string>
@@ -201,24 +214,16 @@
     <string name="OPTIMUM">Optimum</string>
     <!--HRA-->
 
-    <string name="PLEASE_SELECT">Please select</string>
-    <string name="FILES_ACCESS_MSG1">Directory in your Primary Storage and click on</string>
-    <string name="FILES_ACCESS_MSG2">button to Allow File Access for it</string>
-    <string name="RELEASE_PERMISSIONS_MSG">Directory in your Primary storage</string>
-    <string name="CAN_NOT_USE_ROOT_FOLDER">Can not use root folder</string>
-
+    <string name="COMING_SOON">Coming Soon</string>
     <string name="POWERED_BY">Powered by</string>
-    <string name="FILES_ACCESS_REQUIRED">Files Access Required</string>
     <string name="PERMISSION_REQUIRED">Permission Required</string>
     <string name="SELECT_RECORDS">Select records</string>
     <string name="SELECT_PROFILE_PHOTO">Select Profile Photo</string>
-    <string name="SELECT_AN_IMAGE">Select an Image</string>
-    <string name="SELECT_A_FILE">Select a file</string>
     <string name="SELECT_A_FILE_TO_UPLOAD">Select a File to Upload</string>
     <string name="NEED_STORAGE_PERMISSION">For storing and reading files, we need storage permission</string>
     <string name="NEED_CAMERA_PERMISSION">For clicking snap to upload we need camera permission</string>
     <string name="ERROR_STORAGE_PERMISSION">Storage Permission is Required to Proceed further</string>
-    <string name="ERROR_CAMERA_PERMISSION">camera Permission is Required to Proceed further</string>
+    <string name="ERROR_CAMERA_PERMISSION">Camera Permission is Required to Proceed further</string>
 
     <string name="AN_ERROR_HAPPENED">An error happened, please retry !</string>
     <string name="UNEXPECTED_ERROR">Unexpected error occurred, please try again.</string>
@@ -243,7 +248,6 @@
     <string name="AWW_SNAP">Aww! Snap!</string>
     <string name="PRESS_AGAIN_TO_EXIT">Press again to exit</string>
     <string name="SOMETHING_WENT_WRONG">Something went wrong</string>
-    <string name="NO_INTERNET_AVAILABLE">No Internet Available</string>
     <string name="MSG_NO_INTERNET_CONNECTION">No Internet Connection</string>
     <string name="MSG_SESSION_EXPIRED">Seems your session is expired, please login again.</string>
     <string name="ERROR_INTERNET_UNAVAILABLE">Seems like you are offline. Please check your internet connection and try again</string>
@@ -299,32 +303,6 @@
     <string name="digits_alpha_numeric">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890</string>
     <string name="numeric">1234567890</string>
     <string name="numeric_fraction">1234567890.</string>
-
-
-    <!--File Picker Strings-->
-    <string name="action_settings">Settings</string>
-
-    <string name="all_images">All Images</string>
-    <string name="done">Done</string>
-
-    <string name="permission_filepicker_rationale">Storage permission is needed to access files.</string>
-    <string name="no_files_found">No Files Found</string>
-    <string name="attachments_title_text" formatted="false">(%d/%d)</string>
-    <string name="attachments_num" formatted="false">%d</string>
-    <string name="select_photo_text">Select a media</string>
-    <string name="select_doc_text">Select a document</string>
-    <string name="no_camera_exists">No Application exists for camera!</string>
-    <string name="pdf_title">PDF</string>
-    <string name="ppt_title">PPT</string>
-    <string name="word_title">DOC</string>
-    <string name="excel_title">XLS</string>
-    <string name="txt_title">TXT</string>
-    <string name="videos">Videos</string>
-    <string name="images">Images</string>
-    <string name="all_photos">All Photos</string>
-    <string name="all_videos">All Videos</string>
-    <string name="all_files">All Files</string>
-    <!--File Picker Strings-->
 
     <string name="DISCLAIMER_TITLE">DISCLAIMER</string>
     <string name="DISCLAIMER_MESSAGE_HRA">All Information presented is for the reference purpose only.&lt;BR/&gt;This information should not be considered a substitute for professional medical expertise, diagnosis or treatment of any health problem.&lt;BR/&gt;&lt;BR/&gt;Please consult with your healthcare professional for further information about your health condition.</string>

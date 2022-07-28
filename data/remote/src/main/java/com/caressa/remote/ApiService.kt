@@ -32,6 +32,14 @@ interface ApiService {
     @POST(Constants.strProxyRegistrationUrl)
     fun registerDocumentProxyAPI(@Query("Data") registerEncryptedQuery: String): Deferred<ApiResponse<Users>>
 
+    @POST(Constants.strUpdateProfileSetting)
+    fun updateLanguagePreference(@Body data: UpdateLanguageProfileModel): Deferred<BaseResponse<UpdateLanguageProfileModel.UpdateLanguageProfileResponse>>
+    //suspend fun updateLanguagePreference(@Body data: UpdateLanguageProfileModel): BaseResponse<UpdateLanguageProfileModel.UpdateLanguageProfileResponse>
+
+    @POST(Constants.strRefreshToken)
+    fun getRefreshToken(@Body data: RefreshTokenModel): Deferred<BaseResponse<RefreshTokenModel.RefreshTokenResponse>>
+    //suspend fun getRefreshToken(@Body data: RefreshTokenModel): BaseResponse<RefreshTokenModel.RefreshTokenResponse>
+
     // **********New API**************
     @POST("Security/api/Account/CheckIfLoginNameExists/")
     fun checkLoginNameExistsAPI(@Body loginNameExistsModel: LoginNameExistsModel): Deferred<BaseResponse<LoginNameExistsModel.IsExistResponse>>
@@ -138,7 +146,9 @@ interface ApiService {
     @POST("phr/api/BMI/Synchronize")
     fun saveBmiRecord()
 
-
+    @POST("phr/api/BMI/ListVitalsHistory")
+    fun getLabRecordListVitals(@Body data: VitalsHistoryModel): Deferred<BaseResponse<VitalsHistoryModel.Response>>
+    //fun getLabRecordListVitals(@Body recordList: VitalsHistoryModel): BaseResponse<VitalsHistoryModel.Response>
     /**
      * Fitness Lib Api Calls
      */

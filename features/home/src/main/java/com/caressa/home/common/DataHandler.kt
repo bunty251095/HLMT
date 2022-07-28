@@ -38,42 +38,44 @@ class DataHandler( val context: Context) {
     }
 
     fun getNavDrawerList() : List<NavDrawerOption>{
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<NavDrawerOption> = ArrayList()
-        list.add(NavDrawerOption(R.drawable.img_drawer_home,context.resources.getString(R.string.MENU_HOME),NavDrawer.HOME,ContextCompat.getColor(context,R.color.vivant_orange_yellow)))
-//        list.add(NavDrawerOption(R.drawable.img_link,context.resources.getString(R.string.MENU_LINK),NavDrawer.LINK,ContextCompat.getColor(context,R.color.colorPrimary)))
-        list.add(NavDrawerOption(R.drawable.img_drawer_my_profile,context.resources.getString(R.string.MENU_MY_PROFILE),NavDrawer.MY_PRO,ContextCompat.getColor(context,R.color.vivant_soft_pink)))
-        list.add(NavDrawerOption(R.drawable.img_drawer_family,context.resources.getString(R.string.MENU_FAMILY_MEMBERS),NavDrawer.FAMILY_PRO,ContextCompat.getColor(context,R.color.vivant_purple)))
-//        list.add(NavDrawerOption(R.drawable.img_doctor,context.resources.getString(R.string.MENU_FAMILY_DOCTORS),NavDrawer.FAMILY_DOCTOR,ContextCompat.getColor(context,R.color.vivant_green_blue_two)))
-        list.add(NavDrawerOption(R.drawable.img_drawer_contact_us,context.resources.getString(R.string.MENU_CONTACT_US),NavDrawer.CONTACT_US,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
-        list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.MENU_SPREAD_THE_WORD),NavDrawer.SPREAD_THE_WORD,ContextCompat.getColor(context,R.color.vivant_bright_sky_blue)))
-//        list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.REFER_AND_EARN),NavDrawer.REFER_AND_EARN,ContextCompat.getColor(context,R.color.vivant_bright_blue)))
-        list.add(NavDrawerOption(R.drawable.ic_settings,context.resources.getString(R.string.MENU_SETTINGS),NavDrawer.SETTINGS,ContextCompat.getColor(context,R.color.vivant_watermelon)))
+        list.add(NavDrawerOption(R.drawable.img_drawer_home,localResource.getString(R.string.MENU_HOME),NavDrawer.HOME,ContextCompat.getColor(context,R.color.vivant_orange_yellow)))
+//        list.add(NavDrawerOption(R.drawable.img_link,localResource.getString(R.string.MENU_LINK),NavDrawer.LINK,ContextCompat.getColor(context,R.color.colorPrimary)))
+        list.add(NavDrawerOption(R.drawable.img_drawer_my_profile,localResource.getString(R.string.MENU_MY_PROFILE),NavDrawer.MY_PRO,ContextCompat.getColor(context,R.color.vivant_soft_pink)))
+        list.add(NavDrawerOption(R.drawable.img_drawer_family,localResource.getString(R.string.MENU_FAMILY_MEMBERS),NavDrawer.FAMILY_PRO,ContextCompat.getColor(context,R.color.vivant_purple)))
+//        list.add(NavDrawerOption(R.drawable.img_doctor,localResource.getString(R.string.MENU_FAMILY_DOCTORS),NavDrawer.FAMILY_DOCTOR,ContextCompat.getColor(context,R.color.vivant_green_blue_two)))
+        list.add(NavDrawerOption(R.drawable.img_drawer_contact_us,localResource.getString(R.string.MENU_CONTACT_US),NavDrawer.CONTACT_US,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
+        list.add(NavDrawerOption(R.drawable.ic_menu_share,localResource.getString(R.string.MENU_SPREAD_THE_WORD),NavDrawer.SPREAD_THE_WORD,ContextCompat.getColor(context,R.color.vivant_bright_sky_blue)))
+//        list.add(NavDrawerOption(R.drawable.ic_menu_share,localResource.getString(R.string.REFER_AND_EARN),NavDrawer.REFER_AND_EARN,ContextCompat.getColor(context,R.color.vivant_bright_blue)))
+        list.add(NavDrawerOption(R.drawable.ic_settings,localResource.getString(R.string.MENU_SETTINGS),NavDrawer.SETTINGS,ContextCompat.getColor(context,R.color.vivant_watermelon)))
         return list
     }
 
     fun getSwitchProfileNavDrawerList() : List<NavDrawerOption>{
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<NavDrawerOption> = ArrayList()
-        list.add(NavDrawerOption(R.drawable.img_drawer_home,context.resources.getString(R.string.MENU_HOME),NavDrawer.HOME,ContextCompat.getColor(context,R.color.vivant_bright_blue)))
-//        list.add(NavDrawerOption(R.drawable.img_doctor,context.resources.getString(R.string.MENU_FAMILY_DOCTORS),NavDrawer.FAMILY_DOCTOR,ContextCompat.getColor(context,R.color.vivant_green_blue_two)))
-        list.add(NavDrawerOption(R.drawable.img_drawer_contact_us,context.resources.getString(R.string.MENU_CONTACT_US),NavDrawer.CONTACT_US,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
-        list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.MENU_SPREAD_THE_WORD),NavDrawer.SPREAD_THE_WORD,ContextCompat.getColor(context,R.color.vivant_bright_sky_blue)))
-//        list.add(NavDrawerOption(R.drawable.ic_menu_share,context.resources.getString(R.string.REFER_AND_EARN),NavDrawer.REFER_AND_EARN,ContextCompat.getColor(context,R.color.vivant_bright_blue)))
-        list.add(NavDrawerOption(R.drawable.ic_settings,context.resources.getString(R.string.MENU_SETTINGS),NavDrawer.SETTINGS,ContextCompat.getColor(context,R.color.vivant_watermelon)))
+        list.add(NavDrawerOption(R.drawable.img_drawer_home,localResource.getString(R.string.MENU_HOME),NavDrawer.HOME,ContextCompat.getColor(context,R.color.vivant_bright_blue)))
+//        list.add(NavDrawerOption(R.drawable.img_doctor,localResource.getString(R.string.MENU_FAMILY_DOCTORS),NavDrawer.FAMILY_DOCTOR,ContextCompat.getColor(context,R.color.vivant_green_blue_two)))
+        list.add(NavDrawerOption(R.drawable.img_drawer_contact_us,localResource.getString(R.string.MENU_CONTACT_US),NavDrawer.CONTACT_US,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
+        list.add(NavDrawerOption(R.drawable.ic_menu_share,localResource.getString(R.string.MENU_SPREAD_THE_WORD),NavDrawer.SPREAD_THE_WORD,ContextCompat.getColor(context,R.color.vivant_bright_sky_blue)))
+//        list.add(NavDrawerOption(R.drawable.ic_menu_share,localResource.getString(R.string.REFER_AND_EARN),NavDrawer.REFER_AND_EARN,ContextCompat.getColor(context,R.color.vivant_bright_blue)))
+        list.add(NavDrawerOption(R.drawable.ic_settings,localResource.getString(R.string.MENU_SETTINGS),NavDrawer.SETTINGS,ContextCompat.getColor(context,R.color.vivant_watermelon)))
         return list
     }
 
     fun getDashboardList(hraSummary: HRASummary?, stepsData: String): List<DashboardFeatureGrid>{
 
-
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<DashboardFeatureGrid> = ArrayList()
         if (hraSummary == null){
 
             list.add(
                 DashboardFeatureGrid(
                     imageId = R.drawable.dash_hra,
-                    title = context.resources.getString(R.string.HRA),
+                    title = localResource.getString(R.string.HRA),
                     color = ContextCompat.getColor(context, R.color.colorAccent),
-                    data = context.resources.getString(R.string.TAKE_ASSESSMENT),
+                    data = localResource.getString(R.string.TAKE_ASSESSMENT),
                     code = "HRA"
                 )
             )
@@ -83,7 +85,7 @@ class DataHandler( val context: Context) {
                 if (hraSummary!!.hraCutOff.equals("1")) {
                     hraObservation = "${hraSummary!!.scorePercentile.toInt()}"
                 }else{
-                    hraObservation = context.resources.getString(R.string.TAKE_ASSESSMENT)
+                    hraObservation = localResource.getString(R.string.TAKE_ASSESSMENT)
                 }
                 var color = ContextCompat.getColor(context, R.color.colorAccent)
 
@@ -126,7 +128,7 @@ class DataHandler( val context: Context) {
                 list.add(
                     DashboardFeatureGrid(
                         imageId = R.drawable.dash_hra,
-                        title = context.resources.getString(R.string.HRA),
+                        title = localResource.getString(R.string.HRA),
                         color = color,
                         data = hraObservation,
                         code = "HRA"
@@ -137,7 +139,7 @@ class DataHandler( val context: Context) {
                 list.add(
                     DashboardFeatureGrid(
                         imageId = R.drawable.dash_hra,
-                        title = context.resources.getString(R.string.HRA),
+                        title = localResource.getString(R.string.HRA),
                         color = ContextCompat.getColor(context, R.color.colorAccent),
                         data = " -- ",
                         code = "HRA"
@@ -150,7 +152,7 @@ class DataHandler( val context: Context) {
             list.add(
                 DashboardFeatureGrid(
                     imageId = R.drawable.dash_step_counter,
-                    title = context.resources.getString(R.string.DASH_ACTIVITY_TRACKER),
+                    title = localResource.getString(R.string.DASH_ACTIVITY_TRACKER),
                     color = ContextCompat.getColor(context, R.color.colorAccent),
                     data = " -- ",
                     code = "STEP"
@@ -160,32 +162,33 @@ class DataHandler( val context: Context) {
             list.add(
                 DashboardFeatureGrid(
                     imageId = R.drawable.dash_step_counter,
-                    title = context.resources.getString(R.string.DASH_ACTIVITY_TRACKER),
+                    title = localResource.getString(R.string.DASH_ACTIVITY_TRACKER),
                     color = ContextCompat.getColor(context, R.color.colorAccent),
                     data = stepsData,
                     code = "STEP"
                 )
             )
         }
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_track_parameter,title = context.resources.getString(R.string.DASH_TRACK_PARAMETER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "PARAM"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_store_records,title = context.resources.getString(R.string.DASH_STORE_HEALTH_RECORD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "RECORD"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_medicine_tracker,title = context.resources.getString(R.string.DASH_MEDICINE_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "MED"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_tools_calculators,title = context.resources.getString(R.string.DASH_TOOLS_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "CAL"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_rewards,title = context.resources.getString(R.string.DASH_REWARD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "REW"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_health_library,title = context.resources.getString(R.string.DASH_HEALTH_LIBRARY),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "BLOG"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_track_parameter,title = localResource.getString(R.string.DASH_TRACK_PARAMETER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "PARAM"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_store_records,title = localResource.getString(R.string.DASH_STORE_HEALTH_RECORD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "RECORD"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_medicine_tracker,title = localResource.getString(R.string.DASH_MEDICINE_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "MED"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_tools_calculators,title = localResource.getString(R.string.DASH_TOOLS_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "CAL"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_rewards,title = localResource.getString(R.string.DASH_REWARD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "REW"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_health_library,title = localResource.getString(R.string.DASH_HEALTH_LIBRARY),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "BLOG"))
         return list
     }
 
     fun getSwitchProfileDashboardList(hraSummary: HRASummary?, stepsData: String): List<DashboardFeatureGrid>{
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<DashboardFeatureGrid> = ArrayList()
         if (hraSummary == null){
 
             list.add(
                 DashboardFeatureGrid(
                     imageId = R.drawable.dash_hra,
-                    title = context.resources.getString(R.string.HRA),
+                    title = localResource.getString(R.string.HRA),
                     color = ContextCompat.getColor(context, R.color.colorAccent),
-                    data = context.resources.getString(R.string.TAKE_ASSESSMENT),
+                    data = localResource.getString(R.string.TAKE_ASSESSMENT),
                     code = "HRA"
                 )
             )
@@ -195,7 +198,7 @@ class DataHandler( val context: Context) {
                 if (hraSummary!!.hraCutOff.equals("1")) {
                     hraObservation = "${hraSummary!!.scorePercentile.toInt()}"
                 }else{
-                    hraObservation = context.resources.getString(R.string.TAKE_ASSESSMENT)
+                    hraObservation = localResource.getString(R.string.TAKE_ASSESSMENT)
                 }
                 var color = ContextCompat.getColor(context, R.color.colorAccent)
 
@@ -238,7 +241,7 @@ class DataHandler( val context: Context) {
                 list.add(
                     DashboardFeatureGrid(
                         imageId = R.drawable.dash_hra,
-                        title = context.resources.getString(R.string.HRA),
+                        title = localResource.getString(R.string.HRA),
                         color = color,
                         data = hraObservation,
                         code = "HRA"
@@ -249,7 +252,7 @@ class DataHandler( val context: Context) {
                 list.add(
                     DashboardFeatureGrid(
                         imageId = R.drawable.dash_hra,
-                        title = context.resources.getString(R.string.HRA),
+                        title = localResource.getString(R.string.HRA),
                         color = ContextCompat.getColor(context, R.color.colorAccent),
                         data = " -- ",
                         code = "HRA"
@@ -258,19 +261,19 @@ class DataHandler( val context: Context) {
             }
 
         }
-//        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_hra,title = context.resources.getString(R.string.HRA),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = ""))
-//        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_step_counter,title = context.resources.getString(R.string.DASH_ACTIVITY_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = ""))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_track_parameter,title = context.resources.getString(R.string.DASH_TRACK_PARAMETER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "PARAM"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_store_records,title = context.resources.getString(R.string.DASH_STORE_HEALTH_RECORD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "RECORD"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_medicine_tracker,title = context.resources.getString(R.string.DASH_MEDICINE_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "MED"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_tools_calculators,title = context.resources.getString(R.string.DASH_TOOLS_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "CAL"))
-//        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_rewards,title = context.resources.getString(R.string.DASH_REWARD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "REW"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_health_library,title = context.resources.getString(R.string.DASH_HEALTH_LIBRARY),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "BLOG"))
+//        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_hra,title = localResource.getString(R.string.HRA),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = ""))
+//        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_step_counter,title = localResource.getString(R.string.DASH_ACTIVITY_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = ""))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_track_parameter,title = localResource.getString(R.string.DASH_TRACK_PARAMETER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "PARAM"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_store_records,title = localResource.getString(R.string.DASH_STORE_HEALTH_RECORD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "RECORD"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_medicine_tracker,title = localResource.getString(R.string.DASH_MEDICINE_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "MED"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_tools_calculators,title = localResource.getString(R.string.DASH_TOOLS_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "CAL"))
+//        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_rewards,title = localResource.getString(R.string.DASH_REWARD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "REW"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_health_library,title = localResource.getString(R.string.DASH_HEALTH_LIBRARY),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "BLOG"))
         return list
     }
 
     fun getSettingsOptionList(language: String): List<Option>{
-        var localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<Option> = ArrayList()
         list.add(Option(R.drawable.ic_star_border,localResource.getString(R.string.RATE_US),ContextCompat.getColor(context,R.color.vivant_soft_pink),"RATE_US"))
 //        if(language.isNullOrEmpty()) {
@@ -294,12 +297,13 @@ class DataHandler( val context: Context) {
 //        }
 //        list.add(Option(R.drawable.ic_feedback,localResource.getString(R.string.FEEDBACK),ContextCompat.getColor(context,R.color.vivant_bright_sky_blue),"FEEDBACK"))
         //list.add(Option(R.drawable.img_password,localResource.getString(R.string.CHANGE_PASSWORD),ContextCompat.getColor(context,R.color.vivant_orange_yellow),"CHANGE_PASSWORD"))
+        list.add(Option(R.drawable.img_setting_language,localResource.getString(R.string.LANGUAGE),ContextCompat.getColor(context,R.color.vivant_nasty_green),"LANGUAGE"))
         list.add(Option(R.drawable.img_drawer_logout,localResource.getString(R.string.LOGOUT),ContextCompat.getColor(context,R.color.vivant_nasty_green),"LOGOUT"))
         return list
     }
 
     fun getHasProfileImageOptionList() : List<Option>{
-        var localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<Option> = ArrayList()
         list.add(Option(R.drawable.img_view,localResource.getString(R.string.VIEW),R.color.vivantCyan,ProfileImgOption.View))
         list.add(Option(R.drawable.ic_upload_gallery,localResource.getString(R.string.OPEN_GALLERY),R.color.purple,ProfileImgOption.Gallery))
@@ -309,7 +313,7 @@ class DataHandler( val context: Context) {
     }
 
     fun getNotProfileImageOptionList() : List<Option>{
-        var localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<Option> = ArrayList()
         list.add(Option(R.drawable.ic_upload_gallery,localResource.getString(R.string.OPEN_GALLERY),R.color.purple,ProfileImgOption.Gallery))
         list.add(Option(R.drawable.ic_upload_photo,localResource.getString(R.string.TAKE_PHOTO),R.color.green,ProfileImgOption.Photo))
@@ -317,41 +321,41 @@ class DataHandler( val context: Context) {
     }
 
     fun getFamilyRelationListMale() : List<FamilyRelationOption>{
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<FamilyRelationOption> = ArrayList()
-        var resorce = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
-        list.add(FamilyRelationOption(R.drawable.icon_father,resorce.getString(R.string.FATHER),"FAT" , context.resources.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_mother,resorce.getString(R.string.MOTHER), "MOT" ,context.resources.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_son,resorce.getString(R.string.SON), "SON" ,context.resources.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_daughter,resorce.getString(R.string.DAUGHTER), "DAU" ,context.resources.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_brother,resorce.getString(R.string.BROTHER), "BRO" ,context.resources.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_sister,resorce.getString(R.string.SISTER),"SIS" , context.resources.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_gf,resorce.getString(R.string.GRAND_FATHER), "GRF" ,context.resources.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_gm,resorce.getString(R.string.GRAND_MOTHER),"GRM" , context.resources.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_wife,resorce.getString(R.string.WIFE), "WIF"  ,context.resources.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_father,localResource.getString(R.string.FATHER),"FAT" , localResource.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_mother,localResource.getString(R.string.MOTHER), "MOT" ,localResource.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_son,localResource.getString(R.string.SON), "SON" ,localResource.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_daughter,localResource.getString(R.string.DAUGHTER), "DAU" ,localResource.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_brother,localResource.getString(R.string.BROTHER), "BRO" ,localResource.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_sister,localResource.getString(R.string.SISTER),"SIS" , localResource.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_gf,localResource.getString(R.string.GRAND_FATHER), "GRF" ,localResource.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_gm,localResource.getString(R.string.GRAND_MOTHER),"GRM" , localResource.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_wife,localResource.getString(R.string.WIFE), "WIF"  ,localResource.getString(R.string.FEMALE)))
         return list
     }
 
     fun getFamilyRelationListFemale() : List<FamilyRelationOption>{
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<FamilyRelationOption> = ArrayList()
-        var resorce = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
-        list.add(FamilyRelationOption(R.drawable.icon_father,resorce.getString(R.string.FATHER),"FAT" , resorce.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_mother,resorce.getString(R.string.MOTHER), "MOT" ,resorce.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_son,resorce.getString(R.string.SON), "SON" ,resorce.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_daughter,resorce.getString(R.string.DAUGHTER), "DAU" ,resorce.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_brother,resorce.getString(R.string.BROTHER), "BRO" ,resorce.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_sister,resorce.getString(R.string.SISTER),"SIS" , resorce.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_gf,resorce.getString(R.string.GRAND_FATHER), "GRF" ,resorce.getString(R.string.MALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_gm,resorce.getString(R.string.GRAND_MOTHER),"GRM" , resorce.getString(R.string.FEMALE)))
-        list.add(FamilyRelationOption(R.drawable.icon_husband,resorce.getString(R.string.HUSBAND), "HUS" ,context.resources.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_father,localResource.getString(R.string.FATHER),"FAT" , localResource.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_mother,localResource.getString(R.string.MOTHER), "MOT" ,localResource.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_son,localResource.getString(R.string.SON), "SON" ,localResource.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_daughter,localResource.getString(R.string.DAUGHTER), "DAU" ,localResource.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_brother,localResource.getString(R.string.BROTHER), "BRO" ,localResource.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_sister,localResource.getString(R.string.SISTER),"SIS" , localResource.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_gf,localResource.getString(R.string.GRAND_FATHER), "GRF" ,localResource.getString(R.string.MALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_gm,localResource.getString(R.string.GRAND_MOTHER),"GRM" , localResource.getString(R.string.FEMALE)))
+        list.add(FamilyRelationOption(R.drawable.icon_husband,localResource.getString(R.string.HUSBAND), "HUS" ,localResource.getString(R.string.MALE)))
         return list
     }
 
     fun getWellnessCentreList() : List<WellnessCentreDetails> {
-        var localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<WellnessCentreDetails> = ArrayList()
-        list.add(WellnessCentreDetails(localResource.getString(R.string.TITLE_TOOLS_AND_TRACKER), "VIVANT" , context.resources.getString(R.string.DESC_TOOLS_TRACKER) , R.drawable.img_tools_and_cals,ContextCompat.getColor(context,R.color.vivant_watermelon)))
-        list.add(WellnessCentreDetails(localResource.getString(R.string.TITLE_MEDICINES_HEALTHCARE), "MedLife" , context.resources.getString(R.string.DESC_MED_LIFE) , R.drawable.img_medicines_healthcare,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
-        list.add(WellnessCentreDetails(localResource.getString(R.string.TITLE_SEARCH_HEALTH_PACKAGE), "VIVANT" , context.resources.getString(R.string.DESC_HEALTH_PACKAGE) , R.drawable.img_health_package,ContextCompat.getColor(context,R.color.vivant_orange_yellow)))
+        //list.add(WellnessCentreDetails(localResource.getString(R.string.TITLE_TOOLS_AND_TRACKER), "VIVANT" , localResource.getString(R.string.DESC_TOOLS_TRACKER) , R.drawable.img_tools_and_cals,ContextCompat.getColor(context,R.color.vivant_watermelon)))
+        //list.add(WellnessCentreDetails(localResource.getString(R.string.TITLE_MEDICINES_HEALTHCARE), "MedLife" , localResource.getString(R.string.DESC_MED_LIFE) , R.drawable.img_medicines_healthcare,ContextCompat.getColor(context,R.color.vivant_nasty_green)))
+        //list.add(WellnessCentreDetails(localResource.getString(R.string.TITLE_SEARCH_HEALTH_PACKAGE), "VIVANT" , localResource.getString(R.string.DESC_HEALTH_PACKAGE) , R.drawable.img_health_package,ContextCompat.getColor(context,R.color.vivant_orange_yellow)))
         return list
     }
 
@@ -403,4 +407,10 @@ class DataHandler( val context: Context) {
     data class WellnessCentreDetails(  val title: String ,  val tag: String ,  val desc: String , val  img: Int , val color : Int )
     data class FamilyRelationOption(val  relationImgId: Int, val relation: String , val relationshipCode: String , val gender: String )
     //data class DoctorDetails(val  relationImgId: Int, val relation: String , val relationshipCode: String , val gender: String )
+
+    data class LanguageModel(
+        val language:String = "",
+        val languageCode:String = "",
+        var selectionStatus: Boolean = false
+    )
 }

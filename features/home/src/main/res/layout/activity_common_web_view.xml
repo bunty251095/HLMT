@@ -47,7 +47,7 @@
         android:id="@+id/btn_medicalStoreDetails"
         style="@style/CustomBorderedButton"
         android:layout_margin="@dimen/_8sdp"
-        android:text="@string/MEDICAL_STORE_DETAILS"
+        android:text=""
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -231,7 +231,7 @@ class UploadRecordFragment : BaseFragment()  {
         chooserIntent.type = "*/*"
         chooserIntent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes)
         chooserIntent.addCategory(Intent.CATEGORY_OPENABLE)
-        startActivityForResult(Intent.createChooser(chooserIntent,resources.getString(R.string.SELECT_A_FILE)),Constants.FILE_SELECT_CODE)
+        startActivityForResult(Intent.createChooser(chooserIntent,resources.getString(R.string.SELECT_A_FILE_TO_UPLOAD)),Constants.FILE_SELECT_CODE)
     }
 
     private fun showImageChooser() {

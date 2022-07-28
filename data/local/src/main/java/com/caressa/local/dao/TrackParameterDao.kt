@@ -6,6 +6,7 @@ import com.caressa.model.entity.TrackParameterMaster
 import com.caressa.model.entity.TrackParameters
 import com.caressa.model.entity.UserRelatives
 import com.caressa.model.parameter.*
+import com.caressa.model.tempconst.Configuration
 import timber.log.Timber
 
 @Dao
@@ -411,6 +412,190 @@ abstract class TrackParameterDao {
                         modifiedDate = item.modifiedDate
                     )
                     listHistory.add(bmiItem)
+                }
+            }
+            insertHistory(listHistory)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    suspend fun saveBMIHistoryVital(data: ArrayList<VitalsHistoryModel.VitalsHistory>) {
+        try {
+            var bmiItem: TrackParameterMaster.History
+            val listHistory: ArrayList<TrackParameterMaster.History> = arrayListOf()
+            for (item in data) {
+                if (!Utilities.isNullOrEmptyOrZero(item.height.toString())) {
+                    bmiItem = TrackParameterMaster.History(
+                        personID = item.personID,
+                        profileCode = "BMI",
+                        value = item.height,
+                        parameterCode = "HEIGHT",
+                        description = Utilities.getLanguageDescription("HEIGHT", Configuration.LanguageCode),
+                        recordDate = item.recordDate,
+                        recordDateMillisec = item.recordDateMillisec,
+                        unit = "cm",
+                        sync = false,
+                        createdDate = item.createdDate,
+                        modifiedDate = item.modifiedDate
+                    )
+                    listHistory.add(bmiItem)
+                }
+                if (!Utilities.isNullOrEmptyOrZero(item.weight.toString())) {
+                    bmiItem = TrackParameterMaster.History(
+                        personID = item.personID,
+                        profileCode = "BMI",
+                        value = item.weight,
+                        parameterCode = "WEIGHT",
+                        description = Utilities.getLanguageDescription("WEIGHT", Configuration.LanguageCode),
+                        recordDate = item.recordDate,
+                        recordDateMillisec = item.recordDateMillisec,
+                        unit = "Kg",
+                        sync = false,
+                        createdDate = item.createdDate,
+                        modifiedDate = item.modifiedDate
+                    )
+                    listHistory.add(bmiItem)
+                }
+                if (!Utilities.isNullOrEmptyOrZero(item.value)) {
+                    bmiItem = TrackParameterMaster.History(
+                        personID = item.personID,
+                        profileCode = "BMI",
+                        value = item.value.toDouble(),
+                        parameterCode = "BMI",
+                        description = "BMI",
+                        observation = item.observation,
+                        recordDateMillisec = item.recordDateMillisec,
+                        recordDate = item.recordDate,
+                        unit = "kg/m2",
+                        sync = false,
+                        createdDate = item.createdDate,
+                        modifiedDate = item.modifiedDate
+                    )
+                    listHistory.add(bmiItem)
+                }
+            }
+            insertHistory(listHistory)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    suspend fun saveWHRHistoryVital(data: ArrayList<VitalsHistoryModel.VitalsHistory>) {
+        try {
+            var bmiItem: TrackParameterMaster.History
+            val listHistory: ArrayList<TrackParameterMaster.History> =
+                arrayListOf<TrackParameterMaster.History>()
+            for (item in data) {
+                if (item.waist != 0.0) {
+                    bmiItem = TrackParameterMaster.History(
+                        personID = item.personID,
+                        profileCode = "WHR",
+                        value = item.waist,
+                        parameterCode = "WAIST",
+                        description = Utilities.getLanguageDescription("WAIST", Configuration.LanguageCode),
+                        recordDate = item.recordDate,
+                        recordDateMillisec = item.recordDateMillisec,
+                        unit = "cm",
+                        sync = false,
+                        createdDate = item.createdDate,
+                        modifiedDate = item.modifiedDate
+                    )
+                    listHistory.add(bmiItem)
+                }
+                if (item.hip != 0.0) {
+                    bmiItem = TrackParameterMaster.History(
+                        personID = item.personID,
+                        profileCode = "WHR",
+                        value = item.hip,
+                        parameterCode = "HIP",
+                        description = Utilities.getLanguageDescription("HIP", Configuration.LanguageCode),
+                        recordDate = item.recordDate,
+                        recordDateMillisec = item.recordDateMillisec,
+                        unit = "cm",
+                        sync = false,
+                        createdDate = item.createdDate,
+                        modifiedDate = item.modifiedDate
+                    )
+                    listHistory.add(bmiItem)
+                }
+                if (!item.value.equals("", true)) {
+                    bmiItem = TrackParameterMaster.History(
+                        personID = item.personID,
+                        profileCode = "WHR",
+                        value = item.value.toDouble(),
+                        parameterCode = "WHR",
+                        description = "WHR",
+                        observation = item.observation,
+                        recordDateMillisec = item.recordDateMillisec,
+                        recordDate = item.recordDate,
+                        unit = "",
+                        sync = false,
+                        createdDate = item.createdDate,
+                        modifiedDate = item.modifiedDate
+                    )
+                    listHistory.add(bmiItem)
+                }
+            }
+            insertHistory(listHistory)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    suspend fun saveBloodPressureHistoryVital(data: ArrayList<VitalsHistoryModel.VitalsHistory>) {
+        try {
+            var bpItem: TrackParameterMaster.History
+            val listHistory: ArrayList<TrackParameterMaster.History> =
+                arrayListOf<TrackParameterMaster.History>()
+            for (item in data) {
+                if (item.systolic != 0) {
+                    bpItem = TrackParameterMaster.History(
+                        personID = item.personID,
+                        profileCode = "BLOODPRESSURE",
+                        value = item.systolic.toDouble(),
+                        parameterCode = "BP_SYS",
+                        description = Utilities.getLanguageDescription("Systolic", Configuration.LanguageCode),
+                        recordDate = item.recordDate,
+                        recordDateMillisec = item.recordDateMillisec,
+                        unit = "mmHg",
+                        sync = false,
+                        createdDate = item.createdDate,
+                        modifiedDate = item.modifiedDate
+                    )
+                    listHistory.add(bpItem)
+                }
+                if (item.diastolic != 0) {
+                    bpItem = TrackParameterMaster.History(
+                        personID = item.personID,
+                        profileCode = "BLOODPRESSURE",
+                        value = item.diastolic.toDouble(),
+                        parameterCode = "BP_DIA",
+                        description = Utilities.getLanguageDescription("Diastolic", Configuration.LanguageCode),
+                        recordDate = item.recordDate,
+                        recordDateMillisec = item.recordDateMillisec,
+                        unit = "mmHg",
+                        sync = false,
+                        createdDate = item.createdDate,
+                        modifiedDate = item.modifiedDate
+                    )
+                    listHistory.add(bpItem)
+                }
+                if (item.pulse != 0) {
+                    bpItem = TrackParameterMaster.History(
+                        personID = item.personID,
+                        profileCode = "BLOODPRESSURE",
+                        value = item.pulse.toDouble(),
+                        parameterCode = "BP_PULSE",
+                        description = Utilities.getLanguageDescription("Pulse", Configuration.LanguageCode),
+                        recordDate = item.recordDate,
+                        recordDateMillisec = item.recordDateMillisec,
+                        unit = "bpm",
+                        sync = false,
+                        createdDate = item.createdDate,
+                        modifiedDate = item.modifiedDate
+                    )
+                    listHistory.add(bpItem)
                 }
             }
             insertHistory(listHistory)

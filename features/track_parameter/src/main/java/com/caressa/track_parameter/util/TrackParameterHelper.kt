@@ -1,8 +1,10 @@
 package com.caressa.track_parameter.util
 
 import android.content.Context
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.track_parameter.R
+import java.util.*
 
 object TrackParameterHelper {
 
@@ -92,33 +94,35 @@ object TrackParameterHelper {
     }
 
     fun getPulseObservation(pulseStr: String,context: Context): String {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         var observation = ""
         if (!pulseStr.isNullOrEmpty()) {
             val pulse = pulseStr.toDouble().toInt()
             if (pulse in 1..59) {
-                observation = context.resources.getString(R.string.LOW)
+                observation = localResource.getString(R.string.LOW)
             } else if (pulse in 60..100) {
-                observation = context.resources.getString(R.string.NORMAL)
+                observation = localResource.getString(R.string.NORMAL)
             } else if (pulse in 101..999) {
-                observation = context.resources.getString(R.string.HIGH)
+                observation = localResource.getString(R.string.HIGH)
             }
         }
         return observation
     }
 
     fun getBPObservation(systolic: Int, diastolic: Int,context: Context): String {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         var strObservation = ""
         if (systolic < 90 || diastolic < 60) {
-            strObservation = context.resources.getString(R.string.LOW)
+            strObservation = localResource.getString(R.string.LOW)
         }
         if (systolic in 90..120 && diastolic in 60..80) {
-            strObservation = context.resources.getString(R.string.NORMAL)
+            strObservation = localResource.getString(R.string.NORMAL)
         }
         if (systolic in 121..139 || diastolic in 81..89) {
-            strObservation =  context.resources.getString(R.string.HIGH_NORMAL)
+            strObservation =  localResource.getString(R.string.HIGH_NORMAL)
         }
         if (systolic >= 140 || diastolic >= 90) {
-            strObservation =  context.resources.getString(R.string.ABNORMAL)
+            strObservation =  localResource.getString(R.string.ABNORMAL)
         }
         return strObservation
     }
@@ -186,25 +190,26 @@ object TrackParameterHelper {
     }
 
     fun getBMIObservation(parameterVal: String,context: Context): String {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         var observation = ""
         try {
             if (!parameterVal.isEmpty()){
                 var bmi:Double = parameterVal.toDouble()
 
                 if (bmi<=18.49){
-                    observation = context.resources.getString(R.string.UNDERWEIGHT)
+                    observation = localResource.getString(R.string.UNDERWEIGHT)
                 }else if (bmi>18.49 && bmi<=22.99){
-                    observation = context.resources.getString(R.string.NORMAL)
+                    observation = localResource.getString(R.string.NORMAL)
                 }else if (bmi>22.99 && bmi<=24.99){
-                    observation = context.resources.getString(R.string.OVERWEIGHT)
+                    observation = localResource.getString(R.string.OVERWEIGHT)
                 }else if (bmi>24.99 && bmi<=29.99){
-                    observation = context.resources.getString(R.string.PRE_OBESE)
+                    observation = localResource.getString(R.string.PRE_OBESE)
                 }else if (bmi>29.99 && bmi<=34.99){
-                    observation = context.resources.getString(R.string.OBESE_LEVEL_1)
+                    observation = localResource.getString(R.string.OBESE_LEVEL_1)
                 }else if (bmi>34.99 && bmi<=39.99){
-                    observation = context.resources.getString(R.string.OBESE_LEVEL_2)
+                    observation = localResource.getString(R.string.OBESE_LEVEL_2)
                 }else {
-                    observation = context.resources.getString(R.string.OBESE_LEVEL_3)
+                    observation = localResource.getString(R.string.OBESE_LEVEL_3)
                 }
             }
         }catch (e:Exception){e.printStackTrace()}
@@ -212,30 +217,103 @@ object TrackParameterHelper {
     }
 
     fun getWHRObservation(parameterVal: String,gender: Int,context: Context): String {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         var observation = ""
         try {
             if (parameterVal.isNotEmpty()){
                 var whr:Double = parameterVal.toDouble()
                 if (gender ==1){
                     if (whr<=0.95){
-                        observation = context.resources.getString(R.string.NORMAL)
+                        observation = localResource.getString(R.string.NORMAL)
                     }else if (whr>0.95 && whr<=1){
-                        observation = context.resources.getString(R.string.MODERATE)
+                        observation = localResource.getString(R.string.MODERATE)
                     }else if (whr>1){
-                        observation = context.resources.getString(R.string.HIGH)
+                        observation = localResource.getString(R.string.HIGH)
                     }
                 }else{
                     if (whr<=0.80){
-                        observation = context.resources.getString(R.string.NORMAL)
+                        observation = localResource.getString(R.string.NORMAL)
                     }else if (whr>0.80 && whr<=0.85){
-                        observation = context.resources.getString(R.string.MODERATE)
+                        observation = localResource.getString(R.string.MODERATE)
                     }else if (whr>0.85){
-                        observation = context.resources.getString(R.string.HIGH)
+                        observation = localResource.getString(R.string.HIGH)
                     }
                 }
             }
         }catch (e:Exception){e.printStackTrace()}
         return observation
+    }
+
+    fun getLocalizeObservation(obsVal: String?, context: Context?): String? {
+        var obs = obsVal
+        if(context != null && !obsVal.isNullOrEmpty()){
+            val observation = obsVal!!.toUpperCase()
+            val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+            if (observation.equals("NORMAL",true)){
+                obs = localResource.getString(R.string.NORMAL)
+            }else if(observation.equals("HIGH",true)){
+                obs = localResource.getString(R.string.HIGH)
+            }else if(observation.equals("LOW",true)){
+                obs = localResource.getString(R.string.LOW)
+            }else if(observation.equals("MODERATE",true)){
+                obs = localResource.getString(R.string.MODERATE)
+            }else if(observation.equals("UNDERWEIGHT",true)){
+                obs = localResource.getString(R.string.UNDERWEIGHT)
+            }else if(observation.equals("OVERWEIGHT",true)){
+                obs = localResource.getString(R.string.OVERWEIGHT)
+            }else if(observation.equals("PRE-OBESE",true)){
+                obs = localResource.getString(R.string.PRE_OBESE)
+            }else if(observation.equals("HIGH NORNAL",true)){
+                obs = localResource.getString(R.string.HIGH_NORMAL)
+            }else if(observation.equals("ABNORMAL",true)){
+                obs = localResource.getString(R.string.ABNORMAL)
+            }else if(observation.equals("Obese Level 1",true)){
+                obs = localResource.getString(R.string.OBESE_LEVEL_1)
+            }else if(observation.equals("Obese Level 2",true)){
+                obs = localResource.getString(R.string.OBESE_LEVEL_2)
+            }else if(observation.equals("Obese Level 3",true)){
+                obs = localResource.getString(R.string.OBESE_LEVEL_3)
+            }else if(observation.equals("PREHYPERTENSION",true)){
+                obs = localResource.getString(R.string.PRE_HYPERTENSION)
+            }else if(observation.equals("DIABETIC",true)){
+                obs = localResource.getString(R.string.DIABETIC)
+            } else if(observation.equals("VERY HIGH",true)){
+                obs = localResource.getString(R.string.VERY_HIGH)
+            } else if(observation.equals("VERY LOW",true)){
+                obs = localResource.getString(R.string.VERY_LOW)
+            } else if(observation.equals("MILDLY HIGH",true)){
+                obs = localResource.getString(R.string.MILDLY_HIGH)
+            } else if(observation.equals("MILDLY LOW",true)){
+                obs = localResource.getString(R.string.MILDLY_LOW)
+            } else if(observation.equals("BORDERLINE HIGH",true)){
+                obs = localResource.getString(R.string.BORDERLINE_HIGH)
+            } else if(observation.equals("EARLY DIABETIC",true)){
+                obs = localResource.getString(R.string.EARLY_DIABETIC)
+            } else if(observation.equals("BETTER",true)){
+                obs = localResource.getString(R.string.BETTER)
+            } else if(observation.equals("NEAR OPTIMAL",true)){
+                obs = localResource.getString(R.string.NEAR_OPTIMAL)
+            } else if(observation.equals("MODERATE LOW",true)){
+                obs = localResource.getString(R.string.MODERATE_LOW)
+            } else if(observation.equals("MODERATE HIGH",true)){
+                obs = localResource.getString(R.string.MODERATE_HIGH)
+            } else if(observation.equals("MILD LOW",true)){
+                obs = localResource.getString(R.string.MILD_LOW)
+            } else if(observation.equals("MILD HIGH",true)){
+                obs = localResource.getString(R.string.MILD_HIGH)
+            } else if(observation.equals("AVERAGE RISK",true)){
+                obs = localResource.getString(R.string.AVERAGE_RISK)
+            } else if(observation.equals("DESIRABLE",true)){
+                obs = localResource.getString(R.string.DESIRABLE)
+            } else if(observation.equals("BEST",true)){
+                obs = localResource.getString(R.string.BEST)
+            } else if(observation.equals("OPTIMAL",true)){
+                obs = localResource.getString(R.string.OPTIMAL)
+            } else if(observation.equals("GOOD",true)){
+                obs = localResource.getString(R.string.GOOD)
+            }
+        }
+        return obs
     }
 
     fun isNullOrEmptyOrZero(maxPermissibleValue: String?): Boolean {

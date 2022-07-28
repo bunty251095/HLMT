@@ -24,12 +24,12 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:src="@drawable/track_parameters_banner"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/track_parameters_banner" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgBack"
@@ -52,7 +52,7 @@
                 android:layout_alignStart="@+id/imgBack"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:text="Track health\nparameter"
+                android:text="@string/TITLE_TRACK_HEALTH_PARAMETERS2"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_20sdp" />
 
@@ -89,6 +89,7 @@
                         android:id="@+id/layout_select_param"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:focusable="true"
                         android:clickable="true">
 
@@ -162,6 +163,7 @@
                         android:id="@+id/layout_update_param"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:focusable="true"
                         android:clickable="true">
 
@@ -234,6 +236,7 @@
                         android:id="@+id/layout_dashboard_param"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:focusable="true"
                         android:clickable="true">
 
@@ -308,6 +311,7 @@
                         android:id="@+id/layout_history_param"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:focusable="true"
                         android:clickable="true">
 

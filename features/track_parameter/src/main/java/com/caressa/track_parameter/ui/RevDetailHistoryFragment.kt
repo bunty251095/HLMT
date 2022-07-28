@@ -105,23 +105,23 @@ class RevDetailHistoryFragment: BaseFragment(),PreviousMonthsAdapter.OnMonthClic
 
     private fun registerObserver() {
 
-        viewModel.listAllProfiles.observe(viewLifecycleOwner, {
-            if ( it != null ) {
+        viewModel.listAllProfiles.observe(viewLifecycleOwner) {
+            if (it != null) {
                 mapProfilesAll.clear()
                 mapProfilesAll.addAll(it)
-                Utilities.printData("allProfileCodes",it)
-                viewModel.getParentDataList(mapProfilesAll,month,year)
+                Utilities.printData("allProfileCodes", it)
+                viewModel.getParentDataList(mapProfilesAll, month, year)
             }
-        })
+        }
 
-        viewModel.parentDataList.observe(viewLifecycleOwner, {
-            if ( it != null ) {
+        viewModel.parentDataList.observe(viewLifecycleOwner) {
+            if (it != null) {
                 parentDataList.clear()
                 parentDataList = it.toMutableList()
                 toProceed = false
                 //Timber.e("parentProfilesList---> ${parentDataList.size}")
                 val filteredList = getFilteredData(parentDataList)
-                Utilities.printData("filteredList",filteredList,false)
+                Utilities.printData("filteredList", filteredList, false)
                 if (filteredList.size > 0) {
                     binding.rvExpandableProfile.layoutAnimation = animation
                     expandableProfileAdapter!!.updateData(filteredList)
@@ -133,7 +133,7 @@ class RevDetailHistoryFragment: BaseFragment(),PreviousMonthsAdapter.OnMonthClic
                     binding.layoutNoHistory.visibility = View.VISIBLE
                 }
             }
-        })
+        }
 
     }
 

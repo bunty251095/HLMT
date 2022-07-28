@@ -1,5 +1,6 @@
 package com.caressa.security.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
@@ -13,6 +14,7 @@ import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.EncryptionUtility
 import com.caressa.common.utils.Event
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.model.security.EmailExistsModel
 import com.caressa.model.entity.Users
 import com.caressa.model.security.PhoneExistsModel
@@ -28,9 +30,11 @@ import org.json.JSONObject
 import timber.log.Timber
 import java.util.*
 
+@SuppressLint("StaticFieldLeak")
 class LoginViewModel(private val userManagementUseCase: UserManagementUseCase, private val dispatchers: AppDispatchers,
                      private val sharedPref: SharedPreferences, val context: Context) : BaseViewModel() {
 
+    private val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
     // PRIVATE DATA
     private lateinit var argsLogin: String
     var loginUserSource: LiveData<Resource<Users>> = MutableLiveData()
@@ -185,7 +189,7 @@ class LoginViewModel(private val userManagementUseCase: UserManagementUseCase, p
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if (it.data?.isExist.equals("false", true)) {
-                    toastMessage(context.resources.getString(R.string.ERROR_INVALID_EMAIL_PHONE))
+                    toastMessage(localResource.getString(R.string.ERROR_INVALID_EMAIL_PHONE))
                 } else if ( it.data?.isExist.equals("true", true) ) {
                     callLogin(forceRefresh = true,emailStr = it.data!!.account!!.emailAddress.toString(), passwordStr = passwordStr)
                 }

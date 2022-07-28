@@ -5,7 +5,7 @@ import android.os.Environment
 object Constants {
 
     //for PRODUCTION
-    const val environment: String = "PROD"
+/*    const val environment: String = "PROD"
     const val strAPIUrl: String = "https://hlmtcore.vivant.me"
     const val strHANDLERUrl: String = "Handler/RegistrationHandler.ashx?R="
     const val strProxyUrl = "Proxy/"
@@ -16,7 +16,7 @@ object Constants {
     const val strBlogsBaseURL = "https://blogs.vivant.me/"
     const val strBlogsProxyURL = "wp-json/wp/v2/posts?per_page="
     const val strBookAppointmentURL = "https://booking.vivant.me/bookappointment/mvivant.html"
-    const val strToolsAndCalculatorURL = "https://portal.vivant.me/ToolsAndCalculators"
+    const val strToolsAndCalculatorURL = "https://portal.vivant.me/ToolsAndCalculators"*/
 
     //for UAT
     /*const val environment: String = "UAT"
@@ -34,7 +34,7 @@ object Constants {
     const val strToolsAndCalculatorURL = "https://newphr.vivant.me/ToolsAndCalculators"*/
 
     //for HLMT UAT
-    /*const val environment: String = "UAT"
+    const val environment: String = "UAT"
     const val strAPIUrl: String = "https://hlmtcoreuat.vivant.me/"
     const val strHANDLERUrl: String = "DocumentProxy/Handler/RegistrationHandler.ashx?R="
     const val strProxyUrl = "Proxy/"
@@ -46,7 +46,7 @@ object Constants {
     const val strBlogsBaseURL = "https://blogs.vivant.me/"
     const val strBlogsProxyURL = "wp-json/wp/v2/posts?per_page="
     const val strBookAppointmentURL = "https://labkhojuat.vivant.me/bookappointment/mvivant.html"
-    const val strToolsAndCalculatorURL = "https://newphr.vivant.me/ToolsAndCalculators"*/
+    const val strToolsAndCalculatorURL = "https://newphr.vivant.me/ToolsAndCalculators"
 
     const val SAVE_CLOUD_MESSAGING_ID_API = "Security/api/Account/SaveCloudMessagingID"
     const val CHECK_APP_UPDATE_API = "PHR/api/App/GetVersion"
@@ -69,6 +69,10 @@ object Constants {
     const val strApolloHtml = "file:///android_asset/apollo/apollo_SOP.html"
 
     val primaryStorage = Environment.getExternalStorageDirectory().toString()
+
+    //Language Related API's
+    const val strUpdateProfileSetting = "phr/api/Person/UpdateProfileSetting"
+    const val strRefreshToken = "PHR/api/Person/RefreshToken"
 
     //User APIs
     const val GET_USER_DETAIL_API = "PHR/api/Person/Get"
@@ -130,8 +134,7 @@ object Constants {
     const val MEDICATION_SET_ALERT_API = "PHR/api/Medication/SetAlert"
     const val MEDICATION_ADD_IN_TAKE_API = "PHR/api/Medication/AddInTake"
     const val MEDICATION_DELETE_TAKE_API = "PHR/api/Medication/Delete/"
-    const val MEDICATION_GET_MEDICINE_IN_TAKE_API =
-        "PHR/api/Medication/ListMedicationInTakeByScheduleID/"
+    const val MEDICATION_GET_MEDICINE_IN_TAKE_API = "PHR/api/Medication/ListMedicationInTakeByScheduleID/"
 
     //ToolsTrackers APIs
     const val TOOLS_START_QUIZ_API = "Quiz/api/Quiz/StartQuiz"
@@ -198,6 +201,12 @@ object Constants {
     const val TAKEN = "Taken"
     const val MISSED = "Missed"
     const val SKIPPED = "Skipped"
+    const val BEFORE_MEAL = "Before Meal"
+    const val WITH_MEAL = "With Meal"
+    const val AFTER_MEAL = "After Meal"
+    const val ANYTIME = "Anytime"
+    const val DAILY = "Daily"
+    const val FOR_X_DAYS = "For X Days"
     const val IN_TAKE = "InTake"
     const val MEDICINE_DETAILS = "MedicineDetails"
     const val TAKE_STATUS = "Status"
@@ -222,6 +231,7 @@ object Constants {
     const val DASHBOARD = "Dashboard"
     const val DOWNLOAD = "Download"
     const val RESTART = "Restart"
+    const val HOME = "Home"
 
     const val NOTIFICATION = "Notification"
     const val NOTIFICATION_ID = "NotificationId"
@@ -351,6 +361,7 @@ object ApiConstants {
     const val BMI_HISTORY = "bmiHistory"
     const val BLOOD_PRESSURE_HISTORY = "bloodPressureHistory"
     const val WHR_HISTORY = "whrHistory"
+    const val VITALS_HISTORY = "vitalsHistory"
 
     const val RELATIVE_LIST = "relativeList"
     const val STEPS_GOAL = "stepsGoal"

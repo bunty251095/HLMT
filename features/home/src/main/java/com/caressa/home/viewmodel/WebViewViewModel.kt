@@ -19,6 +19,7 @@ import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
 
+@SuppressLint("StaticFieldLeak")
 class WebViewViewModel(private val homeManagementUseCase: HomeManagementUseCase, private val dispatchers: AppDispatchers,
                        private val dataHandler : DataHandler , val context: Context) : BaseViewModel() {
 

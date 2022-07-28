@@ -67,8 +67,8 @@ class MedTimeStatusAdapter(val context: Context, var medTimeStatusList : Mutable
 
     private fun getStatusList(): ArrayList<MedStatusModel> {
         val statusList: ArrayList<MedStatusModel> = ArrayList()
-        statusList.add(MedStatusModel(Constants.TAKEN, R.drawable.img_taken, R.color.vivant_nasty_green))
-        statusList.add(MedStatusModel(Constants.SKIPPED, R.drawable.img_skipped, R.color.vivant_watermelon))
+        statusList.add(MedStatusModel(context.resources.getString(R.string.TAKEN),R.drawable.img_taken,R.color.vivant_nasty_green))
+        statusList.add(MedStatusModel(context.resources.getString(R.string.SKIPPED),R.drawable.img_skipped,R.color.vivant_watermelon))
         return statusList
     }
 

@@ -33,7 +33,6 @@ import com.caressa.home.viewmodel.ProfileFamilyMemberViewModel
 import com.caressa.model.home.Person
 import com.caressa.model.home.UpdateUserDetailsModel
 import com.theartofdev.edmodo.cropper.CropImage
-import kotlinx.android.synthetic.main.activity_my_profile_new.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.io.File
@@ -182,12 +181,12 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
 
     private fun registerObservers() {
 
-        viewModel.userProfileDetails.observe( this , {
-            if ( it != null ) {
+        viewModel.userProfileDetails.observe( this) {
+            if (it != null) {
                 val person = it.person
-                if ( !Utilities.isNullOrEmptyOrZero( person.profileImageID.toString() ) ) {
+                if (!Utilities.isNullOrEmptyOrZero(person.profileImageID.toString())) {
                     hasProfileImage = true
-                    viewModel.callGetProfileImageApi(this,person.profileImageID.toString())
+                    viewModel.callGetProfileImageApi(this, person.profileImageID.toString())
                 } else {
                     stopImageShimmer()
                 }
@@ -195,20 +194,20 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
                 setUserDetails(person)
                 stopDetailsShimmer()
             }
-        })
+        }
 
-        viewModel.updateUserDetails.observe( this , {
-            if ( it != null ) {
+        viewModel.updateUserDetails.observe( this) {
+            if (it != null) {
                 val person = it.person
                 user = person
                 setUserDetails(person)
                 binding.btnCancelProfile.performClick()
 
             }
-        })
-        viewModel.profileImage.observe( this , {})
-        viewModel.uploadProfileImage.observe( this , {})
-        viewModel.removeProfileImage.observe( this , {})
+        }
+        viewModel.profileImage.observe( this) {}
+        viewModel.uploadProfileImage.observe( this) {}
+        viewModel.removeProfileImage.observe( this) {}
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -262,7 +261,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         }
     }
 
-    fun showDatePickerDialog(){
+    private fun showDatePickerDialog(){
         mCalendar = Calendar.getInstance()
         mCalendar?.add(Calendar.YEAR, -18)
 
@@ -681,13 +680,13 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         }
     }
 
-    fun startImageShimmer() {
+    private fun startImageShimmer() {
         binding.layoutImgShimmer.startShimmer()
         binding.layoutImgShimmer.visibility = View.VISIBLE
         binding.layoutImgDetails.visibility = View.GONE
     }
 
-    fun startDetailsShimmer() {
+    private fun startDetailsShimmer() {
         binding.layoutDetailsShimmer.startShimmer()
         binding.layoutDetailsShimmer.visibility = View.VISIBLE
         binding.layoutShowDetails.visibility = View.GONE
@@ -699,13 +698,13 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         binding.layoutImgDetails.visibility = View.VISIBLE
     }
 
-    fun stopDetailsShimmer() {
+    private fun stopDetailsShimmer() {
         binding.layoutDetailsShimmer.startShimmer()
         binding.layoutDetailsShimmer.visibility = View.GONE
         binding.layoutShowDetails.visibility = View.VISIBLE
     }
 
-    fun showProfilePhoto(bitmap:Bitmap, isImage:Boolean) {
+    private fun showProfilePhoto(bitmap:Bitmap, isImage:Boolean) {
         try {
             dialog = DialogFullScreenView(this,isImage,"",bitmap)
             dialog!!.show()

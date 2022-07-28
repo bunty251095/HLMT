@@ -1,4 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="TITLE_MEDICINE_TRACKER">Medicine Tracker</string>
+
+    <string name="TITLE_MEDICINE_TRACKER">Penjejak Ubat</string>
+    <string name="TITLE_MY_MEDICATIONS">Ubat Saya</string>
+    <string name="TITLE_ADD_MEDICATION">Tambah Ubat</string>
+    <string name="TITLE_SCHEDULE_MEDICATION">Jadual Ubat</string>
+
+    <string name="TRACK_YOUR_MEDICINE_WITH_US">Jejak ubat \n anda dengan kami</string>
+    <string name="QUICK_VIEW_TO_YOUR_MEDICINES">Paparan pantas ubatan anda</string>
+    <string name="ADD_MEDICATION">Tambah ubat</string>
+    <string name="ADD_YOUR_MEDICINE">Tambah ubatan anda</string>
+    <string name="MY_MEDICATIONS">Ubatan saya</string>
+    <string name="CHECK_YOUR_MEDICATION_HISTORY">Periksa sejarah ubatan anda</string>
+
+    <string name="ADD_MEDICINE">Tambah Ubat</string>
+    <string name="UPDATE_STATUS">Kemaskini Status</string>
+    <string name="UPDATE_YOUR_MEDICINE_STATUS">Kemaskini Status Perubatan anda</string>
+    <string name="MEDICINE_NAME">Nama Ubat</string>
+    <string name="TYPE_YOUR_MEDICINE_NAME">Taip nama ubat anda</string>
+    <string name="ENABLE">Aktifkan</string>
+    <string name="DISABLE">Nyahaktifkan</string>
+    <string name="START_DATE">Tarikh mula </string>
+    <string name="END_DATE">Tarikh akhir</string>
+    <string name="STATUS">Status</string>
+    <string name="DOSAGE">Dos</string>
+    <string name="SCHEDULE">Jadual</string>
+
+    <string name="TAKEN">Telah diambil</string>
+    <string name="SKIPPED">Langkau</string>
+    <string name="MISSED">Terlepas</string>
+
+    <string name="BEFORE_MEAL">Sebelum Makan</string>
+    <string name="WITH_MEAL">Dengan Makanan</string>
+    <string name="AFTER_MEAL">Selepas Makan</string>
+    <string name="ANYTIME">Bila-bila waktu</string>
+
+    <string name="ONGOING">Berterusan</string>
+    <string name="COMPLETED">Selesai</string>
+
+    <string name="TABLET">Tablet</string>
+    <string name="CAPSULE">Kapsul</string>
+    <string name="SYRUP">Cecair</string>
+    <string name="DROPS">Titik</string>
+    <string name="INJECTION">Suntikan</string>
+    <string name="GEL">Gel</string>
+    <string name="TUBE">Tiub</string>
+    <string name="SPRAY">Sembur</string>
+    <string name="MOUTHWASH">Penyegar Mulut</string>
+    <string name="MOUTH_WASH">Penyegar \n Mulut</string>
+    <string name="SOLUTION">Penyelesaian</string>
+    <string name="OINTMENT">Minyak</string>
+    <string name="OTHER">Lain-lain</string>
+
+    <string name="FOR_TODAY_ONLY">Hari ini Sahaja</string>
+    <string name="STARTING_ON">Bermula pada</string>
+    <string name="STARTED">Telah  bermula</string>
+
+    <string name="EVERY_DAY">Setiap hari</string>
+    <string name="FOR_X_DAYS">Untuk X Hari</string>
+
+    <string name="NOTES">Nota</string>
+    <string name="DAYS">Hari</string>
+    <string name="NUMBER_OF_DAYS">Jumlah Hari</string>
+    <string name="HOW_OFTEN_WILL_YOU_TAKE">Berapa kerap anda akan mengambilnya?</string>
+    <string name="HOW_MANY_YOU_NEED_TO_TAKE_AT_ONE_TIME">Berapa banyak yang anda perlu ambil pada satu masa?</string>
+    <string name="HOW_MANY_TIME_DAILY">Berapa kali sehari?</string>
+    <string name="INTAKE_INSTRUCTIONS">Arahan Pengambilan</string>
+    <string name="ENABLE_NOTIFICATION_ALERT">Aktifkan Makluman Notifikasi</string>
+    <string name="TYPE_YOUR_NOTES">Taip nota anda</string>
+    <string name="MAX_50_CHARACTERS">Maksimum 50 karakter</string>
+
+    <string name="DO_YOU_WANT_TO">Adakah anda mahu</string>
+    <string name="NOTIFICATION_ALERT">Makluman Notifikasi</string>
+    <string name="DELETE_MEDICINE">Padam Ubat</string>
+    <string name="RESCHEDULE_MEDICINE">Jadual Semula Ubat</string>
+    <string name="UPDATE_MEDICINE_SCHEDULES">Kemaskini Jadual Ubat</string>
+    <string name="PAST_MEDICINES">Ubatan Lalu</string>
+    <string name="NO_MEDICINES_AVAILABLE">Ubatan tidak tersedia</string>
+    <string name="MEDICINE_DELETED">Ubatan Berjaya Dipadam</string>
+    <string name="MEDICINE_ADDED">Ubatan Berjaya Ditambah</string>
+    <string name="MEDICINE_UPDATED">Ubatan Berjaya Dikemaskini</string>
+    <string name="ALERT_ENABLED">Notifikasi Berjaya Diaktifkan</string>
+    <string name="ALERT_DISABLED">Notifikasi Berjaya Dinyahaktifkan</string>
+    <string name="ERROR_SELECT_SCHEDULE_TIME">Sila Pilih Jadual Waktu</string>
+    <string name="ERROR_ENTER_MEDICINE_NAME">Sila Masukkan Nama Ubat Terlebih Dahulu</string>
+    <string name="ERROR_SELECT_MEDICINE_STATUS">Sila Pilih Status Ubat</string>
+    <string name="ALREADY_DELETED_MEMBER_RELATED_TO_NOTIFICATION">Anda telah Memadam Ahli Keluarga berkaitan Notifikasi ini</string>
+    <string name="YOU_ARE_ALREADY_TAKING">Anda telah mengambil</string>
+    <string name="YOU_HAVE_REMOVED_OR_RESCHEDULED_TIME">Anda telah Memadam atau menjadual semula Waktu</string>
+    <string name="YOU_HAVE_ALREADY_DELETED">Anda telah Memadam</string>
+
+    <string name="MSG_SCHEDULE_TIME_FOUND">Kami tidak mempunyai Jadual Waktu untuk Ubat ini. Anda ingin menambah Jadual Waktu?</string>
+    <string name="MSG_CONFIRMATION_DELETE_MEDICINE">Adakah anda mahu</string>
+    <string name="MSG_CONFIRMATION_RESCHEDULE_MEDICINE">Adakah anda mahu menjadual semula</string>
+
+    <string name="ERROR_START_DATE_MUST_BE_LESS_THAN_OR_EQUAL_TO_END_DATE">Tarikh Mula hendaklah sebelum atau Sama dengan Tarikh Tamat</string>
+    <string name="ERROR_END_DATE_MUST_BE_GREATER_THAN_OR_EQUAL_TO_START_DATE">Tarikh Mula hendaklah selepas atau Sama dengan Tarikh Tamat</string>
+    <string name="ERROR_SCHEDULE_TIME_NOT_FOUND_PLEASE_SELECT_TO_UPDATE_MEDICINE_DETAILS">Jadual Waktu tidak ditemui, Sila Pilih untuk Kemaskini Maklumat Ubatan</string>
+    <string name="ERROR_PLEASE_SELECT_VALID_SCHEDULE_TIME">Sila Pilih Jadual Waktu yang Sah</string>
+    <string name="ERROR_PLEASE_ENTER_VALID_NUMBER_OF_DAYS">Sila Masukkan Jumlah Hari yang Sah</string>
+    <string name="ERROR_STATUS_FOR_FUTURE_SCHEDULE_TIMES_CAN_NOT_BE_UPDATED">Status untuk Jadual Waktu akan datang tidak dapat dikemaskini</string>
+
 </resources>

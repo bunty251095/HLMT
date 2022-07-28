@@ -149,7 +149,7 @@ class StressAndAnxietyInputFragment : BaseFragment() {
             if (validate()) {
                 binding.btnBack.text = resources.getString(R.string.PREVIOUS)
                 binding.btnBack.visibility = View.VISIBLE
-                if (binding.btnNext.text.toString().trim { it <= ' ' }.equals("finish", ignoreCase = true)) {
+                if (binding.btnNext.text.toString().trim { it <= ' ' }.equals(resources.getString(R.string.FINISH), ignoreCase = true)) {
                     // Make Api call.
                     saveDetails()
                     Timber.i("AnswerList=> %s", getAnswerList())

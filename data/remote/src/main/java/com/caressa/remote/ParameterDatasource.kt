@@ -22,4 +22,6 @@ class ParameterDatasource(
         encryptedService.getBloodPressureHistory(data)
 
     fun addTrackParameter(data: SaveParameterModel) = encryptedService.saveLabRecords(data)
+
+    fun fetchLabRecordsVitalsList(data: VitalsHistoryModel) = encryptedService.getLabRecordListVitals(data)
 }

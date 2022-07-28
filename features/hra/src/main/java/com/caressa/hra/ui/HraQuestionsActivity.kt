@@ -138,36 +138,43 @@ class HraQuestionsActivity : AppCompatActivity()  {
         when(ques.qCode)  {
 
             "KNWDIANUM" -> {
-                Timber.i("Inside--->"+ques.qCode)
-                if ( selectedOptions.any { it.description.equals(resources.getString(R.string.NONE),ignoreCase = true) } ) {
-                    viewModel.saveResponse("KNWDIANUM","85_NO",resources.getString(R.string.NO),ques.category,ques.tabName,"")
+                Timber.i("Inside--->" + ques.qCode)
+                //if (selectedOptions.any { it.description.equals(resources.getString(R.string.NONE), ignoreCase = true) }) {
+                if (selectedOptions.any { it.answerCode.contains("DONT", ignoreCase = true)
+                            || it.answerCode.contains("NONE", ignoreCase = true) }) {
+                    viewModel.saveResponse("KNWDIANUM", "85_NO", "No", ques.category, ques.tabName, "")
                     viewModel.clearHRALabValuesBasedOnType("SUGAR")
                 }
-                setCurrentScreen( currentScreen -1 )
+                setCurrentScreen(currentScreen - 1)
             }
 
             "KNWLIPNUM" -> {
-                Timber.i("Inside--->"+ques.qCode)
-                if ( selectedOptions.any { it.description.equals(resources.getString(R.string.NONE),ignoreCase = true) } ) {
-                    viewModel.saveResponse("KNWLIPNUM","84_NO",resources.getString(R.string.NO),ques.category,ques.tabName,"")
+                Timber.i("Inside--->" + ques.qCode)
+                //if (selectedOptions.any { it.description.equals(resources.getString(R.string.NONE), ignoreCase = true) }) {
+                if (selectedOptions.any { it.answerCode.contains("DONT", ignoreCase = true)
+                            || it.answerCode.contains("NONE", ignoreCase = true) }) {
+                    viewModel.saveResponse("KNWLIPNUM", "84_NO", "No", ques.category, ques.tabName, "")
                     viewModel.clearHRALabValuesBasedOnType("LIPID")
                 }
-                if ( prevList.any { it.description.equals(resources.getString(R.string.NONE),ignoreCase = true) } ) {
-                    viewModel.saveResponse("KNWLIPNUM","84_NO",resources.getString(R.string.NO),ques.category,ques.tabName,"")
-                    setCurrentScreen( currentScreen -2 )
-                }
-                else {
-                    setCurrentScreen( currentScreen -1 )
+                //if (prevList.any { it.description.equals(resources.getString(R.string.NONE), ignoreCase = true) }) {
+                if (prevList.any { it.answerCode.contains("DONT", ignoreCase = true)
+                            || it.answerCode.contains("NONE", ignoreCase = true) }) {
+                    viewModel.saveResponse("KNWLIPNUM", "84_NO", "No", ques.category, ques.tabName, "")
+                    setCurrentScreen(currentScreen - 2)
+                } else {
+                    setCurrentScreen(currentScreen - 1)
                 }
             }
 
             "HHILL" -> {
-                Timber.i("Inside--->"+ques.qCode)
-                saveMultipleResponseInDb(selectedOptions,ques)
-                if ( prevList.any { it.description.equals(resources.getString(R.string.NONE),ignoreCase = true) } ) {
-                    setCurrentScreen( currentScreen -2 )
+                Timber.i("Inside--->" + ques.qCode)
+                saveMultipleResponseInDb(selectedOptions, ques)
+                //if (prevList.any { it.description.equals(resources.getString(R.string.NONE), ignoreCase = true) }) {
+                if (prevList.any { it.answerCode.contains("DONT", ignoreCase = true)
+                            || it.answerCode.contains("NONE", ignoreCase = true) }) {
+                    setCurrentScreen(currentScreen - 2)
                 } else {
-                    setCurrentScreen( currentScreen -1 )
+                    setCurrentScreen(currentScreen - 1)
                 }
             }
 
@@ -177,22 +184,25 @@ class HraQuestionsActivity : AppCompatActivity()  {
                 setCurrentScreen(currentScreen - 1)
             }
 
-            "EXPOSE","CHECKUP" -> {
-                Timber.i("Inside--->"+ques.qCode)
-                val totalList = ques.optionList.filter { it.answerCode.contains(",",ignoreCase = true) }
-                if ( selectedOptions.any { it.description.equals(resources.getString(R.string.NONE),ignoreCase = true) } ) {
-                    for ( option in totalList ) {
+            "EXPOSE", "CHECKUP" -> {
+                Timber.i("Inside--->" + ques.qCode)
+                val totalList =
+                    ques.optionList.filter { it.answerCode.contains(",", ignoreCase = true) }
+                //if (selectedOptions.any { it.description.equals(resources.getString(R.string.NONE), ignoreCase = true) }) {
+                if (selectedOptions.any { it.answerCode.contains("DONT", ignoreCase = true)
+                            || it.answerCode.contains("NONE", ignoreCase = true) }) {
+                    for (option in totalList) {
                         val data = option.answerCode.split(",")
-                        viewModel.saveResponseOther(data[0],data[2],option.description,ques.category,ques.tabName,"",ques.qCode,Constants.FALSE)
+                        viewModel.saveResponseOther(data[0], data[2], option.description, ques.category, ques.tabName, "", ques.qCode, Constants.FALSE)
                     }
                 } else {
-                    val list = hraDataSingleton.selectedOptionList.filter { !it.description.equals("None",ignoreCase = true) }.toMutableList()
-                    for ( option in list ) {
+                    val list = hraDataSingleton.selectedOptionList.filter { !it.answerCode.equals("DONT", ignoreCase = true) }.toMutableList()
+                    for (option in list) {
                         val data = option.answerCode.split(",")
-                        if ( option.isSelected ) {
-                            viewModel.saveResponseOther(data[0],data[1],option.description,ques.category,ques.tabName,"",ques.qCode,Constants.TRUE)
+                        if (option.isSelected) {
+                            viewModel.saveResponseOther(data[0], data[1], option.description, ques.category, ques.tabName, "", ques.qCode, Constants.TRUE)
                         } else {
-                            viewModel.saveResponseOther(data[0],data[2],option.description,ques.category,ques.tabName,"",ques.qCode,Constants.FALSE)
+                            viewModel.saveResponseOther(data[0], data[2], option.description, ques.category, ques.tabName, "", ques.qCode, Constants.FALSE)
                         }
                     }
                 }

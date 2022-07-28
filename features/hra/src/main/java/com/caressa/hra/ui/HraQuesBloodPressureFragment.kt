@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
@@ -91,12 +90,12 @@ class HraQuesBloodPressureFragment(val qCode: String) : BaseFragment() {
         Timber.e("CurrentPageNo--->" +viewPagerActivity!!.getCurrentScreen() )
         viewModel.getHRAQuestionData(qCode)
 
-        binding.laySystolic.setHint("Systolic")
+        binding.laySystolic.setHint(resources.getString(R.string.SYSTOLIC))
         binding.laySystolic.setImage(R.drawable.img_systolic)
         binding.laySystolic.setUnit(resources.getString(R.string.MM_HG))
         binding.laySystolic.editText!!.addTextChangedListener(textWatcher)
 
-        binding.layDiastolic.setHint("Diastolic")
+        binding.layDiastolic.setHint(resources.getString(R.string.DIASTOLIC))
         binding.layDiastolic.setImage(R.drawable.img_systolic)
         binding.layDiastolic.setUnit(resources.getString(R.string.MM_HG))
         binding.layDiastolic.editText!!.addTextChangedListener(textWatcher)
@@ -118,43 +117,46 @@ class HraQuesBloodPressureFragment(val qCode: String) : BaseFragment() {
     private fun registerObservers() {
 
         var toProceed = true
-        viewModel.quesData.observe(viewLifecycleOwner, {
-            if ( it != null ) {
-                if ( toProceed ) {
+        viewModel.quesData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                if (toProceed) {
                     questionData = it
                     hraDataSingleton.question = it
                     toProceed = false
                 }
             }
-        })
+        }
 
-        viewModel.vitalDetailsSavedResponse.observe(viewLifecycleOwner, { vitalDetails ->
-            if ( vitalDetails != null ) {
+        viewModel.vitalDetailsSavedResponse.observe(viewLifecycleOwner) { vitalDetails ->
+            if (vitalDetails != null) {
                 //Timber.i("HraVitalDetails--->$vitalDetails")
                 var strSystolic = ""
                 var strDiastolic = ""
                 val bpDetails = vitalDetails.filter { vital ->
-                    vital.VitalsKey.equals(HRAConstants.VitalKey_SystolicBP,ignoreCase = true)
-                            || vital.VitalsKey.equals(HRAConstants.VitalKey_DiastolicBP,ignoreCase = true)
+                    vital.VitalsKey.equals(HRAConstants.VitalKey_SystolicBP, ignoreCase = true)
+                            || vital.VitalsKey.equals(
+                        HRAConstants.VitalKey_DiastolicBP,
+                        ignoreCase = true
+                    )
                 }
                 Timber.i("HraVitalDetails--->$bpDetails")
-                for ( bp in bpDetails ) {
+                for (bp in bpDetails) {
                     if (bp.VitalsKey.equals(HRAConstants.VitalKey_SystolicBP, ignoreCase = true)) {
-                        if ( !Utilities.isNullOrEmptyOrZero(bp.VitalsValue) ) {
+                        if (!Utilities.isNullOrEmptyOrZero(bp.VitalsValue)) {
                             binding.laySystolic.setValue(bp.VitalsValue)
                             strSystolic = bp.VitalsValue
                         }
-                        if ( bp.VitalsValue == "0" ) {
+                        if (bp.VitalsValue == "0") {
                             binding.laySystolic.setValue("")
                             strSystolic = "0"
                         }
                     }
                     if (bp.VitalsKey.equals(HRAConstants.VitalKey_DiastolicBP, ignoreCase = true)) {
-                        if ( !Utilities.isNullOrEmptyOrZero(bp.VitalsValue) ) {
+                        if (!Utilities.isNullOrEmptyOrZero(bp.VitalsValue)) {
                             binding.layDiastolic.setValue(bp.VitalsValue)
                             strDiastolic = bp.VitalsValue
                         }
-                        if ( bp.VitalsValue == "0" ) {
+                        if (bp.VitalsValue == "0") {
                             binding.layDiastolic.setValue("")
                             strDiastolic = "0"
                         }
@@ -162,22 +164,23 @@ class HraQuesBloodPressureFragment(val qCode: String) : BaseFragment() {
                 }
                 if (Utilities.isNullOrEmpty(strSystolic) && Utilities.isNullOrEmpty(strDiastolic)) {
                     Timber.e("BP Details not Exist...!!!")
-                    viewModel.callIsBPExist(true,viewPagerActivity!!.personId)
+                    viewModel.callIsBPExist(true, viewPagerActivity!!.personId)
                 }
             }
-        })
+        }
 
-        viewModel.bpDetails.observe(viewLifecycleOwner, { bpDetails ->
-            if ( bpDetails != null ) {
-                if ( !Utilities.isNullOrEmptyOrZero( bpDetails.bloodPressure.Systolic ) &&
-                    !Utilities.isNullOrEmptyOrZero( bpDetails.bloodPressure.Diastolic )) {
+        viewModel.bpDetails.observe(viewLifecycleOwner) { bpDetails ->
+            if (bpDetails != null) {
+                if (!Utilities.isNullOrEmptyOrZero(bpDetails.bloodPressure.Systolic) &&
+                    !Utilities.isNullOrEmptyOrZero(bpDetails.bloodPressure.Diastolic)
+                ) {
                     val systolic = bpDetails.bloodPressure.Systolic!!.toDouble().toInt()
                     val diastolic = bpDetails.bloodPressure.Diastolic!!.toDouble().toInt()
                     binding.laySystolic.setValue(systolic.toString())
                     binding.layDiastolic.setValue(diastolic.toString())
                 }
             }
-        })
+        }
 
     }
 
@@ -191,7 +194,7 @@ class HraQuesBloodPressureFragment(val qCode: String) : BaseFragment() {
                     Utilities.hideKeyboard(requireActivity())
                     saveResponseForNextScreen(true)
 
-                    viewModel.saveResponse("KNWBPNUM","86_YES",resources.getString(R.string.YES),questionData.category,questionData.tabName,"")
+                    viewModel.saveResponse("KNWBPNUM","86_YES","Yes",questionData.category,questionData.tabName,"")
                     viewModel.saveBloodPressureDetails( systolic, diastolic )
                     viewModel.removeSource(qCode)
                     viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() - 1)
@@ -207,7 +210,7 @@ class HraQuesBloodPressureFragment(val qCode: String) : BaseFragment() {
             if ( Validations.validateBP(systolic,diastolic,requireContext()) ) {
                 Utilities.hideKeyboard(requireActivity())
                 saveResponseForNextScreen(true)
-                viewModel.saveResponse("KNWBPNUM","86_YES",resources.getString(R.string.YES),questionData.category,questionData.tabName,"")
+                viewModel.saveResponse("KNWBPNUM","86_YES","Yes",questionData.category,questionData.tabName,"")
                 viewModel.saveBloodPressureDetails( systolic, diastolic )
                 viewModel.removeSource(qCode)
                 viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() + 1)
@@ -219,7 +222,7 @@ class HraQuesBloodPressureFragment(val qCode: String) : BaseFragment() {
             diastolic = 0
             Utilities.hideKeyboard(requireActivity())
             saveResponseForNextScreen(false)
-            viewModel.saveResponse("KNWBPNUM","86_NO",resources.getString(R.string.NO),questionData.category,questionData.tabName,"")
+            viewModel.saveResponse("KNWBPNUM","86_NO","No",questionData.category,questionData.tabName,"")
             viewModel.saveBloodPressureDetails( systolic, diastolic )
             viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() + 1)
         }

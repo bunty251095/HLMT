@@ -126,7 +126,7 @@ class OrderMedicineActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar_home)
-        toolbar_title.text = resources.getString(R.string.DASH_ORDER_YOUR_MEDICINES)
+        //toolbar_title.text = resources.getString(R.string.DASH_ORDER_YOUR_MEDICINES)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)

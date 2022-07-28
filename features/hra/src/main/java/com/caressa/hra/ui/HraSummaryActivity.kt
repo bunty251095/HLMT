@@ -8,10 +8,8 @@ import android.content.Intent
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -104,9 +102,9 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
     }
 
     private fun registerObservers() {
-        viewModel.medicalProfileSummary.observe( this , { })
-        viewModel.assessmentSummary.observe( this , { })
-        viewModel.listRecommendedTests.observe( this , { })
+        viewModel.medicalProfileSummary.observe( this) { }
+        viewModel.assessmentSummary.observe( this) { }
+        viewModel.listRecommendedTests.observe( this) { }
     }
 
     private fun setClickable() {
@@ -142,15 +140,15 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
 
         binding.indicatorScore.setOnTouchListener { _: View?, _: MotionEvent? -> true }
 
-        viewModel.hraSummaryDetails.observe(this, {
+        viewModel.hraSummaryDetails.observe(this) {
             if (it != null) {
                 val wellnessSummary = it
                 //Timber.i("HraSummaryDetails :- " + wellnessSummary)
 
-                if ( !Utilities.isNullOrEmptyOrZero( wellnessSummary.currentHRAHistoryID.toString() ) ) {
+                if (!Utilities.isNullOrEmptyOrZero(wellnessSummary.currentHRAHistoryID.toString())) {
                     currentHRAHistoryID = wellnessSummary.currentHRAHistoryID
                 }
-                if ( !Utilities.isNullOrEmptyOrZero( wellnessSummary.hraCutOff ) ) {
+                if (!Utilities.isNullOrEmptyOrZero(wellnessSummary.hraCutOff)) {
                     hraCutOff = wellnessSummary.hraCutOff.toInt()
                 }
 
@@ -195,17 +193,20 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
                     currentHRAHistoryID == 0 -> {
                         binding.layoutScoreSummary.visibility = View.GONE
                         binding.txtUnableToCalculateScore.visibility = View.VISIBLE
-                        binding.txtUnableToCalculateScore.text = resources.getString(R.string.WELLNESS_DESC_CURRENT_HRA_HISTORY_ID)
+                        binding.txtUnableToCalculateScore.text =
+                            resources.getString(R.string.WELLNESS_DESC_CURRENT_HRA_HISTORY_ID)
                     }
                     hraCutOff == 0 -> {
                         binding.layoutScoreSummary.visibility = View.GONE
                         binding.txtUnableToCalculateScore.visibility = View.VISIBLE
-                        binding.txtUnableToCalculateScore.text = resources.getString(R.string.WELLNESS_DESC_HRA_CUTOFF)
+                        binding.txtUnableToCalculateScore.text =
+                            resources.getString(R.string.WELLNESS_DESC_HRA_CUTOFF)
                     }
                     wellnessscore <= 0 -> {
                         binding.layoutScoreSummary.visibility = View.GONE
                         binding.txtUnableToCalculateScore.visibility = View.VISIBLE
-                        binding.txtUnableToCalculateScore.text = resources.getString(R.string.WELLNESS_DESC_SCORE_ZERO_NEGATIVE)
+                        binding.txtUnableToCalculateScore.text =
+                            resources.getString(R.string.WELLNESS_DESC_SCORE_ZERO_NEGATIVE)
                     }
                     else -> {
                         binding.layoutScoreSummary.visibility = View.VISIBLE
@@ -214,9 +215,10 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
                 }
 
             }
-        })
+        }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setHraRiskSummary() {
 
         val atRiskList: ArrayList<HraAssessmentSummaryModel.AssessmentDetails> = ArrayList()
@@ -291,19 +293,13 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
 
                 var strNeedImprovements = sbNeedImprovements.toString()
                 val strModerate = sbModerate.toString()
-                if (!Utilities.isNullOrEmpty(strNeedImprovements) && !Utilities.isNullOrEmpty(
-                        strModerate
-                    )
-                ) {
+                if (!Utilities.isNullOrEmpty(strNeedImprovements) && !Utilities.isNullOrEmpty(strModerate)) {
                     strNeedImprovements += ", "
                 }
                 Timber.i("Moderate---->%s", (strNeedImprovements + strModerate))
                 binding.txtModerateDesc.text = (strNeedImprovements + strModerate)
                 binding.cardModerateRisk.visibility = View.VISIBLE
-                if (Utilities.isNullOrEmpty(strNeedImprovements) && Utilities.isNullOrEmpty(
-                        strModerate
-                    )
-                ) {
+                if (Utilities.isNullOrEmpty(strNeedImprovements) && Utilities.isNullOrEmpty(strModerate)) {
                     binding.txtModerateDesc.text = "-"
                     binding.cardModerateRisk.visibility = View.GONE
                 }
@@ -344,32 +340,33 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
     private fun setLabTestsList() {
         binding.layoutLabTests.visibility = View.GONE
 
-        viewModel.hraRecommendedTests.observe(this, {
+        viewModel.hraRecommendedTests.observe(this) {
             val labTestsDetailsList = it
             Timber.e("TotalTests--->%s", labTestsDetailsList.size.toString())
 
-            val labTestsCommon  = labTestsDetailsList.filter { labTest ->
-                !labTest.Frequency.equals("As suggested by your doctor",ignoreCase = true)
+            val labTestsCommon = labTestsDetailsList.filter { labTest ->
+                !labTest.Frequency.equals("As suggested by your doctor", ignoreCase = true)
             }
-            val labTestsDoctorSuggested  = labTestsDetailsList.filter { labTest ->
-                labTest.Frequency.equals("As suggested by your doctor",ignoreCase = true)
+            val labTestsDoctorSuggested = labTestsDetailsList.filter { labTest ->
+                labTest.Frequency.equals("As suggested by your doctor", ignoreCase = true)
             }
 
-            if ( labTestsDetailsList.isNotEmpty() ) {
+            if (labTestsDetailsList.isNotEmpty()) {
                 binding.layoutLabTests.visibility = View.VISIBLE
 
-                if ( labTestsCommon.isNotEmpty() ) {
+                if (labTestsCommon.isNotEmpty()) {
                     binding.cardCommonLabtests.visibility = View.VISIBLE
-                    hraLabTestsAdapter = HraLabTestsAdapter(labTestsCommon, viewModel, this,this)
+                    hraLabTestsAdapter = HraLabTestsAdapter(labTestsCommon, viewModel, this, this)
                     binding.rvLabTests.adapter = hraLabTestsAdapter
                     binding.rvLabTests.setExpanded(true)
                 } else {
                     binding.cardCommonLabtests.visibility = View.GONE
                 }
 
-                if ( labTestsDoctorSuggested.isNotEmpty() ) {
+                if (labTestsDoctorSuggested.isNotEmpty()) {
                     binding.cardDoctorSuggestedLabtests.visibility = View.VISIBLE
-                    labTestsDoctorSuggestedAdapter = HraLabTestsAdapter(labTestsDoctorSuggested, viewModel, this,this)
+                    labTestsDoctorSuggestedAdapter =
+                        HraLabTestsAdapter(labTestsDoctorSuggested, viewModel, this, this)
                     binding.rvLabTestDoctorSuggested.adapter = labTestsDoctorSuggestedAdapter
                     binding.rvLabTestDoctorSuggested.setExpanded(true)
                 } else {
@@ -380,7 +377,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
                 binding.layoutLabTests.visibility = View.GONE
             }
 
-        })
+        }
     }
 
     private fun setColors( color : Int ) {
@@ -393,8 +390,7 @@ class HraSummaryActivity : BaseActivity(), DefaultNotificationDialog.OnDialogVal
             binding.layoutScoreDetails.background.colorFilter = BlendModeColorFilter(
                 ContextCompat.getColor(this,color),BlendMode.SRC_ATOP)
         } else {
-            binding.layoutScoreDetails.background.setColorFilter(ContextCompat.getColor(this,color),
-                PorterDuff.Mode.SRC_ATOP)
+            binding.layoutScoreDetails.background.setColorFilter(ContextCompat.getColor(this,color), PorterDuff.Mode.SRC_ATOP)
         }
     }
 

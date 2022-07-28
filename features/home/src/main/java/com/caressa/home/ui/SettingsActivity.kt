@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.toolbar_home.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import android.content.DialogInterface
+import com.caressa.common.constants.Constants
 import com.caressa.common.utils.*
 
 
@@ -60,7 +61,10 @@ class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionLi
         Timber.e("SelectedPosition=>$position")
         when (option.code) {
             "LANGUAGE" -> {
-                showLanguageDialog()
+                //showLanguageDialog()
+                val intent = Intent(this,LanguageActivity::class.java)
+                intent.putExtra(Constants.FROM, "")
+                startActivity(intent)
             }
             "RATE_US" -> {
                 DataHandler(this).goToPlayStore(this)
@@ -92,17 +96,15 @@ class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionLi
 
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setTitle(resources.getString(R.string.LANGUAGE))
-        builder.setItems(
-            items,
-            DialogInterface.OnClickListener { dialog, item -> // Do something with the selection
-                viewModel.getSettingsOptionList1(items[item])
-                if(items[item].equals("malay",true)){
-                    LocaleHelper.setLocale(this@SettingsActivity,"ms")
-                }else{
-                    LocaleHelper.setLocale(this@SettingsActivity,"en")
-                }
-                recreate()
-            })
+        builder.setItems(items) { dialog, item -> // Do something with the selection
+            viewModel.getSettingsOptionList1(items[item])
+            if (items[item].equals("malay", true)) {
+                LocaleHelper.setLocale(this@SettingsActivity, "ms")
+            } else {
+                LocaleHelper.setLocale(this@SettingsActivity, "en")
+            }
+            recreate()
+        }
         val alert: AlertDialog = builder.create()
         alert.show()
     }
@@ -134,6 +136,14 @@ class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionLi
         if (isButtonRight) {
             DataHandler(this).logout(backGroudCallViewModel,this)
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intentToPass = Intent()
+        intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HOME)
+        intentToPass.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intentToPass)
     }
 
 }

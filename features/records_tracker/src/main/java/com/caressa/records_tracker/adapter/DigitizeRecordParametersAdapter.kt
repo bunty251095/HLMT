@@ -88,24 +88,24 @@ class DigitizeRecordParametersAdapter( val list:List<HealthDataParameter> ,val v
                 }
 
                 if (tilEdtParameterUnit.getError() == null && tilEdtParameterValue.getError() == null) {
-                   imgRemove.setVisibility(View.INVISIBLE)
+                    imgRemove.visibility = View.INVISIBLE
                 } else {
-                    imgRemove.setVisibility(View.VISIBLE)
+                    imgRemove.visibility = View.VISIBLE
                 }
 
                 if (!Utilities.isNullOrEmpty(maxVal) && !Utilities.isNullOrEmpty(minVal) && !Utilities.isNullOrEmpty(observation)) {
                     if (!maxVal.equals("nan", ignoreCase = true) && !minVal.equals("nan", ignoreCase = true)) {
                         if (!healthDataParameter.unitStatus || observation.toDouble() > maxVal.toDouble()
                             || observation.toDouble() < minVal.toDouble() ) {
-                            imgRemove.setVisibility(View.VISIBLE)
+                            imgRemove.visibility = View.VISIBLE
                         } else {
-                            imgRemove.setVisibility(View.INVISIBLE)
+                            imgRemove.visibility = View.INVISIBLE
                         }
                     } else {
-                        imgRemove.setVisibility(View.VISIBLE)
+                        imgRemove.visibility = View.VISIBLE
                     }
                 } else {
-                    imgRemove.setVisibility(View.VISIBLE)
+                    imgRemove.visibility = View.VISIBLE
                 }
             } catch (e: Exception){
                 e.printStackTrace()

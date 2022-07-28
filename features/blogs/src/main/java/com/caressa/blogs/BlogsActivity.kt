@@ -15,6 +15,7 @@ import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.utils.FirebaseHelper
+import com.caressa.common.utils.LocaleHelper
 import kotlinx.android.synthetic.main.activity_blogs.*
 import kotlinx.android.synthetic.main.toolbar_layout_blogs.*
 
@@ -26,6 +27,11 @@ class BlogsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try {
+            LocaleHelper.onAttach(this, LocaleHelper.getLanguage(this))
+        } catch (e:Exception) {
+            e.printStackTrace()
+        }
         setContentView(R.layout.activity_blogs)
 
         setSupportActionBar(toolbar_blogs)

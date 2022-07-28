@@ -1,6 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="TITLE_TRACK_HEALTH_PARAMETERS">Track Health Parameters</string>
+    <string name="TITLE_TRACK_HEALTH_PARAMETERS2">Track Health\nParameters</string>
     <string name="TITLE_SELECT_PARAMETERS">Select Parameters</string>
     <string name="TITLE_UPDATE_PARAMETERS">Update Parameters</string>
     <string name="TITLE_PARAMETER_HISTORY">Parameter History</string>
@@ -13,6 +15,10 @@
     <string name="UPDATE_PARAMETER_DESC">Update parameters to see the trend</string>
     <string name="DASHBOARD_DESC">Quick View of Your Health Data</string>
     <string name="HISTORY_DESC">Check your existing data</string>
+
+    <string name="ADD_EDIT">Add/Edit</string>
+    <string name="LAST_CHECKED_ON">Last checked on</string>
+    <string name="SYSTOLIC_DIASTOLIC">Systolic/Diastolic</string>
 
     <string name="BLOOD_PRESSURE">Blood Pressure</string>
     <string name="BLOOD_SUGAR_PROFILE">Blood Sugar Profile</string>
@@ -39,10 +45,7 @@
     <string name="URINE">Urine</string>
     <string name="PULSE">Pulse</string>
 
-    <string name="ADD_EDIT">Add/Edit</string>
-    <string name="LAST_CHECKED_ON">Last checked on</string>
-    <string name="SYSTOLIC_DIASTOLIC">Systolic/Diastolic</string>
-
+    <string name="PLEASE_ENTER_AT_LEAST_ONE_VALUE_FOR">Please enter at least one value for</string>
     <string name="MSG_SELECT_PARAM_TO_TRACK">Please Select at least one Parameter to Track</string>
     <string name="MSG_SELECT_PROFILE_TO_PROCEED">Please Select a Profile to Proceed</string>
     <string name="MSG_PARAMETER_IS_UPDATED">Parameter is Updated Successfully</string>

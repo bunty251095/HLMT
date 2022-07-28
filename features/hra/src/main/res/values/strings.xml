@@ -1,32 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="HEALTH_CONCERN">Health Concerns</string>
-    <string name="MEDICAL_ILLNESS">Medical Illness</string>
-
-    <string name="DRY_EYE">Dry Eyes</string>
-    <string name="WEARING_LENSES">Near / Far Sightedness</string>
-    <string name="DRYNESS">Skin Dryness</string>
-
-    <string name="YOUR_BMI_IS">Your BMI</string>
-    <string name="enter_disease">Enter disease</string>
-    <string name="DIASYSTOLIC_BP">Diastolic (mm Hg)</string>
-
-    <string name="OBS_HIGH_RISK">High Risk</string>
-    <string name="OBS_MODERATE_RISK">Moderate Risk</string>
-    <string name="OBS_HEALTHY">Healthy</string>
-    <string name="OBS_OPTIMUM">Optimum</string>
-    <string name="HIGH">High</string>
-    <string name="MODERATE">Moderate</string>
-    <string name="LOW_RISK">At Risk</string>
-
-    <string name="OBESE">Obese</string>
-    <string name="OBESS_LEVEL_1">Obese Level 1</string>
-    <string name="OBESS_LEVEL_2">Obese Level 2</string>
-    <string name="OBESS_LEVEL_3">Obese Level 3</string>
-
-    <string name="HIGH_NORMAL">High normal</string>
-    <string name="DESIRABLE">Desirable</string>
-    <string name="MILDLY_HIGH">Mildly High</string>
 
     <!--New-->
     <string name="TITLE_HRA">Health Risk Assessment</string>
@@ -56,7 +29,6 @@
     <string name="DIASTOLIC_BP">Diastolic (mm Hg)</string>
     <string name="STARTING_HRA">Starting HRA</string>
 
-    <string name="PLEASE_SELECT_ALL_THAT_APPLY">Please select all that apply &amp; click next</string>
     <string name="SWITCH_PROFILE_DESC">To give HRA for a Family Member , your Profile will be Switched to that Respective Family Member</string>
     <string name="START_HRA">Start Health Risk Assessment</string>
     <string name="ADD_FAMILY_MEMBER">Add Family Member</string>
@@ -77,6 +49,7 @@
     <string name="NORMAL">Normal</string>
     <string name="OVER_WEIGHT">Overweight</string>
     <string name="PRE_OBESE">Pre-Obese</string>
+    <string name="OBESE">Obese</string>
     <string name="OBESE_LEVEL_1">Obese Level 1</string>
     <string name="OBESE_LEVEL_2">Obese Level 2</string>
     <string name="OBESE_LEVEL_3">Obese Level 3</string>
@@ -182,6 +155,7 @@
     <string name="ONGOING_MEDICATION">Ongoing Medication</string>
     <string name="FINANCIAL_MATTER">Financial Issues/Lost Job</string>
     <string name="HEALTH_CONCERNS">Health Concerns</string>
+    <string name="MEDICAL_ILLNESS">Medical Illness</string>
 
     <string name="CHOL_TEST">Cholesterol Test</string>
 
@@ -189,17 +163,13 @@
     <string name="WOMEN_CONCEIVE">Complication in conceiving</string>
     <string name="WOMEN_PID">Pelvic Inflammatory Disease</string>
 
-    <string name="RB_1_2_CIGARETTES">1–2 Cigarettes</string>
-    <string name="RB_3_4_CIGARETTES">3–4 Cigarettes</string>
-    <string name="RB_4_OR_MORE">4 or more</string>
-
     <string name="CHOLESTEROL_TEST">Cholesterol Test</string>
     <string name="PAP_TEST">Pap Test</string>
     <string name="THYROID_TEST">Thyroid Profile</string>
     <string name="BASIC_HEALTH_CHECKUP">Basic Health Check</string>
     <string name="SUGAR_PROFILE_TEST">Sugar Profile</string>
     <string name="MAMMOGRAM">Mammogram</string>
-    <string name="PAP_SMEAR_TEST">Pap Smear Test</string>
+<!--    <string name="PAP_SMEAR_TEST">Pap Smear Test</string>-->
 
     <string name="PLEASE_SELECT_OPTION">Please Select Option</string>
     <string name="PLEASE_ENTER_VALID_RANDOM_SUGAR_VALUE">Please Enter Valid Random Sugar value</string>
@@ -226,28 +196,18 @@
     <string name="TRIGLYCERIDES_VALUE_MUST_BE_BETWEEN">Triglycerides value must be between</string>
     <string name="VLDL_VALUE_MUST_BE_BETWEEN">VLDL value must be between</string>
 
-    <!--HRA Summary-->
-    <string name="YOUR_WELLNESS_SCORE_PLACES">Your wellness score \n places you in</string>
-    <string name="WELLNESS_DESC_CURRENT_HRA_HISTORY_ID">We were unable to compute your Health Score since you have not taken the complete HRA.Please Take the HRA to be able to see your Health Score</string>
-    <string name="WELLNESS_DESC_HRA_CUTOFF">We were not able to compute your Health Score since you have not answered some of the mandatory questions required to compute the Health Score. Please Complete the HRA to be able to see your Health Score</string>
-    <string name="WELLNESS_DESC_SCORE_ZERO_NEGATIVE">Your wellness score is 0 (out of 100), which places you in High Risk category</string>
-    <string name="CONGRATULATION_NO_RISK">Congratulations!! As per the information you have provided, it seems, at present,you have no risks.\n\nKeep up the good work, maintain a healthy lifestyle</string>
-    <string name="WELLNESS_SCORE_SUBTITLE_TEXT">Your Wellness score represents your holistic health status basis of your responses to the questionnaire</string>
-    <string name="SUMMERY_SUBTITLE_TEXT">The highlighted risks are basis the responses provided by you and risk categories under personal health, family history and health parameters</string>
-    <string name="LAB_TESTS_SUBTITLE_TEXT">Test Recommendations provide you a schedule and frequency of vital tests to identify your health regularly, based on your wellness score &amp; Risk summary</string>
-    <string name="RECOMMENDED_LAB_TESTS_CHECK_UPS">Recommended Lab Tests/\nCheck-Ups</string>
-    <string name="LAB_TEST_CHECK_UPS">Lab Test/Check-Ups</string>
-    <!--HRA Summary-->
-
-    <string name="TEXT_START_ASSESSMENT"><![CDATA[Hi <b>%s.</b> in the next 10 minutes, you will need to answer some questions and gain insights to your holistic health. \nDuring this <b> Health risk assessment </b>, we will understand 3 key pillars of your well being - Vitals, Lifestyle & Occupational health.\n
-    As a bonus, we will furnish you with a health score & complete summary & recommendations to reduce your health risks (if any).]]></string>
+    <!--HRA Questions-->
+    <string name="TEXT_START_ASSESSMENT"><![CDATA[Hi <b>%s.</b> in the next 10 minutes, you will need to answer some questions and gain insights to your holistic health. \nDuring this <b> Health risk assessment </b>, we will understand 3 key pillars of your well being - Vitals, Lifestyle & Occupational health.\nAs a bonus, we will furnish you with a health score & complete summary & recommendations to reduce your health risks (if any).]]></string>
     <string name="QUES_FAMILY_PROFILE"><![CDATA[Before we begin, please tell me <b>who</b> is taking this assessment?]]></string>
-    <string name="QUESTION_BMI"><![CDATA[Let\'s calculate your Body mass index (BMI); a simple way to gauge your weight: height ratio.
-    Please enter your vital <b>health parameters.</b>]]></string>
-    <string name="QUESTION_BP"><![CDATA[What ais your <b>blood pressure</b> value? \nKindly mention input in mmHg]]></string>
+    <string name="QUESTION_BMI"><![CDATA[Let\'s calculate your Body mass index (BMI); a simple way to gauge your weight: height ratio.Please enter your vital <b>health parameters.</b>]]></string>
+    <string name="QUESTION_BP"><![CDATA[What is your <b>blood pressure</b> value? \nKindly mention input in mmHg]]></string>
+    <string name="QUESTION_BLOOD_SUGAR"><![CDATA[Which of the following <b>Sugar report</b> you have recently done?]]></string>
+    <string name="QUESTION_BLOOD_SUGAR_INPUT"><![CDATA[Please update your last <b>Blood Sugar</b> level readings]]></string>
+    <string name="QUESTION_CHOLESTEROL"><![CDATA[Which of the following <b>Cholesterol report</b> have you recently done?]]></string>
+    <string name="QUESTION_CHOLESTEROL_INPUT"><![CDATA[Please update your last <b>Blood Cholesterol</b> level readings.]]></string>
     <string name="QUESTION_HEALTH_CONDITION"><![CDATA[Do you have any of these <b> Health Conditions?</b>]]></string>
-    <string name="QUESTION_PHY"><![CDATA[Which of the following <b> apply to you?</b>]]></string>
     <string name="QUESTION_WOMEN"><![CDATA[Do you have history of any of these <b>Medical Illnesses?</b>]]></string>
+    <string name="QUESTION_EDS"><![CDATA[Which of the following <b> Skin/Dental/Eye disorder </b>are you suffering from?]]></string>
     <string name="QUESTION_FAMILY_HISTORY"><![CDATA[Does anyone in your <b> blood relation </b> have any of these <b> health conditions? </b>]]></string>
     <string name="QUESTION_SNACKS"><![CDATA[Do you <b>eat fruits & vegetables</b> 2 to 3 times a day?]]></string>
     <string name="QUESTION_FAT"><![CDATA[Do you <b>eat fast food like red meat, cheese, fried foods</b> more than 3 times a week?]]></string>
@@ -261,19 +221,31 @@
     <string name="QUESTION_JOB_PAY"><![CDATA[Is your job offering <b>adequate amount of paid time off?</b>]]></string>
     <string name="QUESTION_SHIFT"><![CDATA[Do you work <b>in shifts?</b>]]></string>
     <string name="QUESTION_EXTENDED_TIME"><![CDATA[Do you spend <b>more than 8 hours</b> in front of <b>PC/Laptop?</b>]]></string>
-    <string name="QUESTION_STRESS"><![CDATA[Do you often <b>feel stressed?</b>]]></string>
-    <string name="QUESTION_HEALTH_CHECKUP">Have you had any of these tests done within the past one year?</string>
-    <string name="QUESTION_BLOOD_SUGAR_INPUT"><![CDATA[Please update your last <b>Blood Sugar</b> level readings]]></string>
-    <string name="QUESTION_BLOOD_SUGAR"><![CDATA[Which of the following <b>Sugar report</b> you have recently done? ]]></string>
-    <string name="QUESTION_CHOLESTEROL"><![CDATA[Which of the following <b>Cholesterol report</b> have you recently done? ]]></string>
-    <string name="QUESTION_CHOLESTEROL_INPUT"><![CDATA[Please update your last <b>Blood Cholesterol</b> level readings.]]></string>
-    <string name="QUESTION_FAMILY_PROFILE"><![CDATA[Before we begin, please tell me <b>who</b> is taking this assessment?]]></string>
-    <string name="QUESTION_LAST"><![CDATA[Thanks for sharing the details with us. Your <b>health risk assessment results</b> are on the way.]]></string>
-    <string name="QUESTION_CHECKUP"><![CDATA[Which of the following <b> health check-ups </b> have you undergone with the past year? ]]></string>
-    <string name="QUESTION_EDS"><![CDATA[Which of the following <b> Skin/Dental/Eye disorder </b>are you suffering from?]]></string>
     <string name="QUESTION_EXPOSE"><![CDATA[Are you <b> exposed to</b>  any of the following <b>at your workplace</b>?]]></string>
+    <string name="QUESTION_STRESS"><![CDATA[Do you often <b>feel stressed?</b>]]></string>
+    <string name="QUESTION_PHY"><![CDATA[Which of the following <b> apply to you?</b>]]></string>
+    <string name="QUESTION_CHECKUP"><![CDATA[Which of the following <b> health check-ups </b> have you undergone with the past year? ]]></string>
+    <string name="QUESTION_LAST"><![CDATA[Thanks for sharing the details with us. Your <b>health risk assessment results</b> are on the way.]]></string>
+    <string name="PLEASE_SELECT_ALL_THAT_APPLY">Please select all that apply &amp; click next</string>
+
+    <string name="QUESTION_HEALTH_CHECKUP">Have you had any of these tests done within the past one year?</string>
+    <string name="QUESTION_FAMILY_PROFILE"><![CDATA[Before we begin, please tell me <b>who</b> is taking this assessment?]]></string>
     <string name="QUESTION_BRIGHT_LIGHT"><![CDATA[Are you <b>exposed to</b> any of the following <b>at your workplace?</b>]]></string>
     <string name="QUESTION_WHR">Enter your Waist &amp; Hip measurement</string>
+    <!--HRA Questions-->
+
+    <!--HRA Summary-->
+    <string name="YOUR_WELLNESS_SCORE_PLACES">Your wellness score \n places you in</string>
+    <string name="WELLNESS_DESC_CURRENT_HRA_HISTORY_ID">We were unable to compute your Health Score since you have not taken the complete HRA.Please Take the HRA to be able to see your Health Score</string>
+    <string name="WELLNESS_DESC_HRA_CUTOFF">We were not able to compute your Health Score since you have not answered some of the mandatory questions required to compute the Health Score. Please Complete the HRA to be able to see your Health Score</string>
+    <string name="WELLNESS_DESC_SCORE_ZERO_NEGATIVE">Your wellness score is 0 (out of 100), which places you in High Risk category</string>
+    <string name="CONGRATULATION_NO_RISK">Congratulations!! As per the information you have provided, it seems, at present,you have no risks.\n\nKeep up the good work, maintain a healthy lifestyle</string>
+    <string name="WELLNESS_SCORE_SUBTITLE_TEXT">Your Wellness score represents your holistic health status basis of your responses to the questionnaire</string>
+    <string name="SUMMERY_SUBTITLE_TEXT">The highlighted risks are basis the responses provided by you and risk categories under personal health, family history and health parameters</string>
+    <string name="LAB_TESTS_SUBTITLE_TEXT">Test Recommendations provide you a schedule and frequency of vital tests to identify your health regularly, based on your wellness score &amp; Risk summary</string>
+    <string name="RECOMMENDED_LAB_TESTS_CHECK_UPS">Recommended Lab Tests/\nCheck-Ups</string>
+    <string name="LAB_TEST_CHECK_UPS">Lab Test/Check-Ups</string>
+    <!--HRA Summary-->
 
     <string name="FETCHING_BMI_DETAILS">Fetching BMI  Details</string>
     <string name="FETCHING_BP_DETAILS">Fetching Blood Pressure Details</string>
@@ -281,5 +253,15 @@
     <string name="SUBMITTING_HRA_DETAILS">Submitting HRA Details</string>
     <string name="DOWNLOADING_HRA_REPORT">Downloading HRA Report</string>
     <string name="LOADING_HRA_SUMMARY">Loading HRA Summary</string>
+
+    <string name="YOUR_BMI_IS">Your BMI</string>
+
+    <string name="OBS_HIGH_RISK">High Risk</string>
+    <string name="OBS_MODERATE_RISK">Moderate Risk</string>
+    <string name="OBS_HEALTHY">Healthy</string>
+    <string name="OBS_OPTIMUM">Optimum</string>
+    <string name="HIGH">High</string>
+    <string name="MODERATE">Moderate</string>
+    <string name="LOW_RISK">At Risk</string>
 
 </resources>

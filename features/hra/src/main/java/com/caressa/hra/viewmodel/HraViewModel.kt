@@ -13,6 +13,7 @@ import com.caressa.common.constants.Constants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.Event
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.hra.R
 import com.caressa.hra.common.HRAConstants
@@ -32,6 +33,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import timber.log.Timber
+import java.util.*
+import kotlin.collections.ArrayList
 
 @SuppressLint("StaticFieldLeak")
 class HraViewModel(
@@ -45,6 +48,8 @@ class HraViewModel(
     val adminPersonId = sharedPref.getString(PreferenceConstants.ADMIN_PERSON_ID, "")!!
     val firstName = sharedPref.getString(PreferenceConstants.FIRSTNAME, "")!!
     val gender = sharedPref.getString(PreferenceConstants.GENDER, "")!!
+
+    val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
 
     private val hraDataSingleton = HraDataSingleton.getInstance()!!
 
@@ -122,7 +127,7 @@ class HraViewModel(
             HraStartModel.JSONDataRequest(personID = relativeId),
             HraStartModel.JSONDataRequest::class.java), authToken)
 
-        _progressBar.value = Event(context.resources.getString(R.string.STARTING_HRA))
+        _progressBar.value = Event("")
         _hraStart.removeSource(hraStartSource)
         withContext(dispatchers.io) {
             hraStartSource = hraManagementUseCase.invokeStartHra(true,requestData,relativeId)
@@ -163,7 +168,7 @@ class HraViewModel(
                 BMIExistModel.JSONDataRequest(PersonID = personId),
                 BMIExistModel.JSONDataRequest::class.java), authToken)
 
-            _progressBar.value = Event(context.resources.getString(R.string.FETCHING_BMI_DETAILS))
+            _progressBar.value = Event("")
             _bmiDetails.removeSource(checkBmiSource)
             withContext(dispatchers.io) {
                 checkBmiSource = hraManagementUseCase.invokeBMIExist(isForceRefresh = forceRefresh, data = requestData)
@@ -195,7 +200,7 @@ class HraViewModel(
                 BPExistModel.JSONDataRequest(PersonID = personId),
                 BPExistModel.JSONDataRequest::class.java), authToken)
 
-            _progressBar.value = Event(context.resources.getString(R.string.FETCHING_BP_DETAILS))
+            _progressBar.value = Event("")
             _bpDetails.removeSource(checkBPSource)
             withContext(dispatchers.io) {
                 checkBPSource = hraManagementUseCase.invokeBPExist(isForceRefresh = forceRefresh, data = requestData)
@@ -227,7 +232,7 @@ class HraViewModel(
                 LabRecordsModel.JSONDataRequest(PersonID = personId),
                 LabRecordsModel.JSONDataRequest::class.java), authToken)
 
-            _progressBar.value = Event(context.resources.getString(R.string.FETCHING_LAB_DETAILS))
+            _progressBar.value = Event("")
             _labRecordsBs.removeSource(labRecordBsSource)
             withContext(dispatchers.io) {
                 labRecordBsSource = hraManagementUseCase.invokeLabRecords(isForceRefresh = forceRefresh, data = requestData)
@@ -259,7 +264,7 @@ class HraViewModel(
                 LabRecordsModel.JSONDataRequest(PersonID = personId),
                 LabRecordsModel.JSONDataRequest::class.java), authToken)
 
-            _progressBar.value = Event(context.resources.getString(R.string.SUBMITTING_HRA_DETAILS))
+            _progressBar.value = Event("")
             _labRecordsChol.removeSource(labRecordCholSource)
             withContext(dispatchers.io) {
                 labRecordCholSource = hraManagementUseCase.invokeLabRecords(isForceRefresh = forceRefresh, data = requestData)
@@ -394,7 +399,7 @@ class HraViewModel(
             }
         }
 
-        _progressBar.value = Event(context.resources.getString(R.string.SUBMITTING_HRA_DETAILS))
+        _progressBar.value = Event("")
         _submitHra.removeSource(submitHraSource)
         withContext(dispatchers.io) {
             submitHraSource = hraManagementUseCase.invokeSaveAndSubmitHra(true, data = requestData!!)
@@ -540,7 +545,7 @@ class HraViewModel(
                         option.IsSelected.equals(Constants.FALSE,ignoreCase = true)
                     }
                     if ( (optionList.size-1) == notSelectedList.size ) {
-                        list.add( HRAQuestions(Code = code,AnswerCode = "DONT",AnsDescription = context.resources.getString(R.string.NONE) ) )
+                        list.add( HRAQuestions(Code = code,AnswerCode = "DONT",AnsDescription = localResource.getString(R.string.NONE) ) )
                     }
                 }
                 Timber.e("$code SelectedList---> $list")
@@ -642,32 +647,32 @@ class HraViewModel(
             hraManagementUseCase.invokeClearResponse("EYEPROB")
             hraManagementUseCase.invokeClearResponse("SKINPRB")
 
-            if (selectedOptions.any { it.description.equals(context.resources.getString(R.string.NONE), ignoreCase = true) }) {
+            if (selectedOptions.any { it.description.equals("NONE", ignoreCase = true) }) {
                 list.add(HRAQuestions(
                     QuestionCode = quesCode,
                     AnswerCode = "NONE",
-                    AnsDescription = context.resources.getString(R.string.NONE),
+                    AnsDescription = "NONE",
                     Category = category,
                     TabName = tabName,
                     OthersVal = ""))
                 list.add(HRAQuestions(
                     QuestionCode = "DENPROB",
                     AnswerCode = "63_NONE",
-                    AnsDescription = context.resources.getString(R.string.NONE),
+                    AnsDescription = "NONE",
                     Category = "DENTAL",
                     TabName = tabName,
                     OthersVal = ""))
                 list.add(HRAQuestions(
                     QuestionCode = "EYEPROB",
                     AnswerCode = "64_NONE",
-                    AnsDescription = context.resources.getString(R.string.NONE),
+                    AnsDescription = "NONE",
                     Category = "EYE",
                     TabName = tabName,
                     OthersVal = ""))
                 list.add(HRAQuestions(
                     QuestionCode = "SKINPRB",
                     AnswerCode = "65_SKNPRBNONE",
-                    AnsDescription = context.resources.getString(R.string.NONE),
+                    AnsDescription = "NONE",
                     Category = "SKIN",
                     TabName = tabName,
                     OthersVal = ""))
@@ -702,7 +707,7 @@ class HraViewModel(
                     list.add(HRAQuestions(
                         QuestionCode = "DENPROB",
                         AnswerCode = "63_NONE",
-                        AnsDescription = context.resources.getString(R.string.NONE),
+                        AnsDescription = "NONE",
                         Category = "DENTAL",
                         TabName = tabName,
                         OthersVal = ""))
@@ -712,7 +717,7 @@ class HraViewModel(
                     list.add(HRAQuestions(
                         QuestionCode = "EYEPROB",
                         AnswerCode = "64_NONE",
-                        AnsDescription = context.resources.getString(R.string.NONE),
+                        AnsDescription = "NONE",
                         Category = "EYE",
                         TabName = tabName,
                         OthersVal = ""))
@@ -722,7 +727,7 @@ class HraViewModel(
                     list.add(HRAQuestions(
                         QuestionCode = "SKINPRB",
                         AnswerCode = "65_SKNPRBNONE",
-                        AnsDescription = context.resources.getString(R.string.NONE),
+                        AnsDescription = "NONE",
                         Category = "SKIN",
                         TabName = tabName,
                         OthersVal = ""))
@@ -901,7 +906,7 @@ class HraViewModel(
                     val paramDataList : MutableList<TrackParameterMaster.Parameter> = mutableListOf()
                     withContext(dispatchers.io) {
                         paramDataList.addAll(hraManagementUseCase.invokeGetParameterDataByProfileCode("DIABETIC"))
-                        optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
+                        optionList.add(Option(description = localResource.getString(R.string.NONE), answerCode = "DONT"))
                         for (param in paramDataList) {
                             optionList.add(Option(description = param.description!!, answerCode = param.code!!))
                         }
@@ -935,7 +940,7 @@ class HraViewModel(
                     val paramDataList : MutableList<TrackParameterMaster.Parameter> = mutableListOf()
                     withContext(dispatchers.io) {
                         paramDataList.addAll(hraManagementUseCase.invokeGetParameterDataByProfileCode("LIPID"))
-                        optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
+                        optionList.add(Option(description = localResource.getString(R.string.NONE), answerCode = "DONT"))
                         for (param in paramDataList) {
                             optionList.add(Option(description = param.description!!, answerCode = param.code!!))
                         }
@@ -967,15 +972,15 @@ class HraViewModel(
                 //************************Vital Question Data ************************
 
                 "HHILL" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "15_NONE"))
-                    optionList.add(Option(description = context.resources.getString(R.string.HIGH_BLOOD_PRESSURE), answerCode = "15_HBP"))
-                    optionList.add(Option(description = context.resources.getString(R.string.THYROID_IMBALANCE), answerCode = "15_THYRIOD"))
-                    optionList.add(Option(description = context.resources.getString(R.string.HIGH_CHOLESTEROL), answerCode = "15_INC_CHOL"))
-                    optionList.add(Option(description = context.resources.getString(R.string.DIABETES), answerCode = "15_DIAB"))
-                    optionList.add(Option(description = context.resources.getString(R.string.ASTHMA), answerCode = "15_ASTAMA"))
-                    optionList.add(Option(description = context.resources.getString(R.string.ARTHRITIS), answerCode = "15_ARTH"))
-                    optionList.add(Option(description = context.resources.getString(R.string.MENTAL_ILLNESS), answerCode = "15_MENTAL"))
-                    optionList.add(Option(description = context.resources.getString(R.string.HEART_DISEASE), answerCode = "15_HRTPROB"))
+                    optionList.add(Option(description = localResource.getString(R.string.NONE), answerCode = "15_NONE"))
+                    optionList.add(Option(description = localResource.getString(R.string.HIGH_BLOOD_PRESSURE), answerCode = "15_HBP"))
+                    optionList.add(Option(description = localResource.getString(R.string.THYROID_IMBALANCE), answerCode = "15_THYRIOD"))
+                    optionList.add(Option(description = localResource.getString(R.string.HIGH_CHOLESTEROL), answerCode = "15_INC_CHOL"))
+                    optionList.add(Option(description = localResource.getString(R.string.DIABETES), answerCode = "15_DIAB"))
+                    optionList.add(Option(description = localResource.getString(R.string.ASTHMA), answerCode = "15_ASTAMA"))
+                    optionList.add(Option(description = localResource.getString(R.string.ARTHRITIS), answerCode = "15_ARTH"))
+                    optionList.add(Option(description = localResource.getString(R.string.MENTAL_ILLNESS), answerCode = "15_MENTAL"))
+                    optionList.add(Option(description = localResource.getString(R.string.HEART_DISEASE), answerCode = "15_HRTPROB"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_HEALTH_CONDITION,
@@ -986,13 +991,13 @@ class HraViewModel(
                 }
 
                 "WOMOTHER" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "87_NONE"))
-                    optionList.add(Option(description = context.resources.getString(R.string.WOMEN_PERIOD), answerCode = "87_MENSTRUALPRB"))
-                    optionList.add(Option(description = context.resources.getString(R.string.WOMEN_PCOS), answerCode = "87_PCOS"))
-                    optionList.add(Option(description = context.resources.getString(R.string.WOMEN_DISCHARGE), answerCode = "87_VAGINALDIS"))
-                    optionList.add(Option(description = context.resources.getString(R.string.WOMEN_UTI), answerCode = "87_UTI"))
-                    optionList.add(Option(description = context.resources.getString(R.string.WOMEN_BRESTPAIN), answerCode = "87_BREASTPAIN"))
-                    optionList.add(Option(description = context.resources.getString(R.string.WOMEN_FIB), answerCode = "87_FIBROIDS"))
+                    optionList.add(Option(description = localResource.getString(R.string.NONE), answerCode = "87_NONE"))
+                    optionList.add(Option(description = localResource.getString(R.string.WOMEN_PERIOD), answerCode = "87_MENSTRUALPRB"))
+                    optionList.add(Option(description = localResource.getString(R.string.WOMEN_PCOS), answerCode = "87_PCOS"))
+                    optionList.add(Option(description = localResource.getString(R.string.WOMEN_DISCHARGE), answerCode = "87_VAGINALDIS"))
+                    optionList.add(Option(description = localResource.getString(R.string.WOMEN_UTI), answerCode = "87_UTI"))
+                    optionList.add(Option(description = localResource.getString(R.string.WOMEN_BRESTPAIN), answerCode = "87_BREASTPAIN"))
+                    optionList.add(Option(description = localResource.getString(R.string.WOMEN_FIB), answerCode = "87_FIBROIDS"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_WOMEN,
@@ -1003,19 +1008,19 @@ class HraViewModel(
                 }
 
                 "FHIST" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "1_NONE"))
-                    optionList.add(Option(description = context.resources.getString(R.string.DIABETES), answerCode = "1_DIABETIC"))
-                    optionList.add(Option(description = context.resources.getString(R.string.HIGH_BLOOD_PRESSURE), answerCode = "1_HIGHBP"))
-                    optionList.add(Option(description = context.resources.getString(R.string.OBESITY), answerCode = "1_OBESE"))
-                    optionList.add(Option(description = context.resources.getString(R.string.ASTHMA), answerCode = "1_ASTAMA"))
-                    optionList.add(Option(description = context.resources.getString(R.string.ARTHRITIS), answerCode = "1_ARTHRITIS"))
-                    optionList.add(Option(description = context.resources.getString(R.string.HIGH_CHOLESTEROL), answerCode = "1_ELECOHLESTEROL"))
-                    optionList.add(Option(description = context.resources.getString(R.string.HEART_PROBLEMS), answerCode = "1_HRTOPR"))
+                    optionList.add(Option(description = localResource.getString(R.string.NONE), answerCode = "1_NONE"))
+                    optionList.add(Option(description = localResource.getString(R.string.DIABETES), answerCode = "1_DIABETIC"))
+                    optionList.add(Option(description = localResource.getString(R.string.HIGH_BLOOD_PRESSURE), answerCode = "1_HIGHBP"))
+                    optionList.add(Option(description = localResource.getString(R.string.OBESITY), answerCode = "1_OBESE"))
+                    optionList.add(Option(description = localResource.getString(R.string.ASTHMA), answerCode = "1_ASTAMA"))
+                    optionList.add(Option(description = localResource.getString(R.string.ARTHRITIS), answerCode = "1_ARTHRITIS"))
+                    optionList.add(Option(description = localResource.getString(R.string.HIGH_CHOLESTEROL), answerCode = "1_ELECOHLESTEROL"))
+                    optionList.add(Option(description = localResource.getString(R.string.HEART_PROBLEMS), answerCode = "1_HRTOPR"))
                     if ( gender.equals("2",ignoreCase = true)  ) {
-                        optionList.add(Option(description = context.resources.getString(R.string.BREAST_CANCER), answerCode = "1_BRECANCER"))
-                        optionList.add(Option(description = context.resources.getString(R.string.CERVICAL_CANCER), answerCode = "1_CERCANCER"))
+                        optionList.add(Option(description = localResource.getString(R.string.BREAST_CANCER), answerCode = "1_BRECANCER"))
+                        optionList.add(Option(description = localResource.getString(R.string.CERVICAL_CANCER), answerCode = "1_CERCANCER"))
                     } else {
-                        optionList.add(Option(description = context.resources.getString(R.string.COLORECTAL_CANCER), answerCode = "1_COLORECTAL"))
+                        optionList.add(Option(description = localResource.getString(R.string.COLORECTAL_CANCER), answerCode = "1_COLORECTAL"))
                     }
                     question = Question(
                         qCode = qCode,
@@ -1028,8 +1033,8 @@ class HraViewModel(
                 }
 
                 "5FRUIT" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "12_ALW"))
-                    optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "12_NEV"))
+                    optionList.add(Option(description = localResource.getString(R.string.YES), answerCode = "12_ALW"))
+                    optionList.add(Option(description = localResource.getString(R.string.NO), answerCode = "12_NEV"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_SNACKS,
@@ -1040,8 +1045,8 @@ class HraViewModel(
                 }
 
                 "FATFOOD" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "13_EV"))
-                    optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "13_NEV"))
+                    optionList.add(Option(description = localResource.getString(R.string.YES), answerCode = "13_EV"))
+                    optionList.add(Option(description = localResource.getString(R.string.NO), answerCode = "13_NEV"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_FAT,
@@ -1052,10 +1057,10 @@ class HraViewModel(
                 }
 
                 "PHYEXER" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "6_PHYEXEALW"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_USUALLY), answerCode = "6_PHYEXEMSTWEEK"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_SOMETIMES), answerCode = "6_PHYEXERARE"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "6_PHYEXENEVER"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_ALWAYS), answerCode = "6_PHYEXEALW"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_USUALLY), answerCode = "6_PHYEXEMSTWEEK"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_SOMETIMES), answerCode = "6_PHYEXERARE"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_NEVER), answerCode = "6_PHYEXENEVER"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_EXERCISE,
@@ -1066,9 +1071,9 @@ class HraViewModel(
                 }
 
                 "PHYSLEEP" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.LESS_THAN_6HOURS), answerCode = "6_PHYSLPMSTNGT"))
-                    optionList.add(Option(description = context.resources.getString(R.string.SIXTO_EIGHT_HOURS), answerCode = "6_PHYSLPMOST"))
-                    optionList.add(Option(description = context.resources.getString(R.string.MORE_THAN_8HOURS), answerCode = "6_PHYSLPALL"))
+                    optionList.add(Option(description = localResource.getString(R.string.LESS_THAN_6HOURS), answerCode = "6_PHYSLPMSTNGT"))
+                    optionList.add(Option(description = localResource.getString(R.string.SIXTO_EIGHT_HOURS), answerCode = "6_PHYSLPMOST"))
+                    optionList.add(Option(description = localResource.getString(R.string.MORE_THAN_8HOURS), answerCode = "6_PHYSLPALL"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_SLEEP,
@@ -1079,11 +1084,11 @@ class HraViewModel(
                 }
 
                 "SMOKECNT" -> {
-                    //optionList.add(Option(description = context.resources.getString(R.string.RB_DONT_SMOKE), answerCode = "2_NO"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_DONT_SMOKE), answerCode = "86_NONE"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_12CIGAR), answerCode = "SMKCNT12"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_34CIGAR), answerCode = "SMKCNT34"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_MORETHAN_4CIGAR), answerCode = "SMKCNTGT4"))
+                    //optionList.add(Option(description = localResource.getString(R.string.RB_DONT_SMOKE), answerCode = "2_NO"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_DONT_SMOKE), answerCode = "86_NONE"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_12CIGAR), answerCode = "SMKCNT12"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_34CIGAR), answerCode = "SMKCNT34"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_MORETHAN_4CIGAR), answerCode = "SMKCNTGT4"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_SMOKE,
@@ -1094,10 +1099,10 @@ class HraViewModel(
                 }
 
                 "DRINKCNT" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.I_DONT_DRINK), answerCode = "1_GENDRINKNO"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_1_2_PEGS), answerCode = "DNKCNT12"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_3_4_PEGS), answerCode = "DNKCNT34"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_4_PEGS), answerCode = "DNKCNTGT4"))
+                    optionList.add(Option(description = localResource.getString(R.string.I_DONT_DRINK), answerCode = "1_GENDRINKNO"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_1_2_PEGS), answerCode = "DNKCNT12"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_3_4_PEGS), answerCode = "DNKCNT34"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_4_PEGS), answerCode = "DNKCNTGT4"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_DRINK,
@@ -1108,10 +1113,10 @@ class HraViewModel(
                 }
 
                 "BALWF" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "68_BALWFALWAYS"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_USUALLY), answerCode = "68_BALWFSOMETIME"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_RARELY), answerCode = "68_BALWFRAR"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "68_BALWFNEVER"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_ALWAYS), answerCode = "68_BALWFALWAYS"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_USUALLY), answerCode = "68_BALWFSOMETIME"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_RARELY), answerCode = "68_BALWFRAR"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_NEVER), answerCode = "68_BALWFNEVER"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_FAMILY_LIFE,
@@ -1122,10 +1127,10 @@ class HraViewModel(
                 }
 
                 "SOCSYSTM" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_VERY_STRONG), answerCode = "7_SOCSYSLOTFRD"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_ABOVE_AVERAGE), answerCode = "7_SOCSYSTLKFRD"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_BELOW_AVERAGE), answerCode = "7_SOCSYSRARFRD"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_NOT_SURE), answerCode = "7_SOCSYSDONTFRD"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_VERY_STRONG), answerCode = "7_SOCSYSLOTFRD"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_ABOVE_AVERAGE), answerCode = "7_SOCSYSTLKFRD"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_BELOW_AVERAGE), answerCode = "7_SOCSYSRARFRD"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_NOT_SURE), answerCode = "7_SOCSYSDONTFRD"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_SOCIAL,
@@ -1136,10 +1141,10 @@ class HraViewModel(
                 }
 
                 "GENOVER" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.COMPLETELY), answerCode = "1_GENOVRALW"))
-                    optionList.add(Option(description = context.resources.getString(R.string.MOSTLY), answerCode = "1_GENOVRSMT"))
-                    optionList.add(Option(description = context.resources.getString(R.string.PARTLY), answerCode = "1_GENOVRNVR"))
-                    optionList.add(Option(description = context.resources.getString(R.string.NOT_SATISFIED), answerCode = "1_GENOVRSTR"))
+                    optionList.add(Option(description = localResource.getString(R.string.COMPLETELY), answerCode = "1_GENOVRALW"))
+                    optionList.add(Option(description = localResource.getString(R.string.MOSTLY), answerCode = "1_GENOVRSMT"))
+                    optionList.add(Option(description = localResource.getString(R.string.PARTLY), answerCode = "1_GENOVRNVR"))
+                    optionList.add(Option(description = localResource.getString(R.string.NOT_SATISFIED), answerCode = "1_GENOVRSTR"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_SATISFIED_LIFE,
@@ -1150,10 +1155,10 @@ class HraViewModel(
                 }
 
                 "JPT" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "67_JPTALWAYS"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_USUALLY), answerCode = "67_JPTSOMETIME"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_RARELY), answerCode = "67_JPTRAR"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "67_JPTNEVER"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_ALWAYS), answerCode = "67_JPTALWAYS"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_USUALLY), answerCode = "67_JPTSOMETIME"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_RARELY), answerCode = "67_JPTRAR"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_NEVER), answerCode = "67_JPTNEVER"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_JOB_PAY,
@@ -1164,8 +1169,8 @@ class HraViewModel(
                 }
 
                 "OCCSHIFT" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "OCCSHIFTYES"))
-                    optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "OCCSHIFTNO"))
+                    optionList.add(Option(description = localResource.getString(R.string.YES), answerCode = "OCCSHIFTYES"))
+                    optionList.add(Option(description = localResource.getString(R.string.NO), answerCode = "OCCSHIFTNO"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_SHIFT,
@@ -1176,8 +1181,8 @@ class HraViewModel(
                 }
 
                 "OCCPCTIM" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "OCCPCTIMYES"))
-                    optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "OCCPCTIMNO"))
+                    optionList.add(Option(description = localResource.getString(R.string.YES), answerCode = "OCCPCTIMYES"))
+                    optionList.add(Option(description = localResource.getString(R.string.NO), answerCode = "OCCPCTIMNO"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_EXTENDED_TIME,
@@ -1188,8 +1193,8 @@ class HraViewModel(
                 }
 
                 "PHYSTRES" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.YES), answerCode = "6_PHYSTRYES"))
-                    optionList.add(Option(description = context.resources.getString(R.string.NO), answerCode = "6_PHYSTRNO"))
+                    optionList.add(Option(description = localResource.getString(R.string.YES), answerCode = "6_PHYSTRYES"))
+                    optionList.add(Option(description = localResource.getString(R.string.NO), answerCode = "6_PHYSTRNO"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_STRESS,
@@ -1200,15 +1205,15 @@ class HraViewModel(
                 }
 
                 "PHY" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "66_PHYNONE"))
-                    optionList.add(Option(description = context.resources.getString(R.string.DEATH_OF_RELATIVE), answerCode = "66_PHYDEATH"))
-                    optionList.add(Option(description = context.resources.getString(R.string.END_OF_RELATIONSHIP), answerCode = "66_PHYDIVORCE"))
-                    optionList.add(Option(description = context.resources.getString(R.string.FEEL_DEMOTIVATED), answerCode = "66_PHYDEMOTIVE"))
-                    optionList.add(Option(description = context.resources.getString(R.string.PHYSICAL_PROBLEM), answerCode = "66_PHYABUSE"))
-                    optionList.add(Option(description = context.resources.getString(R.string.ONGOING_MEDICATION), answerCode = "66_PHYNMEDON"))
-                    optionList.add(Option(description = context.resources.getString(R.string.FINANCIAL_MATTER), answerCode = "66_PHYFINMATTER"))
-//                optionList.add(Option(description = context.resources.getString(R.string.HEALTH_CONCERN), answerCode = "66_PHYHLTHCONCERN"))
-                    optionList.add(Option(description = context.resources.getString(R.string.MEDICAL_ILLNESS), answerCode = "66_PHYHLTHCONCERN"))
+                    optionList.add(Option(description = localResource.getString(R.string.NONE), answerCode = "66_PHYNONE"))
+                    optionList.add(Option(description = localResource.getString(R.string.DEATH_OF_RELATIVE), answerCode = "66_PHYDEATH"))
+                    optionList.add(Option(description = localResource.getString(R.string.END_OF_RELATIONSHIP), answerCode = "66_PHYDIVORCE"))
+                    optionList.add(Option(description = localResource.getString(R.string.FEEL_DEMOTIVATED), answerCode = "66_PHYDEMOTIVE"))
+                    optionList.add(Option(description = localResource.getString(R.string.PHYSICAL_PROBLEM), answerCode = "66_PHYABUSE"))
+                    optionList.add(Option(description = localResource.getString(R.string.ONGOING_MEDICATION), answerCode = "66_PHYNMEDON"))
+                    optionList.add(Option(description = localResource.getString(R.string.FINANCIAL_MATTER), answerCode = "66_PHYFINMATTER"))
+//                optionList.add(Option(description = localResource.getString(R.string.HEALTH_CONCERN), answerCode = "66_PHYHLTHCONCERN"))
+                    optionList.add(Option(description = localResource.getString(R.string.MEDICAL_ILLNESS), answerCode = "66_PHYHLTHCONCERN"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_PHY,
@@ -1219,17 +1224,17 @@ class HraViewModel(
                 }
 
                 "EDS" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "NONE"))
-                    optionList.add(Option(description = context.resources.getString(R.string.CAVITIES), answerCode = "DENTAL,DENPROB,63_CAVITIES"))
-                    optionList.add(Option(description = context.resources.getString(R.string.BAD_BREATH), answerCode = "DENTAL,DENPROB,63_BAD_BREATH"))
-                    optionList.add(Option(description = context.resources.getString(R.string.STAINING), answerCode = "DENTAL,DENPROB,63_STAINING"))
-                    optionList.add(Option(description = context.resources.getString(R.string.BLEEDING_GUM), answerCode = "DENTAL,DENPROB,63_BLEEDING_GUMS"))
-                    optionList.add(Option(description = context.resources.getString(R.string.BLURRED_VISION), answerCode = "EYE,EYEPROB,64_SQUINT"))
-                    optionList.add(Option(description = context.resources.getString(R.string.WEARING_LENSES), answerCode = "EYE,EYEPROB,64_REFRACTORY_ERROR"))
-                    optionList.add(Option(description = context.resources.getString(R.string.DRY_EYE), answerCode = "EYE,EYEPROB,64_DRY_EYES"))
-                    optionList.add(Option(description = context.resources.getString(R.string.DANDRUFF), answerCode = "SKIN,SKINPRB,65_SKNPRBDAND"))
-                    optionList.add(Option(description = context.resources.getString(R.string.ACNE), answerCode = "SKIN,SKINPRB,65_SKNPRBACNE"))
-                    optionList.add(Option(description = context.resources.getString(R.string.DRYNESS), answerCode = "SKIN,SKINPRB,65_SKNPRBDRY"))
+                    optionList.add(Option(description = localResource.getString(R.string.NONE), answerCode = "NONE"))
+                    optionList.add(Option(description = localResource.getString(R.string.CAVITIES), answerCode = "DENTAL,DENPROB,63_CAVITIES"))
+                    optionList.add(Option(description = localResource.getString(R.string.BAD_BREATH), answerCode = "DENTAL,DENPROB,63_BAD_BREATH"))
+                    optionList.add(Option(description = localResource.getString(R.string.STAINING), answerCode = "DENTAL,DENPROB,63_STAINING"))
+                    optionList.add(Option(description = localResource.getString(R.string.BLEEDING_GUM), answerCode = "DENTAL,DENPROB,63_BLEEDING_GUMS"))
+                    optionList.add(Option(description = localResource.getString(R.string.BLURRED_VISION), answerCode = "EYE,EYEPROB,64_SQUINT"))
+                    optionList.add(Option(description = localResource.getString(R.string.NEAR_FAR_SIGHTEDNESS), answerCode = "EYE,EYEPROB,64_REFRACTORY_ERROR"))
+                    optionList.add(Option(description = localResource.getString(R.string.DRY_EYES), answerCode = "EYE,EYEPROB,64_DRY_EYES"))
+                    optionList.add(Option(description = localResource.getString(R.string.DANDRUFF), answerCode = "SKIN,SKINPRB,65_SKNPRBDAND"))
+                    optionList.add(Option(description = localResource.getString(R.string.ACNE), answerCode = "SKIN,SKINPRB,65_SKNPRBACNE"))
+                    optionList.add(Option(description = localResource.getString(R.string.SKIN_DRYNESS), answerCode = "SKIN,SKINPRB,65_SKNPRBDRY"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_EDS,
@@ -1240,11 +1245,11 @@ class HraViewModel(
                 }
 
                 "EXPOSE" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
-                    optionList.add(Option(description = context.resources.getString(R.string.BRIGHT_LIGHT), answerCode = "OCCHWELD,OCCHWELDYES,OCCHWELDNO"))
-                    optionList.add(Option(description = context.resources.getString(R.string.LOUD_NOISE), answerCode = "OCCNOISE,OCCNOISYES,OCCNOISNO"))
-                    optionList.add(Option(description = context.resources.getString(R.string.HAZARDOUS_GASES), answerCode = "OCCHAZGAS,OCCHGASYES,OCCHGASNO"))
-                    optionList.add(Option(description = context.resources.getString(R.string.TALKING_LONG), answerCode = "OCCTALKLOT,OCCTALKLOTYES,OCCTALKLOTNO"))
+                    optionList.add(Option(description = localResource.getString(R.string.NONE), answerCode = "DONT"))
+                    optionList.add(Option(description = localResource.getString(R.string.BRIGHT_LIGHT), answerCode = "OCCHWELD,OCCHWELDYES,OCCHWELDNO"))
+                    optionList.add(Option(description = localResource.getString(R.string.LOUD_NOISE), answerCode = "OCCNOISE,OCCNOISYES,OCCNOISNO"))
+                    optionList.add(Option(description = localResource.getString(R.string.HAZARDOUS_GASES), answerCode = "OCCHAZGAS,OCCHGASYES,OCCHGASNO"))
+                    optionList.add(Option(description = localResource.getString(R.string.TALKING_LONG), answerCode = "OCCTALKLOT,OCCTALKLOTYES,OCCTALKLOTNO"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_EXPOSE,
@@ -1255,16 +1260,16 @@ class HraViewModel(
                 }
 
                 "CHECKUP" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.NONE), answerCode = "DONT"))
-                    optionList.add(Option(description = context.resources.getString(R.string.CHOL_TEST), answerCode = "LIPIDSCRN,13_LIPLT1YR,13_LIPNEVER"))
+                    optionList.add(Option(description = localResource.getString(R.string.NONE), answerCode = "DONT"))
+                    optionList.add(Option(description = localResource.getString(R.string.CHOL_TEST), answerCode = "LIPIDSCRN,13_LIPLT1YR,13_LIPNEVER"))
                     if ( gender.equals("2",ignoreCase = true)  ) {
-                        optionList.add(Option(description = context.resources.getString(R.string.PAP_TEST), answerCode = "WOMPAPSMR,11_WMNPAPLSTYR,11_WMNPAPNOPAP"))
+                        optionList.add(Option(description = localResource.getString(R.string.PAP_TEST), answerCode = "WOMPAPSMR,11_WMNPAPLSTYR,11_WMNPAPNOPAP"))
                     }
-                    optionList.add(Option(description = context.resources.getString(R.string.THYROID_TEST), answerCode = "TSHSCREEN,TSHL1Y,TSHNVR"))
-                    optionList.add(Option(description = context.resources.getString(R.string.BASIC_HEALTH_CHECKUP), answerCode = "GENSCRN,13_GENLT1YR,13_GENNEVER"))
-                    optionList.add(Option(description = context.resources.getString(R.string.SUGAR_PROFILE_TEST), answerCode = "DIABSCRN,13_DIBLT1YR,13_DIBNEVER"))
+                    optionList.add(Option(description = localResource.getString(R.string.THYROID_TEST), answerCode = "TSHSCREEN,TSHL1Y,TSHNVR"))
+                    optionList.add(Option(description = localResource.getString(R.string.BASIC_HEALTH_CHECKUP), answerCode = "GENSCRN,13_GENLT1YR,13_GENNEVER"))
+                    optionList.add(Option(description = localResource.getString(R.string.SUGAR_PROFILE_TEST), answerCode = "DIABSCRN,13_DIBLT1YR,13_DIBNEVER"))
                     if ( gender.equals("2",ignoreCase = true)  ) {
-                        optionList.add(Option(description = context.resources.getString(R.string.MAMMOGRAM), answerCode = "WOMMAMO,11_WMNMAMLSTYR,11_WMNMAMANO"))
+                        optionList.add(Option(description = localResource.getString(R.string.MAMMOGRAM), answerCode = "WOMMAMO,11_WMNMAMLSTYR,11_WMNMAMANO"))
                     }
                     question = Question(
                         qCode = qCode,
@@ -1276,10 +1281,10 @@ class HraViewModel(
                 }
 
                 "OCCHWELD" -> {
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_ALWAYS), answerCode = "OCCHWELDYES"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_SOMETIMES), answerCode = "OCCHWELDSOM"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_RARELY), answerCode = "OCCHWELDRAR"))
-                    optionList.add(Option(description = context.resources.getString(R.string.RB_NEVER), answerCode = "OCCHWELDNO"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_ALWAYS), answerCode = "OCCHWELDYES"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_SOMETIMES), answerCode = "OCCHWELDSOM"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_RARELY), answerCode = "OCCHWELDRAR"))
+                    optionList.add(Option(description = localResource.getString(R.string.RB_NEVER), answerCode = "OCCHWELDNO"))
                     question = Question(
                         qCode = qCode,
                         question = R.string.QUESTION_BRIGHT_LIGHT,

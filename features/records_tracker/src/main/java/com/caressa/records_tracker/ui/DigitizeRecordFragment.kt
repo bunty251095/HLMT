@@ -101,17 +101,17 @@ class DigitizeRecordFragment : BaseFragment() , com.github.barteksc.pdfviewer.li
     }
 
     private fun registerObservers() {
-        viewModel.ocrUnitExist.observe( viewLifecycleOwner , {
-            if ( it != null ) {
+        viewModel.ocrUnitExist.observe( viewLifecycleOwner) {
+            if (it != null) {
                 Timber.i("OcrUnitExist----->${it.isExist}")
                 digitizeRecordParametersAdapter!!.itemViewRefresh(it.isExist)
             }
-        })
-        viewModel.ocrSaveDocument.observe( viewLifecycleOwner , {
-            if ( it != null ) {
+        }
+        viewModel.ocrSaveDocument.observe( viewLifecycleOwner) {
+            if (it != null) {
                 Timber.i("OcrSaveDocument----->${it.isSaved}")
             }
-        })
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")

@@ -5,38 +5,41 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.hra.R
+import java.util.*
 
 object Observations {
 
      fun setBMIResult(strBMI: String,result_bmi: AppCompatTextView,context: Context) {
          try {
+             val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
              if ( !Utilities.isNullOrEmptyOrZero(strBMI) ) {
                  val bmi = strBMI.toDouble()
                  val strObservations: String
                  val color: Int
                  when {
                      bmi <= 18.49 -> {
-                         strObservations = context.resources.getString(R.string.UNDER_WEIGHT)
+                         strObservations = localResource.getString(R.string.UNDER_WEIGHT)
                          color = R.color.vivant_watermelon
                      }
                      bmi in 18.5..24.99 -> {
-                         strObservations = context.resources.getString(R.string.NORMAL)
+                         strObservations = localResource.getString(R.string.NORMAL)
                          color = R.color.vivant_green_blue_two
                      }
                      bmi in 25.0..29.99 -> {
-                         strObservations = context.resources.getString(R.string.OVER_WEIGHT)
+                         strObservations = localResource.getString(R.string.OVER_WEIGHT)
                          color = R.color.vivant_watermelon
                      }
                      else -> {
-                         strObservations = context.resources.getString(R.string.OBESE)
+                         strObservations = localResource.getString(R.string.OBESE)
                          color = R.color.vivant_watermelon
                      }
                  }
 
                  //val strResult = context.resources.getString(R.string.YOUR_BMI_IS)+" "+"<big><b>" + String.format("%.1f", bmi) + "</b> </big><br>(" + strObservations + ")</br>"
-                 val strResult = context.resources.getString(R.string.YOUR_BMI_IS) + " (" + String.format("%.1f", bmi) + ") is " + strObservations + "."
+                 val strResult = localResource.getString(R.string.YOUR_BMI_IS) + " (" + String.format("%.1f", bmi) + ") is " + strObservations + "."
 
                  result_bmi.text = HtmlCompat.fromHtml(strResult,HtmlCompat.FROM_HTML_MODE_LEGACY)
                  result_bmi.setTextColor( ContextCompat.getColor(context,color) )
@@ -52,16 +55,17 @@ object Observations {
 
     fun setBPResult(systolic: Int?, diastolic: Int?, result_bp: AppCompatTextView, context: Context) {
         try {
+            val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
             val strObservations = getBPObservation(systolic!!, diastolic!!, context)
             if (!Utilities.isNullOrEmpty(strObservations) && systolic >= 30 && systolic <= 300 && diastolic >= 10 && diastolic <= 150) {
-                val strResult = context.resources.getString(R.string.YOUR_BP_IS)+ " <b><big>$systolic/$diastolic</b></big> ${context.resources.getString(R.string.MM_HG)} ($strObservations)"
+                val strResult = localResource.getString(R.string.YOUR_BP_IS)+ " <b><big>$systolic/$diastolic</b></big> ${localResource.getString(R.string.MM_HG)} ($strObservations)"
                 result_bp.text = HtmlCompat.fromHtml(strResult,HtmlCompat.FROM_HTML_MODE_LEGACY)
 
                 when {
-                    strObservations.equals(context.resources.getString(R.string.LOW), ignoreCase = true) -> {
+                    strObservations.equals(localResource.getString(R.string.LOW), ignoreCase = true) -> {
                         result_bp.setTextColor(ContextCompat.getColor(context, R.color.vivant_orange_yellow))
                     }
-                    strObservations.equals(context.resources.getString(R.string.NORMAL), ignoreCase = true) -> {
+                    strObservations.equals(localResource.getString(R.string.NORMAL), ignoreCase = true) -> {
                         result_bp.setTextColor(ContextCompat.getColor(context, R.color.vivant_green_blue_two))
                     }
                     else -> {
@@ -81,18 +85,19 @@ object Observations {
     }
 
     private fun getBPObservation(systolic: Int, diastolic: Int, context: Context): String {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         var strObservation = ""
         if (systolic < 90 || diastolic < 60) {
-            strObservation = context.resources.getString(R.string.LOW)
+            strObservation = localResource.getString(R.string.LOW)
         }
         if (systolic in 90..120 && diastolic in 60..80) {
-            strObservation = context.resources.getString(R.string.NORMAL)
+            strObservation = localResource.getString(R.string.NORMAL)
         }
         if (systolic in 121..139 || diastolic in 81..89) {
-            strObservation =  context.resources.getString(R.string.HIGH_NORMAL)
+            strObservation =  localResource.getString(R.string.HIGH_NORMAL)
         }
         if (systolic >= 140 || diastolic >= 90) {
-            strObservation =  context.resources.getString(R.string.ABNORMAL)
+            strObservation =  localResource.getString(R.string.ABNORMAL)
         }
         return strObservation
     }

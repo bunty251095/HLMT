@@ -142,7 +142,7 @@ class WellnessCentreActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar_home)
-        toolbar_title.text = resources.getString(R.string.TITLE_WELLNESS_CENTRE)
+        //toolbar_title.text = resources.getString(R.string.TITLE_WELLNESS_CENTRE)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)

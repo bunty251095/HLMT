@@ -34,6 +34,8 @@ import okhttp3.RequestBody
 import timber.log.Timber
 import java.io.File
 import java.io.FileInputStream
+import java.util.*
+import kotlin.collections.ArrayList
 
 @SuppressLint("StaticFieldLeak")
 class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManagementUseCase,
@@ -42,6 +44,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                                    private val dataHandler : DataHandler,
                                     val context: Context) : BaseViewModel() {
 
+    private val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
     val personId = sharedPref.getString(PreferenceConstants.PERSONID,"")!!
     val authToken = sharedPref.getString(PreferenceConstants.TOKEN,"")!!
 
@@ -127,7 +130,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                 if ( it != null ) {
                     val newRelative = it.data!!.person
                     if ( !Utilities.isNullOrEmpty( newRelative.id.toString() ) ) {
-                        toastMessage(context.resources.getString(R.string.MEMBER_ADDED))
+                        toastMessage(localResource.getString(R.string.MEMBER_ADDED))
                         Timber.e("from----->$from")
                         if ( from.equals(Constants.HRA,ignoreCase = true) ) {
                             fragment.navigateToHRA()
@@ -219,7 +222,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 navigate(EditFamilyMemberDetailsFragmentDirections.actionEditFamilyMemberDetailsFragmentToFamilyMembersListFragment())
-                toastMessage(context.resources.getString(R.string.MEMBER_DELETED))
+                toastMessage(localResource.getString(R.string.MEMBER_DELETED))
             }
             if (it.status == Resource.Status.ERROR) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
@@ -249,7 +252,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
                 if (it.data!!.isExist.equals(Constants.TRUE, true)) {
-                    toastMessage(context.resources.getString(R.string.ERROR_MOBILE_ALREADY_REGISTERED))
+                    toastMessage(localResource.getString(R.string.ERROR_MOBILE_ALREADY_REGISTERED))
                 } else if (it.data!!.isExist.equals(Constants.FALSE, true)) {
 
                 }
@@ -305,7 +308,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                     Timber.i("UpdatedName-----> ${personDetails.firstName}")
                     if ( !Utilities.isNullOrEmpty( personDetails.id.toString() ) ) {
                         updateUserDetails(personDetails.firstName,personDetails.id)
-                        toastMessage(context.resources.getString(R.string.PROFILE_UPDATED))
+                        toastMessage(localResource.getString(R.string.PROFILE_UPDATED))
                     }
                 }
             }
@@ -348,14 +351,14 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                 if ( it != null ) {
                     val personDetails = it.data!!.person
                     if ( from == Constants.RELATIVE ) {
-                        if ( !Utilities.isNullOrEmpty( personDetails.id.toString() ) ) toastMessage(context.resources.getString(R.string.PROFILE_UPDATED))
+                        if ( !Utilities.isNullOrEmpty( personDetails.id.toString() ) ) toastMessage(localResource.getString(R.string.PROFILE_UPDATED))
                         navigate(EditFamilyMemberDetailsFragmentDirections.actionEditFamilyMemberDetailsFragmentToFamilyMembersListFragment())
                     } else if ( from == Constants.USER ) {
                         val newNumber = personDetails.contact.primaryContactNo
                         if ( !Utilities.isNullOrEmpty( newNumber ) ) {
                             //updateUserMobile(newNumber)
                             getLoggedInPersonDetails()
-                            toastMessage(context.resources.getString(R.string.MOBILE_UPDATED))
+                            //toastMessage(context.resources.getString(R.string.MOBILE_UPDATED))
                         }
                     }
                 }
@@ -432,7 +435,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                     Timber.i("UpdatedName-----> ${personDetails.firstName}")
                     if ( !Utilities.isNullOrEmpty( personDetails.id.toString() ) ) {
                         updateUserDetails(personDetails.firstName,personDetails.id)
-                        Utilities.toastMessageShort(context,context.resources.getString(R.string.PROFILE_UPDATED))
+                        Utilities.toastMessageShort(context,localResource.getString(R.string.PROFILE_UPDATED))
                         FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_UPDATE_SUCCESS)
                     }
                 }
@@ -541,7 +544,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                     if ( !Utilities.isNullOrEmptyOrZero(profileImageID) ) {
                         activity.hasProfileImage = true
                         activity.needToSet = true
-                        Utilities.toastMessageShort(context,context.resources.getString(R.string.PROFILE_PHOTO_UPDATED))
+                        Utilities.toastMessageShort(context,localResource.getString(R.string.PROFILE_PHOTO_UPDATED))
                         updateUserProfileImgPath(name,destPath)
                         activity.completeFilePath = destPath + "/" + name
                         activity.setProfilePic()

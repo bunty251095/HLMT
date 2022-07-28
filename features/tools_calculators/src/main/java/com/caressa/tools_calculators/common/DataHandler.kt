@@ -3,10 +3,7 @@ package com.caressa.tools_calculators.common
 import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.caressa.common.utils.CalculateParameters
-import com.caressa.common.utils.ParameterDataModel
-import com.caressa.common.utils.Utilities
-import com.caressa.common.utils.VitalParameter
+import com.caressa.common.utils.*
 import com.caressa.common.view.SpinnerModel
 import com.caressa.model.toolscalculators.UserInfoModel
 import com.caressa.tools_calculators.R
@@ -20,96 +17,104 @@ import kotlin.math.roundToInt
 class DataHandler(val context: Context) {
 
     fun getTrackersList(): ArrayList<TrackerDashboardModel> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list: ArrayList<TrackerDashboardModel> = ArrayList()
-        list.add(TrackerDashboardModel(context.resources.getString(R.string.TRACKER_HEART_AGE), context.resources.getString(R.string.TRACKER_DESC_HEART_AGE), R.drawable.img_heart_age, ContextCompat.getColor(context, R.color.vivantNavy), "HAC"))
-        list.add(TrackerDashboardModel(context.resources.getString(R.string.TRACKER_DIABETES), context.resources.getString(R.string.TRACKER_DESC_DIABETES), R.drawable.img_diabetes, ContextCompat.getColor(context, R.color.vivantGreen), "DC"))
-        list.add(TrackerDashboardModel(context.resources.getString(R.string.TRACKER_HYPERTENSION), context.resources.getString(R.string.TRACKER_DESC_HYPERTENSION), R.drawable.img_hypertension, ContextCompat.getColor(context, R.color.vivant_nasty_green), "HC"))
-        list.add(TrackerDashboardModel(context.resources.getString(R.string.TRACKER_STRESS_ANXIETY), context.resources.getString(R.string.TRACKER_DESC_STRESS_ANXIETY), R.drawable.img_stress_anxiety, ContextCompat.getColor(context, R.color.vivantOrange), "SAC"))
-        list.add(TrackerDashboardModel(context.resources.getString(R.string.TRACKER_SMART_PHONE), context.resources.getString(R.string.TRACKER_DESC_SMART_PHONE), R.drawable.img_smart_phone, ContextCompat.getColor(context, R.color.vivantCyan), "SPC"))
-        list.add(TrackerDashboardModel(context.resources.getString(R.string.TRACKER_DUE_DATE), context.resources.getString(R.string.TRACKER_DESC_DUE_DATE), R.drawable.img_due_date, ContextCompat.getColor(context, R.color.vivantRed), "DDC"))
-        //list.add(TrackerDashboardModel(context.resources.getString(R.string.tracker_vaccination), context.resources.getString(R.string.tracker_desc__vaccination), R.drawable.img_vaccination,ContextCompat.getColor(context,R.color.vivantRed), "VC"))
+        list.add(TrackerDashboardModel(localResource.getString(R.string.TRACKER_HEART_AGE), localResource.getString(R.string.TRACKER_DESC_HEART_AGE), R.drawable.img_heart_age, ContextCompat.getColor(context, R.color.vivantNavy), "HAC"))
+        list.add(TrackerDashboardModel(localResource.getString(R.string.TRACKER_DIABETES), localResource.getString(R.string.TRACKER_DESC_DIABETES), R.drawable.img_diabetes, ContextCompat.getColor(context, R.color.vivantGreen), "DC"))
+        list.add(TrackerDashboardModel(localResource.getString(R.string.TRACKER_HYPERTENSION), localResource.getString(R.string.TRACKER_DESC_HYPERTENSION), R.drawable.img_hypertension, ContextCompat.getColor(context, R.color.vivant_nasty_green), "HC"))
+        list.add(TrackerDashboardModel(localResource.getString(R.string.TRACKER_STRESS_ANXIETY), localResource.getString(R.string.TRACKER_DESC_STRESS_ANXIETY), R.drawable.img_stress_anxiety, ContextCompat.getColor(context, R.color.vivantOrange), "SAC"))
+        list.add(TrackerDashboardModel(localResource.getString(R.string.TRACKER_SMART_PHONE), localResource.getString(R.string.TRACKER_DESC_SMART_PHONE), R.drawable.img_smart_phone, ContextCompat.getColor(context, R.color.vivantCyan), "SPC"))
+        list.add(TrackerDashboardModel(localResource.getString(R.string.TRACKER_DUE_DATE), localResource.getString(R.string.TRACKER_DESC_DUE_DATE), R.drawable.img_due_date, ContextCompat.getColor(context, R.color.vivantRed), "DDC"))
+        //list.add(TrackerDashboardModel(localResource.getString(R.string.tracker_vaccination), localResource.getString(R.string.tracker_desc__vaccination), R.drawable.img_vaccination,ContextCompat.getColor(context,R.color.vivantRed), "VC"))
         return list
     }
 
     fun getGenderList(): ArrayList<SpinnerModel> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list: ArrayList<SpinnerModel> = ArrayList()
-        list.add(SpinnerModel(context.resources.getString(R.string.MALE), "", 0, true))
-        list.add(SpinnerModel(context.resources.getString(R.string.FEMALE), "", 1, false))
+        list.add(SpinnerModel(localResource.getString(R.string.MALE), "", 0, true))
+        list.add(SpinnerModel(localResource.getString(R.string.FEMALE), "", 1, false))
         return list
     }
 
     fun getModelList(): ArrayList<SpinnerModel> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list: ArrayList<SpinnerModel> = ArrayList()
-        list.add(SpinnerModel(context.resources.getString(R.string.BMI), "", 0, true))
-        list.add(SpinnerModel(context.resources.getString(R.string.LIPID), "", 1, false))
+        list.add(SpinnerModel(localResource.getString(R.string.BMI), "", 0, true))
+        list.add(SpinnerModel(localResource.getString(R.string.LIPID), "", 1, false))
         return list
     }
 
     fun getAgeGroupList(): ArrayList<SpinnerModel> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list: ArrayList<SpinnerModel> = ArrayList()
-        list.add(SpinnerModel(context.resources.getString(R.string.UNDER_35_YEARS), "", 0, true))
-        list.add(SpinnerModel(context.resources.getString(R.string.AGE_35_TO_44), "", 1, false))
-        list.add(SpinnerModel(context.resources.getString(R.string.AGE_45_TO_54), "", 2, false))
-        list.add(SpinnerModel(context.resources.getString(R.string.AGE_55_TO_64), "", 3, false))
-        list.add(SpinnerModel(context.resources.getString(R.string.AGE_65_YRS_OR_OVER), "", 4, false))
+        list.add(SpinnerModel(localResource.getString(R.string.UNDER_35_YEARS), "", 0, true))
+        list.add(SpinnerModel(localResource.getString(R.string.AGE_35_TO_44), "", 1, false))
+        list.add(SpinnerModel(localResource.getString(R.string.AGE_45_TO_54), "", 2, false))
+        list.add(SpinnerModel(localResource.getString(R.string.AGE_55_TO_64), "", 3, false))
+        list.add(SpinnerModel(localResource.getString(R.string.AGE_65_YRS_OR_OVER), "", 4, false))
         return list
     }
 
     fun getDepressionList(): List<String> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list = ArrayList<String>()
-        list.add(context.resources.getString(R.string.DYSPHORIA))
-        list.add(context.resources.getString(R.string.LACK_OF_INTEREST_INVOLVEMENT))
-        list.add(context.resources.getString(R.string.HOPELESSNESS))
-        list.add(context.resources.getString(R.string.ANHEDONIA))
-        list.add(context.resources.getString(R.string.DEVALUATION_OF_LIFE))
-        list.add(context.resources.getString(R.string.INERTIA))
-        list.add(context.resources.getString(R.string.SELF_DEPRECATION))
+        list.add(localResource.getString(R.string.DYSPHORIA))
+        list.add(localResource.getString(R.string.LACK_OF_INTEREST_INVOLVEMENT))
+        list.add(localResource.getString(R.string.HOPELESSNESS))
+        list.add(localResource.getString(R.string.ANHEDONIA))
+        list.add(localResource.getString(R.string.DEVALUATION_OF_LIFE))
+        list.add(localResource.getString(R.string.INERTIA))
+        list.add(localResource.getString(R.string.SELF_DEPRECATION))
         return list
     }
 
     fun getAnxietyList(): List<String> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list = ArrayList<String>()
-        list.add(context.resources.getString(R.string.AUTONOMIC_AROUSAL))
-        list.add(context.resources.getString(R.string.SELF_DEPRECATION))
-        list.add(context.resources.getString(R.string.SKELETAL_MUSCLE_EFFECTS))
-        list.add(context.resources.getString(R.string.SUBJECTIVE_EXPERIENCE_OF_ANXIOUS_AFFECT))
-        list.add(context.resources.getString(R.string.SITUATIONAL_ANXIETY))
+        list.add(localResource.getString(R.string.AUTONOMIC_AROUSAL))
+        list.add(localResource.getString(R.string.SELF_DEPRECATION))
+        list.add(localResource.getString(R.string.SKELETAL_MUSCLE_EFFECTS))
+        list.add(localResource.getString(R.string.SUBJECTIVE_EXPERIENCE_OF_ANXIOUS_AFFECT))
+        list.add(localResource.getString(R.string.SITUATIONAL_ANXIETY))
         return list
     }
 
     fun getStressList(): List<String> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list = ArrayList<String>()
-        list.add(context.resources.getString(R.string.DIFFICULTY_RELAXING))
-        list.add(context.resources.getString(R.string.NERVOUS_AROUSAL))
-        list.add(context.resources.getString(R.string.BEING_EASILY_UPSET_AGITATED_IRRITABLE_OVER_REACTIVE_AND_IMPATIENT))
+        list.add(localResource.getString(R.string.DIFFICULTY_RELAXING))
+        list.add(localResource.getString(R.string.NERVOUS_AROUSAL))
+        list.add(localResource.getString(R.string.BEING_EASILY_UPSET_AGITATED_IRRITABLE_OVER_REACTIVE_AND_IMPATIENT))
         return list
     }
 
     fun getVitalParameterData(parameter: String, context: Context): VitalParameter {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val vitalParameter = VitalParameter()
 
         when(parameter) {
 
-            context.resources.getString(R.string.FT) -> {
-                vitalParameter.unit = context.resources.getString(R.string.FT)
+            localResource.getString(R.string.FT) -> {
+                vitalParameter.unit = localResource.getString(R.string.FT)
                 vitalParameter.minRange = 4
                 vitalParameter.maxRange = 7
             }
 
-            context.resources.getString(R.string.CM) -> {
-                vitalParameter.unit = context.resources.getString(R.string.CM)
+            localResource.getString(R.string.CM) -> {
+                vitalParameter.unit = localResource.getString(R.string.CM)
                 vitalParameter.minRange = 120
                 vitalParameter.maxRange = 240
             }
 
-            context.resources.getString(R.string.LBS) -> {
-                vitalParameter.unit = context.resources.getString(R.string.LBS)
+            localResource.getString(R.string.LBS) -> {
+                vitalParameter.unit = localResource.getString(R.string.LBS)
                 vitalParameter.minRange = 64
                 vitalParameter.maxRange = 550
             }
 
-            context.resources.getString(R.string.KG) -> {
-                vitalParameter.unit = context.resources.getString(R.string.KG)
+            localResource.getString(R.string.KG) -> {
+                vitalParameter.unit = localResource.getString(R.string.KG)
                 vitalParameter.minRange = 30
                 vitalParameter.maxRange = 250
             }
@@ -119,6 +124,7 @@ class DataHandler(val context: Context) {
     }
 
     fun getParameterList(model: String, fragment: Fragment): ArrayList<ParameterDataModel> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val paramList: ArrayList<ParameterDataModel> = ArrayList()
         val userInfoModel: UserInfoModel? = if (fragment is HeartAgeFragment || fragment is HypertensionInputFragment) {
             UserInfoModel.getInstance()
@@ -127,7 +133,7 @@ class DataHandler(val context: Context) {
         }
         var data = ParameterDataModel()
         if (model.equals("BMI", ignoreCase = true)) {
-            data.title = context.resources.getString(R.string.HEIGHT)
+            data.title = localResource.getString(R.string.HEIGHT)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel!!.getHeight()) ) {
                 val `val`: String = CalculateParameters.convertCmToFeet(userInfoModel.getHeight())
                     .toString() + "'" + CalculateParameters.convertCmToInch(
@@ -138,14 +144,14 @@ class DataHandler(val context: Context) {
                 data.value = "- -"
                 data.finalValue = "0"
             }
-            data.unit = context.resources.getString(R.string.FEET_INCH)
+            data.unit = localResource.getString(R.string.FEET_INCH)
             data.code = "HEIGHT"
             data.color = R.color.vivant_nasty_green
             data.img = R.drawable.height
-            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
+            data.description = localResource.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             paramList.add(data)
             data = ParameterDataModel()
-            data.title = context.resources.getString(R.string.SYSTOLIC_BP)
+            data.title = localResource.getString(R.string.SYSTOLIC_BP)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel.getSystolicBp()) ) {
                 val `val` = "" + userInfoModel.getSystolicBp().toDouble().toInt()
                 data.value = `val`
@@ -153,16 +159,16 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = context.resources.getString(R.string.MM_HG)
+            data.unit = localResource.getString(R.string.MM_HG)
             data.code = "SYSTOLIC_BP"
             data.color = R.color.vivant_bright_sky_blue
             data.img = R.drawable.systolic
-            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
+            data.description = localResource.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             data.minRange = 0.01
             data.maxRange = 500.0
             paramList.add(data)
             data = ParameterDataModel()
-            data.title = context.resources.getString(R.string.WEIGHT)
+            data.title = localResource.getString(R.string.WEIGHT)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel.getWeight()) ) {
                 val `val` = "" + userInfoModel.getWeight().toDouble().toInt()
                 data.value = `val`
@@ -171,14 +177,14 @@ class DataHandler(val context: Context) {
                 data.value = "- -"
                 data.finalValue = "50"
             }
-            data.unit = context.resources.getString(R.string.KG)
+            data.unit = localResource.getString(R.string.KG)
             data.code = "WEIGHT"
             data.color = R.color.vivant_marigold
             data.img = R.drawable.weight
-            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
+            data.description = localResource.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             paramList.add(data)
             data = ParameterDataModel()
-            data.title = context.resources.getString(R.string.DIASTOLIC_BP)
+            data.title = localResource.getString(R.string.DIASTOLIC_BP)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel.getDiastolicBp()) ) {
                 val `val` = "" + userInfoModel.getDiastolicBp().toDouble().toInt()
                 data.value = `val`
@@ -186,16 +192,16 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = context.resources.getString(R.string.MM_HG)
+            data.unit = localResource.getString(R.string.MM_HG)
             data.code = "DIASTOLIC_BP"
             data.color = R.color.vivant_watermelon
             data.img = R.drawable.systolic
-            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
+            data.description = localResource.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             data.minRange = 10.0
             data.maxRange = 500.0
             paramList.add(data)
         } else if (model.equals("LIPID", ignoreCase = true)) {
-            data.title = context.resources.getString(R.string.CHOLESTEROL)
+            data.title = localResource.getString(R.string.CHOLESTEROL)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel!!.getCholesterol()) ) {
                 val `val` = "" + userInfoModel.getCholesterol().toDouble().toInt()
                 data.value = `val`
@@ -203,8 +209,8 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
-            data.unit = context.resources.getString(R.string.MMOL_L)
+            data.description = localResource.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
+            data.unit = localResource.getString(R.string.MMOL_L)
             data.code = "TOTAL_CHOL"
             data.color = R.color.vivant_nasty_green
             data.img = R.drawable.cholesteroal
@@ -212,7 +218,7 @@ class DataHandler(val context: Context) {
             data.maxRange = 100.0
             paramList.add(data)
             data = ParameterDataModel()
-            data.title = context.resources.getString(R.string.SYSTOLIC_BP)
+            data.title = localResource.getString(R.string.SYSTOLIC_BP)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel.getSystolicBp()) ) {
                 val `val` = "" + userInfoModel.getSystolicBp().toDouble().toInt()
                 data.value = `val`
@@ -220,16 +226,16 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = context.resources.getString(R.string.MM_HG)
+            data.unit = localResource.getString(R.string.MM_HG)
             data.code = "SYSTOLIC_BP"
             data.color = R.color.vivantCyan
             data.img = R.drawable.systolic
-            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
+            data.description = localResource.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             data.minRange = 0.01
             data.maxRange = 500.0
             paramList.add(data)
             data = ParameterDataModel()
-            data.title = context.resources.getString(R.string.HDL)
+            data.title = localResource.getString(R.string.HDL)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel.getHdl()) ) {
                 val `val` = "" + userInfoModel.getHdl().toDouble().toInt()
                 data.value = `val`
@@ -237,16 +243,16 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = context.resources.getString(R.string.MMOL_L)
+            data.unit = localResource.getString(R.string.MMOL_L)
             data.code = "HDL"
             data.color = R.color.vivant_marigold
             data.img = R.drawable.hdl
-            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
+            data.description = localResource.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             data.minRange = 0.01
             data.maxRange = 100.0
             paramList.add(data)
             data = ParameterDataModel()
-            data.title = context.resources.getString(R.string.DIASTOLIC_BP)
+            data.title = localResource.getString(R.string.DIASTOLIC_BP)
             if ( !Utilities.isNullOrEmptyOrZero(userInfoModel.getDiastolicBp()) ) {
                 val `val` = "" + userInfoModel.getDiastolicBp().toDouble().toInt()
                 data.value = `val`
@@ -254,11 +260,11 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = context.resources.getString(R.string.MM_HG)
+            data.unit = localResource.getString(R.string.MM_HG)
             data.code = "DIASTOLIC_BP"
             data.color = R.color.vivant_watermelon
             data.img = R.drawable.systolic
-            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
+            data.description = localResource.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             data.minRange = 10.0
             data.maxRange = 500.0
             paramList.add(data)
@@ -267,10 +273,11 @@ class DataHandler(val context: Context) {
     }
 
         fun getDiabetesParameterList(): ArrayList<ParameterDataModel> {
+            val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
             val waistSize = UserInfoModel.getInstance()!!.getWaistSize()
             val paramList = ArrayList<ParameterDataModel>()
             val data = ParameterDataModel()
-            data.title = context.resources.getString(R.string.WAIST)
+            data.title = localResource.getString(R.string.WAIST)
             Timber.e("Waist:: $waistSize")
             if ( !Utilities.isNullOrEmptyOrZero(waistSize) ) {
                 try {
@@ -285,13 +292,13 @@ class DataHandler(val context: Context) {
             } else {
                 data.value = "- -"
             }
-            data.unit = context.resources.getString(R.string.INCH)
+            data.unit = localResource.getString(R.string.INCH)
             data.code = "WAISTMEASUREMENT"
             data.color = R.color.vivantCyan
             data.img = R.drawable.waist
             data.minRange = 25.0
             data.maxRange = 65.0
-            data.description = context.resources.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
+            data.description = localResource.getString(R.string.TODAY_VIA_MOBILE_ENTRY)
             paramList.add(data)
             return paramList
         }

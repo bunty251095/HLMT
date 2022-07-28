@@ -37,11 +37,14 @@ import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.util.*
 
 @SuppressLint("StaticFieldLeak")
 class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCase, private val dispatchers: AppDispatchers,
                          private val sharedPref: SharedPreferences , private val dataHandler : DataHandler,
                          val context: Context) : BaseViewModel() {
+
+    private val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
 
     var personId = sharedPref.getString(PreferenceConstants.PERSONID,"")!!
     private var accountID = sharedPref.getString(PreferenceConstants.ACCOUNTID,"")!!
@@ -245,7 +248,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                 if (it.data != null ) {
                     val appFeedback = it.data!!.appFeedback
                     if ( !Utilities.isNullOrEmptyOrZero( appFeedback.id.toString() ) ) {
-                        Utilities.toastMessageShort(context, "Feedback Submitted Successfully")
+                        Utilities.toastMessageShort(context, localResource.getString(R.string.FEEDBACK_SUBMITTED))
                         val intentToPass = Intent()
                         intentToPass.component = ComponentName(NavigationConstants.APPID, NavigationConstants.HOME)
                         intentToPass.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -314,7 +317,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
     fun callContactUsApi(context:Context,fromEmail:String,fromMobile:String,message:String) = viewModelScope.launch(dispatchers.main) {
 
         val requestData = ContactUsModel(Gson().toJson(ContactUsModel.JSONDataRequest(
-            name = (userDetails.value?.firstName +" "+ userDetails.value?.lastName)?.trim(),
+            name = (userDetails.value?.firstName +" "+ userDetails.value?.lastName)?.trim()!!,
             emailAddress = email,
             fromEmail = fromEmail,
             fromMobile = fromMobile,

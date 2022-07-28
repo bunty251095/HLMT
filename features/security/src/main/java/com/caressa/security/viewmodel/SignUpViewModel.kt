@@ -1,5 +1,6 @@
 package com.caressa.security.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
@@ -11,6 +12,7 @@ import com.caressa.common.constants.Constants
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.Event
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.model.security.EmailExistsModel
 import com.caressa.model.security.GenerateOtpModel
@@ -26,9 +28,11 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.*
 
+@SuppressLint("StaticFieldLeak")
 class SignUpViewModel(private val userManagementUseCase: UserManagementUseCase, private val dispatchers: AppDispatchers,
                       private val sharedPref: SharedPreferences, val context: Context) : BaseViewModel() {
 
+    private val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
     // PRIVATE DATA
     private lateinit var argsLogin: String
     var registerUserSource: LiveData<Resource<Users>> = MutableLiveData()
@@ -76,7 +80,7 @@ class SignUpViewModel(private val userManagementUseCase: UserManagementUseCase, 
                     if (socialLogin) {
                         callLogin(forceRefresh = true,name = name, emailStr = emailStr, passwordStr =  passwordStr, socialLogin =  socialLogin, socialId = socialId)
                     } else {
-                        toastMessage(context.resources.getString(R.string.ERROR_EMAIL_REGISTERED))
+                        toastMessage(localResource.getString(R.string.ERROR_EMAIL_REGISTERED))
                     }
                 } else if (it.data?.isExist.equals("false", true)) {
                     if (socialLogin) {
@@ -132,7 +136,7 @@ class SignUpViewModel(private val userManagementUseCase: UserManagementUseCase, 
                     regDetail.emailID = emailStr
                     regDetail.mobileNo = phoneNumber
                     regDetail.passcode = passwordStr
-                    toastMessage(context.resources.getString(R.string.ERROR_PHONE_REGISTERED))
+                    toastMessage(localResource.getString(R.string.ERROR_PHONE_REGISTERED))
                 }
             }
 

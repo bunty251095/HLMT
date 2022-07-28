@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     style="@style/VivantDescription"
                     android:gravity="center"
-                    android:text='@{"(" + relative.relationship + ")"}'
+                    android:text='@{"(" + utilities.getRelationshipByRelationshipCode(relative.relationshipCode,context) + ")"}'
                     android:textSize="@dimen/_10sdp"
                     android:textColor="@color/textViewColor"
                     android:ellipsize="end"

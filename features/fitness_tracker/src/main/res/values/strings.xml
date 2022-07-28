@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="TITLE_ACTIVITY_TRACKER">Activity Tracker</string>
@@ -13,6 +14,7 @@
     <string name="GOALS">Goals</string>
     <string name="STEPS">Steps</string>
     <string name="STEP_GOAL">Steps/Goal</string>
+    <string name="STEPS_GOAL">Steps goal</string>
     <string name="STEPS_TO_GO">Steps To Go</string>
     <string name="MY_GOAL">My Goal</string>
     <string name="CALORIES_BURNED">Calories \n Burned</string>
@@ -20,9 +22,7 @@
     <string name="DISTANCE">Distance</string>
     <string name="ACTIVE_TIME">Active Time</string>
     <string name="THIS_WEEK">This Week</string>
-    <string name="STEPS_GOAL">Steps goal</string>
 
-    <!--    <string name="YOU_HAVE_WALKED"><![CDATA[You have walked <b>%s</b> of your Goal]]></string>-->
     <string name="YOU_HAVE_WALKED">You have walked</string>
     <string name="OF_YOUR_GOAL">of your Goal</string>
     <string name="GOAL_REACHED">Goal Reached :</string>
@@ -35,8 +35,8 @@ Please be noted that your entire history of fitness data will be overwritten</st
     <string name="ERROR_ENTER_STEPS">Please enter the steps</string>
     <string name="NO_FITNESS_DATA">Fitness Data Not Available</string>
 
-    <string name="VIEW_SCROLL">&lt;-------------&gt;</string>
-    <string name="VIEW_LEFT">&lt;------</string>
-    <string name="VIEW_RIGHT">------&gt;</string>
+    <string name="VIEW_SCROLL" translatable="false">&lt;-------------&gt;</string>
+    <string name="VIEW_LEFT" translatable="false">&lt;------</string>
+    <string name="VIEW_RIGHT" translatable="false">------&gt;</string>
 
 </resources>

@@ -23,7 +23,7 @@ class DataHandler(val context: Context) {
     private val fileUtils = FileUtils
 
     private fun openDownloadedFile(file : File, type :String) {
-        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)!!))!!
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         try {
             val uri = FileProvider.getUriForFile(context, context.packageName + ".provider", file)
             val intent = Intent(Intent.ACTION_VIEW)
@@ -63,44 +63,46 @@ class DataHandler(val context: Context) {
     }
 
     fun getCategoryByCode(code: String): String {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         return when {
             code.equals("LAB", ignoreCase = true) -> {
-                context.resources.getString(R.string.PATHOLOGY_REPORT)
+                localResource.getString(R.string.PATHOLOGY_REPORT)
             }
             code.equals("HOS", ignoreCase = true) -> {
-                context.resources.getString(R.string.HOSPITAL_REPORT)
+                localResource.getString(R.string.HOSPITAL_REPORT)
             }
             code.equals("PRE", ignoreCase = true) -> {
-                context.resources.getString(R.string.DOCTOR_PRESCRIPTION)
+                localResource.getString(R.string.DOCTOR_PRESCRIPTION)
             }
             code.equals("DIET_PLAN", ignoreCase = true) -> {
-                context.resources.getString(R.string.DIET_PLAN)
+                localResource.getString(R.string.DIET_PLAN)
             }
             code.equals("FIT_PLAN", ignoreCase = true) -> {
-                context.resources.getString(R.string.FITNESS_PLAN)
+                localResource.getString(R.string.FITNESS_PLAN)
             }
             code.equals("OTR", ignoreCase = true) -> {
-                context.resources.getString(R.string.OTHER_DOCUMENT)
+                localResource.getString(R.string.OTHER_DOCUMENT)
             }
             code.equals("HRAREPORT", ignoreCase = true) -> {
-                context.resources.getString(R.string.HRA_REPORT)
+                localResource.getString(R.string.HRA_REPORT)
             }
             else -> {
-                context.resources.getString(R.string.OTHER_DOCUMENT)
+                localResource.getString(R.string.OTHER_DOCUMENT)
             }
         }
     }
 
     fun getCategoryList( context: Context ) : ArrayList<SpinnerModel> {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list: ArrayList<SpinnerModel> = ArrayList()
-        list.add(SpinnerModel(context.resources.getString(R.string.ALL), "ALL", 0,false))
-        list.add(SpinnerModel(context.resources.getString(R.string.PATHOLOGY_REPORT), "LAB", 1,false))
-        list.add(SpinnerModel(context.resources.getString(R.string.HOSPITAL_REPORT), "HOS", 2,false))
-        list.add(SpinnerModel(context.resources.getString(R.string.DOCTOR_PRESCRIPTION), "PRE", 3,false))
-        list.add(SpinnerModel(context.resources.getString(R.string.DIET_PLAN), "DIET_PLAN", 4,false))
-        list.add(SpinnerModel(context.resources.getString(R.string.FITNESS_PLAN), "FIT_PLAN", 5,false))
-        list.add(SpinnerModel(context.resources.getString(R.string.OTHER_DOCUMENT), "OTR", 6,false))
-        list.add(SpinnerModel(context.resources.getString(R.string.HRA_REPORT), "HRAREPORT", 7,false))
+        list.add(SpinnerModel(localResource.getString(R.string.ALL), "ALL", 0,false))
+        list.add(SpinnerModel(localResource.getString(R.string.PATHOLOGY_REPORT), "LAB", 1,false))
+        list.add(SpinnerModel(localResource.getString(R.string.HOSPITAL_REPORT), "HOS", 2,false))
+        list.add(SpinnerModel(localResource.getString(R.string.DOCTOR_PRESCRIPTION), "PRE", 3,false))
+        list.add(SpinnerModel(localResource.getString(R.string.DIET_PLAN), "DIET_PLAN", 4,false))
+        list.add(SpinnerModel(localResource.getString(R.string.FITNESS_PLAN), "FIT_PLAN", 5,false))
+        list.add(SpinnerModel(localResource.getString(R.string.OTHER_DOCUMENT), "OTR", 6,false))
+        list.add(SpinnerModel(localResource.getString(R.string.HRA_REPORT), "HRAREPORT", 7,false))
         return list
     }
 
@@ -166,6 +168,7 @@ class DataHandler(val context: Context) {
     }
 
     fun shareDataWithAppSingle(recordData : HealthDocument,viewModel : HealthRecordsViewModel) {
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val completePath = recordData.Path + "/" + recordData.Name
         Timber.e("completePath--->$completePath")
         if (!Utilities.isNullOrEmpty(completePath)) {
@@ -174,7 +177,7 @@ class DataHandler(val context: Context) {
             generateShareIntent(context, fileToShare,viewModel)
             FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.HEALTH_RECORD_SHARED)
         } else {
-            Utilities.toastMessageShort(context,context.resources.getString(R.string.DOWNLOAD_DOCUMENT_TO_PROCEED))
+            Utilities.toastMessageShort(context,localResource.getString(R.string.DOWNLOAD_DOCUMENT_TO_PROCEED))
         }
     }
 

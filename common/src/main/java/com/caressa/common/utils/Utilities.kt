@@ -37,6 +37,7 @@ import java.io.File
 import java.math.BigDecimal
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -233,37 +234,40 @@ object Utilities {
 
     fun getRelationshipByRelationshipCode(relationshipCode: String, context: Context): String {
         var relationship = ""
-
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         when (relationshipCode) {
+            Constants.SELF_RELATIONSHIP_CODE -> {
+                relationship = localResource.getString(R.string.MYSELF)
+            }
             Constants.FATHER_RELATIONSHIP_CODE -> {
-                relationship = context.resources.getString(R.string.BROTHER)
+                relationship = localResource.getString(R.string.BROTHER)
             }
             Constants.MOTHER_RELATIONSHIP_CODE -> {
-                relationship = context.resources.getString(R.string.MOTHER)
+                relationship = localResource.getString(R.string.MOTHER)
             }
             Constants.SON_RELATIONSHIP_CODE -> {
-                relationship = context.resources.getString(R.string.SON)
+                relationship = localResource.getString(R.string.SON)
             }
             Constants.DAUGHTER_RELATIONSHIP_CODE -> {
-                relationship = context.resources.getString(R.string.DAUGHTER)
+                relationship = localResource.getString(R.string.DAUGHTER)
             }
             Constants.GRANDFATHER_RELATIONSHIP_CODE -> {
-                relationship = context.resources.getString(R.string.GRAND_FATHER)
+                relationship = localResource.getString(R.string.GRAND_FATHER)
             }
             Constants.GRANDMOTHER_RELATIONSHIP_CODE -> {
-                relationship = context.resources.getString(R.string.GRAND_MOTHER)
+                relationship = localResource.getString(R.string.GRAND_MOTHER)
             }
             Constants.HUSBAND_RELATIONSHIP_CODE -> {
-                relationship = context.resources.getString(R.string.HUSBAND)
+                relationship = localResource.getString(R.string.HUSBAND)
             }
             Constants.WIFE_RELATIONSHIP_CODE -> {
-                relationship = context.resources.getString(R.string.WIFE)
+                relationship = localResource.getString(R.string.WIFE)
             }
             Constants.BROTHER_RELATIONSHIP_CODE -> {
-                relationship = context.resources.getString(R.string.BROTHER)
+                relationship = localResource.getString(R.string.BROTHER)
             }
             Constants.SISTER_RELATIONSHIP_CODE -> {
-                relationship = context.resources.getString(R.string.SISTER)
+                relationship = localResource.getString(R.string.SISTER)
             }
         }
 
@@ -610,6 +614,42 @@ object Utilities {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    fun getLanguageDescription(item: String, languageCode: String): String? {
+        var result:String = ""
+        if (languageCode.equals("en",true)) {
+            when (item.toUpperCase()) {
+                "HEIGHT","WEIGHT","SYSTOLIC","DIASTOLIC","HIP","WAIST","PULSE" -> {
+                    result = item
+                }
+            }
+        }else{
+            when (item.toUpperCase()) {
+                "HEIGHT" -> {
+                    result = "CHIỀU CAO"
+                }
+                "WEIGHT" -> {
+                    result = "CÂN NẶNG"
+                }
+                "SYSTOLIC" -> {
+                    result = "Tâm thu"
+                }
+                "DIASTOLIC" -> {
+                    result = "Tâm trương"
+                }
+                "HIP" -> {
+                    result = "HÔNG"
+                }
+                "WAIST" -> {
+                    result = "Vòng eo"
+                }
+                "PULSE" -> {
+                    result = "Xung"
+                }
+            }
+        }
+        return result
     }
 
 }

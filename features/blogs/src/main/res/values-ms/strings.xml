@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="CONTINUE_READING">Teruskan membaca.....</string>
+
+    <string name="blog_link">https://blogs.vivant.vivant.me/</string>
+    <string name="CONTINUE_READING">Terukan Bacaan.....</string>
+    <string name="HEALTH_LIBRARY">Perpustakaan Kesihatan</string>
+    <string name="BLOG_DETAILS">Maklumat Blog </string>
+
 </resources>

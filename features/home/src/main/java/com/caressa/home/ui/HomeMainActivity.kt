@@ -4,10 +4,7 @@ import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -24,12 +21,10 @@ import com.caressa.common.base.BaseActivity
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.NavigationConstants
-import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.fitness.FitRequestCode
 import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.common.utils.*
 import com.caressa.common.utils.PermissionUtil.AppPermissionListener
-import com.caressa.common.utils.PermissionUtil.StorageAccessListener
 import com.caressa.home.R
 import com.caressa.home.adapter.NavigationDrawerListAdapter
 import com.caressa.home.common.DataHandler
@@ -54,7 +49,6 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
     private lateinit var binding : ActivityHomeMainBinding
 
     private val appColorHelper = AppColorHelper.instance!!
-    private val permissionUtil = PermissionUtil
 
     private var context : Context?= null
     private var activity : Activity?= null
@@ -86,6 +80,7 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
         activity = this
 
         Configuration.EntityID = viewModel.getMainUserPersonID()
+        Configuration.LanguageCode = LocaleHelper.getLanguage(this)
 
         setSupportActionBar(toolbar)
         configureNavController()
@@ -99,12 +94,12 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
 
         Timber.i("HOME onCreate")
 
-        backGroundCallViewModel.saveCloudMessagingId.observe(this, {})
+        backGroundCallViewModel.saveCloudMessagingId.observe(this) {}
         backGroundCallViewModel.refreshPersonId()
         viewModel.refreshPersonId()
 
         // This observer is written because In background thread we are listening .
-        backGroundCallViewModel.medicalProfileSummary.observe(this, {
+        backGroundCallViewModel.medicalProfileSummary.observe(this) {
             Timber.i("backGroundCallViewModel.medicalProfileSummary")
             if (it.data != null && it.status == Resource.Status.SUCCESS) {
 //                Timber.i("Summery :: "+it.data?.MedicalProfileSummary)
@@ -115,19 +110,19 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
                 scoreListener.onScore(it.data!!.MedicalProfileSummary)
 
             }
-        })
+        }
         // Mayuresh: This observer is written for getting parameter data in dashboard screen
         backGroundCallViewModel.labRecordList.observe(this,{})
         backGroundCallViewModel.labParameterList.observe(this, Observer {
                 scoreListener.onVitalDataUpdateListener(it)
 
         })
-        backGroundCallViewModel.getStepsGoal.observe(this,{
-            Timber.i("Steps=> "+it)
-            if (it!=null && it.latestGoal!= null && it.latestGoal.goal!= null) {
+        backGroundCallViewModel.getStepsGoal.observe(this) {
+            Timber.i("Steps=> " + it)
+            if (it != null && it.latestGoal != null && it.latestGoal.goal != null) {
                 scoreListener.onStepGoalReceived(it.latestGoal.goal)
             }
-        })
+        }
     }
 
     private fun navigateToMedicineDashboard() {
@@ -158,7 +153,7 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
 
          val versionName = Utilities.getVersionName(this)
          if (!Utilities.isNullOrEmpty(versionName)) {
-             var versionText = "Powered by Vivant (v $versionName )"
+             var versionText = "${resources.getString(R.string.POWERED_BY)} Vivant (v $versionName )"
              if  (Constants.environment.equals("UAT",ignoreCase = true)) {
                  versionText = "$versionText UAT"
              }
@@ -180,18 +175,18 @@ class HomeMainActivity : BaseActivity(), NavigationDrawerListAdapter.DrawerClick
             navigateToMedicineDashboard()
         } else {
             backGroundCallViewModel.getAppVersionDetails(this)
-            backGroundCallViewModel.checkAppUpdate.observe(this, { })
+            backGroundCallViewModel.checkAppUpdate.observe(this) { }
         }
 
         backGroundCallViewModel.refreshPersonId()
         viewModel.refreshPersonId()
         backGroundCallViewModel.callBackgroundApiCall(showProgress)
 
-        backGroundCallViewModel.listRelatives.observe(this, {
+        backGroundCallViewModel.listRelatives.observe(this) {
             if (it.data != null && it.status == Resource.Status.SUCCESS) {
                 viewModel.getUserRelatives()
             }
-        })
+        }
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {

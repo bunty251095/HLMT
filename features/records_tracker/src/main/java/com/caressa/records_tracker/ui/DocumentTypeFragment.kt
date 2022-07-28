@@ -92,7 +92,7 @@ class DocumentTypeFragment : BaseFragment() {
 
         binding.btnNextDocType.setOnClickListener {
             if ( docTypeCode.equals("ALL",ignoreCase = true) ) {
-                Utilities.toastMessageShort(context, "Please Select Document Type.")
+                Utilities.toastMessageShort(context, resources.getString(R.string.PLEASE_SELECT_THE_TYPE_OF_DOCUMENT_TYPE))
             } else {
                 performNextBtnClick(it)
             }

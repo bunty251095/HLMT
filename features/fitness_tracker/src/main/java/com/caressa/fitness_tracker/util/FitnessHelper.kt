@@ -2,6 +2,7 @@ package com.caressa.fitness_tracker.util
 
 import android.content.Context
 import com.caressa.common.utils.DateHelper
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.fitness_tracker.R
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -57,7 +58,8 @@ class FitnessHelper(private val context: Context) {
     }
 
     fun getCaloriesWithUnit(calories : String) : String {
-        return calories + " " + context.resources.getString(R.string.KCAL)
+        var localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+        return calories + " " + localResource.getString(R.string.KCAL)
     }
 
     private fun getFormattedValue(format: String, date: Date): String {

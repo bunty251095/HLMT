@@ -120,7 +120,7 @@ class SplashScreenActivity : AppCompatActivity(), DefaultNotificationDialog.OnDi
                     it.errorNumber.equals("0", true) -> {
                         showDialog(
                             listener = this,
-                            title = resources.getString(R.string.NO_INTERNET_AVAILABLE),
+                            title = resources.getString(R.string.MSG_NO_INTERNET_CONNECTION),
                             message = resources.getString(R.string.ERROR_INTERNET_UNAVAILABLE),
                             showLeftBtn = false
                         )
@@ -135,6 +135,7 @@ class SplashScreenActivity : AppCompatActivity(), DefaultNotificationDialog.OnDi
 
     private fun proceedInApp() {
         try {
+            Configuration.LanguageCode = LocaleHelper.getLanguage(this)
             Configuration.EntityID = viewModel.getMainUserPersonID()
         }catch (e:Exception){
             e.printStackTrace()

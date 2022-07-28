@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="TITLE_ACTIVITY_TRACKER">Activity Tracker</string>
+
+    <string name="TITLE_ACTIVITY_TRACKER">Penjejak Aktiviti</string>
+    <string name="SET_GOAL">Tetapkan Matlamat</string>
+    <string name="STATISTICS">Statistik</string>
+    <string name="WEEKLY_STATISTICS">Statistik Mingguan</string>
+    <string name="MONTHLY_STATISTICS">Statistik Bulanan</string>
+    <string name="UPDATE_GOAL">Kemaskini matlamat</string>
+    <string name="FORCE_SYNC">Selaras</string>
+    <string name="TODAY">Hari ini</string>
+    <string name="WEEKLY">Mingguan</string>
+    <string name="MONTHLY">Bulanan</string>
+    <string name="GOALS">Goals</string>
+    <string name="STEPS">Matlamat</string>
+    <string name="STEP_GOAL">Langkah/Matlamat</string>
+    <string name="STEPS_GOAL">Matlamat Langkah </string>
+    <string name="STEPS_TO_GO">Baki Langkah</string>
+    <string name="MY_GOAL">Matlamat Saya </string>
+    <string name="CALORIES_BURNED">Kalori \n Dibakar</string>
+    <string name="CAL">Kalori</string>
+    <string name="DISTANCE">Jarak</string>
+    <string name="ACTIVE_TIME">Waktu Aktif</string>
+    <string name="THIS_WEEK">Minggu Ini</string>
+
+    <string name="YOU_HAVE_WALKED">Anda telah berjalan</string>
+    <string name="OF_YOUR_GOAL">daripada matlamat anda </string>
+    <string name="GOAL_REACHED">Matlamat Tercapai :</string>
+
+    <string name="MSG_GOALS_UPDATED">Matlamat Berjaya Dikemaskini</string>
+    <string name="FORCE_SYNC_CONFORMATION">Adakah anda ingin selaraskan keseluruhan data langkah Google Fit untuk setahun yang lalu? Sila maklum semua sejarah data kecergasan anda akan diganti. </string>
+
+    <string name="ERROR_ENTER_VALUE_IN_30_50000">Sila masukkan nilai di antara 30 hingga 50000</string>
+    <string name="ERROR_ENTER_STEPS">Sila masukkan langkah</string>
+    <string name="NO_FITNESS_DATA">Tiada Data Kecergasan</string>
+
 </resources>

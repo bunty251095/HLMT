@@ -18,6 +18,7 @@ import com.caressa.common.fitness.FitRequestCode
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.common.utils.FirebaseHelper
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.fitness_tracker.util.StepCountHelper
 import kotlinx.android.synthetic.main.activity_fitness_home.*
 import kotlinx.android.synthetic.main.fitness_toolbar_layout.*
@@ -36,6 +37,11 @@ class FitnessHomeActivity : AppCompatActivity() , KoinComponent {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try {
+            LocaleHelper.onAttach(this, LocaleHelper.getLanguage(this))
+        } catch (e:Exception) {
+            e.printStackTrace()
+        }
         setContentView(R.layout.activity_fitness_home)
         setSupportActionBar(toolBar_fitness)
         // Setting up a back button

@@ -119,14 +119,14 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
     private fun initialise() {
         binding.counterMedDose.setAsNonDecimal(false)
         binding.counterMedDose.setValue("1")
-        binding.counterMedDose.setUnit("Dose")
+        binding.counterMedDose.setUnit(resources.getString(R.string.DOSE))
         binding.counterMedDose.setInputRange(0.5, 6.0)
         binding.counterMedDose.setValueToAddSubctract(0.5)
         binding.counterMedDose.setOnCounterSubmitListener(this)
 
         binding.counterMedTime.setAsNonDecimal(true)
         binding.counterMedTime.setValue("1")
-        binding.counterMedTime.setUnit("Time")
+        binding.counterMedTime.setUnit(resources.getString(R.string.TIME))
         binding.counterMedTime.setInputRange(1.0, 6.0)
         binding.counterMedTime.setValueToAddSubctract(1.0)
         binding.counterMedTime.setOnCounterSubmitListener(this)

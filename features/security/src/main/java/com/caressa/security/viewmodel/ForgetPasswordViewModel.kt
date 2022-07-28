@@ -1,5 +1,6 @@
 package com.caressa.security.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
@@ -28,10 +29,11 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.*
 
+@SuppressLint("StaticFieldLeak")
 class ForgetPasswordViewModel(private val userCase: UserManagementUseCase, private val dispatchers: AppDispatchers,
                               private val sharedPref: SharedPreferences, val context: Context) : BaseViewModel() {
 
-    private val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)!!))!!
+    private val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
 
     var emailSource: LiveData<Resource<EmailExistsModel.IsExistResponse>> = MutableLiveData()
     val _isEmail = MediatorLiveData<EmailExistsModel.IsExistResponse>()
@@ -73,7 +75,7 @@ class ForgetPasswordViewModel(private val userCase: UserManagementUseCase, priva
                     navigate(ForgetPasswordFragmentDirections.actionForgetPasswordFragmentToLoginWithOtpFragment())
 //                    callGenerateVerificationCode(email = emailStr , from = "ForgetPassword")
                 }else if(it.data?.isExist.equals(Constants.FALSE,true)) {
-                    toastMessage("This email address is not registered with us")
+                    toastMessage(localResource.getString(R.string.ERROR_EMAIL_NOT_REGISTERED))
                 }
             }
 

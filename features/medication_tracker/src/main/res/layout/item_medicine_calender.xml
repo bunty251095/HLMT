@@ -82,7 +82,7 @@
         android:layout_width="@dimen/_8sdp"
         android:layout_height="@dimen/_8sdp"
         android:background="@drawable/circle_shape"
-        android:backgroundTint="#998cba"
+        android:backgroundTint="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="@+id/view"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintStart_toStartOf="@id/view"

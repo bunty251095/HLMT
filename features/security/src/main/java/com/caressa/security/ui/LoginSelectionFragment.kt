@@ -44,7 +44,7 @@ class LoginSelectionFragment: BaseFragment() {
                     + strTermsOfServices +" "+ resources.getString(R.string.AND)
         )
         binding.txtLoginPrivacyPolicy.text = Html.fromHtml(
-             strPrivacyPolicy + " " + resources.getString(R.string.YOU_HAVE_READ_THEM)
+             strPrivacyPolicy + " " + resources.getString(R.string.TO_USE_THE_SERVICES)
         )
     }
 
@@ -54,14 +54,14 @@ class LoginSelectionFragment: BaseFragment() {
             if(binding.termsCheckBox.isChecked) {
                 viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelectionFragmentToRegistrationFragment())
             }else{
-                viewModel.toastMessage("Please accept Terms and Conditions")
+                viewModel.toastMessage(resources.getString(R.string.PLEASE_ACCEPT_TERMS))
             }
         }
         binding.btnSignIn.setOnClickListener {
             if(binding.termsCheckBox.isChecked) {
                 viewModel.navigate(LoginSelectionFragmentDirections.actionLoginSelectionFragmentToLoginFragment())
             }else{
-                viewModel.toastMessage("Please accept Terms and Conditions")
+                viewModel.toastMessage(resources.getString(R.string.PLEASE_ACCEPT_TERMS))
             }
         }
         binding.txtLoginTermsofservice.setOnClickListener {

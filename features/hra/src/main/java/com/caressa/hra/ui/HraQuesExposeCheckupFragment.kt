@@ -95,19 +95,25 @@ class HraQuesExposeCheckupFragment(val qCode: String) : BaseFragment() {
     @SuppressLint("BinaryOperationInTimber")
     private fun loadData() {
         var toProceed = true
-        viewModel.quesData.observe(viewLifecycleOwner, {
-            if ( it != null ) {
-                if ( toProceed ) {
-                    Timber.i("OptionList-----> "+it.optionList)
+        viewModel.quesData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                if (toProceed) {
+                    Timber.i("OptionList-----> " + it.optionList)
                     questionData = it
                     hraDataSingleton.question = it
                     selectedOptionList.addAll(it.optionList)
-                    HraHelper.addButtonsMultiSelection(it.optionList,binding.optionContainer,checkChangeListener,onClickListener,requireContext())
+                    HraHelper.addButtonsMultiSelection(
+                        it.optionList,
+                        binding.optionContainer,
+                        checkChangeListener,
+                        onClickListener,
+                        requireContext()
+                    )
                     loadPreviousData(it.optionList)
                     toProceed = false
                 }
             }
-        })
+        }
 
         viewModel.submitHra.observe(viewLifecycleOwner , {
             if ( it != null ) {

@@ -1,59 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
             name="viewModel"
-            type="com.caressa.hra.viewmodel.HraViewModel" />
+            type="com.caressa.hra.viewmodel.HraViewModel"/>
     </data>
-
-    <ScrollView
-        android:id="@+id/mainScroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_hi"
-            style="@style/HRAImageView"
-            android:src="@drawable/img_hi"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/lbl_intro_msg"/>
-
-        <com.caressa.hra.views.HTMLTextView
-            android:id="@+id/lbl_intro_msg"
-            style="@style/HRAQuestion"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/mainScroll"
             android:layout_width="match_parent"
-            android:text="@string/TEXT_START_ASSESSMENT"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/btn_start_hra"/>
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.caressa.common.view.ArcBorderButton
-            android:id="@+id/btn_start_hra"
-            app:isTemplate="true"
-            app:isRound="true"
-            style="@style/HRACustomButton"
-            android:layout_width="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:text="@string/START_HRA"
-            android:textColor="@color/hra_option_selector_color"
-            android:background="@drawable/hra_option_selector_bg"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_hi"
+                    style="@style/HRAImageView"
+                    android:src="@drawable/img_hi"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/lbl_intro_msg"/>
+
+                <com.caressa.hra.views.HTMLTextView
+                    android:id="@+id/lbl_intro_msg"
+                    style="@style/HRAQuestion"
+                    android:layout_width="match_parent"
+                    android:text="@string/TEXT_START_ASSESSMENT"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_start_hra"/>
+
+                <com.caressa.common.view.ArcBorderButton
+                    android:id="@+id/btn_start_hra"
+                    app:isTemplate="true"
+                    app:isRound="true"
+                    style="@style/HRACustomButton"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:text="@string/START_HRA"
+                    android:textColor="@color/hra_option_selector_color"
+                    android:background="@drawable/hra_option_selector_bg"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+<!--                <com.caressa.common.view.ArcButton
+                    android:id="@+id/btn_start_hra"
+                    style="@style/HRACustomButton"
+                    android:layout_width="0dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:text="@string/START_HRA"
+                    android:textColor="@color/hra_option_selector_color"
+                    android:background="@drawable/hra_option_selector_bg"
+                    app:isTemplate="true"
+                    app:isRound="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/lbl_intro_msg"
+                    app:layout_constraintStart_toStartOf="@+id/lbl_intro_msg" />-->
+
+<!--                <com.caressa.common.view.ArcButton
+                    android:id="@+id/btn_skip_hra"
+                    style="@style/CustomButtonLeft"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:text="@string/SKIP_FOR_NOW"
+                    android:visibility="gone"
+                    app:isLeftButton="true"
+                    app:isTemplate="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/lbl_intro_msg"
+                    app:layout_constraintStart_toStartOf="@+id/lbl_intro_msg" />-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <!--        <com.caressa.common.view.ArcButton
+                    android:id="@+id/btn_start_hra"
+                    android:layout_width="0dp"
+                    app:isTemplate="true"
+                    style="@style/CustomButton"
+                    android:text="@string/TAKE_HRA"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
 
 </layout>
 

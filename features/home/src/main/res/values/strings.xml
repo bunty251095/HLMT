@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="TITLE_SETTINGS">Settings</string>
@@ -6,17 +7,9 @@
     <string name="TITLE_EDIT_PROFILE">Edit Profile</string>
     <string name="TITLE_FAMILY_MEMBERS">Family Members</string>
     <string name="TITLE_FAMILY_DOCTORS">Family Doctors</string>
-    <string name="TITLE_ADD_DOCTOR">Add Doctor Details</string>
-    <string name="TITLE_UPDATE_DOCTOR">Update Doctor Details</string>
     <string name="TITLE_EDIT_DETAILS">Edit Details</string>
     <string name="TITLE_SELECT_RELATION">Select Relationship</string>
     <string name="TITLE_ADD_FAMILY_MEMBER">Add Family Member</string>
-    <string name="TITLE_WELLNESS_CENTRE">Wellness Centre</string>
-    <string name="TITLE_CALL_VISIT">Call / Visit</string>
-    <string name="TITLE_ORDER_ONLINE">Order Online</string>
-    <string name="TITLE_MED_LIFE">MedLife</string>
-    <string name="TITLE_MEDICINES_HEALTHCARE">Medicines and Healthcare</string>
-    <string name="TITLE_SEARCH_HEALTH_PACKAGE">Search Health Packages</string>
     <string name="TITLE_TOOLS_AND_TRACKER">Tools and Calculators</string>
     <string name="TITLE_CONTACT_US">Contact Us</string>
 
@@ -36,40 +29,18 @@
     <string name="RATE_US">Rate Us</string>
     <string name="LANGUAGE">Language</string>
     <string name="STEPS_OF">steps of</string>
-    <string name="AFFILIATED_TO">Affiliated To :</string>
-    <string name="FAMILY_MEMBER">Family Members  :</string>
-    <string name="UPDATE_PHONE">Update Mobile</string>
-
-    <string name="OPEN_GALLERY">Open Gallery</string>
-    <string name="TAKE_PHOTO">Take Photo</string>
-    <string name="REMOVE_PHOTO">Remove Photo</string>
 
     <!--Dashboard Buttons-->
-    <string name="MY_HEALTH_SCORE">My Health Score</string>
-    <string name="WELLNESS_SCORE">Wellness Score</string>
-    <string name="TRACKER_AND_RECORDS">Trackers and Records</string>
-    <string name="FACILITIES_RESOURCES">Facilities and Resources</string>
-
-    <string name="DASH_TAKE_HEALTH_CHECKUP">Take a Health Checkup</string>
-    <string name="DASH_CHAT_WITH_DOCTOR">Chat With Doctor</string>
-    <string name="DASH_ORDER_YOUR_MEDICINES">Order Your Medicines</string>
-    <string name="DASH_TRACK_PARAMETER">Track Health \n Parameters</string>
-
+    <string name="DASH_TRACK_PARAMETER">Track Health Parameters</string>
     <string name="DASH_MEDICINE_TRACKER">Medicine Tracker</string>
     <string name="DASH_ACTIVITY_TRACKER">Activity Tracker</string>
     <string name="DASH_STORE_HEALTH_RECORD">Store \n Health Records</string>
-    <string name="DASH_WELLNESS_CENTRE">Wellness \n Centre</string>
     <string name="DASH_TOOLS_TRACKER">Tools &amp; Calculators</string>
-    <string name="DASH_HOSPITAL_NEAR_ME">Hospitals \n Near Me</string>
     <string name="DASH_HEALTH_LIBRARY">Health Library</string>
-    <string name="DASH_CHAT_DIETITIAN">Chat with Dietitian/Counsellor</string>
     <string name="DASH_REWARD">Rewards</string>
     <!--Dashboard Buttons-->
 
-    <string name="CHECKOUT_PROFILE">Checkout your \n profile</string>
     <string name="ADD_MEMBER">Add family \n member</string>
-    <string name="FAMILY_MEMBERS">Family Members</string>
-    <string name="MEMBER_SINCE">Member Since</string>
 
     <string name="ACCOUNT_LINKED">Your HLMTakaful360 tran2@yahoo..com is already linked with your HL Pace wellness profile.</string>
     <string name="LINK_HLMT_360_ACCOUNT">Link HLMT 360 Account</string>
@@ -78,32 +49,42 @@
     <string name="HAS_BEEN_LINKED_TO_PROFILE">has been linked Successfully with your HL Pace profile.</string>
     <string name="ACCOUNT_ALREADY_LINKED">is already link with your HL Pace wellness profile.</string>
 
-    <string name="HELP_US_TO_MAKE_US_BETTER">Help us to make us better...</string>
+    <string name="HELP_US_TO_MAKE_US_BETTER">Help us to make us better…</string>
     <string name="DO_YOU_HAVE_ANY_SUGGESTION_OR_FEEDBACK_TO_MAKE_OUR_APP_BETTER">Do you have any suggestion or feedback to make our app better?</string>
-    <string name="WRITE_SOMETHING_TO_US">Write something to us...</string>
+    <string name="WRITE_SOMETHING_TO_US">Write something to us…</string>
     <string name="CONTACT_US_DESC">Send us a message and we will respond shortly</string>
     <string name="SEND_US_YOUR_QUERY">Send us your query</string>
 
-    <!--HRA Strings-->
-    <string name="COMPLETE_YOUR_HRA">Complete Your HRA</string>
-    <string name="HIGH_RISK">High Risk</string>
-    <string name="NEED_IMPROVEMENT">Needs Improvement</string>
-    <string name="HEALTHY">Healthy</string>
-    <string name="OPTIMUM">Optimum</string>
-    <string name="TAKE_YOUR_HRA">Take your HRA</string>
-    <!--HRA Strings-->
+    <string name="ADD_NEW_MEMBER">Add Family member</string>
+    <string name="NO_RELATIVES">No Relatives found</string>
+    <string name="MEMBER_ADDED">Family Member Added Successfully</string>
+    <string name="MSG_ALREADY_ADDED">You have already added</string>
+    <string name="MEMBER_DELETED">Family Member Deleted Successfully</string>
+    <string name="PROFILE_UPDATED">Profile Details Updated Successfully</string>
+    <string name="PROFILE_PHOTO_UPDATED">Profile Photo Updated Successfully</string>
+    <string name="PROFILE_PHOTO_REMOVED">Profile Photo Removed Successfully</string>
+    <string name="ERROR_PROFILE_PHOTO">Unable to Remove Profile Photo</string>
+    <string name="FEEDBACK_SUBMITTED">Feedback Submitted Successfully</string>
+    <string name="MSG_CONTACT_US_SUCCESS">Thanks for contacting us.\nYour message has been received by our team</string>
 
-    <string name="POWERED_BY_VIVANT">Powered by Vivant</string>
-    <string name="CONTENT">Content</string>
-    <string name="PICK_DOB">Pick Date of Birth</string>
-    <string name="FEATURE_AVAILABLE_FOR_PREMIUM_USERS">Feature available for premium users</string>
+    <string name="REMOVE_PROFILE_PHOTO">Remove Profile Photo</string>
+    <string name="MSG_REMOVE_PROFILE_PHOTO_CONFORMATION">Are you sure that you want to Remove Profile Photo?</string>
+    <string name="MSG_DELETE_MEMBER_CONFIRMATION">Are you sure that you want to delete the selected family member from list?</string>
+    <string name="MSG_LOGOUT_CONFORMATION">Are you sure that you want to Logout from the app?</string>
+    <string name="MSG_SWITCH_PROFILE_CONFIRMATION1">You would like to view the health profile of</string>
+    <string name="MSG_SWITCH_PROFILE_CONFIRMATION2">Click confirm to proceed</string>
+    <string name="ERROR_PARENTS_AGE">Parent\'s age should be greater than your age</string>
+    <string name="ERROR_KIDS_AGE">Kid\'s age should be smaller than your age</string>
+    <string name="ERROR__GP_AGE">Grand Parent\'s age should be greater than your age</string>
+    <string name="ERROR_AGE_NOT_LESS_THAN_18">Age cannot be less than 18 years</string>
+    <string name="ERROR_SELECT_RELATION_FIRST">Please Select Relationship first</string>
+    <string name="ERROR_PLEASE_ENTER_FEEDBACK_TO_SUBMIT">Please Enter Feedback to Submit</string>
+    <string name="ERROR_DOB_UNAVAILABLE">Unable to save Profile information as Logged In user\'s age is unavailable</string>
 
-    <!--Wellness Centre Options-->
-    <string name="MEDICAL_STORE_DETAILS">Medical Store Details</string>
-    <string name="DESC_MED_LIFE">Get assured discounts on prescribed medicines and other healthcare products with delivery at your doorsteps across <big><b>100</b></big> cities.</string>
-    <string name="DESC_HEALTH_PACKAGE">Avail Up to 65% discount on Health Check-Up packages at over 1200 centres in more than 50 cities covering all parameters such as Lipid Profile, Thyroid profile, and more.</string>
-    <string name="DESC_TOOLS_TRACKER">Find out instant answers to complex health problems by using Vivant’s health calculators and charts. They are well researched and have been validated by health experts. However the final word about your health should be from your doctor.</string>
-    <!--Wellness Centre Options-->
+    <!--Navigation Options-->
+    <string name="NAVIGATION_DRAWER_OPEN">Open navigation drawer</string>
+    <string name="NAVIGATION_DRAWER_CLOSE">Close navigation drawer</string>
+    <!--Navigation Options-->
 
     <string name="RE_LOGIN">Re-Login</string>
     <string name="CHANGE_PASSWORD">Change Password</string>
@@ -113,39 +94,8 @@
     <string name="CONFIRM_PASSWORD">Confirm Password</string>
     <string name="DELETE_FAMILY_MEMBER">Delete Family Member</string>
     <string name="DELETE_DOCTOR">Delete Doctor</string>
-    <string name="REMOVE_PROFILE_PHOTO">Remove Profile Photo</string>
-    <string name="ADD_NEW_MEMBER">Add a new family member</string>
-    <string name="NO_RELATIVES">No Relatives found</string>
-    <string name="NO_DOCTORS">No Doctors found</string>
-    <string name="SWITCH_PROFILE">Change user profile\n</string>
-    <string name="MEMBER_ADDED">Family Member Added Successfully</string>
-    <string name="MEMBER_DELETED">Family Member Deleted Successfully</string>
-    <string name="PROFILE_UPDATED">Profile Details Updated Successfully</string>
-    <string name="PROFILE_PHOTO_UPDATED">Profile Photo Updated Successfully</string>
-    <string name="PROFILE_PHOTO_REMOVED">Profile Photo Removed Successfully</string>
-    <string name="ERROR_PROFILE_PHOTO">Unable to Remove Profile Photo</string>
-    <string name="MOBILE_UPDATED">Mobile Number Updated Successfully</string>
-    <string name="MSG_CONTACT_US_SUCCESS">Thanks for contacting us.\nYour message has been received by our team</string>
-    <string name="MSG_REMOVE_PROFILE_PHOTO_CONFORMATION">Are you sure that you want to Remove Profile Photo?</string>
     <string name="MSG_DELETE_DOCTOR_CONFIRMATION1">Are you sure that you want to delete </string>
     <string name="MSG_DELETE_DOCTOR_CONFIRMATION2"> from Doctor from list?</string>
-    <string name="MSG_DELETE_MEMBER_CONFIRMATION">Are you sure that you want to delete the selected family member from list?</string>
-    <string name="MSG_LOGOUT_CONFORMATION">Are you sure that you want to Logout from the app?</string>
-    <string name="MSG_SWITCH_PROFILE_CONFIRMATION1">You would like to view the health profile of</string>
-    <string name="MSG_SWITCH_PROFILE_CONFIRMATION2">Click confirm to proceed</string>
     <string name="ERROR_INVALID_OLD_PASSWORD">Invalid Old Password</string>
-    <string name="ERROR_PARENTS_AGE">Parent\'s age should be greater than your age</string>
-    <string name="ERROR_KIDS_AGE">Kid\'s age should be smaller than your age</string>
-    <string name="ERROR__GP_AGE">Grand Parent\'s age should be greater than your age</string>
-    <string name="ERROR_AGE_NOT_LESS_THAN_18">Age cannot be less than 18 years</string>
-    <string name="ERROR_SELECT_RELATION_FIRST">Please Select Relationship first</string>
-    <string name="MSG_ALREADY_ADDED">You have already added</string>
-    <string name="ERROR_PLEASE_ENTER_FEEDBACK_TO_SUBMIT">Please Enter Feedback to Submit</string>
-    <string name="ERROR_DOB_UNAVAILABLE">Unable to save Profile information as Logged In user\'s age is unavailable</string>
-
-    <!--Navigation Options-->
-    <string name="NAVIGATION_DRAWER_OPEN">Open navigation drawer</string>
-    <string name="NAVIGATION_DRAWER_CLOSE">Close navigation drawer</string>
-    <!--Navigation Options-->
 
 </resources>

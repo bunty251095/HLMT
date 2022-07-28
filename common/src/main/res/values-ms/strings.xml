@@ -1,18 +1,311 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HL Pace</string>
-    <string name="LOGOUT">Log keluar</string>
+
+    <string name="SAVE">Simpan</string>
+    <string name="SUBMIT">Hantar</string>
+    <string name="RESTART">Mula Semula</string>
+    <string name="SEND">Hantar</string>
+    <string name="FINISH">Selesai</string>
+    <string name="DONE">Selesai</string>
+    <string name="NEXT">Seterusnya</string>
+    <string name="PREVIOUS">Sebelumnya</string>
+    <string name="OK">OK</string>
+    <string name="OR">atau</string>
+    <string name="CONFIRM">Sahkan</string>
+    <string name="PROCEED">Teruskan</string>
+    <string name="SELECT">Pilih</string>
+    <string name="CLOSE">Tutup</string>
+    <string name="CANCEL">Batal</string>
+    <string name="BACK">Kembali</string>
+    <string name="START">Mula</string>
+    <string name="CONTINUE">Teruskan</string>
+    <string name="CALCULATE">Kira</string>
+    <string name="RECALCULATE">Kira Semula</string>
+    <string name="DELETE">Padam</string>
+    <string name="UPDATE">Kemaskini</string>
+    <string name="DOWNLOAD">Muat Turun</string>
+    <string name="SHARE">Kongsi</string>
+    <string name="VIEW">Lihat</string>
+    <string name="ADD">Tambah</string>
+    <string name="ADD_MORE">Tambah Lagi</string>
+    <string name="LOGOUT">Log Keluar</string>
+    <string name="LOGOUT_APPLICATION">Log Keluar Aplikasi</string>
+    <string name="PASSWORD">Kata Laluan</string>
+
+    <string name="ALERT">Amaran</string>
+    <string name="VIEW_MORE">Lihat Lagi</string>
+    <string name="REPORT">Laporan</string>
+    <string name="DESCRIPTION">Penerangan</string>
+    <string name="RECOMMENDATIONS">Cadangan</string>
+    <string name="TAKEN">Telah Diambil</string>
+    <string name="SKIP">Langkau</string>
+    <string name="SKIPPED">Langkau</string>
+<!--    <string name="VALUE">Value</string>-->
+<!--    <string name="OBSERVATION">Observation</string>-->
+    <string name="REFRESH">Muat Semula</string>
+    <string name="CATEGORY">Kategori</string>
+    <string name="DOSE">Dos</string>
+    <string name="TIME">Masa</string>
+    <string name="RESEND_OTP">Hantar Semula OTP</string>
+    <string name="NO_THANKS">Tidak, Terima kasih</string>
+    <string name="DEAR_USER">Pengguna yang dihormati</string>
+    <string name="UPLOAD_REPORT">Muat Naik Laporan</string>
+    <string name="UPLOAD_PRESCRIPTION">Muat Naik Preskripsi</string>
+    <string name="ORDER_MEDICINE">Pesan Ubat</string>
+    <string name="ADD_MEDICATION">Tambah Ubat</string>
+    <string name="MEDICINE_REMINDER">Peringatan ubat</string>
+    <string name="ALL">Semua</string>
+    <string name="IS">adalah </string>
+    <string name="TITLE">Tajuk</string>
+    <string name="DASHBOARD">Utama</string>
+    <string name="HISTORY">Sejarah</string>
+    <string name="DIGITIZE">Digitkan</string>
+    <string name="YES">Ya</string>
+    <string name="NO">Tidak</string>
+    <string name="NONE">Tiada</string>
+    <string name="MALE">Lelaki</string>
+    <string name="FEMALE">Perempuan</string>
+    <string name="NAME">Nama</string>
+    <string name="GENDER">Jantina</string>
+    <string name="PHONE">Telefon</string>
+    <string name="PHONE_NUMBER">Nombor Telefon</string>
+    <string name="NUMBER">Nombor</string>
+    <string name="ALTERNATE_NUMBER">Nombor Alternatif</string>
+    <string name="EMAIL">Emel</string>
+    <string name="EMAIL_ADDRESS">Alamat Emel</string>
+    <string name="EMAIL_ADDRESS_HINT">*Alamat Emel</string>
+    <string name="ALTERNATE_EMAIL_ADDRESS">Alamat Emel Alternatif</string>
+    <string name="ADDRESS">Alamat</string>
+    <string name="AGE">Umur</string>
+    <string name="DATE_OF_BIRTH">Tarikh Lahir</string>
+    <string name="MOBILE_NUMBER">Nombor Telefon Bimbit</string>
+    <string name="AND">dan</string>
+    <string name="DATE">Tarikh</string>
+    <string name="DAY">Hari</string>
+    <string name="WEEK">Minggu</string>
+    <string name="MONTH">Sebulan</string>
+    <string name="YEAR">Tahun</string>
+    <string name="YEARS">Tahun</string>
+    <string name="FOR">Untuk</string>
+    <string name="FROM">Dari</string>
+    <string name="TO">ke</string>
+<!--    <string name="ONLY">Only</string>-->
+    <string name="STEPS">Langkah</string>
+    <string name="CALORIES">Kalori</string>
+    <string name="SEC">Saat</string>
+    <string name="TODAY">Hari Ini</string>
+    <string name="WEEKLY">Mingguan</string>
+    <string name="MONTHLY">Bulanan</string>
+
+    <string name="JANUARY">Januari</string>
+    <string name="FEBRUARY">Februari</string>
+    <string name="MARCH">Mac</string>
+    <string name="APRIL">April</string>
+    <string name="MAY">Mei</string>
+    <string name="JUNE">Jun</string>
+    <string name="JULY">Julai</string>
+    <string name="AUGUST">Ogos</string>
+    <string name="SEPTEMBER">September</string>
+    <string name="OCTOBER">Oktober</string>
+    <string name="NOVEMBER">November</string>
+    <string name="DECEMBER">Disember</string>
+
+<!--    <string name="SESSION">Session</string>-->
+    <string name="MYSELF">Saya Sendiri</string>
 
     <string name="FATHER">Bapa</string>
     <string name="MOTHER">Ibu</string>
     <string name="SON">Anak lelaki</string>
     <string name="DAUGHTER">Anak perempuan</string>
-    <string name="BROTHER">Abang</string>
-    <string name="SISTER">Kakak</string>
+    <string name="BROTHER">Abang/Adik Lelaki</string>
+    <string name="SISTER">Kakak/Adik Perempuan</string>
     <string name="WIFE">Isteri</string>
     <string name="HUSBAND">Suami</string>
-    <string name="SPOUSE">Pasangan suami isteri</string>
+    <string name="SPOUSE">Pasangan</string>
     <string name="GRAND_FATHER">Datuk</string>
-    <string name="GRAND_MOTHER">Ibu Besar</string>
+    <string name="GRAND_MOTHER">Nenek</string>
+
+    <string name="HEIGHT">Height</string>
+    <string name="WEIGHT">Weight</string>
+    <string name="WAIST">Waist</string>
+    <string name="CHOLESTEROL">Cholesterol</string>
+    <string name="HDL">HDL</string>
+    <string name="SYSTOLIC">Systolic</string>
+    <string name="DIASTOLIC">Diastolic</string>
+    <string name="FEET_INCH">Feet/inch</string>
+    <string name="FT_IN">ft,in</string>
+    <string name="FT">ft</string>
+    <string name="INCH">in</string>
+    <string name="CM">cm</string>
+    <string name="LBS">lbs</string>
+    <string name="KG">kg</string>
+    <string name="MM_HG">mm Hg</string>
+    <string name="MMOL_L">mm Hg</string>
+    <string name="MG_DL">mg/dL</string>
+    <string name="KCAL">Kcal</string>
+    <string name="MIN">min</string>
+    <string name="KM">km</string>
+    <string name="MTR">mtr</string>
+
+    <string name="LOW">Rendah</string>
+    <string name="HIGH">Tinggi</string>
+    <string name="MODERATE">Sederhana</string>
+    <string name="HIGH_NORMAL">High normal</string>
+    <string name="DESIRABLE">Desirable</string>
+    <string name="MILDLY_HIGH">Mildly High</string>
+
+    <string name="NORMAL">Normal</string>
+    <string name="ABNORMAL">Abnormal</string>
+    <string name="DIABETIC">Diabetic</string>
+    <string name="EARLY_DIABETIC">Early Diabetic</string>
+    <string name="VERY_HIGH">Very High</string>
+    <string name="VERY_LOW">Very Low</string>
+    <string name="MILDLY_LOW">Mildly Low</string>
+    <string name="BORDERLINE_HIGH">Borderline High</string>
+    <string name="BETTER">Better</string>
+    <string name="NEAR_OPTIMAL">Near Optimal</string>
+    <string name="MODERATE_LOW">Moderate Low</string>
+    <string name="MODERATE_HIGH">Moderate High</string>
+    <string name="MILD_LOW">Mild Low</string>
+    <string name="MILD_HIGH">Mild High</string>
+    <string name="AVERAGE_RISK">Average Risk</string>
+    <string name="BEST">Best</string>
+    <string name="OPTIMAL">Optimal</string>
+    <string name="GOOD">Good</string>
+
+<!--    <string name="OPEN_GALLERY">Open Gallery</string>-->
+<!--    <string name="TAKE_PHOTO">Take Photo</string>-->
+<!--    <string name="REMOVE_PHOTO">Remove Photo</string>-->
+
+    <string name="GALLERY">Galeri</string>
+    <string name="PHOTO">Gambar</string>
+    <string name="REMOVE">Alih keluar</string>
+
+    <string name="PRE_HYPERTENSION">Pra-Hipertensi</string>
+    <string name="HYPERTENSION_STAGE_1">Hipertensi - Tahap 1</string>
+    <string name="HYPERTENSION_STAGE_2">Hipertensi - Tahap 2</string>
+    <string name="HYPERTENSION_CRITICAL">Hipertensi - Kritikal</string>
+
+    <string name="UNDERWEIGHT">Kurang berat badan</string>
+    <string name="OVERWEIGHT">Lebih berat badan</string>
+    <string name="PRE_OBESE">Pra-Obesiti</string>
+    <string name="OBESE_LEVEL_1">Obesiti Tahap 1</string>
+    <string name="OBESE_LEVEL_2">Obesiti Tahap 2</string>
+    <string name="OBESE_LEVEL_3">Obesiti Tahap 3</string>
+
+    <string name="SWITCH_PROFILE">Tukar Profil</string>
+    <string name="PICK_YOUR_HEIGHT">Pilih Ketinggian Anda</string>
+    <string name="PICK_YOUR_WEIGHT">Pilih Berat Badan Anda</string>
+<!--    <string name="PICK_YOUR_WAIST">Pick your Waist</string>-->
+    <string name="CURRENT_WEIGHT">Pilih Berat Badan Anda</string>
+    <string name="ENTER_WEIGHT">Masukkan berat badan anda</string>
+    <string name="ENTER_HEIGHT">Masukkan ketinggian anda</string>
+<!--    <string name="ENTER_YOUR_WAIST_SIZE">Enter your waist size</string>-->
+    <string name="YOUR_BMI_IS">BMI anda adalah : </string>
+
+    <!--HRA-->
+<!--    <string name="TAKE_ASSESSMENT">Take Assessment</string>-->
+    <string name="TAKE_YOUR_HRA">Ambil HRA Anda</string>
+    <string name="COMPLETE_YOUR_HRA">Lengkapkan HRA anda</string>
+    <string name="HIGH_RISK">Berisiko tinggi</string>
+    <string name="NEEDS_IMPROVEMENT">Perlu penambahbaikan</string>
+    <string name="HEALTHY">Sihat</string>
+    <string name="OPTIMUM">Optimum</string>
+    <!--HRA-->
+
+    <string name="COMING_SOON">Akan datang</string>
+    <string name="POWERED_BY">Dikuasakan oleh</string>
+    <string name="PERMISSION_REQUIRED">Keizinan Diperlukan</string>
+    <string name="SELECT_RECORDS">Pilih rekod</string>
+    <string name="SELECT_PROFILE_PHOTO">Pilih Fail untuk Dimuatnaik</string>
+    <string name="SELECT_A_FILE_TO_UPLOAD">Pilih Fail untuk Dimuatnaik</string>
+    <string name="NEED_STORAGE_PERMISSION">Untuk menyimpan dan membaca fail, kami memerlukan keizinan untuk penyimpanan</string>
+    <string name="NEED_CAMERA_PERMISSION">Untuk klik tangkap untuk memuat naik, kami memerlukan keizinan kamera</string>
+    <string name="ERROR_STORAGE_PERMISSION">Keizinan Storan Diperlukan untuk meneruskan</string>
+    <string name="ERROR_CAMERA_PERMISSION">Keizinan kamera Diperlukan untuk meneruskan</string>
+
+    <string name="AN_ERROR_HAPPENED">Berlaku ralat, sila cuba lagi!</string>
+    <string name="UNEXPECTED_ERROR">Ralat tidak dijangka berlaku, sila cuba lagi.</string>
+    <string name="SESSION_EXPIRED">Sesi anda telah tamat, sila cuba lagi.</string>
+
+    <!--App Message-->
+    <string name="API_RETRY_ERROR">Sila cuba lagi!</string>
+    <string name="MSG_API_DEFAULT_ERROR">Terdapat masalah berlaku!</string>
+    <string name="SOME_ERROR">Ralat!</string>
+    <string name="NO_INTERNET_CONNECTION">Tiada Sambungan Internet</string>
+
+    <string name="NO_DATA">Tiada Data</string>
+    <string name="NO_DATA_AVAILABLE">Tidak ada data</string>
+    <string name="NO_HISTORY_AVAILABLE">Sejarah Tidak Ada</string>
+    <string name="SYNCHRONIZING">Selaraskan</string>
+    <string name="PASSWORD_CHANGED">Kata Laluan telah diubah</string>
+    <string name="PASSWORD_CHANGED_SUCCESS">Kata Laluan anda telah berjaya diubah</string>
+    <string name="GO_TO_APP">Kembali ke Aplikasi Saya</string>
+    <string name="PLEASE_WAIT">Sila tunggu</string>
+    <string name="LOADING">Loading</string>
+    <string name="ERROR_GENERAL">Tidak dapat disambung, sila cuba lagi</string>
+    <string name="AWW_SNAP">Oh! Maaf!</string>
+    <string name="PRESS_AGAIN_TO_EXIT">Tekan sekali lagi untuk keluar</string>
+    <string name="SOMETHING_WENT_WRONG">Ralat berlaku</string>
+    <string name="MSG_NO_INTERNET_CONNECTION">Tiada Internet</string>
+    <string name="MSG_SESSION_EXPIRED">Sesi anda telah tamat, sila log masuk sekali lagi.</string>
+    <string name="ERROR_INTERNET_UNAVAILABLE">Anda berada di luar talian. Sila periksa sambungan internet anda dan cuba lagi</string>
+    <string name="MSG_OTP">OTP telah dihantar ke nombor telefon yang didaftarkan, sila tunggu sementara kami mendapatkan kembali.</string>
+
+    <!--Error Msg-->
+    <string name="VALIDATE_OTP">Sila Masukkan OTP yang Sah</string>
+    <string name="VALIDATE_PASSWORD">Sila Masukkan Kata Laluan Yang Sah</string>
+    <string name="ERROR_PASSWORD_SHOULD_BE_MINIMUM_6_CHARACTERS">Kata Laluan hendaklah minimum 6 aksara</string>
+    <string name="ERROR_NEW_PASSWORD_MUST_BE_DIFFERENT_FROM_OLD_PASSWORD">Kata laluan baru mesti berbeza dengan kata laluan lama</string>
+    <string name="ERROR_PASSWORD_DOES_NOT_MATCH">Kata laluan tidak sepadan</string>
+    <string name="ERROR_PASSWORD_DOES_NOT_MATCH_REQUIREMENTS">Kata laluan tidak memenuhi Kriteria</string>
+    <string name="ERROR_PASSWORD_CONFIRM_DOES_NOT_MATCH">Kata laluan dan kata laluan pengesahan tidak sepadan</string>
+    <string name="VALUE_SHOULD_BE_BETWEEN">bacaan hendaklah di antara</string>
+    <string name="PLEASE_ENTER_VALUE">Sila masukkan bacaan</string>
+    <string name="PLEASE_INSERT_SYSTOLIC_BP_VALUE">Sila masukkan bacaan BP sistolik</string>
+    <string name="PLEASE_INSERT_DIASTOLIC_BP_VALUE">Sila masukkan bacaan BP Diastolik</string>
+    <string name="DIASTOLIC_VALUE_SHOULD_BE_LESS_THAN_SYSTOLIC_VALUE">Bacaan diastolik mestilah kurang daripada bacaan Sistolik</string>
+    <string name="SYSTOLIC_BP_SHOULD_NOT_LESS_THAN_DIASTOLIC_BP">BP sistolik tidak boleh kurang daripada BP Diastolik</string>
+    <string name="PLEASE_INSERT_SYSTOLIC_BP_VALUE_BETWEEN_30_TO_300">Sila masukkan bacaan BP sistolik antara 30 hingga 300</string>
+    <string name="PLEASE_INSERT_DIASTOLIC_BP_VALUE_BETWEEN_10_TO_150">Sila masukkan bacaan BP Diastolik antara 10 hingga 150</string>
+    <string name="PLEASE_INSERT_SYSTOLIC_BP_VALUE_BETWEEN_0_01_TO_500">Sila masukkan bacaan BP sistolik antara 0.01 hingga 500</string>
+    <string name="PLEASE_INSERT_DIASTOLIC_BP_VALUE_BETWEEN_10_TO_500">Sila masukkan bacaan BP Diastolik antara 10 hingga 500</string>
+
+    <string name="PLEASE_FILL_DETAILS">Sila isi butiran</string>
+    <string name="VALIDATE_AGE">Umur mestilah melebihi 18 tahun</string>
+    <string name="VALIDATE_DATE_OF_BIRTH">Sila Masukkan Tarikh Lahir yang Sah</string>
+    <string name="VALIDATE_EMAIL">Sila Masukkan Emel yang Sah</string>
+    <string name="VALIDATE_EMAIL_MUST_INCLUDE">Emel hendaklah mengandungi @</string>
+    <string name="VALIDATE_PHONE">Sila Masukkan Nombor Telefon Yang Sah</string>
+    <string name="VALIDATE_DIFFERENT_PHONE">Sila Masukkan Nombor Telefon yang Berbeza</string>
+    <string name="VALIDATE_DIFFERENT_EMAIL">Sila Masukkan Alamat Emel yang Berbeza</string>
+    <string name="VALIDATE_DIFFERENT_DOB">Sila Masukkan Tarikh Lahir yang Sah</string>
+    <string name="VALIDATE_MESSAGE">Sila Tuliskan Sesuatu dalam Mesej</string>
+    <string name="VALIDATE_VERIFICATION_CODE">Sila Masukkan Kod Pengesahan yang sah</string>
+    <string name="VALIDATE_EMAIL_PHONE">Sila Masukkan Emel / telefon number yang sah</string>
+    <string name="VALIDATE_SAME_PHONE">Sila Masukkan Nombor Baru</string>
+    <string name="ERROR_MOBILE_ALREADY_REGISTERED">Nombor ini telah didaftarkan dengan kami</string>
+    <string name="VALIDATE_NAME">Sila Masukkan Nama yang sah</string>
+    <string name="VALIDATE_SPECIALIZATION">Sila Masukkan Pengkhususan yang sah</string>
+    <string name="ERROR_UNABLE_VERIFY_OTP">Tidak dapat mengesahkan OTP yang dimasukkan, sila cuba lagi</string>
+    <string name="ERROR_CONTACT_US_QUERY">Pertanyaan hendaklah antara 5–1000 huruf</string>
+    <string name="ERROR_FILE_NOT_EXIST">Fail tidak wujud dalam sistem</string>
+    <string name="ERROR_NO_APPLICATION_TO_VIEW_PDF">Tiada Aplikasi Sesuai untuk Melihat PDF</string>
+    <string name="ERROR_FILE_SIZE_LESS_THEN_5MB">Saiz fail mestilah kurang daripada 5MB</string>
+    <string name="ERROR_UNABLE_TO_READ_FILE">Tidak dapat membaca fail, sila cuba lagi</string>
+    <string name="ERROR_FILES_NOT_ACCEPTED">fail tidak diterima</string>
+    <string name="ERROR_UNABLE_TO_OPEN_FILE">Tidak dapat membuka fail</string>
+    <string name="ERROR_NOT_ABLE_TO_READ_FILE">Tidak dapat membaca fail</string>
+    <!--Error Msg-->
+
+    <string name="digits_alpha">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="digits_alpha_numeric">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890</string>
+    <string name="numeric">1234567890</string>
+    <string name="numeric_fraction">1234567890.</string>
+
+<!--    <string name="DISCLAIMER_TITLE">DISCLAIMER</string>
+    <string name="DISCLAIMER_MESSAGE_HRA">All Information presented is for the reference purpose only.&lt;BR/&gt;This information should not be considered a substitute for professional medical expertise, diagnosis or treatment of any health problem.&lt;BR/&gt;&lt;BR/&gt;Please consult with your healthcare professional for further information about your health condition.</string>
+    <string name="DISCLAIMER_MESSAGE_ACTIVITY_TRACKER">Note that this is a reference tool only.&lt;BR/&gt;It should not be used as a substitute for professional diagnostic tool.&lt;BR/&gt;&lt;BR/&gt;Please consult your healthcare professional on this.</string>-->
 
 </resources>

@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.caressa.common.constants.FirebaseConstants
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.utils.FirebaseHelper
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.model.toolscalculators.UserInfoModel
 import kotlinx.android.synthetic.main.activity_tools_calculators_home.*
 import kotlinx.android.synthetic.main.toolbar_tools_calculators.*
@@ -24,6 +25,11 @@ class ToolsCalculatorsHomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try {
+            LocaleHelper.onAttach(this, LocaleHelper.getLanguage(this))
+        } catch (e:Exception) {
+            e.printStackTrace()
+        }
         setContentView(R.layout.activity_tools_calculators_home)
         UserInfoModel.getInstance()!!.isDataLoaded = false
 

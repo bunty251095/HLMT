@@ -71,9 +71,9 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
     }
 
     private fun setObserver() {
-        viewModel.currentSelectedPerson.observe(viewLifecycleOwner,{
+        viewModel.currentSelectedPerson.observe(viewLifecycleOwner) {
 //            viewModel.goToHRA(it)
-        })
+        }
         viewModel.dashboardFeatureList.observe(viewLifecycleOwner,{})
     }
 
@@ -212,19 +212,13 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
             "STEP"->{
                 if(viewModel.checkForFirstTime()) {
                     val dialogData = DefaultNotificationDialog.DialogData()
-                    dialogData.title =
-                        requireContext().resources.getString(R.string.DISCLAIMER_TITLE)
-                    dialogData.message =
-                        requireContext().resources.getString(R.string.DISCLAIMER_MESSAGE_ACTIVITY_TRACKER)
-                    dialogData.btnRightName =
-                        requireContext().resources.getString(R.string.CONTINUE)
+                    dialogData.title = requireContext().resources.getString(R.string.DISCLAIMER_TITLE)
+                    dialogData.message = requireContext().resources.getString(R.string.DISCLAIMER_MESSAGE_ACTIVITY_TRACKER)
+                    dialogData.btnRightName = requireContext().resources.getString(R.string.CONTINUE)
                     dialogData.showLeftButton = false
                     val defaultNotificationDialog = DefaultNotificationDialog(context,
                         object : DefaultNotificationDialog.OnDialogValueListener {
-                            override fun onDialogClickListener(
-                                isButtonLeft: Boolean,
-                                isButtonRight: Boolean
-                            ) {
+                            override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
                                 if (isButtonRight) {
                                     findNavController().navigate(R.id.action_dashboardFragment_to_fitnessActivity)
                                 }
@@ -251,7 +245,7 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
                 findNavController().navigate(R.id.action_dashboardFragment_to_medicationActivity)
             }
             "CAL"->{findNavController().navigate(R.id.action_dashboardFragment_to_toolsCalculatorsHomeActivity)}
-            "REW"->{viewModel.toastMessage("Coming Soon..")}
+            "REW"->{viewModel.toastMessage(resources.getString(R.string.COMING_SOON))}
             "BLOG"->{findNavController().navigate(R.id.action_dashboardFragment_to_blogsActivity)}
         }
     }

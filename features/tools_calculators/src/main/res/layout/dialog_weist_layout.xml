@@ -97,7 +97,7 @@
                     android:id="@+id/tab_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/CENTIMETER"  />
+                    android:text="@string/CM"  />
 
             </com.caressa.common.view.ArcTabLayout>
 
