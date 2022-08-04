@@ -41,8 +41,8 @@
     <string name="TAKEN">Telah Diambil</string>
     <string name="SKIP">Langkau</string>
     <string name="SKIPPED">Langkau</string>
-<!--    <string name="VALUE">Value</string>-->
-<!--    <string name="OBSERVATION">Observation</string>-->
+    <string name="VALUE">Nilai</string>
+    <string name="OBSERVATION">Pemerhatian</string>
     <string name="REFRESH">Muat Semula</string>
     <string name="CATEGORY">Kategori</string>
     <string name="DOSE">Dos</string>
@@ -90,7 +90,7 @@
     <string name="FOR">Untuk</string>
     <string name="FROM">Dari</string>
     <string name="TO">ke</string>
-<!--    <string name="ONLY">Only</string>-->
+    <string name="ONLY">Sahaja</string>
     <string name="STEPS">Langkah</string>
     <string name="CALORIES">Kalori</string>
     <string name="SEC">Saat</string>
@@ -111,7 +111,7 @@
     <string name="NOVEMBER">November</string>
     <string name="DECEMBER">Disember</string>
 
-<!--    <string name="SESSION">Session</string>-->
+    <string name="SESSION">Sesi</string>
     <string name="MYSELF">Saya Sendiri</string>
 
     <string name="FATHER">Bapa</string>
@@ -126,9 +126,10 @@
     <string name="GRAND_FATHER">Datuk</string>
     <string name="GRAND_MOTHER">Nenek</string>
 
-    <string name="HEIGHT">Height</string>
-    <string name="WEIGHT">Weight</string>
+    <string name="HEIGHT">Tinggi</string>
+    <string name="WEIGHT">Berat</string>
     <string name="WAIST">Waist</string>
+    <string name="BLOOD_PRESSURE">Tekanan Darah</string>
     <string name="CHOLESTEROL">Cholesterol</string>
     <string name="HDL">HDL</string>
     <string name="SYSTOLIC">Systolic</string>
@@ -174,9 +175,9 @@
     <string name="OPTIMAL">Optimal</string>
     <string name="GOOD">Good</string>
 
-<!--    <string name="OPEN_GALLERY">Open Gallery</string>-->
-<!--    <string name="TAKE_PHOTO">Take Photo</string>-->
-<!--    <string name="REMOVE_PHOTO">Remove Photo</string>-->
+    <string name="OPEN_GALLERY">Buka Galeri</string>
+    <string name="TAKE_PHOTO">Mengambil gambar</string>
+    <string name="REMOVE_PHOTO">Alih Keluar Foto</string>
 
     <string name="GALLERY">Galeri</string>
     <string name="PHOTO">Gambar</string>
@@ -197,15 +198,15 @@
     <string name="SWITCH_PROFILE">Tukar Profil</string>
     <string name="PICK_YOUR_HEIGHT">Pilih Ketinggian Anda</string>
     <string name="PICK_YOUR_WEIGHT">Pilih Berat Badan Anda</string>
-<!--    <string name="PICK_YOUR_WAIST">Pick your Waist</string>-->
+    <string name="PICK_YOUR_WAIST">Pilih Pinggang anda</string>
     <string name="CURRENT_WEIGHT">Pilih Berat Badan Anda</string>
     <string name="ENTER_WEIGHT">Masukkan berat badan anda</string>
     <string name="ENTER_HEIGHT">Masukkan ketinggian anda</string>
-<!--    <string name="ENTER_YOUR_WAIST_SIZE">Enter your waist size</string>-->
+    <string name="ENTER_YOUR_WAIST_SIZE">Masukkan saiz pinggang anda</string>
     <string name="YOUR_BMI_IS">BMI anda adalah : </string>
 
     <!--HRA-->
-<!--    <string name="TAKE_ASSESSMENT">Take Assessment</string>-->
+    <string name="TAKE_ASSESSMENT">Ambil Penilaian</string>
     <string name="TAKE_YOUR_HRA">Ambil HRA Anda</string>
     <string name="COMPLETE_YOUR_HRA">Lengkapkan HRA anda</string>
     <string name="HIGH_RISK">Berisiko tinggi</string>
@@ -304,8 +305,8 @@
     <string name="numeric">1234567890</string>
     <string name="numeric_fraction">1234567890.</string>
 
-<!--    <string name="DISCLAIMER_TITLE">DISCLAIMER</string>
-    <string name="DISCLAIMER_MESSAGE_HRA">All Information presented is for the reference purpose only.&lt;BR/&gt;This information should not be considered a substitute for professional medical expertise, diagnosis or treatment of any health problem.&lt;BR/&gt;&lt;BR/&gt;Please consult with your healthcare professional for further information about your health condition.</string>
-    <string name="DISCLAIMER_MESSAGE_ACTIVITY_TRACKER">Note that this is a reference tool only.&lt;BR/&gt;It should not be used as a substitute for professional diagnostic tool.&lt;BR/&gt;&lt;BR/&gt;Please consult your healthcare professional on this.</string>-->
+    <string name="DISCLAIMER_TITLE">PENAFIAN</string>
+    <string name="DISCLAIMER_MESSAGE_HRA">Semua Maklumat yang dikemukakan adalah untuk tujuan rujukan sahaja.&lt;BR/&gt; Maklumat ini tidak boleh dianggap sebagai pengganti kepakaran perubatan profesional, diagnosis atau rawatan sebarang masalah kesihatan.&lt;BR/&gt;&lt;BR/&gt; Sila rujuk dengan profesional penjagaan kesihatan anda untuk mendapatkan maklumat lanjut tentang keadaan kesihatan anda.</string>
+    <string name="DISCLAIMER_MESSAGE_ACTIVITY_TRACKER">Ambil perhatian bahawa ini ialah alat rujukan sahaja.&lt;BR/&gt; Ia tidak boleh digunakan sebagai pengganti alat diagnostik profesional.&lt;BR/&gt;&lt;BR/&gt; Sila rujuk profesional penjagaan kesihatan anda tentang perkara ini.</string>
 
 </resources>

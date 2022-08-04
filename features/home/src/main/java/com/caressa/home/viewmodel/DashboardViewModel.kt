@@ -8,6 +8,10 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Build
 import android.text.Html
+import android.view.View
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -60,6 +64,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
     val userRelativesList = MutableLiveData<List<UserRelatives>>()
     val currentSelectedPerson = MutableLiveData<UserRelatives>()
     val dashboardFeatureList = MutableLiveData<List<DataHandler.DashboardFeatureGrid>>()
+    val dashboardFeatureListUpper = MutableLiveData<List<DataHandler.DashboardFeatureGrid>>()
     val settingsOptionList = MutableLiveData<List<DataHandler.Option>>()
     val navDrawerOptionList = MutableLiveData<List<NavDrawerOption>>()
     var hraDetails = MutableLiveData<HRASummary>()
@@ -105,6 +110,14 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
             navDrawerOptionList.postValue(dataHandler.getNavDrawerList())
         }else{
             navDrawerOptionList.postValue(dataHandler.getSwitchProfileNavDrawerList())
+        }
+    }
+
+    fun refreshDashboardFeatureListUpper() {
+        if (isSelfUser()) {
+            dashboardFeatureListUpper.postValue(dataHandler.getDashboardListUpper(hraSummary,stepsData))
+        }else{
+            dashboardFeatureListUpper.postValue(dataHandler.getSwitchProfileDashboardListUpper(hraSummary,stepsData))
         }
     }
 
@@ -598,5 +611,80 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         return sharedPref.getBoolean(PreferenceConstants.STEPS_TRACKER_FIRST,true)
     }
 
+    fun setHraData( title : AppCompatTextView,default : AppCompatTextView ) {
+        if (hraSummary == null) {
+            title.visibility = View.GONE
+            default.visibility = View.VISIBLE
+            default.text = localResource.getString(R.string.TAKE_ASSESSMENT)
+        } else {
+            try {
+                var hraObservation = " -- "
+                if (hraSummary!!.hraCutOff.equals("1")) {
+                    hraObservation = "${hraSummary!!.scorePercentile.toInt()}"
+                }else{
+                    hraObservation = localResource.getString(R.string.TAKE_ASSESSMENT)
+                }
+                var color = ContextCompat.getColor(context, R.color.colorAccent)
+
+                if ( hraSummary != null ) {
+                    var wellnessScore = 0
+                    var hraCutOff = ""
+                    var currentHRAHistoryID = ""
+                    wellnessScore = hraSummary!!.scorePercentile.toInt()
+                    hraCutOff = hraSummary!!.hraCutOff
+                    currentHRAHistoryID = hraSummary!!.currentHRAHistoryID.toString()
+                    if (wellnessScore <= 0) {
+                        wellnessScore = 0
+                    }
+
+                    if ( !Utilities.isNullOrEmpty( currentHRAHistoryID) && !currentHRAHistoryID.equals("0", ignoreCase = true) ) {
+                        when {
+                            hraCutOff.equals("0", ignoreCase = true) -> {
+                                color = ContextCompat.getColor(context,R.color.colorPrimary)
+                            }
+                            wellnessScore in 0..15 -> {
+                                color = ContextCompat.getColor(context,R.color.high_risk)
+                            }
+                            wellnessScore in 16..45 -> {
+                                color = ContextCompat.getColor(context,R.color.moderate_risk)
+                            }
+                            wellnessScore in 46..85 -> {
+                                color = ContextCompat.getColor(context,R.color.healthy_risk)
+                            }
+                            wellnessScore > 85 -> {
+                                color = ContextCompat.getColor(context,R.color.optimum_risk)
+                            }
+                        }
+                    } else {
+                        color = ContextCompat.getColor(context,R.color.colorPrimary)
+                    }
+                } else {
+                    ContextCompat.getColor(context,R.color.colorPrimary)
+                }
+
+                title.visibility = View.VISIBLE
+                default.visibility = View.GONE
+                title.text = hraObservation
+                title.setTextColor(color)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                title.text = " -- "
+                title.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+            }
+        }
+    }
+
+    fun setFitnessData( title : AppCompatTextView , cardActivityTracker : CardView) {
+        if (isSelfUser()) {
+            cardActivityTracker.visibility = View.VISIBLE
+            if (stepsData.isNullOrEmpty()) {
+                title.text = " -- "
+            } else {
+                title.text = stepsData
+            }
+        } else {
+            cardActivityTracker.visibility = View.GONE
+        }
+    }
 
 }

@@ -64,10 +64,10 @@ class DataHandler( val context: Context) {
         return list
     }
 
-    fun getDashboardList(hraSummary: HRASummary?, stepsData: String): List<DashboardFeatureGrid>{
-
+    fun getDashboardListUpper(hraSummary: HRASummary?, stepsData: String): List<DashboardFeatureGrid>{
         val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<DashboardFeatureGrid> = ArrayList()
+
         if (hraSummary == null){
 
             list.add(
@@ -169,18 +169,14 @@ class DataHandler( val context: Context) {
                 )
             )
         }
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_track_parameter,title = localResource.getString(R.string.DASH_TRACK_PARAMETER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "PARAM"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_store_records,title = localResource.getString(R.string.DASH_STORE_HEALTH_RECORD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "RECORD"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_medicine_tracker,title = localResource.getString(R.string.DASH_MEDICINE_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "MED"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_tools_calculators,title = localResource.getString(R.string.DASH_TOOLS_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "CAL"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_rewards,title = localResource.getString(R.string.DASH_REWARD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "REW"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_health_library,title = localResource.getString(R.string.DASH_HEALTH_LIBRARY),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "BLOG"))
+
         return list
     }
 
-    fun getSwitchProfileDashboardList(hraSummary: HRASummary?, stepsData: String): List<DashboardFeatureGrid>{
+    fun getSwitchProfileDashboardListUpper(hraSummary: HRASummary?, stepsData: String): List<DashboardFeatureGrid>{
         val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
         val list:ArrayList<DashboardFeatureGrid> = ArrayList()
+
         if (hraSummary == null){
 
             list.add(
@@ -261,12 +257,32 @@ class DataHandler( val context: Context) {
             }
 
         }
-//        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_hra,title = localResource.getString(R.string.HRA),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = ""))
-//        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_step_counter,title = localResource.getString(R.string.DASH_ACTIVITY_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = ""))
+
+        return list
+    }
+
+    fun getDashboardList(hraSummary: HRASummary?, stepsData: String): List<DashboardFeatureGrid>{
+
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+        val list:ArrayList<DashboardFeatureGrid> = ArrayList()
+
         list.add(DashboardFeatureGrid(imageId = R.drawable.dash_track_parameter,title = localResource.getString(R.string.DASH_TRACK_PARAMETER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "PARAM"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_store_records,title = localResource.getString(R.string.DASH_STORE_HEALTH_RECORD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "RECORD"))
-        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_medicine_tracker,title = localResource.getString(R.string.DASH_MEDICINE_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "MED"))
         list.add(DashboardFeatureGrid(imageId = R.drawable.dash_tools_calculators,title = localResource.getString(R.string.DASH_TOOLS_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "CAL"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_medicine_tracker,title = localResource.getString(R.string.DASH_MEDICINE_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "MED"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_store_records,title = localResource.getString(R.string.DASH_STORE_HEALTH_RECORD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "RECORD"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_rewards,title = localResource.getString(R.string.DASH_REWARD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "REW"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_health_library,title = localResource.getString(R.string.DASH_HEALTH_LIBRARY),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "BLOG"))
+        return list
+    }
+
+    fun getSwitchProfileDashboardList(hraSummary: HRASummary?, stepsData: String): List<DashboardFeatureGrid>{
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+        val list:ArrayList<DashboardFeatureGrid> = ArrayList()
+
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_track_parameter,title = localResource.getString(R.string.DASH_TRACK_PARAMETER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "PARAM"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_tools_calculators,title = localResource.getString(R.string.DASH_TOOLS_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "CAL"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_medicine_tracker,title = localResource.getString(R.string.DASH_MEDICINE_TRACKER),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "MED"))
+        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_store_records,title = localResource.getString(R.string.DASH_STORE_HEALTH_RECORD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "RECORD"))
 //        list.add(DashboardFeatureGrid(imageId = R.drawable.dash_rewards,title = localResource.getString(R.string.DASH_REWARD),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "REW"))
         list.add(DashboardFeatureGrid(imageId = R.drawable.dash_health_library,title = localResource.getString(R.string.DASH_HEALTH_LIBRARY),color = ContextCompat.getColor(context,R.color.vivant_bright_blue),data = "",code = "BLOG"))
         return list

@@ -51,8 +51,8 @@
     <string name="AGE_65_YRS_OR_OVER">65 tahun atau ke atas</string>
 
     <string name="RANGE_0_TO_4">0 – 4</string>
-<!--    <string name="UPPER_LIMIT">Upper Limit</string>
-    <string name="LOWER_LIMIT">Lower Limit</string>-->
+    <string name="UPPER_LIMIT">Had Atas</string>
+    <string name="LOWER_LIMIT">Had Rendah</string>
 
     <string name="DEPRESSION">Depresi</string>
     <string name="ANXIETY">Kebimbangan</string>
@@ -242,9 +242,9 @@
     <string name="QUES_SMART_PHONE_ADDICTION_11">Adakah anda berasa sunyi jika telefon pintar anda tidak berdering untuk beberapa jam?</string>
     <!--Smart Phone Addiction Questions-->
 
-<!--    <string name="PHYSICAL_EFFECTS_OF_ADDICTION">Physical Effects of Addiction</string>
-    <string name="PHYSICAL_EFFECTS_OF_ADDICTION_DESC">Over use of your cell phone or smartphone can result in a number of different physical problems that may cause permanent damage or be difficult to treat, including:</string>
-    <string name="PSYCHOLOGICAL_EFFECTS_OF_CELL_PHONE_ADDICTION">Psychological Effects of Cell Phone Addiction</string>-->
+    <string name="PHYSICAL_EFFECTS_OF_ADDICTION">Kesan Fizikal Ketagihan</string>
+    <string name="PHYSICAL_EFFECTS_OF_ADDICTION_DESC">Penggunaan berlebihan telefon bimbit atau telefon pintar anda boleh mengakibatkan beberapa masalah fizikal yang berbeza yang boleh menyebabkan kerosakan kekal atau sukar untuk dirawat, termasuk:</string>
+    <string name="PSYCHOLOGICAL_EFFECTS_OF_CELL_PHONE_ADDICTION">Kesan Psikologi Ketagihan Telefon Bimbit</string>
 
     <string name="DIGITAL_EYE_STRAIN">Ketegangan mata digital</string>
     <string name="NECK_PROBLEMS">Masalah leher</string>
@@ -280,6 +280,6 @@
 
     <string name="SUB_1_RELATIONSHIP_PROBLEMS">Hubungan luar talian mungkin terjejas akibat pengabaian kerana penggunaan telefon bimbit dan media sosial yang berlebihan.</string>
 
-<!--    <string name="SUB_1_ANXIETY">Research has found that college students who use their cell phones the most are more likely to feel anxious during downtime.</string>-->
+    <string name="SUB_1_ANXIETY">Penyelidikan mendapati bahawa pelajar kolej yang paling kerap menggunakan telefon bimbit mereka lebih berkemungkinan berasa cemas semasa waktu rehat.</string>
 
 </resources>

@@ -19,7 +19,7 @@
     <string name="DIGITIZE_YOUR_PATHOLOGY_LAB_REPORTS">Digitalkan laporan patologi anda </string>
     <string name="CLICK_ON_THE_BELOW_OPTIONS_TO_START_UPLOADING">Klik pilihan di bawah untuk mula memuatnaik</string>
     <string name="PLEASE_SELECT_THE_TYPE_OF_DOCUMENT_FROM_THE_BELOW_LISTED_OPTIONS">Sila pilih jenis dokumen daripada pilihan yang disenaraikan di bawah</string>
-<!--    <string name="PLEASE_SELECT_THE_TYPE_OF_DOCUMENT_TYPE">Please Select Document Type.</string>-->
+    <string name="PLEASE_SELECT_THE_TYPE_OF_DOCUMENT_TYPE">Sila Pilih Jenis Dokumen</string>
 
     <string name="DIET_PLAN">Pelan Diet</string>
     <string name="FITNESS_PLAN">Pelan Kecergasan </string>

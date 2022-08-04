@@ -1,14 +1,22 @@
 package com.caressa.home.ui
 
+import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
 import com.caressa.common.constants.Constants
@@ -18,6 +26,7 @@ import com.caressa.common.fitness.FitnessDataManager
 import com.caressa.common.utils.*
 import com.caressa.home.R
 import com.caressa.home.adapter.DashboardFeaturesGridAdapter
+import com.caressa.home.adapter.SlidingImagesAdapter
 import com.caressa.home.common.DataHandler
 import com.caressa.home.databinding.FragmentHlmtDashboardBinding
 import com.caressa.home.di.ScoreListener
@@ -30,7 +39,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.*
 
-class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGridAdapter.OnItemSelectionListener,
+class HlmtDashboardFragment : BaseFragment() , ScoreListener,
+    DashboardFeaturesGridAdapter.OnItemSelectionListener,
     HomeMainActivity.OnGoogleAccountSelectListener {
 
     private lateinit var binding: FragmentHlmtDashboardBinding
@@ -41,6 +51,33 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
     private var stepGoal = 3000
     private var dashboardGridAdapter: DashboardFeaturesGridAdapter? = null
 
+    private val mContext: Context? = null
+
+    private var imagesArray: Array<String> = arrayOf(
+        "https://picsum.photos/id/0/5616/3744.jpg",
+        "https://picsum.photos/id/2/5616/3744.jpg",
+        "https://picsum.photos/id/1/5616/3744.jpg",
+        "https://picsum.photos/id/3/5616/3744.jpg",
+        "https://picsum.photos/id/4/5616/3744.jpg")
+
+    private var imagesArray1: Array<String> = arrayOf(
+        "https://cdn.pixabay.com/photo/2020/02/13/10/29/bees-4845211__340.jpg",
+        "https://cdn.pixabay.com/photo/2020/04/24/08/57/street-5085971__340.jpg",
+        "https://cdn.pixabay.com/photo/2020/03/11/01/53/landscape-4920705__340.jpg",
+        "https://cdn.pixabay.com/photo/2020/02/11/12/07/portofino-4839356__340.jpg")
+
+    private var currentPage = 0
+    private var slidingImageDots: Array<ImageView?> = arrayOf()
+    private var slidingDotsCount = 0
+
+/*    private val slidingCallback = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            for (i in 0 until slidingDotsCount) {
+                slidingImageDots[i]?.setImageDrawable(ContextCompat.getDrawable(context!!,R.drawable.non_active_dot))
+            }
+            slidingImageDots[position]?.setImageDrawable(ContextCompat.getDrawable(context!!,R.drawable.active_dot))
+        }
+    }*/
 
     override fun getViewModel(): BaseViewModel = viewModel
 
@@ -64,16 +101,71 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
         binding.backViewModel = backgroundCallViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         FirebaseHelper.logScreenEvent(FirebaseConstants.HOME_DASHBOARD)
-        initialise()
-        setClickable()
-        setObserver()
+        try {
+            initialise()
+            setClickable()
+            setObserver()
+            if ( activity != null ) {
+                setUpSlidingViewPager()
+            }
+        } catch ( e : Exception ) {
+            e.printStackTrace()
+        }
         return binding.root
+    }
+
+    private fun setUpSlidingViewPager() {
+        try {
+            slidingDotsCount = imagesArray.size
+            slidingImageDots = arrayOfNulls(slidingDotsCount)
+            val landingImagesAdapter = SlidingImagesAdapter(requireActivity(),slidingDotsCount)
+
+            for (i in 0 until slidingDotsCount) {
+                slidingImageDots[i] = ImageView(binding.slidingViewPager.context)
+                slidingImageDots[i]?.setImageDrawable(ContextCompat.getDrawable(binding.slidingViewPager.context,R.drawable.non_active_dot))
+                val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
+                params.setMargins(8, 0, 8, 0)
+                binding.sliderDots.addView(slidingImageDots[i], params)
+            }
+
+            slidingImageDots[0]?.setImageDrawable(ContextCompat.getDrawable(binding.slidingViewPager.context,R.drawable.active_dot))
+
+            binding.slidingViewPager.apply {
+                adapter = landingImagesAdapter
+                registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        for (i in 0 until slidingDotsCount) {
+                            slidingImageDots[i]?.setImageDrawable(ContextCompat.getDrawable(binding.slidingViewPager.context,R.drawable.non_active_dot))
+                        }
+                        slidingImageDots[position]?.setImageDrawable(ContextCompat.getDrawable(binding.slidingViewPager.context,R.drawable.active_dot))
+                    }
+                })
+            }
+
+            val handler = Handler()
+            val update = Runnable {
+                if (currentPage == slidingDotsCount) {
+                    currentPage = 0
+                }
+                binding.slidingViewPager.setCurrentItem(currentPage++, true)
+            }
+
+            Timer().schedule(object : TimerTask() {
+                override fun run() {
+                    handler.post(update)
+                }
+            },3000, 3000)
+
+        } catch ( e : Exception ) {
+            e.printStackTrace()
+        }
     }
 
     private fun setObserver() {
         viewModel.currentSelectedPerson.observe(viewLifecycleOwner) {
 //            viewModel.goToHRA(it)
         }
+        viewModel.dashboardFeatureListUpper.observe(viewLifecycleOwner,{})
         viewModel.dashboardFeatureList.observe(viewLifecycleOwner,{})
     }
 
@@ -87,10 +179,14 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
             Timber.e("oAuthPermissionsApproved---> false")
             fitnessDataManager!!.fitSignIn(FitRequestCode.READ_DATA)
         }
+
         dashboardGridAdapter = DashboardFeaturesGridAdapter(requireContext(), this,viewModel)
-        binding.rvDashboardGrid.layoutManager = GridLayoutManager(requireContext(),2)
+        binding.rvDashboardGrid.layoutManager = GridLayoutManager(requireContext(),3)
+        binding.rvDashboardGrid.setExpanded(true)
         binding.rvDashboardGrid.adapter = dashboardGridAdapter
 
+        viewModel.setHraData(binding.lblHraDesc,binding.lblHraDescDefault)
+        viewModel.setFitnessData(binding.lblActivityTrackerDesc,binding.cardActivityTracker)
         viewModel.refreshDashboardFeatureList()
 
     }
@@ -119,12 +215,43 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
             bundle.putString(Constants.FROM, "DashboardBP")
             it.findNavController().navigate(R.id.action_dashboardFragment_to_trackParamActivity,bundle)
         }
+
+        binding.cardHra.setOnClickListener {
+            viewModel.goToHRA()
+        }
+
+        binding.cardActivityTracker.setOnClickListener {
+            if(viewModel.checkForFirstTime()) {
+                val dialogData = DefaultNotificationDialog.DialogData()
+                dialogData.title = requireContext().resources.getString(R.string.DISCLAIMER_TITLE)
+                dialogData.message = requireContext().resources.getString(R.string.DISCLAIMER_MESSAGE_ACTIVITY_TRACKER)
+                dialogData.btnRightName = requireContext().resources.getString(R.string.CONTINUE)
+                dialogData.showLeftButton = false
+                val defaultNotificationDialog = DefaultNotificationDialog(context,
+                    object : DefaultNotificationDialog.OnDialogValueListener {
+                        override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
+                            if (isButtonRight) {
+                                findNavController().navigate(R.id.action_dashboardFragment_to_fitnessActivity)
+                            }
+                        }
+                    }, dialogData
+                )
+                defaultNotificationDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                defaultNotificationDialog.show()
+            }else{
+                findNavController().navigate(R.id.action_dashboardFragment_to_fitnessActivity)
+            }
+        }
+
     }
 
     override fun onScore(hraSummary: HRASummary?) {
         viewModel.getHraSummaryDetails()
         viewModel.hraSummary = hraSummary
         viewModel.refreshDashboardFeatureList()
+        //viewModel.refreshDashboardFeatureListUpper()
+        viewModel.setHraData(binding.lblHraDesc,binding.lblHraDescDefault)
+        viewModel.setFitnessData(binding.lblActivityTrackerDesc,binding.cardActivityTracker)
     }
 
     override fun onVitalDataUpdateListener(history: List<TrackParameterMaster.History>) {
@@ -194,6 +321,9 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
                     data.activeTime = todayData.getString(Constants.ACTIVE_TIME).toString().toInt()
                     viewModel.stepsData = "${data.stepsCount} ${resources.getString(R.string.STEPS_OF)} ${stepGoal}"
                     viewModel.refreshDashboardFeatureList()
+                    //viewModel.refreshDashboardFeatureListUpper()
+                    viewModel.setHraData(binding.lblHraDesc,binding.lblHraDescDefault)
+                    viewModel.setFitnessData(binding.lblActivityTrackerDesc,binding.cardActivityTracker)
                     viewModel.hideProgressBar()
                 } else {
                     Timber.e("Fitness Data not Available")
@@ -228,7 +358,8 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
                     defaultNotificationDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                     defaultNotificationDialog.show()
                 }else{
-                    findNavController().navigate(R.id.action_dashboardFragment_to_fitnessActivity)}
+                    findNavController().navigate(R.id.action_dashboardFragment_to_fitnessActivity)
+                }
                 }
             "PARAM"->{
                     val bundle = Bundle()
@@ -249,5 +380,6 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,DashboardFeaturesGr
             "BLOG"->{findNavController().navigate(R.id.action_dashboardFragment_to_blogsActivity)}
         }
     }
+
 
 }

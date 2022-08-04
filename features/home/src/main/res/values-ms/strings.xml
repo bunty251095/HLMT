@@ -7,8 +7,8 @@
     <string name="TITLE_EDIT_PROFILE">Sunting Profil</string>
     <string name="TITLE_FAMILY_MEMBERS">Ahli Keluarga</string>
     <string name="TITLE_FAMILY_DOCTORS">Doktor Keluarga</string>
-<!--    <string name="TITLE_EDIT_DETAILS">Edit Details</string>-->
-<!--    <string name="TITLE_SELECT_RELATION">Select Relationship</string>-->
+    <string name="TITLE_EDIT_DETAILS">Edit Butiran</string>
+    <string name="TITLE_SELECT_RELATION">Pilih Jenis Hubungan</string>
     <string name="TITLE_ADD_FAMILY_MEMBER">Tambah Ahli Keluarga</string>
     <string name="TITLE_TOOLS_AND_TRACKER">Alat dan Kalkulator</string>
     <string name="TITLE_CONTACT_US">Hubungi Kami</string>
@@ -19,16 +19,16 @@
     <string name="MENU_FAMILY_MEMBERS">Ahli Keluarga</string>
     <string name="MENU_FAMILY_DOCTORS">Doktor Keluarga</string>
     <string name="MENU_CONTACT_US">Hubungi Kami</string>
-<!--    <string name="MENU_SPREAD_THE_WORD">Invite My Friends</string>-->
-<!--    <string name="REFER_AND_EARN">Refer &amp; Earn</string>-->
+    <string name="MENU_SPREAD_THE_WORD">Jemput Rakan Saya</string>
+    <string name="REFER_AND_EARN">Rujuk &amp; Dapatkan</string>
     <string name="MENU_SETTINGS">Tetapan</string>
     <string name="MENU_LOGOUT">Log keluar</string>
 
     <string name="HRA">Penilaian Risiko Kesihatan</string>
     <string name="FEEDBACK">Maklumbalas</string>
-<!--    <string name="RATE_US">Rate Us</string>-->
-<!--    <string name="LANGUAGE">Language</string>-->
-<!--    <string name="STEPS_OF">steps of</string>-->
+    <string name="RATE_US">Nilaikan Kami</string>
+    <string name="LANGUAGE">Bahasa</string>
+    <string name="STEPS_OF">langkah daripada</string>
 
     <!--Dashboard Buttons-->
     <string name="DASH_TRACK_PARAMETER">Jejak Parameter Kesihatan</string>
@@ -56,30 +56,30 @@
     <string name="SEND_US_YOUR_QUERY">Hantar pertanyaan anda kepada Kami</string>
 
     <string name="ADD_NEW_MEMBER">Tambah Ahli Keluarga</string>
-<!--    <string name="NO_RELATIVES">No Relatives found</string>-->
+    <string name="NO_RELATIVES">Tiada Saudara Mara ditemui</string>
     <string name="MEMBER_ADDED">Ahli Keluarga berjaya ditambah</string>
-<!--    <string name="MSG_ALREADY_ADDED">You have already added</string>-->
-<!--    <string name="MEMBER_DELETED">Family Member Deleted Successfully</string>-->
-<!--    <string name="PROFILE_UPDATED">Profile Details Updated Successfully</string>-->
-<!--    <string name="PROFILE_PHOTO_UPDATED">Profile Photo Updated Successfully</string>-->
-<!--    <string name="PROFILE_PHOTO_REMOVED">Profile Photo Removed Successfully</string>-->
-<!--    <string name="ERROR_PROFILE_PHOTO">Unable to Remove Profile Photo</string>-->
+    <string name="MSG_ALREADY_ADDED">Anda telah pun menambah</string>
+    <string name="MEMBER_DELETED">Ahli Keluarga Berjaya Dipadamkan</string>
+    <string name="PROFILE_UPDATED">Butiran Profil Berjaya Dikemas Kini</string>
+    <string name="PROFILE_PHOTO_UPDATED">Foto Profil Berjaya Dikemas Kini</string>
+    <string name="PROFILE_PHOTO_REMOVED">Foto Profil Berjaya Dipadamkan</string>
+    <string name="ERROR_PROFILE_PHOTO">Tidak Dapat Memadamkan Foto Profil</string>
     <string name="FEEDBACK_SUBMITTED">Maklumbalas anda berjaya dihantar</string>
     <string name="MSG_CONTACT_US_SUCCESS">Terima kasih kerana menghubungi kami. Kami telah menerima mesej anda dan pihak kami akan menghubungi anda dengan secepat mungkin.</string>
 
-<!--    <string name="REMOVE_PROFILE_PHOTO">Remove Profile Photo</string>-->
-<!--    <string name="MSG_REMOVE_PROFILE_PHOTO_CONFORMATION">Are you sure that you want to Remove Profile Photo?</string>-->
+    <string name="REMOVE_PROFILE_PHOTO">Padamkan Foto Profil</string>
+    <string name="MSG_REMOVE_PROFILE_PHOTO_CONFORMATION">Adakah anda pasti mahu memadamkan Foto Profil?</string>
     <string name="MSG_DELETE_MEMBER_CONFIRMATION">Adakah anda pasti untuk memadam ahli keluarga yang dipilih daripada senarai?</string>
     <string name="MSG_LOGOUT_CONFORMATION">Adakah anda pasti anda ingin keluar dari aplikasi?</string>
-<!--    <string name="MSG_SWITCH_PROFILE_CONFIRMATION1">You would like to view the health profile of</string>-->
-<!--    <string name="MSG_SWITCH_PROFILE_CONFIRMATION2">Click confirm to proceed</string>-->
-<!--    <string name="ERROR_PARENTS_AGE">Parent\'s age should be greater than your age</string>-->
-<!--    <string name="ERROR_KIDS_AGE">Kid\'s age should be smaller than your age</string>-->
-<!--    <string name="ERROR__GP_AGE">Grand Parent\'s age should be greater than your age</string>-->
-<!--    <string name="ERROR_AGE_NOT_LESS_THAN_18">Age cannot be less than 18 years</string>-->
-<!--    <string name="ERROR_SELECT_RELATION_FIRST">Please Select Relationship first</string>-->
+    <string name="MSG_SWITCH_PROFILE_CONFIRMATION1">Anda ingin melihat profil kesihatan</string>
+    <string name="MSG_SWITCH_PROFILE_CONFIRMATION2">Klik sahkan untuk meneruskan</string>
+    <string name="ERROR_PARENTS_AGE">Umur ibu bapa\ hendaklah lebih besar daripada umur anda</string>
+    <string name="ERROR_KIDS_AGE">Umur kanak-kanak\ hendaklah lebih kecil daripada umur anda</string>
+    <string name="ERROR__GP_AGE">Umur datuk nenek\ hendaklah lebih besar daripada umur anda</string>
+    <string name="ERROR_AGE_NOT_LESS_THAN_18">Umur tidak boleh kurang dari 18 tahun</string>
+    <string name="ERROR_SELECT_RELATION_FIRST">Sila Pilih Jenis Hubungan dahulu</string>
     <string name="ERROR_PLEASE_ENTER_FEEDBACK_TO_SUBMIT">Sila masukkan maklumbalas untuk dihantar</string>
-<!--    <string name="ERROR_DOB_UNAVAILABLE">Unable to save Profile information as Logged In user\'s age is unavailable</string>-->
+    <string name="ERROR_DOB_UNAVAILABLE">Tidak dapat menyimpan maklumat Profil kerana umur pengguna Log Masuk tidak tersedia</string>
 
     <!--Navigation Options-->
     <string name="NAVIGATION_DRAWER_OPEN">Open navigation drawer</string>

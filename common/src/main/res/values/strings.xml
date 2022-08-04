@@ -126,9 +126,10 @@
     <string name="GRAND_FATHER">Grand Father</string>
     <string name="GRAND_MOTHER">Grand Mother</string>
 
-    <string name="HEIGHT">Tinggi</string>
-    <string name="WEIGHT">Berat</string>
+    <string name="HEIGHT">Height</string>
+    <string name="WEIGHT">Weight</string>
     <string name="WAIST">Pinggang</string>
+    <string name="BLOOD_PRESSURE">Blood Pressure</string>
     <string name="CHOLESTEROL">Kolesterol</string>
     <string name="HDL">HDL</string>
     <string name="SYSTOLIC">Sistolik</string>

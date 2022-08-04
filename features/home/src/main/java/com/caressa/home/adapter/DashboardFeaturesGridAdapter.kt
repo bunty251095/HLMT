@@ -7,17 +7,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.caressa.home.R
 import com.caressa.home.common.DataHandler
 import com.caressa.home.databinding.ItemDashboardFeaturesBinding
-import com.caressa.home.ui.HlmtDashboardFragment
-import com.caressa.home.ui.ProfileAndFamilyMember.EditProfileImageBottomsheetFragment
 import com.caressa.home.viewmodel.DashboardViewModel
 import timber.log.Timber
 
-class DashboardFeaturesGridAdapter(requireContext: Context, listener: OnItemSelectionListener,
-    viewModel: DashboardViewModel) : RecyclerView.Adapter<DashboardFeaturesGridAdapter.ObservationViewHolder>() {
+class DashboardFeaturesGridAdapter(context: Context,
+                                   listener: OnItemSelectionListener,
+                                   viewModel: DashboardViewModel) : RecyclerView.Adapter<DashboardFeaturesGridAdapter.ObservationViewHolder>() {
 
     private var selectionListener:OnItemSelectionListener = listener
     private val dataList: MutableList<DataHandler.DashboardFeatureGrid> = mutableListOf()

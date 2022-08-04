@@ -2,6 +2,7 @@ package com.caressa.home.views
 
 import android.annotation.SuppressLint
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -31,6 +32,38 @@ import timber.log.Timber
 import java.util.*
 
 object HomeBinding {
+
+    fun AppCompatImageView.loadImageNew(url: String) {
+        Glide.with(this)
+            .load(url)
+            .placeholder(R.drawable.img_placeholder)
+            .error(R.drawable.img_placeholder)
+            .into(this)
+    }
+
+    @BindingAdapter("app:loadImgUrl")
+    @JvmStatic fun AppCompatImageView.setImgUrl( imgUrl: String) {
+        try {
+            if ( !Utilities.isNullOrEmpty(imgUrl) ) {
+                Picasso.get()
+                    .load(imgUrl)
+                    .placeholder(R.drawable.img_placeholder)
+                    .resize(6000,3000)
+                    .onlyScaleDown()
+                    .error(R.drawable.img_placeholder)
+                    .into(this)
+            } else {
+                setImageResource(R.drawable.img_placeholder)
+            }
+        } catch (e:Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    @BindingAdapter("app:imageUrl")
+    @JvmStatic fun AppCompatImageView.loadImage( url: String) {
+        Glide.with(context).load(url).apply(RequestOptions.circleCropTransform()).into(this)
+    }
 
     @BindingAdapter("app:showWhenLoading")
     @JvmStatic
@@ -196,11 +229,10 @@ object HomeBinding {
         }
     }
 
-
     @BindingAdapter("app:dashboardFeaturesGrid")
     @JvmStatic fun RecyclerView.setDashboardFeaturesList( list: List<DataHandler.DashboardFeatureGrid>? ) {
         with(this.adapter as DashboardFeaturesGridAdapter) {
-            layoutManager = GridLayoutManager(context,2)
+            layoutManager = GridLayoutManager(context,3)
 //            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             list?.let { updateData(it) }
         }
@@ -259,11 +291,6 @@ object HomeBinding {
             layoutManager = LinearLayoutManager(context)
             list?.let { updateWellnessCentreList(it) }
         }
-    }
-
-    @BindingAdapter("app:imageUrl")
-    @JvmStatic fun AppCompatImageView.loadImage( url: String) {
-        Glide.with(context).load(url).apply(RequestOptions.circleCropTransform()).into(this)
     }
 
     @BindingAdapter("app:loadAppImgUrl")

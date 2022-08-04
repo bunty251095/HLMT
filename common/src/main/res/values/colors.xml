@@ -42,6 +42,7 @@
     <color name="vivant_soft_pink">#fcb4c1</color>
     <color name="vivant_track_param_textcolor">#9a9a9a</color>
     <color name="vivant_edit_textcolor">#c0c0c0</color>
+    <color name="vivant_icon_warm_grey">#9a9a9a</color>
     <color name="vivant_teal_blue">#00a49e</color>
     <color name="vivant_purple">#7a6ba0</color>
     <color name="vivant_disabled">#E6E6E6</color>

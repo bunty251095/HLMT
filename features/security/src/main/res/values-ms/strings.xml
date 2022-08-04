@@ -8,13 +8,13 @@
 
     <string name="LOGIN_WITH_OTP">Log masuk dengan OTP</string>
     <string name="DONT_HAVE_ACCOUNT">Belum mempunyai akaun?</string>
-<!--    <string name="I_AGREE_CONSENT">I provide my Consent and I agree to the</string>-->
+    <string name="I_AGREE_CONSENT">Saya memberikan Persetujuan saya dan saya bersetuju dengan</string>
     <string name="TERMS_AND_CONDITIONS">Terma dan Syarat</string>
-<!--    <string name="PRIVACY_POLICY">Privacy Policy</string>-->
+    <string name="PRIVACY_POLICY">Dasar Privasi</string>
     <string name="AND">dan</string>
-<!--    <string name="TERMS_OF_SERVICE_LOGIN">I confirm that I have read and agreed to the</string>-->
+    <string name="TERMS_OF_SERVICE_LOGIN">Saya mengesahkan bahawa saya telah membaca dan bersetuju dengan</string>
     <string name="TERMS_OF_SERVICE_SIGNUP">Dengan menekan Daftar anda bersetuju untuk</string>
-<!--    <string name="TO_USE_THE_SERVICES">to use the services</string>-->
+    <string name="TO_USE_THE_SERVICES">untuk menggunakan perkhidmatan tersebut</string>
     <string name="YOUR_DOB">Tarikh Lahir Anda</string>
     <string name="ADDITIONAL_DETAILS">Maklumat Tambahan</string>
     <string name="VIVANT_TERMS_CONDITIONS">HL Pace Terma dan Syarat</string>
@@ -36,7 +36,7 @@
     <string name="I_AM_DONE">Saya selesai</string>
     <string name="FACEBOOK">Facebook</string>
     <string name="GOOGLE">Google</string>
-    <!--    <string name="PLEASE_ACCEPT_TERMS">Please accept Terms and Condition</string>-->
+    <string name="PLEASE_ACCEPT_TERMS">Sila terima Terma dan Syarat</string>
 
     <string name="NAME_COMPULSARY">Nama*</string>
     <string name="EMAIL_COMPULSARY">Emel*</string>
@@ -53,18 +53,18 @@
     <string name="RE_ENTER_NEW_PASSWORD">Masukkan Semula Kata Laluan Baru</string>
     <string name="RESET_PASSWORD">Tetapkan Semula Kata Laluan</string>
     <string name="FORGOT_YOUR_PASSWORD">Lupa Kata Laluan?</string>
-<!--    <string name="FORGOT_PASSWORD_DESC">Enter your email address to get password.</string>-->
+    <string name="FORGOT_PASSWORD_DESC">Masukkan Alamat E-mel anda untuk mendapatkan kata laluan</string>
     <string name="VERIFICATION_CODE">Kod Pengesahan</string>
     <string name="HLMT_LOGIN_DESCRIPTION">Enter your HLMTakaful360&#xb0; account\ndetails to login</string>
 
     <string name="DO_YOU_HAVE_HLM_360_ACCOUNT">Are you a HLMTakaful360&#xb0; \naccount holder? </string>
     <string name="NO_DONT">Tidak </string>
     <string name="YES_I_HAVE">Ya</string>
-<!--    <string name="REGISTER">Register</string>-->
+    <string name="REGISTER">Daftar</string>
 
     <string name="PASSWORD_CRITERIA">Kriteria Kata Laluan</string>
     <string name="PASSWORD_CRITERIA_DESC">Panjang kata laluan anda hendaklah sekurang-kurangnya 6 karakter</string>
-<!--    <string name="OTP_SENT_DESC">Your email address to receive TAC</string>-->
+    <string name="OTP_SENT_DESC">Alamat e-mel anda untuk menerima TAC</string>
     <string name="LOGIN_SELECTION_INFO">Teruskan langkah bersama Kami!</string>
 
     <!--    <string name="error_invalid_otp">Please enter a valid TAC</string>-->
@@ -84,20 +84,20 @@
 
     <string name="HLMT_USER_ID">HLMT User ID</string>
 
-<!--    <string name="PASSWORD_CRITERIA_DESC1">Password length should be minimum 8 characters</string>
-    <string name="PASSWORD_CRITERIA_DESC2">Password characters must include :</string>
-    <string name="PASSWORD_CRITERIA_DESC3">Minimum one Uppercase</string>
-    <string name="PASSWORD_CRITERIA_DESC4">Minimum one Lowercase</string>
-    <string name="PASSWORD_CRITERIA_DESC5">Minimum one Numeric</string>
-    <string name="PASSWORD_CRITERIA_DESC6">Minimum one Special Character</string>
-    <string name="PASSWORD_CRITERIA_DESC7">Username should not be same as Password</string>-->
+    <string name="PASSWORD_CRITERIA_DESC1">Panjang kata laluan hendaklah sekurang-kurangnya 8 aksara</string>
+    <string name="PASSWORD_CRITERIA_DESC2">Aksara kata laluan mesti mengandungi :</string>
+    <string name="PASSWORD_CRITERIA_DESC3">Minimum satu huruf besar</string>
+    <string name="PASSWORD_CRITERIA_DESC4">Minimum satu huruf kecil</string>
+    <string name="PASSWORD_CRITERIA_DESC5">Minimum satu Angka</string>
+    <string name="PASSWORD_CRITERIA_DESC6">Minimum satu Aksara Istimewa</string>
+    <string name="PASSWORD_CRITERIA_DESC7">Nama pengguna tidak boleh sama dengan Kata Laluan</string>
 
-<!--    <string name="VALIDATE_NEW_PASSWORD">Please Enter Valid New Password</string>
-    <string name="VALIDATE_CONFIRM_PASSWORD">Please Enter Valid Confirm Password</string>-->
+    <string name="VALIDATE_NEW_PASSWORD">Sila Masukkan Kata Laluan Baharu yang Sah</string>
+    <string name="VALIDATE_CONFIRM_PASSWORD">Sila Masukkan Kata Laluan Sah </string>
 
-<!--    <string name="VALIDATE_EMPTY_NEW_PASSWORD">Please Enter New Password</string>-->
-<!--    <string name="VALIDATE_EMPTY_CONFIRM_PASSWORD">Please Enter Confirm Password</string>-->
-<!--    <string name="ERROR_UNABLE_TO_RESET_PASSWORD">Unable to Reset Password</string>-->
+    <string name="VALIDATE_EMPTY_NEW_PASSWORD">Sila Masukkan Kata Laluan Baharu</string>
+    <string name="VALIDATE_EMPTY_CONFIRM_PASSWORD">Sila Masukkan Sahkan Kata Laluan</string>
+    <string name="ERROR_UNABLE_TO_RESET_PASSWORD">Tidak dapat Menetapkan Semula Kata Laluan</string>
 
 </resources>
 

@@ -20,7 +20,6 @@
     <string name="LAST_CHECKED_ON">Last checked on</string>
     <string name="SYSTOLIC_DIASTOLIC">Systolic/Diastolic</string>
 
-    <string name="BLOOD_PRESSURE">Blood Pressure</string>
     <string name="BLOOD_SUGAR_PROFILE">Blood Sugar Profile</string>
     <string name="HEMOGRAM_PRESSURE">Hemogram Profile</string>
     <string name="KIDNEY_PRESSURE">Kidney Profile</string>
@@ -29,7 +28,6 @@
     <string name="THYROID_PRESSURE">Thyroid Profile</string>
     <string name="URINE_PRESSURE">Urine Profile</string>
 
-    <string name="WEIGHT">Weight</string>
     <string name="WAIST">Waist</string>
     <string name="BMI">BMI</string>
     <string name="WHR">WHR</string>

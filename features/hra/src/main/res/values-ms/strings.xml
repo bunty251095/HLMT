@@ -182,8 +182,8 @@
     <string name="POST_MEAL_BLOOD_SUGAR_VALUE_MUST_BE_BETWEEN">Nilai Selepas Makan hendaklah di antara</string>
     <string name="HBA1C_VALUE_MUST_BE_BETWEEN">Nilai HbA1c hendaklah di antara</string>
 
-<!--    <string name="PLEASE_SELECT_VALID_HEIGHT_BETWEEN">Please Select valid height between</string>
-    <string name="PLEASE_SELECT_VALID_WEIGHT_BETWEEN">Please Select valid weight between</string>-->
+    <string name="PLEASE_SELECT_VALID_HEIGHT_BETWEEN">Sila Pilih ketinggian yang sah antara</string>
+    <string name="PLEASE_SELECT_VALID_WEIGHT_BETWEEN">Sila Pilih berat yang sah antara</string>
     <string name="PLEASE_ENTER_VALID_TOTAL_CHOLESTEROL_VALUE">Sila masukkan Nilai Jumlah Kolesterol yang Sah</string>
     <string name="PLEASE_ENTER_VALID_HDL_VALUE">Sila masukkan HDL yang Sah</string>
     <string name="PLEASE_ENTER_VALID_LDL_VALUE">Sila masukkan LDL yang Sah</string>
@@ -241,7 +241,7 @@
     <string name="WELLNESS_DESC_SCORE_ZERO_NEGATIVE">Skor Kesihatan anda adalah 0 (daripada 100), yang meletakkan anda dalam kategori Risiko Tinggi</string>
     <string name="CONGRATULATION_NO_RISK">Tahniah !! Mengikut maklumat yang anda berikan, pada masa ini, anda tidak mempunyai risiko. \n\n Teruskan usaha yang baik, kekalkan gaya hidup yang sihat</string>
     <string name="WELLNESS_SCORE_SUBTITLE_TEXT">Skor Kesihatan anda mewakili status kesihatan holistik anda berasaskan jawapan anda kepada soal selidik</string>
-<!--    <string name="SUMMERY_SUBTITLE_TEXT">The highlighted risks are basis the responses provided by you and risk categories under personal health, family history and health parameters</string>-->
+    <string name="SUMMERY_SUBTITLE_TEXT">Risiko yang diserlahkan adalah berdasarkan respons yang diberikan oleh anda dan kategori risiko di bawah kesihatan diri, sejarah keluarga dan parameter kesihatan</string>
     <string name="LAB_TESTS_SUBTITLE_TEXT">Cadangan ujian memberikan anda jadual dan kekerapan ujian penting untuk mengenalpasti kesihatan anda secara berkalas, berdasarkan skor kesihatan anda &amp; Ringkasan Risiko</string>
     <string name="RECOMMENDED_LAB_TESTS_CHECK_UPS">Ujian/\n Pemeriksaan Makmal Disarankan</string>
     <string name="LAB_TEST_CHECK_UPS">Pemeriksaan/Ujian makmal</string>

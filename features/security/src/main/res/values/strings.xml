@@ -53,7 +53,7 @@
     <string name="RE_ENTER_NEW_PASSWORD">Re-enter New Password</string>
     <string name="RESET_PASSWORD">Reset Password</string>
     <string name="FORGOT_YOUR_PASSWORD">Forgot Your Password?</string>
-    <string name="FORGOT_PASSWORD_DESC">Enter your email address to get password</string>
+    <string name="FORGOT_PASSWORD_DESC">Enter your Email Address to get password</string>
     <string name="VERIFICATION_CODE">Verification Code</string>
     <string name="HLMT_LOGIN_DESCRIPTION">Enter your HLMTakaful360&#xb0; account\ndetails to login</string>
 
