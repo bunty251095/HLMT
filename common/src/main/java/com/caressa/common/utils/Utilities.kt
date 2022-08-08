@@ -1,6 +1,7 @@
 package com.caressa.common.utils
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
@@ -14,8 +15,6 @@ import android.graphics.Rect
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
-import android.os.Environment
-import android.provider.DocumentsContract
 import android.util.Base64
 import android.util.TypedValue
 import android.view.Gravity
@@ -25,7 +24,6 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.caressa.common.BuildConfig
 import com.caressa.common.R
 import com.caressa.common.base.DialogFullScreenView
 import com.caressa.common.constants.Constants
@@ -38,7 +36,6 @@ import java.math.BigDecimal
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.*
-import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 
@@ -650,6 +647,25 @@ object Utilities {
             }
         }
         return result
+    }
+
+    fun redirectToChrome(url:String,context: Context) {
+        //val urlString = "http://mysuperwebsite"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.setPackage("com.android.chrome")
+        try {
+            context.startActivity(intent)
+        } catch (ex: ActivityNotFoundException) {
+            // Chrome is probably not installed
+            // Try with the default browser
+            intent.setPackage(null);
+            context.startActivity(intent);
+
+            // Chrome browser presumably not installed and open Kindle Browser
+            //intent.setPackage("com.amazon.cloud9")
+            //context.startActivity(intent)
+        }
     }
 
 }

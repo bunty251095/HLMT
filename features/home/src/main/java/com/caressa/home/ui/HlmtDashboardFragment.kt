@@ -1,12 +1,9 @@
 package com.caressa.home.ui
 
-import android.app.Activity
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +31,7 @@ import com.caressa.home.viewmodel.BackgroundCallViewModel
 import com.caressa.home.viewmodel.DashboardViewModel
 import com.caressa.model.entity.HRASummary
 import com.caressa.model.entity.TrackParameterMaster
+import com.caressa.model.home.ListActiveBannerModel
 import com.caressa.model.parameter.FitnessData
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -51,33 +49,9 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,
     private var stepGoal = 3000
     private var dashboardGridAdapter: DashboardFeaturesGridAdapter? = null
 
-    private val mContext: Context? = null
-
-    private var imagesArray: Array<String> = arrayOf(
-        "https://picsum.photos/id/0/5616/3744.jpg",
-        "https://picsum.photos/id/2/5616/3744.jpg",
-        "https://picsum.photos/id/1/5616/3744.jpg",
-        "https://picsum.photos/id/3/5616/3744.jpg",
-        "https://picsum.photos/id/4/5616/3744.jpg")
-
-    private var imagesArray1: Array<String> = arrayOf(
-        "https://cdn.pixabay.com/photo/2020/02/13/10/29/bees-4845211__340.jpg",
-        "https://cdn.pixabay.com/photo/2020/04/24/08/57/street-5085971__340.jpg",
-        "https://cdn.pixabay.com/photo/2020/03/11/01/53/landscape-4920705__340.jpg",
-        "https://cdn.pixabay.com/photo/2020/02/11/12/07/portofino-4839356__340.jpg")
-
     private var currentPage = 0
     private var slidingImageDots: Array<ImageView?> = arrayOf()
     private var slidingDotsCount = 0
-
-/*    private val slidingCallback = object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageSelected(position: Int) {
-            for (i in 0 until slidingDotsCount) {
-                slidingImageDots[i]?.setImageDrawable(ContextCompat.getDrawable(context!!,R.drawable.non_active_dot))
-            }
-            slidingImageDots[position]?.setImageDrawable(ContextCompat.getDrawable(context!!,R.drawable.active_dot))
-        }
-    }*/
 
     override fun getViewModel(): BaseViewModel = viewModel
 
@@ -105,30 +79,19 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,
             initialise()
             setClickable()
             setObserver()
-            if ( activity != null ) {
-                setUpSlidingViewPager()
-            }
         } catch ( e : Exception ) {
             e.printStackTrace()
         }
         return binding.root
     }
 
-    private fun setUpSlidingViewPager() {
+    private fun setUpSlidingViewPager( campaignList: MutableList<ListActiveBannerModel.CampaignDetails> ) {
         try {
-            slidingDotsCount = imagesArray.size
+            //val campaignDetailsList = campaignList.filter { it.campaignID == "1" }.toMutableList()
+            val campaignDetailsList = campaignList
+            slidingDotsCount = campaignDetailsList.size
             slidingImageDots = arrayOfNulls(slidingDotsCount)
-            val landingImagesAdapter = SlidingImagesAdapter(requireActivity(),slidingDotsCount)
-
-            for (i in 0 until slidingDotsCount) {
-                slidingImageDots[i] = ImageView(binding.slidingViewPager.context)
-                slidingImageDots[i]?.setImageDrawable(ContextCompat.getDrawable(binding.slidingViewPager.context,R.drawable.non_active_dot))
-                val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
-                params.setMargins(8, 0, 8, 0)
-                binding.sliderDots.addView(slidingImageDots[i], params)
-            }
-
-            slidingImageDots[0]?.setImageDrawable(ContextCompat.getDrawable(binding.slidingViewPager.context,R.drawable.active_dot))
+            val landingImagesAdapter = SlidingImagesAdapter(requireActivity(),slidingDotsCount,campaignDetailsList)
 
             binding.slidingViewPager.apply {
                 adapter = landingImagesAdapter
@@ -142,19 +105,31 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,
                 })
             }
 
-            val handler = Handler()
-            val update = Runnable {
-                if (currentPage == slidingDotsCount) {
-                    currentPage = 0
+            if ( slidingDotsCount > 1 ) {
+                for (i in 0 until slidingDotsCount) {
+                    slidingImageDots[i] = ImageView(binding.slidingViewPager.context)
+                    slidingImageDots[i]?.setImageDrawable(ContextCompat.getDrawable(binding.slidingViewPager.context,R.drawable.non_active_dot))
+                    val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
+                    params.setMargins(8, 0, 8, 0)
+                    binding.sliderDots.addView(slidingImageDots[i],params)
                 }
-                binding.slidingViewPager.setCurrentItem(currentPage++, true)
-            }
 
-            Timer().schedule(object : TimerTask() {
-                override fun run() {
-                    handler.post(update)
+                slidingImageDots[0]?.setImageDrawable(ContextCompat.getDrawable(binding.slidingViewPager.context,R.drawable.active_dot))
+
+                val handler = Handler()
+                val update = Runnable {
+                    if (currentPage == slidingDotsCount) {
+                        currentPage = 0
+                    }
+                    binding.slidingViewPager.setCurrentItem(currentPage++,true)
                 }
-            },3000, 3000)
+
+                Timer().schedule(object : TimerTask() {
+                    override fun run() {
+                        handler.post(update)
+                    }
+                },3000,3000)
+            }
 
         } catch ( e : Exception ) {
             e.printStackTrace()
@@ -162,11 +137,19 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,
     }
 
     private fun setObserver() {
-        viewModel.currentSelectedPerson.observe(viewLifecycleOwner) {
-//            viewModel.goToHRA(it)
+        viewModel.listActiveBanner.observe(viewLifecycleOwner) {
+            if ( it != null ) {
+                if ( it.campaignDetailsList.isNotEmpty() ) {
+                    setUpSlidingViewPager(it.campaignDetailsList)
+                }
+            }
         }
-        viewModel.dashboardFeatureListUpper.observe(viewLifecycleOwner,{})
-        viewModel.dashboardFeatureList.observe(viewLifecycleOwner,{})
+
+        viewModel.currentSelectedPerson.observe(viewLifecycleOwner) {
+            //viewModel.goToHRA(it)
+        }
+        viewModel.dashboardFeatureListUpper.observe(viewLifecycleOwner) {}
+        viewModel.dashboardFeatureList.observe(viewLifecycleOwner) {}
     }
 
     private fun initialise() {
@@ -185,6 +168,7 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,
         binding.rvDashboardGrid.setExpanded(true)
         binding.rvDashboardGrid.adapter = dashboardGridAdapter
 
+        viewModel.callListActiveBannerApi()
         viewModel.setHraData(binding.lblHraDesc,binding.lblHraDescDefault)
         viewModel.setFitnessData(binding.lblActivityTrackerDesc,binding.cardActivityTracker)
         viewModel.refreshDashboardFeatureList()

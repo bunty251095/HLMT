@@ -21,6 +21,13 @@ class HomeManagementUseCase( private val homeRepository: HomeRepository , privat
         }
     }
 
+    suspend fun invokeListActiveBanner(isForceRefresh : Boolean, data: ListActiveBannerModel): LiveData<Resource<ListActiveBannerModel.ListActiveBannerResponse>> {
+        return Transformations.map(
+            homeRepository.listActiveBanner(data)) {
+            it
+        }
+    }
+
     suspend fun invokePasswordChange(isForceRefresh : Boolean, data: PasswordChangeModel): LiveData<Resource<PasswordChangeModel.ChangePasswordResponse>> {
         return Transformations.map(
             homeRepository.passwordChange(isForceRefresh, data)) {

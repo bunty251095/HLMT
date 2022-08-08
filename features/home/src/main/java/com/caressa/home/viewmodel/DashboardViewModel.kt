@@ -32,6 +32,7 @@ import com.caressa.model.entity.HRASummary
 import com.caressa.model.entity.UserRelatives
 import com.caressa.model.entity.Users
 import com.caressa.model.home.ContactUsModel
+import com.caressa.model.home.ListActiveBannerModel
 import com.caressa.model.home.PasswordChangeModel
 import com.caressa.model.home.SaveFeedbackModel
 import com.caressa.model.security.HLMTLoginModel
@@ -76,6 +77,10 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
     private var passwordChangeSource: LiveData<Resource<PasswordChangeModel.ChangePasswordResponse>> = MutableLiveData()
     private val _passwordChange = MediatorLiveData<PasswordChangeModel.ChangePasswordResponse>()
     val passwordChange: LiveData<PasswordChangeModel.ChangePasswordResponse> get() = _passwordChange
+
+    private var listActiveBannerSource: LiveData<Resource<ListActiveBannerModel.ListActiveBannerResponse>> = MutableLiveData()
+    private val _listActiveBanner = MediatorLiveData<ListActiveBannerModel.ListActiveBannerResponse>()
+    val listActiveBanner: LiveData<ListActiveBannerModel.ListActiveBannerResponse> get() = _listActiveBanner
 
     private val _hlmt360LoginResponse = MediatorLiveData<HLMTLoginModel.LoginResponse>()
     val hlmt360LoginResponse: LiveData<HLMTLoginModel.LoginResponse> get() = _hlmt360LoginResponse
@@ -319,6 +324,41 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                         toastMessage( activity.resources.getString(R.string.ERROR_INVALID_OLD_PASSWORD) )
                     }
                     else -> {
+                        toastMessage(it.errorMessage)
+                    }
+                }
+            }
+        }
+
+    }
+
+    fun callListActiveBannerApi() = viewModelScope.launch(dispatchers.main) {
+
+        val requestData = ListActiveBannerModel(Gson().toJson(
+            ListActiveBannerModel.JSONDataRequest(
+                campaignFilters = null
+            ),ListActiveBannerModel.JSONDataRequest::class.java),sharedPref.getString(PreferenceConstants.TOKEN,"")!!)
+
+        _progressBar.value = Event("")
+        _listActiveBanner.removeSource(listActiveBannerSource)
+        withContext(dispatchers.io) {
+            listActiveBannerSource = homeManagementUseCase.invokeListActiveBanner(isForceRefresh = true, data = requestData)
+        }
+        _listActiveBanner.addSource(listActiveBannerSource) {
+            _listActiveBanner.value = it.data
+
+            if (it.status == Resource.Status.SUCCESS) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if (it.data != null ) {
+
+                }
+            }
+            if (it.status == Resource.Status.ERROR) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                when {
+                    it.errorNumber.equals("1100014",true) -> {
+                        _sessionError.value = Event(true)
+                    }else -> {
                         toastMessage(it.errorMessage)
                     }
                 }
@@ -621,8 +661,12 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                 var hraObservation = " -- "
                 if (hraSummary!!.hraCutOff.equals("1")) {
                     hraObservation = "${hraSummary!!.scorePercentile.toInt()}"
+                    title.visibility = View.VISIBLE
+                    default.visibility = View.GONE
                 }else{
                     hraObservation = localResource.getString(R.string.TAKE_ASSESSMENT)
+                    title.visibility = View.GONE
+                    default.visibility = View.VISIBLE
                 }
                 var color = ContextCompat.getColor(context, R.color.colorAccent)
 
@@ -661,9 +705,6 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                 } else {
                     ContextCompat.getColor(context,R.color.colorPrimary)
                 }
-
-                title.visibility = View.VISIBLE
-                default.visibility = View.GONE
                 title.text = hraObservation
                 title.setTextColor(color)
             } catch (e: Exception) {

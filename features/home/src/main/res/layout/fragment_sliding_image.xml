@@ -7,7 +7,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_corner">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/sliding_image"
@@ -15,6 +16,7 @@
             android:layout_height="@dimen/_140sdp"
             android:scaleType="centerCrop"
             android:src="@drawable/img_placeholder"
+            android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

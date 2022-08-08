@@ -320,6 +320,8 @@ interface ApiService {
     @POST(Constants.CHECK_APP_UPDATE_API)
     fun checkAppUpdateApi(@Body request: CheckAppUpdateModel): Deferred<BaseResponse<CheckAppUpdateModel.CheckAppUpdateResponse>>
 
+    @POST(Constants.LIST_ACTIVE_BANNER_API)
+    fun listActiveBannerApi(@Body request: ListActiveBannerModel): Deferred<BaseResponse<ListActiveBannerModel.ListActiveBannerResponse>>
     //  ****************Blogs Api Call ****************
 /*    @GET
     fun downloadBlogs( @Url url: String): Deferred<BlogModel.BlogResponce>*/

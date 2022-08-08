@@ -138,49 +138,49 @@
                     app:srcCompat="@drawable/img_always" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txt_often"
-                    style="@style/CustomTextview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/OFTEN"
-                    android:textColor="@color/vivant_dark_sky_blue"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/img_often"
-                    app:layout_constraintStart_toStartOf="@+id/img_often"
-                    app:layout_constraintTop_toBottomOf="@+id/img_often" />
-
-                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_never"
                     style="@style/CustomTextview"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="center|top"
                     android:text="@string/NEVER"
                     android:textColor="@color/vivant_nasty_green"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/img_never"
-                    app:layout_constraintStart_toStartOf="@+id/img_never"
+                    app:layout_constraintEnd_toStartOf="@+id/txt_sometimes"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img_never" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_sometimes"
                     style="@style/CustomTextview"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="center|top"
                     android:text="@string/SOMETIMES"
                     android:textColor="@color/vivant_marigold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/img_sometime"
-                    app:layout_constraintStart_toStartOf="@+id/img_sometime"
+                    app:layout_constraintEnd_toStartOf="@+id/txt_often"
+                    app:layout_constraintStart_toEndOf="@+id/txt_never"
                     app:layout_constraintTop_toBottomOf="@+id/img_sometime" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_often"
+                    style="@style/CustomTextview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:gravity="center|top"
+                    android:text="@string/OFTEN"
+                    android:textColor="@color/vivant_dark_sky_blue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/txt_always"
+                    app:layout_constraintStart_toEndOf="@+id/txt_sometimes"
+                    app:layout_constraintTop_toBottomOf="@+id/img_often" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_always"
@@ -189,12 +189,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="center|top"
                     android:text="@string/ALWAYS"
                     android:textColor="@color/vivant_watermelon"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/img_always"
-                    app:layout_constraintStart_toStartOf="@+id/img_always"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/txt_often"
                     app:layout_constraintTop_toBottomOf="@+id/img_always" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,6 +53,7 @@ object Constants {
     const val SAVE_FEEDBACK_API = "PHR/api/App/SaveFeedback"
     const val PASSWORD_CHANGE_API = "Security/api/Security/ChangePassword"
     const val CONTACT_US_API = "messaging/api/message/ContactUs"
+    const val LIST_ACTIVE_BANNER_API = "PHR/api/Banner/ListActiveBanner"
 
     //Dashboard
     const val strWebChatDoctorURL: String =

@@ -78,4 +78,6 @@ class HomeDatasource(
 
     fun fetchRefreshToken(data: RefreshTokenModel) = encryptedUserService.getRefreshToken(data)
 
+    fun listActiveBanner(data: ListActiveBannerModel) = encryptedUserService.listActiveBannerApi(data)
+
 }

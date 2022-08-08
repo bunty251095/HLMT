@@ -142,6 +142,7 @@ interface HomeRepository {
 
     suspend fun fetchUpdateProfileResponse(data: UpdateLanguageProfileModel): LiveData<Resource<UpdateLanguageProfileModel.UpdateLanguageProfileResponse>>
     suspend fun fetchRefreshTokenResponse(data: RefreshTokenModel): LiveData<Resource<RefreshTokenModel.RefreshTokenResponse>>
+    suspend fun listActiveBanner(data: ListActiveBannerModel): LiveData<Resource<ListActiveBannerModel.ListActiveBannerResponse>>
 }
 
 class HomeRepositoryImpl(
@@ -1036,6 +1037,35 @@ class HomeRepositoryImpl(
             }*/
 
         }.build().asLiveData()
+    }
+
+    override suspend fun listActiveBanner(data: ListActiveBannerModel): LiveData<Resource<ListActiveBannerModel.ListActiveBannerResponse>> {
+
+        return object : NetworkBoundResource<ListActiveBannerModel.ListActiveBannerResponse, BaseResponse<ListActiveBannerModel.ListActiveBannerResponse>>(context) {
+
+            override fun shouldStoreInDb(): Boolean = false
+
+            override suspend fun loadFromDb(): ListActiveBannerModel.ListActiveBannerResponse {
+                return ListActiveBannerModel.ListActiveBannerResponse()
+            }
+
+            override fun processResponse(response: BaseResponse<ListActiveBannerModel.ListActiveBannerResponse>): ListActiveBannerModel.ListActiveBannerResponse {
+                return response.jSONData
+            }
+
+            override fun createCallAsync(): Deferred<BaseResponse<ListActiveBannerModel.ListActiveBannerResponse>> {
+                return datasource.listActiveBanner(data)
+            }
+
+            override suspend fun saveCallResults(items: ListActiveBannerModel.ListActiveBannerResponse) {
+
+            }
+
+            override fun shouldFetch(data: ListActiveBannerModel.ListActiveBannerResponse?): Boolean = true
+
+
+        }.build().asLiveData()
+
     }
 
 
