@@ -322,6 +322,9 @@ interface ApiService {
 
     @POST(Constants.LIST_ACTIVE_BANNER_API)
     fun listActiveBannerApi(@Body request: ListActiveBannerModel): Deferred<BaseResponse<ListActiveBannerModel.ListActiveBannerResponse>>
+
+    @POST(Constants.BANNER_ACCESS_LOG_API)
+    fun saveBannerAccessLogApi(@Body request: SaveBannerAccessLogModel): Deferred<BaseResponse<SaveBannerAccessLogModel.SaveBannerAccessLogResponse>>
     //  ****************Blogs Api Call ****************
 /*    @GET
     fun downloadBlogs( @Url url: String): Deferred<BlogModel.BlogResponce>*/

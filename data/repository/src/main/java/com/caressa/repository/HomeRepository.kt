@@ -143,6 +143,7 @@ interface HomeRepository {
     suspend fun fetchUpdateProfileResponse(data: UpdateLanguageProfileModel): LiveData<Resource<UpdateLanguageProfileModel.UpdateLanguageProfileResponse>>
     suspend fun fetchRefreshTokenResponse(data: RefreshTokenModel): LiveData<Resource<RefreshTokenModel.RefreshTokenResponse>>
     suspend fun listActiveBanner(data: ListActiveBannerModel): LiveData<Resource<ListActiveBannerModel.ListActiveBannerResponse>>
+    suspend fun saveBannerAccessLog(data: SaveBannerAccessLogModel): LiveData<Resource<SaveBannerAccessLogModel.SaveBannerAccessLogResponse>>
 }
 
 class HomeRepositoryImpl(
@@ -1063,6 +1064,34 @@ class HomeRepositoryImpl(
 
             override fun shouldFetch(data: ListActiveBannerModel.ListActiveBannerResponse?): Boolean = true
 
+
+        }.build().asLiveData()
+
+    }
+
+    override suspend fun saveBannerAccessLog(data: SaveBannerAccessLogModel): LiveData<Resource<SaveBannerAccessLogModel.SaveBannerAccessLogResponse>> {
+
+        return object : NetworkBoundResource<SaveBannerAccessLogModel.SaveBannerAccessLogResponse, BaseResponse<SaveBannerAccessLogModel.SaveBannerAccessLogResponse>>(context) {
+
+            override fun shouldStoreInDb(): Boolean = false
+
+            override suspend fun loadFromDb(): SaveBannerAccessLogModel.SaveBannerAccessLogResponse {
+                return SaveBannerAccessLogModel.SaveBannerAccessLogResponse()
+            }
+
+            override fun processResponse(response: BaseResponse<SaveBannerAccessLogModel.SaveBannerAccessLogResponse>): SaveBannerAccessLogModel.SaveBannerAccessLogResponse {
+                return response.jSONData
+            }
+
+            override fun createCallAsync(): Deferred<BaseResponse<SaveBannerAccessLogModel.SaveBannerAccessLogResponse>> {
+                return datasource.saveBannerAccessLog(data)
+            }
+
+            override suspend fun saveCallResults(items: SaveBannerAccessLogModel.SaveBannerAccessLogResponse) {
+
+            }
+
+            override fun shouldFetch(data: SaveBannerAccessLogModel.SaveBannerAccessLogResponse?): Boolean = true
 
         }.build().asLiveData()
 

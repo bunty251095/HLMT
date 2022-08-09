@@ -88,50 +88,74 @@ class HlmtDashboardFragment : BaseFragment() , ScoreListener,
     private fun setUpSlidingViewPager( campaignList: MutableList<ListActiveBannerModel.CampaignDetails> ) {
         try {
             //val campaignDetailsList = campaignList.filter { it.campaignID == "1" }.toMutableList()
-            val campaignDetailsList = campaignList
-            slidingDotsCount = campaignDetailsList.size
+            campaignList.sortBy { it.displayOrder }
+            slidingDotsCount = campaignList.size
             slidingImageDots = arrayOfNulls(slidingDotsCount)
-            val landingImagesAdapter = SlidingImagesAdapter(requireActivity(),slidingDotsCount,campaignDetailsList)
+            val landingImagesAdapter =
+                SlidingImagesAdapter(requireActivity(), slidingDotsCount, campaignList)
 
             binding.slidingViewPager.apply {
                 adapter = landingImagesAdapter
                 registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                     override fun onPageSelected(position: Int) {
                         for (i in 0 until slidingDotsCount) {
-                            slidingImageDots[i]?.setImageDrawable(ContextCompat.getDrawable(binding.slidingViewPager.context,R.drawable.non_active_dot))
+                            slidingImageDots[i]?.setImageDrawable(
+                                ContextCompat.getDrawable(
+                                    binding.slidingViewPager.context,
+                                    R.drawable.non_active_dot
+                                )
+                            )
                         }
-                        slidingImageDots[position]?.setImageDrawable(ContextCompat.getDrawable(binding.slidingViewPager.context,R.drawable.active_dot))
+                        slidingImageDots[position]?.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                binding.slidingViewPager.context,
+                                R.drawable.active_dot
+                            )
+                        )
                     }
                 })
             }
 
-            if ( slidingDotsCount > 1 ) {
+            if (slidingDotsCount > 1) {
                 for (i in 0 until slidingDotsCount) {
                     slidingImageDots[i] = ImageView(binding.slidingViewPager.context)
-                    slidingImageDots[i]?.setImageDrawable(ContextCompat.getDrawable(binding.slidingViewPager.context,R.drawable.non_active_dot))
-                    val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
+                    slidingImageDots[i]?.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            binding.slidingViewPager.context,
+                            R.drawable.non_active_dot
+                        )
+                    )
+                    val params = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
                     params.setMargins(8, 0, 8, 0)
-                    binding.sliderDots.addView(slidingImageDots[i],params)
+                    binding.sliderDots.addView(slidingImageDots[i], params)
                 }
 
-                slidingImageDots[0]?.setImageDrawable(ContextCompat.getDrawable(binding.slidingViewPager.context,R.drawable.active_dot))
+                slidingImageDots[0]?.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        binding.slidingViewPager.context,
+                        R.drawable.active_dot
+                    )
+                )
 
                 val handler = Handler()
                 val update = Runnable {
                     if (currentPage == slidingDotsCount) {
                         currentPage = 0
                     }
-                    binding.slidingViewPager.setCurrentItem(currentPage++,true)
+                    binding.slidingViewPager.setCurrentItem(currentPage++, true)
                 }
 
                 Timer().schedule(object : TimerTask() {
                     override fun run() {
                         handler.post(update)
                     }
-                },3000,3000)
+                }, 3000, 3000)
             }
 
-        } catch ( e : Exception ) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }

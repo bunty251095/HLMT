@@ -80,4 +80,5 @@ class HomeDatasource(
 
     fun listActiveBanner(data: ListActiveBannerModel) = encryptedUserService.listActiveBannerApi(data)
 
+    fun saveBannerAccessLog(data: SaveBannerAccessLogModel) = encryptedUserService.saveBannerAccessLogApi(data)
 }

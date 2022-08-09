@@ -31,10 +31,7 @@ import com.caressa.home.ui.PasswordChangeActivity
 import com.caressa.model.entity.HRASummary
 import com.caressa.model.entity.UserRelatives
 import com.caressa.model.entity.Users
-import com.caressa.model.home.ContactUsModel
-import com.caressa.model.home.ListActiveBannerModel
-import com.caressa.model.home.PasswordChangeModel
-import com.caressa.model.home.SaveFeedbackModel
+import com.caressa.model.home.*
 import com.caressa.model.security.HLMTLoginModel
 import com.caressa.repository.AppDispatchers
 import com.caressa.repository.utils.Resource
@@ -81,6 +78,10 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
     private var listActiveBannerSource: LiveData<Resource<ListActiveBannerModel.ListActiveBannerResponse>> = MutableLiveData()
     private val _listActiveBanner = MediatorLiveData<ListActiveBannerModel.ListActiveBannerResponse>()
     val listActiveBanner: LiveData<ListActiveBannerModel.ListActiveBannerResponse> get() = _listActiveBanner
+
+    private var saveBannerAccessLogSource: LiveData<Resource<SaveBannerAccessLogModel.SaveBannerAccessLogResponse>> = MutableLiveData()
+    private val _saveBannerAccessLog = MediatorLiveData<SaveBannerAccessLogModel.SaveBannerAccessLogResponse>()
+    val saveBannerAccessLog: LiveData<SaveBannerAccessLogModel.SaveBannerAccessLogResponse> get() = _saveBannerAccessLog
 
     private val _hlmt360LoginResponse = MediatorLiveData<HLMTLoginModel.LoginResponse>()
     val hlmt360LoginResponse: LiveData<HLMTLoginModel.LoginResponse> get() = _hlmt360LoginResponse
@@ -361,6 +362,53 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
                     }else -> {
                         toastMessage(it.errorMessage)
                     }
+                }
+            }
+        }
+
+    }
+
+    fun callSaveBannerAccessLogApi( campaignId:Int,redirectionUrl:String ) = viewModelScope.launch(dispatchers.main) {
+
+        val requestData = SaveBannerAccessLogModel(Gson().toJson(SaveBannerAccessLogModel.JSONDataRequest(
+            SaveBannerAccessLogModel.CampaignAccessDetails(
+                campaignID = campaignId,
+                personId = personId.toInt(),
+                accountID = accountID.toInt(),
+                partnerCode = Configuration.PartnerCode,
+                service = "HLMT/banner",
+                code = "BANNER",
+                url = redirectionUrl,
+                description = "Banner-Campaign-$campaignId",
+                appVersion = Utilities.getVersionName(context),
+                device = Build.BRAND + "~" + Build.MODEL,
+                deviceType = "Android",
+                platform = "App")),SaveBannerAccessLogModel.JSONDataRequest::class.java),sharedPref.getString(PreferenceConstants.TOKEN,"")!!)
+
+        //_progressBar.value = Event("")
+        _saveBannerAccessLog.removeSource(saveBannerAccessLogSource)
+        withContext(dispatchers.io) {
+            saveBannerAccessLogSource = homeManagementUseCase.invokeSaveBannerAccessLog(isForceRefresh = true, data = requestData)
+        }
+        _saveBannerAccessLog.addSource(saveBannerAccessLogSource) {
+            _saveBannerAccessLog.value = it.data
+
+            if (it.status == Resource.Status.SUCCESS) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                if (it.data != null ) {
+                    if ( !Utilities.isNullOrEmptyOrZero(it.data!!.campaignAccessDetails.id!!.toString()) ) {
+                        toastMessage("Count Saved")
+                    }
+                }
+            }
+            if (it.status == Resource.Status.ERROR) {
+                _progressBar.value = Event(Event.HIDE_PROGRESS)
+                when {
+                    it.errorNumber.equals("1100014",true) -> {
+                        _sessionError.value = Event(true)
+                    }else -> {
+                    toastMessage(it.errorMessage)
+                }
                 }
             }
         }
