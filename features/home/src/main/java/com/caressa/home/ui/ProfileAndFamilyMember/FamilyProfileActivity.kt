@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.caressa.common.constants.Constants
 import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.AppColorHelper
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.home.R
 import kotlinx.android.synthetic.main.activity_family_profile.*
 import kotlinx.android.synthetic.main.toolbar_home.*
@@ -26,6 +27,11 @@ class FamilyProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try {
+            LocaleHelper.onAttach(this, LocaleHelper.getLanguage(this))
+        } catch (e:Exception) {
+            e.printStackTrace()
+        }
         setContentView(R.layout.activity_family_profile)
 
         setSupportActionBar(toolbar_home)

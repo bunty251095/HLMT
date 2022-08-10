@@ -213,7 +213,7 @@ class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterA
         }
         if (isValid) {
             for (i in paramList.indices) {
-                if (paramList[i].title.equals("Height", ignoreCase = true)) {
+                if (paramList[i].code.equals("HEIGHT", ignoreCase = true)) {
                     if (!paramList[i].finalValue.equals("", ignoreCase = true)) {
                         isValid = true
                     } else {
@@ -221,7 +221,7 @@ class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterA
                         Utilities.toastMessageShort(context, "${resources.getString(R.string.PLEASE_FILL_HEIGHT_DETAILS)}.")
                         break
                     }
-                } else if (paramList[i].title.equals("Weight", ignoreCase = true)) {
+                } else if (paramList[i].code.equals("WEIGHT", ignoreCase = true)) {
                     if (!paramList[i].finalValue.equals("", ignoreCase = true)) {
                         isValid = true
                     } else {
@@ -229,8 +229,8 @@ class HypertensionRecalculateFragment : BaseFragment(), KoinComponent,ParameterA
                         Utilities.toastMessageShort(context, "${resources.getString(R.string.PLEASE_FILL_WEIGHT_DETAILS)}.")
                         break
                     }
-                } else if (!paramList[i].title.equals("Height", ignoreCase = true)
-                    && !paramList[i].title.equals("Weight", ignoreCase = true)) {
+                } else if (!paramList[i].code.equals("HEIGHT", ignoreCase = true)
+                    && !paramList[i].code.equals("WEIGHT", ignoreCase = true)) {
                     if (!paramList[i].finalValue.equals("", ignoreCase = true)) {
                         Timber.e("paramList=>%s", paramList[i].finalValue)
                         val `val`: Double = paramList[i].finalValue.toDouble()

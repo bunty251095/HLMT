@@ -28,9 +28,6 @@
     <string name="THYROID_PRESSURE">Profil Tiroid</string>
     <string name="URINE_PRESSURE">Profil Air Kencing</string>
 
-    <string name="WAIST">Pinggang</string>
-    <string name="BMI">Indeks Jisim Badam</string>
-    <string name="WHR">Nisbah Pinggang-Pinggul </string>
     <string name="BP">Tekanan Darah</string>
     <string name="BLOOD_SUGAR">Gula dalam Darah</string>
     <string name="CHOLESTEROL">Kolesterol</string>

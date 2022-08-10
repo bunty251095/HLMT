@@ -23,6 +23,7 @@ class DialogUpdateMedicineStatus(@NonNull context: Context?, medicineDetails: Me
                                  listener: OnUpdateClickListener,viewModel: MedicineTrackerViewModel
                                  ,fragment:MedicineDashboardFragment) : Dialog(context!!) {
 
+    private val medicationTrackerHelper = viewModel.medicationTrackerHelper
     private var medicineDetails = MedicineDetails()
     private var onUpdateClickListener: OnUpdateClickListener
     private var viewModel: MedicineTrackerViewModel
@@ -49,7 +50,7 @@ class DialogUpdateMedicineStatus(@NonNull context: Context?, medicineDetails: Me
             println("DialogSelectedDate=>" + medicineDetails.selectedDate)
             txt_medicine_name.text = medicineDetails.medName
             txt_dose.text = medicineDetails.medDose + " " + context.resources.getString(R.string.DOSE)
-            txt_med_time.text = medicineDetails.medInstruction
+            txt_med_time.text = medicationTrackerHelper.getMedInstructionByCode(medicineDetails.medInstruction)
             if (medicineDetails.setAlert.equals(Constants.TRUE, ignoreCase = true)) {
                 img_alert.setImageResource(R.drawable.img_alert_on)
             } else {

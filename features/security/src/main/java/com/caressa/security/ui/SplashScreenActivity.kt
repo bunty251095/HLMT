@@ -36,8 +36,13 @@ class SplashScreenActivity : AppCompatActivity(), DefaultNotificationDialog.OnDi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try {
+            LocaleHelper.onAttach(this, LocaleHelper.getLanguage(this))
+        } catch (e:Exception) {
+            e.printStackTrace()
+        }
         setContentView(R.layout.activity_splash_screen)
-        LocaleHelper.onAttach(this)
+        //LocaleHelper.onAttach(this)
         val animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
         val animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out)
 

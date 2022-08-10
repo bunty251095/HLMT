@@ -295,7 +295,7 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
 
     private fun showStartDatePicker() {
         try {
-            DialogHelper().showDatePickerDialog("Start Date",requireContext(), Calendar.getInstance(),
+            DialogHelper().showDatePickerDialog(resources.getString(R.string.START_DATE),requireContext(), Calendar.getInstance(),
                 Calendar.getInstance(), null, object :
                 DialogHelper.DateListener{
                 override fun onDateSet(date: String, year: String, month: String, dayOfMonth: String) {
@@ -375,7 +375,7 @@ class ScheduleDetailsFragment : BaseFragment(), CounterView.OnCounterSubmitListe
 
     private fun showEndDatePicker() {
         try {
-            DialogHelper().showDatePickerDialog("End Date",requireContext(), Calendar.getInstance(),
+            DialogHelper().showDatePickerDialog(resources.getString(R.string.END_DATE),requireContext(), Calendar.getInstance(),
                 Calendar.getInstance(), null, object :
                     DialogHelper.DateListener {
                     override fun onDateSet(

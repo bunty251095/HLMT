@@ -115,14 +115,14 @@ class HraQuesExposeCheckupFragment(val qCode: String) : BaseFragment() {
             }
         }
 
-        viewModel.submitHra.observe(viewLifecycleOwner , {
-            if ( it != null ) {
+        viewModel.submitHra.observe(viewLifecycleOwner) {
+            if (it != null) {
                 val wellnessScore = it.WellnessScoreSummary.WellnessScore
-                if ( !Utilities.isNullOrEmptyOrZero( wellnessScore ) ) {
+                if (!Utilities.isNullOrEmptyOrZero(wellnessScore)) {
                     viewPagerActivity!!.setCurrentScreen(viewPagerActivity!!.getCurrentScreen() + 1)
                 }
             }
-        })
+        }
     }
 
     private fun loadPreviousData( optionList : ArrayList<Option>) {
@@ -177,13 +177,17 @@ class HraQuesExposeCheckupFragment(val qCode: String) : BaseFragment() {
             "EXPOSE","CHECKUP" -> {
                 if ( selectedOptions.isNullOrEmpty() ) {
                     val totalList = questionData.optionList.filter { it.answerCode.contains(",",ignoreCase = true) }
-                    if ( selectedOptions.any { it.description.equals(resources.getString(R.string.NONE),ignoreCase = true) } ) {
+                    //if ( selectedOptions.any { it.description.equals(resources.getString(R.string.NONE),ignoreCase = true) } ) {
+                    if (selectedOptions.any { it.answerCode.contains("DONT", ignoreCase = true)
+                                || it.answerCode.contains("NONE", ignoreCase = true) }) {
                         for ( option in totalList ) {
                             val data = option.answerCode.split(",")
                             viewModel.saveResponseOther(data[0],data[2],option.description,questionData.category,questionData.tabName,"",qCode,Constants.FALSE)
                         }
                     } else {
-                        val list = selectedOptionList.filter { !it.description.equals("None",ignoreCase = true) }.toMutableList()
+                        //val list = selectedOptionList.filter { !it.description.equals("None",ignoreCase = true) }.toMutableList()
+                        val list = selectedOptionList.filter { !it.answerCode.contains("DONT", ignoreCase = true)
+                                || !it.answerCode.contains("NONE", ignoreCase = true) }.toMutableList()
                         if ( list.isNullOrEmpty() ) {
                             for ( option in list ) {
                                 val data = option.answerCode.split(",")
@@ -212,13 +216,16 @@ class HraQuesExposeCheckupFragment(val qCode: String) : BaseFragment() {
 
     private fun saveResponse( selectedOptions : MutableList<Option> ) {
         val totalList = questionData.optionList.filter { it.answerCode.contains(",",ignoreCase = true) }
-        if ( selectedOptions.any { it.description.equals(resources.getString(R.string.NONE),ignoreCase = true) } ) {
+        //if ( selectedOptions.any { it.description.equals(resources.getString(R.string.NONE),ignoreCase = true) } ) {
+        if (selectedOptions.any { it.answerCode.contains("DONT", ignoreCase = true)
+                    || it.answerCode.contains("NONE", ignoreCase = true) }) {
             for ( option in totalList ) {
                 val data = option.answerCode.split(",")
                 viewModel.saveResponseOther(data[0],data[2],option.description,questionData.category,questionData.tabName,"",qCode, Constants.FALSE)
             }
         } else {
-            val list = selectedOptionList.filter { !it.description.equals("None",ignoreCase = true) }.toMutableList()
+            //val list = selectedOptionList.filter { !it.description.equals("None",ignoreCase = true) }.toMutableList()
+            val list = selectedOptionList.filter { !it.answerCode.equals("DONT", ignoreCase = true) }.toMutableList()
             for ( option in list ) {
                 val data = option.answerCode.split(",")
                 if ( option.isSelected ) {
@@ -243,13 +250,18 @@ class HraQuesExposeCheckupFragment(val qCode: String) : BaseFragment() {
 
     private var checkChangeListener = CompoundButton.OnCheckedChangeListener { view, isChecked ->
         selectedOptionList[view.id].isSelected = isChecked
-        refreshSelectedOptionList()
-        if ( isChecked && !view.text.toString().equals("None", ignoreCase = true) ) {
+        if (isChecked && !view.text.toString().contains(resources.getString(R.string.NONE), ignoreCase = true)) {
+        //if ( isChecked && !view.text.toString().equals("None", ignoreCase = true) ) {
             val none = binding.optionContainer.getChildAt(0) as CheckBox
             if ( none.isChecked ) {
                 none.isChecked = false
             }
         }
+
+        selectedOptionList.find { it.answerCode.contains("DONT", ignoreCase = true)
+                || it.answerCode.contains("NONE", ignoreCase = true) }!!.isSelected = false
+        Timber.e("${view.text} : isChecked-----> $isChecked")
+        refreshSelectedOptionList()
     }
 
     // This listener is only for "None" Option to Navigate directly on Next Screen
@@ -257,7 +269,9 @@ class HraQuesExposeCheckupFragment(val qCode: String) : BaseFragment() {
         val view = it as CheckBox
         selectedOptionList[view.id].isSelected = view.isChecked
         refreshSelectedOptionList()
-        if ( selectedOptionList.any { option -> !option.description.equals("None",ignoreCase = true) && option.isSelected } ) {
+        //if ( selectedOptionList.any { option -> !option.description.equals("None",ignoreCase = true) && option.isSelected } ) {
+        if (selectedOptionList.any { option -> option.isSelected && ( !option.answerCode.contains("DONT", ignoreCase = true)
+                    || !option.answerCode.contains("NONE", ignoreCase = true) ) }) {
             HraHelper.deselectExceptNone(binding.optionContainer)
         }
         selectedOptionList[0].isSelected = true

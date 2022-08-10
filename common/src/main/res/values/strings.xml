@@ -82,6 +82,9 @@
     <string name="MOBILE_NUMBER">Mobile Number</string>
     <string name="AND">and</string>
     <string name="DATE">Date</string>
+    <string name="RECORD_DATE">Record Date</string>
+    <string name="START_DATE">Start Date</string>
+    <string name="END_DATE">End Date</string>
     <string name="DAY">Day</string>
     <string name="WEEK">Week</string>
     <string name="MONTH">Month</string>
@@ -113,6 +116,9 @@
 
     <string name="SESSION">Session</string>
     <string name="MYSELF">Myself</string>
+    <string name="HIM">him</string>
+    <string name="HER">her</string>
+    <string name="HIS">his</string>
 
     <string name="FATHER">Father</string>
     <string name="MOTHER">Mother</string>
@@ -128,16 +134,18 @@
 
     <string name="HEIGHT">Height</string>
     <string name="WEIGHT">Weight</string>
-    <string name="WAIST">Pinggang</string>
+    <string name="WAIST">Waist</string>
+    <string name="BMI" translatable="false">BMI</string>
+    <string name="WHR" translatable="false">WHR</string>
     <string name="BLOOD_PRESSURE">Blood Pressure</string>
-    <string name="CHOLESTEROL">Kolesterol</string>
+    <string name="CHOLESTEROL">Cholesterol</string>
     <string name="HDL">HDL</string>
-    <string name="SYSTOLIC">Sistolik</string>
-    <string name="DIASTOLIC">Diastolik</string>
-    <string name="FEET_INCH">Kaki/inci</string>
-    <string name="FT_IN">Kaki/inci</string>
-    <string name="FT">kaki</string>
-    <string name="INCH">inci</string>
+    <string name="SYSTOLIC">Systolic</string>
+    <string name="DIASTOLIC">Diastolic</string>
+    <string name="FEET_INCH">Feet/inch</string>
+    <string name="FT_IN">ft,in</string>
+    <string name="FT">ft</string>
+    <string name="INCH">in</string>
     <string name="CM">cm</string>
     <string name="LBS">lbs</string>
     <string name="KG">kg</string>
@@ -152,7 +160,7 @@
     <string name="LOW">Low</string>
     <string name="HIGH">High</string>
     <string name="MODERATE">Moderate</string>
-    <string name="HIGH_NORMAL">High normal</string>
+    <string name="HIGH_NORMAL">High Normal</string>
     <string name="DESIRABLE">Desirable</string>
     <string name="MILDLY_HIGH">Mildly High</string>
 
@@ -308,5 +316,18 @@
     <string name="DISCLAIMER_TITLE">DISCLAIMER</string>
     <string name="DISCLAIMER_MESSAGE_HRA">All Information presented is for the reference purpose only.&lt;BR/&gt;This information should not be considered a substitute for professional medical expertise, diagnosis or treatment of any health problem.&lt;BR/&gt;&lt;BR/&gt;Please consult with your healthcare professional for further information about your health condition.</string>
     <string name="DISCLAIMER_MESSAGE_ACTIVITY_TRACKER">Note that this is a reference tool only.&lt;BR/&gt;It should not be used as a substitute for professional diagnostic tool.&lt;BR/&gt;&lt;BR/&gt;Please consult your healthcare professional on this.</string>
+
+    <string name="HELLO">Hello</string>
+    <string name="HAS_INVITED_YOU_TO_JOIN">has invited you to join</string>
+    <string name="INVITE_DESC">This Health &amp; Wellness App that helps you to Store, Track and Manage your Health Data.</string>
+    <string name="JOIN">Join</string>
+    <string name="ON">on</string>
+    <string name="KEEP_PACE_WITH_US">Keep pace with us!</string>
+
+    <string name="HAS_SHARED_HEALTH_RECORDS_WITH_YOU">has shared health record with you.</string>
+    <string name="KINDLY_REVIEW">Kindly review the records and guide</string>
+    <string name="THROUGH">through</string>
+    <string name="HEALTH_RELATED_QUERIES">health related queries.</string>
+    <string name="WE_HOPE_THIS_ELECTRONIC">We hope this electronic health record sharing feature has saved your precious time and provided you with the necessary information.</string>
 
 </resources>

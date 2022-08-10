@@ -24,7 +24,7 @@
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Add New Family Member"
+        android:text="@string/ADD_NEW_MEMBER"
         style="@style/VivantTitle"
         android:textSize="@dimen/_12sdp"
         android:textColor="@color/white"

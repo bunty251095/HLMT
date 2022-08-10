@@ -58,7 +58,6 @@
                         android:text="@string/ADD_MEMBER"
                         android:textColor="@color/vivantWhite"
                         android:textSize="@dimen/_20sdp"
-                        android:tag="bold"
                         android:layout_marginStart="@dimen/_16sdp"
                         android:layout_marginTop="@dimen/_40sdp"
                         app:layout_constraintStart_toStartOf="parent"

@@ -103,7 +103,7 @@ class RevUpdateParameterFragment : BaseFragment(){
             if (fragmentManager != null) {
 //                dpd.show()
 
-                DialogHelper().showDatePickerDialog("Record Date",requireContext(), Calendar.getInstance(),null, Calendar.getInstance(), object :DialogHelper.DateListener{
+                DialogHelper().showDatePickerDialog(resources.getString(R.string.RECORD_DATE),requireContext(), Calendar.getInstance(),null, Calendar.getInstance(), object :DialogHelper.DateListener{
                     override fun onDateSet(date: String, year: String, month: String, dayOfMonth: String) {
                         val selectedDate:String = dayOfMonth + "/" + month + "/" + year
                         if (!selectedDate.isNullOrEmpty()) {
@@ -118,12 +118,7 @@ class RevUpdateParameterFragment : BaseFragment(){
 
         binding.edtDate.setOnClickListener { view: View? ->
             if (fragmentManager != null) {
-                DialogHelper().showDatePickerDialog(
-                    "Record Date",
-                    requireContext(),
-                    Calendar.getInstance(),
-                    null,
-                    Calendar.getInstance(),
+                DialogHelper().showDatePickerDialog(resources.getString(R.string.RECORD_DATE), requireContext(), Calendar.getInstance(), null, Calendar.getInstance(),
 
                     object : DialogHelper.DateListener {
 

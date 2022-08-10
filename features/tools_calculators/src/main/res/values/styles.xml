@@ -89,7 +89,7 @@
         <item name="android:layout_weight">1</item>
         <item name="background">@drawable/sw_on</item>
         <item name="android:checked">true</item>
-        <item name="android:text">No</item>
+        <item name="android:text">@string/NO</item>
         <item name="android:textSize">@dimen/_12sdp</item>
         <item name="fontFamily">@font/dax_font</item>
         <item name="android:padding">@dimen/_6sdp</item>
@@ -104,7 +104,7 @@
         <item name="android:layout_weight">1</item>
         <item name="background">@drawable/sw_on</item>
         <item name="android:checked">false</item>
-        <item name="android:text">Yes</item>
+        <item name="android:text">@string/YES</item>
         <item name="android:textSize">@dimen/_12sdp</item>
         <item name="fontFamily">@font/dax_font</item>
         <item name="android:padding">@dimen/_6sdp</item>

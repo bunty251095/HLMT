@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:textSize="@dimen/_16sdp"
-                    android:text="Health Condition"
+                    android:text="@string/HEALTH_CONDITION"
                     android:layout_marginTop="@dimen/_15sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:textSize="@dimen/_12sdp"
                     android:layout_gravity="center_horizontal"
-                    android:text="Select all that applies to you"
+                    android:text="@string/SELECT_ALL_THAT_APPLIES_TO_YOU"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/lbl_health_condition"/>
@@ -136,9 +136,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_3sdp"
                         android:tag="CRART"
-                        android:drawableTint="@color/vivant_charcoal_grey"
-                        android:text="@string/CORONARY_ARTERY"
-                        />
+                        android:text="@string/CORONARY_ARTERY"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/btn_cholestrol"

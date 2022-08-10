@@ -28,9 +28,6 @@
     <string name="THYROID_PRESSURE">Thyroid Profile</string>
     <string name="URINE_PRESSURE">Urine Profile</string>
 
-    <string name="WAIST">Waist</string>
-    <string name="BMI">BMI</string>
-    <string name="WHR">WHR</string>
     <string name="BP">BP</string>
     <string name="BLOOD_SUGAR">Blood Sugar</string>
     <string name="CHOLESTEROL">Cholesterol</string>

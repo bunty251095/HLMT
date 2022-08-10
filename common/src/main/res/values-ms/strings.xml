@@ -82,6 +82,9 @@
     <string name="MOBILE_NUMBER">Nombor Telefon Bimbit</string>
     <string name="AND">dan</string>
     <string name="DATE">Tarikh</string>
+    <string name="RECORD_DATE">Rekod Tarikh</string>
+    <string name="START_DATE">Tarikh mula</string>
+    <string name="END_DATE">Tarikh tamat</string>
     <string name="DAY">Hari</string>
     <string name="WEEK">Minggu</string>
     <string name="MONTH">Sebulan</string>
@@ -113,6 +116,9 @@
 
     <string name="SESSION">Sesi</string>
     <string name="MYSELF">Saya Sendiri</string>
+    <string name="HIM">dia</string>
+    <string name="HER">dia</string>
+    <string name="HIS">dia</string>
 
     <string name="FATHER">Bapa</string>
     <string name="MOTHER">Ibu</string>
@@ -128,16 +134,18 @@
 
     <string name="HEIGHT">Tinggi</string>
     <string name="WEIGHT">Berat</string>
-    <string name="WAIST">Waist</string>
+    <string name="WAIST">Pinggang</string>
+    <string name="BMI">Indeks Jisim Badam</string>
+    <string name="WHR">Nisbah Pinggang-Pinggul </string>
     <string name="BLOOD_PRESSURE">Tekanan Darah</string>
-    <string name="CHOLESTEROL">Cholesterol</string>
+    <string name="CHOLESTEROL">Kolesterol</string>
     <string name="HDL">HDL</string>
-    <string name="SYSTOLIC">Systolic</string>
-    <string name="DIASTOLIC">Diastolic</string>
-    <string name="FEET_INCH">Feet/inch</string>
-    <string name="FT_IN">ft,in</string>
-    <string name="FT">ft</string>
-    <string name="INCH">in</string>
+    <string name="SYSTOLIC">Sistolik</string>
+    <string name="DIASTOLIC">Diastolik</string>
+    <string name="FEET_INCH">Kaki/inci</string>
+    <string name="FT_IN">Kaki/inci</string>
+    <string name="FT">kaki</string>
+    <string name="INCH">inci</string>
     <string name="CM">cm</string>
     <string name="LBS">lbs</string>
     <string name="KG">kg</string>
@@ -152,28 +160,28 @@
     <string name="LOW">Rendah</string>
     <string name="HIGH">Tinggi</string>
     <string name="MODERATE">Sederhana</string>
-    <string name="HIGH_NORMAL">High normal</string>
-    <string name="DESIRABLE">Desirable</string>
-    <string name="MILDLY_HIGH">Mildly High</string>
+    <string name="HIGH_NORMAL">Normal Tinggi</string>
+    <string name="DESIRABLE">Diingini</string>
+    <string name="MILDLY_HIGH">Sedikit Tinggi</string>
 
     <string name="NORMAL">Normal</string>
-    <string name="ABNORMAL">Abnormal</string>
-    <string name="DIABETIC">Diabetic</string>
-    <string name="EARLY_DIABETIC">Early Diabetic</string>
-    <string name="VERY_HIGH">Very High</string>
-    <string name="VERY_LOW">Very Low</string>
-    <string name="MILDLY_LOW">Mildly Low</string>
-    <string name="BORDERLINE_HIGH">Borderline High</string>
-    <string name="BETTER">Better</string>
-    <string name="NEAR_OPTIMAL">Near Optimal</string>
-    <string name="MODERATE_LOW">Moderate Low</string>
-    <string name="MODERATE_HIGH">Moderate High</string>
-    <string name="MILD_LOW">Mild Low</string>
-    <string name="MILD_HIGH">Mild High</string>
+    <string name="ABNORMAL">Tidak Normal</string>
+    <string name="DIABETIC">Diabetis</string>
+    <string name="EARLY_DIABETIC">Penghidap Diabetes Awal</string>
+    <string name="VERY_HIGH">Sangat tinggi</string>
+    <string name="VERY_LOW">Sangat rendah</string>
+    <string name="MILDLY_LOW">Rendah Sedikit</string>
+    <string name="BORDERLINE_HIGH">Garis Sempadan Tinggi</string>
+    <string name="BETTER">Lebih Baik</string>
+    <string name="NEAR_OPTIMAL">Berhampiran Optimum</string>
+    <string name="MODERATE_LOW">Sederhana Rendah</string>
+    <string name="MODERATE_HIGH">Sederhana Tinggi</string>
+    <string name="MILD_LOW">Sedikit Rendah</string>
+    <string name="MILD_HIGH">Sedikit Tinggi</string>
     <string name="AVERAGE_RISK">Average Risk</string>
-    <string name="BEST">Best</string>
-    <string name="OPTIMAL">Optimal</string>
-    <string name="GOOD">Good</string>
+    <string name="BEST">Terbaik</string>
+    <string name="OPTIMAL">Optimum</string>
+    <string name="GOOD">Baik</string>
 
     <string name="OPEN_GALLERY">Buka Galeri</string>
     <string name="TAKE_PHOTO">Mengambil gambar</string>
@@ -308,5 +316,18 @@
     <string name="DISCLAIMER_TITLE">PENAFIAN</string>
     <string name="DISCLAIMER_MESSAGE_HRA">Semua Maklumat yang dikemukakan adalah untuk tujuan rujukan sahaja.&lt;BR/&gt; Maklumat ini tidak boleh dianggap sebagai pengganti kepakaran perubatan profesional, diagnosis atau rawatan sebarang masalah kesihatan.&lt;BR/&gt;&lt;BR/&gt; Sila rujuk dengan profesional penjagaan kesihatan anda untuk mendapatkan maklumat lanjut tentang keadaan kesihatan anda.</string>
     <string name="DISCLAIMER_MESSAGE_ACTIVITY_TRACKER">Ambil perhatian bahawa ini ialah alat rujukan sahaja.&lt;BR/&gt; Ia tidak boleh digunakan sebagai pengganti alat diagnostik profesional.&lt;BR/&gt;&lt;BR/&gt; Sila rujuk profesional penjagaan kesihatan anda tentang perkara ini.</string>
+
+    <string name="HELLO">Helo</string>
+    <string name="HAS_INVITED_YOU_TO_JOIN">telah menjemput anda untuk menyertai</string>
+    <string name="INVITE_DESC">Aplikasi Kesihatan  ini yang membantu anda Menyimpan, Menjejak dan Mengurus Data Kesihatan anda.</string>
+    <string name="JOIN">Sertai</string>
+    <string name="ON">pada</string>
+    <string name="KEEP_PACE_WITH_US">Teruskan Langkah Bersama Kami!</string>
+
+    <string name="HAS_SHARED_HEALTH_RECORDS_WITH_YOU">telah berkongsi rekod kesihatan dengan anda.</string>
+    <string name="KINDLY_REVIEW">Sila semak rekod dan bimbing</string>
+    <string name="THROUGH">melalui</string>
+    <string name="HEALTH_RELATED_QUERIES">pertanyaan berkaitan kesihatannya.</string>
+    <string name="WE_HOPE_THIS_ELECTRONIC">Kami berharap ciri perkongsian rekod kesihatan elektronik ini telah menjimatkan masa berharga anda dan memberikan anda maklumat yang diperlukan.</string>
 
 </resources>

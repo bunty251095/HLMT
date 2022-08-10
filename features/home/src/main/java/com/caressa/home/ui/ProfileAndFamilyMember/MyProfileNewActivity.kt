@@ -185,7 +185,6 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
             if (it != null) {
                 val person = it.person
                 if (!Utilities.isNullOrEmptyOrZero(person.profileImageID.toString())) {
-                    hasProfileImage = true
                     viewModel.callGetProfileImageApi(this, person.profileImageID.toString())
                 } else {
                     stopImageShimmer()
@@ -205,7 +204,13 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
 
             }
         }
-        viewModel.profileImage.observe( this) {}
+        viewModel.profileImage.observe( this) {
+            if (it != null) {
+                if (!Utilities.isNullOrEmptyOrZero(it.healthRelatedDocument.fileBytes)) {
+                    hasProfileImage = true
+                }
+            }
+        }
         viewModel.uploadProfileImage.observe( this) {}
         viewModel.removeProfileImage.observe( this) {}
     }
@@ -265,7 +270,7 @@ class MyProfileNewActivity : BaseActivity(),EditProfileImageBottomsheetFragment.
         mCalendar = Calendar.getInstance()
         mCalendar?.add(Calendar.YEAR, -18)
 
-        DialogHelper().showDatePickerDialog("Your Date of Birth",this, mCalendar,null, mCalendar, object :DialogHelper.DateListener{
+        DialogHelper().showDatePickerDialog(resources.getString(R.string.DATE_OF_BIRTH),this, mCalendar,null, mCalendar, object :DialogHelper.DateListener{
             override fun onDateSet(date: String, year: String, month: String, dayOfMonth: String) {
                 binding.edtDob.setText(date.replace('-',' '))
             }

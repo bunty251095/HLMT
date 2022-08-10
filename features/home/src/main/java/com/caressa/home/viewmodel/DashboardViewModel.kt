@@ -524,6 +524,40 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
 
     fun spreadTheWord() {
         try {
+            val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+            var himOrHer = ""
+            val userName = firstName
+            val appName = "HL Pace"
+            val link = "https://onelink.to/g2zpq4"
+
+            when(gender) {
+                "1" -> himOrHer = " ${localResource.getString(R.string.HIM)} "
+                "2" -> himOrHer = " ${localResource.getString(R.string.HER)} "
+            }
+
+            val title: String = userName + " ${localResource.getString(R.string.HAS_INVITED_YOU_TO_JOIN)} "+appName+" !"
+
+            val text = "${localResource.getString(R.string.HELLO)}," + "\n\n" +  title + "\n\n" + localResource.getString(R.string.INVITE_DESC) +
+                    "\n\n" + localResource.getString(R.string.JOIN) + himOrHer + "${localResource.getString(R.string.ON)} "+
+                    Html.fromHtml("<br><br>" + "App Link : " +
+                            " -- </a> " +link+ "</br></br>") +
+                    Html.fromHtml("<br><br>" + "${localResource.getString(R.string.KEEP_PACE_WITH_US)}</br></br>")
+
+            val sendIntent = Intent()
+            sendIntent.action = Intent.ACTION_SEND
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, title)
+            sendIntent.putExtra(Intent.EXTRA_TEXT, text)
+            sendIntent.type = "text/plain"
+            sendIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(sendIntent)
+            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.MENU_SPREAD_THE_WORD_CLICK)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+/*    fun spreadTheWord() {
+        try {
             var himOrHer = ""
             val userName = firstName
             val appName = "HL Pace"
@@ -535,23 +569,23 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
             }
 
             val title: String = userName + " has invited you to join "+appName+" !"
-            /*val text = "Hello," + "\n\n" +  title + "\n\n" + "Join" + himORher
+            *//*val text = "Hello," + "\n\n" +  title + "\n\n" + "Join" + himORher
                     + "on Vivant, the Health & Wellness App that helps you to Store, Track and Manage your Health Data." +
                     "\n\n" + "Track your steps, get your wellness score, receive personalised recommendations and health goal, chat with a Doctor, all for free !!" +
                     "\n\n" + "What`s more! Earn and redeem rewards while managing your health from our wellness partners." +
                     Html.fromHtml("<br><br>" + "Application Link : " +
                             "<a href=\"https://wk2w7.app.goo.gl/reffral\">https://wk2w7.app.goo.gl/reffral</a> " + "</br></br>")
                     + Html.fromHtml("<br><br>" + "Team Vivant</br><br>" +
-                    "<a href=\"https://vivant.me\">www.vivant.vivant.me</a></br></br>");*/
+                    "<a href=\"https://vivant.me\">www.vivant.vivant.me</a></br></br>");*//*
 //            val text = "Hello," + "\n\n" +  title + "\n\n" + "Join" + himOrHer + "on "+appName+", the Health & Wellness App that helps you to Store, Track and Manage your Health Data." +
 //                    "\n\n" + "Track your steps, get your wellness score, receive personalised recommendations and health goal, all for free !!" +
 //                    "\n\n" + "What`s more! Earn and redeem rewards while managing your health from our wellness partners."
-            /*+
+            *//*+
                     Html.fromHtml("<br><br>" + "IOS : " +
                             "<a href=\"https://bit.ly/33d2un5\">https://bit.ly/33d2un5</a> " + "</br></br>") +
                     Html.fromHtml("<br><br>" + " Android : " +
                             "<a href=\"https://apple.co/3jZI72s\">https://apple.co/3jZI72s</a> " + "</br></br>")+
-                    Html.fromHtml("<br><br>" + "Know the right pace !</br></br>")*/
+                    Html.fromHtml("<br><br>" + "Know the right pace !</br></br>")*//*
 
             val text = "Hello," + "\n\n" +  title + "\n\n" + "This Health & Wellness App that helps you to Store, Track and Manage your Health Data." +
                     "\n\n" + "Join" + himOrHer + "on "+
@@ -570,7 +604,7 @@ class DashboardViewModel(private val homeManagementUseCase: HomeManagementUseCas
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
+    }*/
 
     fun inviteUser(link:String = "--") {
         try {

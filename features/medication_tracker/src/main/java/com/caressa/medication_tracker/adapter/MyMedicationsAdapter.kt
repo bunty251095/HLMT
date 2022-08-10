@@ -64,7 +64,7 @@ class MyMedicationsAdapter(val viewModel : MedicineTrackerViewModel, val context
             if (medicine.scheduleList.isNotEmpty()) {
                 holder.txtDose.text = medicine.scheduleList[0].dosage + " " + context.resources.getString(R.string.DOSE)
             }
-            holder.txtMedTime.text = medicine.comments
+            holder.txtMedTime.text = medicationTrackerHelper.getMedInstructionByCode(medicine.comments!!)
 
             var medDateDuration: String = DateHelper.getDateTimeAs_ddMMMyyyyNew(medicine.PrescribedDate)
             if (!Utilities.isNullOrEmpty(medicine.EndDate)) {

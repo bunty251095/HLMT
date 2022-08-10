@@ -184,7 +184,7 @@ class HeartAgeRecalculateFragment : BaseFragment(), KoinComponent, ParameterAdap
     private fun validateParameter(): Boolean {
         var isValid = false
         for (i in paramList.indices) {
-            if (paramList[i].title.equals(resources.getString(R.string.HEIGHT), ignoreCase = true)) {
+            if (paramList[i].code.equals("HEIGHT", ignoreCase = true)) {
                 if (!paramList[i].finalValue.equals("", ignoreCase = true)) {
                     isValid = true
                 } else {
@@ -192,7 +192,7 @@ class HeartAgeRecalculateFragment : BaseFragment(), KoinComponent, ParameterAdap
                     Utilities.toastMessageShort(context, "${resources.getString(R.string.PLEASE_FILL_HEIGHT_DETAILS)}.")
                     break
                 }
-            } else if (paramList[i].title.equals(resources.getString(R.string.WEIGHT), ignoreCase = true)) {
+            } else if (paramList[i].code.equals("WEIGHT", ignoreCase = true)) {
                 if (!paramList[i].finalValue.equals("", ignoreCase = true)) {
                     isValid = true
                 } else {
@@ -200,9 +200,8 @@ class HeartAgeRecalculateFragment : BaseFragment(), KoinComponent, ParameterAdap
                     Utilities.toastMessageShort(context, "${resources.getString(R.string.PLEASE_FILL_WEIGHT_DETAILS)}.")
                     break
                 }
-            } else if (!paramList[i].title.equals(resources.getString(R.string.HEIGHT), ignoreCase = true)
-                && !paramList[i].title.equals(resources.getString(R.string.WEIGHT), ignoreCase = true)) {
-
+            } else if (!paramList[i].code.equals("HEIGHT", ignoreCase = true)
+                && !paramList[i].code.equals("WEIGHT", ignoreCase = true)) {
                 if (!paramList[i].finalValue.equals("", ignoreCase = true)) {
                     Timber.e("paramList=>%s", paramList[i].finalValue)
                     val `val`: Double = paramList[i].finalValue.toDouble()

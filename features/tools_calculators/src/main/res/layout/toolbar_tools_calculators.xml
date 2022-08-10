@@ -28,7 +28,8 @@
         android:gravity="center|center_horizontal"
         android:text=""
         android:textSize="@dimen/_16sdp"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/colorPrimary"
+        android:layout_marginStart="@dimen/_10sdp"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_vivant_logo"

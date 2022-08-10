@@ -184,22 +184,26 @@ class DataHandler(val context: Context) {
     fun generateShareIntent(context:Context, fileToShare:Uri,viewModel : HealthRecordsViewModel) {
         try
         {
+            val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+
+            localResource.getString(R.string.WE_HOPE_THIS_ELECTRONIC)
+
             val shareIntent = Intent()
             shareIntent.action = Intent.ACTION_SEND
             shareIntent.putExtra(Intent.EXTRA_STREAM, fileToShare)
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, viewModel.firstName + " has shared Health Document")
-            val himORher = if (viewModel.gender.equals("1",ignoreCase = true)) " him " else " her "
-            val hisORher = if (viewModel.gender.equals("1",ignoreCase = true)) " his " else " her "
-            val shareBody = ("Hello," + "\n\n" + viewModel.firstName + " has shared  health records with you." + "\n" +
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, viewModel.firstName + " ${localResource.getString(R.string.HAS_SHARED_HEALTH_RECORDS_WITH_YOU)}")
+            val himORher = if (viewModel.gender.equals("1",ignoreCase = true)) " ${localResource.getString(R.string.HIM)} " else " ${localResource.getString(R.string.HER)} "
+            val hisORher = if (viewModel.gender.equals("1",ignoreCase = true)) " ${localResource.getString(R.string.HIS)} " else " ${localResource.getString(R.string.HER)} "
+            val shareBody = ("${localResource.getString(R.string.HELLO)}," + "\n\n" + viewModel.firstName + " ${localResource.getString(R.string.HAS_SHARED_HEALTH_RECORDS_WITH_YOU)}" + "\n" +
                     Html.fromHtml("<br>" +
-                            "Kindly review the records and guide" +
+                            localResource.getString(R.string.KINDLY_REVIEW) +
                             himORher +
-                            "through" +
+                            localResource.getString(R.string.THROUGH) +
                             hisORher +
-                            "health related queries." +
+                            localResource.getString(R.string.HEALTH_RELATED_QUERIES) +
                             "</br>" +
                             "<br><br>" +
-                            "We hope this electronic health record sharing feature has saved your precious time and provided you with the necessary information. "
+                            "${localResource.getString(R.string.WE_HOPE_THIS_ELECTRONIC)} "
 //                            +
 //                            "If you've liked this feature, please share the Vivant portal " +
 //                            "<a href=\"https://portal.vivant.me\">portal.vivant.vivant.me</a> " +

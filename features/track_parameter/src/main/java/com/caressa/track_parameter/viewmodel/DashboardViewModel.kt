@@ -12,6 +12,7 @@ import com.caressa.common.base.BaseViewModel
 import com.caressa.track_parameter.R
 import com.caressa.common.constants.PreferenceConstants
 import com.caressa.common.utils.Event
+import com.caressa.common.utils.LocaleHelper
 import com.caressa.common.utils.Utilities
 import com.caressa.model.entity.TrackParameterMaster
 import com.caressa.model.parameter.*
@@ -51,6 +52,7 @@ class DashboardViewModel (
     fun listHistoryWithLatestRecord( fitnessData : FitnessData ) = viewModelScope.launch {
         withContext(dispatchers.io){
             try {
+                val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
                 val steps = fitnessData.stepsCount
                 val calories = fitnessData.calories
                 var systolic = -1
@@ -80,16 +82,16 @@ class DashboardViewModel (
 
                 if ( !paramWeight.isNullOrEmpty() ) {
 //                    color = TrackParameterHelper.getObservationColor(paramWeight[0].observation,paramWeight[0].profileCode!!)
-                    list.add(DashboardParamGridModel(R.drawable.img_weight,R.color.vivant_charcoal_grey_55,context.resources.getString(R.string.WEIGHT), paramWeight[0].value!!.toString(), "WEIGHT"))
+                    list.add(DashboardParamGridModel(R.drawable.img_weight,R.color.vivant_charcoal_grey_55,localResource.getString(R.string.WEIGHT), paramWeight[0].value!!.toString(), "WEIGHT"))
                 } else {
-                    list.add(DashboardParamGridModel(R.drawable.img_weight,R.color.hlmt_warm_grey,context.resources.getString(R.string.WEIGHT), " -- ", "WEIGHT"))
+                    list.add(DashboardParamGridModel(R.drawable.img_weight,R.color.hlmt_warm_grey,localResource.getString(R.string.WEIGHT), " -- ", "WEIGHT"))
                 }
 
                 if ( !paramWaist.isNullOrEmpty() ) {
 //                    color = TrackParameterHelper.getObservationColor(paramWaist[0].observation,paramWeight[0].profileCode!!)
-                    list.add(DashboardParamGridModel(R.drawable.img_profile_whr,R.color.vivant_charcoal_grey_55,context.resources.getString(R.string.WAIST), paramWaist[0].value!!.toString(), "WAIST"))
+                    list.add(DashboardParamGridModel(R.drawable.img_profile_whr,R.color.vivant_charcoal_grey_55,localResource.getString(R.string.WAIST), paramWaist[0].value!!.toString(), "WAIST"))
                 } else {
-                    list.add(DashboardParamGridModel(R.drawable.img_profile_whr,R.color.hlmt_warm_grey,context.resources.getString(R.string.WAIST), " -- ", "WAIST"))
+                    list.add(DashboardParamGridModel(R.drawable.img_profile_whr,R.color.hlmt_warm_grey,localResource.getString(R.string.WAIST), " -- ", "WAIST"))
                 }
 
                 if ( !paramBMI.isNullOrEmpty() ) {
@@ -104,16 +106,16 @@ class DashboardViewModel (
                             paramBMI[0].profileCode!!
                         )
                     }
-                    list.add(DashboardParamGridModel(R.drawable.img_profile_bmi,color,context.resources.getString(R.string.BMI), paramBMI[0].value!!.toString(), "BMI"))
+                    list.add(DashboardParamGridModel(R.drawable.img_profile_bmi,color,localResource.getString(R.string.BMI), paramBMI[0].value!!.toString(), "BMI"))
                 } else {
-                    list.add(DashboardParamGridModel(R.drawable.img_profile_bmi,R.color.hlmt_warm_grey,context.resources.getString(R.string.BMI), " -- ", "BMI"))
+                    list.add(DashboardParamGridModel(R.drawable.img_profile_bmi,R.color.hlmt_warm_grey,localResource.getString(R.string.BMI), " -- ", "BMI"))
                 }
 
                 if ( !paramWhr.isNullOrEmpty() ) {
                     color = TrackParameterHelper.getObservationColor(paramWhr[0].observation,paramWhr[0].profileCode!!)
-                    list.add(DashboardParamGridModel(R.drawable.img_profile_whr,color,context.resources.getString(R.string.WHR), paramWhr[0].value!!.toString(), "WHR"))
+                    list.add(DashboardParamGridModel(R.drawable.img_profile_whr,color,localResource.getString(R.string.WHR), paramWhr[0].value!!.toString(), "WHR"))
                 } else {
-                    list.add(DashboardParamGridModel(R.drawable.img_profile_whr,R.color.hlmt_warm_grey,context.resources.getString(R.string.WHR), " -- ", "WHR"))
+                    list.add(DashboardParamGridModel(R.drawable.img_profile_whr,R.color.hlmt_warm_grey,localResource.getString(R.string.WHR), " -- ", "WHR"))
                 }
 
 
@@ -121,12 +123,12 @@ class DashboardViewModel (
                     color = TrackParameterHelper.getObservationColor(TrackParameterHelper.getBPObservation(paramBp[systolic].value!!.toInt(), paramBp[diastolic].value!!.toInt(),context),"")
                     if ( !Utilities.isNullOrEmpty( paramBp[systolic].value.toString())
                         && !Utilities.isNullOrEmpty( paramBp[diastolic].value.toString()) ) {
-                        list.add(DashboardParamGridModel(R.drawable.img_profile_bp,color,context.resources.getString(R.string.BP),paramBp[systolic].value!!.toDouble().toInt().toString() + " / " + paramBp[diastolic].value!!.toDouble().toInt().toString(), "BP"))
+                        list.add(DashboardParamGridModel(R.drawable.img_profile_bp,color,localResource.getString(R.string.BP),paramBp[systolic].value!!.toDouble().toInt().toString() + " / " + paramBp[diastolic].value!!.toDouble().toInt().toString(), "BP"))
                     } else {
-                        list.add(DashboardParamGridModel(R.drawable.img_profile_bp,R.color.hlmt_warm_grey,context.resources.getString(R.string.BP), " -- ", "BP"))
+                        list.add(DashboardParamGridModel(R.drawable.img_profile_bp,R.color.hlmt_warm_grey,localResource.getString(R.string.BP), " -- ", "BP"))
                     }
                 } else {
-                    list.add(DashboardParamGridModel(R.drawable.img_profile_bp,R.color.hlmt_warm_grey,context.resources.getString(R.string.BP), " -- ", "BP"))
+                    list.add(DashboardParamGridModel(R.drawable.img_profile_bp,R.color.hlmt_warm_grey,localResource.getString(R.string.BP), " -- ", "BP"))
                 }
 
 //                if ( !paramPulse.isNullOrEmpty() ) {
@@ -139,35 +141,35 @@ class DashboardViewModel (
 
                 if ( !paramSugar.isNullOrEmpty() ) {
                     color = TrackParameterHelper.getObservationColor(paramSugar[0].observation,paramSugar[0].profileCode!!)
-                    list.add(DashboardParamGridModel(R.drawable.img_profile_blood_sugar,color,context.resources.getString(R.string.BLOOD_SUGAR), paramSugar[0].value!!.toString(), "SUGAR"))
+                    list.add(DashboardParamGridModel(R.drawable.img_profile_blood_sugar,color,localResource.getString(R.string.BLOOD_SUGAR), paramSugar[0].value!!.toString(), "SUGAR"))
                 } else {
-                    list.add(DashboardParamGridModel(R.drawable.img_profile_blood_sugar,R.color.hlmt_warm_grey,context.resources.getString(R.string.BLOOD_SUGAR), " -- ", "SUGAR"))
+                    list.add(DashboardParamGridModel(R.drawable.img_profile_blood_sugar,R.color.hlmt_warm_grey,localResource.getString(R.string.BLOOD_SUGAR), " -- ", "SUGAR"))
                 }
 
                 if ( !paramChol.isNullOrEmpty() ) {
                     color = TrackParameterHelper.getObservationColor(paramChol[0].observation,paramChol[0].profileCode!!)
-                    list.add(DashboardParamGridModel(R.drawable.img_cholesteroal,color,context.resources.getString(R.string.CHOLESTEROL), paramChol[0].value!!.toString(), "CHOL"))
+                    list.add(DashboardParamGridModel(R.drawable.img_cholesteroal,color,localResource.getString(R.string.CHOLESTEROL), paramChol[0].value!!.toString(), "CHOL"))
                 } else {
-                    list.add(DashboardParamGridModel(R.drawable.img_cholesteroal,R.color.hlmt_warm_grey,context.resources.getString(R.string.CHOLESTEROL), " -- ", "CHOL"))
+                    list.add(DashboardParamGridModel(R.drawable.img_cholesteroal,R.color.hlmt_warm_grey,localResource.getString(R.string.CHOLESTEROL), " -- ", "CHOL"))
                 }
 
                 if ( !paramHb.isNullOrEmpty() ) {
                     color = TrackParameterHelper.getObservationColor(paramHb[0].observation,paramHb[0].profileCode!!)
-                    list.add(DashboardParamGridModel(R.drawable.img_hemoglobin,color,context.resources.getString(R.string.HEMOGLOBIN), paramHb[0].value!!.toString(), "HEMOGLOBIN"))
+                    list.add(DashboardParamGridModel(R.drawable.img_hemoglobin,color,localResource.getString(R.string.HEMOGLOBIN), paramHb[0].value!!.toString(), "HEMOGLOBIN"))
                 } else {
-                    list.add(DashboardParamGridModel(R.drawable.img_hemoglobin,R.color.hlmt_warm_grey,context.resources.getString(R.string.HEMOGLOBIN), " -- ", "HEMOGLOBIN"))
+                    list.add(DashboardParamGridModel(R.drawable.img_hemoglobin,R.color.hlmt_warm_grey,localResource.getString(R.string.HEMOGLOBIN), " -- ", "HEMOGLOBIN"))
                 }
 
                 if ( !Utilities.isNullOrEmptyOrZero(steps) ) {
-                    list.add(DashboardParamGridModel(R.drawable.img_step,R.color.vivant_dark_sky_blue,context.resources.getString(R.string.STEPS), steps, "STEPS"))
+                    list.add(DashboardParamGridModel(R.drawable.img_step,R.color.vivant_dark_sky_blue,localResource.getString(R.string.STEPS), steps, "STEPS"))
                 } else {
-                    list.add(DashboardParamGridModel(R.drawable.img_step,R.color.hlmt_warm_grey,context.resources.getString(R.string.STEPS), "0", "STEPS"))
+                    list.add(DashboardParamGridModel(R.drawable.img_step,R.color.hlmt_warm_grey,localResource.getString(R.string.STEPS), "0", "STEPS"))
                 }
 
                 if ( !Utilities.isNullOrEmptyOrZero(calories) ) {
-                    list.add(DashboardParamGridModel(R.drawable.img_calories,R.color.vivant_pumpkin_orange,context.resources.getString(R.string.CALORIES), calories, "CAL"))
+                    list.add(DashboardParamGridModel(R.drawable.img_calories,R.color.vivant_pumpkin_orange,localResource.getString(R.string.CALORIES), calories, "CAL"))
                 } else {
-                    list.add(DashboardParamGridModel(R.drawable.img_calories,R.color.hlmt_warm_grey,context.resources.getString(R.string.CALORIES), "0", "CAL"))
+                    list.add(DashboardParamGridModel(R.drawable.img_calories,R.color.hlmt_warm_grey,localResource.getString(R.string.CALORIES), "0", "CAL"))
                 }
 
 //                list.add(DashboardParamGridModel(R.drawable.add,R.color.white,context.resources.getString(R.string.add_more), "", "ADD"))

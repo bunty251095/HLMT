@@ -313,7 +313,7 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
         }
         if (isValid) {
             for (i in paramList.indices) {
-                if (paramList[i].title.equals(resources.getString(R.string.HEIGHT), ignoreCase = true)) {
+                if (paramList[i].code.equals("HEIGHT", ignoreCase = true)) {
                     if (!Utilities.isNullOrEmptyOrZero(paramList[i].finalValue)) {
                         isValid = true
                         saveUserPreference(paramList[i])
@@ -322,7 +322,7 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
                         Utilities.toastMessageShort(context, "${resources.getString(R.string.PLEASE_FILL_HEIGHT_DETAILS)}.")
                         break
                     }
-                } else if (paramList[i].title.equals(resources.getString(R.string.WEIGHT), ignoreCase = true)) {
+                } else if (paramList[i].code.equals("WEIGHT", ignoreCase = true)) {
                     if (!Utilities.isNullOrEmptyOrZero(paramList[i].finalValue)) {
                         isValid = true
                         saveUserPreference(paramList[i])
@@ -331,8 +331,8 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
                         Utilities.toastMessageShort(context, "${resources.getString(R.string.PLEASE_FILL_WEIGHT_DETAILS)}.")
                         break
                     }
-                } else if (!paramList[i].title.equals(resources.getString(R.string.HEIGHT), ignoreCase = true)
-                    && !paramList[i].title.equals(resources.getString(R.string.WEIGHT), ignoreCase = true)) {
+                } else if (!paramList[i].code.equals("HEIGHT", ignoreCase = true)
+                    && !paramList[i].code.equals("WEIGHT", ignoreCase = true)) {
                     if (!paramList[i].finalValue.equals("", ignoreCase = true)) {
                         Timber.e("paramList=>%s", paramList[i].finalValue)
                         val `val`: Double = paramList[i].finalValue.toDouble()
@@ -402,7 +402,7 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
         }
     }
 
-    override fun onParameterClick(parameterDataModel: ParameterDataModel, position: Int) {
+/*    override fun onParameterClick(parameterDataModel: ParameterDataModel, position: Int) {
         binding.edtAge.clearFocus()
         if (parameterDataModel.title.equals(resources.getString(R.string.HEIGHT),ignoreCase = true)) {
             val heightWeightDialog = HeightWeightDialog(requireContext(), this@HeartAgeFragment, "Height", parameterAdapter!!.paramList[0])
@@ -413,6 +413,36 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
             heightWeightDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             heightWeightDialog.show()
         } else if (parameterDataModel.code.equals("SYSTOLIC_BP", ignoreCase = true) || parameterDataModel.code.equals("DIASTOLIC_BP",ignoreCase = true)) {
+            val customDialogManager = SystolicDiastolicDialogManager(requireContext(), this@HeartAgeFragment, parameterAdapter!!.paramList, position)
+            customDialogManager.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            customDialogManager.show()
+        } else {
+            showInputDialog(parameterDataModel, position)
+        }
+    }*/
+
+    override fun onParameterClick(parameterDataModel: ParameterDataModel, position: Int) {
+        binding.edtAge.clearFocus()
+        if (parameterDataModel.code.equals("HEIGHT", ignoreCase = true)) {
+/*            if(viewModel.getPreference("HEIGHT").equals("cm")){
+                parameterAdapter!!.paramList[0].unit = resources.getString(R.string.CM)
+            }else{
+                parameterAdapter!!.paramList[0].unit = resources.getString(R.string.FEET_INCH)
+            }*/
+            val heightWeightDialog = HeightWeightDialog(requireContext(), this@HeartAgeFragment, "Height", parameterAdapter!!.paramList[0])
+            heightWeightDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            heightWeightDialog.show()
+        } else if (parameterDataModel.code.equals("WEIGHT", ignoreCase = true)) {
+/*            if(viewModel.getPreference("WEIGHT").equals("kg")){
+                parameterAdapter!!.paramList[1].unit = resources.getString(R.string.KG)
+            }else{
+                parameterAdapter!!.paramList[1].unit = resources.getString(R.string.LBS)
+            }*/
+            val heightWeightDialog = HeightWeightDialog(requireContext(), this@HeartAgeFragment, "Weight", parameterAdapter!!.paramList[1])
+            heightWeightDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            heightWeightDialog.show()
+        } else if (parameterDataModel.code.equals("SYSTOLIC_BP", ignoreCase = true)
+            || parameterDataModel.code.equals("DIASTOLIC_BP", ignoreCase = true)) {
             val customDialogManager = SystolicDiastolicDialogManager(requireContext(), this@HeartAgeFragment, parameterAdapter!!.paramList, position)
             customDialogManager.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             customDialogManager.show()
@@ -463,7 +493,7 @@ class HeartAgeFragment : BaseFragment(),KoinComponent,ParameterAdapter.Parameter
     override fun onResume() {
         super.onResume()
         binding.txtSelection.text =
-            "( You have selected ${calculatorDataSingleton!!.healthConditionSelection.size} health condition )"
+            "( ${resources.getString(R.string.HEALTH_CONDITION_RESULT)} ${calculatorDataSingleton!!.healthConditionSelection.size} ${resources.getString(R.string.HEALTH_CONDITION)} )"
     }
 
 }
