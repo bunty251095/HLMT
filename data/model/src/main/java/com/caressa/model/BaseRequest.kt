@@ -42,6 +42,9 @@ open class BaseRequest(
         @SerializedName("UTMMedium")
         @Expose
         private val utmMedium: String = Configuration.UTMMedium,
+        @SerializedName("LanguageCode")
+        @Expose
+        private val languageCode: String = Configuration.LanguageCode,
         @SerializedName("EntityID")
         @Expose
         private val entityID: String = Configuration.EntityID

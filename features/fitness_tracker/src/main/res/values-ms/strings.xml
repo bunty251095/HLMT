@@ -11,10 +11,10 @@
     <string name="TODAY">Hari ini</string>
     <string name="WEEKLY">Mingguan</string>
     <string name="MONTHLY">Bulanan</string>
-    <string name="GOALS">Goals</string>
-    <string name="STEPS">Matlamat</string>
+    <string name="GOALS">Matlamat</string>
+    <string name="STEPS">Langkah</string>
     <string name="STEP_GOAL">Langkah/Matlamat</string>
-    <string name="STEPS_GOAL">Matlamat Langkah </string>
+    <string name="STEPS_GOAL">Matlamat Langkah</string>
     <string name="STEPS_TO_GO">Baki Langkah</string>
     <string name="MY_GOAL">Matlamat Saya </string>
     <string name="CALORIES_BURNED">Kalori \n Dibakar</string>

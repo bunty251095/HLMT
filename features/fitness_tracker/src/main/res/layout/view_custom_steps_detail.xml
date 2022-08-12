@@ -31,8 +31,7 @@
         app:isTemplate="true"
         style="@style/VivantDescription"
         android:text="@string/ACTIVE_TIME"
-        android:textSize="@dimen/_14sdp"
-        android:layout_marginStart="@dimen/_5sdp"
+        android:textSize="@dimen/_12sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/img_data" />
 
