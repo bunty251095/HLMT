@@ -20,9 +20,12 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/sliding_image"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_125sdp"
+            android:layout_height="@dimen/_105sdp"
             android:src="@drawable/img_placeholder"
             android:foreground="?android:attr/selectableItemBackground"
+            android:background="@drawable/border_corner"
+            android:layout_marginStart="@dimen/_11sdp"
+            android:layout_marginEnd="@dimen/_11sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

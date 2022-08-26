@@ -138,7 +138,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
         }
     }
 
-    fun callValidateOTPforUserAPI(otpReceived: String, emailAddress: String) = viewModelScope.launch(dispatchers.main) {
+    fun callValidateOTPforUserAPI(otpReceived: String, emailAddress: String,con: Context) = viewModelScope.launch(dispatchers.main) {
             Timber.i("Validate OTP Called")
         if(validateDetails(otpReceived,emailAddress)) {
             val requestData = GenerateOtpModel(
@@ -165,7 +165,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                     _progressBar.value = Event(Event.HIDE_PROGRESS)
                     if (it.data?.validity.equals("true", true)) {
                         if (UserInfo.from.equals(Constants.LOGIN)) {
-                            fetchLoginResponse(username = UserInfo.emailAddress, passwordStr = UserInfo.password)
+                            fetchLoginResponse(username = UserInfo.emailAddress, passwordStr = UserInfo.password,con = con)
                         }else if(UserInfo.from.equals(Constants.REGISTER)){
                             navigate(LoginWithOtpFragmentDirections.actionLoginWithOtpFragmentToUserDetailsFragment())
                         } else if(UserInfo.from.equals(Constants.FORGET)){
@@ -196,7 +196,7 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
         return false
     }
 
-    fun fetchLoginResponse(name: String = "", username: String, passwordStr: String = "") = viewModelScope.launch(dispatchers.main){
+    fun fetchLoginResponse(name: String = "", username: String, passwordStr: String = "",con: Context) = viewModelScope.launch(dispatchers.main){
 
         val requestData = LoginModel(Gson().toJson(
             LoginModel.JSONDataRequest(
@@ -259,6 +259,11 @@ class LoginWithOtpViewModel (private val userManagementUseCase: UserManagementUs
                         //RealPathUtil.creatingLocalDirctories()
 //                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_LOGIN_SUCCESSFUL_EVENT)
                         saveUserData(loginData)
+                        if ( loginData.languageCode.equals("my",ignoreCase = true) ) {
+                            LocaleHelper.setLocale(con,"ms")
+                        } else {
+                            LocaleHelper.setLocale(con, "en")
+                        }
                         navigate(LoginWithOtpFragmentDirections.actionLoginWithOtpFragmentToMainActivity())
                     }else{
 //                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.NON_HLMT_LOGIN_FAIL_EVENT)

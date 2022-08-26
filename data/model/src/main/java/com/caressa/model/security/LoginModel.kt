@@ -63,6 +63,8 @@ data class LoginModel(
     data class Data(
         @SerializedName("Context")
         var context: String = "",
+        @SerializedName("LanguageCode")
+        var languageCode: String = "",
         @SerializedName("PartnerCode")
         var partnerCode: String = "",
         @SerializedName("Name")

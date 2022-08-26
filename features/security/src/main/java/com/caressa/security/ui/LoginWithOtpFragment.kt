@@ -104,7 +104,7 @@ class LoginWithOtpFragment : BaseFragment() {
         }
 
         binding.btnVerify.setOnClickListener {
-            viewModel.callValidateOTPforUserAPI(binding.layoutCodeView.text.toString(),binding.edtMobileNumber.text.toString())
+            viewModel.callValidateOTPforUserAPI(binding.layoutCodeView.text.toString(),binding.edtMobileNumber.text.toString(),requireContext())
         }
 
         binding.imgSubmit.setOnClickListener {
@@ -112,7 +112,7 @@ class LoginWithOtpFragment : BaseFragment() {
                 viewModel.checkLoginNameExistOrNot(binding.edtMobileNumber.text.toString())
                 startCountdownTimer(120)
             }else{
-                viewModel.callValidateOTPforUserAPI(binding.layoutCodeView.text.toString(),binding.edtMobileNumber.text.toString())
+                viewModel.callValidateOTPforUserAPI(binding.layoutCodeView.text.toString(),binding.edtMobileNumber.text.toString(),requireContext())
             }
         }
 

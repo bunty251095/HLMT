@@ -134,6 +134,7 @@ class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionLi
 
     override fun onDialogClickListener(isButtonLeft: Boolean, isButtonRight: Boolean) {
         if (isButtonRight) {
+            LocaleHelper.setLocale(this, "en")
             DataHandler(this).logout(backGroudCallViewModel,this)
         }
     }
