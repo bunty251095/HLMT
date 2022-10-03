@@ -5,7 +5,7 @@ import android.os.Environment
 object Constants {
 
     //for PRODUCTION
-/*    const val environment: String = "PROD"
+    const val environment: String = "PROD"
     const val strAPIUrl: String = "https://hlmtcore.vivant.me"
     const val strHANDLERUrl: String = "Handler/RegistrationHandler.ashx?R="
     const val strProxyUrl = "Proxy/"
@@ -16,37 +16,21 @@ object Constants {
     const val strBlogsBaseURL = "https://blogs.vivant.me/"
     const val strBlogsProxyURL = "wp-json/wp/v2/posts?per_page="
     const val strBookAppointmentURL = "https://booking.vivant.me/bookappointment/mvivant.html"
-    const val strToolsAndCalculatorURL = "https://portal.vivant.me/ToolsAndCalculators"*/
-
-    //for UAT
-    /*const val environment: String = "UAT"
-    const val strAPIUrl: String = "https://coreuat.vivant.me/"
-    const val strHANDLERUrl: String = "DocumentProxy/Handler/RegistrationHandler.ashx?R="
-//    const val strProxyUrl = "DocumentProxy/"
-    const val strProxyUrl = "Proxy/"
-    const val strProxyRegistrationUrl: String = "DocumentProxy/Registration/Registration?"
-    const val strProxyLoginUrl: String = "DocumentProxy/Registration/Login?"
-    const val strProxyValidationUrl: String = "DocumentProxy/Registration/Validation?"
-    //const val strBlogsURL = "https://blogs.vivant.me/wp-json/wp/v2/posts?per_page="
-    const val strBlogsBaseURL = "https://blogs.vivant.me/"
-    const val strBlogsProxyURL = "wp-json/wp/v2/posts?per_page="
-    const val strBookAppointmentURL = "https://labkhojuat.vivant.me/bookappointment/mvivant.html"
-    const val strToolsAndCalculatorURL = "https://newphr.vivant.me/ToolsAndCalculators"*/
+    const val strToolsAndCalculatorURL = "https://portal.vivant.me/ToolsAndCalculators"
 
     //for HLMT UAT
-    const val environment: String = "UAT"
+/*    const val environment: String = "UAT"
     const val strAPIUrl: String = "https://hlmtcoreuat.vivant.me/"
     const val strHANDLERUrl: String = "DocumentProxy/Handler/RegistrationHandler.ashx?R="
     const val strProxyUrl = "Proxy/"
     const val strProxyRegistrationUrl: String = "DocumentProxy/Registration/Registration?"
     const val strProxyLoginUrl: String = "PHR/api/Person/RegistrationAndLogin"
     const val strProxyValidationUrl: String = "DocumentProxy/Registration/Validation?"
-
     //const val strBlogsURL = "https://blogs.vivant.me/wp-json/wp/v2/posts?per_page="
     const val strBlogsBaseURL = "https://blogs.vivant.me/"
     const val strBlogsProxyURL = "wp-json/wp/v2/posts?per_page="
     const val strBookAppointmentURL = "https://labkhojuat.vivant.me/bookappointment/mvivant.html"
-    const val strToolsAndCalculatorURL = "https://newphr.vivant.me/ToolsAndCalculators"
+    const val strToolsAndCalculatorURL = "https://newphr.vivant.me/ToolsAndCalculators"*/
 
     const val SAVE_CLOUD_MESSAGING_ID_API = "Security/api/Account/SaveCloudMessagingID"
     const val CHECK_APP_UPDATE_API = "PHR/api/App/GetVersion"

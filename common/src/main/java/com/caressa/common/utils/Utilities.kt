@@ -650,6 +650,39 @@ object Utilities {
     }
 
     fun redirectToChrome(url:String,context: Context) {
+        if ( !isNullOrEmpty(url) ) {
+            if ( url.contains("https://") || url.contains("http://") ) {
+                launchChrome(url,context)
+            } else {
+                launchChrome("https://" + url,context)
+            }
+        }
+    }
+
+    fun launchChrome(url:String,context: Context) {
+        try {
+            Timber.e("url--->$url")
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.setPackage("com.android.chrome")
+            try {
+                context.startActivity(intent)
+            } catch (ex: ActivityNotFoundException) {
+                // Chrome is probably not installed
+                // Try with the default browser
+                intent.setPackage(null);
+                context.startActivity(intent)
+
+                // Chrome browser presumably not installed and open Kindle Browser
+                //intent.setPackage("com.amazon.cloud9")
+                //context.startActivity(intent)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+/*    fun redirectToChrome(url:String,context: Context) {
         //val urlString = "http://mysuperwebsite"
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -666,6 +699,6 @@ object Utilities {
             //intent.setPackage("com.amazon.cloud9")
             //context.startActivity(intent)
         }
-    }
+    }*/
 
 }
