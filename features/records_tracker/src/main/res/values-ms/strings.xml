@@ -69,9 +69,9 @@
     <string name="MSG_REOCRD_DOWNLOADED">Rekod Berjaya Dimuat turun</string>
     <string name="MSG_DATA_UPLOADED">Data Berjaya Dimuat naik</string>
 
-    <string name="NO_RECORDS_FOUND">Tiada Rekod Ditemui</string>
+    <string name="NO_RECORDS_FOUND">Tiada Record Ditemui</string>
     <string name="NO_PATHOLOGY_REPORTS_UPLOADED">Tiada Laporan Patologi Dimuatnaik</string>
-    <string name="NO_RECORDS_CLICK_FOR_UPLOADING">Tiada Laporan dimuatnaik \n berdasarkan pilihan di bawah \n untuk mula memuatnaik</string>
+    <string name="NO_RECORDS_CLICK_FOR_UPLOADING">Tiada Laporan dimuatnaik.\nSila klik pilihan di bawah\nuntuk mula memuatnaik</string>
 
     <string name="ERROR_SELECT_RECORD_TO_PROCEED">Sila Pilih Rekod untuk Teruskan</string>
     <string name="ERROR_DOC_CANNOT_DIGITIZE">Dokumen tidak boleh didigitalkan</string>

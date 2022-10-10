@@ -921,7 +921,7 @@ object DateHelper {
             var months = Integer.parseInt(dob[1])
             var days = Integer.parseInt(dob[2])
 
-            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
             val birthDate = sdf.parse("$days/$months/$years") // my date of birth :-)
 
             //create calendar object for birth day
@@ -1037,7 +1037,7 @@ object DateHelper {
     fun calculateDOB(dateOfBirth: String): String {
         try {
             val startCalendar = GregorianCalendar()
-            val sdf = SimpleDateFormat("dd-MMM-yyyy")
+            val sdf = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
             val date = sdf.parse(dateOfBirth)
             startCalendar.time = date
             val endCalendar = GregorianCalendar()
@@ -1117,7 +1117,7 @@ object DateHelper {
         var months = months
         var days = days
         try {
-            val sdf = SimpleDateFormat("dd/MM/yyyy")
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
             val birthDate =
                 sdf.parse(days.toString() + "/" + months + "/" + years) //Yeh !! It's my date of birth :-)
             //create calendar object for birth day
@@ -1178,12 +1178,12 @@ object DateHelper {
     fun getDateTimeAs_ddMMMyyyy_FromUtc(date: String): String {
         /* Current Date : */
         var RecordDatetemp = ""
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
 
         val date1: Date
         try {
             date1 = dateFormat.parse(date)
-            val df = SimpleDateFormat("dd-MMM-yyyy")
+            val df = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
             RecordDatetemp = df.format(date1)
 
         } catch (e: ParseException) {
@@ -1331,7 +1331,7 @@ object DateHelper {
     }
 
     fun convertStringToDate(dobInddmmyy: String): Date? {
-        val format = SimpleDateFormat(DISPLAY_DATE_DDMMMYYYY)
+        val format = SimpleDateFormat(DISPLAY_DATE_DDMMMYYYY, Locale.ENGLISH)
         var date: Date? = null
         try {
             date = format.parse(dobInddmmyy)

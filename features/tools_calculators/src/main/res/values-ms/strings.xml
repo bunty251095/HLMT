@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="TITLE_TOOLS_CALCULATORS">Alat dan Kalkulator</string>
+    <string name="TITLE_TOOLS_CALCULATORS">Instrumen &amp; Kalkulator</string>
     <string name="HEART_AGE_CALCULATOR">Kalkulator Umur Jantung</string>
     <string name="DIABETES_CALCULATOR">Kalkulator Diabetes</string>
     <string name="HYPERTENSION_CALCULATOR">Kalkulator Hipertensi</string>

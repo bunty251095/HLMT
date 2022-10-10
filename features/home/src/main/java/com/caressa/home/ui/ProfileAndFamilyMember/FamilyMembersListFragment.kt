@@ -60,6 +60,7 @@ class FamilyMembersListFragment : BaseFragment() {
     private fun initialise() {
        // viewModel.getUserRelativesList()
         startShimmer()
+        viewModel.getLoggedInPersonDetails()
         viewModel.callListRelativesApi(true,this)
         familyMembersAdapter = FamilyMembersAdapter( this , viewModel , requireContext() )
         binding.rvFamilyMembers.adapter = familyMembersAdapter

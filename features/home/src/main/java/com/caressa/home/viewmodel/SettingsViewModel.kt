@@ -118,10 +118,10 @@ class SettingsViewModel(private val homeManagementUseCase: HomeManagementUseCase
             var list: ArrayList<DataHandler.LanguageModel> = arrayListOf()
             if(LocaleHelper.getLanguage(context).equals("en")) {
                 list.add(DataHandler.LanguageModel("English", "en",true))
-                list.add(DataHandler.LanguageModel("Bahasa Malaysia","my",false))
+                list.add(DataHandler.LanguageModel("Melayu","my",false))
             }else{
                 list.add(DataHandler.LanguageModel("English", "en",false))
-                list.add(DataHandler.LanguageModel("Bahasa Malaysia","my",true))
+                list.add(DataHandler.LanguageModel("Melayu","my",true))
             }
             languageListLiveData.postValue(list)
         }

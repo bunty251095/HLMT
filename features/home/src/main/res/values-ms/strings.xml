@@ -10,7 +10,7 @@
     <string name="TITLE_EDIT_DETAILS">Edit Butiran</string>
     <string name="TITLE_SELECT_RELATION">Pilih Jenis Hubungan</string>
     <string name="TITLE_ADD_FAMILY_MEMBER">Tambah Ahli Keluarga</string>
-    <string name="TITLE_TOOLS_AND_TRACKER">Alat dan Kalkulator</string>
+    <string name="TITLE_TOOLS_AND_TRACKER">Instrumen &amp; Kalkulator</string>
     <string name="TITLE_CONTACT_US">Hubungi Kami</string>
 
     <string name="MENU_HOME">Utama</string>
@@ -35,7 +35,7 @@
     <string name="DASH_MEDICINE_TRACKER">Penjejak Perubatan</string>
     <string name="DASH_ACTIVITY_TRACKER">Penjejak Aktiviti</string>
     <string name="DASH_STORE_HEALTH_RECORD">Simpan Rekod Kesihatan</string>
-    <string name="DASH_TOOLS_TRACKER">Alat dan Kalkulator</string>
+    <string name="DASH_TOOLS_TRACKER">Instrumen &amp; Kalkulator</string>
     <string name="DASH_HEALTH_LIBRARY">Perpustakaan Kesihatan</string>
     <string name="DASH_REWARD">Ganjaran</string>
     <!--Dashboard Buttons-->
@@ -53,7 +53,7 @@
     <string name="DO_YOU_HAVE_ANY_SUGGESTION_OR_FEEDBACK_TO_MAKE_OUR_APP_BETTER">Adakah anda mempunyai cadangan atau maklumbalas untuk aplikasi kami menjadi lebih baik?</string>
     <string name="WRITE_SOMETHING_TO_US">Tulis kepada kami……</string>
     <string name="CONTACT_US_DESC">Hantar mesej kepada kami dan kami akan memberi maklum balas secepat mungkin. </string>
-    <string name="SEND_US_YOUR_QUERY">Hantar pertanyaan anda kepada Kami</string>
+    <string name="SEND_US_YOUR_QUERY">Masukkan masej atau pertanyaan anda.</string>
 
     <string name="ADD_NEW_MEMBER">Tambah Ahli Keluarga</string>
     <string name="NO_RELATIVES">Tiada Saudara Mara ditemui</string>

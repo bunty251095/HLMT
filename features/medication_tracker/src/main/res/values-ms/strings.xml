@@ -76,7 +76,7 @@
     <string name="RESCHEDULE_MEDICINE">Jadual Semula Ubat</string>
     <string name="UPDATE_MEDICINE_SCHEDULES">Kemaskini Jadual Ubat</string>
     <string name="PAST_MEDICINES">Ubatan Lalu</string>
-    <string name="NO_MEDICINES_AVAILABLE">Ubatan tidak tersedia</string>
+    <string name="NO_MEDICINES_AVAILABLE">Tiada maklumat Ubat</string>
     <string name="MEDICINE_DELETED">Ubatan Berjaya Dipadam</string>
     <string name="MEDICINE_ADDED">Ubatan Berjaya Ditambah</string>
     <string name="MEDICINE_UPDATED">Ubatan Berjaya Dikemaskini</string>

@@ -21,7 +21,7 @@ import com.caressa.home.ui.ProfileAndFamilyMember.*
 import com.caressa.model.entity.UserRelatives
 import com.caressa.model.entity.Users
 import com.caressa.model.home.*
-import com.caressa.model.home.AddRelativeModel.*
+import com.caressa.model.home.AddRelativeModel.Relationship
 import com.caressa.model.security.PhoneExistsModel
 import com.caressa.model.shr.ListRelativesModel
 import com.caressa.repository.AppDispatchers
@@ -35,38 +35,43 @@ import timber.log.Timber
 import java.io.File
 import java.io.FileInputStream
 import java.util.*
-import kotlin.collections.ArrayList
 
 @SuppressLint("StaticFieldLeak")
-class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManagementUseCase,
-                                   private val dispatchers: AppDispatchers,
-                                   private val sharedPref: SharedPreferences,
-                                   private val dataHandler : DataHandler,
-                                    val context: Context) : BaseViewModel() {
+class ProfileFamilyMemberViewModel(
+    private val homeManagementUseCase: HomeManagementUseCase,
+    private val dispatchers: AppDispatchers,
+    private val sharedPref: SharedPreferences,
+    private val dataHandler: DataHandler,
+    val context: Context
+) : BaseViewModel() {
 
-    private val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
-    val personId = sharedPref.getString(PreferenceConstants.PERSONID,"")!!
-    val authToken = sharedPref.getString(PreferenceConstants.TOKEN,"")!!
+    private val localResource =
+        LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+    val personId = sharedPref.getString(PreferenceConstants.PERSONID, "")!!
+    val authToken = sharedPref.getString(PreferenceConstants.TOKEN, "")!!
 
     private val fileUtils = FileUtils
 
-    var requestData : UpdateRelativeModel? = null
-    var relativeToRemove : List<UserRelatives> = listOf()
+    var requestData: UpdateRelativeModel? = null
+    var relativeToRemove: List<UserRelatives> = listOf()
 
     var userDetails = MutableLiveData<Users>()
     val userRelativesList = MutableLiveData<List<UserRelatives>>()
     val alreadyExistRelatives = MutableLiveData<List<UserRelatives>>()
     var familyRelationList = MutableLiveData<List<DataHandler.FamilyRelationOption>>()
 
-    var userProfileDetailsSource: LiveData<Resource<UserDetailsModel.UserDetailsResponse>> = MutableLiveData()
+    var userProfileDetailsSource: LiveData<Resource<UserDetailsModel.UserDetailsResponse>> =
+        MutableLiveData()
     val _userProfileDetails = MediatorLiveData<UserDetailsModel.UserDetailsResponse>()
     val userProfileDetails: LiveData<UserDetailsModel.UserDetailsResponse> get() = _userProfileDetails
 
-    var updateUserDetailsSource: LiveData<Resource<UpdateUserDetailsModel.UpdateUserDetailsResponse>> = MutableLiveData()
+    var updateUserDetailsSource: LiveData<Resource<UpdateUserDetailsModel.UpdateUserDetailsResponse>> =
+        MutableLiveData()
     val _updateUserDetails = MediatorLiveData<UpdateUserDetailsModel.UpdateUserDetailsResponse>()
     val updateUserDetails: LiveData<UpdateUserDetailsModel.UpdateUserDetailsResponse> get() = _updateUserDetails
 
-    var profileImageSource: LiveData<Resource<ProfileImageModel.ProfileImageResponse>> = MutableLiveData()
+    var profileImageSource: LiveData<Resource<ProfileImageModel.ProfileImageResponse>> =
+        MutableLiveData()
     val _profileImage = MediatorLiveData<ProfileImageModel.ProfileImageResponse>()
     val profileImage: LiveData<ProfileImageModel.ProfileImageResponse> get() = _profileImage
 
@@ -74,23 +79,28 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
     val _uploadProfileImage = MediatorLiveData<UploadProfileImageResponce>()
     val uploadProfileImage: LiveData<UploadProfileImageResponce> get() = _uploadProfileImage
 
-    var removeProfileImageSource: LiveData<Resource<RemoveProfileImageModel.RemoveProfileImageResponse>> = MutableLiveData()
+    var removeProfileImageSource: LiveData<Resource<RemoveProfileImageModel.RemoveProfileImageResponse>> =
+        MutableLiveData()
     val _removeProfileImage = MediatorLiveData<RemoveProfileImageModel.RemoveProfileImageResponse>()
     val removeProfileImage: LiveData<RemoveProfileImageModel.RemoveProfileImageResponse> get() = _removeProfileImage
 
-    var addRelativeSource: LiveData<Resource<AddRelativeModel.AddRelativeResponse>> = MutableLiveData()
+    var addRelativeSource: LiveData<Resource<AddRelativeModel.AddRelativeResponse>> =
+        MutableLiveData()
     val _addRelative = MediatorLiveData<AddRelativeModel.AddRelativeResponse>()
     val addRelative: LiveData<AddRelativeModel.AddRelativeResponse> get() = _addRelative
 
-    var updateRelativeSource: LiveData<Resource<UpdateRelativeModel.UpdateRelativeResponse>> = MutableLiveData()
+    var updateRelativeSource: LiveData<Resource<UpdateRelativeModel.UpdateRelativeResponse>> =
+        MutableLiveData()
     val _updateRelative = MediatorLiveData<UpdateRelativeModel.UpdateRelativeResponse>()
     val updateRelative: LiveData<UpdateRelativeModel.UpdateRelativeResponse> get() = _updateRelative
 
-    var removeRelativeSource: LiveData<Resource<RemoveRelativeModel.RemoveRelativeResponse>> = MutableLiveData()
+    var removeRelativeSource: LiveData<Resource<RemoveRelativeModel.RemoveRelativeResponse>> =
+        MutableLiveData()
     val _removeRelative = MediatorLiveData<RemoveRelativeModel.RemoveRelativeResponse>()
     val removeRelative: LiveData<RemoveRelativeModel.RemoveRelativeResponse> get() = _removeRelative
 
-    var listRelativesSource: LiveData<Resource<ListRelativesModel.ListRelativesResponse>> = MutableLiveData()
+    var listRelativesSource: LiveData<Resource<ListRelativesModel.ListRelativesResponse>> =
+        MutableLiveData()
     val _listRelatives = MediatorLiveData<ListRelativesModel.ListRelativesResponse>()
     val listRelatives: LiveData<ListRelativesModel.ListRelativesResponse> get() = _listRelatives
 
@@ -98,41 +108,55 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
     val _phoneExist = MediatorLiveData<PhoneExistsModel.IsExistResponse>()
     val phoneExist: LiveData<PhoneExistsModel.IsExistResponse> get() = _phoneExist
 
-    fun callAddNewRelativeApi(forceRefresh: Boolean,userRelative:UserRelatives,from:String,fragment:AddFamilyMemberFragment) = viewModelScope.launch(dispatchers.main) {
+    fun callAddNewRelativeApi(
+        forceRefresh: Boolean,
+        userRelative: UserRelatives,
+        from: String,
+        fragment: AddFamilyMemberFragment
+    ) = viewModelScope.launch(dispatchers.main) {
 
-        val contact = AddRelativeModel.Contact( userRelative.emailAddress , userRelative.contactNo )
+        val contact = AddRelativeModel.Contact(userRelative.emailAddress, userRelative.contactNo)
         val relationships: ArrayList<Relationship> = ArrayList()
-        relationships.add( Relationship( personId , userRelative.relationshipCode ) )
+        relationships.add(Relationship(personId, userRelative.relationshipCode))
         var gender = ""
-        if ( userRelative.gender.equals("Male",ignoreCase = true) ) {
+        if (userRelative.gender.equals("Male", ignoreCase = true)) {
             gender = "1"
-        } else if ( userRelative.gender.equals("Female",ignoreCase = true) ) {
+        } else if (userRelative.gender.equals("Female", ignoreCase = true)) {
             gender = "2"
         }
 
-        val requestData = AddRelativeModel(Gson().toJson(AddRelativeModel.JSONDataRequest(
-            personID = personId , person =  AddRelativeModel.Person(
-                firstName = userRelative.firstName , relativeID = userRelative.relativeID ,
-                dateOfBirth = userRelative.dateOfBirth , gender = gender ,
-                isProfileImageChanges = Constants.FALSE , contact = contact ,
-                relationships = relationships )), AddRelativeModel.JSONDataRequest::class.java) , authToken )
+        val requestData = AddRelativeModel(
+            Gson().toJson(
+                AddRelativeModel.JSONDataRequest(
+                    personID = personId, person = AddRelativeModel.Person(
+                        firstName = userRelative.firstName, relativeID = userRelative.relativeID,
+                        dateOfBirth = userRelative.dateOfBirth, gender = gender,
+                        isProfileImageChanges = Constants.FALSE, contact = contact,
+                        relationships = relationships
+                    )
+                ), AddRelativeModel.JSONDataRequest::class.java
+            ), authToken
+        )
 
         _progressBar.value = Event("Adding Family Member.....")
         _addRelative.removeSource(addRelativeSource)
         withContext(dispatchers.io) {
-            addRelativeSource = homeManagementUseCase.invokeaddNewRelative(isForceRefresh = forceRefresh, data = requestData)
+            addRelativeSource = homeManagementUseCase.invokeaddNewRelative(
+                isForceRefresh = forceRefresh,
+                data = requestData
+            )
         }
         _addRelative.addSource(addRelativeSource) {
             _addRelative.value = it.data
 
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if ( it != null ) {
+                if (it != null) {
                     val newRelative = it.data!!.person
-                    if ( !Utilities.isNullOrEmpty( newRelative.id.toString() ) ) {
+                    if (!Utilities.isNullOrEmpty(newRelative.id.toString())) {
                         toastMessage(localResource.getString(R.string.MEMBER_ADDED))
                         Timber.e("from----->$from")
-                        if ( from.equals(Constants.HRA,ignoreCase = true) ) {
+                        if (from.equals(Constants.HRA, ignoreCase = true)) {
                             fragment.navigateToHRA()
                         } else {
                             navigate(AddFamilyMemberFragmentDirections.actionAddFamilyMemberFragmentToFamilyMembersListFragment())
@@ -143,9 +167,9 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
             }
             if (it.status == Resource.Status.ERROR) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if(it.errorNumber.equals("1100014",true)){
+                if (it.errorNumber.equals("1100014", true)) {
                     _sessionError.value = Event(true)
-                }else {
+                } else {
                     navigate(AddFamilyMemberFragmentDirections.actionAddFamilyMemberFragmentToFamilyMembersListFragment())
                     toastMessage(it.errorMessage)
                     FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_MEMBER_ADD_FAILED)
@@ -155,112 +179,319 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
 
     }
 
-    fun callListRelativesApi(forceRefresh: Boolean,fragment: FamilyMembersListFragment) = viewModelScope.launch(dispatchers.main) {
+    fun callListRelativesApi(forceRefresh: Boolean, fragment: FamilyMembersListFragment) =
+        viewModelScope.launch(dispatchers.main) {
+            var userDetails: Users? = null
+            val requestData = ListRelativesModel(
+                Gson().toJson(
+                    ListRelativesModel.JSONDataRequest(
+                        personID = personId
+                    ), ListRelativesModel.JSONDataRequest::class.java
+                ), authToken
+            )
 
-        val requestData = ListRelativesModel(Gson().toJson(ListRelativesModel.JSONDataRequest(
-                personID = personId ), ListRelativesModel.JSONDataRequest::class.java) , authToken )
+            _listRelatives.removeSource(listRelativesSource)
+            withContext(dispatchers.io) {
+                userDetails = homeManagementUseCase.invokeGetLoggedInPersonDetails()
+                listRelativesSource = homeManagementUseCase.invokeRelativesList(
+                    isForceRefresh = forceRefresh,
+                    data = requestData
+                )
+            }
+            _listRelatives.addSource(listRelativesSource) {
+                _listRelatives.value = it.data
 
-        _listRelatives.removeSource(listRelativesSource)
-        withContext(dispatchers.io) {
-            listRelativesSource = homeManagementUseCase.invokeRelativesList(isForceRefresh = forceRefresh, data = requestData )
-        }
-        _listRelatives.addSource(listRelativesSource) {
-            _listRelatives.value = it.data
+                if (it.status == Resource.Status.SUCCESS) {
+                    if (it.data != null) {
+                        val relativesList = it.data!!.relativeList
+                        if (relativesList.size > 1) {
 
-            if (it.status == Resource.Status.SUCCESS) {
-                if (it.data != null ) {
-                    val relativesList = it.data!!.relativeList
-                    if ( relativesList.size > 1 ) {
-
-                        val userRelatives: MutableList<UserRelatives> = mutableListOf()
-                        for ( i in relativesList ) {
-                            if ( i.relationshipCode != "SELF" )
-                            userRelatives.add(i)
+                            val userRelatives: MutableList<UserRelatives> = mutableListOf()
+                            for (i in relativesList) {
+                                if (i.relationshipCode != "SELF") {
+                                    i.relationship = getFamilyRelationOption(
+                                        userDetails!!.gender,
+                                        i.relationshipCode,
+                                        Locale(LocaleHelper.getLanguage(context))
+                                    ).relation
+                                    userRelatives.add(i)
+                                }
+                            }
+                            userRelativesList.postValue(userRelatives)
+                        } else {
+                            fragment.noDataView()
                         }
-                        userRelativesList.postValue(userRelatives)
-                    } else {
-                        fragment.noDataView()
+                        Timber.i("RelativesList----->" + relativesList.size)
                     }
-                    Timber.i("RelativesList----->"+relativesList.size)
+                }
+                if (it.status == Resource.Status.ERROR) {
+                    //_progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.errorNumber.equals("1100014", true)) {
+                        _sessionError.value = Event(true)
+                    } else {
+                        toastMessage(it.errorMessage)
+                    }
                 }
             }
-            if (it.status == Resource.Status.ERROR) {
-                //_progressBar.value = Event(Event.HIDE_PROGRESS)
-                if(it.errorNumber.equals("1100014",true)){
-                    _sessionError.value = Event(true)
-                }else {
-                    toastMessage(it.errorMessage)
-                }
+        }
+
+    fun callRemoveRelativesApi(forceRefresh: Boolean, relativeId: String, relationshipId: String) =
+        viewModelScope.launch(dispatchers.main) {
+
+            val relatives: ArrayList<Int> = ArrayList()
+            withContext(dispatchers.io) {
+                relativeToRemove =
+                    homeManagementUseCase.invokeGetUserRelativeForRelativeId(relativeId)
             }
-        }
-    }
 
-    fun callRemoveRelativesApi(forceRefresh: Boolean , relativeId : String , relationshipId : String) = viewModelScope.launch(dispatchers.main) {
-
-        val relatives: ArrayList<Int> = ArrayList()
-        withContext(dispatchers.io) {
-             relativeToRemove = homeManagementUseCase.invokeGetUserRelativeForRelativeId(relativeId)
-        }
-
-        for ( i in relativeToRemove ) {
-            relatives.add(relationshipId.toInt())
-        }
-
-        val requestData = RemoveRelativeModel(
-            Gson().toJson(RemoveRelativeModel.JSONDataRequest(
-                id = relatives ), RemoveRelativeModel.JSONDataRequest::class.java) ,
-            authToken )
-
-        _progressBar.value = Event("Deleting Family Member.....")
-        _removeRelative.removeSource(removeRelativeSource)
-        withContext(dispatchers.io) {
-            removeRelativeSource = homeManagementUseCase.invokeRemoveRelative(isForceRefresh = forceRefresh, data = requestData)
-        }
-        _removeRelative.addSource(removeRelativeSource) {
-            _removeRelative.value = it.data
-
-            if (it.status == Resource.Status.SUCCESS) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                navigate(EditFamilyMemberDetailsFragmentDirections.actionEditFamilyMemberDetailsFragmentToFamilyMembersListFragment())
-                toastMessage(localResource.getString(R.string.MEMBER_DELETED))
+            for (i in relativeToRemove) {
+                relatives.add(relationshipId.toInt())
             }
-            if (it.status == Resource.Status.ERROR) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if(it.errorNumber.equals("1100014",true)){
-                    _sessionError.value = Event(true)
-                }else {
-                    toastMessage(it.errorMessage)
+
+            val requestData = RemoveRelativeModel(
+                Gson().toJson(
+                    RemoveRelativeModel.JSONDataRequest(
+                        id = relatives
+                    ), RemoveRelativeModel.JSONDataRequest::class.java
+                ),
+                authToken
+            )
+
+            _progressBar.value = Event("Deleting Family Member.....")
+            _removeRelative.removeSource(removeRelativeSource)
+            withContext(dispatchers.io) {
+                removeRelativeSource = homeManagementUseCase.invokeRemoveRelative(
+                    isForceRefresh = forceRefresh,
+                    data = requestData
+                )
+            }
+            _removeRelative.addSource(removeRelativeSource) {
+                _removeRelative.value = it.data
+
+                if (it.status == Resource.Status.SUCCESS) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
                     navigate(EditFamilyMemberDetailsFragmentDirections.actionEditFamilyMemberDetailsFragmentToFamilyMembersListFragment())
+                    toastMessage(localResource.getString(R.string.MEMBER_DELETED))
+                }
+                if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.errorNumber.equals("1100014", true)) {
+                        _sessionError.value = Event(true)
+                    } else {
+                        toastMessage(it.errorMessage)
+                        navigate(EditFamilyMemberDetailsFragmentDirections.actionEditFamilyMemberDetailsFragmentToFamilyMembersListFragment())
+                    }
+                }
+            }
+
+        }
+
+    fun callCheckPhoneExistApi(username: String, phone: String) =
+        viewModelScope.launch(dispatchers.main) {
+
+            val requestData = PhoneExistsModel(
+                Gson().toJson(
+                    PhoneExistsModel.JSONDataRequest(
+                        primaryPhone = phone
+                    ), PhoneExistsModel.JSONDataRequest::class.java
+                )
+            )
+
+            _progressBar.value = Event("Verifing Phone Number...")
+            _phoneExist.removeSource(phoneExistSource)
+            withContext(dispatchers.io) {
+                phoneExistSource = homeManagementUseCase.invokePhoneExist(true, requestData)
+            }
+            _phoneExist.addSource(phoneExistSource) {
+                _phoneExist.value = it.data
+
+                if (it.status == Resource.Status.SUCCESS) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.data!!.isExist.equals(Constants.TRUE, true)) {
+                        toastMessage(localResource.getString(R.string.ERROR_MOBILE_ALREADY_REGISTERED))
+                    } else if (it.data!!.isExist.equals(Constants.FALSE, true)) {
+
+                    }
+                }
+
+                if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.errorNumber.equals("1100014", true)) {
+                        _sessionError.value = Event(true)
+                    } else {
+                        toastMessage(it.errorMessage)
+                    }
                 }
             }
         }
 
-    }
+    fun callUpdateProfileApi(forceRefresh: Boolean, username: String, phoneNumber: String) =
+        viewModelScope.launch(dispatchers.main) {
 
-    fun callCheckPhoneExistApi( username : String ,phone: String )
-            = viewModelScope.launch(dispatchers.main) {
+            withContext(dispatchers.io) {
+                val userDetails = homeManagementUseCase.invokeGetLoggedInPersonDetails()
+                try {
+                    val dob = DateHelper.formatDateValue(
+                        DateHelper.SERVER_DATE_YYYYMMDD,
+                        userDetails.dateOfBirth
+                    )!!
+                    requestData = UpdateRelativeModel(
+                        Gson().toJson(
+                            UpdateRelativeModel.JSONDataRequest(
+                                personID = personId,
+                                person = UpdateRelativeModel.Person(
+                                    id = personId.toInt(),
+                                    firstName = username,
+                                    lastName = "",
+                                    dateOfBirth = dob,
+                                    gender = userDetails.gender,
+                                    isProfileImageChanges = Constants.FALSE,
+                                    contact = UpdateRelativeModel.Contact(
+                                        emailAddress = userDetails.emailAddress,
+                                        primaryContactNo = phoneNumber
+                                    )
+                                )
+                            ), UpdateRelativeModel.JSONDataRequest::class.java
+                        ), authToken
+                    )
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            _progressBar.value = Event("Updating Profile.....")
+            _updateRelative.removeSource(updateRelativeSource)
+            withContext(dispatchers.io) {
+                updateRelativeSource = homeManagementUseCase.invokeupdateRelative(
+                    isForceRefresh = forceRefresh,
+                    data = requestData!!
+                )
+            }
+            _updateRelative.addSource(updateRelativeSource) {
+                _updateRelative.value = it.data
 
-        val requestData = PhoneExistsModel(Gson().toJson(PhoneExistsModel.JSONDataRequest(
-            primaryPhone = phone), PhoneExistsModel.JSONDataRequest::class.java))
+                if (it.status == Resource.Status.SUCCESS) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it != null) {
+                        val personDetails = it.data!!.person
+                        Timber.i("PersonId-----> ${personDetails.id}")
+                        Timber.i("UpdatedName-----> ${personDetails.firstName}")
+                        if (!Utilities.isNullOrEmpty(personDetails.id.toString())) {
+                            updateUserDetails(personDetails.firstName, personDetails.id)
+                            toastMessage(localResource.getString(R.string.PROFILE_UPDATED))
+                        }
+                    }
+                }
+                if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.errorNumber.equals("1100014", true)) {
+                        _sessionError.value = Event(true)
+                    } else {
+                        toastMessage(it.errorMessage)
+                    }
+                }
+            }
+        }
 
-        _progressBar.value = Event("Verifing Phone Number...")
-        _phoneExist.removeSource(phoneExistSource)
-        withContext(dispatchers.io) { phoneExistSource = homeManagementUseCase.invokePhoneExist(true, requestData) }
-        _phoneExist.addSource(phoneExistSource) {
-            _phoneExist.value = it.data
+    fun callUpdateRelativesApi(forceRefresh: Boolean, relative: UserRelatives, from: String) =
+        viewModelScope.launch(dispatchers.main) {
+
+            val requestData = UpdateRelativeModel(
+                Gson().toJson(
+                    UpdateRelativeModel.JSONDataRequest(
+                        personID = personId,
+                        person = UpdateRelativeModel.Person(
+                            id = relative.relativeID.toInt(),
+                            firstName = relative.firstName,
+                            lastName = "",
+                            dateOfBirth = relative.dateOfBirth,
+                            gender = relative.gender,
+                            isProfileImageChanges = Constants.FALSE,
+                            contact = UpdateRelativeModel.Contact(
+                                emailAddress = relative.emailAddress,
+                                primaryContactNo = relative.contactNo
+                            )
+                        )
+                    ), UpdateRelativeModel.JSONDataRequest::class.java
+                ), authToken
+            )
+
+            _progressBar.value = Event("Updating Relative Profile.....")
+            _updateRelative.removeSource(updateRelativeSource)
+            withContext(dispatchers.io) {
+                updateRelativeSource = homeManagementUseCase.invokeupdateRelative(
+                    isForceRefresh = forceRefresh,
+                    data = requestData
+                )
+            }
+            _updateRelative.addSource(updateRelativeSource) {
+                _updateRelative.value = it.data
+
+                if (it.status == Resource.Status.SUCCESS) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it != null) {
+                        val personDetails = it.data!!.person
+                        if (from == Constants.RELATIVE) {
+                            if (!Utilities.isNullOrEmpty(personDetails.id.toString())) toastMessage(
+                                localResource.getString(R.string.PROFILE_UPDATED)
+                            )
+                            navigate(EditFamilyMemberDetailsFragmentDirections.actionEditFamilyMemberDetailsFragmentToFamilyMembersListFragment())
+                        } else if (from == Constants.USER) {
+                            val newNumber = personDetails.contact.primaryContactNo
+                            if (!Utilities.isNullOrEmpty(newNumber)) {
+                                //updateUserMobile(newNumber)
+                                getLoggedInPersonDetails()
+                                //toastMessage(context.resources.getString(R.string.MOBILE_UPDATED))
+                            }
+                        }
+                    }
+                }
+                if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.errorNumber.equals("1100014", true)) {
+                        _sessionError.value = Event(true)
+                    } else {
+                        toastMessage(it.errorMessage)
+                        if (from == Constants.RELATIVE) {
+                            navigate(EditFamilyMemberDetailsFragmentDirections.actionEditFamilyMemberDetailsFragmentToFamilyMembersListFragment())
+                        }
+                    }
+                }
+            }
+        }
+
+    fun callGetUserDetailsApi() = viewModelScope.launch(dispatchers.main) {
+
+        val requestData = UserDetailsModel(
+            Gson().toJson(
+                UserDetailsModel.JSONDataRequest(
+                    UserDetailsModel.PersonIdentificationCriteria(
+                        personId = personId.toInt()
+                    )
+                ),
+                UserDetailsModel.JSONDataRequest::class.java
+            ), authToken
+        )
+
+        _userProfileDetails.removeSource(userProfileDetailsSource)
+        withContext(dispatchers.io) {
+            userProfileDetailsSource = homeManagementUseCase.invokeGetUserDetails(
+                isForceRefresh = true,
+                data = requestData
+            )
+        }
+        _userProfileDetails.addSource(userProfileDetailsSource) {
+            _userProfileDetails.value = it.data
 
             if (it.status == Resource.Status.SUCCESS) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if (it.data!!.isExist.equals(Constants.TRUE, true)) {
-                    toastMessage(localResource.getString(R.string.ERROR_MOBILE_ALREADY_REGISTERED))
-                } else if (it.data!!.isExist.equals(Constants.FALSE, true)) {
-
+                if (it.data != null) {
+                    val person = it.data!!.person
+                    Timber.e("GetUserDetails----->$person")
                 }
             }
-
             if (it.status == Resource.Status.ERROR) {
                 _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if(it.errorNumber.equals("1100014",true)) {
+                if (it.errorNumber.equals("1100014", true)) {
                     _sessionError.value = Event(true)
                 } else {
                     toastMessage(it.errorMessage)
@@ -269,346 +500,256 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
         }
     }
 
-    fun callUpdateProfileApi( forceRefresh: Boolean,username : String,phoneNumber : String )
-            = viewModelScope.launch(dispatchers.main) {
+    fun callUpdateUserDetailsApi(person: UpdateUserDetailsModel.PersonRequest) =
+        viewModelScope.launch(dispatchers.main) {
 
-        withContext(dispatchers.io) {
-            val userDetails = homeManagementUseCase.invokeGetLoggedInPersonDetails()
-            try {
-                val dob = DateHelper.formatDateValue(DateHelper.SERVER_DATE_YYYYMMDD, userDetails.dateOfBirth)!!
-                requestData = UpdateRelativeModel(Gson().toJson(UpdateRelativeModel.JSONDataRequest(
-                    personID = personId ,
-                    person = UpdateRelativeModel.Person(
-                        id = personId.toInt() ,
-                        firstName = username,
-                        lastName = "" ,
-                        dateOfBirth = dob ,
-                        gender = userDetails.gender ,
-                        isProfileImageChanges = Constants.FALSE ,
-                        contact = UpdateRelativeModel.Contact(
-                            emailAddress = userDetails.emailAddress ,
-                            primaryContactNo = phoneNumber))), UpdateRelativeModel.JSONDataRequest::class.java) , authToken )
-            } catch ( e : Exception ) {
-                e.printStackTrace()
+            val requestData = UpdateUserDetailsModel(
+                Gson().toJson(
+                    UpdateUserDetailsModel.JSONDataRequest(
+                        personID = personId,
+                        person = person
+                    ),
+                    UpdateUserDetailsModel.JSONDataRequest::class.java
+                ), authToken
+            )
+
+            _progressBar.value = Event("Updating Profile Details.....")
+            _updateUserDetails.removeSource(updateUserDetailsSource)
+            withContext(dispatchers.io) {
+                updateUserDetailsSource = homeManagementUseCase.invokeUpdateUserDetails(
+                    isForceRefresh = true,
+                    data = requestData
+                )
             }
-        }
-        _progressBar.value = Event("Updating Profile.....")
-        _updateRelative.removeSource(updateRelativeSource)
-        withContext(dispatchers.io) {
-            updateRelativeSource = homeManagementUseCase.invokeupdateRelative(isForceRefresh = forceRefresh, data = requestData!!)
-        }
-        _updateRelative.addSource(updateRelativeSource) {
-            _updateRelative.value = it.data
+            _updateUserDetails.addSource(updateUserDetailsSource) {
+                _updateUserDetails.value = it.data
 
-            if (it.status == Resource.Status.SUCCESS) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if ( it != null ) {
-                    val personDetails = it.data!!.person
-                    Timber.i("PersonId-----> ${personDetails.id}")
-                    Timber.i("UpdatedName-----> ${personDetails.firstName}")
-                    if ( !Utilities.isNullOrEmpty( personDetails.id.toString() ) ) {
-                        updateUserDetails(personDetails.firstName,personDetails.id)
-                        toastMessage(localResource.getString(R.string.PROFILE_UPDATED))
-                    }
-                }
-            }
-            if (it.status == Resource.Status.ERROR) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if(it.errorNumber.equals("1100014",true)){
-                    _sessionError.value = Event(true)
-                }else {
-                    toastMessage(it.errorMessage)
-                }
-            }
-        }
-    }
-
-    fun callUpdateRelativesApi(forceRefresh: Boolean , relative : UserRelatives ,from:String) = viewModelScope.launch(dispatchers.main) {
-
-        val requestData = UpdateRelativeModel(Gson().toJson(UpdateRelativeModel.JSONDataRequest(
-                personID = personId ,
-                person = UpdateRelativeModel.Person(
-                    id = relative.relativeID.toInt() ,
-                    firstName = relative.firstName ,
-                    lastName = "" ,
-                    dateOfBirth = relative.dateOfBirth ,
-                    gender = relative.gender ,
-                    isProfileImageChanges = Constants.FALSE ,
-                    contact = UpdateRelativeModel.Contact(
-                        emailAddress = relative.emailAddress ,
-                        primaryContactNo = relative.contactNo))), UpdateRelativeModel.JSONDataRequest::class.java) , authToken )
-
-        _progressBar.value = Event("Updating Relative Profile.....")
-        _updateRelative.removeSource(updateRelativeSource)
-        withContext(dispatchers.io) {
-            updateRelativeSource = homeManagementUseCase.invokeupdateRelative(isForceRefresh = forceRefresh, data = requestData)
-        }
-        _updateRelative.addSource(updateRelativeSource) {
-            _updateRelative.value = it.data
-
-            if (it.status == Resource.Status.SUCCESS) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if ( it != null ) {
-                    val personDetails = it.data!!.person
-                    if ( from == Constants.RELATIVE ) {
-                        if ( !Utilities.isNullOrEmpty( personDetails.id.toString() ) ) toastMessage(localResource.getString(R.string.PROFILE_UPDATED))
-                        navigate(EditFamilyMemberDetailsFragmentDirections.actionEditFamilyMemberDetailsFragmentToFamilyMembersListFragment())
-                    } else if ( from == Constants.USER ) {
-                        val newNumber = personDetails.contact.primaryContactNo
-                        if ( !Utilities.isNullOrEmpty( newNumber ) ) {
-                            //updateUserMobile(newNumber)
-                            getLoggedInPersonDetails()
-                            //toastMessage(context.resources.getString(R.string.MOBILE_UPDATED))
+                if (it.status == Resource.Status.SUCCESS) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it != null) {
+                        val personDetails = it.data!!.person
+                        Timber.e("UpdateUserDetails----->${it.data!!.person}")
+                        Timber.i("PersonId-----> ${personDetails.id}")
+                        Timber.i("UpdatedName-----> ${personDetails.firstName}")
+                        if (!Utilities.isNullOrEmpty(personDetails.id.toString())) {
+                            updateUserDetails(personDetails.firstName, personDetails.id)
+                            Utilities.toastMessageShort(
+                                context,
+                                localResource.getString(R.string.PROFILE_UPDATED)
+                            )
+                            FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_UPDATE_SUCCESS)
                         }
                     }
+
                 }
-            }
-            if (it.status == Resource.Status.ERROR) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if(it.errorNumber.equals("1100014",true)){
-                    _sessionError.value = Event(true)
-                }else {
-                    toastMessage(it.errorMessage)
-                    if ( from == Constants.RELATIVE ) {
-                        navigate(EditFamilyMemberDetailsFragmentDirections.actionEditFamilyMemberDetailsFragmentToFamilyMembersListFragment())
+                if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.errorNumber.equals("1100014", true)) {
+                        _sessionError.value = Event(true)
+                    } else {
+                        toastMessage(it.errorMessage)
+                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_UPDATE_FAILED)
                     }
                 }
             }
         }
-    }
 
-    fun callGetUserDetailsApi() = viewModelScope.launch(dispatchers.main) {
+    fun callGetProfileImageApi(activity: MyProfileNewActivity, documentID: String) =
+        viewModelScope.launch(dispatchers.main) {
 
-        val requestData = UserDetailsModel(Gson().toJson(
-            UserDetailsModel.JSONDataRequest(
-                UserDetailsModel.PersonIdentificationCriteria(
-                    personId = personId.toInt())),
-            UserDetailsModel.JSONDataRequest::class.java) , authToken )
+            val requestData = ProfileImageModel(
+                Gson().toJson(
+                    ProfileImageModel.JSONDataRequest(
+                        documentID = documentID
+                    ),
+                    ProfileImageModel.JSONDataRequest::class.java
+                ), authToken
+            )
 
-        _userProfileDetails.removeSource(userProfileDetailsSource)
-        withContext(dispatchers.io) {
-           userProfileDetailsSource = homeManagementUseCase.invokeGetUserDetails(isForceRefresh = true, data = requestData)
-        }
-        _userProfileDetails.addSource(userProfileDetailsSource) {
-            _userProfileDetails.value = it.data
-
-            if (it.status == Resource.Status.SUCCESS) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if (it.data != null ) {
-                    val person = it.data!!.person
-                    Timber.e("GetUserDetails----->$person")
-                }
+            _profileImage.removeSource(profileImageSource)
+            withContext(dispatchers.io) {
+                profileImageSource = homeManagementUseCase.invokeGetProfileImage(
+                    isForceRefresh = true,
+                    data = requestData
+                )
             }
-            if (it.status == Resource.Status.ERROR) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if(it.errorNumber.equals("1100014",true)){
-                    _sessionError.value = Event(true)
-                }else {
-                    toastMessage(it.errorMessage)
-                }
-            }
-        }
-    }
+            _profileImage.addSource(profileImageSource) {
+                _profileImage.value = it.data
 
-    fun callUpdateUserDetailsApi( person : UpdateUserDetailsModel.PersonRequest ) = viewModelScope.launch(dispatchers.main) {
-
-        val requestData = UpdateUserDetailsModel(Gson().toJson(
-            UpdateUserDetailsModel.JSONDataRequest(
-                personID = personId,
-                person = person),
-            UpdateUserDetailsModel.JSONDataRequest::class.java) , authToken )
-
-        _progressBar.value = Event("Updating Profile Details.....")
-        _updateUserDetails.removeSource(updateUserDetailsSource)
-        withContext(dispatchers.io) {
-            updateUserDetailsSource = homeManagementUseCase.invokeUpdateUserDetails(isForceRefresh = true, data = requestData)
-        }
-        _updateUserDetails.addSource(updateUserDetailsSource) {
-            _updateUserDetails.value = it.data
-
-            if (it.status == Resource.Status.SUCCESS) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if ( it != null ) {
-                    val personDetails = it.data!!.person
-                    Timber.e("UpdateUserDetails----->${it.data!!.person}")
-                    Timber.i("PersonId-----> ${personDetails.id}")
-                    Timber.i("UpdatedName-----> ${personDetails.firstName}")
-                    if ( !Utilities.isNullOrEmpty( personDetails.id.toString() ) ) {
-                        updateUserDetails(personDetails.firstName,personDetails.id)
-                        Utilities.toastMessageShort(context,localResource.getString(R.string.PROFILE_UPDATED))
-                        FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_UPDATE_SUCCESS)
-                    }
-                }
-
-            }
-            if (it.status == Resource.Status.ERROR) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if(it.errorNumber.equals("1100014",true)){
-                    _sessionError.value = Event(true)
-                }else {
-                    toastMessage(it.errorMessage)
-                    FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.PROFILE_UPDATE_FAILED)
-                }
-            }
-        }
-    }
-    fun callGetProfileImageApi( activity: MyProfileNewActivity,documentID : String ) = viewModelScope.launch(dispatchers.main) {
-
-        val requestData = ProfileImageModel(Gson().toJson(
-            ProfileImageModel.JSONDataRequest(
-                documentID = documentID),
-            ProfileImageModel.JSONDataRequest::class.java) , authToken )
-
-        _profileImage.removeSource(profileImageSource)
-        withContext(dispatchers.io) {
-            profileImageSource = homeManagementUseCase.invokeGetProfileImage(isForceRefresh = true, data = requestData)
-        }
-        _profileImage.addSource(profileImageSource) {
-            _profileImage.value = it.data
-
-            if (it.status == Resource.Status.SUCCESS) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if (it.data != null ) {
-                    val document = it.data!!.healthRelatedDocument
-                    val fileName = document.fileName
-                    val fileBytes = document.fileBytes
-                    try {
-                        val path = Utilities.getAppFolderLocation(context)
-                        if (!File(path,fileName).exists()) {
-                            if ( !Utilities.isNullOrEmpty(fileBytes) ) {
-                                val decodedImage = fileUtils.convertBase64ToBitmap(fileBytes)
-                                if (decodedImage != null) {
-                                    val saveRecordUri = fileUtils.saveBitmapToExternalStorage(context,decodedImage,fileName)
-                                    if ( saveRecordUri != null ) {
-                                        updateUserProfileImgPath(fileName,path)
+                if (it.status == Resource.Status.SUCCESS) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.data != null) {
+                        val document = it.data!!.healthRelatedDocument
+                        val fileName = document.fileName
+                        val fileBytes = document.fileBytes
+                        try {
+                            val path = Utilities.getAppFolderLocation(context)
+                            if (!File(path, fileName).exists()) {
+                                if (!Utilities.isNullOrEmpty(fileBytes)) {
+                                    val decodedImage = fileUtils.convertBase64ToBitmap(fileBytes)
+                                    if (decodedImage != null) {
+                                        val saveRecordUri = fileUtils.saveBitmapToExternalStorage(
+                                            context,
+                                            decodedImage,
+                                            fileName
+                                        )
+                                        if (saveRecordUri != null) {
+                                            updateUserProfileImgPath(fileName, path)
+                                        }
                                     }
                                 }
+                            } else {
+                                updateUserProfileImgPath(fileName, path)
                             }
-                        } else {
-                            updateUserProfileImgPath(fileName,path)
+                            activity.completeFilePath = path + "/" + fileName
+                            activity.setProfilePic()
+                            activity.stopImageShimmer()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            activity.stopImageShimmer()
                         }
-                        activity.completeFilePath = path + "/"  + fileName
-                        activity.setProfilePic()
-                        activity.stopImageShimmer()
-                    } catch ( e : Exception ) {
-                        e.printStackTrace()
-                        activity.stopImageShimmer()
                     }
                 }
-            }
-            if (it.status == Resource.Status.ERROR) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if(it.errorNumber.equals("1100014",true)){
-                    _sessionError.value = Event(true)
-                }else {
-                    toastMessage(it.errorMessage)
-                    activity.stopImageShimmer()
-                }
-            }
-        }
-    }
-
-    fun callUploadProfileImageApi( activity: MyProfileNewActivity,name:String,imageFile:File) = viewModelScope.launch(dispatchers.main) {
-        val destPath: String = Utilities.getAppFolderLocation(context)
-        var encodedImage =""
-        try {
-            val bytesFile = ByteArray(imageFile.length().toInt())
-            context.contentResolver.openFileDescriptor(Uri.fromFile(imageFile), "r")?.use { parcelFileDescriptor ->
-                FileInputStream(parcelFileDescriptor.fileDescriptor).use { inStream ->
-                    inStream.read(bytesFile)
-                    encodedImage = Base64.encodeToString(bytesFile, Base64.DEFAULT)
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        val PersonID = RequestBody.create(MediaType.parse("text/plain"), personId)
-        val FileName = RequestBody.create(MediaType.parse("text/plain"), name)
-        val DocumentTypeCode = RequestBody.create(MediaType.parse("text/plain"), "PROFPIC")
-        val ByteArray = RequestBody.create(MediaType.parse("text/plain"), encodedImage)
-        val AuthTicket = RequestBody.create(MediaType.parse("text/plain"), authToken)
-
-        _progressBar.value = Event("Uploading Profile Photo.....")
-        _uploadProfileImage.removeSource(uploadProfileImageSource)
-        withContext(dispatchers.io) {
-            uploadProfileImageSource = homeManagementUseCase.invokeUploadProfileImage(PersonID,FileName,DocumentTypeCode,ByteArray,AuthTicket)
-        }
-        _uploadProfileImage.addSource(uploadProfileImageSource) {
-            _uploadProfileImage.value = it.data
-
-            if (it.status == Resource.Status.SUCCESS) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if (it.data != null) {
-                    val profileImageID = it.data!!.profileImageID
-                    Timber.i("UploadProfileImage----->$profileImageID")
-                    if ( !Utilities.isNullOrEmptyOrZero(profileImageID) ) {
-                        activity.hasProfileImage = true
-                        activity.needToSet = true
-                        Utilities.toastMessageShort(context,localResource.getString(R.string.PROFILE_PHOTO_UPDATED))
-                        updateUserProfileImgPath(name,destPath)
-                        activity.completeFilePath = destPath + "/" + name
-                        activity.setProfilePic()
-                    }
-                }
-            }
-            if (it.status == Resource.Status.ERROR) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if(it.errorNumber.equals("1100014",true)){
-                    _sessionError.value = Event(true)
-                }else {
-                    toastMessage(it.errorMessage)
-                }
-            }
-        }
-    }
-
-    fun callRemoveProfileImageApi( activity: MyProfileNewActivity,context: Context )
-            = viewModelScope.launch(dispatchers.main) {
-
-        val requestData = RemoveProfileImageModel(Gson().toJson(
-            RemoveProfileImageModel.JSONDataRequest(
-                personID = personId.toInt()),
-            RemoveProfileImageModel.JSONDataRequest::class.java) , authToken )
-
-        _progressBar.value = Event("Removing Profile Photo...")
-        _removeProfileImage.removeSource(removeProfileImageSource)
-        withContext(dispatchers.io) {
-            removeProfileImageSource = homeManagementUseCase.invokeRemoveProfileImage(isForceRefresh = true, data = requestData)
-        }
-        _removeProfileImage.addSource(removeProfileImageSource) {
-            _removeProfileImage.value = it.data
-
-            if (it.status == Resource.Status.SUCCESS) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if (it.data != null ) {
-                    val isProcessed = it.data!!.isProcessed
-                    Timber.e("isProcessed----->$isProcessed")
-                    if ( isProcessed.equals(Constants.TRUE,ignoreCase = true) ) {
-                        Utilities.toastMessageShort(context,context.resources.getString(R.string.PROFILE_PHOTO_REMOVED))
-                        activity.removeProfilePic()
+                if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.errorNumber.equals("1100014", true)) {
+                        _sessionError.value = Event(true)
                     } else {
-                        Utilities.toastMessageShort(context,context.resources.getString(R.string.ERROR_PROFILE_PHOTO))
+                        toastMessage(it.errorMessage)
+                        activity.stopImageShimmer()
                     }
                 }
             }
-            if (it.status == Resource.Status.ERROR) {
-                _progressBar.value = Event(Event.HIDE_PROGRESS)
-                if(it.errorNumber.equals("1100014",true)){
-                    _sessionError.value = Event(true)
-                }else {
-                    toastMessage(it.errorMessage)
+        }
+
+    fun callUploadProfileImageApi(activity: MyProfileNewActivity, name: String, imageFile: File) =
+        viewModelScope.launch(dispatchers.main) {
+            val destPath: String = Utilities.getAppFolderLocation(context)
+            var encodedImage = ""
+            try {
+                val bytesFile = ByteArray(imageFile.length().toInt())
+                context.contentResolver.openFileDescriptor(Uri.fromFile(imageFile), "r")
+                    ?.use { parcelFileDescriptor ->
+                        FileInputStream(parcelFileDescriptor.fileDescriptor).use { inStream ->
+                            inStream.read(bytesFile)
+                            encodedImage = Base64.encodeToString(bytesFile, Base64.DEFAULT)
+                        }
+                    }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            val PersonID = RequestBody.create(MediaType.parse("text/plain"), personId)
+            val FileName = RequestBody.create(MediaType.parse("text/plain"), name)
+            val DocumentTypeCode = RequestBody.create(MediaType.parse("text/plain"), "PROFPIC")
+            val ByteArray = RequestBody.create(MediaType.parse("text/plain"), encodedImage)
+            val AuthTicket = RequestBody.create(MediaType.parse("text/plain"), authToken)
+
+            _progressBar.value = Event("Uploading Profile Photo.....")
+            _uploadProfileImage.removeSource(uploadProfileImageSource)
+            withContext(dispatchers.io) {
+                uploadProfileImageSource = homeManagementUseCase.invokeUploadProfileImage(
+                    PersonID,
+                    FileName,
+                    DocumentTypeCode,
+                    ByteArray,
+                    AuthTicket
+                )
+            }
+            _uploadProfileImage.addSource(uploadProfileImageSource) {
+                _uploadProfileImage.value = it.data
+
+                if (it.status == Resource.Status.SUCCESS) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.data != null) {
+                        val profileImageID = it.data!!.profileImageID
+                        Timber.i("UploadProfileImage----->$profileImageID")
+                        if (!Utilities.isNullOrEmptyOrZero(profileImageID)) {
+                            activity.hasProfileImage = true
+                            activity.needToSet = true
+                            Utilities.toastMessageShort(
+                                context,
+                                localResource.getString(R.string.PROFILE_PHOTO_UPDATED)
+                            )
+                            updateUserProfileImgPath(name, destPath)
+                            activity.completeFilePath = destPath + "/" + name
+                            activity.setProfilePic()
+                        }
+                    }
+                }
+                if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.errorNumber.equals("1100014", true)) {
+                        _sessionError.value = Event(true)
+                    } else {
+                        toastMessage(it.errorMessage)
+                    }
                 }
             }
         }
-    }
 
-    fun updateUserMobileNumber( phone: String ) = viewModelScope.launch(dispatchers.main) {
+    fun callRemoveProfileImageApi(activity: MyProfileNewActivity, context: Context) =
+        viewModelScope.launch(dispatchers.main) {
+
+            val requestData = RemoveProfileImageModel(
+                Gson().toJson(
+                    RemoveProfileImageModel.JSONDataRequest(
+                        personID = personId.toInt()
+                    ),
+                    RemoveProfileImageModel.JSONDataRequest::class.java
+                ), authToken
+            )
+
+            _progressBar.value = Event("Removing Profile Photo...")
+            _removeProfileImage.removeSource(removeProfileImageSource)
+            withContext(dispatchers.io) {
+                removeProfileImageSource = homeManagementUseCase.invokeRemoveProfileImage(
+                    isForceRefresh = true,
+                    data = requestData
+                )
+            }
+            _removeProfileImage.addSource(removeProfileImageSource) {
+                _removeProfileImage.value = it.data
+
+                if (it.status == Resource.Status.SUCCESS) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.data != null) {
+                        val isProcessed = it.data!!.isProcessed
+                        Timber.e("isProcessed----->$isProcessed")
+                        if (isProcessed.equals(Constants.TRUE, ignoreCase = true)) {
+                            Utilities.toastMessageShort(
+                                context,
+                                context.resources.getString(R.string.PROFILE_PHOTO_REMOVED)
+                            )
+                            activity.removeProfilePic()
+                        } else {
+                            Utilities.toastMessageShort(
+                                context,
+                                context.resources.getString(R.string.ERROR_PROFILE_PHOTO)
+                            )
+                        }
+                    }
+                }
+                if (it.status == Resource.Status.ERROR) {
+                    _progressBar.value = Event(Event.HIDE_PROGRESS)
+                    if (it.errorNumber.equals("1100014", true)) {
+                        _sessionError.value = Event(true)
+                    } else {
+                        toastMessage(it.errorMessage)
+                    }
+                }
+            }
+        }
+
+    fun updateUserMobileNumber(phone: String) = viewModelScope.launch(dispatchers.main) {
         withContext(dispatchers.io) {
-           val userDetails = homeManagementUseCase.invokeGetLoggedInPersonDetails()
+            val userDetails = homeManagementUseCase.invokeGetLoggedInPersonDetails()
             var dob = ""
             try {
-                val db = DateHelper.formatDateValue( DateHelper.SERVER_DATE_YYYYMMDD,userDetails.dateOfBirth)!!
-                if ( db != null ) {
+                val db = DateHelper.formatDateValue(
+                    DateHelper.SERVER_DATE_YYYYMMDD,
+                    userDetails.dateOfBirth
+                )!!
+                if (db != null) {
                     dob = db
                 }
             } catch (e: Exception) {
@@ -622,9 +763,10 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
                 age = userDetails.age.toString(),
                 gender = userDetails.gender,
                 contactNo = phone,
-                emailAddress = userDetails.emailAddress)
-            Timber.i("userUpdateDetails----->"+userUpdateDetails)
-            callUpdateRelativesApi(true,userUpdateDetails,Constants.USER)
+                emailAddress = userDetails.emailAddress
+            )
+            Timber.i("userUpdateDetails----->" + userUpdateDetails)
+            callUpdateRelativesApi(true, userUpdateDetails, Constants.USER)
         }
     }
 
@@ -634,15 +776,15 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
         }
     }
 
-    fun updateUserDetails( name : String ,personId : Int ) = viewModelScope.launch {
+    fun updateUserDetails(name: String, personId: Int) = viewModelScope.launch {
         withContext(dispatchers.io) {
-            homeManagementUseCase.invokeUpdateUserDetails( name , personId )
+            homeManagementUseCase.invokeUpdateUserDetails(name, personId)
         }
     }
 
-    fun updateUserProfileImgPath( name : String ,path : String ) = viewModelScope.launch {
+    fun updateUserProfileImgPath(name: String, path: String) = viewModelScope.launch {
         withContext(dispatchers.io) {
-            homeManagementUseCase.invokeUpdateUserProfileImgPath( name , path )
+            homeManagementUseCase.invokeUpdateUserProfileImgPath(name, path)
         }
     }
 
@@ -652,22 +794,35 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
         }
     }
 
-   fun getUserRelativeSpecific(relationShipCode : String ) = viewModelScope.launch  {
-       withContext(dispatchers.io) {
-           alreadyExistRelatives.postValue( homeManagementUseCase.invokeGetUserRelativeSpecific(relationShipCode) )
-       }
-   }
-
-    fun getUserRelativeForRelativeId(relativeId : String ) = viewModelScope.launch  {
+    fun getUserRelativeSpecific(relationShipCode: String) = viewModelScope.launch {
         withContext(dispatchers.io) {
-            alreadyExistRelatives.postValue( homeManagementUseCase.invokeGetUserRelativeForRelativeId(relativeId) )
+            alreadyExistRelatives.postValue(
+                homeManagementUseCase.invokeGetUserRelativeSpecific(
+                    relationShipCode
+                )
+            )
+        }
+    }
+
+    fun getUserRelativeForRelativeId(relativeId: String) = viewModelScope.launch {
+        withContext(dispatchers.io) {
+            alreadyExistRelatives.postValue(
+                homeManagementUseCase.invokeGetUserRelativeForRelativeId(
+                    relativeId
+                )
+            )
         }
     }
 
 
-    fun getFamilyRelationshipList() = viewModelScope.launch{
-        withContext(dispatchers.io){
-            var user = homeManagementUseCase.invokeGetUserRelativeDetailsByRelativeId(sharedPref.getString(PreferenceConstants.PERSONID,"")!!)
+    fun getFamilyRelationshipList() = viewModelScope.launch {
+        withContext(dispatchers.io) {
+            var user = homeManagementUseCase.invokeGetUserRelativeDetailsByRelativeId(
+                sharedPref.getString(
+                    PreferenceConstants.PERSONID,
+                    ""
+                )!!
+            )
             val gender = user.gender
             if (gender.contains("1", ignoreCase = true)) {
                 familyRelationList.postValue(dataHandler.getFamilyRelationListMale())
@@ -677,7 +832,7 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
         }
     }
 
-    fun getRelationImgId(relationshipCode : String ): Int {
+    fun getRelationImgId(relationshipCode: String): Int {
         var relationImgTobeAdded: Int = R.drawable.icon_husband
 
         when (relationshipCode) {
@@ -715,4 +870,19 @@ class ProfileFamilyMemberViewModel(private val homeManagementUseCase: HomeManage
         return relationImgTobeAdded
     }
 
+    fun getFamilyRelationOption(
+        gender: String,
+        relationshipCode: String,
+        desiredLocale: Locale
+    ): DataHandler.FamilyRelationOption {
+        return when {
+            gender.contains("1", ignoreCase = true) -> {
+                dataHandler.getFamilyRelationOptionMale(relationshipCode, desiredLocale)
+            }
+            else -> {
+                dataHandler.getFamilyRelationOptionFemale(relationshipCode, desiredLocale)
+            }
+        }
+
+    }
 }

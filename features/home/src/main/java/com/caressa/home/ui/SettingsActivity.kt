@@ -49,7 +49,7 @@ class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionLi
     private fun initialise() {
         Timber.i("Language=> "+LocaleHelper.getLanguage(this))
         if(LocaleHelper.getLanguage(this).equals("ms",true)) {
-            viewModel.getSettingsOptionList1("Malay")
+            viewModel.getSettingsOptionList1("Melayu")
         }else{
             viewModel.getSettingsOptionList1("English")
         }
@@ -92,7 +92,7 @@ class SettingsActivity : BaseActivity() , OptionSettingsAdapter.SettingsOptionLi
     }
 
     private fun showLanguageDialog() {
-        val items = arrayOf<String>("English", "Malay")
+        val items = arrayOf<String>("English", "Melayu")
 
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setTitle(resources.getString(R.string.LANGUAGE))

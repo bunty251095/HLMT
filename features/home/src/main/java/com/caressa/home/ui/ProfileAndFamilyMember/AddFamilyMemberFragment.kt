@@ -2,12 +2,10 @@ package com.caressa.home.ui.ProfileAndFamilyMember
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.caressa.common.base.BaseFragment
 import com.caressa.common.base.BaseViewModel
@@ -20,13 +18,13 @@ import com.caressa.home.viewmodel.ProfileFamilyMemberViewModel
 import com.caressa.model.entity.UserRelatives
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
-import java.lang.StringBuilder
 import java.util.*
 
-class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener  {
+class AddFamilyMemberFragment : BaseFragment(),
+    com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
 
-    private val viewModel : ProfileFamilyMemberViewModel by viewModel()
-    private lateinit var binding : FragmentAddFamilyMemberBinding
+    private val viewModel: ProfileFamilyMemberViewModel by viewModel()
+    private lateinit var binding: FragmentAddFamilyMemberBinding
 
     private val appColorHelper = AppColorHelper.instance!!
 
@@ -34,19 +32,23 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
     private var relationCode = ""
     private var relation = ""
     private var gender = ""
-    private var isValidFAM : Boolean = false
+    private var isValidFAM: Boolean = false
     private var userDob = ""
     private var relativeDob = ""
     private val cal = Calendar.getInstance()
 
     override fun getViewModel(): BaseViewModel = viewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentAddFamilyMemberBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         FirebaseHelper.logScreenEvent(FirebaseConstants.FAMILY_MEMBER_ADD_SCREEN)
-        from = requireArguments().getString(Constants.FROM,"")!!
+        from = requireArguments().getString(Constants.FROM, "")!!
         relationCode = requireArguments().getString(Constants.RELATION_CODE)!!
         relation = requireArguments().getString(Constants.RELATION)!!
         gender = requireArguments().getString(Constants.GENDER)!!
@@ -62,7 +64,7 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
         binding.imgFamilyMember.setImageResource(viewModel.getRelationImgId(relationCode))
         binding.txtRelationship.text = relation
 
-        viewModel.addRelative.observe( viewLifecycleOwner , {})
+        viewModel.addRelative.observe(viewLifecycleOwner, {})
 
         binding.edtMemberName.addTextChangedListener(object : TextWatcher {
 
@@ -127,7 +129,8 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
         }
 
         binding.btnBackAddMember.setOnClickListener {
-            it.findNavController().navigate(R.id.action_addFamilyMemberFragment_to_selectRelationshipFragment)
+            it.findNavController()
+                .navigate(R.id.action_addFamilyMemberFragment_to_selectRelationshipFragment)
         }
 
         binding.btnAddMember.setOnClickListener {
@@ -137,7 +140,7 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
             val mobile = binding.edtMemberMobile.text.toString()
             val email = binding.edtMemberEmail.text.toString()
 
-            if ( !Validation.isValidName(name) ) {
+            if (!Validation.isValidName(name)) {
                 binding.tilEdtMemberName.isErrorEnabled = true
                 binding.tilEdtMemberName.error = resources.getString(R.string.VALIDATE_NAME)
             }
@@ -147,7 +150,7 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                 binding.tilEdtMemberDob.error = resources.getString(R.string.VALIDATE_DATE_OF_BIRTH)
             }
 
-            if (Utilities.isNullOrEmpty(mobile) || !Utilities.isValidPhoneNumber( mobile )) {
+            if (Utilities.isNullOrEmpty(mobile) || !Utilities.isValidPhoneNumber(mobile)) {
                 binding.tilEdtMemberMobile.isErrorEnabled = true
                 binding.tilEdtMemberMobile.error = resources.getString(R.string.VALIDATE_PHONE)
             }
@@ -155,11 +158,13 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
             if (!Utilities.isNullOrEmpty(email) && email.length > 3) {
                 if (!email.contains("@")) {
                     binding.tilEdtMemberEmail.isErrorEnabled = true
-                    binding.tilEdtMemberEmail.error = resources.getString(R.string.VALIDATE_EMAIL_MUST_INCLUDE)
+                    binding.tilEdtMemberEmail.error =
+                        resources.getString(R.string.VALIDATE_EMAIL_MUST_INCLUDE)
                 } else {
                     if (!Validation.isValidEmail(email)) {
                         binding.tilEdtMemberEmail.isErrorEnabled = true
-                        binding.tilEdtMemberEmail.error = resources.getString(R.string.VALIDATE_EMAIL)
+                        binding.tilEdtMemberEmail.error =
+                            resources.getString(R.string.VALIDATE_EMAIL)
                     }
                 }
             } else {
@@ -167,17 +172,17 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                 binding.tilEdtMemberEmail.error = resources.getString(R.string.VALIDATE_EMAIL)
             }
 
-          /*  if ( !DateHelper.isDateAbove18Years(DateHelper.getDateTimeAs_ddMMMyyyy(dob)) ) {
-                binding.tilEdtMemberDob.isErrorEnabled = true
-                binding.tilEdtMemberDob.error = "Age must be more than 18 years"
-            }*/
+            /*  if ( !DateHelper.isDateAbove18Years(DateHelper.getDateTimeAs_ddMMMyyyy(dob)) ) {
+                  binding.tilEdtMemberDob.isErrorEnabled = true
+                  binding.tilEdtMemberDob.error = "Age must be more than 18 years"
+              }*/
 
             if (!binding.tilEdtMemberName.isErrorEnabled && !binding.tilEdtMemberDob.isErrorEnabled
                 && !binding.tilEdtMemberMobile.isErrorEnabled && !binding.tilEdtMemberEmail.isErrorEnabled
             ) {
                 //***********************
                 val relativeId = FileUtils.getUniqueIdLong()
-                viewModel.userDetails.observe( viewLifecycleOwner) {
+                viewModel.userDetails.observe(viewLifecycleOwner) {
                     if (it != null) {
                         userDob = DateHelper.getDateTimeAs_ddMMMyyyy(it.dateOfBirth)
                         val relDob = DateHelper.getDateTimeAs_ddMMMyyyy(dob)
@@ -282,11 +287,19 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
                                 firstName = name,
                                 lastName = "",
                                 dateOfBirth = dob,
-                                gender = gender,
+                                gender = viewModel.getFamilyRelationOption(
+                                    it.gender,
+                                    relationCode,
+                                    Locale.ENGLISH
+                                ).gender,
                                 contactNo = mobile,
                                 emailAddress = email,
                                 relationshipCode = relationCode,
-                                relationship = relation
+                                relationship = viewModel.getFamilyRelationOption(
+                                    it.gender,
+                                    relationCode,
+                                    Locale.ENGLISH
+                                ).relation
                             )
                             viewModel.callAddNewRelativeApi(true, newRelative, from, this)
                             FirebaseHelper.logCustomFirebaseEvent(FirebaseConstants.FAMILY_MEMBER_ADD)
@@ -309,7 +322,8 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
             this@AddFamilyMemberFragment,
             cal.get(Calendar.YEAR),
             cal.get(Calendar.MONTH),
-            cal.get(Calendar.DAY_OF_MONTH))
+            cal.get(Calendar.DAY_OF_MONTH)
+        )
         dpd.accentColor = appColorHelper.primaryColor()
         dpd.setTitle(resources.getString(R.string.DATE_OF_BIRTH))
         dpd.maxDate = cal
@@ -321,10 +335,21 @@ class AddFamilyMemberFragment : BaseFragment() , com.wdullaer.materialdatetimepi
         //dpd.show(fragmentManager!!, "FamilyMember")
     }
 
-    override fun onDateSet(view: com.wdullaer.materialdatetimepicker.date.DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        val date = year.toString() + "-" + (monthOfYear + 1).toString() + "-" + dayOfMonth.toString()
+    override fun onDateSet(
+        view: com.wdullaer.materialdatetimepicker.date.DatePickerDialog?,
+        year: Int,
+        monthOfYear: Int,
+        dayOfMonth: Int
+    ) {
+        val date =
+            year.toString() + "-" + (monthOfYear + 1).toString() + "-" + dayOfMonth.toString()
         relativeDob = date
-        binding.edtMemberDob.setText(DateHelper.formatDateValue(DateHelper.DATEFORMAT_DDMMMYYYY_NEW, date))
+        binding.edtMemberDob.setText(
+            DateHelper.formatDateValue(
+                DateHelper.DATEFORMAT_DDMMMYYYY_NEW,
+                date
+            )
+        )
     }
 
 }

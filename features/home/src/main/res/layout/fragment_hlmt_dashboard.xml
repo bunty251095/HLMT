@@ -414,7 +414,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/slidingViewPager"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_105sdp"
+                    android:layout_height="@dimen/_120sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_70sdp"
                     app:layout_constraintEnd_toEndOf="parent"
