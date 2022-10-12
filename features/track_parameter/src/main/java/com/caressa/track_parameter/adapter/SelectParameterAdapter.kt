@@ -31,6 +31,7 @@ class SelectParameterAdapter(private val mContext: Context,private  val viewMode
         val profile : ParameterProfile = dataList[position]
         holder.bindTo(profile)
 
+        holder.binding.txtProfile.text = mContext.getString(TrackParameterHelper.getSelectProfileNameByProfileCode(profile.profileCode))
         if( profile.isSelection) {
             holder.binding.layoutProfile.setBackgroundColor(appColorHelper.primaryColor())
             ImageViewCompat.setImageTintList(holder.binding.imgProfile, ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.white)))

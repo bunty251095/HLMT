@@ -638,72 +638,23 @@ class HraViewModel(
     }
 
     fun saveResponseEDS(quesCode:String,tabName:String,category:String,selectedOptions:MutableList<Option>) = viewModelScope.launch(dispatchers.main) {
+        try {
+            val list: ArrayList<HRAQuestions> = ArrayList()
+            withContext(dispatchers.io) {
 
-        val list: ArrayList<HRAQuestions> = ArrayList()
-        withContext(dispatchers.io) {
+                hraManagementUseCase.invokeClearResponse(quesCode)
+                hraManagementUseCase.invokeClearResponse("DENPROB")
+                hraManagementUseCase.invokeClearResponse("EYEPROB")
+                hraManagementUseCase.invokeClearResponse("SKINPRB")
 
-            hraManagementUseCase.invokeClearResponse(quesCode)
-            hraManagementUseCase.invokeClearResponse("DENPROB")
-            hraManagementUseCase.invokeClearResponse("EYEPROB")
-            hraManagementUseCase.invokeClearResponse("SKINPRB")
-
-            if (selectedOptions.any { it.description.equals("NONE", ignoreCase = true) }) {
-                list.add(HRAQuestions(
-                    QuestionCode = quesCode,
-                    AnswerCode = "NONE",
-                    AnsDescription = "NONE",
-                    Category = category,
-                    TabName = tabName,
-                    OthersVal = ""))
-                list.add(HRAQuestions(
-                    QuestionCode = "DENPROB",
-                    AnswerCode = "63_NONE",
-                    AnsDescription = "NONE",
-                    Category = "DENTAL",
-                    TabName = tabName,
-                    OthersVal = ""))
-                list.add(HRAQuestions(
-                    QuestionCode = "EYEPROB",
-                    AnswerCode = "64_NONE",
-                    AnsDescription = "NONE",
-                    Category = "EYE",
-                    TabName = tabName,
-                    OthersVal = ""))
-                list.add(HRAQuestions(
-                    QuestionCode = "SKINPRB",
-                    AnswerCode = "65_SKNPRBNONE",
-                    AnsDescription = "NONE",
-                    Category = "SKIN",
-                    TabName = tabName,
-                    OthersVal = ""))
-            } else {
-                var dental = true
-                var eye = true
-                var skin = true
-
-                for (option in selectedOptions) {
-                    val data = option.answerCode.split(",")
+                if (selectedOptions.any { it.answerCode.equals("NONE", ignoreCase = true) }) {
                     list.add(HRAQuestions(
-                        QuestionCode = data[1],
-                        AnswerCode = data[2],
-                        AnsDescription = option.description,
-                        Category = data[0],
+                        QuestionCode = quesCode,
+                        AnswerCode = "NONE",
+                        AnsDescription = "NONE",
+                        Category = category,
                         TabName = tabName,
                         OthersVal = ""))
-                    when {
-                        data[1].equals("DENPROB",ignoreCase = true) -> {
-                            dental = false
-                        }
-                        data[1].equals("EYEPROB",ignoreCase = true) -> {
-                            eye = false
-                        }
-                        data[1].equals("SKINPRB",ignoreCase = true) -> {
-                            skin = false
-                        }
-                    }
-                }
-
-                if ( dental ) {
                     list.add(HRAQuestions(
                         QuestionCode = "DENPROB",
                         AnswerCode = "63_NONE",
@@ -711,9 +662,6 @@ class HraViewModel(
                         Category = "DENTAL",
                         TabName = tabName,
                         OthersVal = ""))
-                }
-
-                if ( eye ) {
                     list.add(HRAQuestions(
                         QuestionCode = "EYEPROB",
                         AnswerCode = "64_NONE",
@@ -721,9 +669,6 @@ class HraViewModel(
                         Category = "EYE",
                         TabName = tabName,
                         OthersVal = ""))
-                }
-
-                if ( skin ) {
                     list.add(HRAQuestions(
                         QuestionCode = "SKINPRB",
                         AnswerCode = "65_SKNPRBNONE",
@@ -731,11 +676,70 @@ class HraViewModel(
                         Category = "SKIN",
                         TabName = tabName,
                         OthersVal = ""))
+                } else {
+                    var dental = true
+                    var eye = true
+                    var skin = true
+
+                    for (option in selectedOptions) {
+                        val data = option.answerCode.split(",")
+                        list.add(HRAQuestions(
+                            QuestionCode = data[1],
+                            AnswerCode = data[2],
+                            AnsDescription = option.description,
+                            Category = data[0],
+                            TabName = tabName,
+                            OthersVal = ""))
+                        when {
+                            data[1].equals("DENPROB",ignoreCase = true) -> {
+                                dental = false
+                            }
+                            data[1].equals("EYEPROB",ignoreCase = true) -> {
+                                eye = false
+                            }
+                            data[1].equals("SKINPRB",ignoreCase = true) -> {
+                                skin = false
+                            }
+                        }
+                    }
+
+                    if ( dental ) {
+                        list.add(HRAQuestions(
+                            QuestionCode = "DENPROB",
+                            AnswerCode = "63_NONE",
+                            AnsDescription = "NONE",
+                            Category = "DENTAL",
+                            TabName = tabName,
+                            OthersVal = ""))
+                    }
+
+                    if ( eye ) {
+                        list.add(HRAQuestions(
+                            QuestionCode = "EYEPROB",
+                            AnswerCode = "64_NONE",
+                            AnsDescription = "NONE",
+                            Category = "EYE",
+                            TabName = tabName,
+                            OthersVal = ""))
+                    }
+
+                    if ( skin ) {
+                        list.add(HRAQuestions(
+                            QuestionCode = "SKINPRB",
+                            AnswerCode = "65_SKNPRBNONE",
+                            AnsDescription = "NONE",
+                            Category = "SKIN",
+                            TabName = tabName,
+                            OthersVal = ""))
+                    }
                 }
+                Timber.i("SaveResponse---> $list")
+                hraManagementUseCase.invokeSaveQuesResponse(list)
             }
-            Timber.i("SaveResponse---> $list")
-            hraManagementUseCase.invokeSaveQuesResponse(list)
+        } catch ( e : Exception ) {
+            e.printStackTrace()
         }
+
     }
 
     fun saveResponseOther(quesCode:String,ansCode:String,ansDesc:String,category:String,tabName:String,othersVal:String,code:String,isSelected :String) = viewModelScope.launch(dispatchers.main) {

@@ -140,7 +140,8 @@ class RevInputParamAdapter(var profileCode: String, val viewModel: UpdateParamVi
         fun bindTo(parameter: ParameterListModel.InputParameterModel,position: Int) {
             Timber.i("DataAdapter=> "+parameter.minPermissibleValue+" : "+parameter.maxPermissibleValue+" : "+parameter.parameterUnit)
             binding.view.setBackgroundColor(binding.view.resources.getColor(getRandomColor(position)))
-            binding.txtParamName.setText(parameter.description)
+            //binding.txtParamName.text = parameter.description
+            binding.txtParamName.text = Utilities.getParameterNameByCode(context,parameter.parameterCode!!,parameter.description!!)
             binding.imgParam.setImageResource(TrackParameterHelper.getProfileImageByProfileCode(profileCode))
 
             binding.edtInputValue.setHint(getHint(parameter))

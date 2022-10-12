@@ -51,7 +51,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:paddingEnd="@dimen/_8sdp"
-                android:text="@{history.description}"
+                android:text=""
                 android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toTopOf="@+id/txt_param_date"
                 app:layout_constraintEnd_toEndOf="parent"

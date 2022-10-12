@@ -34,6 +34,32 @@ object TrackParameterHelper {
         return image
     }
 
+    fun getSelectProfileNameByProfileCode(code: String): Int {
+        var profileName: Int = R.string.BMI
+        if (code.equals("BMI", ignoreCase = true)) {
+            profileName = R.string.BMI
+        } else if (code.equals("BLOODPRESSURE", ignoreCase = true)) {
+            profileName = R.string.BLOOD_PRESSURE
+        } else if (code.equals("DIABETIC", ignoreCase = true)) {
+            profileName = R.string.BLOOD_SUGAR_PROFILE
+        } else if (code.equals("HEMOGRAM", ignoreCase = true)) {
+            profileName = R.string.HAEMATOLOGY_PROFILE
+        } else if (code.equals("KIDNEY", ignoreCase = true)) {
+            profileName = R.string.KIDNEY_PROFILE
+        } else if (code.equals("LIPID", ignoreCase = true)) {
+            profileName = R.string.LIPID_PROFILE
+        } else if (code.equals("LIVER", ignoreCase = true)) {
+            profileName = R.string.LIVER_PROFILE
+        } else if (code.equals("THYROID", ignoreCase = true)) {
+            profileName = R.string.THYROID_PROFILE
+        } else if (code.equals("URINE", ignoreCase = true)) {
+            profileName = R.string.URINE_PROFILE
+        } else if (code.equals("WHR", ignoreCase = true)) {
+            profileName = R.string.WHR
+        }
+        return profileName
+    }
+
     fun getProfileNameByProfileCode(code: String): Int {
         var profileName: Int = R.string.BMI
         if (code.equals("BMI", ignoreCase = true)) {

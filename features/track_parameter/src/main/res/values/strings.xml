@@ -21,12 +21,12 @@
     <string name="SYSTOLIC_DIASTOLIC">Systolic/Diastolic</string>
 
     <string name="BLOOD_SUGAR_PROFILE">Blood Sugar Profile</string>
-    <string name="HEMOGRAM_PRESSURE">Hemogram Profile</string>
-    <string name="KIDNEY_PRESSURE">Kidney Profile</string>
-    <string name="LIPID_PRESSURE">Lipid Profile</string>
-    <string name="LIVER_PRESSURE">Liver Profile</string>
-    <string name="THYROID_PRESSURE">Thyroid Profile</string>
-    <string name="URINE_PRESSURE">Urine Profile</string>
+    <string name="HAEMATOLOGY_PROFILE">Haematology Profile</string>
+    <string name="KIDNEY_PROFILE">Kidney Profile</string>
+    <string name="LIPID_PROFILE">Lipid Profile</string>
+    <string name="LIVER_PROFILE">Liver Profile</string>
+    <string name="THYROID_PROFILE">Thyroid Profile</string>
+    <string name="URINE_PROFILE">Urine Profile</string>
 
     <string name="BP">BP</string>
     <string name="BLOOD_SUGAR">Blood Sugar</string>

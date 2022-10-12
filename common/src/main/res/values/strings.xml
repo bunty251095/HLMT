@@ -134,6 +134,7 @@
 
     <string name="HEIGHT">Height</string>
     <string name="WEIGHT">Weight</string>
+    <string name="HIP">Hip</string>
     <string name="WAIST">Waist</string>
     <string name="BMI" translatable="false">BMI</string>
     <string name="WHR" translatable="false">WHR</string>
@@ -156,6 +157,47 @@
     <string name="MIN">min</string>
     <string name="KM">km</string>
     <string name="MTR">mtr</string>
+
+    <string name="GLUCOSE_FASTING">Glucose (fasting)</string>
+    <string name="GLUCOSE_RANDOM">Glucose (Random)</string>
+    <string name="TOTAL_CHOLESTEROL">Total Cholesterol</string>
+    <string name="TRIGLYCERIDES">Triglycerides</string>
+
+    <string name="RBC">Red Blood Cell (RBC)</string>
+    <string name="PLATELET_COUNT">Platelet Count</string>
+    <string name="PCV">Packed Cell Volume (PCV)</string>
+    <string name="NEUTROPHILS">Neutrophils</string>
+    <string name="MONOCYTES">Monocytes</string>
+    <string name="MCV">Mean Corpuscular Volume (MCV)</string>
+    <string name="MCHC">Mean Corpuscular Hemoglobin Concentration (MCHC)</string>
+    <string name="LYMPHOCYTES">Lymphocytes</string>
+    <string name="ESR">Erythrocyte Sedimentation Rate (ESR)</string>
+    <string name="EOSINOPHILS">Eosinophils</string>
+    <string name="BASOPHILS">Basophils</string>
+
+    <string name="SODIUM">Sodium</string>
+    <string name="URIC_ACID">Uric Acid</string>
+    <string name="CREATININE">Creatinine</string>
+    <string name="POTASSIUM">Potassium</string>
+    <string name="PHOSPHATE">Phosphate</string>
+    <string name="CHLORIDE">Chloride</string>
+    <string name="CALCIUM">Calcium</string>
+    <string name="UREA">Urea</string>
+
+    <string name="ALP">Alkaline Phosphatase (ALP)</string>
+    <string name="TOTAL_BILIRUBIN">Total Bilirubin</string>
+    <string name="TOTAL_PROTEIN">Total Protein</string>
+    <string name="SGOT">Aspartate Aminotransferase (AST) / SGOT</string>
+
+    <string name="APPEARANCE">Appearance</string>
+    <string name="URINE_PROTEIN">Urine Protein</string>
+    <string name="URINE_GLUCOSE">Urine Glucose</string>
+    <string name="SPECIFIC_GRAVITY">Specific Gravity (S.G.)</string>
+    <string name="PH_VALUE">pH Value</string>
+    <string name="URINE_KETONE">Urine Ketone</string>
+    <string name="EPITHELIAL_CELLS">Epithelial Cells</string>
+    <string name="CRYSTALS">Crystals</string>
+    <string name="BACTERIA">Bacteria</string>
 
     <string name="LOW">Low</string>
     <string name="HIGH">High</string>

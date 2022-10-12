@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.caressa.common.utils.Utilities
 import com.caressa.model.entity.TrackParameterMaster
 import com.caressa.track_parameter.R
 import com.caressa.track_parameter.databinding.ItemParamResultBinding
@@ -84,7 +85,8 @@ public class RevSavedParamAdapter(val context: Context): RecyclerView.Adapter<Re
             var color:Int = R.color.textViewColor
 
             if(!item.description.isNullOrEmpty()){
-                binding.txtParamTitle.text = item.description
+                //binding.txtParamTitle.text = item.description
+                binding.txtParamTitle.text = Utilities.getParameterNameByCode(context,item.parameterCode,item.description!!)
             }else{
                 binding.txtParamTitle.text = "- -"
             }

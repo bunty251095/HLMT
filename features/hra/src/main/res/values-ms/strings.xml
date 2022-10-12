@@ -73,10 +73,8 @@
     <string name="POST_MEAL_BS">Gula \n Dalam Darah Selepas Makan</string>
 
     <string name="TOTAL_CHOL">Jumlah \n Kolesterol</string>
-    <string name="TOTAL_CHOLESTEROL">Jumlah Kolesterol</string>
     <string name="HDL">HDL</string>
     <string name="LDL">LDL</string>
-    <string name="TRIGLYCERIDES">Triglycerides</string>
     <string name="VLDL">VLDL</string>
 
     <string name="HIGH_BLOOD_PRESSURE">Tekanan darah tinggi</string>
@@ -88,10 +86,10 @@
     <string name="MENTAL_ILLNESS">Sakit mental</string>
     <string name="HEART_DISEASE">Penyakit jantung</string>
 
-    <string name="WOMEN_PERIOD">Menstruasi tidak teratur</string>
-    <string name="WOMEN_PCOS">Sindrom Ovari Polisistik (PCOS)</string>
+    <string name="WOMEN_PERIOD">Menstruasi Tidak Teratur</string>
+    <string name="WOMEN_PCOS">Sindrom Ovari Polistik (PCOS)</string>
     <string name="WOMEN_DISCHARGE">Keputihan</string>
-    <string name="WOMEN_UTI">Jangkitan saluran kencing</string>
+    <string name="WOMEN_UTI">Jangkitan Saluran Kencing</string>
     <string name="WOMEN_BRESTPAIN">Kesakitan Payudara</string>
     <string name="WOMEN_FIB">Fibroid</string>
 
@@ -110,14 +108,14 @@
     <string name="HEART_PROBLEMS">Masalah Jantung</string>
     <string name="BREAST_CANCER">Kanser Payudara</string>
     <string name="COLORECTAL_CANCER">Kanser kolorektal</string>
-    <string name="CERVICAL_CANCER">Kanser serviks</string>
+    <string name="CERVICAL_CANCER">Kanser Serviks</string>
     <string name="STROKE">Strok</string>
 
     <string name="RB_ALWAYS">Sentiasa</string>
-    <string name="RB_SOMETIMES">Kadang kala</string>
+    <string name="RB_SOMETIMES">Kadang-Kadang</string>
     <string name="RB_RARELY">Kadang kala</string>
-    <string name="RB_NEVER">Tidak pernah</string>
-    <string name="RB_USUALLY">Selalunya</string>
+    <string name="RB_NEVER">Tidak Pernah</string>
+    <string name="RB_USUALLY">kandangkala</string>
 
     <string name="LESS_THAN_6HOURS">Kurang dari 6 jam</string>
     <string name="SIXTO_EIGHT_HOURS">6 hingga 8 jam</string>
@@ -139,7 +137,7 @@
     <string name="RB_NOT_SURE">Tidak pasti</string>
 
     <string name="COMPLETELY">Sepenuhnya</string>
-    <string name="MOSTLY">Selalunya</string>
+    <string name="MOSTLY">kandangkala</string>
     <string name="PARTLY">Sebahagiannya</string>
     <string name="NOT_SATISFIED">Tidak Puas Hati</string>
 
@@ -222,11 +220,11 @@
     <string name="QUESTION_SHIFT"><![CDATA[Adakah anda bekerja shift?]]></string>
     <string name="QUESTION_EXTENDED_TIME"><![CDATA[Adakah anda menghabiskan lebih daripada 8 jam di hadapan PC / Laptop?]]></string>
     <string name="QUESTION_EXPOSE"><![CDATA[Adakah anda terdedah kepada perkara berikut di tempat kerja anda?]]></string>
-    <string name="QUESTION_STRESS"><![CDATA[Adakah anda selalu berasa tertekan?]]></string>
+    <string name="QUESTION_STRESS"><![CDATA[Adakah anda Selalu berasa tertekan?]]></string>
     <string name="QUESTION_PHY"><![CDATA[Yang manakah di antara berikut yang berlaku kepada anda?]]></string>
     <string name="QUESTION_CHECKUP"><![CDATA[Di antara pemeriksaan kesihatan berikut, mana yang anda telah ambil di sepanjang tahun lalu?]]></string>
     <string name="QUESTION_LAST"><![CDATA[Terima kasih kerana berkongsi maklumat dengan kami. Hasil penilaian risiko kesihatan anda sedang diproses.]]></string>
-    <string name="PLEASE_SELECT_ALL_THAT_APPLY">Sila pilih semua yang berkaitan &amp; klik seterusnya</string>
+    <string name="PLEASE_SELECT_ALL_THAT_APPLY">Sila pilih semua yang berkenaan &amp; klik seterusnya</string>
 
     <string name="QUESTION_HEALTH_CHECKUP">Have you had any of these tests done within the past one year?</string>
     <string name="QUESTION_FAMILY_PROFILE"><![CDATA[Before we begin, please tell me <b>who</b> is taking this assessment?]]></string>

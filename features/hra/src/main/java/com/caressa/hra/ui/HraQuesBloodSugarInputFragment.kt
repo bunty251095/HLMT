@@ -379,7 +379,8 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
         if ( prevAnsList.any { it.answerCode.equals(paramCodeRa,ignoreCase = true) } ) {
             rs =  allParamList.find { it.code.equals(paramCodeRa, true) }!!
             Utilities.printData("paramCodeRa",rs,true)
-            binding.lblQuesRandomBs.text = rs.description
+            //binding.lblQuesRandomBs.text = rs.description
+            binding.lblQuesRandomBs.text = Utilities.getParameterNameByCode(requireContext(),rs.code!!,rs.description!!)
             binding.layRandomBs.setHint( "" + rs.minPermissibleValue + " - " + rs.maxPermissibleValue )
             binding.layRandomBs.setUnit(rs.unit!!)
             binding.randomBs.visibility = View.VISIBLE
@@ -390,7 +391,8 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
         if ( prevAnsList.any { it.answerCode.equals(paramCodeFs,ignoreCase = true) } ) {
             fs =  allParamList.find { it.code.equals(paramCodeFs, true) }!!
             Utilities.printData("paramCodeFs",fs,true)
-            binding.lblQuesFastingBs.text = fs.description
+            //binding.lblQuesFastingBs.text = fs.description
+            binding.lblQuesFastingBs.text = Utilities.getParameterNameByCode(requireContext(),fs.code!!,fs.description!!)
             binding.layFastingBs.setHint( "" + fs.minPermissibleValue + " - " + fs.maxPermissibleValue )
             binding.layFastingBs.setUnit(fs.unit!!)
             binding.fastingBs.visibility = View.VISIBLE
@@ -401,7 +403,8 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
         if ( prevAnsList.any { it.answerCode.equals(paramCodePm,ignoreCase = true) } ) {
             ps =  allParamList.find { it.code.equals(paramCodePm, true) }!!
             Utilities.printData("paramCodePm",ps,true)
-            binding.lblQuesPostMealBs.text = ps.description
+            //binding.lblQuesPostMealBs.text = ps.description
+            binding.lblQuesPostMealBs.text = Utilities.getParameterNameByCode(requireContext(),ps.code!!,ps.description!!)
             binding.layPostMealBs.setHint( "" + ps.minPermissibleValue + " - " + ps.maxPermissibleValue )
             binding.layPostMealBs.setUnit(ps.unit!!)
             binding.postMealBs.visibility = View.VISIBLE
@@ -412,7 +415,8 @@ class HraQuesBloodSugarInputFragment(val qCode: String) : BaseFragment() {
         if ( prevAnsList.any { it.answerCode.equals(paramCodeHba1c,ignoreCase = true) } ) {
             hb =  allParamList.find { it.code.equals(paramCodeHba1c, true) }!!
             Utilities.printData("paramCodeHba1c",hb,true)
-            binding.lblQuesHbA1cBs.text = hb.description
+            //binding.lblQuesHbA1cBs.text = hb.description
+            binding.lblQuesHbA1cBs.text = Utilities.getParameterNameByCode(requireContext(),hb.code!!,hb.description!!)
             binding.layHbA1cBs.setHint( "" + hb.minPermissibleValue + " - " + hb.maxPermissibleValue )
             binding.layHbA1cBs.setUnit(hb.unit!!)
             binding.hab1cBs.visibility = View.VISIBLE

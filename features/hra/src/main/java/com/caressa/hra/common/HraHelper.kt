@@ -162,7 +162,8 @@ object HraHelper : KoinComponent {
                 chk.apply {
                     id = i
                     tag = option.answerCode
-                    text = option.description
+                    //text = option.description
+                    text = Utilities.getParameterNameByCode(context,option.answerCode,option.description)
                     layoutParams = par
                     buttonDrawable = null
                     setPadding(40, 25, 40, 25)

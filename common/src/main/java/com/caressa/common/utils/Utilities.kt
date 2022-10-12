@@ -682,6 +682,64 @@ object Utilities {
         }
     }
 
+    fun getParameterNameByCode(context: Context,code: String,desc: String): String {
+        Timber.e("code--->$code")
+        val localResource = LocaleHelper.getLocalizedResources(context, Locale(LocaleHelper.getLanguage(context)))!!
+        var parameterName : String = desc
+        when(code) {
+            "HEIGHT" -> parameterName = localResource.getString(R.string.HEIGHT)
+            "WEIGHT" -> parameterName = localResource.getString(R.string.WEIGHT)
+
+            "BP_SYS" -> parameterName = localResource.getString(R.string.SYSTOLIC)
+            "BP_DIA" -> parameterName = localResource.getString(R.string.DIASTOLIC)
+
+            "HIP" -> parameterName = localResource.getString(R.string.HIP)
+            "WAIST" -> parameterName = localResource.getString(R.string.WAIST)
+
+            "DIAB_FS" -> parameterName = localResource.getString(R.string.GLUCOSE_FASTING)
+            "DIAB_RA" -> parameterName = localResource.getString(R.string.GLUCOSE_RANDOM)
+            "CHOL_TOTAL" -> parameterName = localResource.getString(R.string.TOTAL_CHOLESTEROL)
+            "CHOL_TRY" -> parameterName = localResource.getString(R.string.TRIGLYCERIDES)
+
+            "RBC" -> parameterName = localResource.getString(R.string.RBC)
+            "PLATELET" -> parameterName = localResource.getString(R.string.PLATELET_COUNT)
+            "PCV" -> parameterName = localResource.getString(R.string.PCV)
+            "NEUTROPHILS" -> parameterName = localResource.getString(R.string.NEUTROPHILS)
+            "MONOCYTE" -> parameterName = localResource.getString(R.string.MONOCYTES)
+            "MCV" -> parameterName = localResource.getString(R.string.MCV)
+            "MCHC" -> parameterName = localResource.getString(R.string.MCHC)
+            "LYMPHOCYTE" -> parameterName = localResource.getString(R.string.LYMPHOCYTES)
+            "ESR" -> parameterName = localResource.getString(R.string.ESR)
+            "EOSINOPHILS" -> parameterName = localResource.getString(R.string.EOSINOPHILS)
+            "BASOPHILS" -> parameterName = localResource.getString(R.string.BASOPHILS)
+
+            "SODIUMSERUM" -> parameterName = localResource.getString(R.string.SODIUM)
+            "SERUMURICACID" -> parameterName = localResource.getString(R.string.URIC_ACID)
+            "SERUMCREATININE" -> parameterName = localResource.getString(R.string.CREATININE)
+            "POTASSIUMSERUM" -> parameterName = localResource.getString(R.string.POTASSIUM)
+            "PHOSPHATE" -> parameterName = localResource.getString(R.string.PHOSPHATE)
+            "CHLORIDEURINE" -> parameterName = localResource.getString(R.string.CHLORIDE)
+            "CALCIUM" -> parameterName = localResource.getString(R.string.CALCIUM)
+            "BLOODUREANITROGEN" -> parameterName = localResource.getString(R.string.UREA)
+
+            "ALKALINE_PHOSPHATASE" -> parameterName = localResource.getString(R.string.ALP)
+            "TOTAL_BILIRUBIN" -> parameterName = localResource.getString(R.string.TOTAL_BILIRUBIN)
+            "PROTEINS" -> parameterName = localResource.getString(R.string.TOTAL_PROTEIN)
+            "SGOT" -> parameterName = localResource.getString(R.string.SGOT)
+
+            "URN_APPEARANCE" -> parameterName = localResource.getString(R.string.APPEARANCE)
+            "URN_ALBUMIN_PROTEIN" -> parameterName = localResource.getString(R.string.URINE_PROTEIN)
+            "URINESUGAR" -> parameterName = localResource.getString(R.string.URINE_GLUCOSE)
+            "SPECIFIC_GRAVITY" -> parameterName = localResource.getString(R.string.SPECIFIC_GRAVITY)
+            "PHVAL" -> parameterName = localResource.getString(R.string.PH_VALUE)
+            "KETONE_BODIES" -> parameterName = localResource.getString(R.string.URINE_KETONE)
+            "EPITHELIAL_CELLS" -> parameterName = localResource.getString(R.string.EPITHELIAL_CELLS)
+            "CRYSTALS" -> parameterName = localResource.getString(R.string.CRYSTALS)
+            "BACTERIA" -> parameterName = localResource.getString(R.string.BACTERIA)
+        }
+        return parameterName
+    }
+
 /*    fun redirectToChrome(url:String,context: Context) {
         //val urlString = "http://mysuperwebsite"
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.caressa.common.utils.Utilities
 import com.caressa.model.entity.TrackParameterMaster
 import com.caressa.track_parameter.R
 
@@ -35,7 +36,8 @@ class ParameterSpinnerAdapter(var context: Context) : BaseAdapter() {
             val constraintLayout = view!!.findViewById<View>(com.caressa.common.R.id.spinner_container) as ConstraintLayout?
             val names = view.findViewById<View>(com.caressa.common.R.id.txt_spinner_name) as TextView?
             val view1 = view.findViewById(com.caressa.common.R.id.view1) as View?
-            names!!.setText(dataList.get(position).description)
+            //names!!.text = dataList.get(position).description
+            names!!.text = Utilities.getParameterNameByCode(context,dataList[position].parameterCode,dataList[position].description!!)
             if (selectedPos == position) {
                 view1!!.visibility = View.VISIBLE
                 constraintLayout!!.setBackgroundColor(context.resources.getColor(com.caressa.common.R.color.vivant_pale_grey))

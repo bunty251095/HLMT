@@ -406,7 +406,8 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
         if ( prevAnsList.any { it.answerCode.equals(paramCodeTotalChol,ignoreCase = true) } ) {
             cholTotal =  allParamList.find { it.code.equals(paramCodeTotalChol, true) }!!
             Utilities.printData("paramCodeTotalChol",cholTotal,true)
-            binding.lblTotalChol.text = cholTotal.description
+            //binding.lblTotalChol.text = cholTotal.description
+            binding.lblTotalChol.text = Utilities.getParameterNameByCode(requireContext(),cholTotal.code!!,cholTotal.description!!)
             binding.layTotalChol.setHint( "" + cholTotal.minPermissibleValue + " - " + cholTotal.maxPermissibleValue )
             binding.layTotalChol.setUnit(cholTotal.unit!!)
             binding.totalChol.visibility = View.VISIBLE
@@ -439,7 +440,8 @@ class HraQuesCholesterolInputFragment(val qCode:String) : BaseFragment() {
         if ( prevAnsList.any { it.answerCode.equals(paramCodeTry,ignoreCase = true) } ) {
             triglyceride =  allParamList.find { it.code.equals(paramCodeTry, true) }!!
             Utilities.printData("paramCodeTry",triglyceride,true)
-            binding.lblTriglycerides.text = triglyceride.description
+            //binding.lblTriglycerides.text = triglyceride.description
+            binding.lblTriglycerides.text = Utilities.getParameterNameByCode(requireContext(),triglyceride.code!!,triglyceride.description!!)
             binding.layTriglycerides.setHint( "" + triglyceride.minPermissibleValue + " - " + triglyceride.maxPermissibleValue )
             binding.layTriglycerides.setUnit(triglyceride.unit!!)
             binding.triglycerides.visibility = View.VISIBLE

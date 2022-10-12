@@ -17,8 +17,8 @@
     <com.caressa.common.view.ArcImageView
         android:id="@+id/img_data"
         app:isTemplate="true"
-        android:layout_width="@dimen/_45sdp"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_width="@dimen/_42sdp"
+        android:layout_height="@dimen/_42sdp"
         android:padding="@dimen/_5sdp"
         android:src="@drawable/img_active_time"
         app:layout_constraintTop_toTopOf="@+id/txt_data"
@@ -31,7 +31,7 @@
         app:isTemplate="true"
         style="@style/VivantDescription"
         android:text="@string/ACTIVE_TIME"
-        android:textSize="@dimen/_12sdp"
+        android:textSize="@dimen/_11sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/img_data" />
 
@@ -42,7 +42,7 @@
         app:isPrimary="true"
         style="@style/VivantDescription"
         android:text="- -"
-        android:textSize="@dimen/_15sdp"
+        android:textSize="@dimen/_14sdp"
         android:layout_marginTop="@dimen/_4sdp"
         app:layout_constraintTop_toBottomOf="@+id/txt_data"
         app:layout_constraintStart_toStartOf="@+id/txt_data" />

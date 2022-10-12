@@ -134,6 +134,7 @@
 
     <string name="HEIGHT">Tinggi</string>
     <string name="WEIGHT">Berat</string>
+    <string name="HIP">Pinggul</string>
     <string name="WAIST">Pinggang</string>
     <string name="BMI">Indeks Jisim Badam</string>
     <string name="WHR">Nisbah Pinggang-Pinggul </string>
@@ -156,6 +157,47 @@
     <string name="MIN">min</string>
     <string name="KM">km</string>
     <string name="MTR">mtr</string>
+
+    <string name="GLUCOSE_FASTING">Glukos (Puasa)</string>
+    <string name="GLUCOSE_RANDOM">Glukos (Rawak)</string>
+    <string name="TOTAL_CHOLESTEROL">Jumlah Kolesterol</string>
+    <string name="TRIGLYCERIDES">Trigliserida</string>
+
+    <string name="RBC">Sel Darah Merah</string>
+    <string name="PLATELET_COUNT">Kiraan Platlet</string>
+    <string name="PCV"> Isipadu Sel Dipek (PCV)</string>
+    <string name="NEUTROPHILS">Neutrofil</string>
+    <string name="MONOCYTES">Monosit</string>
+    <string name="MCV">Purata Isipadu Corpuskular (MCV)</string>
+    <string name="MCHC">Purata Kepekatan Hemoglobin Corpuskular (MCHC)</string>
+    <string name="LYMPHOCYTES">Limfosit</string>
+    <string name="ESR">Kadar Pemendapat Erythocyte (ESR)</string>
+    <string name="EOSINOPHILS">Eosinofil</string>
+    <string name="BASOPHILS">Basofil</string>
+
+    <string name="SODIUM">Natrium</string>
+    <string name="URIC_ACID">Asid Urik</string>
+    <string name="CREATININE">Kreatinin</string>
+    <string name="POTASSIUM">Potasium</string>
+    <string name="PHOSPHATE">Fosfat</string>
+    <string name="CHLORIDE">Klorida</string>
+    <string name="CALCIUM">Calcium</string>
+    <string name="UREA">Urea</string>
+
+    <string name="ALP">Alkali Fosfatase</string>
+    <string name="TOTAL_BILIRUBIN">Jumlah Bilirubin</string>
+    <string name="TOTAL_PROTEIN"> Jumlah Protein</string>
+    <string name="SGOT">Aminotransferase Aspartat (AST/SGOT)</string>
+
+    <string name="APPEARANCE">Penampilan</string>
+    <string name="URINE_PROTEIN">Protine dalam Air Kencing</string>
+    <string name="URINE_GLUCOSE">Glukoasa Air Kencing</string>
+    <string name="SPECIFIC_GRAVITY">Graviti Khusus</string>
+    <string name="PH_VALUE">Nilai PH</string>
+    <string name="URINE_KETONE">Kenton Air Kencing</string>
+    <string name="EPITHELIAL_CELLS">Sel Epitelium</string>
+    <string name="CRYSTALS">Kristal</string>
+    <string name="BACTERIA">Bakteria</string>
 
     <string name="LOW">Rendah</string>
     <string name="HIGH">Tinggi</string>

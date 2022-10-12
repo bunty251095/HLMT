@@ -23,6 +23,7 @@ import com.caressa.common.constants.NavigationConstants
 import com.caressa.common.utils.AppColorHelper
 import com.caressa.common.utils.DateHelper
 import com.caressa.common.utils.FirebaseHelper
+import com.caressa.common.utils.Utilities
 import com.caressa.model.entity.TrackParameterMaster
 import com.caressa.track_parameter.R
 import com.caressa.track_parameter.adapter.ParameterSpinnerAdapter
@@ -189,7 +190,8 @@ class RevHistoryFragment : BaseFragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                 if (spinnerAdapter.dataList.isNotEmpty()) {
                     spinnerAdapter.selectedPos = position
-                    val name: String = spinnerAdapter.dataList.get(position).description!!
+                    //val name: String = spinnerAdapter.dataList.get(position).description!!
+                    val name: String = Utilities.getParameterNameByCode(requireContext(),spinnerAdapter.dataList[position].parameterCode,spinnerAdapter.dataList[position].description!!)
                     binding.txtParamSpinner.text = name
                     selectedParameterCode = spinnerAdapter.dataList.get(position).parameterCode
                     if (spinnerAdapter.dataList.get(position).unit != null) {
@@ -244,8 +246,9 @@ class RevHistoryFragment : BaseFragment() {
         binding.txtLastCheckedDate.text = history.recordDate.replace("-"," ",true)
         val color = TrackParameterHelper.getObservationColor(history.observation,history.profileCode!!)
 
-        binding.layoutSelectedParameterDetails.setBackgroundColor(resources.getColor(color))
-            binding.txtParamTitle.text = history.description
+            binding.layoutSelectedParameterDetails.setBackgroundColor(resources.getColor(color))
+            //binding.txtParamTitle.text = history.description
+            binding.txtParamTitle.text = Utilities.getParameterNameByCode(requireContext(),history.parameterCode,history.description!!)
             binding.txtParamValue.text = history.value.toString()
         if (history.observation.isNullOrEmpty()) {
             binding.txtParamObs.text = history.unit

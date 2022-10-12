@@ -21,12 +21,12 @@
     <string name="SYSTOLIC_DIASTOLIC">Sistolik/Diastolik</string>
 
     <string name="BLOOD_SUGAR_PROFILE">Profil Gula dalam Darah</string>
-    <string name="HEMOGRAM_PRESSURE">Profil Hemogram</string>
-    <string name="KIDNEY_PRESSURE">Profil Buah Pinggang</string>
-    <string name="LIPID_PRESSURE">Profil Lipid</string>
-    <string name="LIVER_PRESSURE">Profil Hati</string>
-    <string name="THYROID_PRESSURE">Profil Tiroid</string>
-    <string name="URINE_PRESSURE">Profil Air Kencing</string>
+    <string name="HAEMATOLOGY_PROFILE">Profil Hemogram</string>
+    <string name="KIDNEY_PROFILE">Profil Buah Pinggang</string>
+    <string name="LIPID_PROFILE">Profil Lipid</string>
+    <string name="LIVER_PROFILE">Profil Hati</string>
+    <string name="THYROID_PROFILE">Profil Tiroid</string>
+    <string name="URINE_PROFILE">Profil Air Kencing</string>
 
     <string name="BP">Tekanan Darah</string>
     <string name="BLOOD_SUGAR">Gula dalam Darah</string>

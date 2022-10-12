@@ -39,6 +39,7 @@ class ExpandedParametersAdapter(private val mContext: Context, private val fragm
                 color = ContextCompat.getColor(mContext, TrackParameterHelper.getObservationColor(
                     Objects.requireNonNull(parameter.observation!!), parameter.profileCode!!))
             }
+            holder.txtParamTitle.text = Utilities.getParameterNameByCode(mContext,parameter.parameterCode,parameter.description!!)
             holder.bindTo( parameter,color )
 
             if( parameter.profileCode.equals("URINE",ignoreCase = true) ) {

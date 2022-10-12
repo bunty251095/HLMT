@@ -73,10 +73,8 @@
     <string name="POST_MEAL_BS">Post Meal Blood \n Sugar</string>
 
     <string name="TOTAL_CHOL">Total \n Cholesterol</string>
-    <string name="TOTAL_CHOLESTEROL">Total Cholesterol</string>
     <string name="HDL">HDL</string>
     <string name="LDL">LDL</string>
-    <string name="TRIGLYCERIDES">Triglycerides</string>
     <string name="VLDL">VLDL</string>
 
     <string name="HIGH_BLOOD_PRESSURE">High Blood Pressure</string>
